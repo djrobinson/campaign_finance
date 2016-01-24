@@ -23,7 +23,7 @@ http://api.nytimes.com/svc/elections/us/v3/finances/2016/president/independent_e
 Committee Contributions to a Candidate:
 http://api.nytimes.com/svc/elections/us/{version}/finances/{campaign-cycle}/committees/{fec-id}/contributions/candidates/{candidate-id}[.response-format]?api-key={your-API-key}[&callback={callback-function}]
 
-Top 20 Contributions by presidential filing:
+Top 20 Individual Contributions by presidential filing:
 http://api.nytimes.com/svc/elections/us/{version}/finances/{campaign-cycle}/contributions/filing/{filing-id}[.response-format]?api-key={your-API-key}[&callback={callback-function}]
 
 Contributions Opposing or supporting a candidate:
@@ -37,4 +37,7 @@ http://api.nytimes.com/svc/elections/us/v3/finances/2016/contributions/candidate
 
 Contributions to a Committe (or PAC. Showing Koch industries):
 http://api.nytimes.com/svc/elections/us/v3/finances/2016/contributions/committee/C00236489.json
+
+Independent expenditures for a given race by committee:
+http://api.nytimes.com/svc/elections/us/{version}/finances/{campaign-cycle}/committees/{fec-id}/independent_expenditures/races[.response-format]?api-key={your-API-key}[&callback={callback-function}]
 
