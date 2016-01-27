@@ -1,5 +1,6 @@
 var key = keys.nyt_key;
 
+
 console.log(key);
 
 $('#submitCandidate').on('click', function(){
