@@ -1,43 +1,25 @@
-API Notes for App:
+# Campaign Finance Explorer App
+##Overview
+I want to create a Campaign Finance data visualization projects to explore some of the largest donors to political campaigns.  My project will focus specifically on the largest SuperPACs involved in the current presidential campaign to reduce the scope of the exploration.  I will be integrating with publicly available FEC apis (also a few New York Times APIs) that show all information on political donations. At a very minimum I would like to create a network-style data visualization that will show the flow of funds from donor to pac to candidate. If I have time I would also like to show detail on each node.
 
-Presidential Candidate Overview:
-http://api.nytimes.com/svc/elections/us/v3/finances/2016/president/totals.json
+![site mockup](./mockup.png)
 
-Presidential Canidate Details:
-http://api.nytimes.com/svc/elections/us/v3/finances/2016/president/candidates/clinton.json
+##Technologies I Will Use
+- HTML/CSS/JS: For overall app content and structure
+- D3.js: Will use the Force diagram and Tree layouts to display the flow of funds
+- JQuery: I will use JQuery for detail boxes that will attach to each Node
+- AJAX & LocalStorage: I'm going to be loading all data at once due to the high number of api calls required and I will need to persist this data throughout the app.
 
-Electronic Filing Search:
-http://api.nytimes.com/svc/elections/us/v3/finances/2016/filings/search.json?query=C00540997
-//will return the required filing IDs to return each id with the next query
+##Features in Order of Importance
+1. Data Object that will hold all of the data from the APIs & be structures in a way that D3 can use
+2. A D3 force diagram displaying the tree structure of all of participants' connections
+3. Varying weight and colors of each Node & Link based on party affiliation and capital base
+4. A popup that aggregates major donor info for each PAC & Candidate upon click
+5. Search functionality that will immediately highlight a Candidate, Donor, or PAC
+6. The ability to Filter based on party, size, and Candidate
+7. A seperate tree diagram for each node that will display an in depth view of donations based on size & industry
+8. The ability to add or remove PACs while zooming & panning the screen to include all new elements
 
-Presidential Filing Details:
-http://api.nytimes.com/svc/elections/us/v3/finances/2016/filings/1020114.json
-
-
-Independent Expenditure only committees (lists superpacs):
-http://api.nytimes.com/svc/elections/us/v3/finances/2016/committees/superpacs.json
-
-Presidential Independent Expenditures: Shows major expenditures by candidate:
-http://api.nytimes.com/svc/elections/us/v3/finances/2016/president/independent_expenditures.json?
-
-Committee Contributions to a Candidate:
-http://api.nytimes.com/svc/elections/us/{version}/finances/{campaign-cycle}/committees/{fec-id}/contributions/candidates/{candidate-id}[.response-format]?api-key={your-API-key}[&callback={callback-function}]
-
-Top 20 Individual Contributions by presidential filing:
-http://api.nytimes.com/svc/elections/us/{version}/finances/{campaign-cycle}/contributions/filing/{filing-id}[.response-format]?api-key={your-API-key}[&callback={callback-function}]
-
-Contributions Opposing or supporting a candidate:
-http://api.nytimes.com/svc/elections/us/v3/finances/2016/candidates/P60006111/independent_expenditures.json
-
-Committe Details:
-http://api.nytimes.com/svc/elections/us/v3/finances/2016/committees/C00581777.json
-
-Individual contributions to a candidate (w/ ted cruz) (returns the filing IDs to use in Pres Filing Details):
-http://api.nytimes.com/svc/elections/us/v3/finances/2016/contributions/candidate/P60006111.json
-
-Contributions to a Committe (or PAC. Showing Koch industries):
-http://api.nytimes.com/svc/elections/us/v3/finances/2016/contributions/committee/C00236489.json
-
-Independent expenditures for a given race by committee:
-http://api.nytimes.com/svc/elections/us/{version}/finances/{campaign-cycle}/committees/{fec-id}/independent_expenditures/races[.response-format]?api-key={your-API-key}[&callback={callback-function}]
+##Pivotal Tracker:
+https://www.pivotaltracker.com/n/projects/1524201
 
