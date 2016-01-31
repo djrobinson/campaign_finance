@@ -6,6 +6,7 @@ var linksEmp = [];
 
 $('#build').on('click', buildGraph);
 
+console.log("sanity check!");
 
 
 $('#submitCandidate').on('click', function(){
@@ -18,12 +19,14 @@ $('#submitCandidate').on('click', function(){
       console.log(data);
       var prevPresNode = 0;
       var i = 1;
-      data.results.map(function(candidate){
+      var candidate = data.results[0];
+      // data.results.map(function(candidate){
 
         console.log(prevPresNode);
         var pass = candidate.associated_committees;
         // committeeDetails(pass);
         var presNode = {
+          "id": candidate.candidate_id,
           "name": candidate.candidate_name,
           "group": candidate.candidate_id,
           "type": "pres"
@@ -50,39 +53,16 @@ $('#submitCandidate').on('click', function(){
         prevPresNode = presNodeIndex;
         donorsByEmployer(pass, presNodeIndex);
         // committeeDonors(pass);
-      });
+      // });
     }
   });
 });
-
-// $('#submitCandidate').on('click', function(){
-//   var lastName = $('#inputCandidate').val();
-//   $.ajax({
-//     url: "http://api.nytimes.com/svc/elections/us/v3/finances/2016/president/candidates/"+ lastName + ".json" + key,
-//     method: "GET",
-//     success: function(data){
-//       console.log(data);
-//       data.results.map(function(candidate){
-//         var pass = data.results[0].associated_committees;
-//         var presNode = {
-//           "name": candidate.candidate_name,
-//           "donation": 0,
-//           "group": candidate.candidate_id
-//         }
-//         nodesEmp.push(presNode);
-//         var presNodeIndex = nodesEmp.length-1;
-//         // committeeDetails(pass);
-//         donorsByEmployer(pass, presNodeIndex);
-//         // committeeDonors(pass);
-//       });
-//     }
-//   });
-// });
 
 function donorsByEmployer(assocComm, presNodeIndex){
   assocComm.map(function(committee){
 
       var commNode = {
+        "id": committee.candidate_committee.fec_committee_id,
         "name": committee.candidate_committee.fec_committee_id,
         "donation": 0,
         "group": committee.candidate_committee.fec_committee_id,
@@ -105,6 +85,7 @@ function donorsByEmployer(assocComm, presNodeIndex){
 
         data.results.map(function(donor){
           var node = {
+            "id": donor.committee_id,
             "name": donor.employer === "N/A" ? donor.committee_id : donor.employer,
             "donation": donor.total,
             "group": targetIndex
@@ -198,7 +179,7 @@ function buildGraph(){
     .enter().append("g")
       .attr("class", "node")
       .attr("id", function(d){
-        return d.name;        // slug = label downcased, this works
+        return d.id;
       })
       .call(force.drag)
       .style("fill", "blue")
@@ -248,7 +229,24 @@ function click(){
     .css("display", "block")
     .text(name);
 
+  committeeExpenditures(name);
+
 };
+
+function committeeExpenditures(committeeId){
+
+  $.ajax({
+    url: "https://api.open.fec.gov/v1/committee/" + committeeId + "/schedules/schedule_b/by_purpose/?page=1&sort_nulls_large=true&api_key=" + fec_key + "&per_page=100",
+    method: "GET",
+    success: function(data){
+      console.log(data);
+      data.results.forEach(function(expenditure){
+        $("#holder")
+          .append(expenditure.purpose +" $ " + expenditure.total);
+      })
+    }
+    });
+}
 
 
 
