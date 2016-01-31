@@ -81,21 +81,23 @@ $('#submitCandidate').on('click', function(){
 
 function donorsByEmployer(assocComm, presNodeIndex){
   assocComm.map(function(committee){
-    var commNode = {
-      "name": committee.candidate_committee.fec_committee_id,
-      "donation": 0,
-      "group": committee.candidate_committee.fec_committee_id,
-      "type": "committee"
-    }
-    nodesEmp.push(commNode);
-    var commLink = {
-      "source": nodesEmp.length-1,
-      "target": presNodeIndex,
-      "weight": 1,
-      "type": "committee"
-    }
-    linksEmp.push(commLink);
-    var targetIndex = nodesEmp.length - 1;
+
+      var commNode = {
+        "name": committee.candidate_committee.fec_committee_id,
+        "donation": 0,
+        "group": committee.candidate_committee.fec_committee_id,
+        "type": "committee"
+      }
+      nodesEmp.push(commNode);
+      var commLink = {
+        "source": nodesEmp.length-1,
+        "target": presNodeIndex,
+        "weight": 1,
+        "type": "committee"
+      }
+      linksEmp.push(commLink);
+      var targetIndex = nodesEmp.length - 1;
+
     $.ajax({
       url: "https://api.open.fec.gov/v1/committee/" + committee.candidate_committee.fec_committee_id+ "/schedules/schedule_a/by_employer/?page=1&sort_nulls_large=true&api_key=" + fec_key + "&sort=-total&per_page=20",
       method: "GET",
@@ -175,7 +177,7 @@ function buildGraph(){
     force.linkDistance(function(link){
       if(link.type === "pres") return 30;
       if(link.type === "committee") return 200;
-      return 50;
+      return 20;
     })
 
   var link = svg.selectAll(".link")
@@ -195,9 +197,16 @@ function buildGraph(){
       .data(nodesEmp)
     .enter().append("g")
       .attr("class", "node")
+      .attr("id", function(d){
+        return d.name;        // slug = label downcased, this works
+      })
       .call(force.drag)
       .style("fill", "blue")
       .on("click", click)
+
+
+
+
 
   node.append("circle")
       .attr("r",function(d) {
@@ -220,6 +229,8 @@ function buildGraph(){
 
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
+
+
 });
 
 force.start();
@@ -228,7 +239,15 @@ force.start();
 function click(){
   d3.select(this)
     .style("fill", "red");
-    console.log(this);
+
+  console.log(d3.select(this));
+
+  var name = d3.select(this).attr("id");
+  console.log(name);
+  $("#holder")
+    .css("display", "block")
+    .text(name);
+
 };
 
 
