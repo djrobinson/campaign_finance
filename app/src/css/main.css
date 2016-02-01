@@ -1,5 +1,33 @@
 /* add custom styles */
 
+
+
 #holder {
+  margin-top: 70px;
   display: none;
+  background-color: #6f5499;
+  height: 500px;
+  color: white !important;
+  font-size: 2rem;
+}
+
+#holderBack {
+  margin-top: 60px;
+  background-color: #6f5499;
+  width: 100%;
+}
+
+.forceContainer{
+  display: block;
+  width: 100%;
+}
+
+.candContainer {
+  display: block;
+  width: 100%;
+}
+
+.tableHolder{
+  height: 450px !important;
+  overflow: scroll;
 }

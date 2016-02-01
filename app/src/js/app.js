@@ -1,14 +1,18 @@
 var key = keys.nyt_key;
 var fec_key = keys.fec_key;
 
+
+
 var nodeArr = [];
 var linkArr = [];
+
 var prevPresNode = 0;
 var presIterator = 1;
 var presArray = [];
 var presNodeIndex;
 
 var filterPres = ["P00003392", "P60007168", "P60005915", "P60006111", "P60008059", "P60006723", "P40003576", "P80001571","P60003670", "P60008521", "P60007671"];
+var filterCommittee = [];
 
 
 $('#build').on('click', buildGraph);
@@ -67,6 +71,7 @@ function addCandidate(candidate){
 
 function addCommittee(committee){
   var currNodeIndex = presNodeIndex;
+  filterCommittee.push(committee.candidate_committee.fec_committee_id);
   var commNode = {
     "id": committee.candidate_committee.fec_committee_id,
     "name": committee.candidate_committee.fec_committee_id,
@@ -104,7 +109,9 @@ function addDonors(currCommittee){
             "id": donor.contributor_id,
             "name": donor.contributor_name,
             "donation": donor.total,
-            "group": targetComm
+            "group": targetComm,
+            // "belongsTo": committee,
+            "type": "donor"
           }
           nodeArr.push(node);
           var link = {
@@ -122,20 +129,25 @@ function addDonors(currCommittee){
     url: "https://api.open.fec.gov/v1/committee/"+ currCommittee +"/schedules/schedule_a/by_employer/?page=1&sort_nulls_large=true&api_key="+ fec_key +"&sort=-total&per_page=20",
     method: "GET",
     success: function(data){
-
+      var i = 0;
       data.results.map(function(donor){
         var targetComm = 0;
+
         nodeArr.map(function(committee, i){
           if (committee.type === "committee" && committee.id === currCommittee){
             targetComm = i;
           }
         })
+
+
         // if(committeeNodeCount < 20){
           var node = {
-            "id": donor.committee_id,
+            "id": donor.committee_id + "E" + i,
             "name": donor.employer,
             "donation": donor.total,
-            "group": targetComm
+            "group": targetComm,
+            // "belongsTo": donor.committee_id,
+            "type": "donor"
           }
           nodeArr.push(node);
           var link = {
@@ -144,55 +156,39 @@ function addDonors(currCommittee){
             "weight": 1
           }
           linkArr.push(link);
+        i++;
         // }
       });
     }
   })
 }
-// function committeeDonors(assocComm){
-//   assocComm.map(function(committee){
-//     $.ajax({
-//       url: "https://api.open.fec.gov/v1/committee/" + committee.candidate_committee.fec_committee_id + "/schedules/schedule_a/by_contributor/?page=1&sort_nulls_large=true&api_key=" + fec_key + "&sort=-total&per_page=100",
-//       method: "GET",
-//       success: function(data){
-//         console.log(data);
-//       }
-//     });
-//   });
-// }
 
-// function committeeDetails(assocComm){
-//   assocComm.map(function(committee){
-//     $.ajax({
-//       url: "http://api.nytimes.com/svc/elections/us/v3/finances/2016/contributions/committee/" + committee.candidate_committee['fec_committee_id'] + ".json" + key,
-//       method: "GET",
-//       success: function(data){
-//         console.log(data);
-//       }
-//     });
-//   });
-// }
+
+// var graphNode = filterCommittee.map(function(committee){
+//   nodeArr.filter(function(node){
+//     if ()
+//   })
+// })
 
 
 function buildGraph(){
 
-  var width = 2000,
-      height = 2000
+  var height = 1200
 
   var svg = d3.select(".forceContainer").append("svg")
-      .attr("width", width)
+      .attr("width", $("svg").parent().width())
       .attr("height", height);
 
   var force = d3.layout.force()
       .gravity(.1)
-      .size([width, height])
+      .size([$("svg").parent().width(), height])
       .nodes(nodeArr)
       .links(linkArr)
 
   force.charge(function(d){
       if(d.type === "pres") return -1000;
-      if(d.type === "committee") return -300;
-      return -100;
+      if(d.type === "committee") return -1000;
+      return -1000;
     }
 
   )
@@ -200,7 +196,7 @@ function buildGraph(){
     force.linkDistance(function(link){
       if(link.type === "pres") return 30;
       if(link.type === "committee") return 200;
-      return 20;
+      return 50;
     })
 
   var link = svg.selectAll(".link")
@@ -247,6 +243,7 @@ function buildGraph(){
         .attr("y2", function(d) { return d.target.y; });
 
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
 });
 
 force.start();
@@ -261,22 +258,31 @@ function click(){
   console.log(name);
   $("#holder")
     .css("display", "block")
-    .text(name);
+    // .text(name);
 
-  committeeExpenditures(name);
-
+  if(name.includes("E")){
+    employeeGroup(name);
+    newName = name.split("E").shift();
+    console.log(newName);
+    committeeExpenditures(newName);
+  } else if ( name.charAt(0) === "P" ) {
+    candidateInfo(name);
+  } else {
+    committeeExpenditures(name);
+  }
 };
 
 function committeeExpenditures(committeeId){
 
   $.ajax({
-    url: "https://api.open.fec.gov/v1/committee/" + committeeId + "/schedules/schedule_b/by_purpose/?page=1&sort_nulls_large=true&api_key=" + fec_key + "&per_page=100",
+    url: "https://api.open.fec.gov/v1/committee/" + committeeId + "/schedules/schedule_b/by_purpose/?page=1&sort_nulls_large=true&api_key=" + fec_key + "&sort=-total&per_page=100",
     method: "GET",
     success: function(data){
       console.log(data);
+      $("#byCategory").html("")
+      $("#byCategory").append("<tr><th>Category</th><th>Amount</th></tr>");
       data.results.forEach(function(expenditure){
-        $("#holder")
-          .append(expenditure.purpose +" $ " + expenditure.total + "</br>");
+        $("#byCategory").append("<tr><td>"+ expenditure.purpose +"</td><td> $" + expenditure.total + "</td></tr>");
       })
     }
   })
@@ -286,8 +292,10 @@ function committeeExpenditures(committeeId){
     success: function(data){
       console.log(data);
       var committeeInfo = data.results[0];
-        $("#holder")
-          .append(committeeInfo.name + "email: " + committeeInfo.email + " website: " + committeeInfo.website );
+        $("#name").text(committeeInfo.name);
+        $("#website").text(committeeInfo.website);
+        $("#email").text(committeeInfo.email);
+        $("#treasurer").text(committeeInfo.treasurer_name);
 
     }
   })
@@ -297,31 +305,45 @@ function committeeExpenditures(committeeId){
     method: "GET",
     success: function(data){
       console.log(data);
-      // data.results.forEach(function(filing){
-      var filingInfo = data.results[0];
-      console.log(filingInfo.pdf_url);
-        $("#holder")
-          .append("See filing: " + filingInfo.pdf_url + "</br>" + "Net Contributions YTD: " + filingInfo.net_contributions_ytd + "</br>" + "Cash on Hand: "+filingInfo.cash_on_hand_close_ytd)
+      $("#byFiling").html("");
+      $("#byFiling").append("<tr><th>Link to Filing</th><th>Contributions YTD</th><th>Cash on Hand EOY</th></tr>");
+      var currFiling = data.results[0];
+      $("#cash").text("Cash: $"+currFiling.cash_on_hand_close_ytd);
+      $("#contributions").text("YTD Contributions: $"+currFiling.net_contributions_ytd);
+      $("#expenditures").text("YTD Expenditures: $"+ currFiling.offsets_to_operating_expenditures_ytd);
+      data.results.forEach(function(filing, i){
 
-      }
-    })
+        $("#byFiling").append("<tr><td><a href='"+filing.pdf_url+"'>Filing #"+ (i+1) +"</a></td><td> $"+ filing.net_contributions_ytd +"</td><td> $" + filing.cash_on_hand_close_ytd + "</td></tr>");
+      })
+    }
+  })
   $.ajax({
     url: "https://api.open.fec.gov/v1/committee/"+ committeeId +"/schedules/schedule_b/by_recipient/?sort_nulls_large=true&page=1&api_key="+ fec_key +"&sort=-total&per_page=100",
     method: "GET",
     success: function(data){
-      var distributions = data.results[0];
-      $("#holder")
-        .append("Recipient: "+ distributions.recipient_name + " Amount: " + distributions.total);
+      $("#byRecipient").html("")
+      $("#byRecipient").append("<tr><th>Category</th><th>Amount</th></tr>")
+      data.results.forEach(function(distributions){
+        $("#byRecipient").append("<tr><td>"+ distributions.recipient_name +"</td><td> $" + distributions.total+ "</td></tr>");
+      })
     }
   })
+}
 
+function employeeGroup(id){
+  console.log("Employee Group!!!");
+  var emplGroup = nodeArr.filter(function(node){
+    if (id === node.id) return node;
+  })
+  console.log(emplGroup);
+}
 
-  //TODO - These will be additional to the committee details
-  //Implement the api for committee details
-  //https://api.open.fec.gov/v1/committee/C00495861/?page=1&sort_nulls_large=true&api_key=DEMO_KEY&sort=name&per_page=20
-  //Implement the api for committee filings.
-  //https://api.open.fec.gov/v1/committee/C00575431/reports/?sort_nulls_large=true&api_key=DEMO_KEY&sort=-coverage_end_date&per_page=20&page=1
-
+function candidateInfo(id){
+  console.log("Pres Candidate!!!");
+  var candidate = nodeArr.filter(function(node){
+    if ( id === node.id ) return node;
+  })
+  console.log(candidate);
 
 }
 

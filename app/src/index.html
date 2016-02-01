@@ -2,40 +2,70 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Campaign Finance</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
+
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-      <h1 class="text-center">Campaign Finance Explorer</h1>
-      <label class="control-label" for="inputCandidate">Enter a Candidate's Last Name</label>
-      <div class="input-group col-md-6">
-        <input type="text" class="form-control" id="inputCandidate" value="Clinton">
-        <span class="input-group-btn"><button class="btn btn-default" type="button" id="submitCandidate">Submit</button></span>
+  <div class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand">Campaign Finance Explorer</a>
       </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="#">Testing 1</a></li>
+          <li><a><button class="btn btn-default" type="button" id="submitCandidate">Submit</button></a></li>
+        </ul>
 
+      </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="jumbotron" id="holder">
+  </div>
+  <div class="container" id="holderBack">
+    <div class="row" >
+      <div class="col-md-12" id="holder">
+        <div class="col-md-3 text-center">
+          <h1 id="name"></h1>
+          <h4 id="website"></h4>
+          </br>
+          <h2 id="cash"></h2>
+          <h2 id="expenditures"></h2>
+          <h2 id="contributions"></h2>
+          <h4 id="email"></h4>
+          <h4 id="treasurer"></h4>
+        </div>
+        <div class="tableHolder col-md-3">
+          <table class="table table-hover" id="byCategory">
+          </table>
+        </div>
+        <div class="tableHolder col-md-3">
+          <table class="table table-hover" id="byRecipient">
 
+          </table>
+        </div>
+        <div class="tableHolder col-md-3">
+          <table class="table table-hover" id="byFiling">
+
+          </table>
         </div>
       </div>
     </div>
-    <hr>
+  </div>
 
-    <div class="row" id="candidateList">
+  <div class="container candContainer">
+    <div class="row" id="candidateList candContainer">
     <p><a class="btn btn-lg" id="build">Build Graph</a></p>
-      <div class="forceContainer">
+      <div class="forceContainer candContainer">
       </div>
     </div>
   </div>
 
 
+
   <script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <script src="js/apikeys.js"></script>
   <script src="js/app.js"></script>
 </body>
