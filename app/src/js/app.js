@@ -24,8 +24,9 @@ $('#submitCandidate').on('click', function(){
     success: function(data){
       console.log(data);
       presArray = data.results;
-      // var candidate = data.results[0]; //For Testing purposes, use this
-      presArray.map(addCandidate);
+      var candidate = data.results[0]; //For Testing purposes, use this
+      addCandidate(candidate);
+      // presArray.map(addCandidate);
     }
   });
 });
@@ -255,7 +256,6 @@ function click(){
   d3.select(this)
     .style("fill", "red");
 
-  console.log(d3.select(this));
 
   var name = d3.select(this).attr("id");
   console.log(name);
@@ -276,10 +276,53 @@ function committeeExpenditures(committeeId){
       console.log(data);
       data.results.forEach(function(expenditure){
         $("#holder")
-          .append(expenditure.purpose +" $ " + expenditure.total);
+          .append(expenditure.purpose +" $ " + expenditure.total + "</br>");
       })
     }
-  });
+  })
+  $.ajax({
+    url: "https://api.open.fec.gov/v1/committee/"+ committeeId +"/?page=1&sort_nulls_large=true&api_key="+ fec_key +"&sort=name&per_page=20",
+    method: "GET",
+    success: function(data){
+      console.log(data);
+      var committeeInfo = data.results[0];
+        $("#holder")
+          .append(committeeInfo.name + "email: " + committeeInfo.email + " website: " + committeeInfo.website );
+
+    }
+  })
+
+  $.ajax({
+    url: "https://api.open.fec.gov/v1/committee/"+ committeeId +"/reports/?sort_nulls_large=true&api_key="+ fec_key +"&sort=-coverage_end_date&per_page=20",
+    method: "GET",
+    success: function(data){
+      console.log(data);
+      // data.results.forEach(function(filing){
+      var filingInfo = data.results[0];
+      console.log(filingInfo.pdf_url);
+        $("#holder")
+          .append("See filing: " + filingInfo.pdf_url + "</br>" + "Net Contributions YTD: " + filingInfo.net_contributions_ytd + "</br>" + "Cash on Hand: "+filingInfo.cash_on_hand_close_ytd)
+
+      }
+    })
+  $.ajax({
+    url: "https://api.open.fec.gov/v1/committee/"+ committeeId +"/schedules/schedule_b/by_recipient/?sort_nulls_large=true&page=1&api_key="+ fec_key +"&sort=-total&per_page=100",
+    method: "GET",
+    success: function(data){
+      var distributions = data.results[0];
+      $("#holder")
+        .append("Recipient: "+ distributions.recipient_name + " Amount: " + distributions.total);
+    }
+  })
+
+
+  //TODO - These will be additional to the committee details
+  //Implement the api for committee details
+  //https://api.open.fec.gov/v1/committee/C00495861/?page=1&sort_nulls_large=true&api_key=DEMO_KEY&sort=name&per_page=20
+  //Implement the api for committee filings.
+  //https://api.open.fec.gov/v1/committee/C00575431/reports/?sort_nulls_large=true&api_key=DEMO_KEY&sort=-coverage_end_date&per_page=20&page=1
+
+
 }
 
 
