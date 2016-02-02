@@ -3,7 +3,7 @@
 
 
 #holder {
-  margin-top: 70px;
+  /*margin-top: 70px;*/
   display: none;
   background-color: #6f5499;
   height: 500px;
@@ -11,9 +11,16 @@
   font-size: 2rem;
 }
 
+#presHolder {
+  padding-top: 70px;
+  display: none;
+  height: 500px;
+  color: white !important;
+  font-size: 2rem;
+}
+
 #holderBack {
   margin-top: 60px;
-  background-color: #6f5499;
   width: 100%;
 }
 
