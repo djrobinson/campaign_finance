@@ -133,7 +133,7 @@ function buildArr(){
   graphNode = graphNode.concat(filterPres);
   filterCommittee.map(function(committee){
     var i = 0;
-    var maxI = 5;
+    var maxI = 35;
     graphNode.push(committee);
     var filterCommDonor = nodeArr.filter(function(node){
       if ( i < maxI && node.type === "donor" && node.belongsTo === committee.id){
@@ -207,60 +207,52 @@ function buildGraph(nodesFiltered, linksFiltered){
       .on("dragend", dragended);
 
   var svg = d3.select(".forceContainer").append("svg")
-      .attr("width", $("svg").parent().width())
+      .attr("width", $("svg").parent().width() * .9)
       .attr("height", height)
+      .append("g") //< added
       .call(zoom)
 
+var rect = svg.append("rect") //<= Added
+    .attr("width", $("svg").parent().width())
+    .attr("height", height)
+    .style("fill", "none")
+    .style("pointer-events", "all");
+
+
+
+
+
+  var container = svg.append("g");
+
+
   var force = d3.layout.force()
-      .gravity(.1)
-      .size([$("svg").parent().width(), height])
-      .nodes(nodesFiltered)
-      .links(linksFiltered)
+        .gravity(.1)
+        .size([$("svg").parent().width() * .9, height])
+        .nodes(nodesFiltered)
+        .links(linksFiltered)
+        .start();
 
-
-
-  force.charge(function(d){
-      if(d.type === "anchor") return 10;
-      if(d.type === "pres") return -100;
-      if(d.type === "committee") return -1000;
-      return -1000;
-    }
-
-  )
-
-    force.linkDistance(function(link){
-      if(link.type === "anchor") return 10;
-      if(link.type === "pres") return 30;
-      if(link.type === "committee") return 200;
-      return 50;
-    })
-
-  var link = svg.selectAll(".link")
-      .data(linksFiltered)
+  var link = container.append("g")
+    .selectAll(".link")
+    .data(linksFiltered)
     .enter().append("line")
-      .attr("class", "link")
+    .attr("class", "link")
     .attr("stroke-width", function(d) { return d.weight })
     .style("stroke", "black");
 
 
-  force.linkStrength(function(link){
-    if(link.type === "anchor") return 100;
-    if(link.type === "pres") return 5;
-    return 0.1;
-  })
-
-  var node = svg.selectAll(".node")
-      .data(nodesFiltered)
-    .enter().append("g")
-      .attr("class", "node")
-      .attr("id", function(d){
-        return d.id;
-      })
-      .call(force.drag)
-      .style("fill", "blue")
-      .on("click", click)
-      .call(drag);
-
+  var node = container.append("g")
+            .selectAll(".node")
+            .data(nodesFiltered)
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("id", function(d){
+              return d.id;
+            })
+            .on("click", click)
+            .attr("cx", function(d) { return d.x; })
+            .attr("cy", function(d) { return d.y; })
+            .call(drag);
 
   node.append("circle")
       .attr("r",function(d) {
@@ -283,39 +275,98 @@ function buildGraph(nodesFiltered, linksFiltered){
 
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
+  force.charge(function(d){
+      if(d.type === "anchor") return 10;
+      if(d.type === "pres") return -100;
+      if(d.type === "committee") return -1000;
+      return -1000;
+    }
+
+  )
+
+  force.linkDistance(function(link){
+    if(link.type === "anchor") return 10;
+    if(link.type === "pres") return 30;
+    if(link.type === "committee") return 200;
+    return 50;
+  })
+
+  force.linkStrength(function(link){
+    if(link.type === "anchor") return 100;
+    if(link.type === "pres") return 5;
+    return 0.1;
+  })
 
 });
 
-force.start();
+var linkedByIndex = {};
+linksFiltered.forEach(function(d) {
+    linkedByIndex[d.source.index + "," + d.target.index] = 1;
+});
 
-// function zoomed() {
-//   container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-// }
+function isConnected(a, b) {
+    return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index];
+}
 
-// function dragstarted(d) {
-//   d3.event.sourceEvent.stopPropagation();
+node.on("mouseover", function(d){
 
-//   d3.select(this).classed("dragging", true);
-//   force.start();
-// }
+        node.classed("node-active", function(o) {
+            thisOpacity = isConnected(d, o) ? true : false;
+            this.setAttribute('fill-opacity', thisOpacity);
+            return thisOpacity;
+        });
 
-// function dragged(d) {
+        link.classed("link-active", function(o) {
+            return o.source === d || o.target === d ? true : false;
+        });
 
-//   d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+        d3.select(this).classed("node-active", true);
+        d3.select(this).select("circle").transition()
+                .duration(750)
+                .attr("r", (d.weight * 2+ 12)*1.5);
+})
 
-// }
+.on("mouseout", function(d){
 
-// function dragended(d) {
+        node.classed("node-active", false);
+        link.classed("link-active", false);
 
-//   d3.select(this).classed("dragging", false);
-// }
+        d3.select(this).select("circle").transition()
+                .duration(750)
+                .attr("r", d.weight * 2+ 12);
+});
+
+
+function dottype(d) {
+  d.x = +d.x;
+  d.y = +d.y;
+  return d;
+}
+
+function zoomed() {
+  container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+}
+
+function dragstarted(d) {
+  d3.event.sourceEvent.stopPropagation();
+
+  d3.select(this).classed("dragging", true);
+  force.start();
+}
+
+function dragged(d) {
+
+  d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+
+}
+
+function dragended(d) {
+
+  d3.select(this).classed("dragging", false);
+}
 
 }
 //d3.js//////////////////////////////////////////////
-
-
-
-
 
 
 
@@ -330,24 +381,26 @@ function click(){
     // .text(name);
 
   if(name.includes("E")){
-    $("#presHolder")
-      .css("display", "none")
-    $("#holder")
-      .css("display", "block")
+    $("#presHolder").slideUp("slow");
+      // .css("display", "none")
+    $("#holder").slideDown("slow");
+      // .css("display", "block")
     employeeGroup(name);
     newName = name.split("E").shift();
     committeeExpenditures(newName);
   } else if ( name.charAt(0) === "P" ) {
-    $("#presHolder")
-      .css("display", "block")
-    $("#holder")
-      .css("display", "none")
+    $("#employeeSel").hide();
+    $("#presHolder").slideDown("slow");
+      // .css("display", "block")
+    $("#holder").slideUp("slow");
+      // .css("display", "none")
     candidateInfo(name);
   } else {
-    $("#presHolder")
-      .css("display", "none")
-    $("#holder")
-      .css("display", "block")
+    $("#employeeSel").hide();
+    $("#presHolder").slideUp("slow");
+      // .css("display", "none")
+    $("#holder").slideDown("slow");
+      // .css("display", "block")
     committeeExpenditures(name);
   }
 };
@@ -417,6 +470,7 @@ function employeeGroup(id){
   var emplGroup = nodeArr.filter(function(node){
     if (id === node.id) return node;
   })
+  $("#employeeSel").show().html("<h2>"+emplGroup[0].name+" Donation Amount: "+emplGroup[0].donation+"</h2><h4>The selected node represents a group/individual donation from a specified employer. For more individuals on individuals from this employer, refer to the filings for the corresponding PAC shown above</h4>")
   console.log(emplGroup);
 }
 
@@ -441,30 +495,20 @@ function candidateInfo(id){
   $("#contributions2700").html(candidate.contributions_2700);
 
   console.log(candidate);
+  $("#presComms").html("");
   candidate.assoc_committees.map(function(committee){
   $.ajax({
       url: "https://api.open.fec.gov/v1/committee/"+ committee.candidate_committee.fec_committee_id +"/?page=1&sort_nulls_large=true&api_key="+ fec_key +"&sort=name&per_page=20",
       method: "GET",
       success: function(data){
         console.log(data);
+        data.results.forEach(function(committee){
+          $("#presComms").append("<tr><td>"+ committee.name +"</td><td> $" + committee.website + "</td></tr>")
+        })
+
       }
     })
   })
 }
-
-
-// "id": candidate.candidate_id,
-//       "name": candidate.candidate_name,
-//       "group": candidate.candidate_id,
-//       "total_contributions": candidate.total_contributions,
-//       "total_disbursements": candidate.total_disbursements,
-//       "total_receipts": candidate.total_receipts,
-//       "cash_on_hand": candidate.cash_on_hand,
-//       "contributions_200_499": candidate.contributions_200_499,
-//       "contributions_500_1499": candidate.contributions_500_1499,
-//       "contributions_1500_2699": candidate.contributions_1500_2699,
-//       "contributions_2700": candidate.contributions_2700,
-//       "party": candidate.party,
-//       "type": "pres"
 
 
