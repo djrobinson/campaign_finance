@@ -1,34 +1,78 @@
 /* add custom styles */
 
+/*https://coolors.co/app/2f3061-29339b-dbf9f4-bfc3ba-a9aca9*/
+/*https://coolors.co/app/742121-c6caed-ada8be-a28497-dddfdf*/
 
-table {
-  margin-top: 60px;
+body {
+  padding: none !important;
+  margin: none !important;
+  border: none;
 }
 
+.option-select {
+  display:none;
+  margin-top: 10rem;
+}
+
+.cover {
+  background-color: #2F3061;
+  display: block;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  margin-top: 10rem;
+}
+
+.intro {
+  font-size: 10rem;
+}
+
+.remove>h3:hover {
+  color: #DDDFDF;
+}
+
+.remove {
+  padding-left: 10rem;
+  color: white;
+}
+
+.remove h3 {
+  text-decoration: underline;
+}
+
+.glyphicon-star {
+  position: absolute;
+  margin: 2rem;
+  color: #DDDFDF;
+  font-size: 8rem;
+  z-index: 99;
+}
+
+.glyphicon-star:hover {
+  text-decoration: none;
+  color: #291F1E;
+ }
 #employeeSel {
   display: none;
 
 }
 
 #holder {
-  /*margin-top: 70px;*/
   display: none;
   background-color: #6f5499;
-  height: 500px;
+  height: 400px;
   color: white !important;
   font-size: 2rem;
 }
 
 #presHolder {
-  padding-top: 70px;
   display: none;
-  height: 500px;
+  height: 400px;
   color: white !important;
   font-size: 2rem;
 }
 
 #holderBack {
-  margin-top: 60px;
   width: 100%;
 }
 
@@ -43,6 +87,6 @@ table {
 }
 
 .tableHolder{
-  height: 400px !important;
+  height: 300px !important;
   overflow: scroll;
 }

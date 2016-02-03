@@ -3,48 +3,95 @@
 <head>
   <meta charset="utf-8">
   <title>Campaign Finance</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://bootswatch.com/readable/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css">
+
 
 </head>
 <body>
-  <div class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand">Campaign Finance Explorer</a>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li><a id="buildArr">Testing 1</a></li>
-          <li><a><button class="btn btn-default" type="button" id="submitCandidate">Submit</button></a></li>
-        </ul>
+  <a class="glyphicon glyphicon-star"></a>
+  <div class="cover">
+    <div class="col-md-6">
 
+      <h1 class="remove intro">Campaign Finance Dashboard</h1>
+      <div class="remove">
+        <h2>An in depth analysis of how presidential campaigns are funded. All data is taken directly from publicly available FEC reports.</h2>
+        <h3 id="start">Get Started ></h3>
       </div>
     </div>
   </div>
+  <div class="col-md-3 option-select">
+    <form class="form-horizontal">
+      <fieldset>
+        <legend>Select Search Options:</legend>
+        <div class="form-group">
+          <label for="nodeNumber" class="col-md-6 control-label text-center">Number of Associated PACs per Candidate</label>
+          <div class="col-md-6">
+            <input type="number" class="form-control" id="nodeNumber" placeholder="5">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="select" class="col-md-4 control-label">Choose Candidates to Display</label>
+          <div class="col-md-8">
+            <select multiple="" id="multiSel" class="form-control">
+              <option value="P00003392">Hilary Clinton</option>
+              <option value="P60007168">Bernie Sanders</option>
+              <option value="P60005915">Ben Carson</option>
+              <option value="P60006111">Ted Cruz</option>
+              <option value="P60008059">Jeb Bush</option>
+              <option value="P60006723">Marco Rubio</option>
+              <option value="P40003576">Rand Paul</option>
+              <option value="P60007242">Carly Fiorina</option>
+              <option value="P80001571">Donald Trump</option>
+              <option value="P60003670">John Kasich</option>
+              <option value="P60008521">Chris Christie</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="col-md-4 col-md-offset-8">
+            <input type="button" class="btn btn-default btn-lg" id="testBtn" value="Testing">
+            <input type="button" class="btn btn-default btn-lg" id="submitCandidate" value="Pull Data">
+            <input type="button" class="btn btn-default btn-lg" id="buildArr" value="Generate Graph">
+          </div>
+      </fieldset>
+    </form>
+  </div>
+
   <div class="container" id="holderBack">
     <div class="row" >
       <div class="col-md-12" id="holder">
-        <div class="col-md-3 text-center">
+        <div class="col-md-4 text-center">
           <h1 id="name"></h1>
           <h4 id="website"></h4>
           </br>
-          <h2 id="cash"></h2>
-          <h2 id="expenditures"></h2>
-          <h2 id="contributions"></h2>
+          <h3 id="cash"></3>
+          <h3 id="expenditures">Cash on Hand: </h3>
+          <h2 id="contributions"></h3>
           <h4 id="email"></h4>
           <h4 id="treasurer"></h4>
         </div>
-        <div class="tableHolder col-md-3">
-          <table class="table table-hover" id="byCategory">
-          </table>
-        </div>
-        <div class="tableHolder col-md-3">
-          <table class="table table-hover" id="byRecipient">
+        <div class="col-md-4">
+        <ul class="nav nav-tabs">
+          <li><a href="#1" data-toggle="tab">By Category</a>
+          </li>
+          <li><a href="#2" data-toggle="tab">By Recipient</a>
+          </li>
+        </ul>
+        <div class="tab-content tableHolder">
+          <div id="1" class="tab-pane">
+            <table class="table table-hover" id="byCategory">
+            </table>
+          </div>
+          <div id="2" class="tab-pane">
+            <table class="table table-hover" id="byRecipient">
 
-          </table>
+            </table>
+           </div>
+          </div>
         </div>
-        <div class="tableHolder col-md-3">
+        <div class="tableHolder col-md-4">
           <table class="table table-hover" id="byFiling">
 
           </table>
@@ -56,16 +103,16 @@
           </div>
           <h1 id="presName"></h1>
           <h1 id="presCash"></h1>
-          <h1 id="totalContributions"></h1>
+
         </div>
         <div class="col-md-4">
           <h1 id="totalContributions"></h1>
-          <h3 id="contributions499"></h3>
-          <h3 id="contributions1499"></h3>
-          <h3 id="contributions2699"></h3>
-          <h3 id="contributions2700"></h3>
+          <div id="pieChart">
+
+          </div>
         </div>
-        <div class="tableHolder col-md-3">
+        <div class="tableHolder col-md-4">
+          <h1>Political Action Committees Associated to Candidate</h1>
           <table class="table table-hover" id="presComms">
 
           </table>
@@ -88,6 +135,7 @@
 
 
   <script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
+  <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <script src="js/apikeys.js"></script>

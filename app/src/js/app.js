@@ -6,34 +6,34 @@ var fec_key = keys.fec_key;
 var nodeArr = [];
 var linkArr = [];
 var presArray = [];
-var presFilterStart = ["P00003392"];
-
+// var presFilterStart = ["P00003392"];
 //, "P60007168", "P60005915", "P60006111", "P60008059", "P60006723", "P40003576", "P80001571","P60003670", "P60008521", "P60007671"
 var filterPres = [];
 var filterCommittee = [];
 
-$('#buildArr').on('click', buildArr);
-$('#build').on('click', buildGraph);
+$('#buildArr').on("click", buildArr);
 
 console.log("sanity check!");
 
 
-$('#submitCandidate').on('click', function(){
-  var lastName = $('#inputCandidate').val();
+
+
+$("#submitCandidate").on("click", function(){
+  // var lastName = $('#inputCandidate').val();
+
   $.ajax({
     url: "http://api.nytimes.com/svc/elections/us/v3/finances/2016/president/totals.json" + key,
     method: "GET",
     success: function(data){
       console.log(data);
       presArray = data.results;
-      // var candidate = data.results[0]; //For Testing purposes, use this
-      // addCandidate(candidate);
       presArray.map(addCandidate);
     }
   });
 });
 
 function addCandidate(candidate){
+  var presFilterStart = $("#multiSel").val();
   if ( presFilterStart.indexOf(candidate.candidate_id) !== -1 ) {
     var assoc_committees = candidate.associated_committees;
     var presNode = {
@@ -118,22 +118,17 @@ function addDonors(currCommittee){
   })
 }
 
-
-
-
-
-
-
-
 //ajax.js//////////////////////////////////////////////////
 
 function buildArr(){
+
+  $(".option-select").hide();
 
   var graphNode = [{"id": "CENTERNODE", "group": 0, "type": "anchor"}];
   graphNode = graphNode.concat(filterPres);
   filterCommittee.map(function(committee){
     var i = 0;
-    var maxI = 35;
+    var maxI = $("#nodeNumber").val();
     graphNode.push(committee);
     var filterCommDonor = nodeArr.filter(function(node){
       if ( i < maxI && node.type === "donor" && node.belongsTo === committee.id){
@@ -183,13 +178,6 @@ function getNodeIndex(nodes, id){
   return index;
 }
 
-
-
-
-
-
-
-
 //d3.js//////////////////////////////////////////////
 
 function buildGraph(nodesFiltered, linksFiltered){
@@ -207,13 +195,13 @@ function buildGraph(nodesFiltered, linksFiltered){
       .on("dragend", dragended);
 
   var svg = d3.select(".forceContainer").append("svg")
-      .attr("width", $("svg").parent().width() * .9)
+      .attr("width", $(".forceContainer").width() * .9)
       .attr("height", height)
       .append("g") //< added
       .call(zoom)
 
 var rect = svg.append("rect") //<= Added
-    .attr("width", $("svg").parent().width())
+    .attr("width", $(".forceContainer").width())
     .attr("height", height)
     .style("fill", "none")
     .style("pointer-events", "all");
@@ -227,7 +215,7 @@ var rect = svg.append("rect") //<= Added
 
   var force = d3.layout.force()
         .gravity(.1)
-        .size([$("svg").parent().width() * .9, height])
+        .size([$(".forceContainer").width() * .9, height])
         .nodes(nodesFiltered)
         .links(linksFiltered)
         .start();
@@ -242,17 +230,17 @@ var rect = svg.append("rect") //<= Added
 
 
   var node = container.append("g")
-            .selectAll(".node")
-            .data(nodesFiltered)
-            .enter().append("g")
-            .attr("class", "node")
-            .attr("id", function(d){
-              return d.id;
-            })
-            .on("click", click)
-            .attr("cx", function(d) { return d.x; })
-            .attr("cy", function(d) { return d.y; })
-            .call(drag);
+        .selectAll(".node")
+        .data(nodesFiltered)
+        .enter().append("g")
+        .attr("class", "node")
+        .attr("id", function(d){
+          return d.id;
+        })
+        .on("click", click)
+        .attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; })
+        .call(drag);
 
   node.append("circle")
       .attr("r",function(d) {
@@ -443,8 +431,8 @@ function committeeExpenditures(committeeId){
       $("#byFiling").html("");
       $("#byFiling").append("<tr><th>Link to Filing</th><th>Contributions YTD</th><th>Cash on Hand EOY</th></tr>");
       var currFiling = data.results[0];
-      $("#cash").text("Cash: $"+currFiling.cash_on_hand_close_ytd);
-      $("#contributions").text("YTD Contributions: $"+currFiling.net_contributions_ytd);
+      $("#cash").text("Cash: "+(currFiling.cash_on_hand_close_ytd).formatMoney(2));
+      $("#contributions").text("YTD Contributions: $"+(currFiling.net_contributions_ytd).formatMoney(2));
       $("#expenditures").text("YTD Expenditures: $"+ currFiling.offsets_to_operating_expenditures_ytd);
       data.results.forEach(function(filing, i){
 
@@ -480,21 +468,38 @@ function candidateInfo(id){
   })[0];
   console.log(candidate);
   if (candidate.party === "D"){
-    $("#presHolder").css("background-color", "blue");
+    $("#presHolder").css("background-color", "#29339B");
   } else if (candidate.party === "R"){
-    $("#presHolder").css("background-color", "red");
+    $("#presHolder").css("background-color", "#742121");
   }
   $("#imgPlacholder").html("<img src='img/"+id+".jpg' alt='prezzi'>");
-  $("#presName").html(candidate.name);
-  $("#presCash").html(candidate.cash_on_hand);
-  $("#totalDisbursements").html(candidate.total_disbursements);
-  $("#totalContributions").html(candidate.total_contributions);
-  $("#contributions499").html(candidate.contributions_200_499);
-  $("#contributions1499").html(candidate.contributions_500_1499);
-  $("#contributions2699").html(candidate.contributions_1500_2699);
-  $("#contributions2700").html(candidate.contributions_2700);
+  $("#presName").text(candidate.name);
+  $("#presCash").text((candidate.cash_on_hand).formatMoney(2));
+  $("#totalDisbursements").text((candidate.total_disbursements).formatMoney(2));
+  $("#totalContributions").text((candidate.total_contributions).formatMoney(2));
+  var pieData = [
+    {
+      "label": "$200-499",
+      "value":  candidate.contributions_200_499
+    },
+    {
+      "label": "$500-1499",
+      "value": candidate.contributions_500_1499
+    },
+    {
+      "label": "$1500-2699",
+      "value": candidate.contributions_1500_2699
+    },
+    {
+      "label": "Over $2700",
+      "value": candidate.contributions_2700
+    }
+  ]
+  $("#pieChart").html("");
+  pieChart(pieData);
 
   console.log(candidate);
+
   $("#presComms").html("");
   candidate.assoc_committees.map(function(committee){
   $.ajax({
@@ -503,7 +508,7 @@ function candidateInfo(id){
       success: function(data){
         console.log(data);
         data.results.forEach(function(committee){
-          $("#presComms").append("<tr><td>"+ committee.name +"</td><td> $" + committee.website + "</td></tr>")
+          $("#presComms").html("<tr><td>"+ committee.name +"</td><td> $" + committee.website + "</td></tr>")
         })
 
       }
@@ -511,4 +516,58 @@ function candidateInfo(id){
   })
 }
 
+function pieChart(data){
 
+    var w = $("#pieChart").parent().width() / 2,
+    h = $("#pieChart").parent().width() / 2,
+    r = h/2,
+    color = d3.scale.category20c();
+
+    var vis = d3.select("#pieChart")
+        .append("svg:svg")
+        .data([data])
+            .attr("width", w)
+            .attr("height", h)
+        .append("svg:g")
+            .attr("transform", "translate(" + r + "," + r + ")")
+    var arc = d3.svg.arc()
+        .outerRadius(r);
+    var pie = d3.layout.pie()
+        .value(function(d) { return d.value; });
+    var arcs = vis.selectAll("g.slice")
+        .data(pie)
+        .enter()
+            .append("svg:g")
+                .attr("class", "slice");
+        arcs.append("svg:path")
+                .attr("fill", function(d, i) { return color(i); } )
+                .attr("d", arc);
+        arcs.append("svg:text")
+                .attr("transform", function(d) {
+
+                d.innerRadius = 0;
+                d.outerRadius = r;
+                return "translate(" + arc.centroid(d) + ")";
+            })
+            .attr("text-anchor", "middle")
+            .text(function(d, i) { return data[i].label; });
+
+}
+
+$("#start").on('click', function(){
+  $(".cover").slideUp("slow", function() { $(this).hide(); $(".option-select").show();});
+
+  $(".glyphicon-star").css("display","block");
+})
+
+
+Number.prototype.formatMoney = function(c){
+var n = this,
+    c = isNaN(c = Math.abs(c)) ? 2 : c,
+    d = ".",
+    t = ",",
+    s = n < 0 ? "-" : "",
+    i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+    j = (j = i.length) > 3 ? j % 3 : 0;
+   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+ };
