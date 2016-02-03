@@ -62,7 +62,6 @@ body {
   background-color: #DDDFDF;
   border-bottom: solid 1px #ADA8BE;
   height: 450px;
-  color: white !important;
   font-size: 2rem;
 }
 
@@ -78,6 +77,10 @@ body {
 .closer {
   position: relative;
   height: 450px;
+}
+
+#imgPlaceholder{
+  margin-top: 2rem;
 }
 
 #collapse {
@@ -101,6 +104,6 @@ body {
 
 .tableHolder{
   margin-top: 3rem;
-  height: 375px !important;
+  height: 350px !important;
   overflow: scroll;
 }
