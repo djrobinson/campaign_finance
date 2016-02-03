@@ -62,7 +62,7 @@
   <div class="container" id="holderBack">
     <div class="row" >
       <div class="col-md-12" id="holder">
-        <div class="col-md-4 text-center">
+        <div class="col-md-3 col-md-offset-1 text-center">
           <h1 id="name"></h1>
           <h4 id="website"></h4>
           </br>
@@ -80,7 +80,7 @@
           </li>
         </ul>
         <div class="tab-content tableHolder">
-          <div id="1" class="tab-pane">
+          <div id="1" class="tab-pane active">
             <table class="table table-hover" id="byCategory">
             </table>
           </div>
@@ -91,32 +91,51 @@
            </div>
           </div>
         </div>
-        <div class="tableHolder col-md-4">
-          <table class="table table-hover" id="byFiling">
+        <div class="col-md-4">
+          <ul class="nav nav-tabs">
+            <li><a href="#3" data-toggle="tab">FEC Filings</a>
+            </li>
+            <li><a href="#4" data-toggle="tab">Top Donors</a>
+            </li>
+          </ul>
+          <div class="tab-content tableHolder">
+            <div id="3" class="tab-pane">
+              <table class="table table-hover" id="byFiling">
+              </table>
+            </div>
+            <div id="4" class="tab-pane active">
+              <table class="table table-hover" id="byDonor">
 
-          </table>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-md-12" id="presHolder">
-        <div class="col-md-4 text-center">
+
+        <div class="col-md-3 col-md-offset-1 text-center">
           <div id="imgPlacholder">
           </div>
           <h1 id="presName"></h1>
           <h1 id="presCash"></h1>
 
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3 text-center closer">
           <h1 id="totalContributions"></h1>
+          <br>
           <div id="pieChart">
 
           </div>
+
         </div>
         <div class="tableHolder col-md-4">
-          <h1>Political Action Committees Associated to Candidate</h1>
+          <h2>Political Action Committees Associated with Candidate</h2>
+
           <table class="table table-hover" id="presComms">
 
           </table>
         </div>
+         <div class="glyphicon glyphicon-remove pull-right" id="collapse"></div>
       </div>
       <div class="col-md-12">
         <div class="alert alert-info text-center" id="employeeSel">
@@ -126,8 +145,8 @@
   </div>
 
   <div class="container candContainer">
-    <div class="row" id="candidateList candContainer">
-      <div class="forceContainer candContainer">
+    <div class="row" id="candidateList">
+      <div class="forceContainer">
       </div>
     </div>
   </div>

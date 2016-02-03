@@ -43,7 +43,7 @@ body {
 .glyphicon-star {
   position: absolute;
   margin: 2rem;
-  color: #DDDFDF;
+  color: #B7777F;
   font-size: 8rem;
   z-index: 99;
 }
@@ -59,17 +59,30 @@ body {
 
 #holder {
   display: none;
-  background-color: #6f5499;
-  height: 400px;
+  background-color: #DDDFDF;
+  border-bottom: solid 1px #ADA8BE;
+  height: 450px;
   color: white !important;
   font-size: 2rem;
 }
 
 #presHolder {
+  position: relative;
+  width: 100%;
   display: none;
-  height: 400px;
+  height: 450px;
   color: white !important;
   font-size: 2rem;
+}
+
+.closer {
+  position: relative;
+  height: 450px;
+}
+
+#collapse {
+  position: absolute;
+  padding: 2rem;
 }
 
 #holderBack {
@@ -87,6 +100,7 @@ body {
 }
 
 .tableHolder{
-  height: 300px !important;
+  margin-top: 3rem;
+  height: 375px !important;
   overflow: scroll;
 }

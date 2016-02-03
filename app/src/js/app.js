@@ -285,6 +285,11 @@ var rect = svg.append("rect") //<= Added
     return 0.1;
   })
 
+  $("rect").on('click', function(){
+    $("#presHolder").slideUp('slow');
+    $("#holder").slideUp('slow');
+  })
+
 });
 
 var linkedByIndex = {};
@@ -353,10 +358,12 @@ function dragended(d) {
   d3.select(this).classed("dragging", false);
 }
 
+
+
 }
 //d3.js//////////////////////////////////////////////
 
-
+$('.toCommittee').on('click', click);
 
 function click(){
   d3.select(this)
@@ -508,7 +515,7 @@ function candidateInfo(id){
       success: function(data){
         console.log(data);
         data.results.forEach(function(committee){
-          $("#presComms").html("<tr><td>"+ committee.name +"</td><td> $" + committee.website + "</td></tr>")
+          $("#presComms").html("<tr><td><h4>"+ committee.name +"</h4></td><td><h4><a class='toCommittee' id=" + committee.committee_id + ">" + committee.committee_id + "</a></h4></td></tr>")
         })
 
       }
@@ -518,20 +525,21 @@ function candidateInfo(id){
 
 function pieChart(data){
 
-    var w = $("#pieChart").parent().width() / 2,
-    h = $("#pieChart").parent().width() / 2,
-    r = h/2,
-    color = d3.scale.category20c();
+    var w = $("#pieChart").parent().width() / 1.5,
+        h = $("#pieChart").parent().width() / 1.5,
+        r = h/2,
+        labelr = r-20,
+        color = d3.scale.category20c();
+
 
     var vis = d3.select("#pieChart")
         .append("svg:svg")
         .data([data])
-            .attr("width", w)
-            .attr("height", h)
+            .attr("width", $("#pieChart").parent().width())
+            .attr("height", $("#pieChart").parent().width())
         .append("svg:g")
             .attr("transform", "translate(" + r + "," + r + ")")
-    var arc = d3.svg.arc()
-        .outerRadius(r);
+    var arc = d3.svg.arc().innerRadius(r * .5).outerRadius(r);
     var pie = d3.layout.pie()
         .value(function(d) { return d.value; });
     var arcs = vis.selectAll("g.slice")
@@ -544,21 +552,34 @@ function pieChart(data){
                 .attr("d", arc);
         arcs.append("svg:text")
                 .attr("transform", function(d) {
+                    console.log(d);
+                    console.log(arc);
+                    var c = arc.centroid(d),
+                        x = c[0],
+                        y = c[1],
+                        h = Math.sqrt(x*x + y*y);
 
-                d.innerRadius = 0;
-                d.outerRadius = r;
-                return "translate(" + arc.centroid(d) + ")";
-            })
-            .attr("text-anchor", "middle")
-            .text(function(d, i) { return data[i].label; });
+                    console.log("translate(" + (x/h * labelr) +  ',' +
+                       (y/h * labelr) +  ")");
+                    return "translate(" + (x/h * labelr) +  ',' +
+                       (y/h * labelr) +  ")";
+                })
+                .attr("text-anchor", function(d) {
+                    // are we past the center?
+                    return (d.endAngle + d.startAngle)/2 > Math.PI ?
+                        "end" : "start";
+                })
+                .attr("dy", ".35rem")
+                .text(function(d, i) { return ( data[i].label + ": $" + data[i].value)  });
 
 }
 
 $("#start").on('click', function(){
   $(".cover").slideUp("slow", function() { $(this).hide(); $(".option-select").show();});
-
   $(".glyphicon-star").css("display","block");
 })
+
+
 
 
 Number.prototype.formatMoney = function(c){
