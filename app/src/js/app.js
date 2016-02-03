@@ -14,14 +14,12 @@ var fec_key = keys.fec_key;
 var nodeArr = [];
 var presArray = [];
 
-//TESTING ONLY!!! \/\/\/\/\/\/\/
-// var filterPres = JSON.parse(localStorage.getItem("filterPres"));
-// var filterCommittee = JSON.parse(localStorage.getItem("filterCommittee"));
-// var graphLinks = JSON.parse(localStorage.getItem("graphLinks"));
-//TESTING ONLY!!! ^^^^^^^^^^^
 
 var filterPres = [];
 var filterCommittee = [];
+
+// var localStorage.setItem("filterPres", filterPres);
+// var localStorage.setItem("filterCommittee", filterCommittee);
 
 console.log("sanity check!");
 
@@ -29,12 +27,27 @@ console.log("sanity check!");
 $("#submitCandidate").on("click", function(){
   $(".forceContainer").html("");
   // var lastName = $('#inputCandidate').val();
-  $("#openOptions").css("display","block");
-  // getCandidates();
+  nodeArr = [];
+  filterPres = [];
+  filterCommittee = [];
+  getCandidates();
   setTimeout(buildArr, 1000);
 });
 
+function getCandidates(){
+  $.ajax({
+    url: "http://api.nytimes.com/svc/elections/us/v3/finances/2016/president/totals.json" + key,
+    method: "GET",
+    success: function(data){
+
+      presArray = data.results;
+      presArray.map(addCandidate);
+    }
+  });
+}
+
 function addCandidate(candidate){
+
   var presFilterStart = $("#multiSel").val();
   if ( presFilterStart.indexOf(candidate.candidate_id) !== -1 ) {
     var assoc_committees = candidate.associated_committees;
@@ -92,6 +105,8 @@ function committeeExpenditures(committeeId){
 //UPDATES THE NODE COUNT DEPENDING ON HOW MANY PACS A USER WANTS TO SEE ON THE PAGE
 
 function buildArr(){
+  graphNode = [];
+  $("#openOptions").css("display","block");
   $(".option-select").hide();
   var graphNode = [{"id": "CENTERNODE", "group": 0, "type": "anchor"}];
   graphNode = graphNode.concat(filterPres);
@@ -134,7 +149,6 @@ function buildLinks(nodes){
       graphLinks.push(pushObj);
     }
   })
-  localStorage.setItem("graphLinks", JSON.stringify(graphLinks))
   return graphLinks;
 }
 

@@ -43,7 +43,7 @@ function buildGraph(nodesFiltered, linksFiltered){
       .data(linksFiltered)
       .enter().append("line")
       .attr("class", "link")
-      .attr("stroke-width", function(d) { return d.weight })
+      .attr("stroke-width", 1)
       .style("stroke", "gray");
 
 
@@ -160,14 +160,12 @@ function buildGraph(nodesFiltered, linksFiltered){
   $("rect").on("click", function(){
     $("#presHolder").slideUp('slow');
     $("#holder").slideUp('slow');
+    $("#employeeSel").slideUp('slow');
   })
 
   $('svg').on('click', function(e){
     var Elem = e.target;
-    console.log(e);
-    console.log(Elem.id);
-    console.log(Elem.classList[0]);
-    console.log("Is true? ", (Elem.classList[0] === "circle"));
+
     if (Elem.classList[0] === "circle"){
       click(Elem.id);
     }
@@ -204,8 +202,8 @@ function buildGraph(nodesFiltered, linksFiltered){
 //CREATE PIE CHART FUNCTION
 function pieChart(data){
 
-  var w = $("#pieChart").parent().width() / 1.5,
-      h = $("#pieChart").parent().width() / 1.5,
+  var w = $("#pieChart").parent().width() / 2,
+      h = $("#pieChart").parent().width() / 2,
       r = h/2,
       labelr = r-70,
       color = d3.scale.category20c();
@@ -225,24 +223,17 @@ function pieChart(data){
       .data(pie)
       .enter()
         .append("svg:g")
-          .attr("class", "slice");
+          .attr("class", "slice")
+          .attr("id", function(d, i){
+            return data[i].id;
+          })
       arcs.append("svg:path")
           .attr("fill", function(d, i) { return color(i); } )
           .attr("d", arc);
-      arcs.append("svg:text")
-          .attr("transform", function(d) {
-              var c = arc.centroid(d),
-                  x = c[0],
-                  y = c[1],
-                  h = Math.sqrt(x*x + y*y);
-              return "translate(" + (x/h * labelr) +  ',' +
-                 (y/h * labelr) +  ")";
-          })
-          .attr("text-anchor", function(d) {
-              // are we past the center?
-              return (d.endAngle + d.startAngle)/2 > Math.PI ?
-                  "end" : "start";
-          })
-          .attr("dy", ".2rem")
-          .text(function(d, i) { return ( data[i].label + ": $" + data[i].value)  });
+
+  $(".slice").on("click", function(){
+
+    var i = parseInt($(this).attr("id")) - 1;
+    $("#categDonor").html( data[i].label + ": $" + (data[i].value).formatMoney(2) );
+  })
 }

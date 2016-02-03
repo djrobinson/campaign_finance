@@ -28,7 +28,7 @@
         <div class="form-group">
           <label for="nodeNumber" class="col-md-6 control-label text-center">Number of Associated PACs per Candidate</label>
           <div class="col-md-6">
-            <input type="number" class="form-control" id="nodeNumber" placeholder="5">
+            <input type="number" class="form-control" id="nodeNumber" value="5">
           </div>
         </div>
         <div class="form-group">
@@ -51,9 +51,8 @@
 
         </div>
         <div class="col-md-6 col-md-offset-6">
-            <input type="button" class="btn btn-default btn-lg" id="submitCandidate" value="Pull Data">
-            <input type="button" class="btn btn-default btn-lg" id="buildArr" value="Generate Graph">
-          </div>
+          <input type="button" class="btn btn-default btn-lg pull-right" id="submitCandidate" value="Pull Data">
+        </div>
       </fieldset>
     </form>
 
@@ -63,9 +62,9 @@
     <div class="row" >
       <div class="col-md-12" id="holder">
         <div class="col-md-4 text-center">
-          <h3 id="name"></h3>
+          <h2 id="name"></h2>
           <h4 id="website"></h4>
-          </br>
+
           <h3 id="cash"></h3>
           <h3 id="expenditures"></h3>
           <h2 id="contributions"></h3>
@@ -74,18 +73,18 @@
         </div>
         <div class="col-md-4 tableHolder">
         <ul class="nav nav-tabs">
-          <li class="active" ><a href="#1" data-toggle="tab">By Category</a>
+          <li class="active" ><a href="#5" data-toggle="tab">By Category</a>
           </li>
-          <li><a href="#2" data-toggle="tab">By Recipient</a>
+          <li><a href="#6" data-toggle="tab">By Recipient</a>
           </li>
         </ul>
         <div class="tab-content ">
-          <div id="1" class="tab-pane active">
+          <div id="5" class="tab-pane active">
             <table class="table table-striped table-hover" id="byCategory">
 
             </table>
           </div>
-          <div id="2" class="tab-pane">
+          <div id="6" class="tab-pane">
             <table class="table table-striped table-hover" id="byRecipient">
             </table>
            </div>
@@ -93,18 +92,18 @@
         </div>
         <div class="col-md-4 tableHolder">
           <ul class="nav nav-tabs">
-            <li class="active" ><a href="#3" data-toggle="tab" class="active">FEC Filings</a>
+            <li class="active" ><a href="#7" data-toggle="tab" class="active">Top Donors</a>
             </li>
-            <li><a href="#4" data-toggle="tab">Top Donors</a>
+            <li><a href="#8" data-toggle="tab">FEC Filings</a>
             </li>
           </ul>
           <div class="tab-content ">
-            <div id="3" class="tab-pane active">
-              <table class="table table-striped table-hover" id="byFiling">
+            <div id="7" class="tab-pane active">
+              <table class="table table-striped table-hover" id="byDonor">
               </table>
             </div>
-            <div id="4" class="tab-pane">
-              <table class="table table-striped table-hover" id="byDonor">
+            <div id="8" class="tab-pane">
+              <table class="table table-striped table-hover" id="byFiling">
               </table>
             </div>
           </div>
@@ -126,7 +125,7 @@
           <div id="pieChart">
 
           </div>
-
+          <h4 id="categDonor"></h4>
         </div>
         <div class="tableHolder col-md-4 text-center">
           <h3>Political Action Committees Associated with Candidate</h3>

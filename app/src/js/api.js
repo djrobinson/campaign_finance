@@ -1,18 +1,24 @@
 
 //GET A LIST OF CANDIDATES
-function getCandidates(){
+
+
+//Get committees tied to candidate
+function getCandidateComm(committee){
   $.ajax({
-    url: "http://api.nytimes.com/svc/elections/us/v3/finances/2016/president/totals.json" + key,
-    method: "GET",
-    success: function(data){
-      console.log(data);
-      presArray = data.results;
-      presArray.map(addCandidate);
-    }
-  });
+      url: "https://api.open.fec.gov/v1/committee/"+ committee.candidate_committee.fec_committee_id +"/?page=1&sort_nulls_large=true&api_key="+ fec_key +"&sort=name&per_page=20",
+      method: "GET",
+      success: function(data) {
+
+        $("#presComms").append("<tr><td><h4>"+ data.results[0].name +"</h4></td><td><h4><a class='toCommittee' id=" + data.results[0].committee_id + ">" + data.results[0].committee_id + "</a></h4></td></tr>")
+
+        $('.toCommittee').on('click', function(){
+          click($(this).attr('id'));
+        });
+      }
+  })
 }
 
-//Get donor PAC info
+//Get PAC info
 function addCommDonor(currCommittee){
   $.ajax({
     url: "https://api.open.fec.gov/v1/committee/" + currCommittee + "/schedules/schedule_a/by_contributor/?page=1&sort_nulls_large=true&api_key=" + fec_key + "&sort=-total&per_page=100",
@@ -66,7 +72,7 @@ function getCommitteSpend(committeeId){
       $("#byCategory").html("")
       $("#byCategory").append("<tr><th>Category</th><th>Amount</th></tr>");
       data.results.forEach(function(expenditure){
-        $("#byCategory").append("<tr><td>"+ expenditure.purpose +"</td><td> $" + expenditure.total + "</td></tr>");
+        $("#byCategory").append("<tr><td>"+ expenditure.purpose +"</td><td> $" + (expenditure.total).formatMoney(2) + "</td></tr>");
       })
     }
   })
@@ -82,7 +88,6 @@ function getCommitteeInfo(committeeId){
         $("#website").text(committeeInfo.website);
         $("#email").text(committeeInfo.email);
         $("#treasurer").text(committeeInfo.treasurer_name);
-
     }
   })
 }
@@ -97,9 +102,8 @@ function getCommitteeFilings(committeeId){
       var currFiling = data.results[0];
       $("#cash").text("Cash: $"+(currFiling.cash_on_hand_close_ytd).formatMoney(2));
       $("#contributions").text("YTD Contributions: $"+(currFiling.net_contributions_ytd).formatMoney(2));
-      $("#expenditures").text("YTD Expenditures: $"+ currFiling.offsets_to_operating_expenditures_ytd);
+      $("#expenditures").text("YTD Expenditures: $"+ (currFiling.offsets_to_operating_expenditures_ytd).formatMoney(2));
       data.results.forEach(function(filing, i){
-
         $("#byFiling").append("<tr><td><a href='"+filing.pdf_url+"'>Filing #"+ (i+1) +"</a></td><td> $"+ filing.net_contributions_ytd +"</td><td> $" + filing.cash_on_hand_close_ytd + "</td></tr>");
       })
     }
@@ -114,25 +118,9 @@ function getCommitteeDistributions(committeeId){
       $("#byRecipient").html("")
       $("#byRecipient").append("<tr><th>Category</th><th>Amount</th></tr>")
       data.results.forEach(function(distributions){
-        $("#byRecipient").append("<tr><td>"+ distributions.recipient_name +"</td><td> $" + distributions.total+ "</td></tr>");
+        $("#byRecipient").append("<tr><td>"+ distributions.recipient_name +"</td><td> $" + (distributions.total).formatMoney(2)+ "</td></tr>");
       })
     }
   })
 }
 
-//Get committees tied to candidate
-function getCandidateComm(committee){
-  $.ajax({
-      url: "https://api.open.fec.gov/v1/committee/"+ committee.candidate_committee.fec_committee_id +"/?page=1&sort_nulls_large=true&api_key="+ fec_key +"&sort=name&per_page=20",
-      method: "GET",
-      success: function(data) {
-        console.log(data);
-        $("#presComms").append("<tr><td><h4>"+ data.results[0].name +"</h4></td><td><h4><a class='toCommittee' id=" + data.results[0].committee_id + ">" + data.results[0].committee_id + "</a></h4></td></tr>")
-
-        $('.toCommittee').on('click', function(){
-          console.log($(this).attr('id'));
-          click($(this).attr('id'));
-        });
-      }
-  })
-}

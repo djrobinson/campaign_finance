@@ -8,6 +8,9 @@ th, td {
   font-weight: 500;
 }
 
+img {
+  height: 200px;
+}
 
 body {
   padding: none !important;
@@ -41,12 +44,16 @@ body {
 }
 
 .remove>h3:hover {
-  color: #DDDFDF;
+  color: white;
 }
 
 .remove {
   padding-left: 10rem;
   color: white;
+}
+
+.remove h2, h3 {
+  color: #DDDFDF;
 }
 
 .remove h3 {

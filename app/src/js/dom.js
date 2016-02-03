@@ -30,12 +30,15 @@ function click(id){
   } else if ( name.charAt(0) === "P" ) {
     $("#employeeSel").hide();
     $("#presHolder").slideDown("slow");
+    $("#categDonor").html("");
     $("#holder").slideUp("slow");
     candidateInfo(name);
   } else {
     $("#employeeSel").hide();
     $("#presHolder").slideUp("slow");
     $("#holder").slideDown("slow");
+    committeeTopDonors(id);
+    committeeDonations(name);
     committeeExpenditures(name);
   }
 };
@@ -51,25 +54,29 @@ function candidateInfo(id){
   } else if (candidate.party === "R"){
     $("#presHolder").css("background-color", "#742121");
   }
-  $("#imgPlacholder").html("<img src='img/"+id+".jpg' alt='prezzi'>");
+  $("#imgPlaceholder").html("<img src='img/"+id+".jpg' alt='candidate'>");
   $("#presName").text(candidate.name);
   $("#presCash").text("Cash on Hand: $" + (candidate.cash_on_hand).formatMoney(2));
   $("#totalDisbursements").text("Total Disbursements: $" + (candidate.total_disbursements).formatMoney(2));
   $("#totalContributions").text("Total Contributions: $" + (candidate.total_contributions).formatMoney(2));
   var pieData = [
     {
+      "id": "1",
       "label": "$200-499",
       "value":  candidate.contributions_200_499
     },
     {
+      "id": "2",
       "label": "$500-1499",
       "value": candidate.contributions_500_1499
     },
     {
+      "id": "3",
       "label": "$1500-2699",
       "value": candidate.contributions_1500_2699
     },
     {
+      "id": "4",
       "label": "Over $2700",
       "value": candidate.contributions_2700
     }
@@ -85,13 +92,37 @@ function candidateInfo(id){
 
 //Handles all employee scenarios
 function employeeGroup(id){
-  console.log("Employee Group!!!");
   var emplGroup = nodeArr.filter(function(node){
     if (id === node.id) return node;
   })
-  $("#employeeSel").show().html("<h2>"+emplGroup[0].name+" Donation Amount: "+emplGroup[0].donation+"</h2><h4>The selected node represents a group/individual donation from a specified employer. For more individuals on individuals from this employer, refer to the filings for the corresponding PAC shown above</h4>")
-  console.log(emplGroup);
+  $("#employeeSel").show().html("<h2>"+emplGroup[0].name+" Donation Amount: $"+(emplGroup[0].donation).formatMoney(2)+"</h2><h4>The selected node represents a group/individual donation from a specified employer. For more individuals on individuals from this employer, refer to the filings for the corresponding PAC shown above</h4>")
 }
+
+//popup for committee donations
+function committeeDonations(id){
+  var commGroup = nodeArr.filter(function(node){
+    if (id === node.id) return node;
+  })
+  if (commGroup[0].donation > 0 ){
+    $("#employeeSel").show().html("<h2>"+commGroup[0].name+" Donation Amount: $"+(commGroup[0].donation).formatMoney(2)+"</h2><h4>This was the direct donation from the chosen committee to its parent node. For a breakout of donations, see the above info.</h4>")
+  }
+}
+
+
+function committeeTopDonors(id){
+  var sortDonors = nodeArr.filter(function(node){
+    if (id === node.belongsTo) return node;
+  })
+  var sortedDonors = sortDonors.sort(function(a, b){
+    return b.donation - a.donation
+  })
+  $("#byDonor").html("");
+  $("#byDonor").append("<tr><th>Donor Name</th><th>Donation Amount</th></tr>");
+  sortedDonors.forEach(function(donor){
+    $("#byDonor").append("<tr><th>"+donor.name+"</th><th>$"+(donor.donation).formatMoney(2)+"</th></tr>");
+  });
+}
+
 
 //MONEY FORMATTING HELPER
 Number.prototype.formatMoney = function(c){
