@@ -4,11 +4,19 @@
 //STARTS THE APP
 $("#start").on('click', function(){
   $(".cover").slideUp("slow", function() { $(this).hide(); $(".option-select").show();});
-  $(".glyphicon-star").css("display","block");
+
 })
 
 //NEED TO FIGURE OUT HOW TO GET RID OF THIS LISTENER
-$('#buildArr').on("click", buildArr);
+// $('#buildArr').on("click", function(){
+//   buildArr();
+//   $("#openOptions").css("display","block");
+// });
+
+$("#openOptions").on("click", function(){
+  $(".option-select").show();
+  $("#openOptions").hide();
+});
 
 //HANDLES ALL NODE CLICKS
 function click(id){

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Campaign Finance</title>
+  <link rel="stylesheet" href="https://bootswatch.com/journal/bootstrap.min.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <style>
+
+  </style>
+
+</head>
+<body>
+  <div class="cover">
+  <div class="container" id="holderBack">
+    <div class="row" >
+      <div class="col-md-12" id="holder">
+        <div class="col-md-3 col-md-offset-1 text-center">
+          <h2 id="name"></h2>
+          <h4 id="website"></h4>
+          </br>
+          <h3 id="cash"></3>
+          <h3 id="expenditures">Cash on Hand: </h3>
+          <h2 id="contributions"></h3>
+          <h4 id="email"></h4>
+          <h4 id="treasurer"></h4>
+        </div>
+        <div class="col-md-4">
+        <ul class="nav nav-tabs">
+          <li><a href="#1" data-toggle="tab">By Category</a>
+          </li>
+          <li><a href="#2" data-toggle="tab">By Recipient</a>
+          </li>
+        </ul>
+        <div class="tab-content tableHolder">
+          <div id="1" class="tab-pane active">
+            <table class="table table-hover" id="byCategory">
+            </table>
+          </div>
+          <div id="2" class="tab-pane">
+            <table class="table table-hover" id="byRecipient">
+
+            </table>
+           </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <ul class="nav nav-tabs">
+            <li><a href="#3" data-toggle="tab">FEC Filings</a>
+            </li>
+            <li><a href="#4" data-toggle="tab">Top Donors</a>
+            </li>
+          </ul>
+          <div class="tab-content tableHolder">
+            <div id="3" class="tab-pane active">
+              <table class="table table-hover" id="byFiling">
+              </table>
+            </div>
+            <div id="4" class="tab-pane">
+              <table class="table table-hover" id="byDonor">
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" id="presHolder">
+
+        <div class="col-md-3 col-md-offset-1 text-center">
+          <div id="imgPlaceholder">
+          </div>
+          <h1 id="presName"></h1>
+          <h3 id="presCash"></h3>
+          <h3 id="totalDisbursements"></h3>
+
+        </div>
+        <div class="col-md-3 text-center closer">
+          <h1 id="totalContributions"></h1>
+          <br>
+          <div id="pieChart">
+
+          </div>
+
+        </div>
+        <div class="tableHolder col-md-4">
+          <h2>Political Action Committees Associated with Candidate</h2>
+
+          <table class="table table-hover" id="presComms">
+
+          </table>
+        </div>
+         <div class="glyphicon glyphicon-remove pull-right" id="collapse"></div>
+      </div>
+      <div class="col-md-12">
+        <div class="alert alert-info text-center" id="employeeSel">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

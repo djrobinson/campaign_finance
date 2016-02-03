@@ -6,58 +6,12 @@
   <link rel="stylesheet" href="https://bootswatch.com/journal/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
 
+  <style>
+
+  </style>
 
 </head>
 <body>
-  <div class="cover">
-    <div class="col-md-6">
-
-      <h1 class="remove intro">Campaign Finance Explorer</h1>
-      <div class="remove">
-        <h2>An in depth analysis of how presidential campaigns are funded. All data is taken directly from publicly available FEC reports.</h2>
-        <h3 id="start">Get Started ></h3>
-      </div>
-    </div>
-  </div>
-  <a id="openOptions" class="btn btn-lg btn-default">Change Options</a>
-  <div class="col-md-3 option-select">
-
-    <form class="form-horizontal">
-      <fieldset>
-        <legend>Select Search Options:</legend>
-        <div class="form-group">
-          <label for="nodeNumber" class="col-md-6 control-label text-center">Number of Associated PACs per Candidate</label>
-          <div class="col-md-6">
-            <input type="number" class="form-control" id="nodeNumber" placeholder="5">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="select" class="col-md-4 control-label">Choose Candidates to Display</label>
-          <div class="col-md-8">
-            <select multiple="" id="multiSel" class="form-control">
-              <option value="P00003392">Hilary Clinton</option>
-              <option value="P60007168">Bernie Sanders</option>
-              <option value="P60005915">Ben Carson</option>
-              <option value="P60006111">Ted Cruz</option>
-              <option value="P60008059">Jeb Bush</option>
-              <option value="P60006723">Marco Rubio</option>
-              <option value="P40003576">Rand Paul</option>
-              <option value="P60007242">Carly Fiorina</option>
-              <option value="P80001571">Donald Trump</option>
-              <option value="P60003670">John Kasich</option>
-              <option value="P60008521">Chris Christie</option>
-            </select>
-          </div>
-
-        </div>
-        <div class="col-md-6 col-md-offset-6">
-            <input type="button" class="btn btn-default btn-lg" id="submitCandidate" value="Pull Data">
-            <input type="button" class="btn btn-default btn-lg" id="buildArr" value="Generate Graph">
-          </div>
-      </fieldset>
-    </form>
-
-  </div>
 
   <div class="container" id="holderBack">
     <div class="row" >
@@ -74,9 +28,9 @@
         </div>
         <div class="col-md-4 tableHolder">
         <ul class="nav nav-tabs">
-          <li class="active" ><a href="#1" data-toggle="tab">By Category</a>
+          <li class="active" ><a href="#1" data-toggle="tab"></a>
           </li>
-          <li><a href="#2" data-toggle="tab">By Recipient</a>
+          <li><a href="#2" data-toggle="tab"></a>
           </li>
         </ul>
         <div class="tab-content ">
@@ -141,23 +95,8 @@
       </div>
     </div>
   </div>
-
-  <div class="container candContainer">
-    <div class="row" id="candidateList">
-      <div class="forceContainer">
-      </div>
-    </div>
-  </div>
-
-
-
-  <script src="http://d3js.org/d3.v2.min.js?2.9.3"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  <script src="js/apikeys.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/graph.js"></script>
-  <script src="js/dom.js"></script>
 </body>
+
 </html>

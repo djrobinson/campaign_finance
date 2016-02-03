@@ -14,29 +14,24 @@ var fec_key = keys.fec_key;
 var nodeArr = [];
 var presArray = [];
 
+//TESTING ONLY!!! \/\/\/\/\/\/\/
+// var filterPres = JSON.parse(localStorage.getItem("filterPres"));
+// var filterCommittee = JSON.parse(localStorage.getItem("filterCommittee"));
+// var graphLinks = JSON.parse(localStorage.getItem("graphLinks"));
+//TESTING ONLY!!! ^^^^^^^^^^^
 
 var filterPres = [];
 var filterCommittee = [];
 
-// var localStorage.setItem("filterPres", filterPres);
-// var localStorage.setItem("filterCommittee", filterCommittee);
-
 console.log("sanity check!");
 
-//KICKS OFF APP. INCLUDING HERE RATHER THAN IN DOM.JS
-//POPULATES THE NODE ARRAY.
+//KICKS OFF APP. NEED TO FIGURE THIS OUT ASYNCH!!!
 $("#submitCandidate").on("click", function(){
+  $(".forceContainer").html("");
   // var lastName = $('#inputCandidate').val();
-
-  $.ajax({
-    url: "http://api.nytimes.com/svc/elections/us/v3/finances/2016/president/totals.json" + key,
-    method: "GET",
-    success: function(data){
-      console.log(data);
-      presArray = data.results;
-      presArray.map(addCandidate);
-    }
-  });
+  $("#openOptions").css("display","block");
+  // getCandidates();
+  setTimeout(buildArr, 1000);
 });
 
 function addCandidate(candidate){
@@ -93,9 +88,6 @@ function committeeExpenditures(committeeId){
   getCommitteeDistributions(committeeId);
 }
 
-
-
-
 //SETS UP THE ARRAY THAT WILL BE USED BY THE GRAPH
 //UPDATES THE NODE COUNT DEPENDING ON HOW MANY PACS A USER WANTS TO SEE ON THE PAGE
 
@@ -142,6 +134,7 @@ function buildLinks(nodes){
       graphLinks.push(pushObj);
     }
   })
+  localStorage.setItem("graphLinks", JSON.stringify(graphLinks))
   return graphLinks;
 }
 

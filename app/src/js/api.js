@@ -1,4 +1,17 @@
 
+//GET A LIST OF CANDIDATES
+function getCandidates(){
+  $.ajax({
+    url: "http://api.nytimes.com/svc/elections/us/v3/finances/2016/president/totals.json" + key,
+    method: "GET",
+    success: function(data){
+      console.log(data);
+      presArray = data.results;
+      presArray.map(addCandidate);
+    }
+  });
+}
+
 //Get donor PAC info
 function addCommDonor(currCommittee){
   $.ajax({
@@ -19,7 +32,6 @@ function addCommDonor(currCommittee){
     }
   })
 }
-
 
 //Get individual donor info
 function addIndivDonor(currCommittee){
@@ -113,16 +125,14 @@ function getCandidateComm(committee){
   $.ajax({
       url: "https://api.open.fec.gov/v1/committee/"+ committee.candidate_committee.fec_committee_id +"/?page=1&sort_nulls_large=true&api_key="+ fec_key +"&sort=name&per_page=20",
       method: "GET",
-      success: function(data){
-        $("#presComms").html("");
-        data.results.forEach(function(committee){
-          $("#presComms").append("<tr><td><h4>"+ committee.name +"</h4></td><td><h4><a class='toCommittee' id=" + committee.committee_id + ">" + committee.committee_id + "</a></h4></td></tr>")
-        })
+      success: function(data) {
+        console.log(data);
+        $("#presComms").append("<tr><td><h4>"+ data.results[0].name +"</h4></td><td><h4><a class='toCommittee' id=" + data.results[0].committee_id + ">" + data.results[0].committee_id + "</a></h4></td></tr>")
 
         $('.toCommittee').on('click', function(){
           console.log($(this).attr('id'));
           click($(this).attr('id'));
         });
-    }
+      }
   })
 }

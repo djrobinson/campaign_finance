@@ -44,7 +44,7 @@ function buildGraph(nodesFiltered, linksFiltered){
       .enter().append("line")
       .attr("class", "link")
       .attr("stroke-width", function(d) { return d.weight })
-      .style("stroke", "black");
+      .style("stroke", "gray");
 
 
   var node = container.append("g")
@@ -54,6 +54,15 @@ function buildGraph(nodesFiltered, linksFiltered){
       .attr("class", "node")
       .attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; })
+      .style("fill", function(d){
+        if ( d.party === undefined ){
+          return "black";
+        } else if ( d.party === "R"){
+          return "#742121";
+        } else if ( d.party === "D"){
+          return "#29339B";
+        }
+      })
       .call(drag);
 
 

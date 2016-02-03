@@ -3,6 +3,12 @@
 /*https://coolors.co/app/2f3061-29339b-dbf9f4-bfc3ba-a9aca9*/
 /*https://coolors.co/app/742121-c6caed-ada8be-a28497-dddfdf*/
 
+th, td {
+  font-family: "News Cycle","Arial Narrow Bold",sans-serif;
+  font-weight: 500;
+}
+
+
 body {
   padding: none !important;
   margin: none !important;
@@ -12,6 +18,13 @@ body {
 .option-select {
   display:none;
   margin-top: 10rem;
+}
+
+#openOptions {
+  display: none;
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
 }
 
 .cover {
@@ -40,21 +53,9 @@ body {
   text-decoration: underline;
 }
 
-.glyphicon-star {
-  position: absolute;
-  margin: 2rem;
-  color: #B7777F;
-  font-size: 8rem;
-  z-index: 99;
-}
 
-.glyphicon-star:hover {
-  text-decoration: none;
-  color: #291F1E;
- }
 #employeeSel {
   display: none;
-
 }
 
 #holder {
@@ -77,6 +78,10 @@ body {
 .closer {
   position: relative;
   height: 450px;
+}
+
+#name {
+  color: #742121;
 }
 
 #imgPlaceholder{
