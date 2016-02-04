@@ -36,7 +36,7 @@ $("#submitCandidate").on("click", function(){
 
 function getCandidates(){
   $.ajax({
-    url: "http://api.nytimes.com/svc/elections/us/v3/finances/2016/president/totals.json" + key,
+    url: "https://api.nytimes.com/svc/elections/us/v3/finances/2016/president/totals.json" + key,
     method: "GET",
     success: function(data){
 
