@@ -31,7 +31,7 @@ $("#submitCandidate").on("click", function(){
   filterPres = [];
   filterCommittee = [];
   getCandidates();
-  setTimeout(buildArr, 1000);
+  setTimeout(buildArr, 3000);
 });
 
 function getCandidates(){
