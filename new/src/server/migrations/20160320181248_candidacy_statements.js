@@ -16,7 +16,7 @@ exports.up = function(knex, Promise) {
     table.string('ELECTION_YEAR');
     table.date('RECEIPT_DATE');
     table.string('REPORT_YEAR');
-    table.string('BEGIN_IMAGE_NUM');
+    table.string('BEGIN_IMAGE_NUMBER');
   });
 };
 
