@@ -6,10 +6,10 @@ exports.up = function(knex, Promise) {
     table.string('lin_ima');
     table.text('spo_nam');
     table.text('aff_com_nam');
-    table.decimal('tot_rec');
-    table.decimal('tot_dis');
-    table.decimal('cas_on_han');
-    table.date('cov_end_dat');
+    table.string('tot_rec');
+    table.string('tot_dis');
+    table.string('cas_on_han');
+    table.string('cov_end_dat');
   });
 };
 

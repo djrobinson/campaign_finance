@@ -4,8 +4,8 @@ exports.up = function(knex, Promise) {
     table.string('com_id');
     table.string('com_nam');
     table.string('lin_ima');
-    table.boolean('is_lob');
-    table.date('dat_fil');
+    table.string('is_lob');
+    table.string('dat_fil');
   });
 };
 

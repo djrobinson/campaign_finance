@@ -92,6 +92,7 @@ exports.up = function(knex, Promise) {
     table.string('uni_oth_inc');
     table.string('uni_oth_ref_or_reb');
     table.string('uni_ref_or_reb');
+    table.string('org_tp');
   });
 };
 
