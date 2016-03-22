@@ -1,0 +1,20 @@
+table.string('Column Name');,table.string('Field Name');,table.string('Position');,table.string('Data Type');,table.string('Description');
+table.string('CANDIDATE_ID');,table.string('Candidate ID');,table.string('1');,table.string('Character');,table.string('A 9-character alpha-numeric code assigned to a candidate by the Federal Election Commission. The candidate ID for a specific candidate remains the same across election cycles as long as the candidate is running for the same office.');
+table.string('CANDIDATE_NAME');,table.string('Candidate Name');,table.string('2');,table.string('Character');,table.string('');
+table.string('CANDIDATE_OFFICE');,table.string('Candidate Office');,table.string('3');,table.string('Character');,table.string('H = HouseP = PresidentS = Seante');
+table.string('CANDIDATE_STATE');,table.string('Candidate  State');,table.string('4');,table.string('Character');,table.string('House = state of racePresident = USSeante = state of race');
+table.string('CANDIDATE_OFFICE_DISTRICT');,table.string('Candidate District');,table.string('5');,table.string('Character');,table.string('Congressional district number.Congressional At Large 00Senate 00Presidential 00');
+table.string('COMMITTEE_ID');,table.string('Committee ID');,table.string('6');,table.string('Character');,table.string('');
+table.string('COMMITTEE_NAME');,table.string('Filer ID');,table.string('7');,table.string('Character');,table.string('A 9-character alpha-numeric code assigned to a committee by the Federal Election Commission. The filer ID for a specific committee always remains the same.');
+table.string('SB_IMAGE_NUM');,table.string('Image Number');,table.string('8');,table.string('Number');,"table.string('Indicates the image location of the disbursement11-digit Image Number FormatYYOORRRFFFFYY - scanning yearOO - office (01 - House, 02 - Senate, 03 - FEC Paper, 9x - FEC Electronic)RRR - reel numberFFFF- frame number18-digit Image Number Format (June 29, 2015)YYYYMMDDSSPPPPPPPPYYYY - scanning yearMM - scanning monthDD - scanning daySS - source (02 - Senate, 03 - FEC Paper, 9x - FEC Electronic)PPPPPPPP - page (reset to zero every year on January 1)');"
+table.string('PAYEE_NAME');,table.string('Payee Name');,table.string('9');,table.string('Character');,table.string('');
+table.string('PAYEE_STREET');,table.string('Payee Street Address');,table.string('10');,table.string('Character');,table.string('');
+table.string('PAYEE_CITY');,table.string('Payee City');,table.string('11');,table.string('Character');,table.string('');
+table.string('PAYEE_STATE');,table.string('Payee State');,table.string('12');,table.string('Character');,table.string('');
+table.string('DISBURSEMENT_DESCRIPTION');,table.string('Disbursement Description');,table.string('13');,table.string('Character');,table.string('');
+table.string('DISBURSEMENT_DATE');,table.string('Disbursement Date');,table.string('14');,table.string('Date');,table.string('Date reported on Schedule 9-B');
+table.string('COMMUNICATION_DATE');,table.string('Communication Date');,table.string('15');,table.string('Date');,table.string('Date reported on Schedule 9-B');
+table.string('PUBLIC_DISTRIBUTION_DATE');,table.string('Date of Public Distribution');,table.string('16');,table.string('Date');,table.string('Date reported on Form 9 page 1');
+table.string('REPORTED_DISBURSEMENT_AMOUNT');,table.string('Reported Disbursement Amount');,table.string('17');,table.string('Number');,table.string('Amount reported on Schedule 9-B');
+table.string('NUMBER_OF_CANDIDATES');,table.string('Number of Candidates');,table.string('18');,table.string('Number');,table.string('Number of candides reported on Schedule 9-B associated with a specific disbursement');
+table.string('CALCULATED_CANDIDATE_SHARE');,table.string('Calculated Share Per Candidate');,table.string('19');,table.string('Number');,table.string('Calculated Share equals Reported Disbursement Amount devided by Number of Candidates');
