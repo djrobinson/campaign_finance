@@ -1,6 +1,6 @@
 
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('candidate_disbursements.js', function(table){
+  return knex.schema.createTable('candidate_disbursements', function(table){
     table.string('com_nam');
     table.string('lin_ima');
     table.string('rep_typ');

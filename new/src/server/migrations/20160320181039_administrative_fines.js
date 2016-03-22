@@ -6,13 +6,13 @@ exports.up = function(knex, Promise) {
     table.string('com_nam');
     table.string('rep_typ');
     table.integer('rep_yea');
-    table.decimal('fin_amo');
+    table.string('fin_amo');
     table.string('off');
     table.string('sta');
     table.string('dis');
-    table.string('can_name');
-    table.boolean('lat_fil_not_fil');
-    table.boolean('pai_yes_no');
+    table.string('can_nam');
+    table.string('lat_fil_not_fil');
+    table.string('pai_yes_no');
   });
 };
 

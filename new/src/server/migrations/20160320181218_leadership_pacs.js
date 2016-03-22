@@ -1,6 +1,6 @@
 
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('leadership_pacs', function(data){
+  return knex.schema.createTable('leadership_pacs', function(table){
     table.string('com_id');
     table.string('com_nam');
     table.string('lin_ima');
