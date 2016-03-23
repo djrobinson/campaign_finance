@@ -13,6 +13,13 @@ var routes = require('./routes/index.js');
 var adminRoutes = require('./routes/administrative_fine_routes.js');
 var cmteRptRoutes = require('./routes/campaign_cmte_rpts_routes.js');
 var candDisbRoutes = require('./routes/candidate_disbursements_routes.js');
+var candSumm = require('./routes/candidate_summaries_routes.js');
+var commSumm = require('./routes/committee_summaries_routes.js');
+var elecComm = require('./routes/elec_communications_routes.js');
+var indExpend = require('./routes/independent_expenditures_routes.js');
+var leadPacs = require('./routes/leadership_pacs_routes.js');
+var lobbCont = require('./routes/lobbyist_contributions_routes.js');
+var lobbReg = require('./routes/lobbyist_registrations_routes.js');
 
 
 // *** express instance *** //
@@ -39,7 +46,16 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 // *** main routes *** //
 app.use('/', routes);
-app.use('/candDisb', candDisbRoutes);
+app.use('/admin', adminRoutes);
+app.use('/cmterpt', cmteRptRoutes);
+app.use('/canddisb', candDisbRoutes);
+app.use('/candsumm', candSumm);
+app.use('/commsumm', commSumm);
+app.use('/eleccomm', elecComm);
+app.use('/indexp', indExpend);
+app.use('/leadpacs', leadPacs);
+app.use('/lobbcont', lobbCont);
+app.use('/lobbreg', lobbReg);
 
 
 // catch 404 and forward to error handler

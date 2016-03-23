@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var query = require('../queries/elec_communications_queries');
+var query = require('../queries/independent_expenditures_queries');
 
-router.get('/indepexpend', function(req, res, next) {
+router.get('/', function(req, res, next) {
   query.getIndExpen().then(function(expend){
     res.json(expend);
   });
 });
+
+module.exports = router;
