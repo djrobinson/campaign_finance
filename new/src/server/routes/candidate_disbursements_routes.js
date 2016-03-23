@@ -1,0 +1,9 @@
+var express = require('express');
+var router = express.Router();
+var query = require('../queries/candidate_disbursements_queries');
+
+router.get('/canddisbursements', function(req, res, next) {
+  query.CandDisb().then(function(disb){
+    res.json(disb);
+  });
+});
