@@ -3,7 +3,9 @@ var router = express.Router();
 var query = require('../queries/candidate_disbursements_queries');
 
 router.get('/canddisbursements', function(req, res, next) {
-  query.CandDisb().then(function(disb){
+  query.getCandDisb().then(function(disb){
     res.json(disb);
   });
 });
+
+module.exports = router;

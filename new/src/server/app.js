@@ -10,6 +10,9 @@ var swig = require('swig');
 
 // *** routes *** //
 var routes = require('./routes/index.js');
+var adminRoutes = require('./routes/administrative_fine_routes.js');
+var cmteRptRoutes = require('./routes/campaign_cmte_rpts_routes.js');
+var candDisbRoutes = require('./routes/candidate_disbursements_routes.js');
 
 
 // *** express instance *** //
@@ -36,6 +39,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 // *** main routes *** //
 app.use('/', routes);
+app.use('/candDisb', candDisbRoutes);
 
 
 // catch 404 and forward to error handler
