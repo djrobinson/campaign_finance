@@ -34,8 +34,8 @@ angular.module('campaignApp')
         d3.select(this).classed("dragging", false);
       }
 
-      var height = 1200;
-      var width = 800;
+      var height = 900;
+      var width = 1600;
 
       //BEHAVIOR SETUP FOR FORCE GRAPH. USES HELPER FUNCTIONS BELOW
         var zoom = d3.behavior.zoom()

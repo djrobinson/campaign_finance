@@ -5,7 +5,10 @@ function CandSumm(){
 }
 
 module.exports = {
-  getCandSumm: function(){
+  getTenCandSumm: function(){
     return CandSumm().select().limit(10);
+  },
+  getCandSumm: function(can_id){
+    return CandSumm().select().where({can_id: can_id});
   }
 };

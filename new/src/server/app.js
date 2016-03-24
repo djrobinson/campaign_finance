@@ -15,6 +15,7 @@ var cmteRptRoutes = require('./routes/campaign_cmte_rpts_routes.js');
 var candDisbRoutes = require('./routes/candidate_disbursements_routes.js');
 var candSumm = require('./routes/candidate_summaries_routes.js');
 var commSumm = require('./routes/committee_summaries_routes.js');
+var commReg = require('./routes/committee_registrations_routes.js');
 var elecComm = require('./routes/elec_communications_routes.js');
 var indExpend = require('./routes/independent_expenditures_routes.js');
 var leadPacs = require('./routes/leadership_pacs_routes.js');
@@ -50,16 +51,17 @@ app.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../client/', 'index.html'));
 });
 app.use('/', routes);
-app.use('/admin', adminRoutes);
-app.use('/cmterpt', cmteRptRoutes);
-app.use('/canddisb', candDisbRoutes);
-app.use('/candsumm', candSumm);
-app.use('/commsumm', commSumm);
-app.use('/eleccomm', elecComm);
-app.use('/indexp', indExpend);
-app.use('/leadpacs', leadPacs);
-app.use('/lobbcont', lobbCont);
-app.use('/lobbreg', lobbReg);
+app.use('/api/admin', adminRoutes);
+app.use('/api/cmterpt', cmteRptRoutes);
+app.use('/api/canddisb', candDisbRoutes);
+app.use('/api/candsumm', candSumm);
+app.use('/api/commsumm', commSumm);
+app.use('/api/commreg', commReg);
+app.use('/api/eleccomm', elecComm);
+app.use('/api/indexp', indExpend);
+app.use('/api/leadPacs', leadPacs);
+app.use('/api/lobbcont', lobbCont);
+app.use('/api/lobbreg', lobbReg);
 
 
 // catch 404 and forward to error handler

@@ -32,11 +32,11 @@ function addCommDonor(currCommittee){
             "group": currCommittee,
             "belongsTo": currCommittee,
             "type": "donor"
-          }
+          };
           nodeArr.push(node);
       });
     }
-  })
+  });
 }
 
 //Get individual donor info
@@ -55,12 +55,12 @@ function addIndivDonor(currCommittee){
             "group": donor.committee_id,
             "belongsTo": donor.committee_id,
             "type": "donor"
-          }
+          };
           nodeArr.push(node);
         i++;
       });
     }
-  })
+  });
 }
 
 //Get all of the committee information
