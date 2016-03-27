@@ -14,10 +14,10 @@ exports.up = function(knex, Promise) {
     table.string('PAYEE_CITY');
     table.string('PAYEE_STATE');
     table.string('DISBURSEMENT_DESCRIPTION');
-    table.date('DISBURSEMENT_DATE');
-    table.date('PUBLIC_DISBURSEMENT_DATE');
-    table.date('COMMUNICATION_DATE');
-    table.date('PUBLIC_DISTRIBUTION_DATE');
+    table.string('DISBURSEMENT_DATE');
+    table.string('PUBLIC_DISBURSEMENT_DATE');
+    table.string('COMMUNICATION_DATE');
+    table.string('PUBLIC_DISTRIBUTION_DATE');
     table.string('REPORTED_DISBURSEMENT_AMOUNT');
     table.string('NUMBER_OF_CANDIDATES');
     table.string('CALCULATED_CANDIDATE_SHARE');
