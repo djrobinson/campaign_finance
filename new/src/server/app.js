@@ -21,7 +21,8 @@ var indExpend = require('./routes/independent_expenditures_routes.js');
 var leadPacs = require('./routes/leadership_pacs_routes.js');
 var lobbCont = require('./routes/lobbyist_contributions_routes.js');
 var lobbReg = require('./routes/lobbyist_registrations_routes.js');
-var cmteMstr = require('./routes/committee_master_routes.js')
+var cmteMstr = require('./routes/committee_master_routes.js');
+var candMstr = require('./routes/MainRoutes/cand_sum.js');
 
 
 // *** express instance *** //
@@ -64,6 +65,7 @@ app.use('/api/leadPacs', leadPacs);
 app.use('/api/lobbcont', lobbCont);
 app.use('/api/lobbreg', lobbReg);
 app.use('/api/commstr', cmteMstr);
+app.use('/api/candmstr', candMstr)
 
 
 // catch 404 and forward to error handler
