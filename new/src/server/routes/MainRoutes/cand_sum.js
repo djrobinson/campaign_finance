@@ -4,6 +4,7 @@ var canSumm = require('../../queries/candidate_summaries_queries.js');
 var canMstr = require('../../queries/candidate_master_queries.js');
 var canLink = require('../../queries/cmte_cand_linkage.js');
 var canStat = require('../../queries/candidate_statements_queries.js');
+var knex = require('../../queries/knex.js');
 
 router.get('/candsumm', function(req, res, next) {
   canSumm.getTenCandSumm().then(function(summs){
@@ -28,5 +29,19 @@ router.get('/candstat', function(req, res, next){
     res.json(stats);
   });
 });
+
+function getTenCandSumm(){
+  return knex('candidacy_statements')
+         .innerJoin('cmte_cand_linkage', 'CANDIDATE_ID', 'CAND_ID')
+         .innerJoin('candidate_master', 'candidate_master.CAND_ID', 'cmte_cand_linkage.CAND_ID')
+         .innerJoin('candidate_summaries', 'can_id','candidate_master.CAND_ID' )
+         .select().limit(10);
+}
+
+router.get('/cand_sum', function(req, res, next){
+  getTenCandSumm().then(function(data){
+    res.json(data);
+  })
+})
 
 module.exports = router;
