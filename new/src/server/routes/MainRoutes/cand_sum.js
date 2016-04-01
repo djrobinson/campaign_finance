@@ -18,6 +18,8 @@ router.get('/candmstr', function(req, res, next) {
   });
 });
 
+
+//Will end up calling this one independently.
 router.get('/candlink', function(req, res, next) {
   canLink.getTenCandLink().then(function(links){
     res.json(links);
