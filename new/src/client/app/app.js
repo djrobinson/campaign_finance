@@ -10,7 +10,9 @@ angular.module('campaignApp', ['ngRoute'])
     /* LANDING PAGE */
     .when('/', {
         templateUrl: '/app/views/api.html',
-        css: '/styles/css/main.css'
+        css: '/styles/css/main.css',
+        controller: 'ApiExpoCtrl',
+        controllerAs: 'vmdoc'
     })
     .otherwise('/');
 });

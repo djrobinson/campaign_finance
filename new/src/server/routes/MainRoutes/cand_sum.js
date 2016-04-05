@@ -61,11 +61,12 @@ function getCandSumm(cand_id){
 }
 
 
-router.get('/cand_sum', function(req, res, next){
-  getTenCandSumm().then(function(data){
-    res.json(data);
-  });
-});
+// router.get('/cand_sum', function(req, res, next){
+//   getTenCandSumm().then(function(data){
+//     console.log("Cand Sum!!!!");
+//     res.json(data);
+//   });
+// });
 
 router.get('/cand_sum/:cand_id', function(req, res, next){
   getCandSumm(req.params.cand_id).then(function(data){

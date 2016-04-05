@@ -10,3 +10,12 @@ a {
 .text-center {
   text-align: center;
 }
+
+.result {
+  padding-left: 100px;
+  padding-right: 100px;
+  background-color: #F5F5F5 ;
+  color: #B96464;
+  height: 300px;
+  overflow: auto;
+}
