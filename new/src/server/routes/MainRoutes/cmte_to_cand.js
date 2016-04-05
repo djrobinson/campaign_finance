@@ -8,4 +8,10 @@ router.get('/', function(req, res, next){
   });
 });
 
+router.get('/:cand_id', function(req, res, next){
+  cmteCand.getCmteToCand(req.params.cand_id).then(function(contribs){
+    res.json(contribs);
+  });
+});
+
 module.exports = router;

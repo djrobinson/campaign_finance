@@ -18,10 +18,22 @@ router.get('/candmstr', function(req, res, next) {
   });
 });
 
+router.get('/:last_nm', function(req, res, next) {
+  canMstr.getCandLast(req.params.last_nm).then(function(summs){
+    res.json(summs);
+  });
+});
+
 
 //Will end up calling this one independently.
 router.get('/candlink', function(req, res, next) {
   canLink.getTenCandLink().then(function(links){
+    res.json(links);
+  });
+});
+
+router.get('/candlink/:cand_id', function(req, res, next){
+  canLink.getCandLink(req.params.cand_id).then(function(links){
     res.json(links);
   });
 });
