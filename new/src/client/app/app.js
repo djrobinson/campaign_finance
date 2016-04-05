@@ -9,7 +9,7 @@ angular.module('campaignApp', ['ngRoute'])
 
     /* LANDING PAGE */
     .when('/', {
-        templateUrl: '/app/views/index.html',
+        templateUrl: '/app/views/api.html',
         css: '/styles/css/main.css'
     })
     .otherwise('/');
