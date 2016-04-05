@@ -22,6 +22,8 @@ var lobbCont = require('./routes/lobbyist_contributions_routes.js');
 var lobbReg = require('./routes/lobbyist_registrations_routes.js');
 var cmteMstr = require('./routes/committee_master_routes.js');
 var candMstr = require('./routes/MainRoutes/cand_sum.js');
+var cmteCand = require('./routes/MainRoutes/cmte_to_cand.js');
+var opex = require('./routes/MainRoutes/opex.js');
 var votes = require('./mongo/test.js');
 
 //Connect to Mongo
@@ -61,8 +63,10 @@ app.use('/api/leadPacs', leadPacs);
 app.use('/api/lobbcont', lobbCont);
 app.use('/api/lobbreg', lobbReg);
 app.use('/api/commstr', cmteMstr);
-app.use('/api/candmstr', candMstr)
+app.use('/api/candmstr', candMstr);
 app.use('/api/votes', votes);
+app.use('/api/opex', opex);
+app.use('/api/cmtecand', cmteCand);
 
 
 // catch 404 and forward to error handler

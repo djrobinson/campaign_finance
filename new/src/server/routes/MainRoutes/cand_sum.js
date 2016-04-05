@@ -37,13 +37,28 @@ function getTenCandSumm(){
          .innerJoin('cmte_cand_linkage', 'CANDIDATE_ID', 'CAND_ID')
          .innerJoin('candidate_master', 'candidate_master.CAND_ID', 'cmte_cand_linkage.CAND_ID')
          .innerJoin('candidate_summaries', 'can_id','candidate_master.CAND_ID' )
-         .select().limit(10);
+         .select().limit(100);
 }
+
+function getCandSumm(cand_id){
+  return knex('candidacy_statements')
+         .innerJoin('cmte_cand_linkage', 'CANDIDATE_ID', 'CAND_ID')
+         .innerJoin('candidate_master', 'candidate_master.CAND_ID', 'cmte_cand_linkage.CAND_ID')
+         .innerJoin('candidate_summaries', 'can_id','candidate_master.CAND_ID' )
+         .where({'cmte_cand_linkage.CAND_ID': cand_id});
+}
+
 
 router.get('/cand_sum', function(req, res, next){
   getTenCandSumm().then(function(data){
     res.json(data);
-  })
-})
+  });
+});
+
+router.get('/cand_sum/:cand_id', function(req, res, next){
+  getCandSumm(req.params.cand_id).then(function(data){
+    res.json(data);
+  });
+});
 
 module.exports = router;
