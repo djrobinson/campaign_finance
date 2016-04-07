@@ -11,7 +11,6 @@ var mongoose = require('mongoose');
 var routes = require('./routes/index.js');
 var adminRoutes = require('./routes/administrative_fine_routes.js');
 var cmteRptRoutes = require('./routes/campaign_cmte_rpts_routes.js');
-var candDisbRoutes = require('./routes/candidate_disbursements_routes.js');
 var candSumm = require('./routes/candidate_summaries_routes.js');
 var commSumm = require('./routes/committee_summaries_routes.js');
 var commReg = require('./routes/committee_registrations_routes.js');
@@ -21,10 +20,13 @@ var lobbCont = require('./routes/lobbyist_contributions_routes.js');
 var lobbReg = require('./routes/lobbyist_registrations_routes.js');
 var cmteMstr = require('./routes/committee_master_routes.js');
 
+var canddisb = require('./routes/MainRoutes/candidate_disbursements_routes.js');
 var indExpend = require('./routes/MainRoutes/independent_expenditures_routes.js');
 var candMstr = require('./routes/MainRoutes/cand_sum.js');
 var cmteCand = require('./routes/MainRoutes/cmte_to_cand.js');
 var opex = require('./routes/MainRoutes/opex.js');
+var indivContrib = require('./routes/MainRoutes/indiv_contrib_routes.js');
+var cmteMstr = require('./routes/MainRoutes/cmte_sum.js');
 var votes = require('./mongo/test.js');
 
 //Connect to Mongo
@@ -54,7 +56,7 @@ app.get('/', function(req, res, next) {
 app.use('/', routes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/cmterpt', cmteRptRoutes);
-app.use('/api/canddisb', candDisbRoutes);
+app.use('/api/canddisb', canddisb);
 app.use('/api/candsumm', candSumm);
 app.use('/api/commsumm', commSumm);
 app.use('/api/commreg', commReg);
@@ -69,6 +71,8 @@ app.use('/api/candmstr', candMstr);
 app.use('/api/votes', votes);
 app.use('/api/opex', opex);
 app.use('/api/cmtecand', cmteCand);
+app.use('/api/indivcontrib', indivContrib);
+app.use('/api/cmte', cmteMstr);
 
 
 // catch 404 and forward to error handler
