@@ -1,14 +1,29 @@
 var knex = require('./knex');
 
-function (){
-  return knex('committee_master');
-}
 
 module.exports = {
-  get: function(){
-    return ().select().limit(10);
+   getCandSum: function(cand_id){
+    return knex('candidacy_statements')
+           .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
+           .where({'can_id': cand_id});
   },
-  get: function(com_id){
-    return ().select().where({});
+
+  getAssocCommittees: function(cand_id){
+    return knex('cmte_cand_linkage')
+            .select().where({'CAND_ID': cand_id});
+  },
+
+  getCandSort: function(cand_id, column){
+    return knex('candidacy_statements')
+           .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
+           .where({'can_id': cand_id})
+           .orderBy(column, 'desc');
+  },
+
+  getCandSumLimit: function(limit){
+    if (!limit) { limit = 100; }
+    return knex('candidacy_statements')
+           .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
+           .limit(limit);
   }
 };

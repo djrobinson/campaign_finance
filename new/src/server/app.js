@@ -27,7 +27,10 @@ var mongoose = require('mongoose');
 // var opex = require('./routes/MainRoutes/opex.js');
 // var indivContrib = require('./routes/MainRoutes/indiv_contrib_routes.js');
 // var cmteMstr = require('./routes/MainRoutes/cmte_sum.js');
-// var votes = require('./mongo/test.js');
+var votes = require('./mongo/test.js');
+var candidates = require('./api/candidates.js');
+
+
 
 //Connect to Mongo
 mongoose.connect('mongodb://localhost/testPolis');
@@ -68,11 +71,13 @@ app.get('/', function(req, res, next) {
 
 // app.use('/api/indexp', indExpend);
 // app.use('/api/candmstr', candMstr);
-// app.use('/api/votes', votes);
 // app.use('/api/opex', opex);
 // app.use('/api/cmtecand', cmteCand);
 // app.use('/api/indivcontrib', indivContrib);
 // app.use('/api/cmte', cmteMstr);
+app.use('/api/votes', votes);
+app.use('/api/candidates', candidates);
+
 
 
 // catch 404 and forward to error handler
