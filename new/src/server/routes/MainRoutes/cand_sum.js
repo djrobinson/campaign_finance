@@ -6,6 +6,15 @@ var canLink = require('../../queries/cmte_cand_linkage.js');
 var canStat = require('../../queries/candidate_statements_queries.js');
 var knex = require('../../queries/knex.js');
 
+/* REQUIRED ROUTES
+  - Get Candidate Full Summary By Id
+  - Get Associated Cand Committees
+  - Get Candidate Financial Data by Id
+  - Get Candidate Financial Summary, sort by financial columns (By Total Contrib, Cash on Close, Total Distrib)
+  - Limit
+*/
+
+
 router.get('/candsumm', function(req, res, next) {
   canSumm.getTenCandSumm().then(function(summs){
     res.json(summs);
@@ -44,12 +53,12 @@ router.get('/candstat', function(req, res, next){
   });
 });
 
-function getTenCandSumm(){
+function getCandSummLimit(limit){
   return knex('candidacy_statements')
          .innerJoin('cmte_cand_linkage', 'CANDIDATE_ID', 'CAND_ID')
          .innerJoin('candidate_master', 'candidate_master.CAND_ID', 'cmte_cand_linkage.CAND_ID')
          .innerJoin('candidate_summaries', 'can_id','candidate_master.CAND_ID' )
-         .select().limit(100);
+         .select().limit(limit);
 }
 
 function getCandSumm(cand_id){
@@ -60,13 +69,6 @@ function getCandSumm(cand_id){
          .where({'cmte_cand_linkage.CAND_ID': cand_id});
 }
 
-
-// router.get('/cand_sum', function(req, res, next){
-//   getTenCandSumm().then(function(data){
-//     console.log("Cand Sum!!!!");
-//     res.json(data);
-//   });
-// });
 
 router.get('/cand_sum/:cand_id', function(req, res, next){
   getCandSumm(req.params.cand_id).then(function(data){
