@@ -1,14 +1,16 @@
 var knex = require('./knex');
 
-function (){
-  return knex('committee_master');
-}
 
 module.exports = {
-  get: function(){
-    return ().select().limit(10);
+   getCmteSum: function(cmte_id){
+    return knex('committee_registrations')
+           .innerJoin('committee_summaries', 'COMMITTEE_ID', 'com_id')
+           .where({'com_id': cmte_id});
   },
-  get: function(com_id){
-    return ().select().where({});
+  getCmteLimit: function(limit){
+    if (!limit) { limit = 100; }
+    return knex('committee_registrations')
+           .innerJoin('committee_summaries', 'COMMITTEE_ID', 'com_id')
+           .limit(limit);
   }
 };
