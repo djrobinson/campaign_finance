@@ -5,10 +5,19 @@ function (){
 }
 
 module.exports = {
-  get: function(){
-    return ().select().limit(10);
+  getDisbursements: function(cand_id){
+    return knex('candidate_disbursements')
+          .where({'can_id': cand_id})
+          .limit(100);
   },
-  get: function(com_id){
-    return ().select().where({});
+  getIndExpendByCand: function(cand_id){
+    return knex('independent_expenditures')
+           .where({'can_id': cand_id})
+           .limit(100);
+  },
+  getIndExpendByComm: function(cmte_id){
+    return knex('independent_expenditures')
+           .where({'spe_id': cmte_id})
+           .limit(100);
   }
 };
