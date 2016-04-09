@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var query = require('../cmte_to_cmte_queries.js');
+var query = require('../queries/cmte_to_cmte_queries.js');
 
 router.get('/committee/:cmte_id/contributor', function(req, res, next){
   query.getCmteCmteByDon(req.params.cmte_id).then(function(data){

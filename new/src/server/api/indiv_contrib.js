@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var query = require('../queries/indiv_contrib_queries.js');
 
 router.get('/individuals/:cmte_id/recipient', function(req, res, next){
   query.getIndivContrib(req.params.cmte_id).then(function(data){
