@@ -30,6 +30,7 @@ var mongoose = require('mongoose');
 var votes = require('./mongo/test.js');
 var candidates = require('./api/candidates.js');
 var committees = require('./api/committees.js');
+var funds = require('./api/funds.js');
 
 
 
@@ -79,6 +80,7 @@ app.get('/', function(req, res, next) {
 app.use('/api/votes', votes);
 app.use('/api/candidates', candidates);
 app.use('/api/committees', committees);
+app.use('/api/funds', funds);
 
 
 
