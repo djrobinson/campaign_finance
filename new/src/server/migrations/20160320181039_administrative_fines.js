@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.string('com_nam');
     table.string('rep_typ');
     table.integer('rep_yea');
-    table.string('fin_amo');
+    table.decimal('fin_amo').defaultTo(0);
     table.string('off');
     table.string('sta');
     table.string('dis');
