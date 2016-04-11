@@ -50,7 +50,7 @@ app.use('/api/committees', committees);
 app.use('/api/disbursements', disbursements);
 app.use('/api/pac', pacExpend);
 app.use('/api/contributions', cmteCand);
-app.use('/api/committee', cmteCmte); //Should rename this one
+app.use('/api/transfers', cmteCmte);
 app.use('/api/individuals', indivContrib);
 
 
