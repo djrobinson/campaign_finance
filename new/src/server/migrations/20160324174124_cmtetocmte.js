@@ -15,7 +15,7 @@ exports.up = function(knex, Promise) {
     table.string('EMPLOYER');
     table.string('OCCUPATION');
     table.string('TRANSACTION_DT');
-    table.string('TRANSACTION_AMT');
+    table.decimal('TRANSACTION_AMT', 12);
     table.string('OTHER_ID');
     table.string('TRAN_ID');
     table.string('FILE_NUM');
