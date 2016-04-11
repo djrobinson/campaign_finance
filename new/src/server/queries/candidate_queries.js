@@ -13,11 +13,11 @@ module.exports = {
             .select().where({'CAND_ID': cand_id});
   },
 
-  getCandSort: function(cand_id, column){
+  getCandSort: function(column){
     return knex('candidacy_statements')
            .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
-           .where({'can_id': cand_id})
-           .orderBy(column, 'desc');
+           .orderBy(column, 'desc')
+           .limit(100);
   },
 
   getCandSumLimit: function(limit){
@@ -25,5 +25,12 @@ module.exports = {
     return knex('candidacy_statements')
            .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
            .limit(limit);
+  },
+
+  getCandSumByOffice: function(office){
+    return knex('candidacy_statements')
+           .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
+           .where({'CANDIDATE_OFFICE_CODE': office})
+           .limit(100);
   }
 };
