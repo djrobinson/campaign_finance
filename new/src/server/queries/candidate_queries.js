@@ -32,5 +32,13 @@ module.exports = {
            .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
            .where({'CANDIDATE_OFFICE_CODE': office})
            .limit(100);
+  },
+
+  getCandByOffSort: function(office, col){
+    return knex('candidacy_statements')
+           .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
+           .where({'CANDIDATE_OFFICE_CODE': office})
+           .orderBy(col, 'desc')
+           .limit(100);
   }
 };

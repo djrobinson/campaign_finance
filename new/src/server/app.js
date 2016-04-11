@@ -11,7 +11,6 @@ var mongoose = require('mongoose');
 var votes = require('./mongo/test.js');
 var candidates = require('./api/candidates.js');
 var committees = require('./api/committees.js');
-// var funds = require('./api/funds.js');
 var disbursements = require('./api/disbursements.js');
 var pacExpend = require('./api/pac_expenditures.js');
 var cmteCand = require('./api/cmte_to_cand.js');
@@ -48,7 +47,6 @@ app.get('/', function(req, res, next) {
 app.use('/api/votes', votes);
 app.use('/api/candidates', candidates);
 app.use('/api/committees', committees);
-// app.use('/api/funds', funds);
 app.use('/api/disbursements', disbursements);
 app.use('/api/pac', pacExpend);
 app.use('/api/contributions', cmteCand);

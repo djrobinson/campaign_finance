@@ -21,9 +21,15 @@ router.get('/:cand_id', function(req, res, next){
 });
 
 router.get('/sort/:column_name', function(req, res, next){
-  query.getCandSort(req.params.column_name).then(function(summs){
-    res.json(summs);
-  });
+  if (req.query.office){
+    query.getCandByOffSort(req.query.office, req.params.column_name).then(function(summs){
+      res.json(summs);
+    });
+  } else {
+    query.getCandSort(req.params.column_name).then(function(summs){
+      res.json(summs);
+    });
+  }
 });
 
 router.get('/:cand_id/committees', function(req, res, next){
@@ -31,7 +37,5 @@ router.get('/:cand_id/committees', function(req, res, next){
     res.json(comms);
   })
 });
-
-
 
 module.exports = router;
