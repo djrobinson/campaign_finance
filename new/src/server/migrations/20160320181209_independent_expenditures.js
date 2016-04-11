@@ -10,9 +10,9 @@ exports.up = function(knex, Promise) {
     table.string('can_off_dis');
     table.string('can_off');
     table.string('can_par_aff');
-    table.string('exp_amo');
+    table.decimal('exp_amo', 12);
     table.string('exp_dat');
-    table.string('agg_amo');
+    table.decimal('agg_amo', 12);
     table.string('sup_opp');
     table.string('pur');
     table.string('pay');

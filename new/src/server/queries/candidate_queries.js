@@ -24,6 +24,7 @@ module.exports = {
     if (!limit) { limit = 100; }
     return knex('candidacy_statements')
            .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
+           .orderBy('net_con', 'desc')
            .limit(limit);
   },
 

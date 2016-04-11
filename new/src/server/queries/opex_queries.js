@@ -24,5 +24,4 @@ module.exports = {
            .orderBy('sum', 'desc')
            .limit(50);
   }
-  // opexByPurp: function
-}
+ }
