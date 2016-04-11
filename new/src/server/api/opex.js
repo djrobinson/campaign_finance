@@ -8,10 +8,24 @@ router.get('/', function(req, res, next){
   });
 });
 
-router.get('/:cmte_id', function(req, res, next){
+router.get('/committee/:cmte_id', function(req, res, next){
   query.getOpexByCmte(req.params.cmte_id).then(function(data){
     res.json(data);
   });
-})
+});
+
+router.get('/recipients', function(req, res, next){
+  if (req.query.rcpt){
+    query.getOpexByRec(req.query.rcpt.toUpperCase()).then(function(data){
+      res.json(data);
+    });
+  } else {
+    query.totalOpexByRec().then(function(data){
+      res.json(data);
+    });
+  }
+});
+
+
 
 module.exports = router;
