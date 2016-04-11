@@ -16,6 +16,7 @@ var pacExpend = require('./api/pac_expenditures.js');
 var cmteCand = require('./api/cmte_to_cand.js');
 var cmteCmte = require('./api/cmte_to_cmte.js');
 var indivContrib = require('./api/indiv_contrib.js');
+var opex = require('./api/opex.js');
 
 
 
@@ -52,6 +53,7 @@ app.use('/api/pac', pacExpend);
 app.use('/api/contributions', cmteCand);
 app.use('/api/transfers', cmteCmte);
 app.use('/api/individuals', indivContrib);
+app.use('/api/opex', opex);
 
 
 
