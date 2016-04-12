@@ -40,6 +40,5 @@ module.exports = {
            .sum('exp_amo')
            .groupBy('pur')
            .orderBy('sum', 'desc');
-  },
-
+  }
 }
