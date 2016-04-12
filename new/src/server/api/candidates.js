@@ -3,7 +3,11 @@ var router = express.Router();
 var query = require('../queries/candidate_queries.js');
 
 router.get('/', function(req, res, next){
-  if (req.query.office){
+  if (req.query.search){
+    query.searchCand(req.query.search.toUpperCase()).then(function(summs){
+      res.json(summs);
+    });
+  } else if (req.query.office){
     query.getCandSumByOffice(req.query.office).then(function(summs){
       res.json(summs);
     });

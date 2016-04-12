@@ -41,5 +41,12 @@ module.exports = {
            .where({'CANDIDATE_OFFICE_CODE': office})
            .orderBy(col, 'desc')
            .limit(100);
+  },
+
+  searchCand: function(cand){
+    return knex('candidacy_statements')
+           .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
+           .where('CANDIDATE_NAME', 'like', '%'+cand+'%')
+           .limit(100);
   }
 };
