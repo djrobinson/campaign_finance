@@ -19,7 +19,7 @@ exports.up = function(knex, Promise) {
     table.string('rec_sta');
     table.string('rec_zip');
     table.string('dis_dat');
-    table.string('dis_amo');
+    table.decimal('dis_amo', 12);
     table.string('dis_pur_des');
     table.string('mem_cod');
     table.string('mem_tex');
