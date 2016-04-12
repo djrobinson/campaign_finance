@@ -1,4 +1,4 @@
-// *** main dependencies *** //
+ //check// *** main dependencies *** //
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -45,15 +45,15 @@ app.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../client', 'index.html'));
 });
 
-app.use('/api/votes', votes);
-app.use('/api/candidates', candidates);
+app.use('/api/votes', votes); //check
+app.use('/api/candidates', candidates); //check
 app.use('/api/committees', committees);
 app.use('/api/disbursements', disbursements);
-app.use('/api/pac', pacExpend);
-app.use('/api/contributions', cmteCand);
+app.use('/api/pac', pacExpend); //check
+app.use('/api/contributions', cmteCand); //check
 app.use('/api/transfers', cmteCmte);
 app.use('/api/individuals', indivContrib);
-app.use('/api/opex', opex);
+app.use('/api/opex', opex); //check
 
 
 

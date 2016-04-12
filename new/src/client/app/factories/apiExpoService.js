@@ -15,7 +15,7 @@ function apiExpoService($http) {
   };
 
   function getCandMstr() {
-    return $http.get('/api/candmstr/candsumm')
+    return $http.get('/api/candidates')
       .then(getCompletedRes)
       .catch(getFailedRes);
     function getCompletedRes(response) {
@@ -40,7 +40,7 @@ function apiExpoService($http) {
   }
 
   function getCmteCand() {
-    return $http.get('/api/cmtecand')
+    return $http.get('/api/contributions')
       .then(getCompletedRes)
       .catch(getFailedRes);
     function getCompletedRes(response) {
@@ -64,7 +64,55 @@ function apiExpoService($http) {
   }
 
   function getIndExp() {
-    return $http.get('/api/indexp')
+    return $http.get('/api/pac')
+      .then(getCompletedRes)
+      .catch(getFailedRes);
+    function getCompletedRes(response) {
+      return response.data;
+    }
+    function getFailedRes(error) {
+      console.log('XHR Failed for indexp.' + error.data);
+    }
+  }
+
+  function getCmtes() {
+    return $http.get('/api/committees')
+      .then(getCompletedRes)
+      .catch(getFailedRes);
+    function getCompletedRes(response) {
+      return response.data;
+    }
+    function getFailedRes(error) {
+      console.log('XHR Failed for indexp.' + error.data);
+    }
+  }
+
+  function getDisb() {
+    return $http.get('/api/disbursements')
+      .then(getCompletedRes)
+      .catch(getFailedRes);
+    function getCompletedRes(response) {
+      return response.data;
+    }
+    function getFailedRes(error) {
+      console.log('XHR Failed for indexp.' + error.data);
+    }
+  }
+
+  function getTransfers() {
+    return $http.get('/api/transfers')
+      .then(getCompletedRes)
+      .catch(getFailedRes);
+    function getCompletedRes(response) {
+      return response.data;
+    }
+    function getFailedRes(error) {
+      console.log('XHR Failed for indexp.' + error.data);
+    }
+  }
+
+  function getIndiv() {
+    return $http.get('/api/individuals')
       .then(getCompletedRes)
       .catch(getFailedRes);
     function getCompletedRes(response) {

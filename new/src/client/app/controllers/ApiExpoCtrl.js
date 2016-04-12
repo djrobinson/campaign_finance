@@ -54,5 +54,37 @@
       });
     }
     getIndExp();
+
+    function getCmtes(){
+      return apiExpoService.getCmtes()
+      .then(function(data) {
+        docvm.cmtes = data;
+        return docvm.cmtes;
+      });
+    }
+
+    function getDisb(){
+      return apiExpoService.getDisb()
+      .then(function(data) {
+        docvm.disb = data;
+        return docvm.disb;
+      });
+    }
+
+    function getTransfers(){
+      return apiExpoService.getTransfers()
+      .then(function(data) {
+        docvm.trans = data;
+        return docvm.trans;
+      });
+    }
+
+    function getIndiv(){
+      return apiExpoService.getIndiv()
+      .then(function(data) {
+        docvm.indiv = data;
+        return docvm.indiv;
+      });
+    }
   }
 })();
