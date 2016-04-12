@@ -62,6 +62,7 @@
         return docvm.cmtes;
       });
     }
+    getCmtes();
 
     function getDisb(){
       return apiExpoService.getDisb()
@@ -70,6 +71,7 @@
         return docvm.disb;
       });
     }
+    getDisb();
 
     function getTransfers(){
       return apiExpoService.getTransfers()
@@ -78,6 +80,7 @@
         return docvm.trans;
       });
     }
+    getTransfers();
 
     function getIndiv(){
       return apiExpoService.getIndiv()
@@ -86,5 +89,6 @@
         return docvm.indiv;
       });
     }
+    getIndiv();
   }
 })();

@@ -15,7 +15,7 @@ router.get('/:cmte_id/committee', function(req, res, next){
   });
 });
 
-router.get('/sort', function(req, res, next){
+router.get('/', function(req, res, next){
   query.getCmteCandSort().then(function(data){
     res.json(data);
   });

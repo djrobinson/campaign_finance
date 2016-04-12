@@ -11,7 +11,11 @@ function apiExpoService($http) {
     getOpex: getOpex,
     getCmteCand: getCmteCand,
     getVotes: getVotes,
-    getIndExp: getIndExp
+    getIndExp: getIndExp,
+    getCmtes: getCmtes,
+    getDisb: getDisb,
+    getTransfers: getTransfers,
+    getIndiv: getIndiv
   };
 
   function getCandMstr() {
