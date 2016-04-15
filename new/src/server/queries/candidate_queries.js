@@ -8,6 +8,11 @@ module.exports = {
            .where({'can_id': cand_id});
   },
 
+  getQkAsc: function(cand_id){
+    return knex('cmte_cand_linkage')
+            .select('CAND_ID', 'CMTE_ID')
+            .where({'CAND_ID': cand_id});
+  },
   getAssocCommittees: function(cand_id){
     return knex('cmte_cand_linkage')
             .select().where({'CAND_ID': cand_id});

@@ -17,6 +17,7 @@ var cmteCand = require('./api/cmte_to_cand.js');
 var cmteCmte = require('./api/cmte_to_cmte.js');
 var indivContrib = require('./api/indiv_contrib.js');
 var opex = require('./api/opex.js');
+var graph = require('./api/graph.js');
 
 
 
@@ -54,6 +55,7 @@ app.use('/api/contributions', cmteCand); //check
 app.use('/api/transfers', cmteCmte);
 app.use('/api/individuals', indivContrib);
 app.use('/api/opex', opex); //check
+app.use('/api/graph', graph);
 
 
 

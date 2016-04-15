@@ -3,7 +3,7 @@ var knex = require('./knex');
 module.exports = {
   getIndivContrib: function(cmte_id){
     return knex('indiv_contrib')
-           .where({'cmte_id': cmte_id})
+           .where({'CMTE_ID': cmte_id})
            .orderBy('TRANSACTION_AMT', 'desc')
            .limit(100);
   },
@@ -41,6 +41,7 @@ module.exports = {
   indivByCmte: function(cmte_id){
     return knex('indiv_contrib')
            .where({'CMTE_ID': cmte_id})
-           .orderBy('TRANSACTION_AMT', 'desc');
+           .orderBy('TRANSACTION_AMT', 'desc')
+           .limit(100);
   }
 }
