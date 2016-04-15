@@ -9,6 +9,12 @@ var callAsc = function(input){
   )
 }
 
+var callInd = function(input){
+  return Promise.all(
+    input.map(graph.getTopInd)
+  )
+}
+
 var appender = function(orig, newArrs){
   return new Promise(function(resolve){
     newArrs.forEach(function(arr){
@@ -24,8 +30,12 @@ router.get('/:cand_id', function(req, res, next){
   cand.getQkAsc(req.params.cand_id).then(function(first){
     console.log(first);
     callAsc(first).then(function(second){
-      appender(first, second).then(function(data){
-        res.json(data);
+      appender(first, second).then(function(third){
+        callInd(first).then(function(fourth){
+          appender(third, fourth).then(function(data){
+            res.json(data);
+          })
+        })
       })
     });
   });
