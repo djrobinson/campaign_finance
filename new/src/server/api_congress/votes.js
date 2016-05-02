@@ -1,4 +1,4 @@
-var Vote = require('../mongo/votes.js');
+var Vote = require('../mongo/votes_schema.js');
 
 var express = require('express');
 var router = express.Router();

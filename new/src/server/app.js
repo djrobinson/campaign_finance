@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 // *** routes *** //
-var votes = require('./mongo/test.js');
+var votes = require('./api_congress/votes.js');
 var candidates = require('./api_funds/candidates.js');
 var committees = require('./api_funds/committees.js');
 var disbursements = require('./api_funds/disbursements.js');
