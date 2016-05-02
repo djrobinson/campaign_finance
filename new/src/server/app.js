@@ -9,15 +9,15 @@ var mongoose = require('mongoose');
 
 // *** routes *** //
 var votes = require('./mongo/test.js');
-var candidates = require('./api/candidates.js');
-var committees = require('./api/committees.js');
-var disbursements = require('./api/disbursements.js');
-var pacExpend = require('./api/pac_expenditures.js');
-var cmteCand = require('./api/cmte_to_cand.js');
-var cmteCmte = require('./api/cmte_to_cmte.js');
-var indivContrib = require('./api/indiv_contrib.js');
-var opex = require('./api/opex.js');
-var graph = require('./api/graph.js');
+var candidates = require('./api_funds/candidates.js');
+var committees = require('./api_funds/committees.js');
+var disbursements = require('./api_funds/disbursements.js');
+var pacExpend = require('./api_funds/pac_expenditures.js');
+var cmteCand = require('./api_funds/cmte_to_cand.js');
+var cmteCmte = require('./api_funds/cmte_to_cmte.js');
+var indivContrib = require('./api_funds/indiv_contrib.js');
+var opex = require('./api_funds/opex.js');
+var graph = require('./api_funds/graph.js');
 
 
 

@@ -15,30 +15,29 @@ var callInd = function(input){
   )
 }
 
-var appender = function(orig, newArrs){
+var appender = function(parArr, subArr){
   return new Promise(function(resolve){
-    newArrs.forEach(function(arr){
-      if (arr.length > 0){
-        orig = orig.concat(arr);
-      }
-    });
-    resolve(orig);
+    var flattened = subArr.reduce(function (acc, val) {
+      return acc.concat(val);
+    }, parArr);
+    resolve(flattened);
   })
 }
 
 router.get('/:cand_id', function(req, res, next){
   cand.getQkAsc(req.params.cand_id).then(function(first){
     console.log(first);
-    callAsc(first).then(function(second){
-      appender(first, second).then(function(third){
+    callAsc(first)
+    .then(function(second){
+      return appender(first, second);
+    }).then(function(third){
         callInd(first).then(function(fourth){
-          appender(third, fourth).then(function(data){
+          return appender(third, fourth)
+        }).then(function(data){
             res.json(data);
           })
         })
       })
     });
-  });
-});
 
 module.exports = router;

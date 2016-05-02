@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var query = require('../queries/disbursement_queries.js')
 
+/*
+  OFFSET ON ALL  4, LIMIT ON JUST CANDIDATE? CAT_COD?
+*/
+
 router.get('/', function(req, res, next){
   if (req.query.recipient) {
     query.getByRec(req.query.recipient).then(function(data){

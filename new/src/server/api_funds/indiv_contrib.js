@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var query = require('../queries/indiv_contrib_queries.js');
 
+/*
+  OFFSET ON MAIN, RECIPIENT.  LIMIT ON EMPLOYER
+*/
+
 router.get('/', function(req, res, next){
   if (req.query.donor){
     query.getContribByDon(req.query.donor.toUpperCase()).then(function(data){

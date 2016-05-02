@@ -2,6 +2,12 @@ var express = require('express');
 var router = express.Router();
 var query = require('../queries/committee_queries.js');
 
+/*
+
+OFFSET ON MAIN, SORT
+
+*/
+
 router.get('/', function(req, res, next){
   if (req.query.limit){
     query.getCmteLimit(req.query.limit).then(function(summs){

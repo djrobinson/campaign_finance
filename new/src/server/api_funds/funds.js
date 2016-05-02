@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var query = require('../queries/fund_queries.js');
 
+/*
+  OFFSET & LIMITS ON ALL ROUTES
+*/
+
 router.get('/disbursements/:cand_id', function(req, res, next){
   query.getDisbursements(req.params.cand_id).then(function(data){
     res.json(data);

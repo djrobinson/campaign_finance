@@ -1,0 +1,1 @@
+\COPY indiv_contrib FROM '/Users/danny/Galvanize/projects/campaign_finances/new/src/server/data/indiv_contrib.csv' DELIMITER ',' CSV header encoding 'WINDOWS-1252';

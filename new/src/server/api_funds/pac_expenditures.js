@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var query = require('../queries/pac_expenditures_queries.js');
 
+/*
+  LIMIT & OFFSET ON ALL ROUTES
+*/
+
 router.get('/', function(req, res, next){
   query.getExpSort().then(function(data){
     res.json(data);

@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var query = require('../queries/candidate_queries.js');
 
+
+/* TODO:
+  OFFSET ON MAIN, SORT
+*/
 router.get('/', function(req, res, next){
   if (req.query.search){
     query.searchCand(req.query.search.toUpperCase()).then(function(summs){

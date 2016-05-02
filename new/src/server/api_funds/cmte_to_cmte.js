@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var query = require('../queries/cmte_to_cmte_queries.js');
 
+/*
+  OFFSET & LIMIT ON ALL 3 ROUTES
+*/
+
 router.get('/', function(req, res, next){
   query.getCmteCmteSort().then(function(data){
     res.json(data);
