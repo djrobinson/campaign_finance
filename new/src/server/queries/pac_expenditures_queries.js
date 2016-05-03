@@ -1,30 +1,49 @@
 var knex = require('./knex');
 
 module.exports = {
-  getExpSort: function(){
+  getExpSort: function(offset){
     return knex('independent_expenditures')
-           .orderBy('agg_amo', 'desc')
-           .limit(100);
+           .orderBy('exp_amo', 'desc')
+           .limit(100)
+           .offset(offset);
   },
-  getIndExpendByCand: function(cand_id){
+  getIndExpendByCand: function(cand_id, offset){
     return knex('independent_expenditures')
            .where({'can_id': cand_id})
-           .limit(100);
+           .orderBy('exp_amo', 'desc')
+           .limit(100)
+           .offset(offset);
   },
-  getIndExpendByComm: function(cmte_id){
+  getIndExpendByComm: function(cmte_id, offset){
     return knex('independent_expenditures')
            .where({'spe_id': cmte_id})
-           .limit(100);
+           .orderBy('exp_amo', 'desc')
+           .limit(100)
+           .offset(offset);
   },
-  getSuppByCmte: function(cmte_id){
+  getSuppByCand: function(cand_id, offset){
+    return knex('independent_expenditures')
+           .where({'can_id': cand_id, 'sup_opp': 'Support'})
+           .limit(100)
+           .offset(offset);
+  },
+  getOppByCand: function(cand_id, offset){
+    return knex('independent_expenditures')
+           .where({'can_id': cand_id, 'sup_opp': 'Oppose'})
+           .limit(100)
+           .offset(offset);
+  },
+  getSuppByCmte: function(cmte_id, offset){
     return knex('independent_expenditures')
            .where({'spe_id': cmte_id, 'sup_opp': 'Support'})
-           .limit(100);
+           .limit(100)
+           .offset(offset);
   },
-  getOppByCmte: function(cmte_id){
+  getOppByCmte: function(cmte_id, offset){
     return knex('independent_expenditures')
            .where({'spe_id': cmte_id, 'sup_opp': 'Oppose'})
-           .limit(100);
+           .limit(100)
+           .offset(offset);
   },
   groupedCat: function(){
     return knex('independent_expenditures')

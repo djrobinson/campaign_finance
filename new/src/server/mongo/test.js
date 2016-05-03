@@ -29,7 +29,6 @@ router.get('/:cand_id/yeas',function(req, res, next){
     if (err) throw err;
 
     // object of the user
-    console.log(vote);
     res.json(vote);
   });
 });
@@ -48,7 +47,6 @@ router.get('/:cand_id/nays',function(req, res, next){
     if (err) throw err;
 
     // object of the user
-    console.log(vote);
     res.json(vote);
   });
 });
