@@ -35,10 +35,10 @@ var hresSchema = new Schema({
   },
   "official_title" : String,
   "history" : {
-    "senate_passage_result" : String,
+    "house_passage_result" : String,
     "vetoed" : Boolean,
     "active_at" : Date,
-    "senate_passage_result_at" : Date,
+    "house_passage_result_at" : Date,
     "awaiting_signature" : Boolean,
     "active" : Boolean,
     "enacted" : Boolean
