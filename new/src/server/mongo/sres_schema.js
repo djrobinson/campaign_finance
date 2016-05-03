@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var voteSchema = new Schema({
+var sresSchema = new Schema({
   "_id" : String,
   "number" : Number,
   "actions" : [],
@@ -48,6 +48,6 @@ var voteSchema = new Schema({
   "enacted_as" : String
 });
 
-var Sres = mongoose.model('Sres', voteSchema);
+var Sres = mongoose.model('Sres', sresSchema);
 
 module.exports = Sres;
