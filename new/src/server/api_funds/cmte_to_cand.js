@@ -7,21 +7,42 @@ var query = require('../queries/cmte_to_cand_queries.js');
 */
 
 router.get('/:cand_id/candidate', function(req, res, next){
-  query.getCmteCandByCand(req.params.cand_id).then(function(data){
-    res.json(data);
-  });
+  if (req.query.offset){
+    var offset = +req.query.offset * 100;
+    query.getCmteCandByCand(req.params.cand_id, offset).then(function(data){
+      res.json(data);
+    });
+  } else {
+    query.getCmteCandByCand(req.params.cand_id).then(function(data){
+      res.json(data);
+    });
+  }
 });
 
 router.get('/:cmte_id/committee', function(req, res, next){
-  query.getCmteCandByCmte(req.params.cmte_id).then(function(data){
-    res.json(data);
-  });
+  if (req.query.offset){
+    var offset = +req.query.offset * 100;
+    query.getCmteCandByCmte(req.params.cmte_id, offset).then(function(data){
+      res.json(data);
+    });
+  } else {
+    query.getCmteCandByCmte(req.params.cmte_id).then(function(data){
+      res.json(data);
+    });
+  }
 });
 
 router.get('/', function(req, res, next){
-  query.getCmteCandSort().then(function(data){
-    res.json(data);
-  });
+  if (req.query.offset){
+    var offset = +req.query.offset * 100;
+    query.getCmteCandSort(offset).then(function(data){
+      res.json(data);
+    });
+  } else {
+    query.getCmteCandSort().then(function(data){
+      res.json(data);
+    });
+  }
 });
 
 module.exports = router;
