@@ -1,10 +1,11 @@
 var knex = require('./knex');
 
 module.exports = {
-  getDisbursements: function(cand_id){
+  getDisbursements: function(cand_id, offset){
     return knex('candidate_disbursements')
           .where({'can_id': cand_id})
-          .limit(100);
+          .limit(100)
+          .offset(offset);
   },
   getIndExpendByCand: function(cand_id){
     return knex('independent_expenditures')

@@ -3,13 +3,20 @@ var router = express.Router();
 var query = require('../queries/fund_queries.js');
 
 /*
-  OFFSET & LIMITS ON ALL ROUTES
+ THIS FILE IS DEPRECATED. LEAVING INTACT FOR REFERENCE
 */
 
 router.get('/disbursements/:cand_id', function(req, res, next){
-  query.getDisbursements(req.params.cand_id).then(function(data){
-    res.json(data);
-  });
+  if (req.query.offset){
+    var offset = +req.query.offset * 100;
+    query.getDisbursements(req.params.cand_id, offset).then(function(data){
+      res.json(data);
+    });
+  } else {
+    query.getDisbursements(req.params.cand_id).then(function(data){
+      res.json(data);
+    });
+  }
 });
 
 router.get('/pac/:cand_id/candidate', function(req, res, next){

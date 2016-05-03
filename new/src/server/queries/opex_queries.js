@@ -1,27 +1,31 @@
 var knex = require('./knex');
 
 module.exports = {
-  getOpexSort: function(){
+  getOpexSort: function(offset){
     return knex('opex')
            .orderBy('TRANSACTION_AMT', 'desc')
-           .limit(100);
+           .limit(100)
+           .offset(offset);
   },
-  getOpexByCmte: function(cmte_id){
+  getOpexByCmte: function(cmte_id, offset){
     return knex('opex')
            .where({'CMTE_ID': cmte_id})
            .orderBy('TRANSACTION_AMT', 'desc')
-           .limit(100);
+           .limit(100)
+           .offset(offset);
   },
-  getOpexByRec: function(name){
+  getOpexByRec: function(name, offset){
     return knex('opex')
            .where('NAME', 'like', '%'+ name +'%')
+           .offset(offset);
   },
-  totalOpexByRec: function(){
+  totalOpexByRec: function(offset){
     return knex('opex')
            .select('NAME')
            .sum('TRANSACTION_AMT')
            .groupBy('NAME')
            .orderBy('sum', 'desc')
-           .limit(50);
+           .limit(50)
+           .offset(offset);
   }
  }
