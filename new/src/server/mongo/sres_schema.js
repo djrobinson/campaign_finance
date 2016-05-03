@@ -37,7 +37,7 @@ var sresSchema = new Schema({
   "history" : {
     "senate_passage_result" : String,
     "vetoed" : Boolean,
-    "active_at" : "2013-01-03",
+    "active_at" : Date,
     "senate_passage_result_at" : Date,
     "awaiting_signature" : Boolean,
     "active" : Boolean,
