@@ -45,20 +45,34 @@ router.get('/:cand_id', function(req, res, next){
 
 router.get('/sort/:column_name', function(req, res, next){
   if (req.query.office){
-    query.getCandByOffSort(req.query.office, req.params.column_name).then(function(summs){
-      res.json(summs);
-    });
+    if (req.query.offset){
+      var offset = +req.query.offset * 100;
+      query.getCandByOffSort(req.query.office, req.params.column_name, offset).then(function(summs){
+        res.json(summs);
+      });
+    } else {
+      query.getCandByOffSort(req.query.office, req.params.column_name).then(function(summs){
+        res.json(summs);
+      });
+    }
   } else {
-    query.getCandSort(req.params.column_name).then(function(summs){
-      res.json(summs);
-    });
+    if (req.query.offset){
+      var offset = +req.query.offset * 100;
+      query.getCandSort(req.params.column_name, offset).then(function(summs){
+        res.json(summs);
+      });
+    } else {
+      query.getCandSort(req.params.column_name).then(function(summs){
+        res.json(summs);
+      });
+    }
   }
 });
 
 router.get('/:cand_id/committees', function(req, res, next){
   query.getAssocCommittees(req.params.cand_id).then(function(comms){
     res.json(comms);
-  })
+  });
 });
 
 module.exports = router;
