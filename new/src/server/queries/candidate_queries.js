@@ -18,40 +18,45 @@ module.exports = {
             .select().where({'CAND_ID': cand_id});
   },
 
-  getCandSort: function(column){
+  getCandSort: function(column, offset){
     return knex('candidacy_statements')
            .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
            .orderBy(column, 'desc')
-           .limit(100);
+           .limit(100)
+           .offset(offset);
   },
 
-  getCandSumLimit: function(limit){
+  getCandSumLimit: function(limit, offset){
     if (!limit) { limit = 100; }
     return knex('candidacy_statements')
            .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
            .orderBy('net_con', 'desc')
-           .limit(limit);
+           .limit(limit)
+           .offset(offset);
   },
 
-  getCandSumByOffice: function(office){
+  getCandSumByOffice: function(office, offset){
     return knex('candidacy_statements')
            .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
            .where({'CANDIDATE_OFFICE_CODE': office})
-           .limit(100);
+           .limit(100)
+           .offset(offset);
   },
 
-  getCandByOffSort: function(office, col){
+  getCandByOffSort: function(office, col, offset){
     return knex('candidacy_statements')
            .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
            .where({'CANDIDATE_OFFICE_CODE': office})
            .orderBy(col, 'desc')
-           .limit(100);
+           .limit(100)
+           .offset(offset);
   },
 
-  searchCand: function(cand){
+  searchCand: function(cand, offset){
     return knex('candidacy_statements')
            .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
            .where('CANDIDATE_NAME', 'like', '%'+cand+'%')
-           .limit(100);
+           .limit(100)
+           .offset(offset);
   }
 };

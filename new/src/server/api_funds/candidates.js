@@ -12,13 +12,27 @@ router.get('/', function(req, res, next){
       res.json(summs);
     });
   } else if (req.query.office){
-    query.getCandSumByOffice(req.query.office).then(function(summs){
-      res.json(summs);
-    });
+    if (req.query.offset){
+      var offset = +req.query.offset * 100;
+      query.getCandSumByOffice(req.query.office, offset).then(function(summs){
+        res.json(summs);
+      });
+    } else {
+      query.getCandSumByOffice(req.query.office).then(function(summs){
+        res.json(summs);
+      });
+    }
   } else {
-    query.getCandSumLimit().then(function(summs){
-      res.json(summs);
-    });
+    if (req.query.offset){
+      var offset = +req.query.offset * 100;
+      query.getCandSumLimit(null, offset).then(function(summs){
+        res.json(summs);
+      });
+    } else {
+      query.getCandSumLimit().then(function(summs){
+        res.json(summs);
+      });
+    }
   }
 });
 
