@@ -5,7 +5,7 @@ import {Component} from 'angular2/core';
     <h1>Opex view!</h1>
   `
 })
-export class opexComponent {
+export class OpexComponent {
   constructor() {
 
   }

@@ -5,7 +5,7 @@ import {Component} from 'angular2/core';
     <h1>Individuals view!</h1>
   `
 })
-export class individualsComponent {
+export class IndividualsComponent {
   constructor() {
 
   }

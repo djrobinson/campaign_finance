@@ -2,8 +2,17 @@ import {Component, OnInit} from 'angular2/core';
 import {Subject} from './subject';
 import {SubjectService} from './subject.service';
 import {CandidateComponent} from './candidate/candidate.component.ts';
+import {CommitteeComponent} from './committees/committee.component';
+import {ContributionsComponent} from './contributions/contributions.component';
+import {DisbursementsComponent} from './disbursements/disbursements.component';
+import {IndividualsComponent} from './individuals/individuals.component';
+import {LegislatorsComponent} from './legislators/legislators.component';
+import {OpexComponent} from './opex/opex.component';
+import {PacsComponent} from './pacs/pacs.component';
+import {TransfersComponent} from './transfers/transfers.component';
+import {VotesComponent} from './votes/votes.component';
 import {Landing} from './landing/landing.component.ts';
-import { RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
 @Component({
   selector: 'my-app',
@@ -78,47 +87,47 @@ import { RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
   {
     path: '/contributions',
     as: 'Contributions',
-    component: CandidateComponent
+    component: ContributionsComponent
   },
   {
     path: '/transfers',
     as: 'Committee Transfers',
-    component: CandidateComponent
+    component: TransfersComponent
   },
   {
     path: '/committees',
     as: 'Committees',
-    component: CandidateComponent
+    component: CommitteeComponent
   },
   {
     path: '/disbursements',
     as: 'Disbursements',
-    component: CandidateComponent
+    component: DisbursementsComponent
   },
   {
     path: '/individuals',
     as: 'Individual Contributions',
-    component: CandidateComponent
+    component: IndividualsComponent
   },
   {
     path: '/pacs',
     as: 'PAC Expenditures',
-    component: CandidateComponent
+    component: PacsComponent
   },
   {
     path: '/opex',
     as: 'Committee Opex',
-    component: CandidateComponent
+    component: OpexComponent
   },
   {
     path: '/legislators',
     as: 'Legislators',
-    component: CandidateComponent
+    component: LegislatorsComponent
   },
   {
     path: '/votes',
     as: 'Congressional Votes',
-    component: CandidateComponent
+    component: VotesComponent
   },
   {
     path: '/',

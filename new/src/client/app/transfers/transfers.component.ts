@@ -5,7 +5,7 @@ import {Component} from 'angular2/core';
     <h1>Transfers view!</h1>
   `
 })
-export class transfersComponent {
+export class TransfersComponent {
   constructor() {
 
   }

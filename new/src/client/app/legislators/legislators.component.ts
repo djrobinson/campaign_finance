@@ -5,7 +5,7 @@ import {Component} from 'angular2/core';
     <h1>Legislators view!</h1>
   `
 })
-export class legislatorsComponent {
+export class LegislatorsComponent {
   constructor() {
 
   }

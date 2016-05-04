@@ -5,7 +5,7 @@ import {Component} from 'angular2/core';
     <h1>Votes view!</h1>
   `
 })
-export class votesComponent {
+export class VotesComponent {
   constructor() {
 
   }
