@@ -1,4 +1,3 @@
-import {Subject} from './subject';
 export var SUBJECTS: Subject[] = [
     {"id": 1, "name": "Candidates", "link": "/candidates"},
     {"id": 2, "name": "Contributions", "link": "/candidates"},

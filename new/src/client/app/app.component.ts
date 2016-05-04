@@ -1,6 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
-import {Subject} from './subject';
-import {SubjectService} from './subject.service';
+// import {Subject} from './subject';
+import {SubjectService} from './api_services/subject.service';
 import {CandidateComponent} from './candidate/candidate.component.ts';
 import {CommitteeComponent} from './committees/committee.component';
 import {ContributionsComponent} from './contributions/contributions.component';
@@ -137,7 +137,6 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
   }
 ])
 export class AppComponent implements OnInit {
-  subjects: Subject[];
   constructor(private _subjectService: SubjectService) { }
   getHeroes() {
     this._subjectService.getSubjects().then(subjects => this.subjects = subjects);

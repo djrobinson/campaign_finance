@@ -1,13 +1,22 @@
 import {Component, OnInit} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {CandidateService} from '../api_services/candidate.service';
 @Component({
   selector: 'candidate-view',
-  template: '<h1>Candidate!!!</h1>'
+  template: `
+            <h1>Candidate!!!</h1>
+            <p>{{candidates}}</p>
+
+           `
     ,
-  providers: []
+  providers: [CandidateService]
 })
 export class CandidateComponent implements OnInit {
-  ngOnInit() {
-    console.log("We have entered the candidate component!!!");
+  constructor(private _candidateService:CandidateService) {
+    _candidateService.candidates
+      .subscribe(
+        candidates => this.candidates = candidates,
+        error => console.error('Error: ' + err),
+        () => console.log('Completed!')
+      );
   }
 }
