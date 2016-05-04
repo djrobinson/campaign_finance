@@ -1,6 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {Subject} from './subject';
 import {SubjectService} from './subject.service';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 
 @Component({
   selector: 'my-app',
@@ -31,11 +32,24 @@ import {SubjectService} from './subject.service';
   `],
   template: `
     <div class="app">
-      <div class="tile" *ngFor="#subject of subjects"><h2>{{subject.name}}</h2></div>
+      <a href="subject.link">
+        <div class="tile" *ngFor="#subject of subjects" (click)="onClick(subject.id)">
+          <h2>{{subject.name}}</h2>
+        </div>
+      </a>
     </div>
   `,
-  providers: [SubjectService]
+  directives: [ROUTER_DIRECTIVES],
+  providers: [SubjectService, ROUTER_PROVIDERS]
 })
+// @RouteConfig([
+//   {
+//     path: '/dashboard',
+//     name: 'Dashboard',
+//     component: DashboardComponent,
+//     useAsDefault: true
+//   }
+// ])
 export class AppComponent implements OnInit {
   subjects: Subject[];
   constructor(private _subjectService: SubjectService) { }

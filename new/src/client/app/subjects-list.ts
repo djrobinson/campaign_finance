@@ -1,6 +1,6 @@
 import {Subject} from './subject';
 export var SUBJECTS: Subject[] = [
-    {"id": 1, "name": "Candidates"},
+    {"id": 1, "name": "Candidates", "link": "/candidates"},
     {"id": 2, "name": "Contributions"},
     {"id": 3, "name": "Committee Transfers"},
     {"id": 4, "name": "Committees"},
