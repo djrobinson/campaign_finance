@@ -11,6 +11,7 @@ import { RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
     .app {
       display: flex;
       flex-flow: row wrap;
+      min-height: 100vh;
     }
     .header, .app, .footer {
       flex: 1 100%;
@@ -38,6 +39,7 @@ import { RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
       order: 2;
     }
     .footer {
+      align-self: flex-end;
       order: 4;
     }
 
