@@ -9,42 +9,59 @@ import { RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
   selector: 'my-app',
   styles: [`
     .app {
-      display: block;
-      position: absolute;
-      padding: 25px;
+      display: flex;
+      flex-flow: row wrap;
+    }
+    .header, .app, .footer {
+      flex: 1 100%;
+    }
+    .tileContainer {
+      order: 1;
       background: #f5f5f5;
-      text-align: center;
-      height: 90%;
     }
     .tile {
-      display: inline-flex;
+      display: flex;
       justify-content: space-around;
-      flex-direction: row;
+      flex-direction: column;
       text-align: center;
       flex-wrap: wrap;
-      width: 15%;
-      height: 8rem;
 
-      margin: .5rem;
       background: #7A8B99;
       color: #A9DDD6;
       font-family: "Courier New", Courier, monospace;
+    }
+    .tileContainer a {
+      text-decoration: none;
+    }
+    main {
+      flex: 2 0px;
+      order: 2;
+    }
+    .footer {
+      order: 4;
     }
 
   `],
   template: `
     <div class="app">
-      <a [routerLink]="['/Candidates']" *ngFor="#subject of subjects">
-        <div class="tile" >
-          <h2>{{subject.name}}</h2>
-        </div>
-      </a>
-      <landing></landing>
-      <candidate-view></candidate-view>
+      <div class="header">
+        <h1>Campaign Finance</h1>
+      </div>
+      <div class="tileContainer">
+        <a [routerLink]="[subject.name]" *ngFor="#subject of subjects">
+          <div class="tile" >
+            <h2>{{subject.name}}</h2>
+          </div>
+        </a>
+      </div>
       <main>
         <router-outlet></router-outlet>
       </main>
+      <div class="footer">
+        <h1>About</h1>
+      </div>
     </div>
+
 
   `,
   directives: [ROUTER_DIRECTIVES, CandidateComponent],
@@ -57,7 +74,52 @@ import { RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
     component: CandidateComponent
   },
   {
-    path: '/landing',
+    path: '/contributions',
+    as: 'Contributions',
+    component: CandidateComponent
+  },
+  {
+    path: '/transfers',
+    as: 'Committee Transfers',
+    component: CandidateComponent
+  },
+  {
+    path: '/committees',
+    as: 'Committees',
+    component: CandidateComponent
+  },
+  {
+    path: '/disbursements',
+    as: 'Disbursements',
+    component: CandidateComponent
+  },
+  {
+    path: '/individuals',
+    as: 'Individual Contributions',
+    component: CandidateComponent
+  },
+  {
+    path: '/pacs',
+    as: 'PAC Expenditures',
+    component: CandidateComponent
+  },
+  {
+    path: '/opex',
+    as: 'Committee Opex',
+    component: CandidateComponent
+  },
+  {
+    path: '/legislators',
+    as: 'Legislators',
+    component: CandidateComponent
+  },
+  {
+    path: '/votes',
+    as: 'Congressional Votes',
+    component: CandidateComponent
+  },
+  {
+    path: '/',
     as: 'Landing',
     component: Landing,
     useAsDefault: true
