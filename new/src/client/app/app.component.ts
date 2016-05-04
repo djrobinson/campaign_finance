@@ -1,7 +1,9 @@
 import {Component, OnInit} from 'angular2/core';
 import {Subject} from './subject';
 import {SubjectService} from './subject.service';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
+import {CandidateComponent} from './candidate/candidate.component.ts';
+import {Landing} from './landing/landing.component.ts';
+import { RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
 @Component({
   selector: 'my-app',
@@ -12,7 +14,7 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
       padding: 25px;
       background: #f5f5f5;
       text-align: center;
-      height: 100%;
+      height: 90%;
     }
     .tile {
       display: inline-flex;
@@ -32,24 +34,35 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
   `],
   template: `
     <div class="app">
-      <a href="subject.link">
-        <div class="tile" *ngFor="#subject of subjects" (click)="onClick(subject.id)">
+      <a [routerLink]="['/Candidates']" *ngFor="#subject of subjects">
+        <div class="tile" >
           <h2>{{subject.name}}</h2>
         </div>
       </a>
+      <landing></landing>
+      <candidate-view></candidate-view>
+      <main>
+        <router-outlet></router-outlet>
+      </main>
     </div>
+
   `,
-  directives: [ROUTER_DIRECTIVES],
-  providers: [SubjectService, ROUTER_PROVIDERS]
+  directives: [ROUTER_DIRECTIVES, CandidateComponent],
+  providers: [SubjectService]
 })
-// @RouteConfig([
-//   {
-//     path: '/dashboard',
-//     name: 'Dashboard',
-//     component: DashboardComponent,
-//     useAsDefault: true
-//   }
-// ])
+@RouteConfig([
+  {
+    path: '/candidates',
+    as: 'Candidates',
+    component: CandidateComponent
+  },
+  {
+    path: '/landing',
+    as: 'Landing',
+    component: Landing,
+    useAsDefault: true
+  }
+])
 export class AppComponent implements OnInit {
   subjects: Subject[];
   constructor(private _subjectService: SubjectService) { }
@@ -57,8 +70,6 @@ export class AppComponent implements OnInit {
     this._subjectService.getSubjects().then(subjects => this.subjects = subjects);
   }
   ngOnInit() {
-    console.log("on init is running first")
-
     this.getHeroes();
   }
 }
