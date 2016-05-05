@@ -6,7 +6,7 @@ import {CandidateService} from '../api_services/candidate.service';
 
           ],
   template: `
-              <div class="api-result">
+              <div class="candidate-table">
                 <ul>
                   <li *ngFor="#candidate of candidates">
                     <h2>{{candidate.can_nam}}</h2>

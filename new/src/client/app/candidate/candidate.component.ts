@@ -1,6 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {CandidateService} from '../api_services/candidate.service';
 import {TitleService} from '../api_services/title.service';
+import {ResultComponent} from '../api-helpers/api-result.component';
 @Component({
   selector: 'candidate-view',
   styles: [`
@@ -35,21 +36,16 @@ import {TitleService} from '../api_services/title.service';
               </div>
               <div class="api-result">
                 <h1>Results go here!</h1>
+                <api-result></api-result>
               </div>
             </div>
            `,
-  providers: [CandidateService, TitleService]
+  providers: [CandidateService, TitleService],
+  directives: [ResultComponent]
 })
 export class CandidateComponent implements OnInit {
+  //Not sure how to use multiple services here
   constructor(private _titleService: TitleService) { }
-  constructor(private _candidateService:CandidateService) {
-    _candidateService.candidates
-      .subscribe(
-        candidates => this.candidates = candidates,
-        error => console.error('Error: ' + err),
-        () => console.log('Completed!')
-      );
-  }
   setSelected(id){
     console.log(id);
     this.selected = id;
