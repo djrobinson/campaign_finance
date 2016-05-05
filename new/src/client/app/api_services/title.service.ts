@@ -7,12 +7,13 @@ export class TitleService {
   constructor(http:Http) {
     this.http = http;
   }
+
   getTitles() {
     return Promise.resolve(TITLES);
   }
 
-  getResult() {
-    return this.http.get('api/candidates')
+  getResult(route) {
+    return this.http.get(route)
         .map(response => response.json());
     }
   }

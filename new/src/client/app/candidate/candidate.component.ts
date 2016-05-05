@@ -1,6 +1,7 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
 import {CandidateService} from '../api_services/candidate.service';
 import {TitleService} from '../api_services/title.service';
+import {AsyncPipe } from 'angular2/common';
 import {ResultComponent} from '../api-helpers/api-result.component';
 @Component({
   selector: 'candidate-view',
@@ -24,34 +25,43 @@ import {ResultComponent} from '../api-helpers/api-result.component';
             }
             `],
   template: `
-            <div class="wrapper">
+            <div class="wrapper" (routeChange)="newRoute($event)">
               <div class="route-column">
               <h1>Candidate API Routes</h1>
                 <div *ngFor="#route of routes"
                   (click)="setSelected(route.id)"
-                  [style.background-color]="isSelected(route.id)"
+                  [style.background-color]="isSelected(route)"
                   class="api-route">
                   <h3>{{route.name}}</h3>
+                  <h2>{{currentRoute}}</h2>
                 </div>
               </div>
               <div class="api-result">
-                <h1>Results go here!</h1>
-                <api-result></api-result>
+                 {{currentRoute}}
               </div>
             </div>
            `,
   providers: [CandidateService, TitleService],
-  directives: [ResultComponent]
+  directives: [ResultComponent],
+  pipes: [AsyncPipe]
 })
 export class CandidateComponent implements OnInit {
-  //Not sure how to use multiple services here
-  constructor(private _titleService: TitleService) { }
+  routeChange = new EventEmitter();
+  constructor(private _titleService: TitleService) {  }
   setSelected(id){
     console.log(id);
     this.selected = id;
   }
-  isSelected(id) {
-    if (this.selected === id) return "blue";
+  isSelected(route) {
+    if (this.selected === route.id){
+      this.routeChange.emit({
+        route: route.name
+      })
+      return "blue";
+    }
+  }
+  newRoute(event){
+    console.log("event");
   }
   getRoutes() {
     this._titleService.getTitles().then(titles => this.routes = titles
