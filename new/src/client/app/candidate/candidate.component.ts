@@ -26,18 +26,11 @@ import {TitleService} from '../api_services/title.service';
             <div class="wrapper">
               <div class="route-column">
               <h1>Candidate API Routes</h1>
-              <h3 *ngFor="#title of titles">{{title.name}}</h3>
-                <div (click)="setSelected()" class="api-route">
-                  <h2>/api/candidates/</h2>
-                </div>
-                <div class="api-route">
-                  <h2>/api/candidates/{candidate_id}</h2>
-                </div>
-                <div class="api-route">
-                  <h2>/api/candidates/sort/{column_name}</h2>
-                </div>
-                <div class="api-route">
-                  <h2>/api/candidates/{candidate_id}/committees</h2>
+                <div *ngFor="#route of routes"
+                  (click)="setSelected(route.id)"
+                  [style.background-color]="isSelected(route.id)"
+                  class="api-route">
+                  <h3>{{route.name}}</h3>
                 </div>
               </div>
               <div class="api-result">
@@ -57,14 +50,18 @@ export class CandidateComponent implements OnInit {
         () => console.log('Completed!')
       );
   }
-  setSelected(){
-
+  setSelected(id){
+    console.log(id);
+    this.selected = id;
   }
-  getTitles() {
-    this._titleService.getTitles().then(titles => this.titles = titles
+  isSelected(id) {
+    if (this.selected === id) return "blue";
+  }
+  getRoutes() {
+    this._titleService.getTitles().then(titles => this.routes = titles
       .filter(title => title.id === 1 )[0].routes);
   }
   ngOnInit() {
-    this.getTitles();
+    this.getRoutes();
   }
 }
