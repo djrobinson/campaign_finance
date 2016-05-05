@@ -1,21 +1,18 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
-a {
-  color: #00B7FF;
-}
 
-.text-center {
-  text-align: center;
+/*.api-route {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background: #963D5A;
+  margin: 1rem;
 }
-
-.result {
-  padding-left: 100px;
-  padding-right: 100px;
-  background-color: #F5F5F5 ;
-  color: #B96464;
-  height: 300px;
-  overflow: auto;
+.route-column {
+  display: flex;
+  order: 1;
 }
+.api-result {
+  display: flex;
+  order: 1;
+}*/

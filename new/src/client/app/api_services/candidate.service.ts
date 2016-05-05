@@ -9,3 +9,9 @@ export class CandidateService {
       .map(response => response.json());
   }
 }
+
+// export class TestService {
+//   constructor(http:Http) {
+//     this.results = http.get()
+//   }
+// }

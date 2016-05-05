@@ -52,6 +52,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
       order: 4;
     }
 
+
   `],
   template: `
     <div class="app">
@@ -79,6 +80,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
   providers: [SubjectService]
 })
 @RouteConfig([
+  { path: '*', redirectTo: ['Landing'] },
   {
     path: '/candidates',
     as: 'Candidates',
