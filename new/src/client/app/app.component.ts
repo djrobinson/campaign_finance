@@ -1,6 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
-// import {Subject} from './subject';
-import {SubjectService} from './api_services/subject.service';
+import {TitleService} from './api_services/title.service';
 import {CandidateComponent} from './candidate/candidate.component.ts';
 import {CommitteeComponent} from './committees/committee.component';
 import {ContributionsComponent} from './contributions/contributions.component';
@@ -60,9 +59,9 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
         <h1>Campaign Finance</h1>
       </div>
       <div class="tileContainer">
-        <a [routerLink]="[subject.name]" *ngFor="#subject of subjects">
+        <a [routerLink]="[title.name]" *ngFor="#title of titles">
           <div class="tile" >
-            <h2>{{subject.name}}</h2>
+            <h2>{{title.name}}</h2>
           </div>
         </a>
       </div>
@@ -77,7 +76,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
   `,
   directives: [ROUTER_DIRECTIVES, CandidateComponent],
-  providers: [SubjectService]
+  providers: [TitleService]
 })
 @RouteConfig([
   { path: '*', redirectTo: ['Landing'] },
@@ -139,11 +138,11 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
   }
 ])
 export class AppComponent implements OnInit {
-  constructor(private _subjectService: SubjectService) { }
-  getHeroes() {
-    this._subjectService.getSubjects().then(subjects => this.subjects = subjects);
+  constructor(private _titleService: TitleService) { }
+  getTitles() {
+    this._titleService.getTitles().then(titles => this.titles = titles);
   }
   ngOnInit() {
-    this.getHeroes();
+    this.getTitles();
   }
 }

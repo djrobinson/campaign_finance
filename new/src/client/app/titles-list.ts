@@ -1,5 +1,12 @@
-export var SUBJECTS: Subject[] = [
-    {"id": 1, "name": "Candidates", "link": "/candidates"},
+export var TITLES: Title[] = [
+    {"id": 1, "name": "Candidates", "link": "/candidates", "routes":
+        [
+            {"id": 1, "name": "/api/candidates/"},
+            {"id": 2, "name": "/api/candidates/{candidate_id}"},
+            {"id": 1, "name": "/api/candidates/sort/{column_name}"},
+            {"id": 1, "name": "/api/candidates/{candidate_id}/committees"}
+        ]
+    },
     {"id": 2, "name": "Contributions", "link": "/candidates"},
     {"id": 3, "name": "Committee Transfers", "link": "/candidates"},
     {"id": 4, "name": "Committees", "link": "/candidates"},
