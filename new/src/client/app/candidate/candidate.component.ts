@@ -16,7 +16,7 @@ import {ResultComponent} from '../api-helpers/api-result.component';
             .route-column {
               order: 1;
             }
-            .api-result {
+            .result {
               display: flex;
               order: 2;
             }
@@ -25,7 +25,7 @@ import {ResultComponent} from '../api-helpers/api-result.component';
             }
             `],
   template: `
-            <div class="wrapper" (routeChange)="newRoute($event)">
+            <div class="wrapper">
               <div class="route-column">
               <h1>Candidate API Routes</h1>
                 <div *ngFor="#route of routes"
@@ -36,8 +36,8 @@ import {ResultComponent} from '../api-helpers/api-result.component';
                   <h2>{{currentRoute}}</h2>
                 </div>
               </div>
-              <div class="api-result">
-                 {{currentRoute}}
+              <div class="result">
+                 <api-result [currentRoute]="startRoute" (routeChange)="newRoute($event)"></api-result>
               </div>
             </div>
            `,
@@ -46,7 +46,7 @@ import {ResultComponent} from '../api-helpers/api-result.component';
   pipes: [AsyncPipe]
 })
 export class CandidateComponent implements OnInit {
-  routeChange = new EventEmitter();
+  public startRoute:string = '/api/candidates';
   constructor(private _titleService: TitleService) {  }
   setSelected(id){
     console.log(id);
@@ -54,14 +54,11 @@ export class CandidateComponent implements OnInit {
   }
   isSelected(route) {
     if (this.selected === route.id){
-      this.routeChange.emit({
-        route: route.name
-      })
       return "blue";
     }
   }
   newRoute(event){
-    console.log("event");
+    console.log(event);
   }
   getRoutes() {
     this._titleService.getTitles().then(titles => this.routes = titles
