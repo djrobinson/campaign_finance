@@ -54,11 +54,12 @@ export class CandidateComponent implements OnInit {
   }
   isSelected(route) {
     if (this.selected === route.id){
+       this.startRoute = route.name;
       return "blue";
     }
   }
   newRoute(event){
-    console.log(event);
+    console.log();
   }
   getRoutes() {
     this._titleService.getTitles().then(titles => this.routes = titles

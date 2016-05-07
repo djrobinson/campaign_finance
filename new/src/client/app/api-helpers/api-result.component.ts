@@ -10,6 +10,7 @@ import {TitleService} from '../api_services/title.service';
   template: `
               <div class="result">
                 <button (click)="routeClick();" class="counter__button">Clicky click</button>
+                <h2>{{currentRoute}}</h2>
               </div>
            `,
   providers: [TitleService]
