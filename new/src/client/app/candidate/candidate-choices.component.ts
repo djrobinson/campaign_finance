@@ -1,12 +1,9 @@
-import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
+import {Component, OnInit, Input, Output, EventEmitter} from 'angular2/core';
 import {CandidateService} from '../api_services/candidate.service';
 import {TitleService} from '../api_services/title.service';
-import {CandidateChoices} from './candidate-choices.component';
-import {ResultComponent} from '../api-helpers/api-result.component';
 import {AsyncPipe } from 'angular2/common';
-
 @Component({
-  selector: 'candidate-view',
+  selector: 'candidate-choices',
   styles: [`
             .api-route {
               display: flex;
@@ -29,19 +26,34 @@ import {AsyncPipe } from 'angular2/common';
   template: `
             <div class="wrapper">
               <div class="route-column">
-               <h1>{{currentRoute}}</h1>
+              <h1>Candidate API Routes</h1>
+                <div *ngFor="#route of routes"
+                  (click)="setSelected(route.id)"
+                  [style.background-color]="isSelected(route)"
+                  (click)="routeClick(route.name);"
+                  class="api-route">
+                  <h3>{{route.name}}</h3>
+                  <h2>{{currentRoute}}</h2>
+                </div>
               </div>
-
-              <candidate-choices [currentRoute]="startRoute" (routeChange)="newRoute($event);"></candidate-choices>
-              <api-result [currentRoute]="currentRoute"></api-result>
             </div>
            `,
   providers: [CandidateService, TitleService],
-  directives: [CandidateChoices, ResultComponent],
   pipes: [AsyncPipe]
 })
-export class CandidateComponent implements OnInit {
+export class CandidateChoices implements OnInit {
   public startRoute:string = '/api/candidates';
+  @Input() currentRoute = '';
+  @Output() routeChange = new EventEmitter();
+
+  routeClick(name) {
+    this.counterValue++;
+    this.routeChange.emit({
+      value: name
+    })
+  }
+
+
   constructor(private _titleService: TitleService) {  }
   setSelected(id){
     console.log(id);
@@ -53,10 +65,7 @@ export class CandidateComponent implements OnInit {
       return "blue";
     }
   }
-  newRoute(event){
-    console.log(event);
-    this.currentRoute=event.value;
-  }
+
   getRoutes() {
     this._titleService.getTitles().then(titles => this.routes = titles
       .filter(title => title.id === 1 )[0].routes);
