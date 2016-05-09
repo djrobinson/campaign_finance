@@ -33,7 +33,6 @@ import {AsyncPipe } from 'angular2/common';
                   (click)="routeClick(route.name);"
                   class="api-route">
                   <h3>{{route.name}}</h3>
-                  <h2>{{currentRoute}}</h2>
                 </div>
               </div>
             </div>
@@ -42,7 +41,6 @@ import {AsyncPipe } from 'angular2/common';
   pipes: [AsyncPipe]
 })
 export class CandidateChoices implements OnInit {
-  public startRoute:string = '/api/candidates';
   @Input() currentRoute = '';
   @Output() routeChange = new EventEmitter();
 

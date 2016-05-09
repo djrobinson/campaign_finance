@@ -3,6 +3,7 @@ import {CandidateService} from '../api_services/candidate.service';
 import {TitleService} from '../api_services/title.service';
 import {CandidateChoices} from './candidate-choices.component';
 import {ResultComponent} from '../api-helpers/api-result.component';
+import {CandidateTableComponent} from './candidate-table.component';
 import {AsyncPipe } from 'angular2/common';
 
 @Component({
@@ -22,9 +23,12 @@ import {AsyncPipe } from 'angular2/common';
               display: flex;
               order: 2;
               overflow: scroll;
+              width: 100%;
             }
             .wrapper {
               display: flex;
+              position: relative;
+              height: 100%;
             }
             `],
   template: `
@@ -40,9 +44,13 @@ import {AsyncPipe } from 'angular2/common';
                 [result]="result">
               </api-result>
             </div>
+            <candidate-table
+              [candidates]="result">
+            </candidate-table>
+
            `,
   providers: [CandidateService, TitleService],
-  directives: [CandidateChoices, ResultComponent],
+  directives: [CandidateChoices, ResultComponent, CandidateTableComponent],
   pipes: [AsyncPipe]
 })
 export class CandidateComponent {
