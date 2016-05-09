@@ -25,11 +25,31 @@ export var TITLES: Title[] = [
         [
             {"id": 1, "name": "/api/committees/", "test": "/api/transfers"},
             {"id": 2, "name": "/api/committees/{committee_id}", "test": "/api/committees/C00571372"},
-            {"id": 3, "name": "/api/committees/sort/{column_name}", "test": "/api/committees/sort/"}
+            {"id": 3, "name": "/api/committees/sort/{column_name}", "test": "/api/committees/sort/tot_con"}
         ]
     },
-    {"id": 5, "name": "Disbursements", "link": "/candidates"},
-    {"id": 6, "name": "Individual Contributions", "link": "/candidates"},
+    {"id": 5, "name": "Disbursements", "link": "/candidates", "routes":
+        [
+            {"id": 1, "name": "/api/disbursements/", "test": "/api/transfers"},
+            {"id": 2, "name": "/api/disbursements/{candidate_id}/candidate", "test": "/api/disbursements/S6AL00013/candidate"},
+            {"id": 3, "name": "/api/disbursements/type/{category_code}", "test": "/api/disbursements/type/1"},
+            {"id": 4, "name": "/api/disbursements/{candidate_id}/candidate/type", "test": "/api/disbursements/S6AL00013/candidate/type"},
+            {"id": 5, "name": "/api/disbursements/{candidate_id}/candidate/purpose", "test": "/api/disbursements/S6AL00013/candidate/purpose"},
+            {"id": 6, "name": "/api/disbursements/{candidate_id}/candidate/purpose", "test": "/api/disbursements/S6AL00013/candidate/purpose"},
+            {"id": 7, "name": "/api/disbursements/aggregate/type", "test": "/api/disbursements/aggregate/type"},
+            {"id": 8, "name": "/api/disbursements/aggregate/purpose", "test": "/api/disbursements/aggregate/purpose"},
+        ]
+    },
+    {"id": 6, "name": "Individual Contributions", "link": "/individuals", "routes":
+        [
+            {"id": 1, "name": "/api/individuals/", "test": "/api/individuals"},
+            {"id": 2, "name": "/api/committees/{committee_id}/recipient", "test": "/api/committees/C00571372/recipient"},
+            {"id": 3, "name": "/api/committees/employer", "test": "/api/committees/employer"},
+            {"id": 4, "name": "/api/committees/occupation", "test": "/api/committees/occupation"},
+            {"id": 5, "name": "/api/committees/committee/{committee_id}", "test": "/api/committees/committee/C00571372"}
+
+        ]
+    },
     {"id": 7, "name": "Committee Opex", "link": "/candidates"},
     {"id": 8, "name": "PAC Expenditures", "link": "/candidates"},
     {"id": 9, "name": "Congressional Votes", "link": "/candidates"},

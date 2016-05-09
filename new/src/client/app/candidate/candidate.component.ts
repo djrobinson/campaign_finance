@@ -1,5 +1,4 @@
 import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
-import {CandidateService} from '../api_services/candidate.service';
 import {TitleService} from '../api_services/title.service';
 import {ChoicesComponent} from '../api-helpers/api-choices.component';
 import {ResultComponent} from '../api-helpers/api-result.component';
@@ -50,7 +49,7 @@ import {CandidateTableComponent} from './candidate-table.component';
             </candidate-table>
 
            `,
-  providers: [CandidateService, TitleService],
+  providers: [TitleService],
   directives: [ChoicesComponent, ResultComponent, CandidateTableComponent]
 })
 export class CandidateComponent implements OnInit {

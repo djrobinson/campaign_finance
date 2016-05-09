@@ -1,9 +1,7 @@
 import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
-// import {ContributionsService} from '../api_services/candidate.service';
 import {TitleService} from '../api_services/title.service';
 import {ChoicesComponent} from '../api-helpers/api-choices.component';
 import {ResultComponent} from '../api-helpers/api-result.component';
-// import {CandidateTableComponent} from './candidate-table.component';
 
 @Component({
   selector: 'contributions-view',
@@ -46,7 +44,7 @@ import {ResultComponent} from '../api-helpers/api-result.component';
               </api-result>
             </div>
             <candidate-table
-              [candidates]="result">
+              [results]="result">
             </candidate-table>
 
            `,
