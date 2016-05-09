@@ -43,10 +43,10 @@ export var TITLES: Title[] = [
     {"id": 6, "name": "Individual Contributions", "link": "/individuals", "routes":
         [
             {"id": 1, "name": "/api/individuals/", "test": "/api/individuals"},
-            {"id": 2, "name": "/api/committees/{committee_id}/recipient", "test": "/api/committees/C00571372/recipient"},
-            {"id": 3, "name": "/api/committees/employer", "test": "/api/committees/employer"},
-            {"id": 4, "name": "/api/committees/occupation", "test": "/api/committees/occupation"},
-            {"id": 5, "name": "/api/committees/committee/{committee_id}", "test": "/api/committees/committee/C00571372"}
+            {"id": 2, "name": "/api/individuals/{committee_id}/recipient", "test": "/api/individuals/C00571372/recipient"},
+            {"id": 3, "name": "/api/individuals/employer", "test": "/api/individuals/employer"},
+            {"id": 4, "name": "/api/individuals/occupation", "test": "/api/individuals/occupation"},
+            {"id": 5, "name": "/api/individuals/committee/{committee_id}", "test": "/api/individuals/committee/C00571372"}
 
         ]
     },
