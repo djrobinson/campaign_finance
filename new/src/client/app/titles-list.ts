@@ -57,7 +57,20 @@ export var TITLES: Title[] = [
             {"id": 3, "name": "/api/opex/recipients", "test": "/api/opex/recipients"}
         ]
     },
-    {"id": 8, "name": "PAC Expenditures", "link": "/candidates"},
+    {"id": 8, "name": "PAC Expenditures", "link": "/pacs", "routes":
+        [
+            {"id": 1, "name": "/api/pac/", "test": "/api/pac"},
+            {"id": 2, "name": "/api/pac/{candidate_id}/candidate", "test": "/api/pac/P00003392/candidate"},
+            {"id": 3, "name": "/api/pac/{committee_id}/committee", "test": "/api/pac/C00571372/committee"},
+            {"id": 4, "name": "/api/pac/{candidate_id}/support", "test": "/api/pac/P00003392/support"},
+            {"id": 5, "name": "/api/pac/{candidate_id}/oppose", "test": "/api/pac/P00003392/oppose"},
+            {"id": 6, "name": "/api/pac/{committee_id}/oppose/committee", "test": "/api/pac/C00571372/oppose/committee"},
+            {"id": 7, "name": "/api/pac/{committee_id}/support/committee", "test": "/api/pac/C00571372/support/committee"},
+            {"id": 8, "name": "/api/pac/aggregate", "test": "/api/pac/aggregate"},
+            {"id": 9, "name": "/api/pac/aggregate/{candidate_id}", "test": "/api/pac/aggregate/P00003392"}
+
+        ]
+    },
     {"id": 9, "name": "Congressional Votes", "link": "/candidates"},
     {"id": 10, "name": "Legislators", "link": "/candidates"}
 ];
