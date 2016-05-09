@@ -1,10 +1,9 @@
 import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
 import {CandidateService} from '../api_services/candidate.service';
 import {TitleService} from '../api_services/title.service';
-import {CandidateChoices} from './candidate-choices.component';
+import {ChoicesComponent} from '../api-helpers/api-choices.component';
 import {ResultComponent} from '../api-helpers/api-result.component';
 import {CandidateTableComponent} from './candidate-table.component';
-import {AsyncPipe } from 'angular2/common';
 
 @Component({
   selector: 'candidate-view',
@@ -32,12 +31,14 @@ import {AsyncPipe } from 'angular2/common';
             }
             `],
   template: `
+            <h1>Candidate Routes</h1>
             <div class="wrapper">
               <div class="route-column">
-                <candidate-choices
+                <choices
+                  [apiId]="1"
                   [currentRoute]="startRoute"
                   (routeChange)="newRoute($event);">
-                </candidate-choices>
+                </choices>
               </div>
               <api-result
                 [currentRoute]="currentRoute"
@@ -50,12 +51,13 @@ import {AsyncPipe } from 'angular2/common';
 
            `,
   providers: [CandidateService, TitleService],
-  directives: [CandidateChoices, ResultComponent, CandidateTableComponent],
-  pipes: [AsyncPipe]
+  directives: [ChoicesComponent, ResultComponent, CandidateTableComponent]
 })
-export class CandidateComponent {
+export class CandidateComponent implements OnInit {
   public startRoute:string = '/api/candidates';
-  constructor(private _titleService: TitleService) {  }
+  constructor(private _titleService: TitleService) {
+    this._choicesComponent: ChoicesComponent;
+  }
   setSelected(id){
     console.log(id);
     this.selected = id;

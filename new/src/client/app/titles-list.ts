@@ -7,7 +7,12 @@ export var TITLES: Title[] = [
             {"id": 4, "name": "/api/candidates/{candidate_id}/committees", "test": "/api/candidates/P00003392/committees"}
         ]
     },
-    {"id": 2, "name": "Contributions", "link": "/candidates"},
+    {"id": 2, "name": "Contributions", "link": "/candidates", "routes":
+        [
+            {"id": 1, "name": "/api/contributions/", "test": "/api/candidates"},
+            {"id": 2, "name": "/api/contributions/{candidate_id}/candidate", "test": "/api/contributions/P00003392/candidate"},
+            {"id": 3, "name": "/api/contributions/{committee_id}/committee", "test": "/api/contributions/{committee_id}/committee"}
+        ]},
     {"id": 3, "name": "Committee Transfers", "link": "/candidates"},
     {"id": 4, "name": "Committees", "link": "/candidates"},
     {"id": 5, "name": "Disbursements", "link": "/candidates"},

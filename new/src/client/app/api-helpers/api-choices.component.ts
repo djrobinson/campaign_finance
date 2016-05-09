@@ -1,9 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter} from 'angular2/core';
-import {CandidateService} from '../api_services/candidate.service';
 import {TitleService} from '../api_services/title.service';
-import {AsyncPipe } from 'angular2/common';
 @Component({
-  selector: 'candidate-choices',
+  selector: 'choices',
   styles: [`
             .api-route {
               display: flex;
@@ -26,7 +24,6 @@ import {AsyncPipe } from 'angular2/common';
   template: `
             <div class="wrapper">
               <div class="route-column">
-              <h1>Candidate API Routes</h1>
                 <div *ngFor="#route of routes"
                   (click)="setSelected(route.id)"
                   [style.background-color]="isSelected(route)"
@@ -37,10 +34,10 @@ import {AsyncPipe } from 'angular2/common';
               </div>
             </div>
            `,
-  providers: [CandidateService, TitleService],
-  pipes: [AsyncPipe]
+  providers: [TitleService]
 })
-export class CandidateChoices implements OnInit {
+export class ChoicesComponent implements OnInit {
+  @Input() apiId = 0;
   @Input() currentRoute = '';
   @Output() routeChange = new EventEmitter();
 
@@ -50,7 +47,6 @@ export class CandidateChoices implements OnInit {
       value: name
     })
   }
-
 
   constructor(private _titleService: TitleService) {  }
   setSelected(id){
@@ -64,11 +60,13 @@ export class CandidateChoices implements OnInit {
     }
   }
 
-  getRoutes() {
+  getRoutes(id) {
     this._titleService.getTitles().then(titles => this.routes = titles
-      .filter(title => title.id === 1 )[0].routes);
+      .filter(title => title.id === id )[0].routes);
   }
-  ngOnInit() {
-    this.getRoutes();
+
+  ngOnInit(){
+    this.getRoutes(this.apiId);
   }
+
 }
