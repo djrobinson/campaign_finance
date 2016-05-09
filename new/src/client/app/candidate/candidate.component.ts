@@ -18,9 +18,10 @@ import {AsyncPipe } from 'angular2/common';
             .route-column {
               order: 1;
             }
-            .result {
+            api-result {
               display: flex;
               order: 2;
+              overflow: scroll;
             }
             .wrapper {
               display: flex;
@@ -29,39 +30,40 @@ import {AsyncPipe } from 'angular2/common';
   template: `
             <div class="wrapper">
               <div class="route-column">
-               <h1>{{currentRoute}}</h1>
+                <candidate-choices
+                  [currentRoute]="startRoute"
+                  (routeChange)="newRoute($event);">
+                </candidate-choices>
               </div>
-
-              <candidate-choices [currentRoute]="startRoute" (routeChange)="newRoute($event);"></candidate-choices>
-              <api-result [currentRoute]="currentRoute"></api-result>
+              <api-result
+                [currentRoute]="currentRoute"
+                [result]="result">
+              </api-result>
             </div>
            `,
   providers: [CandidateService, TitleService],
   directives: [CandidateChoices, ResultComponent],
   pipes: [AsyncPipe]
 })
-export class CandidateComponent implements OnInit {
+export class CandidateComponent {
   public startRoute:string = '/api/candidates';
   constructor(private _titleService: TitleService) {  }
   setSelected(id){
     console.log(id);
     this.selected = id;
   }
-  isSelected(route) {
-    if (this.selected === route.id){
-       this.startRoute = route.name;
-      return "blue";
-    }
-  }
   newRoute(event){
     console.log(event);
+    this.getJson(event.value);
     this.currentRoute=event.value;
   }
-  getRoutes() {
-    this._titleService.getTitles().then(titles => this.routes = titles
-      .filter(title => title.id === 1 )[0].routes);
-  }
-  ngOnInit() {
-    this.getRoutes();
-  }
+
+  getJson(route){
+    this._titleService.getResult(route)
+      .subscribe(
+        result => this.result = result,
+        error => console.error('Error: ' + err),
+        () => console.log('Completed!')
+      );
+    }
 }

@@ -4,31 +4,26 @@ import {TitleService} from '../api_services/title.service';
   selector: 'api-result',
   styles: [`
             .result {
+              display: flex;
               overflow: scroll;
             }
           `],
   template: `
               <div class="result">
-                <h1>Here's JSON response</h1>
-                <button (click)="routeClick();">Clicky click</button>
-                <h2>{{currentRoute}}</h2>
+                <pre>{{result | json}}</pre>
               </div>
            `,
   providers: [TitleService]
 })
 export class ResultComponent {
+  @Input() result: string;
   @Input() currentRoute = '';
   @Output() routeChange = new EventEmitter();
   constructor(private _titleService:TitleService) {
     this._titleService = _titleService;
   }
+  console.log(result);
 
-  routeClick() {
-    this.counterValue++;
-    this.routeChange.emit({
-      value: '/api/api'
-    })
-  }
   getJson(route){
     this._titleService.getResult(route)
       .subscribe(
@@ -37,5 +32,6 @@ export class ResultComponent {
         () => console.log('Completed!')
       );
     }
+
 
 }
