@@ -1,10 +1,10 @@
 export var TITLES: Title[] = [
     {"id": 1, "name": "Candidates", "link": "/candidates", "routes":
         [
-            {"id": 1, "name": "/api/candidates/"},
-            {"id": 2, "name": "/api/candidates/{candidate_id}"},
-            {"id": 3, "name": "/api/candidates/sort/{column_name}"},
-            {"id": 4, "name": "/api/candidates/{candidate_id}/committees"}
+            {"id": 1, "name": "/api/candidates/", "test": "/api/candidates"},
+            {"id": 2, "name": "/api/candidates/{candidate_id}", "test": "/api/candidates/P00003392"},
+            {"id": 3, "name": "/api/candidates/sort/{column_name}", "test": "/api/candidates/sort/cas_on_han_clo_of_per"},
+            {"id": 4, "name": "/api/candidates/{candidate_id}/committees", "test": "/api/candidates/P00003392/committees"}
         ]
     },
     {"id": 2, "name": "Contributions", "link": "/candidates"},

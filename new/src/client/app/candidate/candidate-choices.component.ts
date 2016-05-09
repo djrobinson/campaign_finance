@@ -30,7 +30,7 @@ import {AsyncPipe } from 'angular2/common';
                 <div *ngFor="#route of routes"
                   (click)="setSelected(route.id)"
                   [style.background-color]="isSelected(route)"
-                  (click)="routeClick(route.name);"
+                  (click)="routeClick(route.test);"
                   class="api-route">
                   <h3>{{route.name}}</h3>
                 </div>
@@ -59,7 +59,7 @@ export class CandidateChoices implements OnInit {
   }
   isSelected(route) {
     if (this.selected === route.id){
-       this.startRoute = route.name;
+       this.startRoute = route.test;
       return "blue";
     }
   }
