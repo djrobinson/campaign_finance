@@ -50,7 +50,13 @@ export var TITLES: Title[] = [
 
         ]
     },
-    {"id": 7, "name": "Committee Opex", "link": "/candidates"},
+    {"id": 7, "name": "Committee Opex", "link": "/candidates", "routes":
+        [
+            {"id": 1, "name": "/api/opex/", "test": "/api/opex"},
+            {"id": 2, "name": "/api/opex/committee/{committee_id}", "test": "/api/opex/committee/C00571372"},
+            {"id": 3, "name": "/api/opex/recipients", "test": "/api/opex/recipients"}
+        ]
+    },
     {"id": 8, "name": "PAC Expenditures", "link": "/candidates"},
     {"id": 9, "name": "Congressional Votes", "link": "/candidates"},
     {"id": 10, "name": "Legislators", "link": "/candidates"}
