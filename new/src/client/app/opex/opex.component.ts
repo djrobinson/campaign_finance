@@ -2,7 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
 import {TitleService} from '../api_services/title.service';
 import {ChoicesComponent} from '../api-helpers/api-choices.component';
 import {ResultComponent} from '../api-helpers/api-result.component';
-
+import {OpexTableComponent} from './opex-table.component.ts';
 @Component({
   selector: 'opex-view',
   styles: [`
@@ -43,13 +43,13 @@ import {ResultComponent} from '../api-helpers/api-result.component';
                 [result]="result">
               </api-result>
             </div>
-            <candidate-table
-              [results]="result">
-            </candidate-table>
+            <opex-table
+              [opex]="result">
+            </opex-table>
 
            `,
   providers: [TitleService],
-  directives: [ChoicesComponent, ResultComponent]
+  directives: [ChoicesComponent, ResultComponent, OpexTableComponent]
 })
 export class OpexComponent {
   public startRoute:string = '/api/opex';
