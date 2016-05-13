@@ -2,7 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
 import {TitleService} from '../api_services/title.service';
 import {ChoicesComponent} from '../api-helpers/api-choices.component';
 import {ResultComponent} from '../api-helpers/api-result.component';
-
+import {PacsTableComponent} from './pacs-table.component.ts';
 @Component({
   selector: 'pacs-view',
   styles: [`
@@ -43,13 +43,13 @@ import {ResultComponent} from '../api-helpers/api-result.component';
                 [result]="result">
               </api-result>
             </div>
-            <candidate-table
-              [results]="result">
-            </candidate-table>
+            <pacs-table
+              [pacs]="result">
+            </pacs-table>
 
            `,
   providers: [TitleService],
-  directives: [ChoicesComponent, ResultComponent]
+  directives: [ChoicesComponent, ResultComponent, PacsTableComponent]
 })
 export class PacsComponent {
   public startRoute:string = '/api/pacs';

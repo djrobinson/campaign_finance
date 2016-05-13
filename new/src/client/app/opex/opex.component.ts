@@ -29,7 +29,7 @@ import {OpexTableComponent} from './opex-table.component.ts';
             }
             `],
   template: `
-            <h1>Individuals Routes</h1>
+            <h1>Opex Routes</h1>
             <div class="wrapper">
               <div class="route-column">
                 <choices
