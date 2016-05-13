@@ -30,7 +30,7 @@ export var TITLES: Title[] = [
     },
     {"id": 5, "name": "Disbursements", "link": "/candidates", "routes":
         [
-            {"id": 1, "name": "/api/disbursements/", "test": "/api/transfers"},
+        { "id": 1, "name": "/api/disbursements/", "test": "/api/disbursements" },
             {"id": 2, "name": "/api/disbursements/{candidate_id}/candidate", "test": "/api/disbursements/S6AL00013/candidate"},
             {"id": 3, "name": "/api/disbursements/type/{category_code}", "test": "/api/disbursements/type/1"},
             {"id": 4, "name": "/api/disbursements/{candidate_id}/candidate/type", "test": "/api/disbursements/S6AL00013/candidate/type"},
