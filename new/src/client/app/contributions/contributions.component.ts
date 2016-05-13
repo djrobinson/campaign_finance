@@ -2,6 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
 import {TitleService} from '../api_services/title.service';
 import {ChoicesComponent} from '../api-helpers/api-choices.component';
 import {ResultComponent} from '../api-helpers/api-result.component';
+import {ContributionTableComponent} from './contributions-table.component';
 
 @Component({
   selector: 'contributions-view',
@@ -43,16 +44,16 @@ import {ResultComponent} from '../api-helpers/api-result.component';
                 [result]="result">
               </api-result>
             </div>
-            <candidate-table
-              [results]="result">
-            </candidate-table>
+            <contributions-table
+              [contributions]="result">
+            </contributions-table>
 
            `,
   providers: [TitleService],
-  directives: [ChoicesComponent, ResultComponent]
+  directives: [ChoicesComponent, ResultComponent, ContributionTableComponent]
 })
 export class ContributionsComponent {
-  public startRoute:string = '/api/candidates';
+  public startRoute:string = '/api/contributions';
   constructor(private _titleService: TitleService) {  }
   setSelected(id){
     console.log(id);
