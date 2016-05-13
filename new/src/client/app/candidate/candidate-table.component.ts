@@ -4,7 +4,7 @@ import {CandidateService} from '../api_services/candidate.service';
   selector: 'candidate-table',
   styles: [
 
-          ],
+  ],
   template: `
               <h1>Candidate Table Here</h1>
               <div>

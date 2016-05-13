@@ -23,7 +23,7 @@ export var TITLES: Title[] = [
     },
     {"id": 4, "name": "Committees", "link": "/committees", "routes":
         [
-            {"id": 1, "name": "/api/committees/", "test": "/api/transfers"},
+            {"id": 1, "name": "/api/committees/", "test": "/api/committees"},
             {"id": 2, "name": "/api/committees/{committee_id}", "test": "/api/committees/C00571372"},
             {"id": 3, "name": "/api/committees/sort/{column_name}", "test": "/api/committees/sort/tot_con"}
         ]

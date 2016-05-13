@@ -2,7 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
 import {TitleService} from '../api_services/title.service';
 import {ChoicesComponent} from '../api-helpers/api-choices.component';
 import {ResultComponent} from '../api-helpers/api-result.component';
-// import {CandidateTableComponent} from './candidate-table.component';
+import {CommitteeTableComponent} from './committee-table.component';
 
 @Component({
   selector: 'committee-view',
@@ -44,16 +44,16 @@ import {ResultComponent} from '../api-helpers/api-result.component';
                 [result]="result">
               </api-result>
             </div>
-            <candidate-table
-              [results]="result">
-            </candidate-table>
+            <committee-table
+              [committees]="result">
+            </committee-table>
 
            `,
   providers: [TitleService],
-  directives: [ChoicesComponent, ResultComponent]
+  directives: [ChoicesComponent, ResultComponent, CommitteeTableComponent]
 })
 export class CommitteeComponent {
-  public startRoute:string = '/api/candidates';
+  public startRoute:string = '/api/committees';
   constructor(private _titleService: TitleService) {  }
   setSelected(id){
     console.log(id);
