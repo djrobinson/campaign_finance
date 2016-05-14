@@ -17,38 +17,62 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
   selector: 'my-app',
   styles: [`
     .app {
-      display: flex;
-      flex-flow: row wrap;
       min-height: 100vh;
+    }
+    .header {
+      height: 3rem;
+      text-align: center;
+      font-size: 3rem;
     }
     .header, .app, .footer {
       flex: 1 100%;
     }
     .tileContainer {
-      order: 1;
-      background: #f5f5f5;
+
+      padding: 0;
+      margin: 0;
+
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+
+      width: 100%;
+
+      -webkit-flex-flow: row;
+      justify-content: space-around;
     }
     .tile {
-      display: flex;
-      justify-content: space-around;
-      flex-direction: column;
-      text-align: center;
-      flex-wrap: wrap;
 
-      background: #7A8B99;
-      color: #A9DDD6;
-      font-family: "Courier New", Courier, monospace;
+      width: 100%;
+      background: tomato;
+      height: 5rem;
+      margin-top: 10px;
+
+      line-height: 5rem;
+      color: white;
+      text-align: center;
     }
     .tileContainer a {
       text-decoration: none;
+      flex-grow: 1;
+    }
+    home {
+      height: 100%;
+      display: flex;
+      flex-flow: column;
     }
     main {
-      flex: 2 0px;
-      order: 2;
+      height: 100%;
+      display: flex;
+      flex-flow: column;
     }
     .footer {
-      align-self: flex-end;
-      order: 4;
+      position: fixed;
+      bottom: 0;
+      text-align: center;
+      font-size: 3rem;
     }
 
 
@@ -56,12 +80,12 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
   template: `
     <div class="app">
       <div class="header">
-        <h1>Campaign Finance</h1>
+        <h1>The Open Politician Initiative</h1>
       </div>
       <div class="tileContainer">
         <a [routerLink]="[title.name]" *ngFor="#title of titles">
-          <div class="tile" >
-            <h2>{{title.name}}</h2>
+          <div class="tile">
+            <h5>{{title.name}}</h5>
           </div>
         </a>
       </div>
