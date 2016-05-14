@@ -15,7 +15,7 @@ import {Component} from 'angular2/core';
   ],
   template: `
     <div class="landing-icon">
-      <h1>Open Politician Initiative</h1>
+      <h1>Open Campaign Project</h1>
       <br>
       <img src="http://www.opensecrets.org/wp-content/uploads/news/assets_c/2010/06/US-WhiteHouse-Logo-thumb-220x149-1250.png" />
       <br>

@@ -5,42 +5,18 @@ import {ResultComponent} from '../api-helpers/api-result.component';
 import {OpexTableComponent} from './opex-table.component.ts';
 @Component({
   selector: 'opex-view',
-  styles: [`
-            .api-route {
-              display: flex;
-              justify-content: space-around;
-              flex-direction: column;
-              background: #963D5A;
-              margin: 1rem;
-            }
-            .route-column {
-              order: 1;
-            }
-            api-result {
-              display: flex;
-              order: 2;
-              overflow: scroll;
-              width: 100%;
-            }
-            .wrapper {
-              display: flex;
-              position: relative;
-              height: 100%;
-            }
-            `],
   template: `
-            <h1>Opex Routes</h1>
-            <div class="wrapper">
-              <div class="route-column">
-                <choices
-                  [apiId]="7"
-                  [currentRoute]="startRoute"
-                  (routeChange)="newRoute($event);">
-                </choices>
-              </div>
+            <div class="row">
+              <choices
+                [apiId]="7"
+                [currentRoute]="startRoute"
+                (routeChange)="newRoute($event);"
+                class="one-third column">
+              </choices>
               <api-result
                 [currentRoute]="currentRoute"
-                [result]="result">
+                [result]="result"
+                class="two-thirds column">
               </api-result>
             </div>
             <div *ngIf="result">

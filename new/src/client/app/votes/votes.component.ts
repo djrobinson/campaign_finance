@@ -6,39 +6,20 @@ import {ResultComponent} from '../api-helpers/api-result.component';
 
 @Component({
   selector: 'votes-view',
-  styles: [`
-
-            .choices {
-              display: flex;
-              justify-content: space-around;
-              flex-direction: column;
-              background: #963D5A;
-              margin: 1rem;
-            }
-            api-result {
-              display: flex;
-              overflow: scroll;
-              width: 100%;
-            }
-            .wrapper {
-              display: flex;
-              position: relative;
-              height: 100%;
-            }
-            `],
   template: `
-            <h1>Votes Routes</h1>
-              <div class="route-column">
-                <choices
-                  [apiId]="9"
-                  [currentRoute]="startRoute"
-                  (routeChange)="newRoute($event);">
-                </choices>
-              </div>
+            <div class="row">
+              <choices
+                [apiId]="9"
+                [currentRoute]="startRoute"
+                (routeChange)="newRoute($event);"
+                class="one-third column">
+              </choices>
               <api-result
                 [currentRoute]="currentRoute"
-                [result]="result">
+                [result]="result"
+                class="two-thirds column">
               </api-result>
+            </div>
 
            `,
   providers: [TitleService],

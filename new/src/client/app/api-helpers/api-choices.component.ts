@@ -2,10 +2,6 @@ import {Component, OnInit, Input, Output, EventEmitter} from 'angular2/core';
 import {TitleService} from '../api_services/title.service';
 @Component({
   selector: 'choices',
-  styles: [`
-
-
-            `],
   template: `
 
               <div class="route-column">
@@ -14,7 +10,7 @@ import {TitleService} from '../api_services/title.service';
                   [style.background-color]="isSelected(route)"
                   (click)="routeClick(route.test);"
                   class="api-route">
-                  <h5>{{route.name}}</h5>
+                  <p>{{route.name}}</p>
                 </div>
               </div>
 

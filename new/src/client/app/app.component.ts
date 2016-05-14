@@ -63,9 +63,13 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
     }
     .footer {
       position: fixed;
+      width: 100%;
       bottom: 0;
       text-align: center;
       font-size: 3rem;
+      background-color: white;
+      z-index: 2;
+      border-top: solid 1px gray;
     }
 
 
@@ -73,8 +77,8 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
   template: `
     <div class="app">
       <div class="row">
-        <div class="container-fluid">
-          <h1>The Open Politician Initiative</h1>
+        <div class="container-fluid header">
+          <h1>The Open Campaign Project</h1>
         </div>
       </div>
       <div class="tileContainer">
