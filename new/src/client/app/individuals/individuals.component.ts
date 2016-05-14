@@ -43,10 +43,13 @@ import {IndividualsTableComponent} from './individuals-table.component';
                 [result]="result">
               </api-result>
             </div>
-            <individuals-table
-              [individuals]="result">
-            </individuals-table>
-
+            <div *ngIf="result">
+              <div *ngIf="!result[0].sum">
+                <individuals-table
+                  [individuals]="result">
+                </individuals-table>
+              </div>
+            </div>
            `,
   providers: [TitleService],
   directives: [ChoicesComponent, ResultComponent, IndividualsTableComponent]

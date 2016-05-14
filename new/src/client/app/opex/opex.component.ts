@@ -43,9 +43,13 @@ import {OpexTableComponent} from './opex-table.component.ts';
                 [result]="result">
               </api-result>
             </div>
-            <opex-table
-              [opex]="result">
-            </opex-table>
+            <div *ngIf="result">
+              <div *ngIf="!result[0].sum">
+                <opex-table
+                  [opex]="result">
+                </opex-table>
+              </div>
+            </div>
 
            `,
   providers: [TitleService],

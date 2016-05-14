@@ -43,10 +43,13 @@ import {PacsTableComponent} from './pacs-table.component.ts';
                 [result]="result">
               </api-result>
             </div>
-            <pacs-table
-              [pacs]="result">
-            </pacs-table>
-
+            <div *ngIf="result">
+              <div *ngIf="!result[0].sum">
+                <pacs-table
+                  [pacs]="result">
+                </pacs-table>
+              </div>
+            </div>
            `,
   providers: [TitleService],
   directives: [ChoicesComponent, ResultComponent, PacsTableComponent]
