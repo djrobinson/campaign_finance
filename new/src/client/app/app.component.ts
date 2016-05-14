@@ -1,5 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
 import {TitleService} from './api_services/title.service';
+import {GraphService} from './api_services/graph.service';
 import {CandidateComponent} from './candidate/candidate.component.ts';
 import {CommitteeComponent} from './committees/committee.component';
 import {ContributionsComponent} from './contributions/contributions.component';
@@ -9,7 +10,8 @@ import {LegislatorsComponent} from './legislators/legislators.component';
 import {OpexComponent} from './opex/opex.component';
 import {PacsComponent} from './pacs/pacs.component';
 import {VotesComponent} from './votes/votes.component';
-import {Landing} from './landing/landing.component.ts';
+import {Landing} from './landing/landing.component';
+import {GraphComponent} from './graphs/graph.component';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
@@ -95,6 +97,7 @@ import {CORE_DIRECTIVES} from 'angular2/common';
       </div>
       <div class="footer">
         <h1>About</h1>
+        <a [routerLink]="['Graphs']">Graphs</a>
       </div>
     </div>
 
@@ -149,6 +152,11 @@ import {CORE_DIRECTIVES} from 'angular2/common';
     path: '/votes',
     as: 'Congressional Votes',
     component: VotesComponent
+  },
+  {
+    path: '/graph',
+    as: 'Graphs',
+    component: GraphComponent
   },
   {
     path: '/',
