@@ -44,9 +44,13 @@ import {DisbursementTableComponent} from './disbursements-table.component';
                 [result]="result">
               </api-result>
             </div>
-            <disbursements-table
-              [disbursements]="result">
-            </disbursements-table>
+            <div *ngIf="result">
+              <div *ngIf="result[0].lin_ima">
+                <disbursements-table
+                  [disbursements]="result">
+                </disbursements-table>
+              </div>
+            </div>
 
            `,
   providers: [TitleService],

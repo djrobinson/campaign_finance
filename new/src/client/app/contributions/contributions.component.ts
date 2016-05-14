@@ -44,9 +44,11 @@ import {ContributionTableComponent} from './contributions-table.component';
                 [result]="result">
               </api-result>
             </div>
-            <contributions-table
-              [contributions]="result">
-            </contributions-table>
+            <div *ngIf="result">
+              <contributions-table
+                [contributions]="result">
+              </contributions-table>
+            </div>
 
            `,
   providers: [TitleService],

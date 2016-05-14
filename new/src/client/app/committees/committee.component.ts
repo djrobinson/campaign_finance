@@ -44,10 +44,11 @@ import {CommitteeTableComponent} from './committee-table.component';
                 [result]="result">
               </api-result>
             </div>
-            <committee-table
-              [committees]="result">
-            </committee-table>
-
+            <div *ngIf="result">
+              <committee-table
+                [committees]="result">
+              </committee-table>
+            </div>
            `,
   providers: [TitleService],
   directives: [ChoicesComponent, ResultComponent, CommitteeTableComponent]
