@@ -18,6 +18,9 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
   styles: [`
     .app {
       min-height: 100vh;
+      width: 100%;
+      flex-direction: row;
+      align-items: stretch;
     }
     .header {
       height: 3rem;
@@ -58,16 +61,6 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
       text-decoration: none;
       flex-grow: 1;
     }
-    home {
-      height: 100%;
-      display: flex;
-      flex-flow: column;
-    }
-    main {
-      height: 100%;
-      display: flex;
-      flex-flow: column;
-    }
     .footer {
       position: fixed;
       bottom: 0;
@@ -79,19 +72,23 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
   `],
   template: `
     <div class="app">
-      <div class="header">
-        <h1>The Open Politician Initiative</h1>
+      <div class="row">
+        <div class="container-fluid">
+          <h1>The Open Politician Initiative</h1>
+        </div>
       </div>
       <div class="tileContainer">
         <a [routerLink]="[title.name]" *ngFor="#title of titles">
           <div class="tile">
-            <h5>{{title.name}}</h5>
+            <p>{{title.name}}</p>
           </div>
         </a>
       </div>
-      <main>
-        <router-outlet></router-outlet>
-      </main>
+      <div class="row">
+        <div class="container-fluid">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
       <div class="footer">
         <h1>About</h1>
       </div>

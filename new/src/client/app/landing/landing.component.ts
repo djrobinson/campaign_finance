@@ -19,7 +19,7 @@ import {Component} from 'angular2/core';
       <br>
       <img src="http://www.opensecrets.org/wp-content/uploads/news/assets_c/2010/06/US-WhiteHouse-Logo-thumb-220x149-1250.png" />
       <br>
-      <h4>Politics for the Data Driven Mind</h4>
+      <h4>Data Driven Politics</h4>
     </div>
   `
 })

@@ -2,11 +2,7 @@ import {Component, Input} from 'angular2/core';
 import {CandidateService} from '../api_services/candidate.service';
 @Component({
   selector: 'candidate-table',
-  styles: [
-
-  ],
   template: `
-              <h1>Candidate Table Here</h1>
               <div>
                 <table>
                   <tr>
@@ -28,22 +24,6 @@ import {CandidateService} from '../api_services/candidate.service';
                     <td>{{candidate.tot_dis}}</td>
                     <td>{{candidate.ope_exp}}</td>
                     <td><a [href]="candidate.lin_ima">Link</a></td>
-                  </tr>
-                </table>
-                <table>
-                  <tr>
-                    <th>Candiate ID</th>
-                    <th>Election Year</th>
-                    <th>Committee ID</th>
-                    <th>Committee Type</th>
-                    <th>Linkage ID</th>
-                  </tr>
-                  <tr *ngFor="#candidate of candidates">
-                    <td>{{candidate.CAND_ID}}</td>
-                    <td>{{candidate.CAND_ELECTION_YR}}</td>
-                    <td>{{candidate.CMTE_ID}}</td>
-                    <td>{{candidate.CMTE_TP}}</td>
-                    <td>{{candidate.LINKAGE_ID}}</td>
                   </tr>
                 </table>
               </div>

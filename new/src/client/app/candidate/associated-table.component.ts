@@ -1,9 +1,6 @@
 import {Component, Input} from 'angular2/core';
 @Component({
   selector: 'associated-table',
-  styles: [
-
-  ],
   template: `
               <h1>Associated Committees</h1>
               <div>

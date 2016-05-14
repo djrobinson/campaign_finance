@@ -3,12 +3,7 @@ import {TitleService} from '../api_services/title.service';
 @Component({
   selector: 'api-result',
   styles: [`
-            .result {
-              display: flex;
-              overflow: scroll;
-              position:absolute;
-              height: 100%;
-            }
+
           `],
   template: `
               <div class="result">

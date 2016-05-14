@@ -8,21 +8,20 @@ import {AssociatedTableComponent} from './associated-table.component';
 @Component({
   selector: 'candidate-view',
   template: `
-            <h1>Candidate Routes</h1>
-            <div class="wrapper">
-              <div class="route-column">
-                <choices
-                  [apiId]="1"
-                  [currentRoute]="startRoute"
-                  (routeChange)="newRoute($event);">
-                </choices>
-              </div>
+            <div class="row">
+              <choices
+                [apiId]="1"
+                [currentRoute]="startRoute"
+                (routeChange)="newRoute($event);"
+                class="one-third column">
+              </choices>
               <api-result
                 [currentRoute]="currentRoute"
-                [result]="result">
+                [result]="result"
+                class="two-thirds column">
               </api-result>
             </div>
-            <div *ngIf="result">
+            <div *ngIf="result" class="row twelve columns">
               <div *ngIf="!result[0].LINKAGE_ID">
                 <candidate-table
                   [candidates]="result">
@@ -34,6 +33,7 @@ import {AssociatedTableComponent} from './associated-table.component';
                 </associated-table>
               </div>
             </div>
+
            `,
   providers: [TitleService],
   directives: [ChoicesComponent, ResultComponent, CandidateTableComponent, AssociatedTableComponent]
