@@ -7,29 +7,6 @@ import {AssociatedTableComponent} from './associated-table.component';
 
 @Component({
   selector: 'candidate-view',
-  styles: [`
-            .api-route {
-              display: flex;
-              justify-content: space-around;
-              flex-direction: column;
-              background: #963D5A;
-              margin: 1rem;
-            }
-            .route-column {
-              order: 1;
-            }
-            api-result {
-              display: flex;
-              order: 2;
-              overflow: scroll;
-              width: 100%;
-            }
-            .wrapper {
-              display: flex;
-              position: relative;
-              height: 100%;
-            }
-            `],
   template: `
             <h1>Candidate Routes</h1>
             <div class="wrapper">

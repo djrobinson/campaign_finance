@@ -5,20 +5,15 @@ import {TitleService} from '../api_services/title.service';
   styles: [`
             .api-route {
               display: flex;
+              width: 100%;
+              height:4rem;
               justify-content: space-around;
               flex-direction: column;
               background: #963D5A;
               margin: 1rem;
             }
             .route-column {
-              order: 1;
-            }
-            .result {
-              display: flex;
-              order: 2;
-            }
-            .wrapper {
-              display: flex;
+              width: 100%;
             }
             `],
   template: `
