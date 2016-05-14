@@ -2,8 +2,6 @@ import {Component, Input} from 'angular2/core';
 @Component({
   selector: 'associated-table',
   template: `
-              <h1>Associated Committees</h1>
-              <div>
                 <table>
                   <tr>
                     <th>Candiate ID</th>
@@ -20,7 +18,6 @@ import {Component, Input} from 'angular2/core';
                     <td>{{candidate.LINKAGE_ID}}</td>
                   </tr>
                 </table>
-              </div>
            `
 })
 export class AssociatedTableComponent {

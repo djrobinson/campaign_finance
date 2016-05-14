@@ -54,6 +54,14 @@ choices {
   overflow: scroll;
 }
 
+.api-route {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px gray;
+}
+
 api-result {
   height: 50rem;
   overflow: scroll;
@@ -62,6 +70,16 @@ api-result {
 table {
   margin-top: 2rem;
   width: 100%;
+  text-align: center;
+}
+
+tr {
+  text-align: center;
+}
+
+th {
+  text-align: center;
+  font-size: 2rem;
 }
 
 .header {
@@ -72,3 +90,5 @@ table {
 .container-fluid {
   padding: 2rem;
 }
+
+

@@ -6,8 +6,6 @@ import {TitleService} from '../api_services/title.service';
 
   ],
   template: `
-              <h1>Disbursements Table Here</h1>
-              <div>
                 <table>
                   <tr>
                     <th>Committee ID</th>
@@ -29,13 +27,10 @@ import {TitleService} from '../api_services/title.service';
                     <td>{{disbursement.dis_dat}}</td>
                     <td>{{disbursement.dis_amo}}</td>
                     <td>{{disbursement.dis_pur_des}}</td>
-
-
                   </tr>
                 </table>
-              </div>
            `,
-  providers: [TitleService],
+  providers: [TitleService]
 })
 export class DisbursementTableComponent {
   @Input() disbursements: string;

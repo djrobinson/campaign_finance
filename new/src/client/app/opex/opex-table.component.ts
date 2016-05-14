@@ -6,8 +6,6 @@ import {TitleService} from '../api_services/title.service';
 
   ],
   template: `
-              <h1>Opex Table Here</h1>
-              <div>
                 <table>
                   <tr>
                     <th>Committee ID</th>
@@ -26,7 +24,6 @@ import {TitleService} from '../api_services/title.service';
                     <td>{{op.MEMO_TEXT}}</td>
                   </tr>
                 </table>
-              </div>
            `,
   providers: [TitleService],
 })

@@ -4,15 +4,13 @@ import {TitleService} from '../api_services/title.service';
   selector: 'choices',
   template: `
 
-              <div class="route-column">
                 <div *ngFor="#route of routes"
                   (click)="setSelected(route.id)"
                   [style.background-color]="isSelected(route)"
                   (click)="routeClick(route.test);"
                   class="api-route">
-                  <p>{{route.name}}</p>
+                    <p>{{route.name}}</p>
                 </div>
-              </div>
 
            `,
   providers: [TitleService]

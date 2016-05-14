@@ -6,8 +6,6 @@ import {TitleService} from '../api_services/title.service';
 
   ],
   template: `
-              <h1>Committee Table Here</h1>
-              <div>
                 <table>
                   <tr>
                     <th>Committee Name</th>
@@ -28,7 +26,6 @@ import {TitleService} from '../api_services/title.service';
 
                   </tr>
                 </table>
-              </div>
            `,
   providers: [TitleService],
 })

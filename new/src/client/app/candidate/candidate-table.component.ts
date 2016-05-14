@@ -1,9 +1,9 @@
 import {Component, Input} from 'angular2/core';
 import {CandidateService} from '../api_services/candidate.service';
+
 @Component({
   selector: 'candidate-table',
   template: `
-              <div>
                 <table>
                   <tr>
                     <th>Candidate Name</th>
@@ -16,7 +16,7 @@ import {CandidateService} from '../api_services/candidate.service';
                     <th>FEC Docs</th>
                   </tr>
                   <tr *ngFor="#candidate of candidates">
-                    <td>{{candidate.can_nam}}</td>
+                    <td>{{candidate.can_name}}</td>
                     <td>{{candidate.CANDIDATE_ID}}</td>
                     <td>{{candidate.PARTY}}</td>
                     <td>{{candidate.cas_on_han_clo_of_per}}</td>
@@ -26,9 +26,8 @@ import {CandidateService} from '../api_services/candidate.service';
                     <td><a [href]="candidate.lin_ima">Link</a></td>
                   </tr>
                 </table>
-              </div>
            `,
-  providers: [CandidateService],
+  providers: [CandidateService]
 })
 export class CandidateTableComponent {
   @Input() candidates: string;

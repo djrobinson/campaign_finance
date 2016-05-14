@@ -8,10 +8,10 @@ import {IndividualsComponent} from './individuals/individuals.component';
 import {LegislatorsComponent} from './legislators/legislators.component';
 import {OpexComponent} from './opex/opex.component';
 import {PacsComponent} from './pacs/pacs.component';
-import {TransfersComponent} from './transfers/transfers.component';
 import {VotesComponent} from './votes/votes.component';
 import {Landing} from './landing/landing.component.ts';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {CORE_DIRECTIVES} from 'angular2/common';
 
 @Component({
   selector: 'my-app',
@@ -78,7 +78,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
     <div class="app">
       <div class="row">
         <div class="container-fluid header">
-          <h1>The Open Campaign Project</h1>
+          <h1>Open Campaign Project</h1>
         </div>
       </div>
       <div class="tileContainer">
@@ -100,7 +100,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
 
   `,
-  directives: [ROUTER_DIRECTIVES, CandidateComponent],
+  directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, CandidateComponent],
   providers: [TitleService]
 })
 @RouteConfig([
@@ -114,11 +114,6 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
     path: '/contributions',
     as: 'Contributions',
     component: ContributionsComponent
-  },
-  {
-    path: '/transfers',
-    as: 'Committee Transfers',
-    component: TransfersComponent
   },
   {
     path: '/committees',
