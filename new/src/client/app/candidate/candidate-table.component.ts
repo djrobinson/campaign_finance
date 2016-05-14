@@ -30,6 +30,22 @@ import {CandidateService} from '../api_services/candidate.service';
                     <td><a [href]="candidate.lin_ima">Link</a></td>
                   </tr>
                 </table>
+                <table>
+                  <tr>
+                    <th>Candiate ID</th>
+                    <th>Election Year</th>
+                    <th>Committee ID</th>
+                    <th>Committee Type</th>
+                    <th>Linkage ID</th>
+                  </tr>
+                  <tr *ngFor="#candidate of candidates">
+                    <td>{{candidate.CAND_ID}}</td>
+                    <td>{{candidate.CAND_ELECTION_YR}}</td>
+                    <td>{{candidate.CMTE_ID}}</td>
+                    <td>{{candidate.CMTE_TP}}</td>
+                    <td>{{candidate.LINKAGE_ID}}</td>
+                  </tr>
+                </table>
               </div>
            `,
   providers: [CandidateService],

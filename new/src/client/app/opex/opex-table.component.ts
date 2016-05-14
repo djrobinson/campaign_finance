@@ -13,7 +13,7 @@ import {TitleService} from '../api_services/title.service';
                     <th>Committee ID</th>
                     <th>Opex Name</th>
                     <th>Individual State</th>
-                    <th>Individual Employer</th>
+                    <th>Purpose</th>
                     <th>Transaction Amount</th>
                     <th>Memo Text</th>
                   </tr>

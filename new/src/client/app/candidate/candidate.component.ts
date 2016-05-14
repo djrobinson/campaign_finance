@@ -3,6 +3,7 @@ import {TitleService} from '../api_services/title.service';
 import {ChoicesComponent} from '../api-helpers/api-choices.component';
 import {ResultComponent} from '../api-helpers/api-result.component';
 import {CandidateTableComponent} from './candidate-table.component';
+import {AssociatedTableComponent} from './associated-table.component';
 
 @Component({
   selector: 'candidate-view',
@@ -44,13 +45,21 @@ import {CandidateTableComponent} from './candidate-table.component';
                 [result]="result">
               </api-result>
             </div>
-            <candidate-table
-              [candidates]="result">
-            </candidate-table>
-
+            <div *ngIf="result">
+              <div *ngIf="!result[0].LINKAGE_ID">
+                <candidate-table
+                  [candidates]="result">
+                </candidate-table>
+              </div>
+              <div *ngIf="result[0].LINKAGE_ID">
+                <associated-table
+                  [candidates]="result">
+                </associated-table>
+              </div>
+            </div>
            `,
   providers: [TitleService],
-  directives: [ChoicesComponent, ResultComponent, CandidateTableComponent]
+  directives: [ChoicesComponent, ResultComponent, CandidateTableComponent, AssociatedTableComponent]
 })
 export class CandidateComponent implements OnInit {
   public startRoute:string = '/api/candidates';

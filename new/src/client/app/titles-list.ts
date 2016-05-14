@@ -14,13 +14,13 @@ export var TITLES: Title[] = [
             {"id": 3, "name": "/api/contributions/{committee_id}/committee", "test": "/api/contributions/C00571372/committee"}
         ]
     },
-    {"id": 3, "name": "Committee Transfers", "link": "/candidates", "routes":
-        [
-            {"id": 1, "name": "/api/transfers/", "test": "/api/transfers"},
-            {"id": 2, "name": "/api/transfers/{committee_id}/contributor", "test": "/api/transfers/C00571372/contributor"},
-            {"id": 3, "name": "/api/transfers/{committee_id}/recipient", "test": "/api/contributions/C00571372/committee"}
-        ]
-    },
+    // {"id": 3, "name": "Committee Transfers", "link": "/candidates", "routes":
+    //     [
+    //         {"id": 1, "name": "/api/transfers/", "test": "/api/transfers"},
+    //         {"id": 2, "name": "/api/transfers/{committee_id}/contributor", "test": "/api/transfers/C00571372/contributor"},
+    //         {"id": 3, "name": "/api/transfers/{committee_id}/recipient", "test": "/api/contributions/C00571372/committee"}
+    //     ]
+    // },
     {"id": 4, "name": "Committees", "link": "/committees", "routes":
         [
             {"id": 1, "name": "/api/committees/", "test": "/api/committees"},
