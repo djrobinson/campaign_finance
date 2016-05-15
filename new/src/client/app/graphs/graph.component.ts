@@ -31,20 +31,34 @@ export class GraphComponent implements OnInit  {
       result => {
         this.result = result;
         var asc = ['C00577395', 'C00570978', 'C00575795'];
-        var linkmeister = result.filter(function(el) {
+        var linkmeister = result.reduce(function(prev, el) {
+          console.log("inside Map: ", el);
           if (asc.indexOf(el.OTHER_ID || el.CMTE_ID) !== -1) {
-            console.log("inside Map: ", this.linkData2);
+            console.log("inside if ", prev);
             var linkDest = asc.indexOf(el.OTHER_ID || el.CMTE_ID);
             var currLink = el.NODE;
-            return {
+
+            prev.push({
               "source": linkDest,
               "target": currLink,
               "value": 1
-            };
+            });
+            return prev;
+          } else {
+            return prev;
+          }
+        }, []);
+        var nodemeister = result.map(function(el) {
+          return {
+            "name": el.NAME || el.OTHER_ID || el.CMTE_ID,
+            "group": 1
           }
         });
         console.log("link data 2 ", linkmeister);
-        this.buildGraph(linkmeister);
+        console.log("nodemeister ", nodemeister);
+        this.linkData = linkmeister;
+        this.nodeData = nodemeister;
+        this.buildGraph();
       },
       error => console.error('Error: ' + err),
       () => console.log('Completed!')
@@ -53,9 +67,9 @@ export class GraphComponent implements OnInit  {
 
 
 
-  buildGraph(inputmeister) {
+  buildGraph() {
 
-    console.log(inputmeister);
+    console.log();
     //HELPER FUNCTIONS FOR GRAPH
     function dottype(d) {
       d.x = +d.x;
