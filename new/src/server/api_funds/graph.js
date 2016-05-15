@@ -25,19 +25,45 @@ var appender = function(parArr, subArr){
 };
 
 router.get('/:cand_id', function(req, res, next){
-  cand.getQkAsc(req.params.cand_id).then(function(first){
-    console.log(first);
-    callAsc(first)
-    .then(function(second){
-      return appender(first, second);
-    }).then(function(third){
-        callInd(first).then(function(fourth){
-          return appender(third, fourth)
-        }).then(function(data){
-            res.json(data);
-          });
-        });
+  var indexer = 0;
+  cand.getQkAsc(req.params.cand_id)
+    .then(function(first){
+      first.forEach(function(el){
+        el.NODE = indexer;
+        indexer++;
       });
+      console.log("First", first);
+      callAsc(first)
+    .then(function(second){
+      second.forEach(function(el){
+        if(el.length){
+          el.forEach(function(el2){
+            el2.NODE = indexer;
+            indexer++;
+          });
+        }
+      });
+      console.log("second", second);
+      return appender(first, second);
+    })
+    .then(function(third){
+      callInd(first).then(function(fourth){
+      console.log("fourth", fourth);
+      fourth.forEach(function(el){
+        if(el.length){
+          el.forEach(function(el2){
+            el2.NODE = indexer;
+            indexer++;
+          });
+        }
+      });
+      return appender(third, fourth)
+    })
+    .then(function(data){
+      res.json(data);
+    });
+    });
+    });
     });
 
 module.exports = router;
