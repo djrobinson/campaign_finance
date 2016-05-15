@@ -16,7 +16,7 @@ import {CandidateService} from '../api_services/candidate.service';
                     <th>FEC Docs</th>
                   </tr>
                   <tr *ngFor="#candidate of candidates">
-                    <td>{{candidate.can_name}}</td>
+                    <td>{{candidate.can_nam}}</td>
                     <td>{{candidate.CANDIDATE_ID}}</td>
                     <td>{{candidate.PARTY}}</td>
                     <td>{{candidate.cas_on_han_clo_of_per}}</td>
