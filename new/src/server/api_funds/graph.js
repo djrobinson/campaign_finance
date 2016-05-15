@@ -4,6 +4,7 @@ var cand      = require('../queries/candidate_queries.js');
 var graph     = require('../queries/graph_queries.js');
 
 var callAsc = function(input){
+  console.log(input);
  return Promise.all(
   input.map(graph.getTopCom)
   );
@@ -74,31 +75,22 @@ router.get('/:cand_id/candidate', function(req, res, next){
 
 router.get('/:cmte_id/committee', function(req, res, next){
   var indexer = 0;
-    callAsc(req.params.cmte_id)
-    .then(function(second){
-      second.forEach(function(el){
-        if(el.length){
-          el.forEach(function(el2){
-            el2.NODE = indexer;
-            indexer++;
-          });
-        }
-      });
+  var input = [];
+  input.push({"CMTE_ID": req.params.cmte_id});
+    callAsc(input)
+    .then(function(first){
+      console.log(first);
+      callInd(input).then(function(second){
       console.log("second", second);
-      return appender(first, second);
-    })
-    .then(function(third){
-      callInd(first).then(function(fourth){
-      console.log("fourth", fourth);
-      fourth.forEach(function(el){
-        if(el.length){
-          el.forEach(function(el2){
-            el2.NODE = indexer;
-            indexer++;
-          });
-        }
-      });
-      return appender(third, fourth)
+      // fourth.forEach(function(el){
+      //   if(el.length){
+      //     el.forEach(function(el2){
+      //       el2.NODE = indexer;
+      //       indexer++;
+      //     });
+      //   }
+      // });
+      return appender(first[0], second);
     })
     .then(function(data){
       res.json(data);

@@ -5,14 +5,16 @@ import {GraphService} from '../api_services/graph.service';
   template: `
             <div class="row">
               <h1>Haldo!</h1>
-              <p>{{result}}</p>
+              <p>{{next}}</p>
               <div class="force-container"></div>
+
             </div>
            `,
   providers: [GraphService]
 })
 export class GraphComponent implements OnInit  {
   constructor(private _graphService: GraphService) {
+    this.ctrl = this;
     this.nodeData = [{ "name": "Myriel", "group": 1 },
       { "name": "Napoleon", "group": 1 }];
     this.linkData = [{ "source": 1, "target": 0, "value": 1 },
@@ -58,19 +60,25 @@ export class GraphComponent implements OnInit  {
         console.log("nodemeister ", nodemeister);
         this.linkData = linkmeister;
         this.nodeData = nodemeister;
-        this.buildGraph();
+        this.buildGraph(this.expandLinks, this.ctrl);
       },
       error => console.error('Error: ' + err),
       () => console.log('Completed!')
       );
   }
 
-  expandLinks(){
-    console.log("hello!");
+  expandLinks(cmte, ctrl){
+    console.log(cmte);
+    ctrl._graphService.getCommitteeDonors(cmte)
+      .subscribe(
+      result => ctrl.next = result,
+      error => console.error('Error: ' + err),
+      () => console.log('Completed!')
+    );
   }
 
 
-  buildGraph() {
+  buildGraph(serviceCall, ctrl) {
 
     console.log();
     //HELPER FUNCTIONS FOR GRAPH
@@ -157,7 +165,6 @@ export class GraphComponent implements OnInit  {
       .data(this.nodeData)
       .enter().append("g")
       .attr("class", "node")
-      // .attr("(click)", "expandLinks()")
       .attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; })
       .call(drag);
@@ -261,7 +268,12 @@ export class GraphComponent implements OnInit  {
       d3.select(this).select("circle").transition()
         .duration(750)
         .attr("r", d.weight * 2 + 12);
-    });
+    })
+
+    .on("click", function(d){
+      console.log(d);
+      serviceCall(d.name, ctrl);
+    })
 
   }
 
