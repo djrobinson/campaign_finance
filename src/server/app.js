@@ -22,7 +22,7 @@ var graph = require('./api_funds/graph.js');
 
 
 //Connect to Mongo
-mongoose.connect('mongodb://localhost/testPolis');
+mongoose.connect('mongodb://heroku_2f1pj73r:tsu0gvp9jelb0lqkchsg86alh@ds023452.mlab.com:23452/heroku_2f1pj73r');
 
 // *** express instance *** //
 var app = express();
