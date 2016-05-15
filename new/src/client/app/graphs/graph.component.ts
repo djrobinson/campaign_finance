@@ -26,16 +26,16 @@ export class GraphComponent implements OnInit  {
   }
 
   getJson() {
-    this._graphService.getResult()
+    this._graphService.getResult('P00003392')
       .subscribe(
       result => {
         this.result = result;
-        var asc = ['C00577395', 'C00570978', 'C00575795'];
+        var asc = ['P00003392','C00577395', 'C00570978', 'C00575795'];
         var linkmeister = result.reduce(function(prev, el) {
           console.log("inside Map: ", el);
-          if (asc.indexOf(el.OTHER_ID || el.CMTE_ID) !== -1) {
+          if (asc.indexOf(el.CAND_ID || el.CMTE_ID) !== -1) {
             console.log("inside if ", prev);
-            var linkDest = asc.indexOf(el.OTHER_ID || el.CMTE_ID);
+            var linkDest = asc.indexOf(el.CAND_ID  || el.CMTE_ID);
             var currLink = el.NODE;
 
             prev.push({
@@ -50,7 +50,7 @@ export class GraphComponent implements OnInit  {
         }, []);
         var nodemeister = result.map(function(el) {
           return {
-            "name": el.NAME || el.OTHER_ID || el.CMTE_ID,
+            "name": el.epicenter || el.NAME || el.OTHER_ID || el.CMTE_ID,
             "group": 1
           }
         });
@@ -65,6 +65,9 @@ export class GraphComponent implements OnInit  {
       );
   }
 
+  expandLinks(){
+    console.log("hello!");
+  }
 
 
   buildGraph() {
@@ -154,6 +157,7 @@ export class GraphComponent implements OnInit  {
       .data(this.nodeData)
       .enter().append("g")
       .attr("class", "node")
+      // .attr("(click)", "expandLinks()")
       .attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; })
       .call(drag);
@@ -185,7 +189,7 @@ export class GraphComponent implements OnInit  {
     node.append("text")
       .attr("dx", 10)
       .attr("dy", ".35em")
-      .style("fill", "black")
+      .style("fill", "blue")
       .text(function(d) { return d.name; });
 
     force.on("tick", function() {
@@ -247,18 +251,17 @@ export class GraphComponent implements OnInit  {
       d3.select(this).classed("node-active", true);
       d3.select(this).select("circle").transition()
         .duration(750)
-        .attr("r", (d.weight * 2 + 12) * 1.5);
     })
 
-      .on("mouseout", function(d) {
+    .on("mouseout", function(d) {
 
-        node.classed("node-active", false);
-        link.classed("link-active", false);
+      node.classed("node-active", false);
+      link.classed("link-active", false);
 
-        d3.select(this).select("circle").transition()
-          .duration(750)
-          .attr("r", d.weight * 2 + 12);
-      });
+      d3.select(this).select("circle").transition()
+        .duration(750)
+        .attr("r", d.weight * 2 + 12);
+    });
 
   }
 

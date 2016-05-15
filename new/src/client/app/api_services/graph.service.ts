@@ -7,8 +7,8 @@ export class GraphService {
   constructor(http:Http) {
     this.http = http;
   }
-  getResult() {
-    return this.http.get('api/graph/P00003392')
+  getResult(cand) {
+    return this.http.get('api/graph/'+cand+'/candidate')
       .map(response => response.json());
   }
 }

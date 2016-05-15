@@ -24,16 +24,57 @@ var appender = function(parArr, subArr){
   });
 };
 
-router.get('/:cand_id', function(req, res, next){
+router.get('/:cand_id/candidate', function(req, res, next){
   var indexer = 0;
   cand.getQkAsc(req.params.cand_id)
     .then(function(first){
+      first.unshift({
+        "epicenter": req.params.cand_id,
+        "NODE": 0
+      });
       first.forEach(function(el){
+
         el.NODE = indexer;
         indexer++;
       });
       console.log("First", first);
-      callAsc(first)
+    callAsc(first)
+    .then(function(second){
+      second.forEach(function(el){
+        if(el.length){
+          el.forEach(function(el2){
+            el2.NODE = indexer;
+            indexer++;
+          });
+        }
+      });
+      console.log("second", second);
+      return appender(first, second);
+    })
+    .then(function(data){
+      res.json(data);
+    });
+    // .then(function(third){
+    //   callInd(first).then(function(fourth){
+    //   console.log("fourth", fourth);
+    //   fourth.forEach(function(el){
+    //     if(el.length){
+    //       el.forEach(function(el2){
+    //         el2.NODE = indexer;
+    //         indexer++;
+    //       });
+    //     }
+    //   });
+    //   return appender(third, fourth)
+    // })
+    // });
+  });
+});
+
+
+router.get('/:cmte_id/committee', function(req, res, next){
+  var indexer = 0;
+    callAsc(req.params.cmte_id)
     .then(function(second){
       second.forEach(function(el){
         if(el.length){
@@ -62,8 +103,6 @@ router.get('/:cand_id', function(req, res, next){
     .then(function(data){
       res.json(data);
     });
-    });
-    });
-    });
-
+  });
+});
 module.exports = router;
