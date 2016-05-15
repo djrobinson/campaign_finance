@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <title>Campaign Finance</title>
+    <script src="//code.angularjs.org/2.0.0-beta.8/angular2-polyfills.js"></script>
+    <script src="//code.angularjs.org/tools/system.js"></script>
+    <script src="//code.angularjs.org/tools/typescript.js"></script>
+    <script src="//code.angularjs.org/2.0.0-beta.8/Rx.js"></script>
+    <script src="//code.angularjs.org/2.0.0-beta.8/angular2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.17/http.dev.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.14/d3.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300' rel='stylesheet' type='text/css'>
+
+    <!-- Bug for router is between beta.15 & beta.16 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.15/router.dev.js"></script>
+    <script>
+      System.config({
+        transpiler: 'typescript',
+        typescriptOptions: {
+          emitDecoratorMetadata: true
+        },
+        map: {
+          app: './app'
+        },
+        packages: {
+          app: {
+            main: './main.ts',
+            defaultExtension: 'ts'
+          }
+        }
+      });
+
+    System
+      .import('app')
+      .catch(console.error.bind(console));
+    </script>
+  </head>
+  <body>
+
+    <my-app>
+      Loading...
+    </my-app>
+  </body>
+</html>
