@@ -18,12 +18,16 @@ var cmteCmte = require('./api_funds/cmte_to_cmte.js');
 var indivContrib = require('./api_funds/indiv_contrib.js');
 var opex = require('./api_funds/opex.js');
 var graph = require('./api_funds/graph.js');
+var legislators = require('./api_congress/legislators.js');
 
 
 
 //Connect to Mongo
-mongoose.connect('mongodb://heroku_2f1pj73r:tsu0gvp9jelb0lqkchsg86alh@ds023452.mlab.com:23452/heroku_2f1pj73r');
+//Production
+// mongoose.connect('mongodb://heroku_2f1pj73r:tsu0gvp9jelb0lqkchsg86alh@ds023452.mlab.com:23452/heroku_2f1pj73r');
 
+//Test
+mongoose.connect('mongodb://localhost/testPolis');
 // *** express instance *** //
 var app = express();
 
@@ -56,6 +60,7 @@ app.use('/api/transfers', cmteCmte);
 app.use('/api/individuals', indivContrib);
 app.use('/api/opex', opex); //check
 app.use('/api/graph', graph);
+app.use('/api/legislators', legislators);
 
 
 
