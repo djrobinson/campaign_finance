@@ -27,7 +27,7 @@ var appender = function(parArr, subArr){
 
 router.get('/:cand_id/candidate', function(req, res, next){
   var indexer = 0;
-  cand.getQkAsc(req.params.cand_id)
+  cand.getGraphAsc(req.params.cand_id)
     .then(function(first){
       // first.unshift({
       //   "epicenter": req.params.cand_id,

@@ -8,10 +8,11 @@ module.exports = {
            .where({'can_id': cand_id});
   },
 
-  getQkAsc: function(cand_id){
+  getGraphAsc: function(cand_id){
     return knex('cmte_cand_linkage')
-            .select('CAND_ID', 'CMTE_ID')
-            .where({'CAND_ID': cand_id});
+            .innerJoin('committee_master', 'committee_master.CMTE_ID', 'cmte_cand_linkage.CMTE_ID')
+            .select('cmte_cand_linkage.CAND_ID', 'cmte_cand_linkage.CMTE_ID', 'committee_master.CMTE_NM')
+            .where({'cmte_cand_linkage.CAND_ID': cand_id});
   },
   getAssocCommittees: function(cand_id){
     return knex('cmte_cand_linkage')
