@@ -12,11 +12,11 @@ import {GraphService} from '../api_services/graph.service';
 export class GraphComponent implements OnInit  {
   constructor(private _graphService: GraphService) {
     this.ctrl = this;
-    this.nodeData = [{ "name": "Myriel", "group": 1 },
-      { "name": "Napoleon", "group": 1 }];
-    this.linkData = [{ "source": 1, "target": 0, "value": 1 },
-      { "source": 1, "target": 0, "value": 1 }];
-    linkData2 = [];
+    // this.nodeData = [{ "name": "Myriel", "group": 1 },
+    //   { "name": "Napoleon", "group": 1 }];
+    // this.linkData = [{ "source": 1, "target": 0, "value": 1 },
+    //   { "source": 1, "target": 0, "value": 1 }];
+    // linkData2 = [];
   }
 
   ngOnInit() {
@@ -30,70 +30,52 @@ export class GraphComponent implements OnInit  {
     graph.getResult(cand)
       .subscribe(
       result => {
+        result.unshift({ "CANDIDATE": cand, "CAND_ID": cand, "CMTE_ID": cand, "NODE": 0 });
         console.log(result);
         this.result = result;
+
+        var nodeData = result.map((elem, i)=>{
+          if (elem.CAND_ID){
+            elem.CORE = true;
+          }
+          elem.NODE = i;
+          return elem;
+        });
+        console.log("Node Data! ", nodeData);
+        var linkData = nodeData.reduce((prev, elem)=>{
+          if (elem.CAND_ID){
+            prev.push({ "source": elem.NODE, "target": 0, "value": 1 })
+            return prev;
+          } else if (elem.OTHER_ID) {
+            var target = nodeData.forEach((el, i) => {
+              if (el.CORE && el.CMTE_ID === elem.CMTE_ID ){
+                prev.push({ "source": elem.NODE, "target": i, "value": 1 })
+                return prev;
+              }
+            })
+            return prev;
+          } else {
+            return prev;
+            // var target = nodeData.forEach((el, i) => {
+            //   if (el.OTHER_ID === elem.CMTE_ID ){
+            //     prev.push({ "source": elem.NODE, "target": i, "value": 1 })
+            //     return prev;
+            //   }
+            // })
+          }
+
+        }, [])
+        console.log(linkData);
         },
         error => console.error('Error: ' + err),
         () => {
-
-
           console.log('Completed!')
         }
-        );
-        // var asc = result.reduce(function(prev, el) {
-        //   if (el.CAND_ID){
-        //     prev.push(el.CMTE_ID);
-        //     return prev;
-        //   } else {
-        //     return prev;
-        //   }
-        // }, []);
-        // asc.unshift(cand);
-        // console.log(asc);
-        // ['P00003392','C00577395', 'C00570978', 'C00575795'];
-        // var linkmeister = result.reduce(function(prev, el) {
-        //   console.log("inside Map: ", el);
-        //   if (asc.indexOf(el.CAND_ID || el.CMTE_ID) !== -1) {
-        //     console.log("inside if ", prev);
-        //     var linkDest = asc.indexOf(el.CAND_ID  || el.CMTE_ID);
-        //     var currLink = el.NODE;
-
-        //     prev.push({
-        //       "source": linkDest,
-        //       "target": currLink,
-        //       "value": 1
-        //     });
-        //     return prev;
-        //   } else {
-        //     return prev;
-        //   }
-        // }, []);
-        // var nodemeister = result.map(function(el) {
-        //   return {
-        //     "name": el.epicenter || el.NAME || el.OTHER_ID || el.CMTE_ID,
-        //     "group": 1
-        //   }
-        // });
-        // console.log("link data 2 ", linkmeister);
-        // console.log("nodemeister ", nodemeister);
-        // this.linkData = linkmeister;
-        // this.nodeData = nodemeister;
-        // this.buildGraph(this.expandLinks, this.ctrl);
+      );
   }
 
 
-  expandLinks(cmte, ctrl){
-    console.log(cmte);
-    ctrl._graphService.getCommitteeDonors(cmte)
-      .subscribe(
-      result => ctrl.next = result,
-      error => console.error('Error: ' + err),
-      () => console.log('Completed!')
-    );
-  }
-
-
-  buildGraph(serviceCall, ctrl) {
+  buildGraph() {
 
     console.log();
     //HELPER FUNCTIONS FOR GRAPH
@@ -284,10 +266,10 @@ export class GraphComponent implements OnInit  {
         .attr("r", d.weight * 2 + 12);
     })
 
-    .on("click", function(d){
-      console.log(d);
-      serviceCall(d.name, ctrl);
-    })
+    // .on("click", function(d){
+    //   console.log(d);
+    //   serviceCall(d.name, ctrl);
+    // })
 
   }
 

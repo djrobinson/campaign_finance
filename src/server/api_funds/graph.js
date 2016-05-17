@@ -71,26 +71,7 @@ router.get('/:cand_id/candidate', function(req, res, next){
     });
     });
     });
-  });
-    // .then(function(fourth){
-    //   console.log("fourth", fourth);
-    //   return appender(third   , fourth);
-    // })
-
-    // .then(function(third){
-    //   callInd(first).then(function(fourth){
-    //   console.log("fourth", fourth);
-    //   fourth.forEach(function(el){
-    //     if(el.length){
-    //       el.forEach(function(el2){
-    //         el2.NODE = indexer;
-    //         indexer++;
-    //       });
-    //     }
-    //   });
-    //   return appender(third, fourth)
-    // })
-    // });
+    });
   });
 });
 
