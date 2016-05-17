@@ -31,10 +31,23 @@ export class GraphComponent implements OnInit  {
         console.log(result);
         this.result = result;
 
+        // var iterArray = [];
+        // result.forEach((el)=>{
+        //   if (iterArray.indexOf(el) === -1){
+        //     iterArray.
+        //   }
+        // })
         this.nodeData = result.map((elem, i)=>{
           if (elem.CAND_ID){
             elem.CORE = true;
           }
+          /*begin temp changes
+          Should change this map to a reduce.
+          Will need a second FOREACH in this statement
+          inputs elem (reduce) & el (foreach)
+          If ( elem.CAND_ID === el.CAND_ID && elem.CMTE_ID === el.CMTE_ID )
+
+          end temp changes*/
           elem.NODE = i;
           return elem;
         });

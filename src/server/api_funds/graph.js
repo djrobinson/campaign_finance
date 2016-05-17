@@ -37,35 +37,43 @@ router.get('/:cand_id/candidate', function(req, res, next){
   var final = [];
   cand.getGraphAsc(req.params.cand_id)
     .then(function(first){
-      console.log("First", first);
+      // console.log("First", first);
     callAsc(first)
     .then(function(second){
-      console.log("second", second);
-    appender(first, second)
-    .then(function(third){
-      console.log("third", second);
+      // console.log("second", second);
       var notUniqIndivComm = second.reduce(function(prev, arr){
         return prev.concat(arr);
       }, []);
       var indivComm = _.uniqBy(notUniqIndivComm, 'OTHER_ID');
-      console.log("indivComm ", indivComm);
+      // console.log("indivComm ", indivComm);
+    appender(first, indivComm)
+    .then(function(third){
+      // console.log("third", third);
     callInd(indivComm)
     .then(function(fourth){
-      console.log("fourth", fourth);
+      // console.log("fourth", fourth);
       appender(third, fourth)
     .then(function(fifth){
       console.log("fifth ", fifth);
-      var notUniqSecondComm = second.reduce(function(prev, arr){
+      var notUniqSecondComm = fifth.reduce(function(prev, arr){
         return prev.concat(arr);
       }, []);
       var secondComm = _.uniqBy(notUniqSecondComm, 'OTHER_ID');
-      console.log("secondComm ", secondComm);
+      // console.log("secondComm ", secondComm);
       callSecondaryAsc(secondComm)
     .then(function(sixth){
-      console.log("sixth ", sixth);
-      appender(fifth, sixth)
+      var notUniqThirdComm = sixth.reduce(function(prev, arr){
+        return prev.concat(arr);
+      }, []);
+      var secondComm = _.uniqBy(notUniqSecondComm, 'OTHER_ID');
+      // console.log("sixth ", sixth);
+      appender(notUniqSecondComm, sixth)
     .then(function(data){
-      res.json(data);
+
+      //Here I'm making sure every name is unique.
+      var uniquify = _.uniqBy(data, 'CMTE_NM');
+      console.log(uniquify);
+      res.json(uniquify);
     });
     });
     });
