@@ -12,11 +12,8 @@ import {GraphService} from '../api_services/graph.service';
 export class GraphComponent implements OnInit  {
   constructor(private _graphService: GraphService) {
     this.ctrl = this;
-    // this.nodeData = [{ "name": "Myriel", "group": 1 },
-    //   { "name": "Napoleon", "group": 1 }];
-    // this.linkData = [{ "source": 1, "target": 0, "value": 1 },
-    //   { "source": 1, "target": 0, "value": 1 }];
-    // linkData2 = [];
+    this.nodeData = [];
+    this.linkData = [];
   }
 
   ngOnInit() {
@@ -34,15 +31,16 @@ export class GraphComponent implements OnInit  {
         console.log(result);
         this.result = result;
 
-        var nodeData = result.map((elem, i)=>{
+        this.nodeData = result.map((elem, i)=>{
           if (elem.CAND_ID){
             elem.CORE = true;
           }
           elem.NODE = i;
           return elem;
         });
-        console.log("Node Data! ", nodeData);
-        var linkData = nodeData.reduce((prev, elem)=>{
+        var nodeData = this.nodeData;
+        console.log("Node Data! ", this.nodeData);
+        this.linkData = nodeData.reduce((prev, elem)=>{
           if (elem.CAND_ID){
             prev.push({ "source": elem.NODE, "target": 0, "value": 1 })
             return prev;
@@ -65,7 +63,8 @@ export class GraphComponent implements OnInit  {
           }
 
         }, [])
-        console.log(linkData);
+        console.log(this.linkData);
+        this.buildGraph();
         },
         error => console.error('Error: ' + err),
         () => {
@@ -193,7 +192,7 @@ export class GraphComponent implements OnInit  {
       .attr("dx", 10)
       .attr("dy", ".35em")
       .style("fill", "blue")
-      .text(function(d) { return d.name; });
+      .text(function(d) { return d.NAME || d.CMTE_NM; });
 
     force.on("tick", function() {
       link.attr("x1", function(d) { return d.source.x; })
