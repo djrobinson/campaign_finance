@@ -47,7 +47,10 @@ export class GraphComponent implements OnInit  {
           } else if (elem.OTHER_ID) {
             nodeData.forEach((el, i) => {
               if (el.CORE && el.CMTE_ID === elem.CMTE_ID ){
-                prev.push({ "source": elem.NODE, "target": i, "value": 1 })
+                prev.push({ "source": elem.NODE, "target": i, "value": 2 })
+                return prev;
+              } else if (elem.CMTE_ID === el.OTHER_ID){
+                prev.push({ "source": elem.NODE, "target": i, "value": 3 })
                 return prev;
               }
             })
@@ -55,7 +58,7 @@ export class GraphComponent implements OnInit  {
           } else {
             nodeData.forEach((el, i) => {
               if (el.OTHER_ID === elem.CMTE_ID ){
-                prev.push({ "source": elem.NODE, "target": i, "value": 1 })
+                prev.push({ "source": elem.NODE, "target": i, "value": 3 })
                 return prev;
               }
             })
