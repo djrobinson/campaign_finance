@@ -78,9 +78,6 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
       z-index: 2;
       border-top: solid 1px gray;
     }
-
-
-
   `],
   template: `
     <div class="app">
@@ -108,6 +105,7 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
       </div>
       <div class="footer">
         <h3>Check for new features weekly.</h3>
+         <a [routerLink]="['Graphs']">Graphs</a>
       </div>
     </div>
 

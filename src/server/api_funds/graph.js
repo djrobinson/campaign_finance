@@ -29,26 +29,25 @@ router.get('/:cand_id/candidate', function(req, res, next){
   var indexer = 0;
   cand.getQkAsc(req.params.cand_id)
     .then(function(first){
-      first.unshift({
-        "epicenter": req.params.cand_id,
-        "NODE": 0
-      });
-      first.forEach(function(el){
-
-        el.NODE = indexer;
-        indexer++;
-      });
+      // first.unshift({
+      //   "epicenter": req.params.cand_id,
+      //   "NODE": 0
+      // });
+      // first.forEach(function(el){
+      //   el.NODE = indexer;
+      //   indexer++;
+      // });
       console.log("First", first);
     callAsc(first)
     .then(function(second){
-      second.forEach(function(el){
-        if(el.length){
-          el.forEach(function(el2){
-            el2.NODE = indexer;
-            indexer++;
-          });
-        }
-      });
+      // second.forEach(function(el){
+      //   if(el.length){
+      //     el.forEach(function(el2){
+      //       el2.NODE = indexer;
+      //       indexer++;
+      //     });
+      //   }
+      // });
       console.log("second", second);
       return appender(first, second);
     })

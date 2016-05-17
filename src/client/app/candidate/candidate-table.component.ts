@@ -19,10 +19,10 @@ import {CandidateService} from '../api_services/candidate.service';
                     <td>{{candidate.can_nam}}</td>
                     <td>{{candidate.CANDIDATE_ID}}</td>
                     <td>{{candidate.PARTY}}</td>
-                    <td>{{candidate.cas_on_han_clo_of_per}}</td>
-                    <td>{{candidate.net_con}}</td>
-                    <td>{{candidate.tot_dis}}</td>
-                    <td>{{candidate.ope_exp}}</td>
+                    <td>{{parseFloat(candidate.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
+                    <td>{{parseFloat(candidate.net_con) | currency:'USD':true}}</td>
+                    <td>{{parseFloat(candidate.tot_dis) | currency:'USD':true}}</td>
+                    <td>{{parseFloat(candidate.ope_exp) | currency:'USD':true}}</td>
                     <td><a [href]="candidate.lin_ima">Link</a></td>
                   </tr>
                 </table>
@@ -30,5 +30,11 @@ import {CandidateService} from '../api_services/candidate.service';
   providers: [CandidateService]
 })
 export class CandidateTableComponent {
-  @Input() candidates: string;
+  @Input() candidates;
+  constructor(){
+    this.parseFloat = function(num){
+      return parseFloat(num);
+    }
+  }
+
 }

@@ -4,22 +4,13 @@ import {GraphService} from '../api_services/graph.service';
   selector: 'graph-view',
   template: `
             <div class="row">
-              <h1>Haldo!</h1>
-              <p>{{next}}</p>
               <div class="force-container"></div>
-
             </div>
            `,
   providers: [GraphService]
 })
 export class GraphComponent implements OnInit  {
   constructor(private _graphService: GraphService) {
-    this.ctrl = this;
-    this.nodeData = [{ "name": "Myriel", "group": 1 },
-      { "name": "Napoleon", "group": 1 }];
-    this.linkData = [{ "source": 1, "target": 0, "value": 1 },
-      { "source": 1, "target": 0, "value": 1 }];
-    linkData2 = [];
   }
 
   ngOnInit() {
@@ -32,7 +23,11 @@ export class GraphComponent implements OnInit  {
       .subscribe(
       result => {
         this.result = result;
-        var asc = ['P00003392','C00577395', 'C00570978', 'C00575795'];
+
+        var asc = result.filter(function(el) {
+
+        });
+        ['P00003392','C00577395', 'C00570978', 'C00575795'];
         var linkmeister = result.reduce(function(prev, el) {
           console.log("inside Map: ", el);
           if (asc.indexOf(el.CAND_ID || el.CMTE_ID) !== -1) {
@@ -144,12 +139,11 @@ export class GraphComponent implements OnInit  {
 
     //STARTS FORCE LAYOUT. ADDS DATA, CREATES LINKS AND NODES
     var force = d3.layout.force()
-      .gravity(.1)
+      .gravity(.05)
       .size([width, height])
       .nodes(this.nodeData)
       .links(this.linkData)
-      .charge(-100)
-      .linkDistance(150)
+      .charge(-1000)
       .start();
 
     var link = container.append("g")
