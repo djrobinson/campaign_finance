@@ -30,21 +30,16 @@ export class GraphComponent implements OnInit  {
     graph.getResult(cand)
       .subscribe(
       result => {
+        console.log(result);
         this.result = result;
+        },
+        error => console.error('Error: ' + err),
+        () => {
 
-        console.log("first result ", result);
-        result.forEach(function(elem) {
-          console.log("inside foreach ", elem);
-          graph.getCommitteeDonors(elem.CMTE_ID)
-            .subscribe(
-            result => {
-              console.log(result);
-            },
-            error => console.error('Error: ' + err),
-            () => console.log('Completed!')
-            );
-        });
 
+          console.log('Completed!')
+        }
+        );
         // var asc = result.reduce(function(prev, el) {
         //   if (el.CAND_ID){
         //     prev.push(el.CMTE_ID);
@@ -84,11 +79,6 @@ export class GraphComponent implements OnInit  {
         // this.linkData = linkmeister;
         // this.nodeData = nodemeister;
         // this.buildGraph(this.expandLinks, this.ctrl);
-      },
-      error => console.error('Error: ' + err),
-      () => console.log('Completed!')
-      );
-
   }
 
 
