@@ -47,7 +47,7 @@ export class GraphComponent implements OnInit  {
             prev.push({ "source": elem.NODE, "target": 0, "value": 1 })
             return prev;
           } else if (elem.OTHER_ID) {
-            var target = nodeData.forEach((el, i) => {
+            nodeData.forEach((el, i) => {
               if (el.CORE && el.CMTE_ID === elem.CMTE_ID ){
                 prev.push({ "source": elem.NODE, "target": i, "value": 1 })
                 return prev;
@@ -55,13 +55,13 @@ export class GraphComponent implements OnInit  {
             })
             return prev;
           } else {
+            nodeData.forEach((el, i) => {
+              if (el.OTHER_ID === elem.CMTE_ID ){
+                prev.push({ "source": elem.NODE, "target": i, "value": 1 })
+                return prev;
+              }
+            })
             return prev;
-            // var target = nodeData.forEach((el, i) => {
-            //   if (el.OTHER_ID === elem.CMTE_ID ){
-            //     prev.push({ "source": elem.NODE, "target": i, "value": 1 })
-            //     return prev;
-            //   }
-            // })
           }
 
         }, [])
