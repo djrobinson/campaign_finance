@@ -146,6 +146,7 @@ export class GraphComponent implements OnInit  {
       .size([width, height])
       .nodes(this.nodeData)
       .links(this.linkData)
+      .distance(150)
       .charge(-1000)
       .start();
 
@@ -264,8 +265,7 @@ export class GraphComponent implements OnInit  {
       link.classed("link-active", false);
 
       d3.select(this).select("circle").transition()
-        .duration(750)
-        .attr("r", d.weight * 2 + 12);
+        .duration(750);
     })
 
     // .on("click", function(d){
