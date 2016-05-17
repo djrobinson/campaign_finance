@@ -29,25 +29,9 @@ router.get('/:cand_id/candidate', function(req, res, next){
   var indexer = 0;
   cand.getGraphAsc(req.params.cand_id)
     .then(function(first){
-      // first.unshift({
-      //   "epicenter": req.params.cand_id,
-      //   "NODE": 0
-      // });
-      // first.forEach(function(el){
-      //   el.NODE = indexer;
-      //   indexer++;
-      // });
       console.log("First", first);
     callAsc(first)
     .then(function(second){
-      // second.forEach(function(el){
-      //   if(el.length){
-      //     el.forEach(function(el2){
-      //       el2.NODE = indexer;
-      //       indexer++;
-      //     });
-      //   }
-      // });
       console.log("second", second);
       return appender(first, second);
     })
@@ -81,14 +65,6 @@ router.get('/:cmte_id/committee', function(req, res, next){
       console.log(first);
       callInd(input).then(function(second){
       console.log("second", second);
-      // fourth.forEach(function(el){
-      //   if(el.length){
-      //     el.forEach(function(el2){
-      //       el2.NODE = indexer;
-      //       indexer++;
-      //     });
-      //   }
-      // });
       return appender(first[0], second);
     })
     .then(function(data){
