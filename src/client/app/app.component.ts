@@ -25,6 +25,9 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
       align-items: stretch;
       background: #EBF5EE;
     }
+    a {
+      text-decoration: none;
+    }
     .header {
       height: 3rem;
       text-align: center;
@@ -83,7 +86,7 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
     <div class="app">
       <div class="row">
         <div class="container-fluid header">
-          <h1>The Open Campaign Project</h1>
+          <h1><a [routerLink]="['Graphs']">The Open Campaign Project</a></h1>
         </div>
       </div>
       <div class="tileContainer">
@@ -102,10 +105,6 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
         <div class="container-fluid">
           <router-outlet></router-outlet>
         </div>
-      </div>
-      <div class="footer">
-        <h3>Check for new features weekly.</h3>
-         <a [routerLink]="['Graphs']">Graphs</a>
       </div>
     </div>
 
