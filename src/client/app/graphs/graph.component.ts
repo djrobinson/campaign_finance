@@ -1,28 +1,65 @@
 import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
 import {GraphService} from '../api_services/graph.service';
+import {TitleService} from '../api_services/title.service';
+import {CandidateTableComponent} from '../candidate/candidate-table.component';
+import {MiniProfileComponent} from './node_selected/mini-profile.component.ts';
 @Component({
   selector: 'graph-view',
   template: `
             <div class="row">
-              <div class="force-container"></div>
+              <candidate-table
+                [candidates]="candidates"
+                [graph]="graph"
+                (buildEmit)="getGraphData($event.cand_id)"
+                >
+              </candidate-table>
+              <p>{{cand_id}}</p>
+              <div class="force-container">
+              </div>
             </div>
+            <mini-profile-view *ngIf="cand_id" [cand_id]="cand_id">
+            </mini-profile-view>
            `,
-  providers: [GraphService]
+  styles: [
+    `
+    mini-profile-view {
+      position: absolute;
+      bottom: 0;
+      height: 200px;
+      width: 100%;
+      background-color: blue;
+    }
+  `
+  ],
+  providers: [GraphService, TitleService],
+  directives: [CandidateTableComponent]
 })
 export class GraphComponent implements OnInit  {
-  constructor(private _graphService: GraphService) {
+  constructor(
+    private _graphService: GraphService,
+    private _TitleService: TitleService
+    ) {
+    this.graph = true;
     this.ctrl = this;
     this.nodeData = [];
     this.linkData = [];
   }
 
   ngOnInit() {
-    this.getJson();
-
+    this._TitleService.getResult('/api/candidates')
+        .subscribe(
+          result => { this.candidates = result },
+          error => console.error('Error: ' + err),
+          () => {}
+        )
+    // this.getGraphData();
   }
 
-  getJson() {
-    var cand = 'P00003392';
+  getGraphData(cand_id) {
+    console.log("get graph data");
+
+    var cand = cand_id;
+    this.cand_id = cand;
     var graph = this._graphService;
     graph.getResult(cand)
       .subscribe(
@@ -139,6 +176,7 @@ export class GraphComponent implements OnInit  {
 
 
     //SETS UP AREA OF THE FORCE LAYOUT
+    d3.select("candidate-table").remove();
     var svg = d3.select(".force-container").append("svg")
       .attr("width", width)
       .attr("height", height)

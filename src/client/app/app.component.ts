@@ -81,6 +81,7 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
       z-index: 2;
       border-top: solid 1px gray;
     }
+
   `],
   template: `
     <div class="app">
@@ -102,9 +103,7 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
         </a>
       </div>
       <div class="row">
-        <div class="container-fluid">
           <router-outlet></router-outlet>
-        </div>
       </div>
     </div>
 

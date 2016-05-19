@@ -1,11 +1,14 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input, Output, EventEmitter} from 'angular2/core';
 import {CandidateService} from '../api_services/candidate.service';
+import {CORE_DIRECTIVES} from 'angular2/common';
 
 @Component({
   selector: 'candidate-table',
+  directives: [CORE_DIRECTIVES],
   template: `
                 <table>
                   <tr>
+                    <th ng-if="graph">Graph</th>
                     <th>Candidate Name</th>
                     <th>Candidate ID</th>
                     <th>Party</th>
@@ -16,6 +19,13 @@ import {CandidateService} from '../api_services/candidate.service';
                     <th>FEC Docs</th>
                   </tr>
                   <tr *ngFor="#candidate of candidates">
+                    <td ng-if="graph">
+                      <button
+                        (click)="buildGraph(candidate.CANDIDATE_ID)"
+                      >
+                      Create Graph
+                      </button>
+                    </td>
                     <td>{{candidate.can_nam}}</td>
                     <td>{{candidate.CANDIDATE_ID}}</td>
                     <td>{{candidate.PARTY}}</td>
@@ -31,10 +41,21 @@ import {CandidateService} from '../api_services/candidate.service';
 })
 export class CandidateTableComponent {
   @Input() candidates;
+  @Input() graph;
+  @Output() buildEmit = new EventEmitter();
+
+  buildGraph(id) {
+    console.log(id);
+    this.buildEmit.emit({
+      cand_id: id
+    });
+  }
+
   constructor(){
     this.parseFloat = function(num){
       return parseFloat(num);
     }
   }
+
 
 }
