@@ -1,5 +1,7 @@
 import {Component, OnChanges, Input} from 'angular2/core';
 import {TitleService} from '../../api_services/title.service';
+import {Http, Response} from 'angular2/http';
+import {Observable} from 'rxjs/Rx';
 @Component({
   selector: 'inputs-view',
   template: `
@@ -15,13 +17,15 @@ import {TitleService} from '../../api_services/title.service';
     </div>
 
 
+
   `
 })
 export class InputsComponent implements OnChanges {
   //Need to think about how to type this input!
   result: null;
   @Input() inputNode;
-  constructor(private _TitleService: TitleService) { }
+  constructor(private _TitleService: TitleService,
+              private http: Http) { }
 
   ngOnChanges(changes: { [inputNode: string]: SimpleChange }) {
     if (this.inputNode.NAME) {
@@ -36,7 +40,16 @@ export class InputsComponent implements OnChanges {
         () => { }
         )
     } else if (this.inputNode.OTHER_ID) {
-
+      Observable.forkJoin(
+        this.http.get('/api/individuals/' + this.inputNode.OTHER_ID + '/recipient').map((res: Response) => res.json()),
+        this.http.get('/api/transfers/' + this.inputNode.OTHER_ID + '/recipient').map((res: Response) => res.json())
+      ).subscribe(
+        data => {
+          console.log(data);
+          this.results = data[0].concat(data[1]);
+        },
+        err => console.error(err)
+        );
     }
   }
 

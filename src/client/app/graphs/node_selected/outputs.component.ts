@@ -16,15 +16,11 @@ import {Observable} from 'rxjs/Rx';
 export class OutputsComponent implements OnChanges, OnInit{
   //Need to think about how to type this input!
   @Input() outputNode;
-  indiv: boolean;
-  cmte: boolean;
   constructor(private _TitleService: TitleService,
               private http: Http) {}
 
   ngOnChanges(changes: { [outputNode: string]: SimpleChange }) {
     if (this.outputNode.NAME) {
-      this.cmte = false;
-      this.indiv = true;
       this._TitleService.getResult('/api/individuals?donor=' + this.outputNode.NAME)
         .subscribe(
         result => { this.results = result },
@@ -32,8 +28,6 @@ export class OutputsComponent implements OnChanges, OnInit{
         () => { }
         )
     } else if (this.outputNode.OTHER_ID) {
-      this.indiv = false;
-      this.cmte = true;
       Observable.forkJoin(
         this.http.get('/api/pac/' + this.outputNode.OTHER_ID + '/committee').map((res: Response) => res.json()),
         this.http.get('/api/transfers/' + this.outputNode.OTHER_ID + '/contributor').map((res: Response) => res.json())
@@ -42,8 +36,6 @@ export class OutputsComponent implements OnChanges, OnInit{
         data => {
           console.log(data);
           this.results = data[0].concat(data[1]).concat(data[2]);
-          // this.books = data[0]
-          // this.movies = data[1]
         },
         err => console.error(err)
         );
