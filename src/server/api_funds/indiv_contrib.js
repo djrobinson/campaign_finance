@@ -87,7 +87,11 @@ router.get('/committee/:cmte_id', function(req, res, next){
   }
 });
 
-
+router.get('/transaction/:tran_id', function(req, res, next){
+  query.getContribById(req.params.tran_id).then(function(data){
+    res.json(data);
+  });
+});
 
 
 

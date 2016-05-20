@@ -18,6 +18,7 @@ import {TitleService} from '../../api_services/title.service';
   `]
 })
 export class MiniProfileComponent implements OnChanges {
+  //Need to think about how to type this input!
   @Input() node;
   title: string;
   id: string;

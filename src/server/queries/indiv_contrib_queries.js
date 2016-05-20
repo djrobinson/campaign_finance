@@ -19,6 +19,10 @@ module.exports = {
            .where('NAME', 'like', '%'+donor+'%')
            .offset(offset);
   },
+  getContribById: function(tran_id){
+    return knex('indiv_contrib')
+            .where('TRAN_ID', tran_id);
+  },
   aggregateEmpl: function(donor, offset){
     return knex('indiv_contrib')
            .select('EMPLOYER')

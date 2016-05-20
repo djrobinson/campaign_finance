@@ -11,19 +11,9 @@ import {TitleService} from '../../api_services/title.service';
   `
 })
 export class OutputsComponent implements OnChanges, OnInit{
+  //Need to think about how to type this input!
   @Input() outputNode;
   constructor(private _TitleService: TitleService) { }
-
-  ngOnInit() {
-    if (this.outputNode.NAME) {
-      this._TitleService.getResult('/api/individuals?donor='+this.outputNode.NAME)
-        .subscribe(
-        result => { this.results = result },
-        error => console.error('Error: ' + err),
-        () => { }
-        )
-    }
-  }
 
   ngOnChanges(changes: { [outputNode: string]: SimpleChange }) {
     console.log("changing!");
