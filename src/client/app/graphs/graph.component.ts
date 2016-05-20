@@ -17,7 +17,7 @@ import {MiniProfileComponent} from './node_selected/mini-profile.component.ts';
               <div class="force-container">
               </div>
             </div>
-            <mini-profile-view *ngIf="cand_id" [cand_id]="cand_id">
+            <mini-profile-view *ngIf="selected_node" [node]="selected_node">
             </mini-profile-view>
            `,
   styles: [
@@ -32,9 +32,11 @@ import {MiniProfileComponent} from './node_selected/mini-profile.component.ts';
   `
   ],
   providers: [GraphService, TitleService],
-  directives: [CandidateTableComponent]
+  directives: [CandidateTableComponent, MiniProfileComponent]
 })
 export class GraphComponent implements OnInit  {
+  selected_node = null;
+
   constructor(
     private _graphService: GraphService,
     private _TitleService: TitleService
@@ -59,7 +61,6 @@ export class GraphComponent implements OnInit  {
     console.log("get graph data");
 
     var cand = cand_id;
-    this.cand_id = cand;
     var graph = this._graphService;
     graph.getResult(cand)
       .subscribe(
@@ -68,23 +69,11 @@ export class GraphComponent implements OnInit  {
         console.log(result);
         this.result = result;
 
-        // var iterArray = [];
-        // result.forEach((el)=>{
-        //   if (iterArray.indexOf(el) === -1){
-        //     iterArray.
-        //   }
-        // })
         this.nodeData = result.map((elem, i)=>{
           if (elem.CAND_ID){
             elem.CORE = true;
           }
-          /*begin temp changes
-          Should change this map to a reduce.
-          Will need a second FOREACH in this statement
-          inputs elem (reduce) & el (foreach)
-          If ( elem.CAND_ID === el.CAND_ID && elem.CMTE_ID === el.CMTE_ID )
 
-          end temp changes*/
           elem.NODE = i;
           return elem;
         });
@@ -117,7 +106,7 @@ export class GraphComponent implements OnInit  {
 
         }, [])
         console.log(this.linkData);
-        this.buildGraph();
+        this.buildGraph(this);
         },
         error => console.error('Error: ' + err),
         () => {
@@ -126,9 +115,12 @@ export class GraphComponent implements OnInit  {
       );
   }
 
+  setSelected(selected:string) {
+    console.log(selected);
+    this.selected_node = selected;
+  }
 
-  buildGraph() {
-
+  buildGraph(ctrl) {
     console.log();
     //HELPER FUNCTIONS FOR GRAPH
     function dottype(d) {
@@ -319,10 +311,10 @@ export class GraphComponent implements OnInit  {
         .duration(750);
     })
 
-    // .on("click", function(d){
-    //   console.log(d);
-    //   serviceCall(d.name, ctrl);
-    // })
+    .on("click", function(d){
+      console.log(d);
+      ctrl.setSelected(d);
+    })
 
   }
 
