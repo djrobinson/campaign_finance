@@ -6,7 +6,7 @@ import {TitleService} from '../../api_services/title.service';
     <div class="title">
       <h1>{{node.CMTE_NM}}</h1>
       <h2>{{node.CMTE_ID}}</h2>
-      <h2>Transaction Amount: {{node.TRANSACTIONS_AMT}}</h2>
+      <h2>Transaction Amount: {{node.TRANSACTION_AMT}}</h2>
     </div>
   `,
   styles: [`

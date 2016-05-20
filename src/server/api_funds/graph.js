@@ -31,13 +31,12 @@ var appender = function(parArr, subArr){
   });
 };
 
-
 router.get('/:cand_id/candidate', function(req, res, next){
   var indexer = 0;
   var final = [];
   cand.getGraphAsc(req.params.cand_id)
     .then(function(first){
-      // console.log("First", first);
+      console.log("First", first);
     callAsc(first)
     .then(function(second){
       // console.log("second", second);
@@ -69,11 +68,24 @@ router.get('/:cand_id/candidate', function(req, res, next){
       // console.log("sixth ", sixth);
       appender(notUniqSecondComm, sixth)
     .then(function(data){
-
+      var indivs = data.filter(function(donor){
+        if (donor.NAME) return donor;
+      });
+      var cmtes = data.filter(function(donor){
+        if (!donor.NAME) return donor;
+      });
+      console.log("INDIVIDUALS ", indivs);
+      console.log("COMMITTEES ", cmtes);
+      var uniqIndiv = _.uniqBy(indivs, 'NAME');
+      var uniqCmte  = _.uniqBy(cmtes, 'CMTE_NM');
       //Here I'm making sure every name is unique.
-      var uniquify = _.uniqBy(data, 'CMTE_NM');
-      console.log(uniquify);
-      res.json(uniquify);
+      var result = uniqIndiv.concat(uniqCmte);
+      res.json(result);
+      // //Original
+      // var uniquify = _.uniqBy(data, 'CMTE_NM');
+      //   console.log(uniquify);
+      //   res.json(uniquify);
+
     });
     });
     });
