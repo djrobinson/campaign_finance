@@ -1,12 +1,12 @@
-import {Component, OnInit, Input} from 'angular2/core';
+import {Component, OnInit, OnChanges, Input} from 'angular2/core';
 import {TitleService} from '../../api_services/title.service';
 @Component({
   selector: 'mini-profile-view',
   template: `
     <div class="title">
-      <h1>{{node.CMTE_NM}}</h1>
-      <h2>{{node.CMTE_ID}}</h2>
-      <h2>Transaction Amount: {{node.TRANSACTION_AMT}}</h2>
+      <h1>{{title}}</h1>
+      <h2>{{id}}</h2>
+      <h2>Transaction Amount: {{amount}}</h2>
       <button>Go to Profile</button>
     </div>
   `,
@@ -17,9 +17,20 @@ import {TitleService} from '../../api_services/title.service';
     }
   `]
 })
-export class MiniProfileComponent implements OnInit {
+export class MiniProfileComponent implements OnChanges {
   @Input() node;
+  title: string;
+  id: string;
+  amount: number;
 
   constructor(private _TitleService: TitleService) {}
+
+  ngOnChanges(changes: { [node: string]: SimpleChange }) {
+    if (this.node.NAME) {
+      this.title = this.node.NAME;
+      this.id = this.node.TRAN_ID;
+      this.amount = this.node.TRANSACTION_AMT;
+    }
+  }
 
 }
