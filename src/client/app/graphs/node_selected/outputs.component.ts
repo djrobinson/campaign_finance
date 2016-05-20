@@ -16,7 +16,6 @@ export class OutputsComponent implements OnChanges, OnInit{
   constructor(private _TitleService: TitleService) { }
 
   ngOnChanges(changes: { [outputNode: string]: SimpleChange }) {
-    console.log("changing!");
     if (this.outputNode.NAME) {
       this._TitleService.getResult('/api/individuals?donor=' + this.outputNode.NAME)
         .subscribe(
