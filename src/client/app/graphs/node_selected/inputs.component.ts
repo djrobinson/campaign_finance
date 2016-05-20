@@ -31,10 +31,12 @@ export class InputsComponent implements OnChanges {
           console.log('RESULT', result)
           result[0].IMAGE_NUM = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + result[0].IMAGE_NUM;
           this.result = result[0]
-         },
+        },
         error => console.error('Error: ' + err),
         () => { }
         )
+    } else if (this.inputNode.OTHER_ID) {
+
     }
   }
 

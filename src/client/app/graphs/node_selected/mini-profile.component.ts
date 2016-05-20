@@ -31,6 +31,10 @@ export class MiniProfileComponent implements OnChanges {
       this.title = this.node.NAME;
       this.id = this.node.TRAN_ID;
       this.amount = this.node.TRANSACTION_AMT;
+    } else if (this.node.OTHER_ID){
+      this.title = this.node.CMTE_NM;
+      this.id = this.node.OTHER_ID;
+      this.amount = this.node.TRANSACTION_AMT;
     }
   }
 
