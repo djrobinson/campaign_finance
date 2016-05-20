@@ -12,6 +12,7 @@ export class InputsComponent {
   constructor(private _TitleService: TitleService) { }
 
 
+
   ngOnInit() {
     console.log("we're here!");
   }
