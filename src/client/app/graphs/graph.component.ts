@@ -3,6 +3,9 @@ import {GraphService} from '../api_services/graph.service';
 import {TitleService} from '../api_services/title.service';
 import {CandidateTableComponent} from '../candidate/candidate-table.component';
 import {MiniProfileComponent} from './node_selected/mini-profile.component.ts';
+import {InputsComponent} from './node_selected/inputs.component.ts';
+import {OutputsComponent} from './node_selected/outputs.component.ts';
+
 @Component({
   selector: 'graph-view',
   template: `
@@ -11,28 +14,51 @@ import {MiniProfileComponent} from './node_selected/mini-profile.component.ts';
                 [candidates]="candidates"
                 [graph]="graph"
                 (buildEmit)="getGraphData($event.cand_id)"
-                >
+              >
               </candidate-table>
               <p>{{cand_id}}</p>
               <div class="force-container">
               </div>
             </div>
-            <mini-profile-view *ngIf="selected_node" [node]="selected_node">
-            </mini-profile-view>
+            <div *ngIf="selected_node">
+              <inputs-view [inputNode]="selected_node">
+              </inputs-view>
+              <mini-profile-view [node]="selected_node">
+              </mini-profile-view>
+              <outputs-view [outputNode]="selected_node">
+              </outputs-view>
+            </div>
            `,
   styles: [
     `
+    inputs-view {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 15%;
+      height: 100vh;
+      background-color: blue;
+    }
     mini-profile-view {
       position: absolute;
       bottom: 0;
       height: 200px;
-      width: 100%;
+      width: 70%;
+      margin-left: 15%;
+      background-color: blue;
+    }
+    outputs-view {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 15%;
+      height: 100vh;
       background-color: blue;
     }
   `
   ],
   providers: [GraphService, TitleService],
-  directives: [CandidateTableComponent, MiniProfileComponent]
+  directives: [CandidateTableComponent, MiniProfileComponent, InputsComponent, OutputsComponent]
 })
 export class GraphComponent implements OnInit  {
   selected_node = null;

@@ -8,6 +8,7 @@ import {DisbursementsComponent} from './disbursements/disbursements.component';
 import {IndividualsComponent} from './individuals/individuals.component';
 import {LegislatorsComponent} from './legislators/legislators.component';
 import {MiniProfileComponent} from './graphs/node_selected/mini-profile.component.ts';
+import {InputsComponent} from './graphs/node_selected/inputs.component.ts';
 import {OpexComponent} from './opex/opex.component';
 import {PacsComponent} from './pacs/pacs.component';
 import {VotesComponent} from './votes/votes.component';

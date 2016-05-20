@@ -7,6 +7,7 @@ import {TitleService} from '../../api_services/title.service';
       <h1>{{node.CMTE_NM}}</h1>
       <h2>{{node.CMTE_ID}}</h2>
       <h2>Transaction Amount: {{node.TRANSACTION_AMT}}</h2>
+      <button>Go to Profile</button>
     </div>
   `,
   styles: [`
@@ -17,12 +18,8 @@ import {TitleService} from '../../api_services/title.service';
   `]
 })
 export class MiniProfileComponent implements OnInit {
-  @Input() node: string;
+  @Input() node;
 
   constructor(private _TitleService: TitleService) {}
-
-  ngOnInit() {
-    console.log("we're here!");
-  }
 
 }

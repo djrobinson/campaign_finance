@@ -40,7 +40,7 @@ router.get('/:cand_id', function(req, res, next){
   query.getCandSum(req.params.cand_id)
   .then(function(summ){
     res.json(summ);
-  })
+  });
 });
 
 router.get('/sort/:column_name', function(req, res, next){
