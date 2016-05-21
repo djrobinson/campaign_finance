@@ -10,8 +10,9 @@ module.exports = {
 
   getGraphAsc: function(cand_id){
     return knex('cmte_cand_linkage')
-            .innerJoin('committee_master', 'committee_master.CMTE_ID', 'cmte_cand_linkage.CMTE_ID')
-            .select('cmte_cand_linkage.CAND_ID', 'cmte_cand_linkage.CMTE_ID', 'committee_master.CMTE_NM')
+            .innerJoin('committee_summaries', 'committee_summaries.com_id', 'cmte_cand_linkage.CMTE_ID')
+            .innerJoin('committee_master', 'cmte_cand_linkage.CMTE_ID', 'committee_master.CMTE_ID')
+            .select('cmte_cand_linkage.CAND_ID', 'cmte_cand_linkage.CMTE_ID', 'committee_master.CMTE_NM', 'committee_summaries.cas_on_han_clo_of_per', 'committee_summaries.net_con', 'committee_summaries.tot_dis')
             .where({'cmte_cand_linkage.CAND_ID': cand_id});
   },
   getAssocCommittees: function(cand_id){
