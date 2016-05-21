@@ -26,7 +26,9 @@ import {IndividualPopupComponent} from './individual-popup.component.ts';
               </mini-profile-view>
             </div>
             <div *ngIf="indivPopup">
-              <individual-popup [individualTran]="individualTran">
+              <individual-popup
+                [individualTran]="individualTran"
+                (exitEmit)="exit">
               </individual-popup>
             </div>
            `,
@@ -99,6 +101,11 @@ export class GraphComponent implements OnInit  {
     console.log("EMITTED ", tranId);
     this.indivPopup = true;
     this.individualTran = tranId;
+    this.selectedNode = false;
+  }
+
+  exit(){
+    this.indivPopup = false;
     this.selectedNode = false;
   }
 
