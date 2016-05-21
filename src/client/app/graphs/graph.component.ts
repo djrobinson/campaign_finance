@@ -55,14 +55,13 @@ import {MiniProfileComponent} from './mini-profile.component.ts';
   directives: [CandidateTableComponent, MiniProfileComponent]
 })
 export class GraphComponent implements OnInit  {
-  selected_node = null;
-
+  selected_node: Object;
+  candidate: Object;
   constructor(
     private _graphService: GraphService,
     private _TitleService: TitleService
     ) {
     this.graph = true;
-    this.ctrl = this;
     this.nodeData = [];
     this.linkData = [];
   }
@@ -80,12 +79,18 @@ export class GraphComponent implements OnInit  {
   getGraphData(cand_id) {
     console.log("get graph data");
 
+    this._TitleService.getResult('/api/candidates/'+cand_id)
+      .subscribe(
+      result => { this.candidate = result },
+      error => console.error('Error: ' + err),
+      () => { }
+      )
     var cand = cand_id;
     var graph = this._graphService;
     graph.getResult(cand)
       .subscribe(
       result => {
-        result.unshift({ "CANDIDATE": cand, "CAND_ID": cand, "CMTE_ID": cand, "NODE": 0, "graphtype": "candidate" });
+        result.unshift({ "CANDIDATE": cand, "CAND_ID": cand, "CMTE_ID": cand, "NODE": 0, "graphtype": "candidate", data: this.candidate});
         console.log(result);
         this.result = result;
 

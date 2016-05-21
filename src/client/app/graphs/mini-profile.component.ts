@@ -27,14 +27,16 @@ export class MiniProfileComponent implements OnChanges {
   constructor(private _TitleService: TitleService) {}
 
   ngOnChanges(changes: { [node: string]: SimpleChange }) {
-    if (this.node.NAME) {
+    if (this.node.graphtype === "individual") {
       this.title = this.node.NAME;
       this.id = this.node.TRAN_ID;
       this.amount = this.node.TRANSACTION_AMT;
-    } else if (this.node.OTHER_ID){
+    } else if (this.node.graphtype === "committee"){
       this.title = this.node.CMTE_NM;
       this.id = this.node.OTHER_ID;
       this.amount = this.node.TRANSACTION_AMT;
+    } else if (this.node.graphtype === "candidate"){
+
     }
   }
 
