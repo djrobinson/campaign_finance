@@ -36,7 +36,9 @@ export class MiniProfileComponent implements OnChanges {
       this.id = this.node.OTHER_ID;
       this.amount = this.node.TRANSACTION_AMT;
     } else if (this.node.graphtype === "candidate"){
-
+      this.title = this.node.data.CANDIDATE_NAME;
+      this.id = this.node.can_id;
+      this.amount = this.node.tot_con;
     }
   }
 
