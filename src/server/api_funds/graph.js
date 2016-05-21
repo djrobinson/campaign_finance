@@ -32,9 +32,10 @@ var appender = function(parArr, subArr){
 };
 
 var typeMap = function(arr){
-  console.log("In herrrr", arr);
   arr.forEach(function(item){
-    if (item.NAME){
+    if (item.tot_dis){
+      item.graphtype = "associated";
+    } else if (item.NAME){
       item.graphtype = "individual";
     } else {
       item.graphtype = "committee";
@@ -90,8 +91,8 @@ router.get('/:cand_id/candidate', function(req, res, next){
       var uniqCmte  = _.uniqBy(cmtes, 'CMTE_NM');
       //Here I'm making sure every name is unique.
       var result = uniqIndiv.concat(uniqCmte);
-      console.log("Stages");
       result = typeMap(result);
+      console.log(result);
       res.json(result);
       // //Original
       // var uniquify = _.uniqBy(data, 'CMTE_NM');
