@@ -16,7 +16,7 @@ import {TitleService} from '../api_services/title.service';
       <h4>{{individual?.TRANSACTION_DT}}</h4>
       <h4><a [href]="individual?.FEC_LINK">Link</a></h4>
       <h4>Transaction Amount: {{individual?.TRANSACTION_AMT}}</h4>
-      <button (click)="close">Close</button>
+      <button (click)="close()">Close</button>
 
     </div>
   `,
@@ -64,6 +64,7 @@ export class IndividualPopupComponent implements OnInit {
   }
 
   close(){
+    console.log("CLOSE");
     this.exitEmit.emit({
       exit: true
     });

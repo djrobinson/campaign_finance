@@ -29,7 +29,7 @@ import {IndividualPopupComponent} from './individual-popup.component.ts';
               <individual-popup
                 [individualTran]="individualTran"
                 [indivName]="indivName"
-                (exitEmit)="exit">
+                (exitEmit)="exit()">
               </individual-popup>
             </div>
            `,
@@ -108,6 +108,7 @@ export class GraphComponent implements OnInit  {
   }
 
   exit(){
+    console.log("EXIT!");
     this.indivPopup = false;
     this.selectedNode = false;
   }
