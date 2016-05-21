@@ -21,12 +21,8 @@ import {OutputsComponent} from './node_selected/outputs.component.ts';
               </div>
             </div>
             <div *ngIf="selected_node">
-              <inputs-view [inputNode]="selected_node">
-              </inputs-view>
               <mini-profile-view [node]="selected_node">
               </mini-profile-view>
-              <outputs-view [outputNode]="selected_node">
-              </outputs-view>
             </div>
            `,
   styles: [
