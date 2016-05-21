@@ -28,6 +28,7 @@ import {IndividualPopupComponent} from './individual-popup.component.ts';
             <div *ngIf="indivPopup">
               <individual-popup
                 [individualTran]="individualTran"
+                [indivName]="indivName"
                 (exitEmit)="exit">
               </individual-popup>
             </div>
@@ -99,7 +100,7 @@ export class GraphComponent implements OnInit  {
   }
 
   showIndivPopup(event){
-    console.log("EMITTED ", event.tranId);
+    console.log("EMITTED ", event);
     this.indivName = event.name;
     this.indivPopup = true;
     this.individualTran = event.tranId;

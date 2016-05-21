@@ -1,6 +1,6 @@
 import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
-import {Observable} from 'rxjs/Observable';
 import {Http, Response} from 'angular2/http';
+import {Observable} from 'rxjs/Rx';
 import {TitleService} from '../api_services/title.service';
 
 @Component({
@@ -27,9 +27,10 @@ import {TitleService} from '../api_services/title.service';
     }
   `]
 })
-export class IndividualPopupComponent {
+export class IndividualPopupComponent implements OnInit {
   //May want to start creating individual/committee types.
-  @Input() individualTran: String;
+  @Input() individualTran: string;
+  @Input() indivName: string;
   @Output() exitEmit = new EventEmitter();
   individual: Observable<Object>;
 
@@ -37,15 +38,15 @@ export class IndividualPopupComponent {
               private http:Http) { }
 
   ngOnInit() {
+    console.log(this.individualTran, this.indivName);
     Observable.forkJoin(
-      this.http.get('/api/individuals/transaction/'+this.individualTran).map((res: Response) => res.json())
-      // this.http.get('/api/individuals?donor=' + this.NAME).map((res: Response) => res.json())
-
+      this.http.get('/api/individuals/transaction/'+this.individualTran).map((res: Response) => res.json()),
+      this.http.get('/api/individuals?donor=' + this.indivName).map((res: Response) => res.json())
     ).subscribe(
       data => {
-        console.log(data[0]);
-        data[0].FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + data[0].IMAGE_NUM;
-        this.individual = data[0];
+        console.log(data);
+        data[0][0].FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + data[0][0].IMAGE_NUM;
+        this.individual = data[0][0];
 
       },
       err => console.error(err)
