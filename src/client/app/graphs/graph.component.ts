@@ -22,7 +22,7 @@ import {IndividualPopupComponent} from './individual-popup.component.ts';
             <div *ngIf="selectedNode">
               <mini-profile-view
                 [node]="selectedNode"
-                (indivEmit)="showIndivPopup($event.tranId)">
+                (indivEmit)="showIndivPopup($event)">
               </mini-profile-view>
             </div>
             <div *ngIf="indivPopup">
@@ -76,6 +76,7 @@ export class GraphComponent implements OnInit  {
   candidate: Object;
   indivPopup: boolean;
   individualTran: string;
+  indivName: string;
   result: Object;
   nodeData = Array;
   linkData = Array;
@@ -97,10 +98,11 @@ export class GraphComponent implements OnInit  {
         )
   }
 
-  showIndivPopup(tranId){
-    console.log("EMITTED ", tranId);
+  showIndivPopup(event){
+    console.log("EMITTED ", event.tranId);
+    this.indivName = event.name;
     this.indivPopup = true;
-    this.individualTran = tranId;
+    this.individualTran = event.tranId;
     this.selectedNode = false;
   }
 

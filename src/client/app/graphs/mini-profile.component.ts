@@ -7,7 +7,7 @@ import {TitleService} from '../api_services/title.service';
       <h3>{{title}}</h3>
       <h4>{{id}}</h4>
       <h4>Transaction Amount: {{amount}}</h4>
-      <button (click)="indivPopupEmit(id)">Go to Profile</button>
+      <button (click)="indivPopupEmit(id, title)">Go to Profile</button>
     </div>
   `,
   styles: [`
@@ -42,10 +42,11 @@ export class MiniProfileComponent implements OnChanges {
     }
   }
 
-  indivPopupEmit(tranId){
+  indivPopupEmit(tranId, name){
     console.log(tranId);
     this.indivEmit.emit({
-      tranId: tranId
+      tranId: tranId,
+      name: name
     });
   }
 }

@@ -1,5 +1,6 @@
 import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
+import {Http, Response} from 'angular2/http';
 import {TitleService} from '../api_services/title.service';
 
 @Component({
@@ -32,19 +33,33 @@ export class IndividualPopupComponent {
   @Output() exitEmit = new EventEmitter();
   individual: Observable<Object>;
 
-  constructor(private _TitleService: TitleService) { }
+  constructor(private _TitleService: TitleService,
+              private http:Http) { }
 
   ngOnInit() {
-    this._TitleService.getResult('/api/individuals/transaction/'+this.individualTran)
-      .subscribe(
-      result => {
-        console.log(result[0]);
-        result[0].FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + result[0].IMAGE_NUM;
-        this.individual = result[0];
+    Observable.forkJoin(
+      this.http.get('/api/individuals/transaction/'+this.individualTran).map((res: Response) => res.json())
+      // this.http.get('/api/individuals?donor=' + this.NAME).map((res: Response) => res.json())
+
+    ).subscribe(
+      data => {
+        console.log(data[0]);
+        data[0].FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + data[0].IMAGE_NUM;
+        this.individual = data[0];
+
       },
-      error => console.error('Error: ' + error),
-      () => { }
-      )
+      err => console.error(err)
+      );
+    // this._TitleService.getResult('/api/individuals/transaction/'+this.individualTran)
+    //   .subscribe(
+    //   result => {
+    //     console.log(result[0]);
+    //     result[0].FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + result[0].IMAGE_NUM;
+    //     this.individual = result[0];
+    //   },
+    //   error => console.error('Error: ' + error),
+    //   () => { }
+    //   )
   }
 
   close(){
