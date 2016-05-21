@@ -25,10 +25,10 @@ export class IndividualPopupComponent {
   constructor(private _TitleService: TitleService) { }
 
   ngOnInit() {
-    this._TitleService.getResult('/api/individuals/transaction'+this.individualTran)
+    this._TitleService.getResult('/api/individuals/transaction/'+this.individualTran)
       .subscribe(
       result => { this.candidates = result },
-      error => console.error('Error: ' + err),
+      error => console.error('Error: ' + error),
       () => { }
       )
   }

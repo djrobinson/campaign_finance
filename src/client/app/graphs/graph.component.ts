@@ -56,10 +56,18 @@ import {IndividualPopupComponent} from './individual-popup.component.ts';
       height: 100vh;
       background-color: blue;
     }
+    individual-popup {
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      top: 30%;
+      left: 20%;
+      background-color: blue;
+    }
   `
   ],
   providers: [GraphService, TitleService],
-  directives: [CandidateTableComponent, MiniProfileComponent]
+  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent]
 })
 export class GraphComponent implements OnInit  {
   selectedNode: Object;
@@ -82,7 +90,7 @@ export class GraphComponent implements OnInit  {
     this._TitleService.getResult('/api/candidates')
         .subscribe(
           result => { this.candidates = result },
-          error => console.error('Error: ' + err),
+          error => console.error('Error: ' + error),
           () => {}
         )
   }
@@ -91,6 +99,7 @@ export class GraphComponent implements OnInit  {
     console.log("EMITTED ", tranId);
     this.indivPopup = true;
     this.individualTran = tranId;
+    this.selectedNode = false;
   }
 
   getGraphData(candId) {
