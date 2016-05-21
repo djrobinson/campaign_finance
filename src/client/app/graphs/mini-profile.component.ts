@@ -1,4 +1,4 @@
-import {Component, OnInit, OnChanges, Input} from 'angular2/core';
+import {Component, OnChanges, Input, Output, EventEmitter} from 'angular2/core';
 import {TitleService} from '../api_services/title.service';
 @Component({
   selector: 'mini-profile-view',
@@ -7,7 +7,7 @@ import {TitleService} from '../api_services/title.service';
       <h3>{{title}}</h3>
       <h4>{{id}}</h4>
       <h4>Transaction Amount: {{amount}}</h4>
-      <button>Go to Profile</button>
+      <button (click)="indivPopupEmit(id)">Go to Profile</button>
     </div>
   `,
   styles: [`
@@ -18,8 +18,8 @@ import {TitleService} from '../api_services/title.service';
   `]
 })
 export class MiniProfileComponent implements OnChanges {
-  //Need to think about how to type this input!
-  @Input() node;
+  @Input() node: Object;
+  @Output() indivEmit = new EventEmitter();
   title: string;
   id: string;
   amount: number;
@@ -42,4 +42,10 @@ export class MiniProfileComponent implements OnChanges {
     }
   }
 
+  indivPopupEmit(tranId){
+    console.log(tranId);
+    this.indivEmit.emit({
+      tranId: tranId
+    });
+  }
 }

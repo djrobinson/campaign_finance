@@ -3,6 +3,7 @@ import {GraphService} from '../api_services/graph.service';
 import {TitleService} from '../api_services/title.service';
 import {CandidateTableComponent} from '../candidate/candidate-table.component';
 import {MiniProfileComponent} from './mini-profile.component.ts';
+import {IndividualPopupComponent} from './individual-popup.component.ts';
 
 @Component({
   selector: 'graph-view',
@@ -11,16 +12,22 @@ import {MiniProfileComponent} from './mini-profile.component.ts';
               <candidate-table
                 [candidates]="candidates"
                 [graph]="graph"
-                (buildEmit)="getGraphData($event.cand_id)"
+                (buildEmit)="getGraphData($event.candId)"
               >
               </candidate-table>
-              <p>{{cand_id}}</p>
+              <p>{{candId}}</p>
               <div class="force-container">
               </div>
             </div>
-            <div *ngIf="selected_node">
-              <mini-profile-view [node]="selected_node">
+            <div *ngIf="selectedNode">
+              <mini-profile-view
+                [node]="selectedNode"
+                (indivEmit)="showIndivPopup($event.tranId)">
               </mini-profile-view>
+            </div>
+            <div *ngIf="indivPopup">
+              <individual-popup [individualTran]="individualTran">
+              </individual-popup>
             </div>
            `,
   styles: [
@@ -55,15 +62,20 @@ import {MiniProfileComponent} from './mini-profile.component.ts';
   directives: [CandidateTableComponent, MiniProfileComponent]
 })
 export class GraphComponent implements OnInit  {
-  selected_node: Object;
+  selectedNode: Object;
   candidate: Object;
+  indivPopup: boolean;
+  individualTran: string;
+  result: Object;
+  nodeData = Array;
+  linkData = Array;
+  graph: boolean;
   constructor(
     private _graphService: GraphService,
     private _TitleService: TitleService
     ) {
     this.graph = true;
-    this.nodeData = [];
-    this.linkData = [];
+
   }
 
   ngOnInit() {
@@ -73,19 +85,24 @@ export class GraphComponent implements OnInit  {
           error => console.error('Error: ' + err),
           () => {}
         )
-    // this.getGraphData();
   }
 
-  getGraphData(cand_id) {
+  showIndivPopup(tranId){
+    console.log("EMITTED ", tranId);
+    this.indivPopup = true;
+    this.individualTran = tranId;
+  }
+
+  getGraphData(candId) {
     console.log("get graph data");
 
-    this._TitleService.getResult('/api/candidates/'+cand_id)
+    this._TitleService.getResult('/api/candidates/'+candId)
       .subscribe(
       result => { this.candidate = result },
       error => console.error('Error: ' + err),
       () => { }
       )
-    var cand = cand_id;
+    var cand = candId;
     var graph = this._graphService;
     graph.getResult(cand)
       .subscribe(
@@ -142,7 +159,7 @@ export class GraphComponent implements OnInit  {
 
   setSelected(selected:string) {
     console.log(selected);
-    this.selected_node = selected;
+    this.selectedNode = selected;
   }
 
   buildGraph(ctrl) {
@@ -261,9 +278,10 @@ export class GraphComponent implements OnInit  {
 
 
     node.append("text")
-      .attr("dx", 10)
-      .attr("dy", ".35em")
+      .attr("dx", "-5rem")
+      .attr("dy", "-1.5rem")
       .style("fill", "blue")
+      .style("font-size", ".5rem")
       .text(function(d) { return d.CANDIDATE || d.NAME || d.CMTE_NM; });
 
     force.on("tick", function() {

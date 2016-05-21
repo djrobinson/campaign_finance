@@ -45,9 +45,8 @@ export class CandidateTableComponent {
   @Output() buildEmit = new EventEmitter();
 
   buildGraph(id) {
-    console.log(id);
     this.buildEmit.emit({
-      cand_id: id
+      candId: id
     });
   }
 
