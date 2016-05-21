@@ -1,4 +1,5 @@
 export var TITLES: Title[] = [
+    { "id": 0, "name": "Graphs", "link": "/graph" },
     {"id": 1, "name": "Candidates", "link": "/candidates", "routes":
         [
             {"id": 1, "name": "/api/candidates/", "test": "/api/candidates"},

@@ -86,11 +86,6 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
   `],
   template: `
     <div class="app">
-      <div class="row">
-        <div class="container-fluid header">
-          <h1><a [routerLink]="['Graphs']">The Open Campaign Project</a></h1>
-        </div>
-      </div>
       <div class="tileContainer">
         <a [routerLink]="[title.name]"
           *ngFor="#title of titles"
