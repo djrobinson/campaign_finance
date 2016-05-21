@@ -6,7 +6,8 @@ import {TitleService} from '../api_services/title.service';
 @Component({
   selector: 'individual-popup',
   template: `
-    <div class="title">
+    <div class="row">
+    <div class="indiv six columns">
       <h3>{{individual?.NAME}}</h3>
       <h4>{{individual?.CITY }}</h4>
       <h4>{{individual?.STATE}}</h4>
@@ -16,13 +17,20 @@ import {TitleService} from '../api_services/title.service';
       <h4>{{individual?.TRANSACTION_DT}}</h4>
       <h4><a [href]="individual?.FEC_LINK">Link</a></h4>
       <h4>Transaction Amount: {{individual?.TRANSACTION_AMT}}</h4>
-      <button (click)="close()">Close</button>
+    </div>
+    <div class="indiv-list six columns">
+      <h4>List of people w/ same name</h4>
+      <ul *ngFor="#indiv of otherIndividuals?.data">
+        <li>{{indiv?.NAME}}, EMPLOYER: individual?.EMPLOYER, AMT: {{indiv?.TRANSACTION_AMT}}</li>
 
+      </ul>
+    </div>
+    <div class="row">
+      <button (click)="close()">Close</button>
     </div>
   `,
   styles: [`
-    .title {
-      width: 100%;
+    .indiv {
       text-align: center;
     }
   `]
@@ -33,6 +41,7 @@ export class IndividualPopupComponent implements OnInit {
   @Input() indivName: string;
   @Output() exitEmit = new EventEmitter();
   individual: Observable<Object>;
+  otherIndividuals: Observable<Object>;
 
   constructor(private _TitleService: TitleService,
               private http:Http) { }
@@ -47,7 +56,8 @@ export class IndividualPopupComponent implements OnInit {
         console.log(data);
         data[0][0].FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + data[0][0].IMAGE_NUM;
         this.individual = data[0][0];
-
+        this.otherIndividuals = {};
+        this.otherIndividuals.data = data[1];
       },
       err => console.error(err)
       );
