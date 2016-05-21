@@ -1,4 +1,4 @@
-import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {TitleService} from '../api_services/title.service';
@@ -21,11 +21,11 @@ import {TitleService} from '../api_services/title.service';
     <div class="indiv-list six columns">
       <h4>List of people w/ same name</h4>
       <ul *ngFor="#indiv of otherIndividuals?.data">
-        <li>{{indiv?.NAME}}, EMPLOYER: individual?.EMPLOYER, AMT: {{indiv?.TRANSACTION_AMT}}</li>
+        <li><button (click)="changeIndiv(indiv?.TRAN_ID)">{{indiv?.NAME}}</button>, EMPLOYER: individual?.EMPLOYER,TO: {{individual?.CMTE_ID}}, AMT: {{indiv?.TRANSACTION_AMT}}</li>
 
       </ul>
     </div>
-    <div class="row">
+    <div class="row indiv">
       <button (click)="close()">Close</button>
     </div>
   `,
@@ -35,13 +35,16 @@ import {TitleService} from '../api_services/title.service';
     }
   `]
 })
-export class IndividualPopupComponent implements OnInit {
+export class IndividualPopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
   @Input() individualTran: string;
   @Input() indivName: string;
   @Output() exitEmit = new EventEmitter();
-  individual: Observable<Object>;
-  otherIndividuals: Observable<Object>;
+  private individual: Observable<Object>;
+  private otherIndividuals: Observable<Object>;
+
+  private _todosObserver: Observer<Todo[]>;
+  private dataStore: Observable<Object>;
 
   constructor(private _TitleService: TitleService,
               private http:Http) { }
@@ -61,16 +64,14 @@ export class IndividualPopupComponent implements OnInit {
       },
       err => console.error(err)
       );
-    // this._TitleService.getResult('/api/individuals/transaction/'+this.individualTran)
-    //   .subscribe(
-    //   result => {
-    //     console.log(result[0]);
-    //     result[0].FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + result[0].IMAGE_NUM;
-    //     this.individual = result[0];
-    //   },
-    //   error => console.error('Error: ' + error),
-    //   () => { }
-    //   )
+  }
+
+  changeIndiv(tranId){
+    this.individualTran = tranId;
+    this.http.get('/api/individuals/transaction/' + this.individualTran).map(response => response.json()).subscribe(data => {
+      console.log(data);
+      this.individual = data[0];
+    }, error => console.log('Could not load todos.'));
   }
 
   close(){
