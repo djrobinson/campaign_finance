@@ -1,12 +1,12 @@
 import {Component, OnInit, OnChanges, Input} from 'angular2/core';
-import {TitleService} from '../../api_services/title.service';
+import {TitleService} from '../api_services/title.service';
 @Component({
   selector: 'mini-profile-view',
   template: `
     <div class="title">
-      <h1>{{title}}</h1>
-      <h2>{{id}}</h2>
-      <h2>Transaction Amount: {{amount}}</h2>
+      <h3>{{title}}</h3>
+      <h4>{{id}}</h4>
+      <h4>Transaction Amount: {{amount}}</h4>
       <button>Go to Profile</button>
     </div>
   `,

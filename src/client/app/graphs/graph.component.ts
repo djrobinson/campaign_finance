@@ -2,9 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
 import {GraphService} from '../api_services/graph.service';
 import {TitleService} from '../api_services/title.service';
 import {CandidateTableComponent} from '../candidate/candidate-table.component';
-import {MiniProfileComponent} from './node_selected/mini-profile.component.ts';
-import {InputsComponent} from './node_selected/inputs.component.ts';
-import {OutputsComponent} from './node_selected/outputs.component.ts';
+import {MiniProfileComponent} from './mini-profile.component.ts';
 
 @Component({
   selector: 'graph-view',
@@ -54,7 +52,7 @@ import {OutputsComponent} from './node_selected/outputs.component.ts';
   `
   ],
   providers: [GraphService, TitleService],
-  directives: [CandidateTableComponent, MiniProfileComponent, InputsComponent, OutputsComponent]
+  directives: [CandidateTableComponent, MiniProfileComponent]
 })
 export class GraphComponent implements OnInit  {
   selected_node = null;
@@ -87,7 +85,7 @@ export class GraphComponent implements OnInit  {
     graph.getResult(cand)
       .subscribe(
       result => {
-        result.unshift({ "CANDIDATE": cand, "CAND_ID": cand, "CMTE_ID": cand, "NODE": 0 });
+        result.unshift({ "CANDIDATE": cand, "CAND_ID": cand, "CMTE_ID": cand, "NODE": 0, "graphtype": "candidate" });
         console.log(result);
         this.result = result;
 
@@ -261,7 +259,7 @@ export class GraphComponent implements OnInit  {
       .attr("dx", 10)
       .attr("dy", ".35em")
       .style("fill", "blue")
-      .text(function(d) { return d.NAME || d.CMTE_NM; });
+      .text(function(d) { return d.CANDIDATE || d.NAME || d.CMTE_NM; });
 
     force.on("tick", function() {
       link.attr("x1", function(d) { return d.source.x; })

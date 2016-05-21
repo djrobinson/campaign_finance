@@ -31,12 +31,23 @@ var appender = function(parArr, subArr){
   });
 };
 
+var typeMap = function(arr){
+  console.log("In herrrr", arr);
+  arr.forEach(function(item){
+    if (item.NAME){
+      item.graphtype = "individual";
+    } else {
+      item.graphtype = "committee";
+    }
+  });
+  return arr;
+};
+
 router.get('/:cand_id/candidate', function(req, res, next){
   var indexer = 0;
   var final = [];
   cand.getGraphAsc(req.params.cand_id)
     .then(function(first){
-      console.log("First", first);
     callAsc(first)
     .then(function(second){
       // console.log("second", second);
@@ -53,7 +64,6 @@ router.get('/:cand_id/candidate', function(req, res, next){
       // console.log("fourth", fourth);
       appender(third, fourth)
     .then(function(fifth){
-      console.log("fifth ", fifth);
       var notUniqSecondComm = fifth.reduce(function(prev, arr){
         return prev.concat(arr);
       }, []);
@@ -74,12 +84,14 @@ router.get('/:cand_id/candidate', function(req, res, next){
       var cmtes = data.filter(function(donor){
         if (!donor.NAME) return donor;
       });
-      console.log("INDIVIDUALS ", indivs);
-      console.log("COMMITTEES ", cmtes);
+      // console.log("INDIVIDUALS ", indivs);
+      // console.log("COMMITTEES ", cmtes);
       var uniqIndiv = _.uniqBy(indivs, 'NAME');
       var uniqCmte  = _.uniqBy(cmtes, 'CMTE_NM');
       //Here I'm making sure every name is unique.
       var result = uniqIndiv.concat(uniqCmte);
+      console.log("Stages");
+      result = typeMap(result);
       res.json(result);
       // //Original
       // var uniquify = _.uniqBy(data, 'CMTE_NM');
@@ -96,20 +108,4 @@ router.get('/:cand_id/candidate', function(req, res, next){
 });
 
 
-router.get('/:cmte_id/committee', function(req, res, next){
-  var indexer = 0;
-  var input = [];
-  input.push({"CMTE_ID": req.params.cmte_id});
-    callAsc(input)
-    .then(function(first){
-      console.log(first);
-      callInd(input).then(function(second){
-      console.log("second", second);
-      return appender(first[0], second);
-    })
-    .then(function(data){
-      res.json(data);
-    });
-  });
-});
 module.exports = router;
