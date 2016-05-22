@@ -25,7 +25,7 @@ import {TitleService} from '../api_services/title.service';
 
       </ul>
     </div>
-    <div class="row indiv">
+    <div class="row indiv twelve columns">
       <button (click)="close()">Close</button>
     </div>
   `,

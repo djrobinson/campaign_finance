@@ -4,6 +4,7 @@ import {TitleService} from '../api_services/title.service';
 import {CandidateTableComponent} from '../candidate/candidate-table.component';
 import {MiniProfileComponent} from './mini-profile.component.ts';
 import {IndividualPopupComponent} from './individual-popup.component.ts';
+import {CommitteePopupComponent} from './committee-popup.component.ts';
 
 @Component({
   selector: 'graph-view',
@@ -34,7 +35,9 @@ import {IndividualPopupComponent} from './individual-popup.component.ts';
               </individual-popup>
             </div>
             <div *ngIf="cmtePopup">
-              <h1>Haldo!</h1>
+              <committee-popup
+                (exitEmit)="exit()">
+              </committee-popup>
             </div>
            `,
   styles: [
@@ -71,10 +74,18 @@ import {IndividualPopupComponent} from './individual-popup.component.ts';
       left: 20%;
       background-color: blue;
     }
+    committee-popup {
+      position: absolute;
+      width: 90%;
+      height: 80%;
+      top: 10%;
+      left: 5%;
+      background-color: blue;
+    }
   `
   ],
   providers: [GraphService, TitleService],
-  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent]
+  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent, CommitteePopupComponent]
 })
 export class GraphComponent implements OnInit  {
   selectedNode: Object;
@@ -114,12 +125,14 @@ export class GraphComponent implements OnInit  {
   showCmtePopup(event){
     console.log("Cmte emitted", event);
     this.cmtePopup = true;
+    this.selectedNode = false;
   }
 
   exit(){
     console.log("EXIT!");
     this.indivPopup = false;
     this.selectedNode = false;
+    this.cmtePopup = false;
   }
 
   getGraphData(candId) {
