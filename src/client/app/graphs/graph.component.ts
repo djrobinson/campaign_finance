@@ -92,10 +92,18 @@ import {CandidatePopupComponent} from './candidate-popup.component.ts';
       left: 5%;
       background-color: blue;
     }
+    candidte-popup {
+      position: absolute;
+      width: 90%;
+      height: 80%;
+      top: 10%;
+      left: 5%;
+      background-color: blue;
+    }
   `
   ],
   providers: [GraphService, TitleService],
-  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent, CommitteePopupComponent]
+  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent, CommitteePopupComponent, CandidatePopupComponent]
 })
 export class GraphComponent implements OnInit  {
   selectedNode: Object;

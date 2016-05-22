@@ -7,6 +7,8 @@ import {TitleService} from '../api_services/title.service';
   selector: 'candidate-popup',
   template: `
     <div class="row">
+      <h1>Candidate Popup</h1>
+      <h5>{{candidate}}</h5>
     </div>
     <div class="row indiv twelve columns">
       <button (click)="close()">Close</button>
@@ -20,7 +22,7 @@ import {TitleService} from '../api_services/title.service';
 })
 export class CandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
-  @Input() committee: string;
+  @Input() candidate: string;
   @Output() exitEmit = new EventEmitter();
   private candidate: Observable<Object>;
   private disbursements: Object;
@@ -30,14 +32,14 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
     private http: Http) { }
 
   ngOnInit(){
-    console.log(this.committee);
+    console.log(this.candidate);
     Observable.forkJoin(
-      this.http.get('/api/candidate/'+this.candidate).map((res: Response) => res.json()),
+      this.http.get('/api/candidates/'+this.candidate).map((res: Response) => res.json()),
 
     ).subscribe(
       data => {
         console.log(data);
-        this.candidate = data[0];
+        this.candidate = data[0][0];
       },
       err => console.error(err)
       );
