@@ -25,6 +25,7 @@ import {TitleService} from '../api_services/title.service';
 export class MiniProfileComponent implements OnChanges {
   @Input() node: Object;
   @Output() indivEmit = new EventEmitter();
+  @Output() cmteEmit = new EventEmitter();
   private title: string;
   private id: string;
   private amount: number;
@@ -52,11 +53,17 @@ export class MiniProfileComponent implements OnChanges {
   }
 
   indivPopupEmit(tranId, name){
-    console.log(tranId);
     this.indivEmit.emit({
       tranId: tranId,
       name: name
     });
+  }
+
+  cmtePopupEmit(cmte){
+    console.log(cmte);
+    this.cmteEmit.emit({
+      cmte: cmte
+    })
   }
 
 

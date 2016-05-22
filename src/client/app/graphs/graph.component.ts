@@ -22,7 +22,8 @@ import {IndividualPopupComponent} from './individual-popup.component.ts';
             <div *ngIf="selectedNode">
               <mini-profile-view
                 [node]="selectedNode"
-                (indivEmit)="showIndivPopup($event)">
+                (indivEmit)="showIndivPopup($event)"
+                (cmteEmit)="showCmtePopup($event)">
               </mini-profile-view>
             </div>
             <div *ngIf="indivPopup">
@@ -31,6 +32,9 @@ import {IndividualPopupComponent} from './individual-popup.component.ts';
                 [indivName]="indivName"
                 (exitEmit)="exit()">
               </individual-popup>
+            </div>
+            <div *ngIf="cmtePopup">
+              <h1>Haldo!</h1>
             </div>
            `,
   styles: [
@@ -76,6 +80,7 @@ export class GraphComponent implements OnInit  {
   selectedNode: Object;
   candidate: Object;
   indivPopup: boolean;
+  cmtePopup: boolean;
   individualTran: string;
   indivName: string;
   result: Object;
@@ -100,11 +105,15 @@ export class GraphComponent implements OnInit  {
   }
 
   showIndivPopup(event){
-    console.log("EMITTED ", event);
     this.indivName = event.name;
     this.indivPopup = true;
     this.individualTran = event.tranId;
     this.selectedNode = false;
+  }
+
+  showCmtePopup(event){
+    console.log("Cmte emitted", event);
+    this.cmtePopup = true;
   }
 
   exit(){
