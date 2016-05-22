@@ -39,11 +39,15 @@ export class MiniProfileComponent implements OnChanges {
       this.id = this.node.TRAN_ID;
       this.amount = this.node.TRANSACTION_AMT;
       this.popupType = "individual";
-    } else if (this.node.graphtype === "committee" || this.node.graphtype === "associated") {
+    } else if (this.node.graphtype === "committee") {
       this.title = this.node.CMTE_NM;
       this.id = this.node.OTHER_ID;
       this.amount = this.node.TRANSACTION_AMT;
       this.popupType = "committee";
+    } else if (this.node.graphtype === "associated"){
+      this.title = this.node.CMTE_NM;
+      this.id = this.node.CMTE_ID;
+      this.popupType = "associated";
     } else if (this.node.graphtype === "candidate"){
       this.title = this.node.data.CANDIDATE_NAME;
       this.id = this.node.can_id;
