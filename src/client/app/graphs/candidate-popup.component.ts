@@ -8,7 +8,10 @@ import {TitleService} from '../api_services/title.service';
   template: `
     <div class="row">
       <h1>Candidate Popup</h1>
-      <h5>{{candidate}}</h5>
+      <h5>{{candidate?.CANDIDATE_NAME}}</h5>
+      <h5>{{candidate?.cas_on_han_clo_of_per}}</h5>
+      <h5>{{candidate?.net_con}}</h5>
+      <h5>{{candidate?.net_ope_exp}}</h5>
     </div>
     <div class="row indiv twelve columns">
       <button (click)="close()">Close</button>

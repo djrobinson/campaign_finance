@@ -92,7 +92,7 @@ import {CandidatePopupComponent} from './candidate-popup.component.ts';
       left: 5%;
       background-color: blue;
     }
-    candidte-popup {
+    candidate-popup {
       position: absolute;
       width: 90%;
       height: 80%;
@@ -160,6 +160,7 @@ export class GraphComponent implements OnInit  {
     this.indivPopup = false;
     this.selectedNode = false;
     this.cmtePopup = false;
+    this.candPopup = false;
   }
 
   getGraphData(candId) {
