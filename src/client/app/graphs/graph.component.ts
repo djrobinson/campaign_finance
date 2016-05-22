@@ -175,6 +175,9 @@ export class GraphComponent implements OnInit  {
               } else if (elem.CMTE_ID === el.OTHER_ID){
                 prev.push({ "source": elem.NODE, "target": i, "value": 3 })
                 return prev;
+              } else if (el.com_id === elem.OTHER_ID){
+                prev.push({ "source": elem.NODE, "target": i, "value": 2 })
+                return prev;
               }
             })
             return prev;
