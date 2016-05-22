@@ -56,5 +56,4 @@ router.get('/recipients', function(req, res, next){
 });
 
 
-
 module.exports = router;
