@@ -1,4 +1,4 @@
- //check// *** main dependencies *** //
+  //check// *** main dependencies *** //
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -19,6 +19,7 @@ var indivContrib = require('./api_funds/indiv_contrib.js');
 var opex = require('./api_funds/opex.js');
 var graph = require('./api_funds/graph.js');
 var legislators = require('./api_congress/legislators.js');
+var hconres = require('./api_congress/hconres.js');
 
 
 
@@ -61,6 +62,7 @@ app.use('/api/individuals', indivContrib);
 app.use('/api/opex', opex); //check
 app.use('/api/graph', graph);
 app.use('/api/legislators', legislators);
+app.use('/api/hconres', hconres);
 
 
 
