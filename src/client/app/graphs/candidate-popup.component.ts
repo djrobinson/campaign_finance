@@ -38,7 +38,9 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
     console.log(this.candidate);
     Observable.forkJoin(
       this.http.get('/api/candidates/'+this.candidate).map((res: Response) => res.json()),
-
+      this.http.get('/api/disbursements/'+this.candidate+'/candidate').map((res: Response) => res.json()),
+      this.http.get('/api/contributions/'+this.candidate+'/candidate').map((res: Response) => res.json()),
+      this.http.get('/api/candidates/'+this.candidate+'/committees').map((res: Response) => res.json())
     ).subscribe(
       data => {
         console.log(data);
