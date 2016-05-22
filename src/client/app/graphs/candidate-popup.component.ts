@@ -23,7 +23,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   @Input() committee: string;
   @Output() exitEmit = new EventEmitter();
   private candidate: Observable<Object>;
-  private disbursements = {};
+  private disbursements: Object;
 
 
   constructor(private _TitleService: TitleService,

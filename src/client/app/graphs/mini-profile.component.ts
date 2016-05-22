@@ -13,6 +13,9 @@ import {TitleService} from '../api_services/title.service';
       <div *ngIf="popupType === 'committee' || popupType === 'associated'">
         <button (click)="cmtePopupEmit(id)">Go to Profile</button>
       </div>
+      <div *ngIf="popupType === 'candidate'">
+        <button (click)="candPopupEmit(id)">Go to Profile</button>
+      </div>
     </div>
   `,
   styles: [`
@@ -26,6 +29,7 @@ export class MiniProfileComponent implements OnChanges {
   @Input() node: Object;
   @Output() indivEmit = new EventEmitter();
   @Output() cmteEmit = new EventEmitter();
+  @Output() candEmit = new EventEmitter();
   private title: string;
   private id: string;
   private amount: number;
@@ -50,7 +54,7 @@ export class MiniProfileComponent implements OnChanges {
       this.popupType = "associated";
     } else if (this.node.graphtype === "candidate"){
       this.title = this.node.data.CANDIDATE_NAME;
-      this.id = this.node.can_id;
+      this.id = this.node.CAND_ID;
       this.amount = this.node.tot_con;
       this.popupType = "candidate";
     }
@@ -67,6 +71,13 @@ export class MiniProfileComponent implements OnChanges {
     console.log(cmte);
     this.cmteEmit.emit({
       cmte: cmte
+    })
+  }
+
+  candPopupEmit(cand){
+    console.log(cand);
+    this.candEmit.emit({
+      cand: cand
     })
   }
 
