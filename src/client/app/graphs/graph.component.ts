@@ -5,6 +5,7 @@ import {CandidateTableComponent} from '../candidate/candidate-table.component';
 import {MiniProfileComponent} from './mini-profile.component.ts';
 import {IndividualPopupComponent} from './individual-popup.component.ts';
 import {CommitteePopupComponent} from './committee-popup.component.ts';
+import {CandidatePopupComponent} from './candidate-popup.component.ts';
 
 @Component({
   selector: 'graph-view',
@@ -40,6 +41,13 @@ import {CommitteePopupComponent} from './committee-popup.component.ts';
                 [committee]="selectedCommittee"
                 (exitEmit)="exit()">
               </committee-popup>
+            </div>
+            <div *ngIf="candPopup">
+              <candidate-popup
+                [candidate]="selectedCandidate"
+                (exitEmit)="exit()"
+              >
+              </candidate-popup>
             </div>
            `,
   styles: [
