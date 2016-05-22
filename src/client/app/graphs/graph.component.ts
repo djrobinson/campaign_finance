@@ -24,7 +24,8 @@ import {CommitteePopupComponent} from './committee-popup.component.ts';
               <mini-profile-view
                 [node]="selectedNode"
                 (indivEmit)="showIndivPopup($event)"
-                (cmteEmit)="showCmtePopup($event)">
+                (cmteEmit)="showCmtePopup($event)"
+                (candEmit)="showCandPopup($event)">
               </mini-profile-view>
             </div>
             <div *ngIf="indivPopup">
@@ -128,6 +129,13 @@ export class GraphComponent implements OnInit  {
     console.log("Cmte emitted", event);
     this.cmtePopup = true;
     this.selectedCommittee = event.cmte;
+    this.selectedNode = false;
+  }
+
+  showCandPopup(event){
+    console.log("Cand event emitted ", event);
+    this.candPopup = true;
+    this.selectedCandidate = event.cand;
     this.selectedNode = false;
   }
 
