@@ -10,7 +10,7 @@ import {TitleService} from '../api_services/title.service';
       <div *ngIf="popupType === 'individual'">
         <button (click)="indivPopupEmit(id, title)">Go to Profile</button>
       </div>
-      <div *ngIf="popupType === 'committee'">
+      <div *ngIf="popupType === 'committee' || popupType === 'associated'">
         <button (click)="cmtePopupEmit(id)">Go to Profile</button>
       </div>
     </div>

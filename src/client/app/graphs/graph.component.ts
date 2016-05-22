@@ -36,6 +36,7 @@ import {CommitteePopupComponent} from './committee-popup.component.ts';
             </div>
             <div *ngIf="cmtePopup">
               <committee-popup
+                [committee]="selectedCommittee"
                 (exitEmit)="exit()">
               </committee-popup>
             </div>
@@ -94,6 +95,7 @@ export class GraphComponent implements OnInit  {
   cmtePopup: boolean;
   individualTran: string;
   indivName: string;
+  selectedCommittee: string;
   result: Object;
   nodeData = Array;
   linkData = Array;
@@ -125,6 +127,7 @@ export class GraphComponent implements OnInit  {
   showCmtePopup(event){
     console.log("Cmte emitted", event);
     this.cmtePopup = true;
+    this.selectedCommittee = event.cmte;
     this.selectedNode = false;
   }
 
