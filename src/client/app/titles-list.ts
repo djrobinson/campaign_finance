@@ -78,5 +78,6 @@ export var TITLES: Title[] = [
             {"id": 2, "name": "/api/votes/{candidate_id}/nays", "test": "/api/votes/P000197/nays"}
         ]
     },
-    {"id": 10, "name": "Legislators"}
+    {"id": 10, "name": "Legislators"},
+    {"id": 11, "name": "Bills", "link": "/bills"}
 ];

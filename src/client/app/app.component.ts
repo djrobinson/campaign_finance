@@ -8,6 +8,7 @@ import {DisbursementsComponent} from './disbursements/disbursements.component';
 import {IndividualsComponent} from './individuals/individuals.component';
 import {LegislatorsComponent} from './legislators/legislators.component';
 import {MiniProfileComponent} from './graphs/node_selected/mini-profile.component.ts';
+import {BillsComponent} from './bills/bills.component.ts';
 import {OpexComponent} from './opex/opex.component';
 import {PacsComponent} from './pacs/pacs.component';
 import {VotesComponent} from './votes/votes.component';
@@ -159,6 +160,11 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
     path: '/graph',
     as: 'Graphs',
     component: GraphComponent
+  },
+  {
+    path: '/bills',
+    as: 'Bills',
+    component: BillsComponent
   },
   {
     path: '/',
