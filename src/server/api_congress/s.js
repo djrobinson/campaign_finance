@@ -41,7 +41,26 @@ router.get('/all/subjects', function(req, res, next){
       console.log(el.subjects);
       return prev.concat(el.subjects);
     }, []);
-    var returnS = _.sortedUniq(allS);
+    var returnS = _.uniq(allS);
+    res.json(returnS);
+  });
+});
+
+router.get('/all/topsubjects', function(req, res, next){
+  S.find({}, {'subjects_top_term':1, '_id':0}, function(err, s) {
+    if (err) throw err;
+
+    // object of the user
+    var allS = s.reduce(function(prev, el){
+      if (el.subjects_top_term){
+        console.log(el.subjects_top_term);
+        prev.push(el.subjects_top_term);
+        return prev;
+      } else {
+        return prev;
+      }
+    }, []);
+    var returnS = _.uniq(allS);
     res.json(returnS);
   });
 });
