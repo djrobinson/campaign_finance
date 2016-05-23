@@ -19,6 +19,14 @@ router.get('/:id',function(req, res, next){
   });
 });
 
+router.get('/subject/:subject',function(req, res, next){
+ Hjres.find({subjects:{ $in: [req.params.subject]}}, function(err, hjres) {
+    if (err) throw err;
+
+    // object of the user
+    res.json(hjres);
+  });
+});
 
 
 

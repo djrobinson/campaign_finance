@@ -21,4 +21,14 @@ router.get('/:id',function(req, res, next){
   });
 });
 
+router.get('/subject/:subject',function(req, res, next){
+  Hconresjres.find({subjects:{ $in: [req.params.subject]}}, function(err, hconres) {
+    if (err) throw err;
+
+    // object of the user
+    res.json(hconres);
+  });
+});
+
+
 module.exports = router;
