@@ -14,7 +14,7 @@ router.get('/',function(req, res, next){
 });
 
 router.get('/:cand_id',function(req, res, next){
-  Legislators.find({'id.bioguide': req.params.cand_id}, function(err, legislator) {
+  Legislators.find({'id.fec': req.params.cand_id}, function(err, legislator) {
     if (err) throw err;
 
     // object of the user

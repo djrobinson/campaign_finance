@@ -29,6 +29,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   @Output() exitEmit = new EventEmitter();
   private candidate: Observable<Object>;
   private disbursements: Object;
+  private candidateInfo: Object;
 
 
   constructor(private _TitleService: TitleService,
@@ -36,19 +37,38 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
   ngOnInit(){
     console.log(this.candidate);
+
+    this.http.get('/api/legislators/' + this.candidate).map(response => response.json()).subscribe(data => {
+      console.log(data);
+      this.candidateInfo = data[0];
+      console.log("info: ", this.candidateInfo);
+      this.callApis(this.candidate, this.candidateInfo.id.bioguide, this.candidateInfo.id.thomas)
+    }, error => console.log('Could not load todos.'));
     //Call teh legislators api to get the vote inputs
+
+  }
+
+  callApis(fecId, bioguideId, thomasId){
     Observable.forkJoin(
-      this.http.get('/api/candidates/'+this.candidate).map((res: Response) => res.json()),
-      this.http.get('/api/disbursements/'+this.candidate+'/candidate').map((res: Response) => res.json()),
-      this.http.get('/api/contributions/'+this.candidate+'/candidate').map((res: Response) => res.json()),
-      this.http.get('/api/candidates/'+this.candidate+'/committees').map((res: Response) => res.json())
+      this.http.get('/api/candidates/'+fecId).map((res: Response) => res.json()),
+      this.http.get('/api/disbursements/'+fecId+'/candidate').map((res: Response) => res.json()),
+      this.http.get('/api/contributions/'+fecId+'/candidate').map((res: Response) => res.json()),
+      this.http.get('/api/candidates/'+fecId+'/committees').map((res: Response) => res.json()),
+      this.http.get('/api/votes/'+bioguideId+'/yeas').map((res: Response) => res.json()),
+      this.http.get('/api/votes/'+bioguideId+'/nays').map((res: Response) => res.json()),
+
     ).subscribe(
       data => {
         console.log(data);
         this.candidate = data[0][0];
+        this.disbursements = data[1];
+        this.contributions = data[2];
+        this.associatedCommittees = data[3];
+        this.yeaVotes = data[4];
+        this.nayVotes = data[5];
       },
       err => console.error(err)
-      );
+    );
   }
 
   close() {
