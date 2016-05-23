@@ -4,11 +4,18 @@ import {TitleService} from '../api_services/title.service';
 @Component({
   selector: 'bills-view',
   template: `
+            <h1>Bills View</h1>
             <div class="row">
-              <h1>Bills View</h1>
-              <ul *ngFor="#subject of subjects?.data">
-                <li><button (click)="searchSubject(subject)">{{subject}}</button></li>
-              </ul>
+              <div class="three columns">
+                <ul *ngFor="#subject of subjects?.data">
+                  <li><button (click)="searchSubject(subject)">{{subject}}</button></li>
+                </ul>
+              </div>
+              <div class="nine columns">
+                <ul *ngFor="#bill of bills?.data">
+                  <li>{{bill.short_title}}</li>
+                </ul>
+              </div>
             </div>
            `,
   providers: [TitleService],
@@ -17,6 +24,7 @@ import {TitleService} from '../api_services/title.service';
 export class BillsComponent implements OnInit {
   constructor(private _titleService: TitleService) {}
   private this.subjects = {};
+  private this.bills = {};
 
   ngOnInit(){
     this._titleService.getResult('/api/hr/all/topsubjects')
@@ -32,5 +40,14 @@ export class BillsComponent implements OnInit {
 
   searchSubject(subject){
     console.log(subject);
+    this._titleService.getResult('/api/hr/subject/'+subject)
+      .subscribe(
+        result => {
+          console.log(result);
+          this.bills.data = result;
+        },
+        error => console.error('Error: ' + err),
+        () => console.log('Completed!')
+      );
   }
 }
