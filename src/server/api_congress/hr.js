@@ -1,15 +1,28 @@
+var Sconres = require('../mongo/sconres_schema.js');
 var Hr = require('../mongo/hr_schema.js');
 
 var express = require('express');
 var router = express.Router();
 
+// router.get('/',function(req, res, next){
+//   Sconres.findOne( {}, function(err, sconres) {
+//     if (err) throw err;
+
+//     // object of the user
+//     res.json(sconres);
+//   });
+// });
+
 router.get('/',function(req, res, next){
-  db.hr.findOne({}, function(err, hr) {
-    console.log(hr);
+  // res.status(200);
+  // res.json("Success");
+  console.log(Hr);
+  Hr.findOne({}, function(err, hr) {
     if (err) throw err;
 
+    console.log(hr);
     // object of the user
-    res.json(hr);
+    res.json({ results: hr, hello: 'world'});
   });
 });
 

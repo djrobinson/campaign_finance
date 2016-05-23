@@ -4,11 +4,11 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/',function(req, res, next){
-  Sconres.findOne( {}, function(err, Sconres) {
+  Sconres.findOne( {}, function(err, sconres) {
     if (err) throw err;
 
     // object of the user
-    res.json(Sconres);
+    res.json(sconres);
   });
 });
 
