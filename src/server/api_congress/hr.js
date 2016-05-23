@@ -31,4 +31,13 @@ router.get('/subject/:subject',function(req, res, next){
   });
 });
 
+router.get('/all/subjects', function(req, res, next){
+  Hr.find({}, {'subjects':1, '_id':0}, function(err, hr) {
+    if (err) throw err;
+
+    // object of the user
+    res.json(hr);
+  });
+});
+
 module.exports = router;

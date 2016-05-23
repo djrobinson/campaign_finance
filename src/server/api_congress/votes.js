@@ -81,5 +81,21 @@ router.get('/id/aggregate/:leg_id',function(req, res, next){
   });
 });
 
+router.get('/id/aggregate',function(req, res, next){
+  var leg = parseInt(req.params.leg_id);
+  console.log(leg);
+
+    Vote.aggregate(
+     [
+        { $group: { _id: '$bill.number', count: { $sum: 1 } } }
+     ],function(err, vote){
+      console.log(vote);
+      if (err) throw err;
+
+    // object of the user
+    res.json(vote);
+  });
+});
+
 
 module.exports = router;
