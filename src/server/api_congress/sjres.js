@@ -10,4 +10,13 @@ router.get('/',function(req, res, next){
   });
 });
 
+router.get('/:id',function(req, res, next){
+  Sjres.find( {'bill_id': req.params.id}, function(err, sjres) {
+    if (err) throw err;
+
+    // object of the user
+    res.json(sjres);
+  });
+});
+
 module.exports = router;

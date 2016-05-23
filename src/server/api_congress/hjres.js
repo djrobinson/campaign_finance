@@ -10,4 +10,14 @@ router.get('/',function(req, res, next){
   });
 });
 
+router.get('/:id',function(req, res, next){
+  Hjres.find( {'bill_id': req.params.id}, function(err, hjres) {
+    if (err) throw err;
+
+    // object of the user
+    res.json(hjres);
+  });
+});
+
+
 module.exports = router;
