@@ -20,6 +20,13 @@ var opex = require('./api_funds/opex.js');
 var graph = require('./api_funds/graph.js');
 var legislators = require('./api_congress/legislators.js');
 var hconres = require('./api_congress/hconres.js');
+var hjres = require('./api_congress/hjres.js');
+var hres = require('./api_congress/hres.js');
+var s = require('./api_congress/s.js');
+var sconres = require('./api_congress/sconres.js');
+var sjres = require('./api_congress/sjres.js');
+var sres = require('./api_congress/sres.js');
+
 
 
 
@@ -63,6 +70,12 @@ app.use('/api/opex', opex); //check
 app.use('/api/graph', graph);
 app.use('/api/legislators', legislators);
 app.use('/api/hconres', hconres);
+app.use('/api/hjres', hjres);
+app.use('/api/hres', hres);
+app.use('/api/s', s);
+app.use('/api/sconres', sconres);
+app.use('/api/sjres', sjres);
+app.use('/api/sres', sres);
 
 
 
