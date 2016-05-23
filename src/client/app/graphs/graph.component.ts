@@ -63,10 +63,8 @@ import {CandidatePopupComponent} from './candidate-popup.component.ts';
     mini-profile-view {
       position: absolute;
       bottom: 0;
-      height: 200px;
       width: 70%;
       margin-left: 15%;
-      background-color: blue;
     }
     outputs-view {
       position: absolute;

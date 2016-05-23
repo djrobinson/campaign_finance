@@ -4,17 +4,50 @@ import {TitleService} from '../api_services/title.service';
   selector: 'mini-profile-view',
   template: `
     <div class="title">
-      <h3>{{title}}</h3>
-      <h4>{{id}}</h4>
-      <h4>Transaction Amount: {{amount}}</h4>
-      <div *ngIf="popupType === 'individual'">
-        <button (click)="indivPopupEmit(id, title)">Go to Profile</button>
+      <div class="four columns">
+        <h4>{{title}}</h4>
+
       </div>
-      <div *ngIf="popupType === 'committee' || popupType === 'associated'">
-        <button (click)="cmtePopupEmit(id)">Go to Profile</button>
+      <div class="five columns">
+        <div *ngIf="popupType ==='candidate'">
+          <table class="cand-table">
+            <tr>
+              <td>Cash</td>
+              <td>{{parseFloat(cash) | currency:'USD':true}}</td>
+            </tr>
+            <tr>
+              <td>Net Contributions</td>
+              <td>{{parseFloat(contributions) | currency:'USD':true}}</td>
+            </tr>
+            <tr>
+              <td>Net Distributions</td>
+              <td>{{parseFloat(distributions) | currency:'USD':true}}</td>
+            </tr>
+          </table>
+        </div>
+        <div *ngIf="popupType ==='associated'">
+          <h4>Transaction Amount: {{parseFloat(amount) | currency}}</h4>
+        </div>
+        <div *ngIf="popupType ==='individual || committee'">
+          <h4>Transaction Amount: {{parseFloat(amount) | currency}}</h4>
+        </div>
+
       </div>
-      <div *ngIf="popupType === 'candidate'">
-        <button (click)="candPopupEmit(id)">Go to Profile</button>
+      <div class="flexbox-container">
+        <div>
+          <div *ngIf="popupType === 'individual'">
+            <button (click)="indivPopupEmit(id, title)">Go to Profile</button>
+            <p>FEC ID: {{id}}</p>
+          </div>
+          <div *ngIf="popupType === 'committee' || popupType === 'associated'">
+            <button (click)="cmtePopupEmit(id)">Go to Profile</button>
+            <p>FEC ID: {{id}}</p>
+          </div>
+          <div *ngIf="popupType === 'candidate'">
+            <button (click)="candPopupEmit(id)">Go to Profile</button>
+            <p>FEC ID: {{id}}</p>
+          </div>
+        </div>
       </div>
     </div>
   `,
@@ -22,6 +55,21 @@ import {TitleService} from '../api_services/title.service';
     .title {
       width: 100%;
       text-align: center;
+      border: solid 1px #3B3561;
+      height: 150px;
+      background-color: white;
+    }
+    .flexbox-container {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    .cand-table {
+      margin: 0 !important;;
+    }
+    button {
+      position: relative;
+      bottom: -50px;
     }
   `]
 })
@@ -35,7 +83,11 @@ export class MiniProfileComponent implements OnChanges {
   private amount: number;
   private popupType: string;
 
-  constructor(private _TitleService: TitleService) {}
+  constructor(private _TitleService: TitleService) {
+    this.parseFloat = function(num){
+      return parseFloat(num);
+    }
+  }
 
   ngOnChanges(changes: { [node: string]: SimpleChange }) {
     if (this.node.graphtype === "individual") {
@@ -55,7 +107,9 @@ export class MiniProfileComponent implements OnChanges {
     } else if (this.node.graphtype === "candidate"){
       this.title = this.node.data.CANDIDATE_NAME;
       this.id = this.node.CAND_ID;
-      this.amount = this.node.tot_con;
+      this.cash = this.node.data.cas_on_han_clo_of_per;
+      this.contributions = this.node.data.tot_con;
+      this.distributions = this.node.data.tot_dis;
       this.popupType = "candidate";
     }
   }
