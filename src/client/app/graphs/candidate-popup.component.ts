@@ -42,7 +42,11 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       console.log(data);
       this.candidateInfo = data[0];
       console.log("info: ", this.candidateInfo);
-      this.callApis(this.candidate, this.candidateInfo.id.bioguide, this.candidateInfo.id.thomas)
+      if (this.candidateInfo){
+        this.callApis(this.candidate, this.candidateInfo.id.bioguide, this.candidateInfo.id.thomas)
+      } else {
+        this.callApis(this.candidate, null, null)
+      }
     }, error => console.log('Could not load todos.'));
     //Call teh legislators api to get the vote inputs
 
@@ -56,6 +60,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       this.http.get('/api/candidates/'+fecId+'/committees').map((res: Response) => res.json()),
       this.http.get('/api/votes/'+bioguideId+'/yeas').map((res: Response) => res.json()),
       this.http.get('/api/votes/'+bioguideId+'/nays').map((res: Response) => res.json()),
+      this.http.get('/api/pac/'+fecId+'/candidate').map((res: Response) => res.json()),
+      this.http.get('/api/pac/aggregate/'+fecId).map((res: Response) => res.json()),
 
     ).subscribe(
       data => {
@@ -66,6 +72,9 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.associatedCommittees = data[3];
         this.yeaVotes = data[4];
         this.nayVotes = data[5];
+        this.pacSpends = data[6];
+        this.pacAgg = data[7];
+
       },
       err => console.error(err)
     );
