@@ -26,6 +26,7 @@ var s = require('./api_congress/s.js');
 var sconres = require('./api_congress/sconres.js');
 var sjres = require('./api_congress/sjres.js');
 var sres = require('./api_congress/sres.js');
+var hr = require('./api_congress/hr.js');
 
 
 
@@ -71,6 +72,7 @@ app.use('/api/graph', graph);
 app.use('/api/legislators', legislators);
 app.use('/api/hconres', hconres);
 app.use('/api/hjres', hjres);
+app.use('/api/hr', hr);
 app.use('/api/hres', hres);
 app.use('/api/s', s);
 app.use('/api/sconres', sconres);

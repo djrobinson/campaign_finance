@@ -50,4 +50,18 @@ router.get('/:cand_id/nays',function(req, res, next){
   });
 });
 
+router.get('/id/:leg_id',function(req, res, next){
+  var leg = req.params.leg_id;
+  Vote.find(Vote.find({"vote_id": new RegExp(leg, "i")},
+    function(err, vote){
+
+      if (err) throw err;
+
+    // object of the user
+    res.json(vote);
+  }));
+});
+
+
+
 module.exports = router;
