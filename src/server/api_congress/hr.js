@@ -4,7 +4,8 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/',function(req, res, next){
-  Hr.findOne( {}, function(err, hr) {
+  db.hr.findOne({}, function(err, hr) {
+    console.log(hr);
     if (err) throw err;
 
     // object of the user
@@ -13,20 +14,20 @@ router.get('/',function(req, res, next){
 });
 
 router.get('/:id',function(req, res, next){
-  Hr.find( {'bill_id': req.params.id}, function(err, sconres) {
+  Hr.find( {'bill_id': req.params.id}, function(err, hr) {
     if (err) throw err;
 
     // object of the user
-    res.json(sconres);
+    res.json(hr);
   });
 });
 
 router.get('/subject/:subject',function(req, res, next){
-  Hr.find({subjects:{ $in: [req.params.subject]}}, function(err, sconres) {
+  Hr.find({subjects:{ $in: [req.params.subject]}}, function(err, hr) {
     if (err) throw err;
 
     // object of the user
-    res.json(sconres);
+    res.json(hr);
   });
 });
 
