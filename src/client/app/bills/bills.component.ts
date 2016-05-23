@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {TitleService} from '../api_services/title.service';
 
 @Component({
@@ -7,7 +7,7 @@ import {TitleService} from '../api_services/title.service';
             <div class="row">
               <h1>Bills View</h1>
               <ul *ngFor="#subject of subjects?.data">
-                <li>{{subject}}</li>
+                <li><button (click)="searchSubject(subject)">{{subject}}</button></li>
               </ul>
             </div>
            `,
@@ -18,12 +18,19 @@ export class BillsComponent implements OnInit {
   constructor(private _titleService: TitleService) {}
   private this.subjects = {};
 
-  getJson(){
+  ngOnInit(){
     this._titleService.getResult('/api/hr/all/topsubjects')
       .subscribe(
-        result => this.subjects.data = result,
+        result => {
+          console.log(result);
+          this.subjects.data = result;
+        },
         error => console.error('Error: ' + err),
         () => console.log('Completed!')
       );
     }
+
+  searchSubject(subject){
+    console.log(subject);
+  }
 }
