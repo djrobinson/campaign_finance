@@ -53,7 +53,7 @@ router.get('/:cand_id/nays',function(req, res, next){
 router.get('/id/:leg_id',function(req, res, next){
   var leg = req.params.leg_id;
   console.log(leg);
-  Vote.find({'bill.number': parseInt(req.params.leg_id)},
+  Vote.find({'bill.number': parseInt(leg)},
     function(err, vote){
       console.log(vote);
       if (err) throw err;
@@ -63,6 +63,23 @@ router.get('/id/:leg_id',function(req, res, next){
   });
 });
 
+
+router.get('/id/aggregate/:leg_id',function(req, res, next){
+  var leg = parseInt(req.params.leg_id);
+  console.log(leg);
+
+    Vote.aggregate(
+     [
+        { $match: {'bill.number': parseInt(leg)}},
+        { $group: { _id: null, count: { $sum: 1 } } }
+     ],function(err, vote){
+      console.log(vote);
+      if (err) throw err;
+
+    // object of the user
+    res.json(vote);
+  });
+});
 
 
 module.exports = router;

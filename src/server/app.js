@@ -72,7 +72,7 @@ app.use('/api/graph', graph);
 app.use('/api/legislators', legislators);
 app.use('/api/hconres', hconres);
 app.use('/api/hjres', hjres);
-app.use('/api/hr', hr);
+app.use('/api/hr', hr);/**/
 app.use('/api/hres', hres);
 app.use('/api/s', s);
 app.use('/api/sconres', sconres);
