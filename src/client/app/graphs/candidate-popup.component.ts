@@ -8,11 +8,36 @@ import {TitleService} from '../api_services/title.service';
   template: `
     <div class="cand-style">
       <div class="row">
-        <h1>Candidate Popup</h1>
-        <h5>{{candidate?.CANDIDATE_NAME}}</h5>
-        <h5>{{candidate?.cas_on_han_clo_of_per}}</h5>
-        <h5>{{candidate?.net_con}}</h5>
-        <h5>{{candidate?.net_ope_exp}}</h5>
+        <div class="four columns">
+          <h1>Sources of Funds</h1>
+        </div>
+        <div class="four columns">
+          <h2>{{candidate?.CANDIDATE_NAME}}</h2>
+          <div class="row">
+            <div class="twelve columns">
+              <p>Office Sought: {{candidate?.CANDIDATE_OFFICE}}</p>
+              <p>Hometown: {{candidate?.can_cit}}, {{candidate?.STATE}}</p>
+              <p>Net Opex: {{candidate?.PARTY}}</p>
+              <p><a [href]="candidate?.lin_ima">FEC Filing Link</a></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="six columns">
+              <p><em>Begin Cash: </em> {{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</p>
+              <p><em>End Cash: </em> {{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</p>
+              <p><em>Debt: </em> {{parseFloat(candidate?.deb_owe_by_com) | currency:'USD':true}}</p>
+              <p><em>Funding from Candidate: </em> {{parseFloat(candidate?.can_con) | currency:'USD':true}}</p>
+            </div>
+            <div class="six columns">
+              <p><em>Net Contributions: </em> {{parseFloat(candidate?.net_con) | currency:'USD':true}}</p>
+              <p><em>Net Opex: </em> {{parseFloat(candidate?.net_ope_exp) | currency:'USD':true}}</p>
+              <p><em>Distributions: </em> {{parseFloat(candidate?.tot_dis) | currency:'USD':true}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="four columns">
+          <h1>Uses of Funds</h1>
+        </div>
       </div>
       <div class="row indiv twelve columns">
         <button (click)="close()">Close</button>
@@ -23,7 +48,10 @@ import {TitleService} from '../api_services/title.service';
     .cand-style {
       text-align: center;
       height: 100px;
-      border: solid 1px #3B3561;
+    }
+    p {
+      margin: 0 !important;
+      padding: 0 !important;
     }
   `]
 })
@@ -37,7 +65,11 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
 
   constructor(private _TitleService: TitleService,
-    private http: Http) { }
+              private http: Http) {
+    this.parseFloat = function(num){
+      return parseFloat(num);
+    }
+  }
 
   ngOnInit(){
     console.log(this.candidate);

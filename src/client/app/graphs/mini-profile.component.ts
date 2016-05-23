@@ -6,7 +6,7 @@ import {TitleService} from '../api_services/title.service';
     <div class="title">
       <div class="four columns">
         <h4>{{title}}</h4>
-
+        <p>FEC ID: {{id}}</p>
       </div>
       <div class="five columns">
         <div *ngIf="popupType ==='candidate'">
@@ -14,6 +14,7 @@ import {TitleService} from '../api_services/title.service';
             <tr>
               <td>Cash</td>
               <td>{{parseFloat(cash) | currency:'USD':true}}</td>
+
             </tr>
             <tr>
               <td>Net Contributions</td>
@@ -37,16 +38,14 @@ import {TitleService} from '../api_services/title.service';
         <div>
           <div *ngIf="popupType === 'individual'">
             <button (click)="indivPopupEmit(id, title)">Go to Profile</button>
-            <p>FEC ID: {{id}}</p>
           </div>
           <div *ngIf="popupType === 'committee' || popupType === 'associated'">
             <button (click)="cmtePopupEmit(id)">Go to Profile</button>
-            <p>FEC ID: {{id}}</p>
           </div>
           <div *ngIf="popupType === 'candidate'">
             <button (click)="candPopupEmit(id)">Go to Profile</button>
-            <p>FEC ID: {{id}}</p>
           </div>
+
         </div>
       </div>
     </div>
@@ -69,7 +68,7 @@ import {TitleService} from '../api_services/title.service';
     }
     button {
       position: relative;
-      bottom: -50px;
+      top: 20px;
     }
   `]
 })
