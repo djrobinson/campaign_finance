@@ -4,7 +4,17 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/',function(req, res, next){
+  console.log("Legislators ", Legislators);
   Legislators.findOne( {}, function(err, legislator) {
+    if (err) throw err;
+
+    // object of the user
+    res.json(legislator);
+  });
+});
+
+router.get('/:cand_id',function(req, res, next){
+  Legislators.find({'id.bioguide': req.params.cand_id}, function(err, legislator) {
     if (err) throw err;
 
     // object of the user

@@ -36,6 +36,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
   ngOnInit(){
     console.log(this.candidate);
+    //Call teh legislators api to get the vote inputs
     Observable.forkJoin(
       this.http.get('/api/candidates/'+this.candidate).map((res: Response) => res.json()),
       this.http.get('/api/disbursements/'+this.candidate+'/candidate').map((res: Response) => res.json()),
