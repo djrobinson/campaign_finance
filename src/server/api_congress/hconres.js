@@ -12,4 +12,13 @@ router.get('/',function(req, res, next){
   });
 });
 
+router.get('/:id',function(req, res, next){
+  Hconres.find( {'bill_id': req.params.id}, function(err, hconres) {
+    if (err) throw err;
+
+    // object of the user
+    res.json(hconres);
+  });
+});
+
 module.exports = router;

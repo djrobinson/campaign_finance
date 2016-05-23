@@ -12,4 +12,13 @@ router.get('/',function(req, res, next){
   });
 });
 
+router.get('/:id',function(req, res, next){
+  Sconres.find( {'bill_id': req.params.id}, function(err, sconres) {
+    if (err) throw err;
+
+    // object of the user
+    res.json(sconres);
+  });
+});
+
 module.exports = router;
