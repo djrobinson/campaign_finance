@@ -27,10 +27,24 @@ import {TitleService} from '../api_services/title.service';
           </table>
         </div>
         <div *ngIf="popupType ==='associated'">
-          <h4>Transaction Amount: {{parseFloat(amount) | currency}}</h4>
+          <table class="cand-table">
+            <tr>
+              <td>Cash</td>
+              <td>{{parseFloat(cash) | currency:'USD':true}}</td>
+
+            </tr>
+            <tr>
+              <td>Net Contributions</td>
+              <td>{{parseFloat(contributions) | currency:'USD':true}}</td>
+            </tr>
+            <tr>
+              <td>Net Distributions</td>
+              <td>{{parseFloat(distributions) | currency:'USD':true}}</td>
+            </tr>
+          </table>
         </div>
         <div *ngIf="popupType ==='individual || committee'">
-          <h4>Transaction Amount: {{parseFloat(amount) | currency}}</h4>
+          <h4>Transaction Amount: {{parseFloat(amount) | currency:'USD':true}}</h4>
         </div>
 
       </div>
@@ -45,7 +59,6 @@ import {TitleService} from '../api_services/title.service';
           <div *ngIf="popupType === 'candidate'">
             <button (click)="candPopupEmit(id)">Go to Profile</button>
           </div>
-
         </div>
       </div>
     </div>
@@ -102,6 +115,9 @@ export class MiniProfileComponent implements OnChanges {
     } else if (this.node.graphtype === "associated"){
       this.title = this.node.CMTE_NM;
       this.id = this.node.CMTE_ID;
+      this.cash = this.node.cas_on_han_clo_of_per;
+      this.contributions = this.node.net_con;
+      this.distributions = this.node.tot_dis;
       this.popupType = "associated";
     } else if (this.node.graphtype === "candidate"){
       this.title = this.node.data.CANDIDATE_NAME;

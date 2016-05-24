@@ -8,9 +8,11 @@ import {TitleService} from '../api_services/title.service';
   template: `
     <div class="row">
       <div class="four columns">
-        <ul *ngFor="#individual of individuals?.data">
-          <li>{{individual.NAME}} {{individual.TRANSACTION_AMT}}</li>
-        </ul>
+        <div class="table-div">
+          <ul *ngFor="#individual of individuals?.data">
+            <li>{{individual.NAME}} {{individual.TRANSACTION_AMT}}</li>
+          </ul>
+        </div>
       </div>
       <div class="four columns">
         <h4>Committee Financials</h4>
@@ -18,9 +20,11 @@ import {TitleService} from '../api_services/title.service';
         <h5>{{committee?.net_con}}</h5>
       </div>
       <div class="four columns">
-        <ul *ngFor="#exp of opex?.data">
-          <li>{{exp.NAME}}</li>
-        </ul>
+        <div class="table-div">
+          <ul *ngFor="#exp of opex?.data">
+            <li>{{exp.NAME}}</li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="row indiv twelve columns">
@@ -30,6 +34,20 @@ import {TitleService} from '../api_services/title.service';
   styles: [`
     .indiv {
       text-align: center;
+    }
+    .table-div {
+      height: 300px;
+      overflow: scroll;
+    }
+        div {
+      border: solid 1px #75717B;
+    }
+    p {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    li {
+      font-size: 8px;
     }
   `]
 })
