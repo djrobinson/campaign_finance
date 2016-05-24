@@ -7,11 +7,14 @@ import {TitleService} from '../api_services/title.service';
   selector: 'candidate-popup',
   template: `
     <div class="cand-style">
-      <div class="row">
-        <div class="four columns">
-          <h1>Sources of Funds</h1>
+        <div class="three columns">
+            <h5>Sources of Funds</h5>
+          <ul *ngFor="#contribution of contributions">
+            <li>{{contribution.NAME}}: {{contribution.TRANSACTION_AMT}}</li>
+          </ul>
         </div>
-        <div class="four columns">
+
+        <div class="one-half column">
           <h2>{{candidate?.CANDIDATE_NAME}}</h2>
           <div class="row">
             <div class="twelve columns">
@@ -35,10 +38,14 @@ import {TitleService} from '../api_services/title.service';
             </div>
           </div>
         </div>
-        <div class="four columns">
-          <h1>Uses of Funds</h1>
+        <div class="three columns">
+          <div>
+            <h3>Usage of Funds</h3>
+          </div>
+          <ul *ngFor="#pacspend of pacSpends">
+            <li>{{pacspend}}</li>
+          </ul>
         </div>
-      </div>
       <div class="row indiv twelve columns">
         <button (click)="close()">Close</button>
       </div>
@@ -48,10 +55,17 @@ import {TitleService} from '../api_services/title.service';
     .cand-style {
       text-align: center;
       height: 100px;
+      font-size: 8px;
+    }
+    div {
+      border: solid 1px #75717B;
     }
     p {
       margin: 0 !important;
       padding: 0 !important;
+    }
+    li {
+      font-size: 8px;
     }
   `]
 })
