@@ -13,7 +13,7 @@ import {TitleService} from '../api_services/title.service';
             <ul>
               <li *ngFor="#contribution of contributions">{{contribution.NAME}}: {{contribution.TRANSACTION_AMT}}</li>
             </ul>
-          </div>s
+          </div>
         </div>
 
         <div class="one-half column">
@@ -27,9 +27,7 @@ import {TitleService} from '../api_services/title.service';
               <p>Hometown: {{candidate?.can_cit}}, {{candidate?.STATE}}</p>
               <p>Birthdate: {{candidateInfo?.bio?.birthday}}</p>
               <p>Gender: {{candidateInfo?.bio?.gender}}</p>
-
               <p>Religion: {{candidateInfo?.bio?.religion}}</p>
-
               <p><a [href]="candidate?.lin_ima">FEC Filing Link</a></p>
             </div>
           </div>
@@ -58,6 +56,34 @@ import {TitleService} from '../api_services/title.service';
               </ul>
           </div>
         </div>
+        <div class="row">
+           <div class="three columns">
+            <div class="table-div">
+              <ul>
+                <li *ngFor="#item of pacAgg">{{item}}</li>
+              </ul>
+            </div>
+           </div>
+           <div class="three columns">
+            <div class="table-div">
+              <ul>
+                <li *ngFor="#item of pacSpends">{{item}}</li>
+              </ul>
+            </div>
+           </div><div class="three columns">
+            <div class="table-div">
+              <ul>
+                <li *ngFor="#item of disbursements">{{item}}</li>
+              </ul>
+            </div>
+           </div><div class="three columns">
+            <div class="table-div">
+              <ul>
+                <li *ngFor="#item of yeaVotes">{{item}}</li>
+              </ul>
+            </div>
+           </div>
+        </div>
       <div class="row indiv twelve columns">
         <button (click)="close()">Close</button>
       </div>
@@ -66,8 +92,7 @@ import {TitleService} from '../api_services/title.service';
   styles: [`
     .cand-style {
       text-align: center;
-      height: 100px;
-      font-size: 8px;
+      font-size: 10px;
     }
     div {
       border: solid 1px #75717B;
@@ -83,7 +108,7 @@ import {TitleService} from '../api_services/title.service';
       font-size: 8px;
     }
     .table-div {
-      height: 350px;
+      height: 300px;
       overflow: scroll;
     }
   `]
