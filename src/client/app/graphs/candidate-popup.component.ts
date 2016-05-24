@@ -9,15 +9,21 @@ import {TitleService} from '../api_services/title.service';
     <div class="cand-style">
         <div class="three columns">
             <h5>Sources of Funds</h5>
-          <ul *ngFor="#contribution of contributions">
-            <li>{{contribution.NAME}}: {{contribution.TRANSACTION_AMT}}</li>
-          </ul>
+          <div class="table-div">
+            <ul>
+              <li *ngFor="#contribution of contributions">{{contribution.NAME}}: {{contribution.TRANSACTION_AMT}}</li>
+            </ul>
+          </div>s
         </div>
 
         <div class="one-half column">
           <h2>{{candidate?.CANDIDATE_NAME}}</h2>
           <div class="row">
-            <div class="twelve columns">
+            <div class="four columns">
+              <h2>heyo</h2>
+                <img [src]="imageVar?.image" alt="picture">
+            </div>
+            <div class="eight columns">
               <p>Office Sought: {{candidate?.CANDIDATE_OFFICE}}</p>
               <p>Hometown: {{candidate?.can_cit}}, {{candidate?.STATE}}</p>
               <p>Net Opex: {{candidate?.PARTY}}</p>
@@ -39,12 +45,15 @@ import {TitleService} from '../api_services/title.service';
           </div>
         </div>
         <div class="three columns">
-          <div>
-            <h3>Usage of Funds</h3>
+
+            <div>
+              <h3>Usage of Funds</h3>
+            </div>
+            <div class="table-div">
+              <ul>
+                <li  *ngFor="#pacspend of pacSpends">{{pacspend}}</li>
+              </ul>
           </div>
-          <ul *ngFor="#pacspend of pacSpends">
-            <li>{{pacspend}}</li>
-          </ul>
         </div>
       <div class="row indiv twelve columns">
         <button (click)="close()">Close</button>
@@ -67,6 +76,10 @@ import {TitleService} from '../api_services/title.service';
     li {
       font-size: 8px;
     }
+    .table-div {
+      height: 350px;
+      overflow: scroll;
+    }
   `]
 })
 export class CandidatePopupComponent implements OnInit, OnChanges {
@@ -76,6 +89,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   private candidate: Observable<Object>;
   private disbursements: Object;
   private candidateInfo: Object;
+  private imageVar: Object;
 
 
   constructor(private _TitleService: TitleService,
@@ -89,11 +103,13 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
     console.log(this.candidate);
 
     this.http.get('/api/legislators/' + this.candidate).map(response => response.json()).subscribe(data => {
-      console.log(data);
+      console.log("cand info: ",data);
       this.candidateInfo = data[0];
       console.log("info: ", this.candidateInfo);
       if (this.candidateInfo){
-        this.callApis(this.candidate, this.candidateInfo.id.bioguide, this.candidateInfo.id.thomas)
+        this.callApis(this.candidate, this.candidateInfo.id.bioguide, this.candidateInfo.id.thomas);
+        this.imageVar = {};
+        this.imageVar.image = 'https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/'+ this.candidateInfo.id.bioguide + '.jpg';
       } else {
         this.callApis(this.candidate, null, null)
       }
