@@ -20,13 +20,16 @@ import {TitleService} from '../api_services/title.service';
           <h2>{{candidate?.CANDIDATE_NAME}}</h2>
           <div class="row">
             <div class="four columns">
-              <h2>heyo</h2>
-                <img [src]="imageVar?.image" alt="picture">
+              <img [src]="imageVar?.image" alt="picture">
             </div>
             <div class="eight columns">
               <p>Office Sought: {{candidate?.CANDIDATE_OFFICE}}</p>
               <p>Hometown: {{candidate?.can_cit}}, {{candidate?.STATE}}</p>
-              <p>Net Opex: {{candidate?.PARTY}}</p>
+              <p>Birthdate: {{candidateInfo?.bio?.birthday}}</p>
+              <p>Gender: {{candidateInfo?.bio?.gender}}</p>
+
+              <p>Religion: {{candidateInfo?.bio?.religion}}</p>
+
               <p><a [href]="candidate?.lin_ima">FEC Filing Link</a></p>
             </div>
           </div>
@@ -68,6 +71,9 @@ import {TitleService} from '../api_services/title.service';
     }
     div {
       border: solid 1px #75717B;
+    }
+    img {
+      width: 100%;
     }
     p {
       margin: 0 !important;
