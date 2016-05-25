@@ -138,7 +138,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       this.candidateInfo = data[0];
       console.log("info: ", this.candidateInfo);
       if (this.candidateInfo){
-        this.callApis(this.candidate, this.candidateInfo.id.bioguide, this.candidateInfo.id.thomas);
+        this.callApis(this.candidate, this.candidateInfo.id.bioguide, this.candidateInfo.id.thomas, this.candidateInfo.id.lis);
         this.imageVar = {};
         this.imageVar.image = 'https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/'+ this.candidateInfo.id.bioguide + '.jpg';
       } else {
@@ -149,14 +149,20 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
   }
 
-  callApis(fecId, bioguideId, thomasId){
+  callApis(fecId, bioguideId, thomasId, lis){
+    console.log(lis);
+    if (lis){
+      var voteId = lis;
+    } else {
+      var voteId = bioguideId;
+    }
     Observable.forkJoin(
       this.http.get('/api/candidates/'+fecId).map((res: Response) => res.json()),
       this.http.get('/api/disbursements/'+fecId+'/candidate').map((res: Response) => res.json()),
       this.http.get('/api/contributions/'+fecId+'/candidate').map((res: Response) => res.json()),
       this.http.get('/api/candidates/'+fecId+'/committees').map((res: Response) => res.json()),
-      this.http.get('/api/votes/'+bioguideId+'/yeas').map((res: Response) => res.json()),
-      this.http.get('/api/votes/'+bioguideId+'/nays').map((res: Response) => res.json()),
+      this.http.get('/api/votes/'+voteId+'/yeas').map((res: Response) => res.json()),
+      this.http.get('/api/votes/'+voteId+'/nays').map((res: Response) => res.json()),
       this.http.get('/api/pac/'+fecId+'/candidate').map((res: Response) => res.json()),
       this.http.get('/api/pac/aggregate/'+fecId).map((res: Response) => res.json()),
 

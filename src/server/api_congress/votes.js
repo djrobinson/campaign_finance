@@ -17,7 +17,6 @@ router.get('/',function(req, res, next){
 router.get('/:cand_id/yeas',function(req, res, next){
   var cand = req.params.cand_id;
   Vote.aggregate([{"$unwind":"$votes"},
-                  {"$limit": 20},
                   {"$match":
                     {"votes.Yea.id":cand}
                   },
@@ -35,7 +34,6 @@ router.get('/:cand_id/yeas',function(req, res, next){
 router.get('/:cand_id/nays',function(req, res, next){
   var cand = req.params.cand_id;
   Vote.aggregate([{"$unwind":"$votes"},
-                  {"$limit": 20},
                   {"$match":
                     {"votes.Nay.id":cand}
                   },
