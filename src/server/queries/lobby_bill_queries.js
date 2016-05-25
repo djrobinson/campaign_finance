@@ -7,4 +7,9 @@ module.exports = {
             .select()
             .limit(10);
   },
+  getLobbyByBill: function(bill_id){
+    return knex('lobby_bill')
+            .select()
+            .where({'bill_name': bill_id});
+  }
 };

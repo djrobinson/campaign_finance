@@ -8,4 +8,11 @@ router.get('/', function(req, res, next){
     });
 });
 
+router.get('/:bill_id', function(req, res, next){
+    query.getLobbyByBill(req.params.bill_id).then(function(data){
+      res.json(data);
+    });
+});
+
+
 module.exports = router;
