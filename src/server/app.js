@@ -28,7 +28,7 @@ var sjres = require('./api_congress/sjres.js');
 var sres = require('./api_congress/sres.js');
 var hr = require('./api_congress/hr.js');
 var lobby_bill = require('./api_congress/lobby_bill.js');
-
+var earmark = require('./api_congress/earmark.js');
 
 
 
@@ -79,7 +79,8 @@ app.use('/api/s', s);
 app.use('/api/sconres', sconres);
 app.use('/api/sjres', sjres);
 app.use('/api/sres', sres);
-app.use('/api/lobbybill', lobby_bill);
+app.use('/api/lobby', lobby_bill);
+app.use('/api/earmark', earmark);
 
 
 
