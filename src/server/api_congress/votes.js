@@ -12,12 +12,31 @@ router.get('/',function(req, res, next){
   });
 });
 
-router.get('/tallies', function(req, res, next){
+router.get('/tallies/yea', function(req, res, next){
   Vote.aggregate([{"$unwind": "$votes.Yea"},
                   {
                     "$group": { _id: {
                                   "question": "$question",
+                                  "vote_id": "$vote_id",
                                   "party": "$votes.Yea.party"
+                                },
+                                count: {$sum: 1}},
+                  }],
+                  function(err, vote){
+    if (err) throw err;
+
+    // object of the user
+    res.json(vote);
+  });
+});
+
+router.get('/tallies/nay', function(req, res, next){
+  Vote.aggregate([{"$unwind": "$votes.Nay"},
+                  {
+                    "$group": { _id: {
+                                  "question": "$question",
+                                  "vote_id": "$vote_id",
+                                  "party": "$votes.Nay.party"
                                 },
                                 count: {$sum: 1}},
                   }],
