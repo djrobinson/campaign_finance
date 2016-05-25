@@ -7,4 +7,10 @@ module.exports = {
             .select()
             .limit(10);
   },
+
+  getReqByCand: function(cand_id){
+    return knex('member')
+            .select()
+            .where({'crp_id': cand_id});
+  }
 };
