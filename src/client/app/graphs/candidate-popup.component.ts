@@ -52,7 +52,7 @@ import {TitleService} from '../api_services/title.service';
             </div>
             <div class="table-div">
               <ul>
-                <li  *ngFor="#pacspend of pacSpends">{{pacspend}}</li>
+                <li  *ngFor="#pacspend of pacSpends">{{pacspend.pay}} {{pacspend.exp_amo}}</li>
               </ul>
           </div>
         </div>
@@ -60,14 +60,14 @@ import {TitleService} from '../api_services/title.service';
            <div class="three columns">
             <div class="table-div">
               <ul>
-                <li *ngFor="#item of pacAgg">{{item}}</li>
+                <li *ngFor="#item of pacAgg">{{item.pur}} {{item.sum}}</li>
               </ul>
             </div>
            </div>
            <div class="three columns">
             <div class="table-div">
               <ul>
-                <li *ngFor="#item of pacSpends">{{item}}</li>
+                <li *ngFor="#item of pacSpends">{{item.pay}} {{item.exp_amo}}</li>
               </ul>
             </div>
            </div><div class="three columns">
