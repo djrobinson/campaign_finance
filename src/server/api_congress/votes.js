@@ -12,13 +12,30 @@ router.get('/',function(req, res, next){
   });
 });
 
+router.get('/tallies', function(req, res, next){
+  Vote.aggregate([{"$unwind": "$votes.Yea"},
+                  {
+                    "$group": { _id: {
+                                  "question": "$question",
+                                  "party": "$votes.Yea.party"
+                                },
+                                count: {$sum: 1}},
+                  }],
+                  function(err, vote){
+    if (err) throw err;
+
+    // object of the user
+    res.json(vote);
+  });
+});
 
 //Currently just for Yeas
 router.get('/:cand_id/yeas',function(req, res, next){
   var cand = req.params.cand_id;
   Vote.aggregate([{"$unwind":"$votes"},
+
                   {"$match":
-                    {"votes.Yea.id":cand}
+                    {"$votes.Yea.id":cand}
                   },
                   {"$project":
                     {"question":1, "source_url": 1}
