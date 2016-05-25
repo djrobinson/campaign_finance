@@ -15,7 +15,7 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
               </div>
               <div class="nine columns">
                 <ul *ngFor="#bill of bills?.data">
-                  <a [routerLink]="['Bill', {bill_id: bill.user_id}]">Go here</a><li>{{bill.short_title}} <button (click)="selectBill(bill.bill_id)">{{bill.bill_id}}</button> </li>
+                  <a [routerLink]="['Bill', {bill_id: bill.bill_id}]">Go here</a><li>{{bill.short_title}} <button (click)="selectBill(bill.bill_id)">{{bill.bill_id}}</button> </li>
                 </ul>
               </div>
             </div>
