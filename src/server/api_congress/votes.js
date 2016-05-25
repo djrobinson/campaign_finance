@@ -87,7 +87,7 @@ router.get('/:cand_id/nays',function(req, res, next){
 router.get('/id/:leg_id',function(req, res, next){
   var leg = req.params.leg_id;
   console.log(leg);
-  Vote.find({'bill.number': parseInt(leg)},
+  Vote.find({'vote_id': {'$regex': leg }},
     function(err, vote){
       console.log(vote);
       if (err) throw err;
