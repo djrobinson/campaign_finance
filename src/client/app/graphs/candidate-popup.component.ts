@@ -153,8 +153,10 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
     console.log(lis);
     if (lis){
       var voteId = lis;
-    } else {
+    } else if (bioguideId) {
       var voteId = bioguideId;
+    } else {
+      var voteId = null;
     }
     Observable.forkJoin(
       this.http.get('/api/candidates/'+fecId).map((res: Response) => res.json()),

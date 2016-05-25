@@ -50,38 +50,47 @@ router.get('/tallies/nay', function(req, res, next){
 
 //Currently just for Yeas
 router.get('/:cand_id/yeas',function(req, res, next){
+  console.log(req.params.cand_id);
   var cand = req.params.cand_id;
-  Vote.aggregate([{"$unwind":"$votes"},
+  if (cand === 'null'){
+    res.json([]);
+  } else {
+    Vote.aggregate([{"$unwind":"$votes"},
+                    {"$match":
+                      {"$votes.Yea.id":cand}
+                    },
+                    {"$project":
+                      {"question":1, "source_url": 1}
+                    }],
+                    function(err, vote){
+      if (err) throw err;
 
-                  {"$match":
-                    {"$votes.Yea.id":cand}
-                  },
-                  {"$project":
-                    {"question":1, "source_url": 1}
-                  }],
-                  function(err, vote){
-    if (err) throw err;
+      // object of the user
+      res.json(vote);
+    });
+  }
 
-    // object of the user
-    res.json(vote);
-  });
 });
 
 router.get('/:cand_id/nays',function(req, res, next){
   var cand = req.params.cand_id;
-  Vote.aggregate([{"$unwind":"$votes"},
-                  {"$match":
-                    {"votes.Nay.id":cand}
-                  },
-                  {"$project":
-                    {"question":1, "source_url": 1}
-                  }],
-                  function(err, vote){
-    if (err) throw err;
+  if (cand === 'null'){
+    res.json([]);
+  } else {
+    Vote.aggregate([{"$unwind":"$votes"},
+                    {"$match":
+                      {"votes.Nay.id":cand}
+                    },
+                    {"$project":
+                      {"question":1, "source_url": 1}
+                    }],
+                    function(err, vote){
+      if (err) throw err;
 
-    // object of the user
-    res.json(vote);
-  });
+      // object of the user
+      res.json(vote);
+    });
+  }
 });
 
 router.get('/id/:leg_id',function(req, res, next){
