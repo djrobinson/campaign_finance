@@ -7,7 +7,8 @@ import {ContributionsComponent} from './contributions/contributions.component';
 import {DisbursementsComponent} from './disbursements/disbursements.component';
 import {IndividualsComponent} from './individuals/individuals.component';
 import {LegislatorsComponent} from './legislators/legislators.component';
-import {MiniProfileComponent} from './graphs/node_selected/mini-profile.component.ts';
+import {MiniProfileComponent} from './graphs/mini-profile.component.ts';
+import {BillPopupComponent} from './bills/bill-popup.component.ts';
 import {BillsComponent} from './bills/bills.component.ts';
 import {OpexComponent} from './opex/opex.component';
 import {PacsComponent} from './pacs/pacs.component';
@@ -165,6 +166,11 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
     path: '/bills',
     as: 'Bills',
     component: BillsComponent
+  },
+  {
+    path: '/bill/:bill_id',
+    as: 'Bill',
+    component: BillPopupComponent
   },
   {
     path: '/',

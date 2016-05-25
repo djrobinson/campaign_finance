@@ -1,6 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {TitleService} from '../api_services/title.service';
-import {BillPopupComponent} from './bill-popup.component.ts';
+import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
+
 
 @Component({
   selector: 'bills-view',
@@ -14,18 +15,24 @@ import {BillPopupComponent} from './bill-popup.component.ts';
               </div>
               <div class="nine columns">
                 <ul *ngFor="#bill of bills?.data">
-                  <li>{{bill.short_title}} <button>{{bill.bill_id}}</button> </li>
+                  <a [routerLink]="['Bill', {bill_id: bill.user_id}]">Go here</a><li>{{bill.short_title}} <button (click)="selectBill(bill.bill_id)">{{bill.bill_id}}</button> </li>
                 </ul>
               </div>
             </div>
+
            `,
   providers: [TitleService],
-  directives: [BillPopupComponent]
+  directives: [ROUTER_DIRECTIVES],
+  styles:[`
+
+  `]
 })
 export class BillsComponent implements OnInit {
-  constructor(private _titleService: TitleService) {}
-  private this.subjects = {};
-  private this.bills = {};
+  constructor(private _titleService: TitleService
+              private router: Router) {
+  }
+  private subjects = {};
+  private bills = {};
 
   ngOnInit(){
     this._titleService.getResult('/api/hr/all/topsubjects')
@@ -38,6 +45,11 @@ export class BillsComponent implements OnInit {
         () => console.log('Completed!')
       );
     }
+
+  selectBill(bill_id){
+    console.log(bill_id);
+    this.router.navigate(['/bills']);
+  }
 
   searchSubject(subject){
     console.log(subject);
