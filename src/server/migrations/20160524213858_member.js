@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable('member', function(table){
     table.string("id");
     table.string("earmark_id");
-    table.number("raw_name");
+    table.string("raw_name");
     table.string("crp_id");
     table.string("crstandardized_namep_id");
     table.string("chamber");
@@ -14,5 +14,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  return knex.dropTable('member');
+  return knex.schema.dropTable('member');
 };

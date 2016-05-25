@@ -1,17 +1,17 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('lobby_issue', function(table){
+    table.string("id");
     table.string("transaction_id");
     table.string("transaction_type");
     table.string("transaction_type_desc");
-    table.number("year");
+    table.string("year");
     table.string("filing_type");
     table.string("filing_included_nsfs");
-    table.number("amount");
+    table.decimal("amount");
     table.string("registrant_name");
     table.string("registrant_is_firm");
     table.string("client_name");
-    table.string("registrant_is_firm");
     table.string("client_category");
     table.string("client_parent_name");
     table.string("include_in_industry_totals");

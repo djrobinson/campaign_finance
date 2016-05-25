@@ -4,10 +4,10 @@ exports.up = function(knex, Promise) {
     table.string("transaction_id");
     table.string("transaction_type");
     table.string("transaction_type_desc");
-    table.string("year");
+    table.integer("year");
     table.string("filing_type");
     table.string("filing_included_nsfs");
-    table.string("amount");
+    table.decimal("amount");
     table.string("registrant_name");
     table.string("registrant_is_firm");
     table.string("client_name");
@@ -20,5 +20,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  return knex.dropTable('lobbying');
+  return knex.schema.dropTable('lobbying');
 };
