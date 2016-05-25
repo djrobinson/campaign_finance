@@ -88,7 +88,8 @@ import {CandidatePopupComponent} from './candidate-popup.component.ts';
       height: 80%;
       top: 10%;
       left: 5%;
-      background-color: blue;
+      border: solid 1px #75717B;
+      background-color: #FEFFFE;
     }
     candidate-popup {
       position: absolute;

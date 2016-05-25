@@ -13,6 +13,11 @@ import {TitleService} from '../api_services/title.service';
             <li>{{individual.NAME}} {{individual.TRANSACTION_AMT}}</li>
           </ul>
         </div>
+        <div class="table-div">
+          <ul *ngFor="#reciept of recieveds?.data">
+            <li>{{reciept}}</li>
+          </ul>
+        </div>
       </div>
       <div class="four columns">
         <h4>Committee Financials</h4>
@@ -23,6 +28,11 @@ import {TitleService} from '../api_services/title.service';
         <div class="table-div">
           <ul *ngFor="#exp of opex?.data">
             <li>{{exp.NAME}}</li>
+          </ul>
+        </div>
+        <div class="table-div">
+          <ul *ngFor="#contrib of contributeds?.data">
+            <li>{{contrib}}</li>
           </ul>
         </div>
       </div>
@@ -58,6 +68,8 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
   private committee: Observable<Object>;
   private opex = {};
   private individuals = {};
+  private recieveds = {};
+  private contributeds = {};
 
 
   constructor(private _TitleService: TitleService,
@@ -78,6 +90,8 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
         this.committee = data[0][0];
         this.opex.data = data[4];
         this.individuals.data = data[1];
+        this.recieveds.data = data[3];
+        this.contributeds.data = data[2];
       },
       err => console.error(err)
       );
