@@ -21,8 +21,15 @@ import {TitleService} from '../api_services/title.service';
       </div>
       <div class="four columns">
         <h4>Committee Financials</h4>
-        <h5>{{committee?.COMMITEE_EMAIL}}</h5>
-        <h5>{{committee?.net_con}}</h5>
+        <h5>Website: {{committee?.COMMITTEE_WEB_URL}}</h5>
+        <h5>Email: {{committee?.COMMITTEE_EMAIL}}</h5>
+        <h5>Treasurer: {{committee?.TREASURER_NAME}}</h5>
+        <h5>Contributions: {{parseFloat(committee?.net_con) | currency:'USD':true}}</h5>
+        <h5>End of Period Cash: {{parseFloat(committee?.cas_on_han_clo_of_per) | currency:'USD':true}}</h5>
+        <h5>Beginning of Period Cash: {{parseFloat(committee?.cas_on_han_beg_of_per) | currency:'USD':true}}</h5>
+        <h5>Net Opex: {{parseFloat(committee?.net_ope_exp) | currency:'USD':true}}</h5>
+        <h5>Distributions: {{parseFloat(committee?.tot_dis) | currency:'USD':true}}</h5>
+        <h5><a [href]="committee?.lin_ima">FEC Link</a></h5>
       </div>
       <div class="four columns">
         <div class="table-div">
@@ -73,7 +80,11 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
 
 
   constructor(private _TitleService: TitleService,
-    private http: Http) { }
+    private http: Http) {
+      this.parseFloat = function(num){
+        return parseFloat(num);
+      }
+    }
 
   ngOnInit(){
     console.log(this.committee);
