@@ -57,7 +57,7 @@ router.get('/:cand_id/yeas',function(req, res, next){
   } else {
     Vote.aggregate([{"$unwind":"$votes"},
                     {"$match":
-                      {"$votes.Yea.id":cand}
+                      {"votes.Yea.id":cand}
                     },
                     {"$project":
                       {"question":1, "source_url": 1}
