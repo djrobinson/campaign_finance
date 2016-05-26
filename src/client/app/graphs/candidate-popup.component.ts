@@ -1,4 +1,4 @@
-import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from 'angular2/core';
+  import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {TitleService} from '../api_services/title.service';
@@ -58,13 +58,13 @@ import {TitleService} from '../api_services/title.service';
         </div>
         <div class="row">
            <div class="three columns">
-            <div class="table-div">
+            <div class="table-div" id="containerChart">
               <div id="chart">
               </div>
             </div>
            </div>
            <div class="three columns">
-            <div class="table-div">
+            <div class="table-div" id="containerChart2">
               <div id="chart2"></div>
             </div>
            </div><div class="three columns">
@@ -219,8 +219,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
     (function(d3) {
       'use strict';
 
-      var width = 360;
-      var height = 360;
+      var width = document.getElementById('containerChart2').offsetWidth;
+      var height = document.getElementById('containerChart2').offsetHeight;
       var radius = Math.min(width, height) / 2;
       var donutWidth = 75;
       var legendRectSize = 18;
@@ -323,12 +323,12 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
   buildTreeMap(){
     var margin = { top: 30, right: 0, bottom: 20, left: 0 },
-      width = 960,
-      height = 500 - margin.top - margin.bottom,
+        width = document.getElementById('containerChart').offsetWidth;
+      height = document.getElementById('containerChart').offsetHeight;
       formatNumber = d3.format(",%"),
-      colorDomain = [-.6, 0, .6],
-      colorRange = ["#373a93", 'white', "#936638"],
-      transitioning;
+        colorDomain = [-.6, 0, .6],
+        colorRange = ["#373a93", 'white', "#936638"],
+        transitioning = false;
 
     // sets x and y scale to determine size of visible boxes
     var x = d3.scale.linear()
