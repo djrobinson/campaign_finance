@@ -25,6 +25,7 @@ export class PieComponent implements OnInit, OnChanges {
 
   callAsc(associatedCommittees) {
       console.log("callAsc");
+      var buildPieChart = this.buildPieChart;
       var http = this.http;
       var indivToCommittees = [];
       var pieData = [
@@ -51,31 +52,35 @@ export class PieComponent implements OnInit, OnChanges {
       ];
       var j = 0;
       associatedCommittees.forEach(function(cmte, i) {
-        http.get('api/individuals/'+cmte.CMTE_ID+'/recipient').map(response => response.json()).subscribe(data=>{
+        http.get('api/individuals/committee/'+cmte.CMTE_ID).map(response => response.json()).subscribe(
+          data=>{
           // indivToCommittees = indivToCommittees.concat(data);
           console.log(data);
-          data.forEach(function(data) {
-            var amt = parseFloat(data.TRANSACTION_AMT);
+          var chartStuff =  data.reduce(function(prev, curr) {
+            var amt = parseFloat(curr.TRANSACTION_AMT);
             if (amt > 2700) {
-              pieData[0].amount += amt;
+              prev[0].amount += amt;
+              return prev;
             } else if (amt > 1500) {
-              pieData[1].amount += amt;
+              prev[1].amount += amt;
+              return prev;
             } else if (amt > 500) {
-              pieData[2].amount += amt;
+              prev[2].amount += amt;
+              return prev;
             } else if (amt > 200) {
-              pieData[3].amount += amt;
+              prev[3].amount += amt;
+              return prev;
             } else {
-              pieData[4].amount += amt;
+              prev[4].amount += amt;
+              return prev;
             }
-          })
+
+          }, pieData)
+          if (i === associatedCommittees.length - 1) {
+            buildPieChart(chartStuff);
+          }
         })
-        j = i;
       })
-
-      if (j === associatedCommittees.length) {
-        this.buildPieChart(pieData);
-      }
-
   }
 
 

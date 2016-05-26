@@ -52,7 +52,6 @@ module.exports = {
     return knex('indiv_contrib')
            .where({'CMTE_ID': cmte_id})
            .orderBy('TRANSACTION_AMT', 'desc')
-           .limit(100)
            .offset(offset);
   }
 }
