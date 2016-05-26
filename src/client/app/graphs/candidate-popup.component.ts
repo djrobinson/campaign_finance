@@ -1,4 +1,4 @@
-  import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {TitleService} from '../api_services/title.service';
@@ -199,7 +199,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       this.http.get('/api/contributions/'+fecId+'/candidate').map((res: Response) => res.json()),
       this.http.get('/api/candidates/'+fecId+'/committees').map((res: Response) => res.json()),
       this.http.get('/api/pac/'+fecId+'/candidate').map((res: Response) => res.json()),
-      this.http.get('/api/pac/aggregate/'+fecId).map((res: Response) => res.json()),
 
     ).subscribe(
       data => {
@@ -209,7 +208,13 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.contributions = data[2];
         this.associatedCommittees = data[3];
         this.pacSpends = data[4];
-        this.pacAgg = data[5];
+        this.treeMapInput = data[4].reduce(function(prev, curr) {
+
+        }, {
+            "children": [],
+            "support": 1,
+            "name": "All Superpac Expenditures Supporting or Opposing Candidate"
+        });
       },
       err => console.error(err)
     );
