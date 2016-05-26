@@ -142,6 +142,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.imageVar = {};
         this.imageVar.image = 'https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/'+ this.candidateInfo.id.bioguide + '.jpg';
       } else {
+        this.imageVar = {};
+        this.imageVar.image = "";
         this.callPresApis(this.candidate)
       }
     }, error => console.log('Could not load todos.'));
