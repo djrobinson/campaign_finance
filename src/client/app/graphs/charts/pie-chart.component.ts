@@ -31,23 +31,28 @@ export class PieComponent implements OnInit, OnChanges {
       var pieData = [
         {
           label: '>2700',
-          amount: 0
+          amount: 0,
+          count: 0
         },
         {
           label: '1500-2699',
-          amount: 0
+          amount: 0,
+          count: 0
         },
         {
           label: '500-1499',
-          amount: 0
+          amount: 0,
+          count: 0
         },
         {
           label: '200-499',
-          amount: 0
+          amount: 0,
+          count: 0
         },
         {
           label: '<200',
-          amount: 0
+          amount: 0,
+          count: 0
         }
       ];
       var j = 0;
@@ -60,18 +65,23 @@ export class PieComponent implements OnInit, OnChanges {
             var amt = parseFloat(curr.TRANSACTION_AMT);
             if (amt > 2700) {
               prev[0].amount += amt;
+              prev[0].count += 1;
               return prev;
             } else if (amt > 1500) {
               prev[1].amount += amt;
+              prev[1].count += 1;
               return prev;
             } else if (amt > 500) {
               prev[2].amount += amt;
+              prev[2].count += 1;
               return prev;
             } else if (amt > 200) {
               prev[3].amount += amt;
+              prev[3].count += 1;
               return prev;
             } else {
               prev[4].amount += amt;
+              prev[4].count += 1;
               return prev;
             }
 
@@ -128,7 +138,8 @@ export class PieComponent implements OnInit, OnChanges {
       tooltip.append('div')
         .attr('class', 'percent');
 
-      d3.csv('app/graphs/test.csv', function(error, dataset) {
+      start(pieData);
+      function start(dataset){
         dataset.forEach(function(d) {
           d.count = +d.count;
         });

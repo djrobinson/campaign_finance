@@ -66,7 +66,7 @@ import {PieComponent} from './charts/pie-chart.component';
             </pie-chart>
            </div>
            <div class="three columns">
-              <treemap>
+              <treemap route="/api/pac/aggregate/P00003392">
               </treemap>
            </div><div class="three columns">
             <div class="table-div">

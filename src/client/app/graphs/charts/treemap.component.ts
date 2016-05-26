@@ -24,14 +24,13 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
   `]
 })
 export class TreemapComponent implements OnInit, OnChanges {
-  //May want to start creating individual/committee types.
-
+  @Input() route: string;
 
   ngOnInit(){
-    this.buildTreeMap(this.rootData);
+    this.buildTreeMap(this.route);
   }
 
-  buildTreeMap(root) {
+  buildTreeMap(route) {
 
     var randomColor = (function() {
       var golden_ratio_conjugate = 0.618033988749895;
@@ -201,7 +200,7 @@ export class TreemapComponent implements OnInit, OnChanges {
 
     //starts w/ passed in data
     ///api/pac/aggregate/P00003392
-    d3.json('/api/pac/aggregate/P00003392', function(root) {
+    d3.json(route, function(root) {
       initialize(root);
       accumulate(root);
       layout(root);
