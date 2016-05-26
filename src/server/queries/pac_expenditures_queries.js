@@ -14,6 +14,12 @@ module.exports = {
            .limit(100)
            .offset(offset);
   },
+  getAllIndExpendByCand: function(cand_id, offset){
+    return knex('independent_expenditures')
+           .where({'can_id': cand_id})
+           .orderBy('exp_amo', 'desc')
+           .offset(offset);
+  },
   getIndExpendByComm: function(cmte_id, offset){
     return knex('independent_expenditures')
            .where({'spe_id': cmte_id})

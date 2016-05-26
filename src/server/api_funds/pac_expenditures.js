@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var query = require('../queries/pac_expenditures_queries.js');
-
+var _ = require('lodash');
 /*
   LIMIT & OFFSET ON ALL ROUTES
 */
@@ -107,8 +107,43 @@ router.get('/aggregate', function(req, res, next){
 });
 
 router.get('/aggregate/:cand_id', function(req, res, next){
-  query.candExpByCat(req.params.cand_id).then(function(data){
-    res.json(data);
+  query.getAllIndExpendByCand(req.params.cand_id).then(function(data){
+
+    var graphVals = data.reduce(function(prev, curr) {
+          var currIndex = _.findIndex(prev.children, {"id": curr.spe_id});
+          if (currIndex === -1){
+            prev.amount += parseFloat(curr.exp_amo);
+            prev.children.push({
+              "children": [{
+                "support": curr.sup_opp,
+                "name": curr.pay,
+                "purpose": curr.pur,
+                "value": parseFloat(curr.exp_amo)
+              }],
+              "support": curr.sup_opp,
+              "name": curr.spe_nam,
+              "id": curr.spe_id,
+              "value": parseFloat(curr.exp_amo)
+            })
+            return prev;
+          } else {
+            prev.amount += parseFloat(curr.exp_amo);
+            prev.children[currIndex].amount += parseFloat(curr.exp_amo);
+            prev.children[currIndex].children.push({
+              "support": curr.sup_opp,
+              "name": curr.pay,
+              "purpose": curr.pur,
+              "value": parseFloat(curr.exp_amo)
+            })
+            return prev;
+          }
+        }, {
+            "children": [],
+            "support": 1,
+            "amount": 0,
+            "name": "All Superpac Expenditures Supporting or Opposing Candidate"
+        });
+    res.json(graphVals);
   });
 });
 

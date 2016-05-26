@@ -5,6 +5,7 @@ import {TitleService} from '../api_services/title.service';
 import {TreemapComponent} from './charts/treemap.component';
 import {PieComponent} from './charts/pie-chart.component';
 
+
 @Component({
   selector: 'candidate-popup',
   template: `
@@ -208,13 +209,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.contributions = data[2];
         this.associatedCommittees = data[3];
         this.pacSpends = data[4];
-        this.treeMapInput = data[4].reduce(function(prev, curr) {
-
-        }, {
-            "children": [],
-            "support": 1,
-            "name": "All Superpac Expenditures Supporting or Opposing Candidate"
-        });
       },
       err => console.error(err)
     );

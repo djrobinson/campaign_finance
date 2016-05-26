@@ -17,212 +17,24 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
       height: 400px;
       width: 400px;
     }
+    rect {
+      stroke: black;
+      stroke-width: 1px;
+    }
   `]
 })
 export class TreemapComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
 
-private rootData = {
-  "children": [
-    {
-      "children": [
-        {
-          "rate": -0.4066358024691358,
-          "value": 769,
-          "name": "Black or African American, Non-Hispanic"
-        },
-        {
-          "rate": -0.35092180546726004,
-          "value": 1021,
-          "name": "Hispanic or Latino"
-        },
-        {
-          "rate": -0.44886363636363635,
-          "value": 291,
-          "name": "White, Non-Hispanic"
-        },
-        {
-          "rate": -0.4716981132075472,
-          "value": 28,
-          "name": "American Indian or Alaska Native, Non-Hispanic"
-        },
-        {
-          "rate": -0.234860883797054,
-          "value": 935,
-          "name": "Asian or Pacific Islander, Non-Hispanic"
-        }
-      ],
-      "rate": -0.348458904109589,
-      "name": "25-44 years"
-    },
-    {
-      "children": [
-        {
-          "rate": -0.36470588235294116,
-          "value": 324,
-          "name": "Black or African American, Non-Hispanic"
-        },
-        {
-          "rate": -0.06147540983606557,
-          "value": 458,
-          "name": "Hispanic or Latino"
-        },
-        {
-          "rate": -0.3368055555555556,
-          "value": 573,
-          "name": "White, Non-Hispanic"
-        },
-        {
-          "rate": 0.14285714285714285,
-          "value": 32,
-          "name": "American Indian or Alaska Native, Non-Hispanic"
-        },
-        {
-          "rate": 0.010443864229765013,
-          "value": 774,
-          "name": "Asian or Pacific Islander, Non-Hispanic"
-        }
-      ],
-      "rate": -0.18637048192771086,
-      "name": "65+ years"
-    },
-    {
-      "children": [
-        {
-          "rate": -0.4,
-          "value": 72,
-          "name": "Black or African American, Non-Hispanic"
-        },
-        {
-          "rate": -0.4645669291338583,
-          "value": 68,
-          "name": "Hispanic or Latino"
-        },
-        {
-          "rate": -0.20833333333333334,
-          "value": 19,
-          "name": "White, Non-Hispanic"
-        },
-        {
-          "rate": 1.4,
-          "value": 12,
-          "name": "American Indian or Alaska Native, Non-Hispanic"
-        },
-        {
-          "rate": 0.18604651162790697,
-          "value": 51,
-          "name": "Asian or Pacific Islander, Non-Hispanic"
-        }
-      ],
-      "rate": -0.30407523510971785,
-      "name": "5-14 years"
-    },
-    {
-      "children": [
-        {
-          "rate": -0.5954198473282443,
-          "value": 53,
-          "name": "Black or African American, Non-Hispanic"
-        },
-        {
-          "rate": -0.5423076923076923,
-          "value": 119,
-          "name": "Hispanic or Latino"
-        },
-        {
-          "rate": -0.575,
-          "value": 17,
-          "name": "White, Non-Hispanic"
-        },
-        {
-          "rate": 0.75,
-          "value": 7,
-          "name": "American Indian or Alaska Native, Non-Hispanic"
-        },
-        {
-          "rate": 0.2391304347826087,
-          "value": 57,
-          "name": "Asian or Pacific Islander, Non-Hispanic"
-        }
-      ],
-      "rate": -0.47401247401247404,
-      "name": "0-4 years"
-    },
-    {
-      "children": [
-        {
-          "rate": -0.39619651347068147,
-          "value": 762,
-          "name": "Black or African American, Non-Hispanic"
-        },
-        {
-          "rate": -0.1719260065288357,
-          "value": 761,
-          "name": "Hispanic or Latino"
-        },
-        {
-          "rate": -0.2727272727272727,
-          "value": 608,
-          "name": "White, Non-Hispanic"
-        },
-        {
-          "rate": -0.23809523809523808,
-          "value": 48,
-          "name": "American Indian or Alaska Native, Non-Hispanic"
-        },
-        {
-          "rate": -0.05090137857900318,
-          "value": 895,
-          "name": "Asian or Pacific Islander, Non-Hispanic"
-        }
-      ],
-      "rate": -0.2358936117325379,
-      "name": "45-64 years"
-    },
-    {
-      "children": [
-        {
-          "rate": -0.3829268292682927,
-          "value": 253,
-          "name": "Black or African American, Non-Hispanic"
-        },
-        {
-          "rate": -0.46920821114369504,
-          "value": 362,
-          "name": "Hispanic or Latino"
-        },
-        {
-          "rate": -0.3368421052631579,
-          "value": 63,
-          "name": "White, Non-Hispanic"
-        },
-        {
-          "rate": 0.6363636363636364,
-          "value": 18,
-          "name": "American Indian or Alaska Native, Non-Hispanic"
-        },
-        {
-          "rate": -0.06116207951070336,
-          "value": 307,
-          "name": "Asian or Pacific Islander, Non-Hispanic"
-        }
-      ],
-      "rate": -0.3422950819672131,
-      "name": "15-24 years"
-    }
-  ],
-  "rate": -0.28656039777712783,
-  "name": "2006 to 2012"
-}
 
   ngOnInit(){
     this.buildTreeMap(this.rootData);
   }
 
   buildTreeMap(root) {
-    var margin = { top: 30, right: 0, bottom: 20, left: 0 },
-      width = document.getElementById('containerChart').offsetWidth;
-    height = document.getElementById('containerChart').offsetHeight;
+    var margin = { top: 30, right: 0, bottom: 20, left: 0 };
+    var width = document.getElementById('containerChart').offsetWidth;
+    var height = document.getElementById('containerChart').offsetHeight;
     formatNumber = d3.format(",%"),
       colorDomain = [-.6, 0, .6],
       colorRange = ["#373a93", 'white', "#936638"],
@@ -291,7 +103,7 @@ private rootData = {
     }
 
 
-    // Aggregate the values for internal nodes. This is normally done by the
+    // Aggregate the amounts for internal nodes. This is normally done by the
     // treemap layout, but not here because of our custom implementation.
     // We also take a snapshot of the original children (_children) to avoid
     // the children being overwritten when when layout is computed.
@@ -335,7 +147,7 @@ private rootData = {
     legend.append("rect")
       .attr("x", function(d) { return margin.left + d * 40 })
       .attr("y", 0)
-      .attr("fill", function(d) { return color(colorIncrements(d)) })
+      .attr("fill", function(d) { return 'blue' })
       .attr('width', '40px')
       .attr('height', '40px')
 
@@ -351,9 +163,8 @@ private rootData = {
     }
 
     //starts w/ passed in data
-    start(root);
-
-    function start(root) {
+    ///api/pac/aggregate/P00003392
+    d3.json('/api/pac/aggregate/P00003392', function(root) {
       console.log(root)
       initialize(root);
       accumulate(root);
@@ -371,7 +182,7 @@ private rootData = {
         grandparent
           .datum(d.parent)
           .select("rect")
-          .attr("fill", function() { console.log(color(d.support)); return color(d['support']) })
+          .attr("fill", function() { return 'blue' })
 
         var g1 = svg.insert("g", ".grandparent")
           .datum(d)
@@ -395,7 +206,7 @@ private rootData = {
           .attr("class", "parent")
           .call(rect)
           .append("title")
-          .text(function(d) { console.log(typeof (d.value), d.value); return d.name + ', Cases of TB: ' + d.value + ', percent change: ' + formatNumber(d.support); });
+          .text(function(d) { console.log(typeof (d.value), d.value); return d.name + ', Size of Donation: ' + d.value; });
 
         g.append("text")
           .attr("dy", ".75em")
@@ -442,7 +253,7 @@ private rootData = {
       function text(text) {
         text.attr("x", function(d) { return x(d.x) + 6; })
           .attr("y", function(d) { return y(d.y) + 6; })
-          .attr("fill", function(d) { return getContrast50(color(parseFloat(d.support))) });
+          .attr("fill", function(d) { return 'black' });
       }
 
       function rect(rect) {
@@ -450,7 +261,7 @@ private rootData = {
           .attr("y", function(d) { return y(d.y); })
           .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
           .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); })
-          .attr("fill", function(d) { return color(parseFloat(d.rate)); });
+          .attr("fill", function(d) { return 'blue' });
       }
 
       function name(d) {
@@ -458,8 +269,10 @@ private rootData = {
           ? name(d.parent) + "." + d.name
           : d.name;
       }
-    }
+    });
+
   }
+
 
 
   close() {
