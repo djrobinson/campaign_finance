@@ -4,10 +4,9 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
   selector: 'treemap',
   template: `
     <div class="row">
-
-    </div>
-    <div class="row indiv twelve columns">
-      <button (click)="close()">Close</button>
+      <div class="table-div" id="containerChart">
+        <div id="chart"></div>
+      </div>
     </div>
   `,
   styles: [`

@@ -2,6 +2,8 @@
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {TitleService} from '../api_services/title.service';
+import {TreemapComponent} from './charts/treemap.component';
+import {PieComponent} from './charts/pie-chart.component';
 
 @Component({
   selector: 'candidate-popup',
@@ -58,15 +60,12 @@ import {TitleService} from '../api_services/title.service';
         </div>
         <div class="row">
            <div class="three columns">
-            <div class="table-div" id="containerChart">
-              <div id="chart">
-              </div>
-            </div>
+            <pie-chart>
+            </pie-chart>
            </div>
            <div class="three columns">
-            <div class="table-div" id="containerChart2">
-              <div id="chart2"></div>
-            </div>
+              <treemap>
+              </treemap>
            </div><div class="three columns">
             <div class="table-div">
               <ul>
@@ -86,6 +85,7 @@ import {TitleService} from '../api_services/title.service';
       </div>
     </div>
   `,
+  directives: [TreemapComponent, PieComponent],
   styles: [`
     .cand-style {
       text-align: center;
@@ -130,8 +130,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
   ngOnInit(){
     console.log(this.candidate);
-    this.buildTreeMap();
-    this.buildPieChart();
+    // this.buildTreeMap();
+    // this.buildPieChart();
     this.http.get('/api/legislators/' + this.candidate).map(response => response.json()).subscribe(data => {
       console.log("cand info: ",data);
       this.candidateInfo = data[0];
