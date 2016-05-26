@@ -164,19 +164,26 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       this.http.get('/api/candidates/'+fecId+'/committees').map((res: Response) => res.json()),
       this.http.get('/api/votes/'+voteId+'/yeas').map((res: Response) => res.json()),
       this.http.get('/api/votes/'+voteId+'/nays').map((res: Response) => res.json()),
+      this.http.get('/api/votes/tallies/yea').map((res: Response) => res.json()),
+      this.http.get('/api/votes/tallies/nay').map((res: Response) => res.json()),
       this.http.get('/api/pac/'+fecId+'/candidate').map((res: Response) => res.json()),
       this.http.get('/api/pac/aggregate/'+fecId).map((res: Response) => res.json())
 
     ).subscribe(
       data => {
+        console.log(data);
         this.candidate = data[0][0];
         this.disbursements = data[1];
         this.contributions = data[2];
         this.associatedCommittees = data[3];
         this.yeaVotes = data[4];
         this.nayVotes = data[5];
-        this.pacSpends = data[6];
-        this.pacAgg = data[7];
+        this.allNays = data[6];
+        this.allYeas = data[7];
+        this.pacSpends = data[8];
+        this.pacAgg = data[9];
+
+
         this.pieComponent.callAsc(data[3]);
 
       },
@@ -194,6 +201,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
     ).subscribe(
       data => {
+        console.log(data);
         this.candidate = data[0][0];
         this.disbursements = data[1];
         this.contributions = data[2];

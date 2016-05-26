@@ -24,7 +24,6 @@ export class PieComponent implements OnInit, OnChanges {
   constructor(private http:Http) {}
 
   callAsc(associatedCommittees) {
-      console.log("callAsc");
       var buildPieChart = this.buildPieChart;
       var http = this.http;
       var indivToCommittees = [];
@@ -60,7 +59,6 @@ export class PieComponent implements OnInit, OnChanges {
         http.get('api/individuals/committee/'+cmte.CMTE_ID).map(response => response.json()).subscribe(
           data=>{
           // indivToCommittees = indivToCommittees.concat(data);
-          console.log(data);
           var chartStuff =  data.reduce(function(prev, curr) {
             var amt = parseFloat(curr.TRANSACTION_AMT);
             if (amt > 2700) {
@@ -96,7 +94,6 @@ export class PieComponent implements OnInit, OnChanges {
 
 
   buildPieChart(pieData) {
-    console.log("Pie! ", pieData);
     (function(d3) {
       'use strict';
 
@@ -204,7 +201,6 @@ export class PieComponent implements OnInit, OnChanges {
   }
 
   close() {
-    console.log("CLOSE");
     this.exitEmit.emit({
       exit: true
     });
