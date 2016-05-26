@@ -32,6 +32,43 @@ export class TreemapComponent implements OnInit, OnChanges {
   }
 
   buildTreeMap(root) {
+
+    var randomColor = (function() {
+      var golden_ratio_conjugate = 0.618033988749895;
+      var h = Math.random();
+
+      var hslToRgb = function(h, s, l) {
+        var r, g, b;
+
+        if (s == 0) {
+          r = g = b = l; // achromatic
+        } else {
+          function hue2rgb(p, q, t) {
+            if (t < 0) t += 1;
+            if (t > 1) t -= 1;
+            if (t < 1 / 6) return p + (q - p) * 6 * t;
+            if (t < 1 / 2) return q;
+            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+            return p;
+          }
+
+          var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+          var p = 2 * l - q;
+          r = hue2rgb(p, q, h + 1 / 3);
+          g = hue2rgb(p, q, h);
+          b = hue2rgb(p, q, h - 1 / 3);
+        }
+
+        return '#' + Math.round(r * 255).toString(16) + Math.round(g * 255).toString(16) + Math.round(b * 255).toString(16);
+      };
+
+      return function() {
+        h += golden_ratio_conjugate;
+        h %= 1;
+        return hslToRgb(h, 0.5, 0.60);
+      };
+    })();
+
     var margin = { top: 30, right: 0, bottom: 20, left: 0 };
     var width = document.getElementById('containerChart').offsetWidth;
     var height = document.getElementById('containerChart').offsetHeight;
@@ -147,7 +184,7 @@ export class TreemapComponent implements OnInit, OnChanges {
     legend.append("rect")
       .attr("x", function(d) { return margin.left + d * 40 })
       .attr("y", 0)
-      .attr("fill", function(d) { return 'blue' })
+      .attr("fill", function(d) { return randomColor(); })
       .attr('width', '40px')
       .attr('height', '40px')
 
@@ -182,7 +219,7 @@ export class TreemapComponent implements OnInit, OnChanges {
         grandparent
           .datum(d.parent)
           .select("rect")
-          .attr("fill", function() { return 'blue' })
+          .attr("fill", function() { return randomColor(); })
 
         var g1 = svg.insert("g", ".grandparent")
           .datum(d)
@@ -261,7 +298,7 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("y", function(d) { return y(d.y); })
           .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
           .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); })
-          .attr("fill", function(d) { return 'blue' });
+          .attr("fill", function(d) { return randomColor(); });
       }
 
       function name(d) {
