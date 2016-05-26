@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var query = require('../queries/opex_queries.js');
+var _ = require('lodash');
+
 
 router.get('/', function(req, res, next){
   if (req.query.offset){
@@ -54,6 +56,57 @@ router.get('/recipients', function(req, res, next){
     }
   }
 });
+
+
+router.get('/aggregate/:cmte_id', function(req, res, next){
+  query.getOpexByCmte(req.params.cmte_id).then(function(data){
+    var graphVals = data.reduce(function(prev, curr) {
+          var currIndex = _.findIndex(prev.children, {"id": curr.spe_id});
+          var exp_amo = parseFloat(curr.TRANSACTION_AMT);
+          if (currIndex === -1){
+            prev.amount += exp_amo;
+            prev.children.push({
+              "children": [{
+                "name": curr.NAME,
+                "value": exp_amo,
+                "children": [{
+                  "name": curr.NAME,
+                  "purpose": curr.PURPOSE,
+                  "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.IMAGE_NUM,
+                  "amount": curr.exp_amo
+                }]
+              }],
+              "name": curr.NAME,
+              "id": curr.CMTE_ID,
+              "value": exp_amo
+            })
+            return prev;
+          } else {
+            prev.amount += parseFloat(curr.exp_amo);
+            prev.children[currIndex].amount += parseFloat(curr.exp_amo);
+            prev.children[currIndex].children.push({
+              "name": curr.NAME,
+              "purpose": curr.PURPOSE,
+              "value": exp_amo,
+              "children": [{
+                  "name": curr.NAME,
+                  "purpose": curr.PURPOSE,
+                  "value": exp_amo,
+                  "date": curr.TRANSACTION_DT,
+                  "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.IMAGE_NUM
+                }]
+            })
+            return prev;
+          }
+        }, {
+            "children": [],
+            "support": 1,
+            "amount": 0,
+            "name": "All Superpac Expenditures Supporting or Opposing Candidate"
+        });
+    res.json(graphVals);
+  });
+})
 
 
 module.exports = router;
