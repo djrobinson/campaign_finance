@@ -202,7 +202,6 @@ export class TreemapComponent implements OnInit, OnChanges {
     //starts w/ passed in data
     ///api/pac/aggregate/P00003392
     d3.json('/api/pac/aggregate/P00003392', function(root) {
-      console.log(root)
       initialize(root);
       accumulate(root);
       layout(root);
@@ -243,7 +242,7 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("class", "parent")
           .call(rect)
           .append("title")
-          .text(function(d) { console.log(typeof (d.value), d.value); return d.name + ', Size of Donation: ' + d.value; });
+          .text(function(d) { return d.name + ', Size of Donation: ' + d.value; });
 
         g.append("text")
           .attr("dy", ".75em")
@@ -313,7 +312,6 @@ export class TreemapComponent implements OnInit, OnChanges {
 
 
   close() {
-    console.log("CLOSE");
     this.exitEmit.emit({
       exit: true
     });

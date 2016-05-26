@@ -1,4 +1,6 @@
-import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
+import {Component, Input, OnInit, OnChanges, EventEmitter} from 'angular2/core';
+import {Http, Response} from 'angular2/http';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'pie-chart',
@@ -19,13 +21,67 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
   `]
 })
 export class PieComponent implements OnInit, OnChanges {
-  //May want to start creating individual/committee types.
+  constructor(private http:Http) {}
 
-  ngOnInit(){
-    this.buildPieChart();
+  callAsc(associatedCommittees) {
+      console.log("callAsc");
+      var http = this.http;
+      var indivToCommittees = [];
+      var pieData = [
+        {
+          label: '>2700',
+          amount: 0
+        },
+        {
+          label: '1500-2699',
+          amount: 0
+        },
+        {
+          label: '500-1499',
+          amount: 0
+        },
+        {
+          label: '200-499',
+          amount: 0
+        },
+        {
+          label: '<200',
+          amount: 0
+        }
+      ];
+      var j = 0;
+      associatedCommittees.forEach(function(cmte, i) {
+        http.get('api/individuals/'+cmte.CMTE_ID+'/recipient').map(response => response.json()).subscribe(data=>{
+          // indivToCommittees = indivToCommittees.concat(data);
+          console.log(data);
+          data.forEach(function(data) {
+            var amt = parseFloat(data.TRANSACTION_AMT);
+            if (amt > 2700) {
+              pieData[0].amount += amt;
+            } else if (amt > 1500) {
+              pieData[1].amount += amt;
+            } else if (amt > 500) {
+              pieData[2].amount += amt;
+            } else if (amt > 200) {
+              pieData[3].amount += amt;
+            } else {
+              pieData[4].amount += amt;
+            }
+          })
+        })
+        j = i;
+      })
+
+      if (j === associatedCommittees.length) {
+        this.buildPieChart(pieData);
+      }
+
   }
 
-  buildPieChart() {
+
+
+  buildPieChart(pieData) {
+    console.log("Pie! ", pieData);
     (function(d3) {
       'use strict';
 
