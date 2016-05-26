@@ -111,19 +111,27 @@ router.get('/aggregate/:cand_id', function(req, res, next){
 
     var graphVals = data.reduce(function(prev, curr) {
           var currIndex = _.findIndex(prev.children, {"id": curr.spe_id});
+          var exp_amo = parseFloat(curr.exp_amo);
           if (currIndex === -1){
-            prev.amount += parseFloat(curr.exp_amo);
+            prev.amount += exp_amo;
             prev.children.push({
               "children": [{
-                "support": curr.sup_opp,
                 "name": curr.pay,
-                "purpose": curr.pur,
-                "value": parseFloat(curr.exp_amo)
+                "value": exp_amo,
+                "children": [{
+                  "name": curr.spe_nam,
+                  "to": curr.pay,
+                  "purpose": curr.pur,
+                  "amount": curr.exp_amo,
+                  "value": exp_amo,
+                  "date": curr.rec_dat,
+                  "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.ima_num
+                }]
               }],
               "support": curr.sup_opp,
               "name": curr.spe_nam,
               "id": curr.spe_id,
-              "value": parseFloat(curr.exp_amo)
+              "value": exp_amo
             })
             return prev;
           } else {
@@ -133,7 +141,16 @@ router.get('/aggregate/:cand_id', function(req, res, next){
               "support": curr.sup_opp,
               "name": curr.pay,
               "purpose": curr.pur,
-              "value": parseFloat(curr.exp_amo)
+              "value": exp_amo,
+              "children": [{
+                  "name": curr.spe_nam,
+                  "to": curr.pay,
+                  "purpose": curr.pur,
+                  "amount": curr.exp_amo,
+                  "value": exp_amo,
+                  "date": curr.rec_dat,
+                  "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.ima_num
+                }]
             })
             return prev;
           }
