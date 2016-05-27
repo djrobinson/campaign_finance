@@ -10,17 +10,17 @@ import {PieComponent} from './charts/pie-chart.component';
   selector: 'candidate-popup',
   template: `
     <div class="cand-style">
-    <div class="nine columns">
+    <div class="eight columns">
       <div class="row">
-        <div class="three columns">
+        <div class="four columns">
             <h4>{{candidate?.CANDIDATE_NAME}}</h4>
             <img [src]="imageVar?.image" alt="picture">
         </div>
-        <div class="three columns pie">
+        <div class="four columns pie">
           <pie-chart>
           </pie-chart>
         </div>
-        <div class="three columns">
+        <div class="four columns">
           <p>Office Sought: {{candidate?.CANDIDATE_OFFICE}}</p>
           <p>Hometown: {{candidate?.can_cit}}, {{candidate?.STATE}}</p>
           <p>Birthdate: {{candidateInfo?.bio?.birthday}}</p>
@@ -37,13 +37,13 @@ import {PieComponent} from './charts/pie-chart.component';
         </div>
       </div>
       <div class="row">
-        <div class="six columns treemap">
+        <div class="eight columns treemap">
           <treemap route="/api/pac/aggregate/P00003392">
           </treemap>
         </div>
       </div>
     </div>
-      <div class="three columns">
+      <div class="four columns">
         <h3>Usage of Funds</h3>
         <div class="table-div">
           <ul>
@@ -65,6 +65,12 @@ import {PieComponent} from './charts/pie-chart.component';
     }
     div {
       border: solid 1px #75717B;
+    }
+    .columns {
+      margin: 0 !important;
+    }
+    .column {
+      margin: 0 !important;
     }
     img {
       width: 100%;
