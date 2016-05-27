@@ -162,35 +162,47 @@ export class CongressPopupComponent implements OnInit, OnChanges {
       this.http.get('/api/candidates/' + fecId + '/committees').map((res: Response) => res.json()),
       this.http.get('/api/votes/' + voteId + '/yeas').map((res: Response) => res.json()),
       this.http.get('/api/votes/' + voteId + '/nays').map((res: Response) => res.json()),
+      this.http.get('/api/votes/' + voteId + '/novotes').map((res: Response) => res.json()),
       this.http.get('/api/votes/tallies/yea').map((res: Response) => res.json()),
       this.http.get('/api/votes/tallies/nay').map((res: Response) => res.json()),
+      this.http.get('/api/votes/tallies/novote').map((res: Response) => res.json()),
       this.http.get('/api/pac/' + fecId + '/candidate').map((res: Response) => res.json()),
       this.http.get('/api/pac/aggregate/' + fecId).map((res: Response) => res.json())
 
     ).subscribe(
       data => {
-        console.log(data);
+        console.log("Data ", data);
         this.candidate = data[0][0];
         this.disbursements = data[1];
         this.contributions = data[2];
         this.associatedCommittees = data[3];
         this.yeaVotes = data[4];
         this.nayVotes = data[5];
-        this.allNays = data[6];
-        this.allYeas = data[7];
-        this.pacSpends = data[8];
-        this.pacAgg = data[9];
-
+        this.absentVotes = data[6];
+        this.allNays = data[7];
+        this.allYeas = data[8];
+        this.allAbsents = data[9];
+        this.pacSpends = data[10];
+        this.pacAgg = data[11];
 
         this.pieComponent.callAsc(data[3]);
-
+        this.tallyYeas(this.yeaVotes, this.allYeas);
       },
       err => console.error(err)
       );
   }
 
-  tallyVotes(){
+  tallyYeas(candYeas, allYeas){
+    candYeas.reduce((prev, curr) => {
+      console.log("Outer vote ", curr.vote_id);
+      allYeas.forEach(vote =>{
+        console.log("inner vote ", vote._id.vote_id);
+        if (vote.vote_id === curr.vote_id){
 
+        }
+      })
+      return prev;
+    },[])
   }
 
   close() {

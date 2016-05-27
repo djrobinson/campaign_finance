@@ -78,7 +78,7 @@ router.get('/:cand_id/yeas',function(req, res, next){
                       {"votes.Yea.id":cand}
                     },
                     {"$project":
-                      {"question":1, "source_url": 1}
+                      {"question":1, "source_url": 1, "vote_id": 1}
                     }],
                     function(err, vote){
       if (err) throw err;
@@ -100,7 +100,7 @@ router.get('/:cand_id/nays',function(req, res, next){
                       {"votes.Nay.id":cand}
                     },
                     {"$project":
-                      {"question":1, "source_url": 1}
+                      {"question":1, "source_url": 1, "vote_id": 1}
                     }],
                     function(err, vote){
       if (err) throw err;
@@ -121,7 +121,7 @@ router.get('/:cand_id/novotes', function(req, res, next){
                       {"votes.Not Voting.id":cand}
                     },
                     {"$project":
-                      {"question":1, "source_url": 1}
+                      {"question":1, "source_url": 1, "vote_id": 1}
                     }],
                     function(err, vote){
       if (err) throw err;
