@@ -48,15 +48,13 @@ import {PieComponent} from './charts/pie-chart.component';
           </div>
         </div>
         <div class="three columns">
-
-            <div>
-              <h3>Usage of Funds</h3>
+            <div class="votes" *ngFor="#vote of AllYeaVotes">
+              <p>Question: {{vote.question}}</p>
+              <p>Yeas Party: {{vote.yeas[0].party}}</p>
+              <p>Yeas Count: {{vote.yeas[0].count}}</p>
+              <p>Nay Party: {{vote.nays[0].party}}</p>
+              <p>Nay Count: {{vote.nays[0].count}}</p>
             </div>
-            <div class="table-div">
-              <ul>
-                <li  *ngFor="#pacspend of pacSpends">{{pacspend.pay}} {{pacspend.exp_amo}}</li>
-              </ul>
-          </div>
         </div>
         <div class="row">
            <div class="three columns">
@@ -108,6 +106,9 @@ import {PieComponent} from './charts/pie-chart.component';
     .table-div {
       height: 300px;
       overflow: scroll;
+    }
+    .votes {
+      width: 100%;
     }
   `]
 })
@@ -184,11 +185,10 @@ export class CongressPopupComponent implements OnInit, OnChanges {
         this.pacAgg = data[11];
 
         this.pieComponent.callAsc(data[3]);
-        this.AllYeas = this.tallyYeas(this.yeaVotes, this.allYeas);
-        this.AllNays = this.tallyNays(this.nayVotes, this.allNays);
-        this.AllNoVotes = this.tallyNoVotes(this.absentVotes, this.allAbsents);
-
-        console.log(this.AllYeas, this.AllNays, this.AllNoVotes);
+        // this.AllYeas = this.tallyYeas(this.yeaVotes, this.allYeas);
+        // this.AllNays = this.tallyNays(this.nayVotes, this.allNays);
+        this.AllYeaVotes = this.tallyAllVotes(this.yeaVotes, this.allNays, this.allYeas, this.allAbsents)
+        console.log(this.AllYeaVotes);
 
 
       },
@@ -226,17 +226,51 @@ export class CongressPopupComponent implements OnInit, OnChanges {
     }, [])
   }
 
-  tallyNoVotes(candNays, allNays) {
-    return candNays.reduce((prev, curr) => {
-      var dingo = allNays.reduce(function(inPrev, inCurr) {
+  tallyAllVotes(candVotes, allNays, allYeas, allAbsents) {
+    return candVotes.reduce((prev, curr) => {
+      var nays = allNays.reduce(function(inPrev, inCurr) {
         if (inCurr._id.vote_id === curr.vote_id) {
-          inPrev.push(inCurr);
+          inPrev.push({
+            party: inCurr._id.party,
+            count: inCurr.count,
+            vote_id: inCurr._id.vote_id
+          });
           return inPrev;
         } else {
           return inPrev;
         }
       }, []);
-      prev.push(dingo);
+      var yeas = allYeas.reduce(function(inPrev, inCurr) {
+        if (inCurr._id.vote_id === curr.vote_id) {
+          inPrev.push({
+            party: inCurr._id.party,
+            count: inCurr.count,
+            vote_id: inCurr._id.vote_id
+          });
+          return inPrev;
+        } else {
+          return inPrev;
+        }
+      }, []);
+      var absents = allAbsents.reduce(function(inPrev, inCurr) {
+        if (inCurr._id.vote_id === curr.vote_id) {
+          inPrev.push({
+            party: inCurr._id.party,
+            count: inCurr.count,
+            vote_id: inCurr._id.vote_id
+          });
+          return inPrev;
+        } else {
+          return inPrev;
+        }
+      }, []);
+      prev.push({
+        vote_id: curr.vote_id,
+        question: curr.question,
+        yeas: yeas,
+        nays: nays,
+        absents: absents
+      });
       return prev;
     }, [])
   }
