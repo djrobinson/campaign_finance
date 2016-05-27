@@ -26,7 +26,8 @@ import {CandidatePopupComponent} from './candidate-popup.component.ts';
                 [node]="selectedNode"
                 (indivEmit)="showIndivPopup($event)"
                 (cmteEmit)="showCmtePopup($event)"
-                (candEmit)="showCandPopup($event)">
+                (candEmit)="showCandPopup($event)"
+                (congressEmit)="showCongressPopup($event)">
               </mini-profile-view>
             </div>
             <div *ngIf="indivPopup">
@@ -142,21 +143,23 @@ export class GraphComponent implements OnInit  {
   }
 
   showCmtePopup(event){
-    console.log("Cmte emitted", event);
     this.cmtePopup = true;
     this.selectedCommittee = event.cmte;
     this.selectedNode = false;
   }
 
   showCandPopup(event){
-    console.log("Cand event emitted ", event);
     this.candPopup = true;
     this.selectedCandidate = event.cand;
     this.selectedNode = false;
   }
 
+  showCongressPopup(event) {
+    console.log("Congress event emitted ", event);
+  }
+
+
   exit(){
-    console.log("EXIT!");
     this.indivPopup = false;
     this.selectedNode = false;
     this.cmtePopup = false;
@@ -164,7 +167,6 @@ export class GraphComponent implements OnInit  {
   }
 
   getGraphData(candId) {
-    console.log("get graph data");
 
     this._TitleService.getResult('/api/candidates/'+candId)
       .subscribe(
@@ -178,7 +180,6 @@ export class GraphComponent implements OnInit  {
       .subscribe(
       result => {
         result.unshift({ "CANDIDATE": cand, "CAND_ID": cand, "CMTE_ID": cand, "NODE": 0, "graphtype": "candidate", data: this.candidate[0]});
-        console.log(result);
         this.result = result;
 
         this.nodeData = result.map((elem, i)=>{
@@ -190,7 +191,6 @@ export class GraphComponent implements OnInit  {
           return elem;
         });
         var nodeData = this.nodeData;
-        console.log("Node Data! ", this.nodeData);
         this.linkData = nodeData.reduce((prev, elem)=>{
           if (elem.CAND_ID){
             prev.push({ "source": elem.NODE, "target": 0, "value": 1 })
@@ -220,7 +220,6 @@ export class GraphComponent implements OnInit  {
           }
 
         }, [])
-        console.log(this.linkData);
         this.buildGraph(this);
         },
         error => console.error('Error: ' + err),

@@ -57,7 +57,10 @@ import {TitleService} from '../api_services/title.service';
             <button (click)="cmtePopupEmit(id)">Go to Profile</button>
           </div>
           <div *ngIf="popupType === 'candidate'">
-            <button (click)="candPopupEmit(id)">Go to Profile</button>
+            <button (click)="candPopupEmit(id)">Go to President Profile</button>
+          </div>
+          <div *ngIf="popupType === 'congress'">
+            <button (click)="congressPopupEmit(id)">Go to Congress Profile</button>
           </div>
         </div>
       </div>
@@ -90,6 +93,7 @@ export class MiniProfileComponent implements OnChanges {
   @Output() indivEmit = new EventEmitter();
   @Output() cmteEmit = new EventEmitter();
   @Output() candEmit = new EventEmitter();
+  @Output() congressEmit = new EventEmitter();
   private title: string;
   private id: string;
   private amount: number;
@@ -125,7 +129,12 @@ export class MiniProfileComponent implements OnChanges {
       this.cash = this.node.data.cas_on_han_clo_of_per;
       this.contributions = this.node.data.tot_con;
       this.distributions = this.node.data.tot_dis;
-      this.popupType = "candidate";
+      if (this.node.CAND_ID.charAt(0)==="P"){
+        this.popupType = "candidate";
+      } else {
+        this.popupType = "congress";
+      }
+
     }
   }
 
@@ -146,6 +155,13 @@ export class MiniProfileComponent implements OnChanges {
   candPopupEmit(cand){
     console.log(cand);
     this.candEmit.emit({
+      cand: cand
+    })
+  }
+
+  congressPopupEmit(cand) {
+    console.log(cand);
+    this.congressEmit.emit({
       cand: cand
     })
   }

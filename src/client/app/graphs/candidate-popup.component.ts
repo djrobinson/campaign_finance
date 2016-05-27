@@ -140,10 +140,10 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       if (this.candidateInfo){
         this.callApis(this.candidate, this.candidateInfo.id.bioguide, this.candidateInfo.id.thomas, this.candidateInfo.id.lis);
         this.imageVar = {};
-        this.imageVar.image = 'https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/'+ this.candidateInfo.id.bioguide + '.jpg';
+        this.imageVar.image = "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/"+ this.candidateInfo.id.bioguide + ".jpg";
       } else {
         this.imageVar = {};
-        this.imageVar.image = "";
+        this.imageVar.image = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/"+ this.candidate + ".jpg";
         this.callPresApis(this.candidate)
       }
     }, error => console.log('Could not load todos.'));
