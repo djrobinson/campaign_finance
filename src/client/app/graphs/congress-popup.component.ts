@@ -5,7 +5,6 @@ import {TitleService} from '../api_services/title.service';
 import {TreemapComponent} from './charts/treemap.component';
 import {PieComponent} from './charts/pie-chart.component';
 
-
 @Component({
   selector: 'congress-popup',
   template: `
@@ -179,8 +178,8 @@ export class CongressPopupComponent implements OnInit, OnChanges {
         this.yeaVotes = data[4];
         this.nayVotes = data[5];
         this.absentVotes = data[6];
-        this.allNays = data[7];
-        this.allYeas = data[8];
+        this.allYeas = data[7];
+        this.allNays = data[8];
         this.allAbsents = data[9];
         this.pacSpends = data[10];
         this.pacAgg = data[11];
@@ -195,12 +194,15 @@ export class CongressPopupComponent implements OnInit, OnChanges {
   tallyYeas(candYeas, allYeas){
     candYeas.reduce((prev, curr) => {
       console.log("Outer vote ", curr.vote_id);
-      allYeas.forEach(vote =>{
-        console.log("inner vote ", vote._id.vote_id);
-        if (vote.vote_id === curr.vote_id){
-
+      var dingo = allYeas.reduce(function(inPrev, inCurr){
+        if (inCurr._id.vote_id === curr.vote_id){
+          inPrev.push(inCurr);
+          return inPrev;
+        } else {
+          return inPrev;
         }
-      })
+      }, []);
+      console.log("inner dingo ", dingo);
       return prev;
     },[])
   }

@@ -77,6 +77,7 @@ router.get('/:cand_id/yeas',function(req, res, next){
                     {"$match":
                       {"votes.Yea.id":cand}
                     },
+                    {"$limit": 5},
                     {"$project":
                       {"question":1, "source_url": 1, "vote_id": 1}
                     }],
