@@ -170,7 +170,6 @@ export class CongressPopupComponent implements OnInit, OnChanges {
 
     ).subscribe(
       data => {
-        console.log("Data ", data);
         this.candidate = data[0][0];
         this.disbursements = data[1];
         this.contributions = data[2];
@@ -185,15 +184,20 @@ export class CongressPopupComponent implements OnInit, OnChanges {
         this.pacAgg = data[11];
 
         this.pieComponent.callAsc(data[3]);
-        this.tallyYeas(this.yeaVotes, this.allYeas);
+        this.AllYeas = this.tallyYeas(this.yeaVotes, this.allYeas);
+        this.AllNays = this.tallyNays(this.nayVotes, this.allNays);
+        this.AllNoVotes = this.tallyNoVotes(this.absentVotes, this.allAbsents);
+
+        console.log(this.AllYeas, this.AllNays, this.AllNoVotes);
+
+
       },
       err => console.error(err)
       );
   }
 
   tallyYeas(candYeas, allYeas){
-    candYeas.reduce((prev, curr) => {
-      console.log("Outer vote ", curr.vote_id);
+    return candYeas.reduce((prev, curr) => {
       var dingo = allYeas.reduce(function(inPrev, inCurr){
         if (inCurr._id.vote_id === curr.vote_id){
           inPrev.push(inCurr);
@@ -202,10 +206,41 @@ export class CongressPopupComponent implements OnInit, OnChanges {
           return inPrev;
         }
       }, []);
-      console.log("inner dingo ", dingo);
+      prev.push(dingo);
       return prev;
     },[])
   }
+
+  tallyNays(candNays, allNays) {
+    return candNays.reduce((prev, curr) => {
+      var dingo = allNays.reduce(function(inPrev, inCurr) {
+        if (inCurr._id.vote_id === curr.vote_id) {
+          inPrev.push(inCurr);
+          return inPrev;
+        } else {
+          return inPrev;
+        }
+      }, []);
+      prev.push(dingo);
+      return prev;
+    }, [])
+  }
+
+  tallyNoVotes(candNays, allNays) {
+    return candNays.reduce((prev, curr) => {
+      var dingo = allNays.reduce(function(inPrev, inCurr) {
+        if (inCurr._id.vote_id === curr.vote_id) {
+          inPrev.push(inCurr);
+          return inPrev;
+        } else {
+          return inPrev;
+        }
+      }, []);
+      prev.push(dingo);
+      return prev;
+    }, [])
+  }
+
 
   close() {
     this.exitEmit.emit({
