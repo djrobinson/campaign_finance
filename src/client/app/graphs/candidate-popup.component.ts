@@ -9,63 +9,47 @@ import {PieComponent} from './charts/pie-chart.component';
 @Component({
   selector: 'candidate-popup',
   template: `
-    <div class="cand-style">
+     <div class="cand-style">
+      <div class="row">
         <div class="three columns">
-            <h5>Sources of Funds</h5>
-          <div class="table-div">
-            <ul>
-              <li *ngFor="#contribution of contributions">{{contribution.NAME}}: {{contribution.TRANSACTION_AMT}}</li>
-            </ul>
-          </div>
+            <h4>{{candidate?.CANDIDATE_NAME}}</h4>
+            <img [src]="imageVar?.image" alt="picture">
         </div>
-
-        <div class="one-half column">
-          <h2>{{candidate?.CANDIDATE_NAME}}</h2>
-          <div class="row">
-            <div class="four columns">
-              <img [src]="imageVar?.image" alt="picture">
-            </div>
-            <div class="eight columns">
+        <div class="three columns">
               <p>Office Sought: {{candidate?.CANDIDATE_OFFICE}}</p>
               <p>Hometown: {{candidate?.can_cit}}, {{candidate?.STATE}}</p>
               <p>Birthdate: {{candidateInfo?.bio?.birthday}}</p>
               <p>Gender: {{candidateInfo?.bio?.gender}}</p>
               <p>Religion: {{candidateInfo?.bio?.religion}}</p>
               <p><a [href]="candidate?.lin_ima">FEC Filing Link</a></p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="six columns">
               <p><em>Begin Cash: </em> {{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</p>
               <p><em>End Cash: </em> {{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</p>
               <p><em>Debt: </em> {{parseFloat(candidate?.deb_owe_by_com) | currency:'USD':true}}</p>
               <p><em>Funding from Candidate: </em> {{parseFloat(candidate?.can_con) | currency:'USD':true}}</p>
-            </div>
-            <div class="six columns">
               <p><em>Net Contributions: </em> {{parseFloat(candidate?.net_con) | currency:'USD':true}}</p>
               <p><em>Net Opex: </em> {{parseFloat(candidate?.net_ope_exp) | currency:'USD':true}}</p>
               <p><em>Distributions: </em> {{parseFloat(candidate?.tot_dis) | currency:'USD':true}}</p>
-            </div>
-          </div>
         </div>
         <div class="three columns">
 
-            <div>
-              <h3>Usage of Funds</h3>
-            </div>
-            <div class="table-div">
-              <ul>
-                <li  *ngFor="#pacspend of pacSpends">{{pacspend.pay}} {{pacspend.exp_amo}}</li>
-              </ul>
+          <h3>Usage of Funds</h3>
+          <div class="table-div">
+            <ul>
+              <li *ngFor="#pacspend of pacSpends">{{pacspend.pay}} {{pacspend.exp_amo}}</li>
+            </ul>
           </div>
         </div>
+        <div class="three columns table-div">
+          <h3>Holder</h3>
+        </div>
+       </div>
         <div class="row">
            <div class="three columns pie">
               <pie-chart>
               </pie-chart>
            </div>
            <div class="three columns">
-
+            <h1>Here's the holder</h1>
            </div>
            <div class="six columns">
             <div class="table-div">
@@ -74,9 +58,9 @@ import {PieComponent} from './charts/pie-chart.component';
             </div>
            </div>
         </div>
-      <div class="row indiv twelve columns">
-        <button (click)="close()">Close</button>
-      </div>
+        <div class="row indiv twelve columns">
+          <button (click)="close()">Close</button>
+        </div>
     </div>
   `,
   directives: [TreemapComponent, PieComponent],
