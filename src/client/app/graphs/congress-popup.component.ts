@@ -117,7 +117,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   @Input() candidate: string;
   @Output() exitEmit = new EventEmitter();
   @ViewChild(PieComponent)
-  private pieComponent:PieComponent;
+  private pieComponent: PieComponent;
   private disbursements: Object;
   private candidateInfo: Object;
   private imageVar: Object;
@@ -125,28 +125,47 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
 
   constructor(private _TitleService: TitleService,
-              private http: Http) {
+    private http: Http) {
 
-    this.parseFloat = function(num){
+    this.parseFloat = function(num) {
       return parseFloat(num);
     }
   }
 
-  ngOnInit(){
-      this.imageVar = {};
-      this.imageVar.image = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/"+ this.candidate + ".jpg";
-      this.callPresApis(this.candidate)
+  ngOnInit() {
+    // this.buildTreeMap();
+    // this.buildPieChart();
+    this.http.get('/api/legislators/' + this.candidate).map(response => response.json()).subscribe(data => {
+      this.candidateInfo = data[0];
+
+        this.callApis(this.candidate, this.candidateInfo.id.bioguide, this.candidateInfo.id.thomas, this.candidateInfo.id.lis);
+        this.imageVar = {};
+        this.imageVar.image = "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + this.candidateInfo.id.bioguide + ".jpg";
+
+    }, error => console.log('Could not load todos.'));
+    //Call teh legislators api to get the vote inputs
 
   }
 
-
-  callPresApis(fecId){
+  callApis(fecId, bioguideId, thomasId, lis) {
+    if (lis) {
+      var voteId = lis;
+    } else if (bioguideId) {
+      var voteId = bioguideId;
+    } else {
+      var voteId = null;
+    }
     Observable.forkJoin(
-      this.http.get('/api/candidates/'+fecId).map((res: Response) => res.json()),
-      this.http.get('/api/disbursements/'+fecId+'/candidate').map((res: Response) => res.json()),
-      this.http.get('/api/contributions/'+fecId+'/candidate').map((res: Response) => res.json()),
-      this.http.get('/api/candidates/'+fecId+'/committees').map((res: Response) => res.json()),
-      this.http.get('/api/pac/'+fecId+'/candidate').map((res: Response) => res.json()),
+      this.http.get('/api/candidates/' + fecId).map((res: Response) => res.json()),
+      this.http.get('/api/disbursements/' + fecId + '/candidate').map((res: Response) => res.json()),
+      this.http.get('/api/contributions/' + fecId + '/candidate').map((res: Response) => res.json()),
+      this.http.get('/api/candidates/' + fecId + '/committees').map((res: Response) => res.json()),
+      this.http.get('/api/votes/' + voteId + '/yeas').map((res: Response) => res.json()),
+      this.http.get('/api/votes/' + voteId + '/nays').map((res: Response) => res.json()),
+      this.http.get('/api/votes/tallies/yea').map((res: Response) => res.json()),
+      this.http.get('/api/votes/tallies/nay').map((res: Response) => res.json()),
+      this.http.get('/api/pac/' + fecId + '/candidate').map((res: Response) => res.json()),
+      this.http.get('/api/pac/aggregate/' + fecId).map((res: Response) => res.json())
 
     ).subscribe(
       data => {
@@ -155,12 +174,19 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.disbursements = data[1];
         this.contributions = data[2];
         this.associatedCommittees = data[3];
-        this.pacSpends = data[4];
+        this.yeaVotes = data[4];
+        this.nayVotes = data[5];
+        this.allNays = data[6];
+        this.allYeas = data[7];
+        this.pacSpends = data[8];
+        this.pacAgg = data[9];
+
+
         this.pieComponent.callAsc(data[3]);
 
       },
       err => console.error(err)
-    );
+      );
   }
 
   close() {
