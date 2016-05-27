@@ -17,6 +17,7 @@ import {PieComponent} from './charts/pie-chart.component';
             <img [src]="imageVar?.image" alt="picture">
         </div>
         <div class="four columns pie">
+          <h5>Donations by Amount</h5>
           <pie-chart>
           </pie-chart>
         </div>
@@ -41,6 +42,12 @@ import {PieComponent} from './charts/pie-chart.component';
           <treemap route="/api/pac/aggregate/P00003392">
           </treemap>
         </div>
+        <div class="four columns">
+          <h5>Associated Committees</h5>
+          <ul>
+            <li *ngFor="#cmte of associatedCommittees">{{cmte.CMTE_ID}}</li>
+          </ul>
+        </div>
       </div>
     </div>
       <div class="four columns">
@@ -51,7 +58,6 @@ import {PieComponent} from './charts/pie-chart.component';
           </ul>
         </div>
       </div>
-
       <div class="row indiv twelve columns">
         <button (click)="close()">Close</button>
       </div>
@@ -66,12 +72,7 @@ import {PieComponent} from './charts/pie-chart.component';
     div {
       border: solid 1px #75717B;
     }
-    .columns {
-      margin: 0 !important;
-    }
-    .column {
-      margin: 0 !important;
-    }
+
     img {
       width: 100%;
     }
