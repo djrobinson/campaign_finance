@@ -48,6 +48,24 @@ router.get('/tallies/nay', function(req, res, next){
   });
 });
 
+router.get('/tallies/novote', function(req, res, next){
+  Vote.aggregate([{"$unwind": "$votes.Not Voting"},
+                  {
+                    "$group": { _id: {
+                                  "question": "$question",
+                                  "vote_id": "$vote_id",
+                                  "party": "$votes.Not Voting.party"
+                                },
+                                count: {$sum: 1}},
+                  }],
+                  function(err, vote){
+    if (err) throw err;
+
+    // object of the user
+    res.json(vote);
+  });
+});
+
 //Currently just for Yeas
 router.get('/:cand_id/yeas',function(req, res, next){
   console.log(req.params.cand_id);

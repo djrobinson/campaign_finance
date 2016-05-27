@@ -189,6 +189,10 @@ export class CongressPopupComponent implements OnInit, OnChanges {
       );
   }
 
+  tallyVotes(){
+
+  }
+
   close() {
     this.exitEmit.emit({
       exit: true
