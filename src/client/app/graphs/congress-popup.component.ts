@@ -50,10 +50,6 @@ import {PieComponent} from './charts/pie-chart.component';
         <div class="three columns">
             <div class="votes" *ngFor="#vote of AllYeaVotes">
               <p>Question: {{vote.question}}</p>
-              <p>Yeas Party: {{vote.yeas[0].party}}</p>
-              <p>Yeas Count: {{vote.yeas[0].count}}</p>
-              <p>Nay Party: {{vote.nays[0].party}}</p>
-              <p>Nay Count: {{vote.nays[0].count}}</p>
             </div>
         </div>
         <div class="row">
@@ -230,47 +226,52 @@ export class CongressPopupComponent implements OnInit, OnChanges {
     return candVotes.reduce((prev, curr) => {
       var nays = allNays.reduce(function(inPrev, inCurr) {
         if (inCurr._id.vote_id === curr.vote_id) {
-          inPrev.push({
-            party: inCurr._id.party,
-            count: inCurr.count,
-            vote_id: inCurr._id.vote_id
-          });
+          inPrev[inCurr._id.party] = inCurr.count;
           return inPrev;
         } else {
           return inPrev;
         }
-      }, []);
+      }, {
+          R: 0,
+          D: 0,
+          I: 0
+        });
+
       var yeas = allYeas.reduce(function(inPrev, inCurr) {
         if (inCurr._id.vote_id === curr.vote_id) {
-          inPrev.push({
-            party: inCurr._id.party,
-            count: inCurr.count,
-            vote_id: inCurr._id.vote_id
-          });
+          inPrev[inCurr._id.party] = inCurr.count;
           return inPrev;
         } else {
           return inPrev;
         }
-      }, []);
+      }, {
+          R: 0,
+          D: 0,
+          I: 0
+        });
+
       var absents = allAbsents.reduce(function(inPrev, inCurr) {
         if (inCurr._id.vote_id === curr.vote_id) {
-          inPrev.push({
-            party: inCurr._id.party,
-            count: inCurr.count,
-            vote_id: inCurr._id.vote_id
-          });
+          inPrev[inCurr._id.party] = inCurr.count;
           return inPrev;
         } else {
           return inPrev;
         }
-      }, []);
-      prev.push({
+      }, {
+          R: 0,
+          D: 0,
+          I: 0
+        });
+
+      var pushable = {
         vote_id: curr.vote_id,
         question: curr.question,
         yeas: yeas,
         nays: nays,
         absents: absents
-      });
+      };
+
+      prev.push(pushable);
       return prev;
     }, [])
   }
