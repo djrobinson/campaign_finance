@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Rx';
 @Component({
   selector: 'pie-chart',
   template: `
-      <div id="containerChart2">
+      <div id="containerChart2" class="twelve-columns">
         <div id="chart2">
         </div>
       </div>
@@ -14,10 +14,12 @@ import {Observable} from 'rxjs/Rx';
     .indiv {
       text-align: center;
     }
+
     #containerChart2 {
-      width: 400px;
-      height: 400px;
+      height: 100%;
+      width: 100%;
     }
+
   `]
 })
 export class PieComponent implements OnInit, OnChanges {

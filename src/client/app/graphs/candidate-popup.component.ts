@@ -60,25 +60,17 @@ import {PieComponent} from './charts/pie-chart.component';
           </div>
         </div>
         <div class="row">
-           <div class="three columns">
-
-            <pie-chart>
-            </pie-chart>
+           <div class="three columns pie">
+              <pie-chart>
+              </pie-chart>
            </div>
            <div class="three columns">
+
+           </div>
+           <div class="six columns">
+            <div class="table-div">
               <treemap route="/api/pac/aggregate/P00003392">
               </treemap>
-           </div><div class="three columns">
-            <div class="table-div">
-              <ul>
-                <li *ngFor="#item of disbursements">{{item}}</li>
-              </ul>
-            </div>
-           </div><div class="three columns">
-            <div class="table-div">
-              <ul>
-                <li *ngFor="#item of yeaVotes">{{item}}</li>
-              </ul>
             </div>
            </div>
         </div>
@@ -109,6 +101,9 @@ import {PieComponent} from './charts/pie-chart.component';
     .table-div {
       height: 300px;
       overflow: scroll;
+    }
+    .pie {
+      height: 300px;
     }
   `]
 })
