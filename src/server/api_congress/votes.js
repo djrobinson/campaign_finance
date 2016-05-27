@@ -111,6 +111,28 @@ router.get('/:cand_id/nays',function(req, res, next){
   }
 });
 
+router.get('/:cand_id/novotes', function(req, res, next){
+  var cand = req.params.cand_id;
+  if (cand === 'null'){
+    res.json([]);
+  } else {
+    Vote.aggregate([{"$unwind": "$votes.Not Voting"},
+                    {"$match":
+                      {"votes.Not Voting.id":cand}
+                    },
+                    {"$project":
+                      {"question":1, "source_url": 1}
+                    }],
+                    function(err, vote){
+      if (err) throw err;
+
+      // object of the user
+      res.json(vote);
+    });
+  }
+});
+
+
 router.get('/id/:leg_id',function(req, res, next){
   var leg = req.params.leg_id;
   console.log(leg);
