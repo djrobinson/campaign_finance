@@ -7,7 +7,7 @@ import {PieComponent} from './charts/pie-chart.component';
 
 
 @Component({
-  selector: 'candidate-popup',
+  selector: 'congress-popup',
   template: `
     <div class="cand-style">
         <div class="three columns">
@@ -112,7 +112,7 @@ import {PieComponent} from './charts/pie-chart.component';
     }
   `]
 })
-export class CandidatePopupComponent implements OnInit, OnChanges {
+export class CongressPopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
   @Input() candidate: string;
   @Output() exitEmit = new EventEmitter();

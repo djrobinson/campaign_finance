@@ -6,6 +6,7 @@ import {MiniProfileComponent} from './mini-profile.component.ts';
 import {IndividualPopupComponent} from './individual-popup.component.ts';
 import {CommitteePopupComponent} from './committee-popup.component.ts';
 import {CandidatePopupComponent} from './candidate-popup.component.ts';
+import {CongressPopupComponent} from './congress-popup.component.ts';
 
 @Component({
   selector: 'graph-view',
@@ -49,6 +50,13 @@ import {CandidatePopupComponent} from './candidate-popup.component.ts';
                 (exitEmit)="exit()"
               >
               </candidate-popup>
+            </div>
+            <div *ngIf="congressPopup">
+              <congress-popup
+                [candidate]="selectedCandidate"
+                (exitEmit)="exit()"
+              >
+              </congress-popup>
             </div>
            `,
   styles: [
@@ -101,10 +109,19 @@ import {CandidatePopupComponent} from './candidate-popup.component.ts';
       border: solid 1px #75717B;
       background-color: #FEFFFE;
     }
+    congress-popup {
+      position: absolute;
+      width: 90%;
+      height: 90%;
+      top: 5%;
+      left: 5%;
+      border: solid 1px #75717B;
+      background-color: #FEFFFE;
+    }
   `
   ],
   providers: [GraphService, TitleService],
-  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent, CommitteePopupComponent, CandidatePopupComponent]
+  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent, CommitteePopupComponent, CandidatePopupComponent, CongressPopupComponent]
 })
 export class GraphComponent implements OnInit  {
   selectedNode: Object;
@@ -156,6 +173,9 @@ export class GraphComponent implements OnInit  {
 
   showCongressPopup(event) {
     console.log("Congress event emitted ", event);
+    this.congressPopup = true;
+    this.selectedCandidate = event.cand;
+    this.selectedNode = false;
   }
 
 
