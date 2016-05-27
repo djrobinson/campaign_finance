@@ -9,6 +9,7 @@ import {PieComponent} from './charts/pie-chart.component';
   selector: 'congress-popup',
   template: `
     <div class="cand-style">
+      <div class="row">
         <div class="three columns">
             <h5>Sources of Funds</h5>
           <div class="table-div">
@@ -48,37 +49,33 @@ import {PieComponent} from './charts/pie-chart.component';
           </div>
         </div>
         <div class="three columns">
-            <div class="votes" *ngFor="#vote of AllYeaVotes">
-              <p>Question: {{vote.question}}</p>
-            </div>
+            <h1>After Row</h1>
         </div>
-        <div class="row">
-           <div class="three columns">
-
-            <pie-chart>
-            </pie-chart>
-           </div>
-           <div class="three columns">
-              <treemap route="/api/pac/aggregate/P00003392">
-              </treemap>
-           </div><div class="three columns">
-            <div class="table-div">
-              <ul>
-                <li *ngFor="#item of disbursements">{{item}}</li>
-              </ul>
-            </div>
-           </div><div class="three columns">
-            <div class="table-div">
-              <ul>
-                <li *ngFor="#item of yeaVotes">{{item}}</li>
-              </ul>
-            </div>
-           </div>
-        </div>
-      <div class="row indiv twelve columns">
-        <button (click)="close()">Close</button>
       </div>
+      <div class="row">
+        <div class="three columns chart">
+          <div class="votesChart">
+          </div>
+        </div>
+        <div class="three columns">
+          <div class="table-div">
+            <ul>
+              <li *ngFor="#item of disbursements">{{item}}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="three columns">
+          <div class="table-div">
+            <ul>
+              <li *ngFor="#item of yeaVotes">{{item}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <div class="row indiv twelve columns">
+      <button (click)="close()">Close</button>
     </div>
+  </div>
   `,
   directives: [TreemapComponent, PieComponent],
   styles: [`
@@ -105,6 +102,9 @@ import {PieComponent} from './charts/pie-chart.component';
     }
     .votes {
       width: 100%;
+    }
+    .chart {
+      height: 400px;
     }
   `]
 })
@@ -179,13 +179,10 @@ export class CongressPopupComponent implements OnInit, OnChanges {
         this.allAbsents = data[9];
         this.pacSpends = data[10];
         this.pacAgg = data[11];
-
-        this.pieComponent.callAsc(data[3]);
         // this.AllYeas = this.tallyYeas(this.yeaVotes, this.allYeas);
         // this.AllNays = this.tallyNays(this.nayVotes, this.allNays);
         this.AllYeaVotes = this.tallyAllVotes(this.yeaVotes, this.allNays, this.allYeas, this.allAbsents)
-        console.log(this.AllYeaVotes);
-
+        this.buildVoteChart(this.AllYeaVotes[0]);
 
       },
       err => console.error(err)
@@ -283,4 +280,73 @@ export class CongressPopupComponent implements OnInit, OnChanges {
     });
   }
 
+  buildVoteChart(votes) {
+    var types = ["yeas", "nays", "absents"];
+    var parties = ["R", "D", "I"];
+
+    var width = 400,
+        height = 400;
+
+    var x = d3.scale.linear()
+      .range([0,400]);
+
+    var y = d3.scale.linear()
+      .rangeRound([height, 0]);
+
+    var z = d3.scale.category10();
+
+    var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom");
+
+    var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("right");
+
+    var svg = d3.select(".votesChart").append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g")
+
+      var layers = d3.layout.stack()(types.map(function(c) {
+        return parties.map(function(d, i) {
+          return { x: i, y: votes[c][d] };
+        });
+      }));
+
+      console.log("Layers! ", layers);
+
+      x.domain(layers[0].map(function(d) { return d.x; }));
+      y.domain([0, d3.max(layers[layers.length - 1], function(d) { return d.y0 + d.y; })]).nice();
+
+      var layer = svg.selectAll(".layer")
+        .data(layers)
+        .enter().append("g")
+        .attr("class", "layer")
+        .style("fill", function(d, i) { return z(i); });
+
+      layer.selectAll("rect")
+        .data(function(d) { return d; })
+        .enter().append("rect")
+        .attr("x", function(d) { console.log(40 * d.x); return 40 * d.x; })
+        .attr("y", function(d) { return y(d.y + d.y0); })
+        .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
+        .attr("width", 40);
+
+      svg.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+      svg.append("g")
+        .attr("class", "axis axis--y")
+        .attr("transform", "translate(" + width + ",0)")
+        .call(yAxis);
+    // });
+
+    function type(d) {
+      types.forEach(function(c) { d[c] = +d[c]; });
+      return d;
+    }
+  }
 }
