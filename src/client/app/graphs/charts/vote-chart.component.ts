@@ -47,9 +47,9 @@ export class VoteChartComponent implements OnInit {
       .attr("height", height)
       .append("g")
 
-    var layers = d3.layout.stack()(types.map(function(c) {
-      return parties.map(function(d, i) {
-        return { x: i, y: votes[c][d] };
+    var layers = d3.layout.stack()(parties.map(function(c) {
+      return types.map(function(d, i) {
+        return { x: i, y: votes[d][c], party: c };
       });
     }));
 
@@ -59,11 +59,11 @@ export class VoteChartComponent implements OnInit {
         return {
           x: d.y,
           y: d.x,
-          x0: d.y0
+          x0: d.y0,
+          party: d.party
         };
       });
-    }),
-
+    })
 
     y.domain(layers[0].map(function(d) { return d.y; }));
     x.domain([0, d3.max(layers[layers.length - 1], function(d) { return d.x0 + d.x; })]).nice();
@@ -72,7 +72,7 @@ export class VoteChartComponent implements OnInit {
       .data(layers)
       .enter().append("g")
       .attr("class", "layer")
-      .style("fill", function(d, i) { return z(i); });
+
 
     layer.selectAll("rect")
       .data(function(d) { return d; })
@@ -80,7 +80,18 @@ export class VoteChartComponent implements OnInit {
       .attr("x", function(d) { return x(d.x0); })
       .attr("y", function(d) { return d.y * 20; })
       .attr("height", 20)
-      .attr("width", function(d) { return x(d.x + d.x0) - x(d.x0); });
+      .attr("width", function(d) { return x(d.x + d.x0) - x(d.x0); })
+      .attr("party", function(d) { return d.party })
+      .style("fill", function(d) {
+        console.log(d);
+        if (d.party === 'R') {
+          return 'red';
+        } else if (d.party === 'D') {
+          return 'blue';
+        } else if (d.party === 'I') {
+          return 'gray';
+        }
+      });
 
     svg.append("g")
       .attr("class", "axis axis--x")
