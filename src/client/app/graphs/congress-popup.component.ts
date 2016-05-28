@@ -52,7 +52,7 @@ import {VoteChartComponent} from './charts/vote-chart.component';
         <div class="three columns">
           <h1>After Row</h1>
           <div *ngFor="#vote of AllYeaVotes">
-            <vote-chart votes="{{vote}}">
+            <vote-chart [votes]="vote">
             </vote-chart>
           </div>
         </div>

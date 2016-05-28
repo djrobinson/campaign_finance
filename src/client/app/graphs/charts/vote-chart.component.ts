@@ -4,6 +4,7 @@ import {Component, Input, Output, OnInit} from 'angular2/core';
   selector: 'vote-chart',
   template: `
       <div class="votesChart">
+        {{votes.vote_id}}
       </div>
   `,
   directives: [],
@@ -15,7 +16,7 @@ export class VoteChartComponent implements OnInit {
   @Input() votes: Object;
 
   ngOnInit(){
-    console.log(this.votes.);
+    console.log(this.votes.vote_id);
     this.buildVoteChart(this.votes);
   }
 
