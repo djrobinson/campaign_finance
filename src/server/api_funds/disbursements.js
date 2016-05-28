@@ -125,7 +125,8 @@ router.get('/graph/:cand_id', function(req, res, next){
                   "name": curr.rec_nam,
                   "purpose": curr.dis_pur_des,
                   "fec": curr.lin_ima,
-                  "amount": curr.exp_amo
+                  "amount": curr.dis_amo,
+                  "value": exp_amo
                 }]
               }],
               "name": curr.rec_nam,
