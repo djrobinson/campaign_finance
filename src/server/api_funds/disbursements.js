@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var query = require('../queries/disbursement_queries.js')
-
+var _ = require('lodash');
 /*
   OFFSET ON ALL  4, LIMIT ON JUST CANDIDATE? CAT_COD?
 */
@@ -109,5 +109,55 @@ router.get('/aggregate/purpose', function(req, res, next){
     });
   }
 });
+
+router.get('/graph/:cand_id', function(req, res, next){
+  query.getDisbByCand(req.params.cand_id).then(function(data){
+    var graphVals = data.reduce(function(prev, curr) {
+          var currIndex = _.findIndex(prev.children, {"name": curr.rec_nam});
+          var exp_amo = parseFloat(curr.dis_amo);
+          if (currIndex === -1){
+            prev.amount += exp_amo;
+            prev.children.push({
+              "children": [{
+                "name": curr.rec_nam,
+                "value": exp_amo,
+                "children": [{
+                  "name": curr.rec_nam,
+                  "purpose": curr.dis_pur_des,
+                  "fec": curr.lin_ima,
+                  "amount": curr.exp_amo
+                }]
+              }],
+              "name": curr.rec_nam,
+              "id": curr.com_id,
+              "value": exp_amo
+            })
+            return prev;
+          } else {
+            prev.amount += parseFloat(curr.exp_amo);
+            prev.children[currIndex].amount += parseFloat(curr.exp_amo);
+            prev.children[currIndex].children.push({
+              "name": curr.rec_nam,
+              "purpose": curr.dis_pur_des,
+              "value": exp_amo,
+              "children": [{
+                  "name": curr.rec_nam,
+                  "purpose": curr.dis_pur_des,
+                  "value": exp_amo,
+                  "date": curr.dis_dat,
+                  "fec": curr.lin_ima
+                }]
+            })
+            return prev;
+          }
+        }, {
+            "children": [],
+            "support": 1,
+            "amount": 0,
+            "name": "All Congressional Candidate Distributions"
+        });
+    res.json(graphVals);
+  });
+})
 
 module.exports = router;

@@ -11,6 +11,7 @@ module.exports = {
     return knex('opex')
            .where({'CMTE_ID': cmte_id})
            .orderBy('TRANSACTION_AMT', 'desc')
+           .limit(250)
            .offset(offset);
   },
   getOpexByRec: function(name, offset){

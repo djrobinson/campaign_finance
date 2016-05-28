@@ -61,7 +61,7 @@ router.get('/recipients', function(req, res, next){
 router.get('/aggregate/:cmte_id', function(req, res, next){
   query.getOpexByCmte(req.params.cmte_id).then(function(data){
     var graphVals = data.reduce(function(prev, curr) {
-          var currIndex = _.findIndex(prev.children, {"id": curr.spe_id});
+          var currIndex = _.findIndex(prev.children, {"name": curr.NAME});
           var exp_amo = parseFloat(curr.TRANSACTION_AMT);
           if (currIndex === -1){
             prev.amount += exp_amo;
@@ -102,7 +102,7 @@ router.get('/aggregate/:cmte_id', function(req, res, next){
             "children": [],
             "support": 1,
             "amount": 0,
-            "name": "All Superpac Expenditures Supporting or Opposing Candidate"
+            "name": "All Operating Expenditures by Committee"
         });
     res.json(graphVals);
   });
