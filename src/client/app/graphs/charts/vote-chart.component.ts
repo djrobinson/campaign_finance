@@ -12,6 +12,12 @@ import {Component, Input, Output, OnInit} from 'angular2/core';
   `]
 })
 export class VoteChartComponent implements OnInit {
+  @Input() votes: Object;
+
+  ngOnInit(){
+    console.log(this.votes.);
+    this.buildVoteChart(this.votes);
+  }
 
   buildVoteChart(votes) {
     var types = ["yeas", "nays", "absents"];

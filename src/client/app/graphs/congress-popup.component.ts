@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Rx';
 import {TitleService} from '../api_services/title.service';
 import {TreemapComponent} from './charts/treemap.component';
 import {PieComponent} from './charts/pie-chart.component';
+import {VoteChartComponent} from './charts/vote-chart.component';
 
 @Component({
   selector: 'congress-popup',
@@ -49,7 +50,11 @@ import {PieComponent} from './charts/pie-chart.component';
           </div>
         </div>
         <div class="three columns">
-            <h1>After Row</h1>
+          <h1>After Row</h1>
+          <div *ngFor="#vote of AllYeaVotes">
+            <vote-chart votes="{{vote}}">
+            </vote-chart>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -77,7 +82,7 @@ import {PieComponent} from './charts/pie-chart.component';
     </div>
   </div>
   `,
-  directives: [TreemapComponent, PieComponent],
+  directives: [TreemapComponent, PieComponent, VoteChartComponent],
   styles: [`
     .cand-style {
       text-align: center;
