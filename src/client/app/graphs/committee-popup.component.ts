@@ -2,6 +2,7 @@ import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from 'angular
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {TitleService} from '../api_services/title.service';
+import {TreemapComponent} from './charts/treemap.component';
 
 @Component({
   selector: 'committee-popup',
@@ -32,10 +33,9 @@ import {TitleService} from '../api_services/title.service';
         <h5><a [href]="committee?.lin_ima">FEC Link</a></h5>
       </div>
       <div class="four columns">
-        <div class="table-div">
-          <ul *ngFor="#exp of opex?.data">
-            <li>{{exp.NAME}}</li>
-          </ul>
+        <div class="treemap">
+          <treemap route="/api/opex/aggregate/C00577130">
+          </treemap>
         </div>
         <div class="table-div">
           <ul *ngFor="#contrib of contributeds?.data">
@@ -69,7 +69,8 @@ import {TitleService} from '../api_services/title.service';
     .treemap {
       height: 300px;
     }
-  `]
+  `],
+  directives: [TreemapComponent]
 })
 export class CommitteePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.

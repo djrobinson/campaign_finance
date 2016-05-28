@@ -73,7 +73,8 @@ router.get('/aggregate/:cmte_id', function(req, res, next){
                   "name": curr.NAME,
                   "purpose": curr.PURPOSE,
                   "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.IMAGE_NUM,
-                  "amount": curr.exp_amo
+                  "amount": curr.exp_amo,
+                  "value": exp_amo
                 }]
               }],
               "name": curr.NAME,
@@ -82,8 +83,8 @@ router.get('/aggregate/:cmte_id', function(req, res, next){
             })
             return prev;
           } else {
-            prev.amount += parseFloat(curr.exp_amo);
-            prev.children[currIndex].amount += parseFloat(curr.exp_amo);
+            prev.amount += exp_amo;
+            prev.children[currIndex].amount += exp_amo;
             prev.children[currIndex].children.push({
               "name": curr.NAME,
               "purpose": curr.PURPOSE,
