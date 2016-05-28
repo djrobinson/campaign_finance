@@ -79,10 +79,10 @@ export class VoteChartComponent implements OnInit {
     layer.selectAll("rect")
       .data(function(d) { return d; })
       .enter().append("rect")
-      .attr("x", function(d) { console.log(20 * d.x); return 20 * d.x; })
-      .attr("y", function(d) { return y(d.y); })
+      .attr("x", function(d) { console.log("d.x0: ", d.x0,"d.x ", d.x); return x(d.x0); })
+      .attr("y", function(d) { return d.y * 20; })
       .attr("height", 20)
-      .attr("width", function(d) { return x(d.x + d.x0) - x(d.x); });
+      .attr("width", function(d) { return x(d.x + d.x0) - x(d.x0); });
 
     svg.append("g")
       .attr("class", "axis axis--x")
