@@ -16,7 +16,6 @@ export class VoteChartComponent implements OnInit {
   @Input() votes: Object;
 
   ngOnInit(){
-    console.log(this.votes.vote_id);
     this.buildVoteChart(this.votes);
   }
 
@@ -65,7 +64,6 @@ export class VoteChartComponent implements OnInit {
       });
     }),
 
-    console.log("Layers! ", layers);
 
     y.domain(layers[0].map(function(d) { return d.y; }));
     x.domain([0, d3.max(layers[layers.length - 1], function(d) { return d.x0 + d.x; })]).nice();
@@ -79,7 +77,7 @@ export class VoteChartComponent implements OnInit {
     layer.selectAll("rect")
       .data(function(d) { return d; })
       .enter().append("rect")
-      .attr("x", function(d) { console.log("d.x0: ", d.x0,"d.x ", d.x); return x(d.x0); })
+      .attr("x", function(d) { return x(d.x0); })
       .attr("y", function(d) { return d.y * 20; })
       .attr("height", 20)
       .attr("width", function(d) { return x(d.x + d.x0) - x(d.x0); });

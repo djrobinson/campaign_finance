@@ -66,6 +66,9 @@ import {TitleService} from '../api_services/title.service';
     li {
       font-size: 8px;
     }
+    .treemap {
+      height: 300px;
+    }
   `]
 })
 export class CommitteePopupComponent implements OnInit, OnChanges {

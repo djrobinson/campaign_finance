@@ -1,4 +1,4 @@
-var express = require('express');
+  var express = require('express');
 var router = express.Router();
 var query = require('../queries/disbursement_queries.js')
 var _ = require('lodash');
@@ -134,8 +134,9 @@ router.get('/graph/:cand_id', function(req, res, next){
             })
             return prev;
           } else {
-            prev.amount += parseFloat(curr.exp_amo);
-            prev.children[currIndex].amount += parseFloat(curr.exp_amo);
+            prev.amount += exp_amo;
+            prev.children[currIndex].amount += exp_amo;
+
             prev.children[currIndex].children.push({
               "name": curr.rec_nam,
               "purpose": curr.dis_pur_des,
@@ -143,6 +144,7 @@ router.get('/graph/:cand_id', function(req, res, next){
               "children": [{
                   "name": curr.rec_nam,
                   "purpose": curr.dis_pur_des,
+                  "amount": curr.dis_amo,
                   "value": exp_amo,
                   "date": curr.dis_dat,
                   "fec": curr.lin_ima
@@ -157,6 +159,7 @@ router.get('/graph/:cand_id', function(req, res, next){
             "name": "All Congressional Candidate Distributions"
         });
     res.json(graphVals);
+    //NOTE: Problem is related to the total amount not being properly updated
   });
 })
 

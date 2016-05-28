@@ -58,16 +58,9 @@ import {VoteChartComponent} from './charts/vote-chart.component';
         </div>
       </div>
       <div class="row">
-        <div class="three columns chart">
-          <div class="votesChart">
-          </div>
-        </div>
-        <div class="three columns">
-          <div class="table-div">
-            <ul>
-              <li *ngFor="#item of disbursements">{{item}}</li>
-            </ul>
-          </div>
+        <div class="one-half column treemap">
+          <treemap route="/api/disbursements/graph/S0CO00211">
+          </treemap>
         </div>
         <div class="three columns">
           <div class="table-div">
@@ -110,6 +103,9 @@ import {VoteChartComponent} from './charts/vote-chart.component';
     }
     .chart {
       height: 400px;
+    }
+    .treemap {
+      height: 300px;
     }
   `]
 })
