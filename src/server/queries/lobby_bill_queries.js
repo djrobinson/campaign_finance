@@ -13,6 +13,13 @@ module.exports = {
             .innerJoin('lobbying', 'lobbying.transaction_id', 'lobby_issue.transaction_id')
             .select()
             .where({'bill_name': bill_id})
+            .orderBy('lobbying.amount', 'desc')
             .limit(10);
+  },
+  getLobbyByTrans: function(transaction_id){
+    return knex('lobby_bill')
+            .innerJoin('lobby_issue', 'lobby_bill.issue_id', 'lobby_issue.id')
+            .innerJoin('lobbying', 'lobbying.transaction_id', 'lobby_issue.transaction_id')
+            .where({'lobbying.transaction_id': transaction_id});
   }
 };

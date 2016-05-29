@@ -8,8 +8,14 @@ router.get('/', function(req, res, next){
     });
 });
 
-router.get('/:bill_id', function(req, res, next){
+router.get('/bill/:bill_id', function(req, res, next){
     query.getLobbyByBill(req.params.bill_id).then(function(data){
+      res.json(data);
+    });
+});
+
+router.get('/transaction/:transaction_id', function(req, res, next){
+    query.getLobbyByTrans(req.params.transaction_id).then(function(data){
       res.json(data);
     });
 });
