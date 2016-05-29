@@ -52,6 +52,7 @@ import {VoteChartComponent} from './charts/vote-chart.component';
         <div class="three columns">
           <h1>After Row</h1>
           <div *ngFor="#vote of AllYeaVotes">
+            <p>{{vote.question}}</p>
             <vote-chart [votes]="vote">
             </vote-chart>
           </div>
@@ -95,6 +96,7 @@ import {VoteChartComponent} from './charts/vote-chart.component';
       font-size: 8px;
     }
     .table-div {
+      padding: 12px;
       height: 300px;
       overflow: scroll;
     }

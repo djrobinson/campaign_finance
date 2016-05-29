@@ -3,9 +3,10 @@ import {Component, Input, Output, OnInit} from 'angular2/core';
 @Component({
   selector: 'vote-chart',
   template: `
+
       <div class="votesChart">
-        {{votes.vote_id}}
       </div>
+
   `,
   directives: [],
   styles: [`
@@ -23,16 +24,22 @@ export class VoteChartComponent implements OnInit {
     var types = ["yeas", "nays", "absents"];
     var parties = ["R", "D", "I"];
 
-    var width = 200,
+    var margins = {
+      left: 35,
+    }
+
+    var width = 200 - margins.left,
       height = 100;
 
     var x = d3.scale.linear()
       .range([0, width]);
 
-    var y = d3.scale.linear()
-      .rangeRound([height, 0]);
+    console.log(types)
+    var y = d3.scale.ordinal()
+      .domain(types)
+      .rangeRoundBands([0, height], .1)
 
-    var z = d3.scale.category10();
+      ;
 
     var xAxis = d3.svg.axis()
       .scale(x)
@@ -40,16 +47,17 @@ export class VoteChartComponent implements OnInit {
 
     var yAxis = d3.svg.axis()
       .scale(y)
-      .orient("right");
+      .orient("left");
 
     var svg = d3.select(".votesChart").append("svg")
-      .attr("width", width)
+      .attr("width", width + margins.left)
       .attr("height", height)
       .append("g")
+      .attr('transform', 'translate(' + margins.left +')')
 
     var layers = d3.layout.stack()(parties.map(function(c) {
       return types.map(function(d, i) {
-        return { x: i, y: votes[d][c], party: c };
+        return { x: i, y: votes[d][c], party: c, type: d };
       });
     }));
 
@@ -60,12 +68,12 @@ export class VoteChartComponent implements OnInit {
           x: d.y,
           y: d.x,
           x0: d.y0,
-          party: d.party
+          party: d.party,
+          type: d.type
         };
       });
     })
 
-    y.domain(layers[0].map(function(d) { return d.y; }));
     x.domain([0, d3.max(layers[layers.length - 1], function(d) { return d.x0 + d.x; })]).nice();
 
     var layer = svg.selectAll(".layer")
@@ -78,7 +86,7 @@ export class VoteChartComponent implements OnInit {
       .data(function(d) { return d; })
       .enter().append("rect")
       .attr("x", function(d) { return x(d.x0); })
-      .attr("y", function(d) { return d.y * 20; })
+      .attr("y", function(d) { return d.y * (height / 3 + 1); })
       .attr("height", 20)
       .attr("width", function(d) { return x(d.x + d.x0) - x(d.x0); })
       .attr("party", function(d) { return d.party })
@@ -93,16 +101,14 @@ export class VoteChartComponent implements OnInit {
         }
       });
 
-    svg.append("g")
-      .attr("class", "axis axis--x")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+
 
     svg.append("g")
       .attr("class", "axis axis--y")
-      .attr("transform", "translate(" + width + ",0)")
+      .attr("transform", "translate(0,0)")
       .call(yAxis);
     // });
+      // .attr("transform", "translate(" + width + ",0)")
 
     function type(d) {
       types.forEach(function(c) { d[c] = +d[c]; });
