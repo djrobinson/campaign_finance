@@ -8,74 +8,7 @@ import {VoteChartComponent} from './charts/vote-chart.component';
 
 @Component({
   selector: 'congress-popup',
-  template: `
-    <div class="cand-style">
-      <div class="row">
-        <div class="three columns">
-            <h5>Sources of Funds</h5>
-          <div class="table-div">
-            <ul>
-              <li *ngFor="#contribution of contributions">{{contribution.NAME}}: {{contribution.TRANSACTION_AMT}}</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="one-half column">
-          <h2>{{candidate?.CANDIDATE_NAME}}</h2>
-          <div class="row">
-            <div class="four columns">
-              <img [src]="imageVar?.image" alt="picture">
-            </div>
-            <div class="eight columns">
-              <p>Office Sought: {{candidate?.CANDIDATE_OFFICE}}</p>
-              <p>Hometown: {{candidate?.can_cit}}, {{candidate?.STATE}}</p>
-              <p>Birthdate: {{candidateInfo?.bio?.birthday}}</p>
-              <p>Gender: {{candidateInfo?.bio?.gender}}</p>
-              <p>Religion: {{candidateInfo?.bio?.religion}}</p>
-              <p><a [href]="candidate?.lin_ima">FEC Filing Link</a></p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="six columns">
-              <p><em>Begin Cash: </em> {{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</p>
-              <p><em>End Cash: </em> {{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</p>
-              <p><em>Debt: </em> {{parseFloat(candidate?.deb_owe_by_com) | currency:'USD':true}}</p>
-              <p><em>Funding from Candidate: </em> {{parseFloat(candidate?.can_con) | currency:'USD':true}}</p>
-            </div>
-            <div class="six columns">
-              <p><em>Net Contributions: </em> {{parseFloat(candidate?.net_con) | currency:'USD':true}}</p>
-              <p><em>Net Opex: </em> {{parseFloat(candidate?.net_ope_exp) | currency:'USD':true}}</p>
-              <p><em>Distributions: </em> {{parseFloat(candidate?.tot_dis) | currency:'USD':true}}</p>
-            </div>
-          </div>
-        </div>
-        <div class="three columns">
-          <h1>After Row</h1>
-          <div *ngFor="#vote of AllYeaVotes">
-            <p>{{vote.question}}</p>
-            <vote-chart [votes]="vote">
-            </vote-chart>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="one-half column treemap">
-          <treemap route="/api/disbursements/graph/S0CO00211">
-          </treemap>
-        </div>
-        <div class="three columns">
-          <div class="table-div">
-            <ul>
-              <li *ngFor="#item of yeaVotes">{{item}}</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    <div class="row indiv twelve columns">
-      <button (click)="close()">Close</button>
-    </div>
-  </div>
-  `,
+  templateUrl: 'app/graphs/templates/congress-popup.html',
   directives: [TreemapComponent, PieComponent, VoteChartComponent],
   styles: [`
     .cand-style {

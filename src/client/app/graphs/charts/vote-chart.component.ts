@@ -1,22 +1,26 @@
-import {Component, Input, Output, OnInit} from 'angular2/core';
+import {Component, Input, OnInit, ElementRef} from 'angular2/core';
 
 @Component({
   selector: 'vote-chart',
   template: `
-
+      <p>{{votes.question}}</p>
       <div class="votesChart">
       </div>
 
   `,
   directives: [],
-  styles: [`
-
-  `]
+  styles: [],
+  providers: [ElementRef]
 })
 export class VoteChartComponent implements OnInit {
   @Input() votes: Object;
+  elementRef: ElementRef;
 
+  constructor(elementRef: ElementRef){
+    this.elementRef = elementRef;
+  }
   ngOnInit(){
+    console.log(this.votes);
     this.buildVoteChart(this.votes);
   }
 
@@ -49,7 +53,7 @@ export class VoteChartComponent implements OnInit {
       .scale(y)
       .orient("left");
 
-    var svg = d3.select(".votesChart").append("svg")
+    var svg = d3.select(this.elementRef.nativeElement).select(".votesChart").append("svg")
       .attr("width", width + margins.left)
       .attr("height", height)
       .append("g")

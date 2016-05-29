@@ -184,6 +184,7 @@ export class GraphComponent implements OnInit  {
     this.selectedNode = false;
     this.cmtePopup = false;
     this.candPopup = false;
+    this.congressPopup = false;
   }
 
   getGraphData(candId) {
