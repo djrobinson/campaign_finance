@@ -12,5 +12,12 @@ module.exports = {
     return knex('member')
             .select()
             .where({'crp_id': cand_id});
+  },
+
+  getEarmarkByCongress: function(cand_id){
+    return knex('earmark')
+            .select()
+            .innerJoin('member', 'member.earmark_id', 'earmark.id')
+            .where({'member.crp_id': cand_id})
   }
 };
