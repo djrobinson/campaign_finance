@@ -4,7 +4,9 @@ import {RouteParams} from 'angular2/router';
 import {Observable} from 'rxjs/Rx';
 import {Http, Response} from 'angular2/http';
 import {LobbyPopupComponent} from '../lobbyists/lobby-popup.component';
-
+import {BillVotesComponent} from './bill-votes.component';
+import {BillOverviewComponent} from './bill-overview.component';
+import {LobbyIssuesComponent} from './lobby-issues.component';
 
 @Component({
   selector: 'bill-popup',
@@ -15,44 +17,17 @@ import {LobbyPopupComponent} from '../lobbyists/lobby-popup.component';
 
             </lobby-popup>
             <div class="row">
-
-              <div class="four columns">
-                <bill-overview>
+              <div class="four columns" *ngIf="billData.data">
+                <bill-overview [overview]="billData?.data">
                 </bill-overview>
-                <h2>Bill Overview</h2>
-                <h3>{{billData?.data?.official_title}}</h3>
-                <h5>{{billData?.data?.subjects_top_term}}</h5>
-                <h5>{{billData?.data?.bill_id}}</h5>
-                <ul>
-                  <li *ngFor="#sponsor of billData?.data?.cosponsors">
-                    <p>{{sponsor.name}}</p>
-                  </li>
-                </ul>
-                <ul>
-                  <li *ngFor="#action of billData?.data?.actions">
-                    <p>{{action.text}}</p>
-                  </li>
-                </ul>
               </div>
-              <div class="four columns">
-                <bill-votes>
+              <div class="four columns" *ngIf="billVotes.data">
+                <bill-votes [votes]="billVotes?.data">
                 </bill-votes>
-                <h2>Bill Votes</h2>
-                <h5>{{billVotes?.data?.category}}</h5>
-                <h5>{{billVotes?.data?.question}}</h5>
-                <h5>{{billVotes?.data?.result_text}}</h5>
-                <h5>{{billVotes?.data?.source_url}}</h5>
-                <h5>{{billVotes?.data?.requires}}</h5>
               </div>
-              <div class="four columns">
-                <lobby-issues>
+              <div class="four columns" *ngIf="lobbyIssues.data">
+                <lobby-issues [issues]="lobbyIssues?.data">
                 </lobby-issues>
-                <h2>Lobbyist Issues w/ Bill</h2>
-                <ul>
-                  <li *ngFor="#issue of lobbyIssues?.data">
-                    <button (click)="showLobby(issue.transaction_id)"> {{issue.bill_id}} </button>
-                  </li>
-                </ul>
               </div>
 
             </div>
@@ -69,7 +44,7 @@ import {LobbyPopupComponent} from '../lobbyists/lobby-popup.component';
 
   `],
   providers: [TitleService],
-  directives: [LobbyPopupComponent]
+  directives: [LobbyPopupComponent, BillVotesComponent, BillOverviewComponent, LobbyIssuesComponent]
 })
 export class BillPopupComponent implements OnInit {
   bill_id: string;
