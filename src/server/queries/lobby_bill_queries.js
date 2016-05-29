@@ -9,7 +9,9 @@ module.exports = {
   },
   getLobbyByBill: function(bill_id){
     return knex('lobby_bill')
+            .innerJoin('lobby_issue', 'lobby_bill.issue_id', 'lobby_issue.id')
             .select()
-            .where({'bill_name': bill_id});
+            .where({'bill_name': bill_id})
+            .limit(10);
   }
 };

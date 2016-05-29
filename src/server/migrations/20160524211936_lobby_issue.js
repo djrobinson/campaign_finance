@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.string("transaction_id");
     table.string("general_issue_code");
     table.string("general_issue");
-    table.string("specific_issue");
+    table.text("specific_issue");
   });
 };
 
