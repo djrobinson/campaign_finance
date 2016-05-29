@@ -9,12 +9,16 @@ import {LobbyPopupComponent} from '../lobbyists/lobby-popup.component';
 @Component({
   selector: 'bill-popup',
   template: `
-            <h1>Bills Popup</h1>
-            <lobby-popup>
+            <h1>{{lobbyPopup}} Popup</h1>
+
+            <lobby-popup *ngIf="lobbyPopup">
 
             </lobby-popup>
             <div class="row">
+
               <div class="four columns">
+                <bill-overview>
+                </bill-overview>
                 <h2>Bill Overview</h2>
                 <h3>{{billData?.data?.official_title}}</h3>
                 <h5>{{billData?.data?.subjects_top_term}}</h5>
@@ -31,6 +35,8 @@ import {LobbyPopupComponent} from '../lobbyists/lobby-popup.component';
                 </ul>
               </div>
               <div class="four columns">
+                <bill-votes>
+                </bill-votes>
                 <h2>Bill Votes</h2>
                 <h5>{{billVotes?.data?.category}}</h5>
                 <h5>{{billVotes?.data?.question}}</h5>
@@ -39,6 +45,8 @@ import {LobbyPopupComponent} from '../lobbyists/lobby-popup.component';
                 <h5>{{billVotes?.data?.requires}}</h5>
               </div>
               <div class="four columns">
+                <lobby-issues>
+                </lobby-issues>
                 <h2>Lobbyist Issues w/ Bill</h2>
                 <ul>
                   <li *ngFor="#issue of lobbyIssues?.data">
