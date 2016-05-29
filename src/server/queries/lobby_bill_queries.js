@@ -14,7 +14,7 @@ module.exports = {
             .select()
             .where({'bill_name': bill_id})
             .orderBy('lobbying.amount', 'desc')
-            .limit(10);
+            .limit(100);
   },
   getLobbyByTrans: function(transaction_id){
     return knex('lobby_bill')

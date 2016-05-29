@@ -72,7 +72,7 @@ export class BillPopupComponent implements OnInit {
       Observable.forkJoin(
       this.http.get('/api/votes/id/'+voteId).map((res: Response) => res.json()),
       this.http.get('/api/hr/'+this.bill_id).map((res: Response) => res.json()),
-      this.http.get('/api/lobby/'+lobbyId).map((res: Response) => res.json())
+      this.http.get('/api/lobby/bill/'+lobbyId).map((res: Response) => res.json())
 
     ).subscribe(
       data => {
