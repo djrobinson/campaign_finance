@@ -1,4 +1,4 @@
-import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 
@@ -46,24 +46,22 @@ import {Observable} from 'rxjs/Rx';
 })
 export class LobbyPopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
-  @Input() transaction_id: string;
+  @Input() transaction: string;
+  @Output() exitEmit = new EventEmitter();
+  private transactions: Object = {};
 
-
-  constructor(private _TitleService: TitleService,
-    private http: Http) {
-    this.parseFloat = function(num) {
-      return parseFloat(num);
-    }
+  constructor(private http: Http) {
+    // this.parseFloat = function(num) {
+    //   return parseFloat(num);
+    // }
   }
 
   ngOnInit() {
-    console.log(this.committee);
     Observable.forkJoin(
-
-
+      this.http.get('/api/lobby/transaction/' + this.transaction).map((res: Response) => res.json())
     ).subscribe(
       data => {
-
+        this.transactions.data = data[0];
       },
       err => console.error(err)
       );

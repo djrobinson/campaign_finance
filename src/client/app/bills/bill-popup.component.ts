@@ -3,12 +3,16 @@ import {TitleService} from '../api_services/title.service';
 import {RouteParams} from 'angular2/router';
 import {Observable} from 'rxjs/Rx';
 import {Http, Response} from 'angular2/http';
+import {LobbyPopupComponent} from '../lobbyists/lobby-popup.component';
 
 
 @Component({
   selector: 'bill-popup',
   template: `
             <h1>Bills Popup</h1>
+            <lobby-popup>
+
+            </lobby-popup>
             <div class="row">
               <div class="four columns">
                 <h2>Bill Overview</h2>
@@ -38,21 +42,34 @@ import {Http, Response} from 'angular2/http';
                 <h2>Lobbyist Issues w/ Bill</h2>
                 <ul>
                   <li *ngFor="#issue of lobbyIssues?.data">
-                    <p>{{issue.bill_id}} {{issue.issue_id}}</p>
+                    <button (click)="showLobby(issue.transaction_id)"> {{issue.bill_id}} </button>
                   </li>
                 </ul>
               </div>
 
             </div>
            `,
+  styles: [`
+      lobby-popup {
+        position: absolute;
+        top: 15px;
+        bottom: 15px;
+        left: 20px;
+        right: 20px;
+        background-color: blue;
+      }
+
+  `],
   providers: [TitleService],
-  directives: []
+  directives: [LobbyPopupComponent]
 })
 export class BillPopupComponent implements OnInit {
   bill_id: string;
   billData: Observable<Object> = {};
   billVotes: Observable<Object> = {};
   lobbyIssues: Observable<Object> = {};
+  lobbyPopup: boolean = false;
+  transaction_id: string;
 
   constructor(private _titleService: TitleService
               private params: RouteParams
@@ -87,6 +104,12 @@ export class BillPopupComponent implements OnInit {
     } else if (this.bill_id.charAt(0).toLowerCase() === 's'){
       this.bill_id = 'S';
     }
+  }
+
+  showLobby(transaction_id){
+    console.log(transaction_id);
+    this.lobbyPopup = true;
+    this.transaction_id = transaction_id;
   }
 
 
