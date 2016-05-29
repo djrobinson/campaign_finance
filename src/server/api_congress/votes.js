@@ -136,7 +136,7 @@ router.get('/:cand_id/novotes', function(req, res, next){
 router.get('/id/:leg_id',function(req, res, next){
   var leg = req.params.leg_id;
   console.log(leg);
-  Vote.find({'vote_id': {'$regex': leg }},
+  Vote.find({'question': {'$regex': 'H R '+leg }},
     function(err, vote){
       console.log(vote);
       if (err) throw err;
@@ -153,7 +153,7 @@ router.get('/id/aggregate/:leg_id',function(req, res, next){
 
     Vote.aggregate(
      [
-        { $match: {'bill.number': parseInt(leg)}},
+        { $match: {'question': {$regex: 'H R '+leg}}},
         { $group: { _id: null, count: { $sum: 1 } } }
      ],function(err, vote){
       console.log(vote);

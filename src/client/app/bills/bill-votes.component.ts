@@ -4,11 +4,13 @@ import {Component, Input} from 'angular2/core';
   selector: 'bill-votes',
   template: `
                 <h2>Bill Votes</h2>
-                <h5>{{votes.category}}</h5>
-                <h5>{{votes.question}}</h5>
-                <h5>{{votes.result_text}}</h5>
-                <h5>{{votes.source_url}}</h5>
-                <h5>{{votes.requires}}</h5>
+                <div *ngFor="#vote of votes">
+                  <h5>{{vote.category}}</h5>
+                  <h5>{{vote.question}}</h5>
+                  <h5>{{vote.result_text}}</h5>
+                  <h5>{{vote.source_url}}</h5>
+                  <h5>{{vote.requires}}</h5>
+                </div>
   `,
   styles: [`
 

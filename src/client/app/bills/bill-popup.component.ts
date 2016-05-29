@@ -23,7 +23,7 @@ import {LobbyIssuesComponent} from './lobby-issues.component';
                 <bill-overview [overview]="billData?.data">
                 </bill-overview>
               </div>
-              <div class="four columns" *ngIf="billVotes.data">
+              <div class="four columns" *ngIf="billVotes?.data">
                 <bill-votes [votes]="billVotes?.data">
                 </bill-votes>
               </div>
@@ -75,7 +75,7 @@ export class BillPopupComponent implements OnInit {
       var voteId = 'h'+idNum;
 
       Observable.forkJoin(
-      this.http.get('/api/votes/id/'+voteId).map((res: Response) => res.json()),
+      this.http.get('/api/votes/id/'+idNum).map((res: Response) => res.json()),
       this.http.get('/api/hr/'+this.bill_id).map((res: Response) => res.json()),
       this.http.get('/api/lobby/bill/'+this.bill_id).map((res: Response) => res.json())
 
