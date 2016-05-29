@@ -11,10 +11,10 @@ import {LobbyIssuesComponent} from './lobby-issues.component';
 @Component({
   selector: 'bill-popup',
   template: `
-            <h1>{{lobbyPopup}} Popup</h1>
-
             <lobby-popup
               *ngIf="lobbyPopup"
+              transaction="{{transaction_id}}"
+              billId="{{bill_id}}"
               (exitEmit)="exit()"
               >
             </lobby-popup>
@@ -44,7 +44,8 @@ import {LobbyIssuesComponent} from './lobby-issues.component';
         bottom: 15px;
         left: 20px;
         right: 20px;
-        background-color: blue;
+        border: solid 1px #75717B;
+        background-color: #FEFFFE;
       }
 
   `],
@@ -72,7 +73,6 @@ export class BillPopupComponent implements OnInit {
       var idNum = this.bill_id.slice(2, dashIndex);
       var lobbyId = 'H.R.'+idNum;
       var voteId = 'h'+idNum;
-      console.log(this.bill_id);
 
       Observable.forkJoin(
       this.http.get('/api/votes/id/'+voteId).map((res: Response) => res.json()),
@@ -84,8 +84,6 @@ export class BillPopupComponent implements OnInit {
         this.billData.data = data[1][0];
         this.billVotes.data = data[0][0];
         this.lobbyIssues.data = data[2];
-        console.log(data);
-
       },
       err => console.error(err)
     );
@@ -95,7 +93,6 @@ export class BillPopupComponent implements OnInit {
   }
 
   showLobbyPopup(event){
-    console.log(event.lobby);
     this.lobbyPopup = true;
     this.transaction_id = event.lobby;
   }
