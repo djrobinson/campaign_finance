@@ -13,8 +13,10 @@ import {LobbyIssuesComponent} from './lobby-issues.component';
   template: `
             <h1>{{lobbyPopup}} Popup</h1>
 
-            <lobby-popup *ngIf="lobbyPopup">
-
+            <lobby-popup
+              *ngIf="lobbyPopup"
+              (exitEmit)="exit()"
+              >
             </lobby-popup>
             <div class="row">
               <div class="four columns" *ngIf="billData.data">
@@ -26,7 +28,10 @@ import {LobbyIssuesComponent} from './lobby-issues.component';
                 </bill-votes>
               </div>
               <div class="four columns" *ngIf="lobbyIssues.data">
-                <lobby-issues [issues]="lobbyIssues?.data">
+                <lobby-issues
+                  [issues]="lobbyIssues?.data"
+                  (showLobbyEmit)="showLobbyPopup($event)">
+
                 </lobby-issues>
               </div>
 
@@ -89,10 +94,14 @@ export class BillPopupComponent implements OnInit {
     }
   }
 
-  showLobby(transaction_id){
-    console.log(transaction_id);
+  showLobbyPopup(event){
+    console.log(event.lobby);
     this.lobbyPopup = true;
-    this.transaction_id = transaction_id;
+    this.transaction_id = event.lobby;
+  }
+
+  exit(){
+    this.lobbyPopup = false;
   }
 
 
