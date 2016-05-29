@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, EventEmitter, OnInit} from 'angular2/core';
 
 @Component({
   selector: 'lobby-issues',
@@ -19,6 +19,10 @@ export class LobbyIssuesComponent {
   //May want to start creating individual/committee types.
   @Input() issues: string;
   @Output() showLobbyEmit = new EventEmitter();
+
+  ngOnInit(){
+    console.log(this.issues);
+  }
 
   showLobby(transaction){
     console.log("showLobby ", transaction)

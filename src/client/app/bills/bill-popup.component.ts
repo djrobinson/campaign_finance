@@ -19,7 +19,7 @@ import {LobbyIssuesComponent} from './lobby-issues.component';
               >
             </lobby-popup>
             <div class="row">
-              <div class="four columns" *ngIf="billData.data">
+              <div class="four columns" *ngIf="billData?.data">
                 <bill-overview [overview]="billData?.data">
                 </bill-overview>
               </div>
@@ -27,7 +27,7 @@ import {LobbyIssuesComponent} from './lobby-issues.component';
                 <bill-votes [votes]="billVotes?.data">
                 </bill-votes>
               </div>
-              <div class="four columns" *ngIf="lobbyIssues.data">
+              <div class="four columns" *ngIf="lobbyIssues?.data">
                 <lobby-issues
                   [issues]="lobbyIssues?.data"
                   (showLobbyEmit)="showLobbyPopup($event)">
@@ -77,13 +77,14 @@ export class BillPopupComponent implements OnInit {
       Observable.forkJoin(
       this.http.get('/api/votes/id/'+voteId).map((res: Response) => res.json()),
       this.http.get('/api/hr/'+this.bill_id).map((res: Response) => res.json()),
-      this.http.get('/api/lobby/bill/'+lobbyId).map((res: Response) => res.json())
+      this.http.get('/api/lobby/bill/'+this.bill_id).map((res: Response) => res.json())
 
     ).subscribe(
       data => {
         this.billData.data = data[1][0];
         this.billVotes.data = data[0][0];
         this.lobbyIssues.data = data[2];
+        console.log(this.lobbyIssues);
       },
       err => console.error(err)
     );
