@@ -62,6 +62,9 @@ export class BillsComponent implements OnInit {
       .subscribe(
         result => {
           console.log("bills ", result);
+          result.sort(function(a, b) {
+            return b.actions.length - a.actions.length;
+          });
           this.bills.data = result;
         },
         error => console.error('Error: ' + err),
