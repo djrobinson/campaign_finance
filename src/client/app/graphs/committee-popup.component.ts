@@ -6,48 +6,7 @@ import {TreemapComponent} from './charts/treemap.component';
 
 @Component({
   selector: 'committee-popup',
-  template: `
-    <div class="row">
-      <div class="four columns">
-        <div class="table-div">
-          <ul *ngFor="#individual of individuals?.data">
-            <li>{{individual.NAME}} {{individual.TRANSACTION_AMT}}</li>
-          </ul>
-        </div>
-        <div class="table-div">
-          <ul *ngFor="#reciept of recieveds?.data">
-            <li>{{reciept}}</li>
-          </ul>
-        </div>
-      </div>
-      <div class="four columns">
-        <h4>Committee Financials</h4>
-        <h5>Website: {{committee?.COMMITTEE_WEB_URL}}</h5>
-        <h5>Email: {{committee?.COMMITTEE_EMAIL}}</h5>
-        <h5>Treasurer: {{committee?.TREASURER_NAME}}</h5>
-        <h5>Contributions: {{parseFloat(committee?.net_con) | currency:'USD':true}}</h5>
-        <h5>End of Period Cash: {{parseFloat(committee?.cas_on_han_clo_of_per) | currency:'USD':true}}</h5>
-        <h5>Beginning of Period Cash: {{parseFloat(committee?.cas_on_han_beg_of_per) | currency:'USD':true}}</h5>
-        <h5>Net Opex: {{parseFloat(committee?.net_ope_exp) | currency:'USD':true}}</h5>
-        <h5>Distributions: {{parseFloat(committee?.tot_dis) | currency:'USD':true}}</h5>
-        <h5><a [href]="committee?.lin_ima">FEC Link</a></h5>
-      </div>
-      <div class="four columns">
-        <div class="treemap">
-          <treemap route="/api/opex/aggregate/C00577130">
-          </treemap>
-        </div>
-        <div class="table-div">
-          <ul *ngFor="#contrib of contributeds?.data">
-            <li>{{contrib}}</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="row indiv twelve columns">
-      <button (click)="close()">Close</button>
-    </div>
-  `,
+  templateUrl: 'app/graphs/templates/committee-popup.html',
   styles: [`
     .indiv {
       text-align: center;
@@ -55,9 +14,6 @@ import {TreemapComponent} from './charts/treemap.component';
     .table-div {
       height: 300px;
       overflow: scroll;
-    }
-        div {
-      border: solid 1px #75717B;
     }
     p {
       margin: 0 !important;
@@ -67,7 +23,29 @@ import {TreemapComponent} from './charts/treemap.component';
       font-size: 8px;
     }
     .treemap {
-      height: 300px;
+      position: relative;
+      height: 100%;
+    }
+    treemap {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+    }
+    .committee-container {
+      position: relative;
+      height: 100%;
+    }
+    .top-row-container {
+      position: relative;
+      height: 50%;
+    }
+    .bottom-row-container {
+      position: relative;
+      height: 40%;
+    }
+    .outer-table {
+      position: relative;
+      height: 100%;
     }
   `],
   directives: [TreemapComponent]

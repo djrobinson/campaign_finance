@@ -12,7 +12,8 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
       text-align: center;
     }
     #containerChart {
-      height: 100%;
+      position: absolute;
+      height: 80%;
       width: 100%;
     }
     rect {
