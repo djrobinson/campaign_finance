@@ -19,10 +19,24 @@ import {TitleService} from '../api_services/title.service';
         <h4>Transaction Amount: {{individual?.TRANSACTION_AMT}}</h4>
       </div>
       <div class="indiv-list six columns">
-        <h4>Other Donations (By Same Name)</h4>
-        <ul>
-          <li *ngFor="#indiv of otherIndividuals?.data"><button (click)="changeIndiv(indiv?.TRAN_ID)">{{indiv?.NAME}}</button>, EMPLOYER: individual?.EMPLOYER,TO: {{individual?.CMTE_ID}}, AMT: {{indiv?.TRANSACTION_AMT}}</li>
-        </ul>
+        <h5>Other Donations</h5>
+        <div class="twelve columns other-donations">
+          <div *ngFor="#indiv of otherIndividuals?.data"
+               class="row donor-tile">
+            <div class="one-half column text-center">
+              <p>{{indiv?.NAME}}</p>
+              <p>{{indiv?.EMPLOYER}}</p>
+              <p>{{indiv?.OCCUPATION}}</p>
+              <p>{{indiv?.CMTE_ID}}</p>
+            </div>
+            <div class="one-half column">
+              <p>Donation: {{indiv?.TRANSACTION_AMT}}</p>
+              <button (click)="changeIndiv(indiv?.TRAN_ID)">
+                See Donation
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row indiv twelve columns">
@@ -38,11 +52,23 @@ import {TitleService} from '../api_services/title.service';
     .indiv-list {
       position: absolute;
       right: 0;
-      height: 90%;
-      overflow: scroll;
+      height: 75%;
     }
     .indiv-container {
       position:relative;
+      height: 100%;
+    }
+    .other-donations {
+      position: absolute;
+      right: 0;
+      height: 100%;
+      overflow: scroll;
+      border: solid 1px #75717B;
+      background-color: #FEFFFE;
+    }
+    .donor-tile {
+      border: solid 1px #75717B;
+      background-color: #FEFFFE;
     }
   `]
 })
