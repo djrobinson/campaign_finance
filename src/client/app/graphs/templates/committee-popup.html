@@ -20,10 +20,22 @@
 
   <div class="row bottom-row-container">
     <div class="four columns outer-table">
-      <div class="table-div">
-        <ul *ngFor="#individual of individuals?.data">
-          <li>{{individual.NAME}} {{individual.TRANSACTION_AMT}}</li>
-        </ul>
+      <div class="other-donations">
+        <div *ngFor="#indiv of individuals?.data"
+               class="row donor-tile">
+          <div class="one-half column text-center">
+            <p>{{indiv?.NAME}}</p>
+            <p>{{indiv?.EMPLOYER}}</p>
+            <p>{{indiv?.OCCUPATION}}</p>
+            <p>{{indiv?.CMTE_ID}}</p>
+          </div>
+          <div class="one-half column">
+            <p>Donation: {{indiv?.TRANSACTION_AMT}}</p>
+            <button (click)="changeIndiv(indiv?.TRAN_ID)">
+              See Donation
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="four columns outer-table">

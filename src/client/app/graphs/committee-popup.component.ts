@@ -47,6 +47,18 @@ import {TreemapComponent} from './charts/treemap.component';
       position: relative;
       height: 100%;
     }
+    .other-donations {
+      position: absolute;
+      right: 0;
+      height: 100%;
+      overflow: scroll;
+      border: solid 1px #75717B;
+      background-color: #FEFFFE;
+    }
+    .donor-tile {
+      border: solid 1px #75717B;
+      background-color: #FEFFFE;
+    }
   `],
   directives: [TreemapComponent]
 })
