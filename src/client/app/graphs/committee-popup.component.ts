@@ -94,7 +94,7 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
     console.log(this.committee);
     Observable.forkJoin(
       this.http.get('/api/committees/'+this.committee).map((res: Response) => res.json()),
-      this.http.get('/api/individuals/committee/'+this.committee).map((res: Response) => res.json()),
+      this.http.get('/api/individuals/committee/'+this.committee+'/limit').map((res: Response) => res.json()),
       this.http.get('/api/transfers/'+this.committee+'/contributor').map((res: Response) => res.json()),
       this.http.get('/api/transfers/'+this.committee+'/recipient').map((res: Response) => res.json()),
       this.http.get('/api/opex/committee/'+this.committee).map((res: Response) => res.json())

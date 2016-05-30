@@ -48,10 +48,16 @@ module.exports = {
            .limit(100)
            .offset(offset);
   },
-  indivByCmte: function(cmte_id, offset){
+  indivByCmteLimit: function(cmte_id, offset){
     return knex('indiv_contrib')
            .where({'CMTE_ID': cmte_id})
            .orderBy('TRANSACTION_AMT', 'desc')
+           .limit(100)
            .offset(offset);
+  },
+  indivByCmte: function(cmte_id, offset){
+    return knex('indiv_contrib')
+           .where({'CMTE_ID': cmte_id})
+           .orderBy('TRANSACTION_AMT', 'desc');
   }
 }
