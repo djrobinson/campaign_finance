@@ -168,7 +168,7 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
     component: BillsComponent
   },
   {
-    path: '/bill/:bill_id',
+    path: '/bill/:congress/:bill_id',
     as: 'Bill',
     component: BillPopupComponent
   },

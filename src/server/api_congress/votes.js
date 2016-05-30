@@ -133,10 +133,10 @@ router.get('/:cand_id/novotes', function(req, res, next){
 });
 
 
-router.get('/id/:leg_id',function(req, res, next){
-  var leg = parseInt(req.params.leg_id) ;
+router.get('/id/:congress/:leg_id',function(req, res, next){
+  var leg = parseInt(req.params.leg_id);
   console.log(leg);
-  Vote.find({'bill.number': leg},
+  Vote.find({'bill.number': leg, 'congress': req.params.congress},
     function(err, vote){
       console.log(vote);
       if (err) throw err;

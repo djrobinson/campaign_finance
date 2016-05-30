@@ -15,7 +15,12 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
               </div>
               <div class="nine columns">
                 <ul *ngFor="#bill of bills?.data">
-                  <a [routerLink]="['Bill', {bill_id: bill.bill_id}]">Go here</a><li>{{bill.short_title}} <button (click)="selectBill(bill.bill_id)">{{bill.bill_id}}</button> </li>
+                  <a [routerLink]="['Bill', {bill_id: bill.bill_id, congress: bill.congress}]">Go here</a><li>{{bill.short_title}}
+                     <button
+                      (click)="selectBill(bill.bill_id)">
+                      {{bill.bill_id}}
+                     </button>
+                    </li>
                 </ul>
               </div>
             </div>
@@ -56,7 +61,7 @@ export class BillsComponent implements OnInit {
     this._titleService.getResult('/api/hr/subject/'+subject)
       .subscribe(
         result => {
-          console.log(result);
+          console.log("bills ", result);
           this.bills.data = result;
         },
         error => console.error('Error: ' + err),

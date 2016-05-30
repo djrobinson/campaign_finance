@@ -54,6 +54,7 @@ import {LobbyIssuesComponent} from './lobby-issues.component';
 })
 export class BillPopupComponent implements OnInit {
   bill_id: string;
+  congress: string;
   billData: Observable<Object> = {};
   billVotes: Observable<Object> = {};
   lobbyIssues: Observable<Object> = {};
@@ -64,6 +65,7 @@ export class BillPopupComponent implements OnInit {
               private params: RouteParams
               private http: Http ) {
     this.bill_id = params.get('bill_id');
+    this.congress = params.get('congress');
   }
 
   ngOnInit(){
@@ -75,16 +77,16 @@ export class BillPopupComponent implements OnInit {
       var voteId = 'h'+idNum;
 
       Observable.forkJoin(
-      this.http.get('/api/votes/id/'+idNum).map((res: Response) => res.json()),
+      this.http.get('/api/votes/id/'+this.congress+'/'+idNum).map((res: Response) => res.json()),
       this.http.get('/api/hr/'+this.bill_id).map((res: Response) => res.json()),
       this.http.get('/api/lobby/bill/'+this.bill_id).map((res: Response) => res.json())
 
     ).subscribe(
       data => {
         this.billData.data = data[1][0];
-        this.billVotes.data = data[0][0];
+        this.billVotes.data = data[0];
         this.lobbyIssues.data = data[2];
-        console.log(this.lobbyIssues);
+        console.log(this.billVotes.data);
       },
       err => console.error(err)
     );
