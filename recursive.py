@@ -7,21 +7,22 @@ client = MongoClient()
 db = client.testPolis
 
 # Set the directory you want to start from
-# rootDir = './votes'
-# for dirName, subdirList, fileList in os.walk(rootDir):
-#     print('Found directory: %s' % dirName)
-#     for fname in fileList:
-#       with open(dirName + "/" + fname, 'r') as fin:
-#         print fin.read()
+rootDir = './2013/2013'
+for dirName, subdirList, fileList in os.walk(rootDir):
+    print('Found directory: %s' % dirName)
+    for fname in fileList:
+      with open(dirName + "/data.json", 'r') as fin:
+        item = fin.read()
+        jsonitem = json.loads(item)
+        result = db.votes.insert_one(jsonitem)
 
-# rootDir = '~/seeds/2014/h1'
+# rootDir = './2013/2013'
 # for dirName, subdirList, fileList in os.walk(rootDir):
-#     print('Found directory: %s' % dirName)
-#     for fname in fileList:
-#       with open('./votes/2014/h1/'+fname, 'r') as fin:
-#         item = fin.read()
-#         jsonitem = json.loads(item)
-# #         result = db.restaurants.insert_one(jsonitem)
+#   print(fileList)
+#   with open(dirname + "/data.json", 'r') as fin:
+#     item = fin.read()
+#     print(item)
+
 
 # with open('/Users/danny/seeds/legislators.json', 'r') as fin:
 #         item = fin.read()

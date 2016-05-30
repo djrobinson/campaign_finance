@@ -134,9 +134,20 @@ router.get('/:cand_id/novotes', function(req, res, next){
 
 
 router.get('/id/:leg_id',function(req, res, next){
-  var leg = req.params.leg_id;
+  var leg = parseInt(req.params.leg_id) ;
   console.log(leg);
-  Vote.find({'question': {'$regex': 'H R '+leg }},
+  Vote.find({'bill.number': leg},
+    function(err, vote){
+      console.log(vote);
+      if (err) throw err;
+
+    // object of the user
+    res.json(vote);
+  });
+});
+
+router.get('/bill',function(req, res, next){
+  Vote.find({'bill.number': 1062, 'bill.congress': 113},
     function(err, vote){
       console.log(vote);
       if (err) throw err;
@@ -153,7 +164,7 @@ router.get('/id/aggregate/:leg_id',function(req, res, next){
 
     Vote.aggregate(
      [
-        { $match: {'question': {$regex: 'H R '+leg}}},
+        { $match: {'question': {$regex: ' '+leg+' '}}},
         { $group: { _id: null, count: { $sum: 1 } } }
      ],function(err, vote){
       console.log(vote);
@@ -165,9 +176,6 @@ router.get('/id/aggregate/:leg_id',function(req, res, next){
 });
 
 router.get('/id/aggregate',function(req, res, next){
-  var leg = parseInt(req.params.leg_id);
-  console.log(leg);
-
     Vote.aggregate(
      [
         { $group: { _id: '$bill.number', count: { $sum: 1 } } }
