@@ -89,7 +89,8 @@ import {CongressPopupComponent} from './congress-popup.component.ts';
       height: 60%;
       top: 30%;
       left: 20%;
-      background-color: blue;
+      border: solid 1px #75717B;
+      background-color: #FEFFFE;
     }
     committee-popup {
       position: absolute;
