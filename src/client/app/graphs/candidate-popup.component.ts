@@ -8,65 +8,12 @@ import {PieComponent} from './charts/pie-chart.component';
 
 @Component({
   selector: 'candidate-popup',
-  template: `
-    <div class="cand-style">
-    <div class="eight columns">
-      <div class="row">
-        <div class="four columns">
-            <h4>{{candidate?.CANDIDATE_NAME}}</h4>
-            <img [src]="imageVar?.image" alt="picture">
-        </div>
-        <div class="four columns pie">
-          <h5>Donations by Amount</h5>
-          <pie-chart>
-          </pie-chart>
-        </div>
-        <div class="four columns">
-          <p>Office Sought: {{candidate?.CANDIDATE_OFFICE}}</p>
-          <p>Hometown: {{candidate?.can_cit}}, {{candidate?.STATE}}</p>
-          <p>Birthdate: {{candidateInfo?.bio?.birthday}}</p>
-          <p>Gender: {{candidateInfo?.bio?.gender}}</p>
-          <p>Religion: {{candidateInfo?.bio?.religion}}</p>
-          <p><a [href]="candidate?.lin_ima">FEC Filing Link</a></p>
-          <p><em>Begin Cash: </em> {{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</p>
-          <p><em>End Cash: </em> {{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</p>
-          <p><em>Debt: </em> {{parseFloat(candidate?.deb_owe_by_com) | currency:'USD':true}}</p>
-          <p><em>Funding from Candidate: </em> {{parseFloat(candidate?.can_con) | currency:'USD':true}}</p>
-          <p><em>Net Contributions: </em> {{parseFloat(candidate?.net_con) | currency:'USD':true}}</p>
-          <p><em>Net Opex: </em> {{parseFloat(candidate?.net_ope_exp) | currency:'USD':true}}</p>
-          <p><em>Distributions: </em> {{parseFloat(candidate?.tot_dis) | currency:'USD':true}}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="eight columns treemap">
-          <treemap route="/api/pac/aggregate/P00003392">
-          </treemap>
-        </div>
-        <div class="four columns">
-          <h5>Associated Committees</h5>
-          <ul>
-            <li *ngFor="#cmte of associatedCommittees">{{cmte.CMTE_ID}}</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-      <div class="four columns">
-        <h3>Usage of Funds</h3>
-        <div class="table-div">
-          <ul>
-            <li *ngFor="#pacspend of pacSpends">{{pacspend.pay}} {{pacspend.exp_amo}}</li>
-          </ul>
-        </div>
-      </div>
-      <div class="row indiv twelve columns">
-        <button (click)="close()">Close</button>
-      </div>
-    </div>
-  `,
+  templateUrl: 'app/graphs/templates/candidate-popup.html',
   directives: [TreemapComponent, PieComponent],
   styles: [`
     .cand-style {
-      text-align: center;
+      position: relative;
+      height: 100%;
       font-size: 10px;
     }
     div {
@@ -87,11 +34,50 @@ import {PieComponent} from './charts/pie-chart.component';
       height: 600px;
       overflow: scroll;
     }
-    .pie {
-      height: 300px;
+
+    pie {
+      position: absolute;
+      height: 100%;
     }
     .treemap {
-      height: 300px;
+      position: absolute;
+      bottom: 0;
+      height: 50%;
+      width: 50%;
+    }
+
+    treemap {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+    }
+
+    .associated-committees {
+      position: absolute;
+      bottom: 0;
+      height: 50%;
+      width: 25%;
+      left: 50%;
+    }
+
+    .cand-pic {
+      position: absolute;
+      height: 50%;
+      width: 25%;
+    }
+
+    .pie-chart {
+      position: absolute;
+      height: 50%;
+      width: 25%;
+      left: 25%;
+    }
+
+    .main-info {
+      position: absolute;
+      height: 50%;
+      width: 25%;
+      left: 50%;
     }
   `]
 })

@@ -14,7 +14,6 @@ import {TitleService} from '../api_services/title.service';
             <tr>
               <td>Cash</td>
               <td>{{parseFloat(cash) | currency:'USD':true}}</td>
-
             </tr>
             <tr>
               <td>Net Contributions</td>
@@ -31,7 +30,6 @@ import {TitleService} from '../api_services/title.service';
             <tr>
               <td>Cash</td>
               <td>{{parseFloat(cash) | currency:'USD':true}}</td>
-
             </tr>
             <tr>
               <td>Net Contributions</td>
@@ -46,7 +44,6 @@ import {TitleService} from '../api_services/title.service';
         <div *ngIf="popupType ==='individual || committee'">
           <h4>Transaction Amount: {{parseFloat(amount) | currency:'USD':true}}</h4>
         </div>
-
       </div>
       <div class="flexbox-container">
         <div>
@@ -114,11 +111,13 @@ export class MiniProfileComponent implements OnChanges {
     } else if (this.node.graphtype === "committee") {
       this.title = this.node.CMTE_NM;
       this.id = this.node.OTHER_ID;
+      console.log("committee id ", this.id)
       this.amount = this.node.TRANSACTION_AMT;
       this.popupType = "committee";
     } else if (this.node.graphtype === "associated"){
       this.title = this.node.CMTE_NM;
-      this.id = this.node.CMTE_ID;
+      this.id = this.node.OTHER_ID;
+      console.log("committee id ", this.id)
       this.cash = this.node.cas_on_han_clo_of_per;
       this.contributions = this.node.net_con;
       this.distributions = this.node.tot_dis;
