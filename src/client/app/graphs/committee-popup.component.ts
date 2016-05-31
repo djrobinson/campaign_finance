@@ -10,6 +10,7 @@ import {TreemapComponent} from './charts/treemap.component';
   styles: [`
     .indiv {
       text-align: center;
+      height: 10%;
     }
     .table-div {
       height: 300px;
@@ -33,7 +34,7 @@ import {TreemapComponent} from './charts/treemap.component';
     }
     .committee-container {
       position: relative;
-      height: 100%;
+      height: 90%;
     }
     .top-row-container {
       position: relative;
