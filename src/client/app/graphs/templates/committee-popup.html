@@ -39,10 +39,18 @@
       </div>
     </div>
     <div class="four columns outer-table">
-      <div class="table-div">
-        <ul *ngFor="#reciept of recieveds?.data">
-          <li>{{reciept}}</li>
-        </ul>
+      <div class="other-donations">
+        <div *ngFor="#reciept of recieveds?.data"
+               class="row donor-tile">
+          <div class="one-half column text-center">
+            <p>{{reciept?.NAME}}</p>
+            <p>{{reciept?.MEMO_TEXT}}</p>
+            <p>{{reciept?.CMTE_ID}}</p>
+          </div>
+          <div class="one-half column">
+            <h5>Donation: {{reciept?.TRANSACTION_AMT}}</h5>
+          </div>
+        </div>
       </div>
     </div>
     <div class="four columns outer-table">

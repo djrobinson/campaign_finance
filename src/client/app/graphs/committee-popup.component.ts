@@ -93,10 +93,11 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
       data => {
         console.log(data);
         this.committee = data[0][0];
-        this.opex.data = data[4];
         this.individuals.data = data[1];
-        this.recieveds.data = data[3];
         this.contributeds.data = data[2];
+        this.recieveds.data = data[3];
+        this.opex.data = data[4];
+
       },
       err => console.error(err)
       );
