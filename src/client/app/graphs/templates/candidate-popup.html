@@ -37,7 +37,7 @@
           <h5>Distributions: {{associatedCommittees?.tot_dis}}</h5>
           <h5>Contributions: {{associatedCommittees?.net_con}}</h5>
           <p><a [href]="associatedCommittees?.lin_ima">FEC Link</a></p>
-          <button>Committee Page</button>
+          <button (click)="cmtePopupEmit(associatedCommittees?.CMTE_ID)">Committee Page</button>
         </div>
       </div>
     </div>
@@ -56,6 +56,7 @@
           <div class="one-half column">
             <p>Donation: {{contrib?.TRANSACTION_AMT}}</p>
             <p><a [href]="contrib?.IMAGE_NUM">FEC Link</a></p>
+            <button (click)="cmtePopupEmit(contrib?.CMTE_ID)">Committee Page</button>
           </div>
         </div>
       </div>

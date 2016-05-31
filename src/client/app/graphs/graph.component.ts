@@ -48,6 +48,7 @@ import {CongressPopupComponent} from './congress-popup.component.ts';
               <candidate-popup
                 [candidate]="selectedCandidate"
                 (exitEmit)="exit()"
+                (cmteEmit)="changeCmte($event)"
               >
               </candidate-popup>
             </div>
@@ -176,6 +177,14 @@ export class GraphComponent implements OnInit  {
     console.log("Congress event emitted ", event);
     this.congressPopup = true;
     this.selectedCandidate = event.cand;
+    this.selectedNode = false;
+  }
+
+  changeCmte(event){
+    console.log("Change cmte event emmitted ", event);
+    this.candPopup = false;
+    this.cmtePopup = true;
+    this.selectedCommittee = event.cmte;
     this.selectedNode = false;
   }
 

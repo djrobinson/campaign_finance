@@ -132,6 +132,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
   @Input() candidate: string;
   @Output() exitEmit = new EventEmitter();
+  @Output() cmteEmit = new EventEmitter();
   @ViewChild(PieComponent)
   private pieComponent:PieComponent;
   private disbursements: Object;
@@ -182,6 +183,13 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       },
       err => console.error(err)
     );
+  }
+
+  cmtePopupEmit(cmte) {
+    console.log(cmte);
+    this.cmteEmit.emit({
+      cmte: cmte
+    })
   }
 
   close() {
