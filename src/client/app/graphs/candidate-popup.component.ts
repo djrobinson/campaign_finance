@@ -24,6 +24,7 @@ import {PieComponent} from './charts/pie-chart.component';
       margin: 0 !important;
       padding: 0 !important;
     }
+
     li {
       font-size: 8px;
     }
@@ -62,15 +63,19 @@ import {PieComponent} from './charts/pie-chart.component';
       position: absolute;
       height: 40%;
       width: 25%;
-      left: 25%;
+      left: 50%;
       text-align: center;
+    }
+
+    pie-chart {
+      position: relative;
     }
 
     .main-info {
       position: absolute;
       height: 40%;
       width: 25%;
-      left: 50%;
+      left: 25%;
     }
 
     .pac-spend {
@@ -88,6 +93,27 @@ import {PieComponent} from './charts/pie-chart.component';
       bottom: 0;
     }
 
+    .assoc-container {
+      position: relative;
+      padding: 0 !important;
+      margin: 0 !important;
+      height: 100%;
+      width: 100%;
+      overflow: scroll;
+    }
+
+    .assoc-tile {
+      position: absolute;
+      padding: 0 !important;
+      margin: 0 !important;
+      vertical-align: top;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      box-sizing: border-box;
+      border: solid 1px gray;
+    }
+
 
 
   `]
@@ -100,6 +126,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   private pieComponent:PieComponent;
   private disbursements: Object;
   private candidateInfo: Object;
+  private contributions: Object;
   private imageVar: Object;
   private associatedCommittees: {};
 
@@ -133,8 +160,12 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         console.log(data);
         this.candidate = data[0][0];
         this.disbursements = data[1];
+        data[2] = data[2].map(function(el){
+          el.IMAGE_NUM = "http://docquery.fec.gov/cgi-bin/fecimg/?" + el.IMAGE_NUM;
+          return el;
+        })
         this.contributions = data[2];
-        this.associatedCommittees = data[3];
+        this.associatedCommittees = data[3][0];
         this.pacSpends = data[4];
         this.pieComponent.callAsc(data[3]);
 

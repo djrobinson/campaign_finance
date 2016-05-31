@@ -3,11 +3,6 @@
         <h4>{{candidate?.CANDIDATE_NAME}}</h4>
         <img [src]="imageVar?.image" alt="picture">
     </div>
-    <div class="pie-chart">
-      <h5>Donations by Amount</h5>
-      <pie-chart>
-      </pie-chart>
-    </div>
     <div class="main-info">
       <p>Office Sought: {{candidate?.CANDIDATE_OFFICE}}</p>
       <p>Hometown: {{candidate?.can_cit}}, {{candidate?.STATE}}</p>
@@ -23,37 +18,43 @@
       <p><em>Net Opex: </em> {{parseFloat(candidate?.net_ope_exp) | currency:'USD':true}}</p>
       <p><em>Distributions: </em> {{parseFloat(candidate?.tot_dis) | currency:'USD':true}}</p>
     </div>
+    <div class="pie-chart">
+      <h5>Donations by Amount</h5>
+      <pie-chart>
+      </pie-chart>
+    </div>
 
     <treemap route="/api/pac/aggregate/P00003392">
     </treemap>
     <div class="associated-committees">
       <h5>Associated Committees</h5>
-      <ul>
-        <li *ngFor="#cmte of associatedCommittees">{{cmte.CMTE_ID}}</li>
-      </ul>
+      <div class="assoc-container">
+        <div class="assoc-tile">
+          <h5>{{associatedCommittees?.CMTE_NM}}</h5>
+          <p>ID: {{associatedCommittees?.CMTE_ID}}</p>
+          <p>Cash: {{associatedCommittees?.cas_on_han_clo_of_per}}</p>
+          <p>Distributions: {{associatedCommittees?.tot_dis}}</p>
+          <p>Contributions: {{associatedCommittees?.net_con}}</p>
+
+
+        </div>
+      </div>
     </div>
 
     <div class="pac-spend">
       <h3>Usage of Funds</h3>
-      <div class="table-div">
-        <ul>
-          <li *ngFor="#pacspend of pacSpends">{{pacspend.pay}} {{pacspend.exp_amo}}</li>
-        </ul>
-      </div>
       <div class="other-donations">
-        <div *ngFor="#pacspend of pacSpends"
+        <div *ngFor="#contrib of contributions"
                class="row donor-tile">
           <div class="one-half column text-center">
-            <p>{{indiv?.NAME}}</p>
-            <p>{{indiv?.EMPLOYER}}</p>
-            <p>{{indiv?.OCCUPATION}}</p>
-            <p>{{indiv?.CMTE_ID}}</p>
+            <p>To: {{contrib?.NAME}}</p>
+            <p>From: {{contrib?.com_nam}}</p>
+            <p>{{contrib?.CITY}}, {{contrib?.STATE}}</p>
+            <p>{{contrib?.CMTE_ID}}</p>
           </div>
           <div class="one-half column">
-            <p>Donation: {{indiv?.TRANSACTION_AMT}}</p>
-            <button (click)="changeIndiv(indiv?.TRAN_ID)">
-              See Donation
-            </button>
+            <p>Donation: {{contrib?.TRANSACTION_AMT}}</p>
+            <p>{{contrib?.IMAGE_NUM}}</p>
           </div>
         </div>
       </div>

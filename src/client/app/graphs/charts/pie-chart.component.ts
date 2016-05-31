@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Rx';
 @Component({
   selector: 'pie-chart',
   template: `
-      <div id="containerChart2" class="twelve-columns">
+      <div id="containerChart2">
         <div id="chart2">
         </div>
       </div>
