@@ -101,8 +101,20 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
       data => {
         console.log(data);
         this.committee = data[0][0];
+        data[1] = data[1].map(function(el) {
+          el.IMAGE_NUM = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + el.IMAGE_NUM;
+          return el;
+        })
         this.individuals.data = data[1];
+        data[2] = data[2].map(function(el){
+          el.IMAGE_NUM = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + el.IMAGE_NUM;
+          return el;
+        })
         this.contributeds.data = data[2];
+        data[3] = data[3].map(function(el) {
+          el.IMAGE_NUM = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + el.IMAGE_NUM;
+          return el;
+        })
         this.recieveds.data = data[3];
         this.opex.data = data[4];
 

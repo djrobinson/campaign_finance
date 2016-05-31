@@ -28,7 +28,7 @@
             <p>{{indiv?.NAME}}</p>
             <p>{{indiv?.EMPLOYER}}</p>
             <p>{{indiv?.OCCUPATION}}</p>
-            <p>{{indiv?.CMTE_ID}}</p>
+            <p><a [href]="indiv?.IMAGE_NUM">FEC Link</a></p>
           </div>
           <div class="one-half column">
             <p>Donation: {{indiv?.TRANSACTION_AMT}}</p>
@@ -66,7 +66,7 @@
             <p>{{contrib?.NAME}}</p>
             <p>{{contrib?.MEMO_TEXT}}</p>
             <p>{{contrib?.OTHER_ID}}</p>
-            <p><a [href]="reciept?.IMAGE_NUM">FEC Link</a></p>
+            <p><a [href]="contrib?.IMAGE_NUM">FEC Link</a></p>
           </div>
           <div class="one-half column">
             <h5>Donation: {{contrib?.TRANSACTION_AMT}}</h5>
