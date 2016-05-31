@@ -25,7 +25,7 @@ import {Observable} from 'rxjs/Rx';
 export class PieComponent implements OnInit, OnChanges {
   constructor(private http:Http) {}
 
-  callAsc(associatedCommittees) {
+  callAsc(associatedCommittee) {
       var buildPieChart = this.buildPieChart;
       var http = this.http;
       var indivToCommittees = [];
@@ -57,8 +57,7 @@ export class PieComponent implements OnInit, OnChanges {
         }
       ];
       var j = 0;
-      associatedCommittees.forEach(function(cmte, i) {
-        http.get('api/individuals/committee/'+cmte.CMTE_ID).map(response => response.json()).subscribe(
+        http.get('api/individuals/committee/'+associatedCommittee.CMTE_ID).map(response => response.json()).subscribe(
           data=>{
           // indivToCommittees = indivToCommittees.concat(data);
           var chartStuff =  data.reduce(function(prev, curr) {
@@ -86,11 +85,8 @@ export class PieComponent implements OnInit, OnChanges {
             }
 
           }, pieData)
-          if (i === associatedCommittees.length - 1) {
-            buildPieChart(chartStuff);
-          }
+          buildPieChart(chartStuff);
         })
-      })
   }
 
 

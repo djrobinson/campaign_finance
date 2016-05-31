@@ -108,13 +108,23 @@ import {PieComponent} from './charts/pie-chart.component';
       margin: 0 !important;
       vertical-align: top;
       width: 100%;
-      height: 100%;
       text-align: center;
       box-sizing: border-box;
       border: solid 1px gray;
     }
 
-
+    .other-donations {
+      position: absolute;
+      right: 0;
+      height: 100%;
+      overflow: scroll;
+      border: solid 1px #75717B;
+      background-color: #FEFFFE;
+    }
+    .donor-tile {
+      border: solid 1px #75717B;
+      background-color: #FEFFFE;
+    }
 
   `]
 })
@@ -167,7 +177,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.contributions = data[2];
         this.associatedCommittees = data[3][0];
         this.pacSpends = data[4];
-        this.pieComponent.callAsc(data[3]);
+        this.pieComponent.callAsc(data[3][0]);
 
       },
       err => console.error(err)

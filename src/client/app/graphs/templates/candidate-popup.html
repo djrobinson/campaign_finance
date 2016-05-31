@@ -27,16 +27,17 @@
     <treemap route="/api/pac/aggregate/P00003392">
     </treemap>
     <div class="associated-committees">
-      <h5>Associated Committees</h5>
+
       <div class="assoc-container">
+        <h5>Associated Committees</h5>
         <div class="assoc-tile">
           <h5>{{associatedCommittees?.CMTE_NM}}</h5>
           <p>ID: {{associatedCommittees?.CMTE_ID}}</p>
-          <p>Cash: {{associatedCommittees?.cas_on_han_clo_of_per}}</p>
-          <p>Distributions: {{associatedCommittees?.tot_dis}}</p>
-          <p>Contributions: {{associatedCommittees?.net_con}}</p>
-
-
+          <h5>Cash: {{associatedCommittees?.cas_on_han_clo_of_per}}</h5>
+          <h5>Distributions: {{associatedCommittees?.tot_dis}}</h5>
+          <h5>Contributions: {{associatedCommittees?.net_con}}</h5>
+          <p><a [href]="associatedCommittees?.lin_ima">FEC Link</a></p>
+          <button>Committee Page</button>
         </div>
       </div>
     </div>
@@ -54,7 +55,7 @@
           </div>
           <div class="one-half column">
             <p>Donation: {{contrib?.TRANSACTION_AMT}}</p>
-            <p>{{contrib?.IMAGE_NUM}}</p>
+            <p><a [href]="contrib?.IMAGE_NUM">FEC Link</a></p>
           </div>
         </div>
       </div>
