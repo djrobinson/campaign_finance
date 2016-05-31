@@ -4,7 +4,7 @@ module.exports = {
   getCmteCmteByDon: function(cmte_id, offset){
     return knex('cmte_to_cmte')
            .where({'CMTE_ID': cmte_id})
-           .where('TRANSACTION_TP', 'LIKE', '24%')
+           .where('TRANSACTION_TP', 'LIKE', '2%')
            .orderBy('TRANSACTION_AMT', 'desc')
            .limit(100)
            .offset(offset);
@@ -12,7 +12,7 @@ module.exports = {
   getCmteCmteByRec: function(cmte_id, offset){
     return knex('cmte_to_cmte')
            .where({'CMTE_ID': cmte_id})
-           .where('TRANSACTION_TP', 'LIKE', '18%')
+           .where('TRANSACTION_TP', 'LIKE', '1%')
            .orderBy('TRANSACTION_AMT', 'desc')
            .limit(100)
            .offset(offset);

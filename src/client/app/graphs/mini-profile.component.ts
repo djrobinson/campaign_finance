@@ -116,7 +116,7 @@ export class MiniProfileComponent implements OnChanges {
       this.popupType = "committee";
     } else if (this.node.graphtype === "associated"){
       this.title = this.node.CMTE_NM;
-      this.id = this.node.OTHER_ID;
+      this.id = this.node.OTHER_ID || this.node.CMTE_ID;
       console.log("committee id ", this.id)
       this.cash = this.node.cas_on_han_clo_of_per;
       this.contributions = this.node.net_con;
