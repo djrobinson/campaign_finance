@@ -12,35 +12,128 @@ import {VoteChartComponent} from './charts/vote-chart.component';
   directives: [TreemapComponent, PieComponent, VoteChartComponent],
   styles: [`
     .cand-style {
-      text-align: center;
+      position: relative;
+      height: 100%;
       font-size: 10px;
     }
-    div {
-      border: solid 1px #75717B;
-    }
     img {
-      width: 100%;
+      width: 80%;
     }
     p {
       margin: 0 !important;
       padding: 0 !important;
     }
+
     li {
       font-size: 8px;
     }
-    .table-div {
-      padding: 12px;
-      height: 300px;
+    .contribs {
+      position: absolute;
+      height: 100%;
+      width: 25%;
       overflow: scroll;
     }
+
+    .bio {
+      position: absolute;
+      height: 50%;
+      width: 50%;
+      left: 25%;
+      top: 0;
+    }
+
+    pie {
+      position: absolute;
+      height: 100%;
+    }
+
+    treemap {
+      position: absolute;
+      bottom: 0;
+      height: 50%;
+      width: 50%;
+      left: 25%;
+    }
+
+    .associated-committees {
+      position: absolute;
+      bottom: 0;
+      height: 50%;
+      width: 25%;
+      left: 50%;
+    }
+
+    .cand-pic {
+      position: absolute;
+      height: 40%;
+      width: 25%;
+    }
+
+    .pie-chart {
+      position: absolute;
+      height: 40%;
+      width: 25%;
+      left: 50%;
+      text-align: center;
+    }
+
+    pie-chart {
+      position: relative;
+    }
+
+    .main-info {
+      sition: absolute;
+      ight: 40%;
+      dth: 25%;
+      left: 25%;
+    }
+
     .votes {
+      position: absolute;
+      right: 0;
+      width: 25%;
+      height: 90%;
+    }
+
+    .indiv {
+      position: absolute;
+      text-align: right;
       width: 100%;
+      height: 5%;
+      bottom: 0;
     }
-    .chart {
-      height: 400px;
+
+    .assoc-container {
+      position: relative;
+      padding: 0 !important;
+      margin: 0 !important;
+      height: 100%;
+      width: 100%;
+      overflow: scroll;
     }
-    .treemap {
-      height: 300px;
+
+    .assoc-tile {
+      position: absolute;
+      padding: 0 !important;
+      margin: 0 !important;
+      vertical-align: top;
+      width: 100%;
+      text-align: center;
+      box-sizing: border-box;
+      border: solid 1px gray;
+    }
+
+    .other-donations {
+      position: absolute;
+      right: 0;
+      height: 100%;
+      overflow: scroll;
+      border: solid 1px #75717B;
+      background-color: #FEFFFE;
+    }
+    .donor-tile {
+      border: solid 1px #75717B;
+      background-color: #FEFFFE;
     }
   `]
 })
