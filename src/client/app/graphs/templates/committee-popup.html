@@ -52,6 +52,7 @@
           </div>
           <div class="one-half column">
             <h5>Donation: {{reciept?.TRANSACTION_AMT}}</h5>
+            <h5>Type: {{reciept?.TRANSACTION_TP}}</h5>
             <button (click)="changeCmte(reciept?.CMTE_ID)">Committe Page</button>
           </div>
         </div>
@@ -70,6 +71,7 @@
           </div>
           <div class="one-half column">
             <h5>Donation: {{contrib?.TRANSACTION_AMT}}</h5>
+            <h5>Type: {{contrib?.TRANSACTION_TP}}</h5>
             <button (click)="changeCmte(contrib?.OTHER_ID)">Committe Page</button>
           </div>
         </div>
