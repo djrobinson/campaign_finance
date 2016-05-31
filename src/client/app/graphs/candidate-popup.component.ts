@@ -139,7 +139,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   private candidateInfo: Object;
   private contributions: Object;
   private imageVar: Object;
-  private associatedCommittees: {};
+  private associatedCommittees: Object = {};
+  private pacSpends: Object;
 
 
   constructor(private _TitleService: TitleService,
@@ -184,6 +185,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       err => console.error(err)
     );
   }
+
+
 
   cmtePopupEmit(cmte) {
     console.log(cmte);

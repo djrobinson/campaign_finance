@@ -41,7 +41,8 @@ import {CongressPopupComponent} from './congress-popup.component.ts';
             <div *ngIf="cmtePopup">
               <committee-popup
                 [committee]="selectedCommittee"
-                (exitEmit)="exit()">
+                (exitEmit)="exit()"
+                (indivEmit)="changeIndiv($event)">
               </committee-popup>
             </div>
             <div *ngIf="candPopup">
@@ -185,6 +186,15 @@ export class GraphComponent implements OnInit  {
     this.candPopup = false;
     this.cmtePopup = true;
     this.selectedCommittee = event.cmte;
+    this.selectedNode = false;
+  }
+
+  changeIndiv(event) {
+    console.log("Change cmte event emmitted ", event);
+    this.cmtePopup = false;
+    this.indivPopup = true;
+    this.indivName = event.name;
+    this.individualTran = event.transaction;
     this.selectedNode = false;
   }
 

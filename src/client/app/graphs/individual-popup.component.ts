@@ -41,8 +41,6 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   @Output() exitEmit = new EventEmitter();
   private individual: Observable<Object>;
   private otherIndividuals: Observable<Object>;
-
-  private _todosObserver: Observer<Todo[]>;
   private dataStore: Observable<Object>;
 
   constructor(private _TitleService: TitleService,
@@ -70,7 +68,7 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
     this.http.get('/api/individuals/transaction/' + this.individualTran).map(response => response.json()).subscribe(data => {
       console.log(data);
       this.individual = data[0];
-    }, error => console.log('Could not load todos.'));
+    }, error => console.log('Could not load transactions.'));
   }
 
   close(){

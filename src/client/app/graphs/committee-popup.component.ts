@@ -67,6 +67,7 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
   @Input() committee: string;
   @Output() exitEmit = new EventEmitter();
+  @Output() indivEmit = new EventEmitter();
   private committee: Observable<Object>;
   private opex = {};
   private individuals = {};
@@ -102,6 +103,14 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
       },
       err => console.error(err)
       );
+  }
+
+  changeIndiv(indiv) {
+    console.log(indiv;
+    this.indivEmit.emit({
+      transaction: indiv.TRAN_ID,
+      name: indiv.NAME
+    })
   }
 
   close() {
