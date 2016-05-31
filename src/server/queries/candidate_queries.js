@@ -19,7 +19,6 @@ module.exports = {
     return knex('cmte_cand_linkage')
             .select().where({'CAND_ID': cand_id});
   },
-
   getCandSort: function(column, offset){
     return knex('candidacy_statements')
            .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')

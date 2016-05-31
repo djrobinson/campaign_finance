@@ -40,10 +40,26 @@
           <li *ngFor="#pacspend of pacSpends">{{pacspend.pay}} {{pacspend.exp_amo}}</li>
         </ul>
       </div>
+      <div class="other-donations">
+        <div *ngFor="#pacspend of pacSpends"
+               class="row donor-tile">
+          <div class="one-half column text-center">
+            <p>{{indiv?.NAME}}</p>
+            <p>{{indiv?.EMPLOYER}}</p>
+            <p>{{indiv?.OCCUPATION}}</p>
+            <p>{{indiv?.CMTE_ID}}</p>
+          </div>
+          <div class="one-half column">
+            <p>Donation: {{indiv?.TRANSACTION_AMT}}</p>
+            <button (click)="changeIndiv(indiv?.TRAN_ID)">
+              See Donation
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-
-</div>
-
-  <div class="row indiv twelve columns">
+  <div class="row indiv twelve columns text-center">
     <button (click)="close()">Close</button>
   </div>
+</div>
+

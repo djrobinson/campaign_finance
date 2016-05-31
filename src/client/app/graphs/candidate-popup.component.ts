@@ -16,9 +16,6 @@ import {PieComponent} from './charts/pie-chart.component';
       height: 100%;
       font-size: 10px;
     }
-    div {
-      border: solid 1px #75717B;
-    }
 
     img {
       width: 80%;
@@ -57,20 +54,21 @@ import {PieComponent} from './charts/pie-chart.component';
 
     .cand-pic {
       position: absolute;
-      height: 50%;
+      height: 40%;
       width: 25%;
     }
 
     .pie-chart {
       position: absolute;
-      height: 50%;
+      height: 40%;
       width: 25%;
       left: 25%;
+      text-align: center;
     }
 
     .main-info {
       position: absolute;
-      height: 50%;
+      height: 40%;
       width: 25%;
       left: 50%;
     }
@@ -79,13 +77,19 @@ import {PieComponent} from './charts/pie-chart.component';
       position: absolute;
       right: 0;
       width: 25%;
-      height: 100%;
+      height: 90%;
     }
 
     .indiv {
+      position: absolute;
+      text-align: right;
       width: 100%;
+      height: 5%;
       bottom: 0;
     }
+
+
+
   `]
 })
 export class CandidatePopupComponent implements OnInit, OnChanges {
@@ -121,7 +125,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       this.http.get('/api/candidates/'+fecId).map((res: Response) => res.json()),
       this.http.get('/api/disbursements/'+fecId+'/candidate').map((res: Response) => res.json()),
       this.http.get('/api/contributions/'+fecId+'/candidate').map((res: Response) => res.json()),
-      this.http.get('/api/candidates/'+fecId+'/committees').map((res: Response) => res.json()),
+      this.http.get('/api/candidates/'+fecId+'/associated').map((res: Response) => res.json()),
       this.http.get('/api/pac/'+fecId+'/candidate').map((res: Response) => res.json()),
 
     ).subscribe(

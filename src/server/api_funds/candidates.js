@@ -75,4 +75,9 @@ router.get('/:cand_id/committees', function(req, res, next){
   });
 });
 
+router.get('/:cand_id/associated', function(req, res, next){
+  query.getGraphAsc(req.params.cand_id).then(function(comms){
+    res.json(comms);
+  })
+})
 module.exports = router;
