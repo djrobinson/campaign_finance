@@ -42,6 +42,7 @@ import {CongressPopupComponent} from './congress-popup.component.ts';
               <committee-popup
                 [committee]="selectedCommittee"
                 (exitEmit)="exit()"
+                (cmteEmit)="changeCmte($event)"
                 (indivEmit)="changeIndiv($event)">
               </committee-popup>
             </div>

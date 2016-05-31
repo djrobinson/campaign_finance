@@ -13,7 +13,7 @@
       <p><a [href]="committee?.lin_ima">FEC Link</a></p>
     </div>
     <div class="six columns treemap">
-      <treemap route="/api/opex/aggregate/C00577130">
+      <treemap route="{{route?.data}}">
       </treemap>
     </div>
   </div>
@@ -48,9 +48,11 @@
             <p>{{reciept?.NAME}}</p>
             <p>{{reciept?.MEMO_TEXT}}</p>
             <p>{{reciept?.CMTE_ID}}</p>
+            <p><a [href]="reciept?.IMAGE_NUM">FEC Link</a></p>
           </div>
           <div class="one-half column">
             <h5>Donation: {{reciept?.TRANSACTION_AMT}}</h5>
+            <button (click)="changeCmte(reciept?.CMTE_ID)">Committe Page</button>
           </div>
         </div>
       </div>
@@ -63,10 +65,12 @@
           <div class="one-half column text-center">
             <p>{{contrib?.NAME}}</p>
             <p>{{contrib?.MEMO_TEXT}}</p>
-            <p>{{contrib?.CMTE_ID}}</p>
+            <p>{{contrib?.OTHER_ID}}</p>
+            <p><a [href]="reciept?.IMAGE_NUM">FEC Link</a></p>
           </div>
           <div class="one-half column">
             <h5>Donation: {{contrib?.TRANSACTION_AMT}}</h5>
+            <button (click)="changeCmte(contrib?.OTHER_ID)">Committe Page</button>
           </div>
         </div>
       </div>

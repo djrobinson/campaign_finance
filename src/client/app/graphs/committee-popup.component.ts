@@ -68,11 +68,12 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
   @Input() committee: string;
   @Output() exitEmit = new EventEmitter();
   @Output() indivEmit = new EventEmitter();
-  private committee: Observable<Object>;
-  private opex = {};
-  private individuals = {};
-  private recieveds = {};
-  private contributeds = {};
+  @Output() cmteEmit = new EventEmitter();
+  private opex: Object = {};
+  private individuals: Object = {};
+  private recieveds: Object = {};
+  private contributeds: Object = {};
+  private route: Object = {};
 
 
   constructor(private _TitleService: TitleService,
@@ -84,12 +85,17 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
 
   ngOnInit(){
     console.log(this.committee);
+    this.callCmteData();
+  }
+
+  callCmteData(){
+    this.route.data = '/api/opex/aggregate/' + this.committee;
     Observable.forkJoin(
-      this.http.get('/api/committees/'+this.committee).map((res: Response) => res.json()),
-      this.http.get('/api/individuals/committee/'+this.committee+'/limit').map((res: Response) => res.json()),
-      this.http.get('/api/transfers/'+this.committee+'/contributor').map((res: Response) => res.json()),
-      this.http.get('/api/transfers/'+this.committee+'/recipient').map((res: Response) => res.json()),
-      this.http.get('/api/opex/committee/'+this.committee).map((res: Response) => res.json())
+      this.http.get('/api/committees/' + this.committee).map((res: Response) => res.json()),
+      this.http.get('/api/individuals/committee/' + this.committee + '/limit').map((res: Response) => res.json()),
+      this.http.get('/api/transfers/' + this.committee + '/contributor').map((res: Response) => res.json()),
+      this.http.get('/api/transfers/' + this.committee + '/recipient').map((res: Response) => res.json()),
+      this.http.get('/api/opex/committee/' + this.committee).map((res: Response) => res.json())
 
     ).subscribe(
       data => {
@@ -106,11 +112,17 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
   }
 
   changeIndiv(indiv) {
-    console.log(indiv;
+    console.log(indiv);
     this.indivEmit.emit({
       transaction: indiv.TRAN_ID,
       name: indiv.NAME
     })
+  }
+
+  changeCmte(cmte) {
+    console.log(cmte);
+    this.committee = cmte;
+    this.callCmteData();
   }
 
   close() {

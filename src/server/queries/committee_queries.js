@@ -3,8 +3,7 @@ var knex = require('./knex');
 
 module.exports = {
    getCmteSum: function(cmte_id, offset){
-    return knex('committee_registrations')
-           .innerJoin('committee_summaries', 'COMMITTEE_ID', 'com_id')
+    return knex('committee_summaries')
            .where({'com_id': cmte_id})
            .limit(100)
            .offset(offset);
