@@ -21,7 +21,7 @@ import {PieComponent} from './charts/pie-chart.component';
     }
 
     img {
-      width: 100%;
+      width: 80%;
     }
     p {
       margin: 0 !important;
@@ -39,17 +39,12 @@ import {PieComponent} from './charts/pie-chart.component';
       position: absolute;
       height: 100%;
     }
-    .treemap {
+
+    treemap {
       position: absolute;
       bottom: 0;
       height: 50%;
       width: 50%;
-    }
-
-    treemap {
-      position: absolute;
-      height: 100%;
-      width: 100%;
     }
 
     .associated-committees {
@@ -78,6 +73,18 @@ import {PieComponent} from './charts/pie-chart.component';
       height: 50%;
       width: 25%;
       left: 50%;
+    }
+
+    .pac-spend {
+      position: absolute;
+      right: 0;
+      width: 25%;
+      height: 100%;
+    }
+
+    .indiv {
+      width: 100%;
+      bottom: 0;
     }
   `]
 })

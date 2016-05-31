@@ -101,7 +101,7 @@ export class PieComponent implements OnInit, OnChanges {
 
       var width = document.getElementById('containerChart2').offsetWidth;
       var height = document.getElementById('containerChart2').offsetHeight;
-      var radius = Math.min(width, height) / 2;
+      var radius = Math.min(width, height) / 2.25;
       var donutWidth = 75;
       var legendRectSize = 18;
       var legendSpacing = 4;

@@ -1,5 +1,5 @@
 <div class="cand-style">
-    <div class="cand-pic">
+    <div class="cand-pic text-center">
         <h4>{{candidate?.CANDIDATE_NAME}}</h4>
         <img [src]="imageVar?.image" alt="picture">
     </div>
@@ -24,10 +24,8 @@
       <p><em>Distributions: </em> {{parseFloat(candidate?.tot_dis) | currency:'USD':true}}</p>
     </div>
 
-    <div class="treemap">
-      <treemap route="/api/pac/aggregate/P00003392">
-      </treemap>
-    </div>
+    <treemap route="/api/pac/aggregate/P00003392">
+    </treemap>
     <div class="associated-committees">
       <h5>Associated Committees</h5>
       <ul>
@@ -43,7 +41,9 @@
         </ul>
       </div>
     </div>
+
+</div>
+
   <div class="row indiv twelve columns">
     <button (click)="close()">Close</button>
   </div>
-</div>
