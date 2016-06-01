@@ -39,13 +39,14 @@ import {LobbyIssuesComponent} from './lobby-issues.component';
            `,
   styles: [`
       lobby-popup {
-        position: absolute;
+        position: fixed;
         top: 15px;
         bottom: 15px;
         left: 20px;
         right: 20px;
         border: solid 1px #75717B;
         background-color: #FEFFFE;
+        z-index: 2;
       }
       .bill-container {
         position: relative;

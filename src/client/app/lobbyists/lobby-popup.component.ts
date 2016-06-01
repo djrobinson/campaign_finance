@@ -5,27 +5,44 @@ import {Observable} from 'rxjs/Rx';
 @Component({
   selector: 'lobby-popup',
   template: `
-    <div class="row">
-      <div class="four columns">
-         <h2>Sponsors</h2>
-      </div>
-      <div class="four columns">
-        <h4>Lobby Issue Info</h4>
-        <h5>{{billId}}</h5>
-        <h5>{{currLobby?.data?.client_parent_name}}</h5>
-      </div>
-      <div class="four columns">
-        <h4>Other Bills Lobbied for Client</h4>
-        <ul>
-          <li *ngFor="#trans of transactionBills?.data">{{trans}}</li>
-        </ul>
-      </div>
-    </div>
-    <div class="row indiv twelve columns">
-      <button (click)="close()">Close</button>
-    </div>
+          <div class="lobby-popup-container">
+            <div class="row">
+              <div class="four columns">
+                 <h2>Sponsors</h2>
+              </div>
+              <div class="four columns">
+                <h4>Lobby Issue Info</h4>
+                <h5>{{billId}}</h5>
+                <h5>{{currLobby?.data?.client_parent_name}}</h5>
+              </div>
+              <div class="other-lobbies-container">
+              <h4>Other Bills Lobbied for Client</h4>
+                <div *ngFor="#trans of transactionBills?.data" class="other-lobbies">
+                  <h5>{{trans.bill_name}}</h5>
+                  <p>{{trans.specific_issue}}</p>
+                  <p>{{trans.category}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="row indiv twelve columns">
+              <button (click)="close()">Close</button>
+            </div>
+          </div>
   `,
   styles: [`
+    .other-lobbies {
+      width: 100%;
+      height: 200px;
+      border: solid 1px gray;
+      overflow: hidden;
+    }
+    .other-lobbies-container {
+      position: absolute;
+      height: 100%;
+      width: 33.33%;
+      right: 0;
+      overflow: scroll;
+    }
   `],
   directives: []
 })
