@@ -2,9 +2,22 @@
 
           <div class="contribs">
             <h5>Sources of Funds</h5>
-            <ul>
-              <li *ngFor="#contribution of contributions">{{contribution.NAME}}: {{contribution.TRANSACTION_AMT}}</li>
-            </ul>
+            <div class="other-donations">
+              <div *ngFor="#contrib of contributions"
+                     class="row donor-tile">
+                <div class="one-half column text-center">
+                  <p>To: {{contrib?.NAME}}</p>
+                  <p>From: {{contrib?.com_nam}}</p>
+                  <p>{{contrib?.CITY}}, {{contrib?.STATE}}</p>
+                  <p>{{contrib?.CMTE_ID}}</p>
+                </div>
+                <div class="one-half column">
+                  <p>Donation: {{contrib?.TRANSACTION_AMT}}</p>
+                  <p><a [href]="contrib?.IMAGE_NUM">FEC Link</a></p>
+                  <button (click)="cmtePopupEmit(contrib?.CMTE_ID)">Committee Page</button>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="bio">
             <h2>{{candidate?.CANDIDATE_NAME}}</h2>

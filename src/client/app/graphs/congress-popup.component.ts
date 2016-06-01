@@ -141,6 +141,7 @@ export class CongressPopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
   @Input() candidate: string;
   @Output() exitEmit = new EventEmitter();
+  @Output() cmteEmit = new EventEmitter();
   @ViewChild(PieComponent)
   private pieComponent: PieComponent;
   private disbursements: Object;
@@ -274,6 +275,12 @@ export class CongressPopupComponent implements OnInit, OnChanges {
     }, [])
   }
 
+  cmtePopupEmit(cmte) {
+    console.log(cmte);
+    this.cmteEmit.emit({
+      cmte: cmte
+    })
+  }
 
 
   close() {
