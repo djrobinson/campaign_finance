@@ -18,6 +18,12 @@ import {Component, Input} from 'angular2/core';
                 <div class="actions-container row">
                   <div class="action" *ngFor="#action of overview.actions">
                     <p>{{action.text}}</p>
+                    <p>{{action.acted_at}}</p>
+                    <ul>
+                      <li *ngFor="#comm of action.committees">
+                        {{comm}}
+                      </li>
+                    </ul>
                   </div>
                 </div>
   `,
@@ -34,6 +40,16 @@ import {Component, Input} from 'angular2/core';
       vertical-align: top;
       border: solid 1px gray;
     }
+    .action-container {
+      width: 100%;
+    }
+    .action {
+      width: 25%;
+      display: inline-block;
+      vertical-align: top;
+      border: solid 1px gray;
+    }
+
   `],
   directives: []
 })

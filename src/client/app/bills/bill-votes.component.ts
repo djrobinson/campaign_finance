@@ -6,17 +6,29 @@ import {Component, Input} from 'angular2/core';
 
               <div class="vote-container row">
                 <h2>Bill Votes</h2>
-                <div *ngFor="#vote of votes">
-                  <h5>{{vote.category}}</h5>
-                  <h5>{{vote.question}}</h5>
+                <div *ngFor="#vote of votes" class="vote">
+                  <h3>{{vote.subject}}</h3>
+                  <div class="row">
+                    <div class="one-half column">
+                      <h5>{{vote.question}}</h5>
+                    </div>
+                    <div class="one-half column">
+                      <h5>Category: {{vote.category}} Requires: {{vote.requires}}</h5>
+                    </div>
+                  </div>
                   <h5>{{vote.result_text}}</h5>
-                  <h5>{{vote.source_url}}</h5>
-                  <h5>{{vote.requires}}</h5>
+                  <h5><a [href]="vote.source_url">Roll Call Link</a></h5>
                 </div>
               </div>
   `,
   styles: [`
+    .vote-container {
+      text-align: center;
 
+    }
+    .vote {
+      border: solid 1px gray;
+    }
   `],
   directives: []
 })
