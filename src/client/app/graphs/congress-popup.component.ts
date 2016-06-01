@@ -147,6 +147,7 @@ export class CongressPopupComponent implements OnInit, OnChanges {
   private candidateInfo: Object;
   private imageVar: Object;
   private associatedCommittees: {};
+  private route: string;
 
 
   constructor(private _TitleService: TitleService,
@@ -160,6 +161,7 @@ export class CongressPopupComponent implements OnInit, OnChanges {
   ngOnInit() {
     // this.buildTreeMap();
     // this.buildPieChart();
+    this.route = '/api/disbursements/graph/' + this.candidate;
     this.http.get('/api/legislators/' + this.candidate).map(response => response.json()).subscribe(data => {
       this.candidateInfo = data[0];
 
@@ -173,6 +175,7 @@ export class CongressPopupComponent implements OnInit, OnChanges {
   }
 
   callApis(fecId, bioguideId, thomasId, lis) {
+
     if (lis) {
       var voteId = lis;
     } else if (bioguideId) {
