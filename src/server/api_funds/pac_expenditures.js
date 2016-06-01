@@ -131,12 +131,15 @@ router.get('/aggregate/:cand_id', function(req, res, next){
               "support": curr.sup_opp,
               "name": curr.spe_nam,
               "id": curr.spe_id,
-              "value": exp_amo
+              "value": exp_amo,
+              "amount": exp_amo
             })
             return prev;
           } else {
-            prev.amount += parseFloat(curr.exp_amo);
-            prev.children[currIndex].amount += parseFloat(curr.exp_amo);
+            prev.value += exp_amo;
+            prev.amount += exp_amo;
+            prev.children[currIndex].value += exp_amo;
+            prev.children[currIndex].amount += exp_amo;
             prev.children[currIndex].children.push({
               "support": curr.sup_opp,
               "name": curr.pay,

@@ -182,7 +182,15 @@ export class TreemapComponent implements OnInit, OnChanges {
     legend.append("rect")
       .attr("x", function(d) { return margin.left + d * 40 })
       .attr("y", 0)
-      .attr("fill", function(d) { return randomColor(); })
+      .attr("fill", function(d) {
+        if (d.support = "Support"){
+          return 'green';
+        } else if (d.support = "Oppose"){
+          return 'red';
+        } else {
+          return 'randomColor()';
+        }
+       })
       .attr('width', '40px')
       .attr('height', '40px')
 
@@ -216,7 +224,9 @@ export class TreemapComponent implements OnInit, OnChanges {
         grandparent
           .datum(d.parent)
           .select("rect")
-          .attr("fill", function() { return randomColor(); })
+          .attr("fill", function() {
+            return 'gray';
+          })
 
         var g1 = svg.insert("g", ".grandparent")
           .datum(d)
@@ -240,11 +250,11 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("class", "parent")
           .call(rect)
           .append("title")
-          .text(function(d) { return d.name + ', Size of Donation: ' + d.value; });
+          .text(function(d) { return d.name + ', Size of Donations: ' + d.amount; });
 
         g.append("text")
           .attr("dy", ".75em")
-          .text(function(d) { return d.name; })
+          .text(function(d) { return d.name + ', Size of Donation: ' + d.amount; })
           .call(text);
 
         function transition(d) {
@@ -280,8 +290,31 @@ export class TreemapComponent implements OnInit, OnChanges {
             transitioning = false;
           });
         }
-
         return g;
+      }
+
+      function wrap(text, width) {
+        text.each(function() {
+          var text = d3.select(this),
+            words = text.text().split(/\s+/).reverse(),
+            word,
+            line = [],
+            lineNumber = 0,
+            lineHeight = 1.1, // ems
+            y = text.attr("y"),
+            dy = parseFloat(text.attr("dy")),
+            tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+          while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width) {
+              line.pop();
+              tspan.text(line.join(" "));
+              line = [word];
+              tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+            }
+          }
+        });
       }
 
       function text(text) {
@@ -295,7 +328,15 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("y", function(d) { return y(d.y); })
           .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
           .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); })
-          .attr("fill", function(d) { return randomColor(); });
+          .attr("fill", function(d) {
+            if (d.support === "Support") {
+              return 'green';
+            } else if (d.support === "Oppose") {
+              return 'red';
+            } else {
+              return 'gray';
+            }
+          });
       }
 
       function name(d) {
