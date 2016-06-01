@@ -249,13 +249,14 @@ export class TreemapComponent implements OnInit, OnChanges {
         g.append("rect")
           .attr("class", "parent")
           .call(rect)
-          .append("title")
-          .text(function(d) { return d.name + ', Size of Donations: ' + d.amount; });
+
 
         g.append("text")
           .attr("dy", ".75em")
-          .text(function(d) { return d.name + ', Size of Donation: ' + d.amount; })
-          .call(text);
+          .text(function(d) { return d.name })
+          .call(text)
+          .each(wordWrap)
+          .each(fontSize);
 
         function transition(d) {
           if (transitioning || !d) return;
@@ -279,10 +280,10 @@ export class TreemapComponent implements OnInit, OnChanges {
           g2.selectAll("text").style("fill-opacity", 0);
 
           // Transition to the new view.
-          t1.selectAll("text").call(text).style("fill-opacity", 0);
-          t2.selectAll("text").call(text).style("fill-opacity", 1);
           t1.selectAll("rect").call(rect);
           t2.selectAll("rect").call(rect);
+          t1.selectAll("text").call(text).style("fill-opacity", 0);
+          t2.selectAll("text").call(text).style("fill-opacity", 1);
 
           // Remove the old node when the transition is finished.
           t1.remove().each("end", function() {
@@ -293,34 +294,77 @@ export class TreemapComponent implements OnInit, OnChanges {
         return g;
       }
 
-      function wrap(text, width) {
-        text.each(function() {
-          var text = d3.select(this),
-            words = text.text().split(/\s+/).reverse(),
-            word,
-            line = [],
-            lineNumber = 0,
-            lineHeight = 1.1, // ems
-            y = text.attr("y"),
-            dy = parseFloat(text.attr("dy")),
-            tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
-          while (word = words.pop()) {
-            line.push(word);
-            tspan.text(line.join(" "));
-            if (tspan.node().getComputedTextLength() > width) {
-              line.pop();
-              tspan.text(line.join(" "));
-              line = [word];
-              tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-            }
+      function fontSize(d, i) {
+        var size = d.dx / 5;
+        var words = d.name.split(' ');
+        var word = words[0];
+        var width = d.dx;
+        var height = d.dy;
+        var length = 0;
+        d3.select(this).style("font-size", size + "px").text(word);
+        while (((this.getBBox().width >= width) || (this.getBBox().height >= height)) && (size > 8)) {
+          size--;
+          d3.select(this).style("font-size", size + "px");
+          this.firstChild.data = word;
+        }
+      }
+
+      function wordWrap(d, i) {
+        var words = d.name.split(' ');
+        var line = new Array();
+        var length = 0;
+        var newText = "";
+        var width = d.dx;
+        var height = d.dy;
+        var word;
+        do {
+          word = words.shift();
+          line.push(word);
+          if (words.length)
+            this.firstChild.data = line.join(' ') + " " + words[0];
+          else
+            this.firstChild.data = line.join(' ');
+          length = this.getBBox().width;
+          if (length < width && words.length) {
+            ;
           }
-        });
+          else {
+            newText = line.join(' ');
+            this.firstChild.data = newText;
+            if (this.getBBox().width > width) {
+              newText = d3.select(this).select(function() { return this.lastChild; }).text();
+              newText = newText + "...";
+              d3.select(this).select(function() { return this.lastChild; }).text(newText);
+              d3.select(this).classed("wordwrapped", true);
+              break;
+            }
+            else if (newText != '') {
+              d3.select(this).append("svg:tspan")
+                .attr("x", 0)
+                .attr("dx", "0.15em")
+                .attr("dy", "0.9em")
+                .text(newText);
+            }
+            else if (this.getBBox().height > height && words.length) {
+              newText = d3.select(this).select(function() { return this.lastChild; }).text();
+              newText = newText + "...";
+              d3.select(this).select(function() { return this.lastChild; }).text(newText);
+              d3.select(this).classed("wordwrapped", true);
+              break;
+            }
+            else
+              ;
+            line = new Array();
+          }
+        } while (words.length);
+        this.firstChild.data = '';
       }
 
       function text(text) {
         text.attr("x", function(d) { return x(d.x) + 6; })
           .attr("y", function(d) { return y(d.y) + 6; })
-          .attr("fill", function(d) { return 'black' });
+          .attr("fill", function(d) { return 'black' })
+          .attr("font-size", "1rem");
       }
 
       function rect(rect) {
@@ -338,17 +382,13 @@ export class TreemapComponent implements OnInit, OnChanges {
             }
           });
       }
-
       function name(d) {
         return d.parent
           ? name(d.parent) + "." + d.name
           : d.name;
       }
     });
-
   }
-
-
 
   close() {
     this.exitEmit.emit({
