@@ -9,7 +9,9 @@ import {Component, Input, OnInit, ElementRef} from 'angular2/core';
 
   `,
   directives: [],
-  styles: [],
+  styles: [`
+
+  `],
   providers: [ElementRef]
 })
 export class VoteChartComponent implements OnInit {
@@ -20,7 +22,6 @@ export class VoteChartComponent implements OnInit {
     this.elementRef = elementRef;
   }
   ngOnInit(){
-    console.log(this.votes);
     this.buildVoteChart(this.votes);
   }
 
@@ -38,7 +39,6 @@ export class VoteChartComponent implements OnInit {
     var x = d3.scale.linear()
       .range([0, width]);
 
-    console.log(types)
     var y = d3.scale.ordinal()
       .domain(types)
       .rangeRoundBands([0, height], .1)
@@ -95,7 +95,6 @@ export class VoteChartComponent implements OnInit {
       .attr("width", function(d) { return x(d.x + d.x0) - x(d.x0); })
       .attr("party", function(d) { return d.party })
       .style("fill", function(d) {
-        console.log(d);
         if (d.party === 'R') {
           return 'red';
         } else if (d.party === 'D') {

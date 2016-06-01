@@ -54,46 +54,19 @@ import {VoteChartComponent} from './charts/vote-chart.component';
       width: 50%;
       left: 25%;
     }
-
-    .associated-committees {
-      position: absolute;
-      bottom: 0;
-      height: 50%;
-      width: 25%;
-      left: 50%;
-    }
-
-    .cand-pic {
-      position: absolute;
-      height: 40%;
-      width: 25%;
-    }
-
-    .pie-chart {
-      position: absolute;
-      height: 40%;
-      width: 25%;
-      left: 50%;
-      text-align: center;
-    }
-
-    pie-chart {
-      position: relative;
-    }
-
-    .main-info {
-      sition: absolute;
-      ight: 40%;
-      dth: 25%;
-      left: 25%;
-    }
-
     .votes {
       position: absolute;
       right: 0;
       width: 25%;
       height: 90%;
+      overflow: scroll;
     }
+
+    .vote-container {
+      border: solid 1px gray;
+    }
+
+
 
     .indiv {
       position: absolute;
@@ -101,26 +74,6 @@ import {VoteChartComponent} from './charts/vote-chart.component';
       width: 100%;
       height: 5%;
       bottom: 0;
-    }
-
-    .assoc-container {
-      position: relative;
-      padding: 0 !important;
-      margin: 0 !important;
-      height: 100%;
-      width: 100%;
-      overflow: scroll;
-    }
-
-    .assoc-tile {
-      position: absolute;
-      padding: 0 !important;
-      margin: 0 !important;
-      vertical-align: top;
-      width: 100%;
-      text-align: center;
-      box-sizing: border-box;
-      border: solid 1px gray;
     }
 
     .other-donations {
@@ -215,6 +168,8 @@ export class CongressPopupComponent implements OnInit, OnChanges {
         // this.AllYeas = this.tallyYeas(this.yeaVotes, this.allYeas);
         // this.AllNays = this.tallyNays(this.nayVotes, this.allNays);
         this.AllYeaVotes = this.tallyAllVotes(this.yeaVotes, this.allNays, this.allYeas, this.allAbsents)
+
+        console.log(this.AllYeaVotes);
 
       },
       err => console.error(err)
