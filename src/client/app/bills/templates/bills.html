@@ -8,13 +8,3 @@
     <h5>{{subject}}</h5>
   </div>
 </div>
-<div class="nine columns">
-  <ul *ngFor="#bill of bills?.data">
-    <a [routerLink]="['Bill', {bill_id: bill.bill_id, congress: bill.congress}]">Go here</a><li>{{bill.short_title}}
-       <button
-        (click)="selectBill(bill.bill_id)">
-        {{bill.bill_id}}
-       </button>
-      </li>
-  </ul>
-</div>

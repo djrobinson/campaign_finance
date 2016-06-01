@@ -10,6 +10,7 @@ import {LegislatorsComponent} from './legislators/legislators.component';
 import {MiniProfileComponent} from './graphs/mini-profile.component.ts';
 import {BillPopupComponent} from './bills/bill-popup.component.ts';
 import {BillsComponent} from './bills/bills.component.ts';
+import {SubjectComponent} from './bills/subject.component.ts';
 import {OpexComponent} from './opex/opex.component';
 import {PacsComponent} from './pacs/pacs.component';
 import {VotesComponent} from './votes/votes.component';
@@ -166,6 +167,11 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
     path: '/bills',
     as: 'Bills',
     component: BillsComponent
+  },
+  {
+    path: '/bills/:subject',
+    as: 'Subject',
+    component: SubjectComponent
   },
   {
     path: '/bill/:congress/:bill_id',
