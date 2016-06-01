@@ -183,13 +183,7 @@ export class TreemapComponent implements OnInit, OnChanges {
       .attr("x", function(d) { return margin.left + d * 40 })
       .attr("y", 0)
       .attr("fill", function(d) {
-        if (d.support = "Support"){
-          return 'green';
-        } else if (d.support = "Oppose"){
-          return 'red';
-        } else {
-          return 'randomColor()';
-        }
+        return 'gray';
        })
       .attr('width', '40px')
       .attr('height', '40px')
@@ -255,8 +249,8 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("dy", ".75em")
           .text(function(d) { return d.name })
           .call(text)
-          .each(wordWrap)
-          .each(fontSize);
+          .each(fontSize)
+          ;
 
         function transition(d) {
           if (transitioning || !d) return;
@@ -302,10 +296,10 @@ export class TreemapComponent implements OnInit, OnChanges {
         var height = d.dy;
         var length = 0;
         d3.select(this).style("font-size", size + "px").text(word);
-        while (((this.getBBox().width >= width) || (this.getBBox().height >= height)) && (size > 8)) {
+        while (((this.getBBox().width >= width) || (this.getBBox().height >= height / 3)) && (size > 8)) {
           size--;
           d3.select(this).style("font-size", size + "px");
-          this.firstChild.data = word;
+          this.firstChild.data = words.join(' ');
         }
       }
 
@@ -313,7 +307,7 @@ export class TreemapComponent implements OnInit, OnChanges {
         var words = d.name.split(' ');
         var line = new Array();
         var length = 0;
-        var newText = "";
+        var text = "";
         var width = d.dx;
         var height = d.dy;
         var word;
@@ -329,31 +323,39 @@ export class TreemapComponent implements OnInit, OnChanges {
             ;
           }
           else {
-            newText = line.join(' ');
-            this.firstChild.data = newText;
+            text = line.join(' ');
+            this.firstChild.data = text;
             if (this.getBBox().width > width) {
-              newText = d3.select(this).select(function() { return this.lastChild; }).text();
-              newText = newText + "...";
-              d3.select(this).select(function() { return this.lastChild; }).text(newText);
-              d3.select(this).classed("wordwrapped", true);
-              break;
-            }
-            else if (newText != '') {
-              d3.select(this).append("svg:tspan")
-                .attr("x", 0)
-                .attr("dx", "0.15em")
-                .attr("dy", "0.9em")
-                .text(newText);
-            }
-            else if (this.getBBox().height > height && words.length) {
-              newText = d3.select(this).select(function() { return this.lastChild; }).text();
-              newText = newText + "...";
-              d3.select(this).select(function() { return this.lastChild; }).text(newText);
+              text = d3.select(this).select(function() { return this.lastChild; }).text();
+              text = text + "...";
+              d3.select(this).select(function() { return this.lastChild; }).text(text);
               d3.select(this).classed("wordwrapped", true);
               break;
             }
             else
               ;
+
+            if (text != '') {
+              d3.select(this).append("svg:tspan")
+                .attr("x", 0)
+                .attr("dx", "0.15em")
+                .attr("dy", "0.9em")
+                .text(text);
+            }
+            else
+              ;
+
+            if (this.getBBox().height > height && words.length) {
+              text = d3.select(this).select(function() { return this.lastChild; }).text();
+              text = text + "...";
+              d3.select(this).select(function() { return this.lastChild; }).text(text);
+              d3.select(this).classed("wordwrapped", true);
+
+              break;
+            }
+            else
+              ;
+
             line = new Array();
           }
         } while (words.length);
@@ -374,11 +376,17 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); })
           .attr("fill", function(d) {
             if (d.support === "Support") {
-              return 'green';
+              var max = 150;
+              var min = 100;
+              var green = Math.floor(Math.random() * (max - min + 1)) + min;
+              return "rgb(0," + green + ",0)";
             } else if (d.support === "Oppose") {
-              return 'red';
+              var max = 150;
+              var min = 100;
+              var red = Math.floor(Math.random() * (max - min + 1)) + min;
+              return "rgb(" + red + ",0,0)";
             } else {
-              return 'gray';
+              return 'randomColor()';
             }
           });
       }
