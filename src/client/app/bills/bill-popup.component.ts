@@ -18,23 +18,23 @@ import {LobbyIssuesComponent} from './lobby-issues.component';
               (exitEmit)="exit()"
               >
             </lobby-popup>
-            <div class="row">
-              <div class="four columns" *ngIf="billData?.data">
-                <bill-overview [overview]="billData?.data">
+            <div class="bill-container">
+                <bill-overview
+                *ngIf="billData?.data"
+                [overview]="billData?.data">
                 </bill-overview>
-              </div>
-              <div class="four columns" *ngIf="billVotes?.data">
-                <bill-votes [votes]="billVotes?.data">
+
+                <bill-votes
+                *ngIf="billVotes?.data"
+                [votes]="billVotes?.data">
                 </bill-votes>
-              </div>
-              <div class="four columns" *ngIf="lobbyIssues?.data">
+
                 <lobby-issues
+                  *ngIf="lobbyIssues?.data"
                   [issues]="lobbyIssues?.data"
                   (showLobbyEmit)="showLobbyPopup($event)">
 
                 </lobby-issues>
-              </div>
-
             </div>
            `,
   styles: [`
@@ -46,6 +46,24 @@ import {LobbyIssuesComponent} from './lobby-issues.component';
         right: 20px;
         border: solid 1px #75717B;
         background-color: #FEFFFE;
+      }
+      .bill-container {
+        position: relative;
+        height: 100%;
+        width: 100%;
+      }
+      .bill-overview {
+        text-align: center;
+        position: relative;
+        width: 100%;
+      }
+      .bill-votes {
+        position: relative;
+        width: 100%;
+      }
+      .lobby-issues {
+        position: relative;
+        width: 100%;
       }
 
   `],
@@ -69,7 +87,6 @@ export class BillPopupComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log(this.bill_id);
     if (this.bill_id.charAt(0).toLowerCase() === 'h'){
       var dashIndex = this.bill_id.indexOf('-');
       var idNum = this.bill_id.slice(2, dashIndex);
@@ -86,7 +103,7 @@ export class BillPopupComponent implements OnInit {
         this.billData.data = data[1][0];
         this.billVotes.data = data[0];
         this.lobbyIssues.data = data[2];
-        console.log(this.billVotes.data);
+        console.log(data);
       },
       err => console.error(err)
     );
