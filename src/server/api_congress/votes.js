@@ -75,15 +75,16 @@ router.get('/:cand_id/yeas',function(req, res, next){
   } else {
     Vote.aggregate([{"$unwind":"$votes"},
                     {"$match":
-                      {"votes.Yea.id":cand}
+                      {"votes.Yea.id":cand,
+                       "bill.type": "hr"}
                     },
-                    {"$limit": 5},
+                    {"$limit": 10},
                     {"$project":
-                      {"question":1,
+                      {"question": 1,
                         "source_url": 1,
                         "vote_id": 1,
-                        "congress": "$congress",
-                        "number": "$number"}
+                        "bill.congress": 1,
+                        "bill.number": 1}
                     }],
                     function(err, vote){
       if (err) throw err;

@@ -12,9 +12,7 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
   `,
   directives: [ROUTER_DIRECTIVES],
-  styles: [`
-
-  `],
+  styles: [],
   providers: [ElementRef]
 })
 export class VoteChartComponent implements OnInit {
