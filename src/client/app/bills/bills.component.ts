@@ -5,31 +5,22 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 @Component({
   selector: 'bills-view',
-  template: `
-            <h1>Bills View</h1>
-            <div class="row">
-              <div class="three columns">
-                <ul *ngFor="#subject of subjects?.data">
-                  <li><button (click)="searchSubject(subject)">{{subject}}</button></li>
-                </ul>
-              </div>
-              <div class="nine columns">
-                <ul *ngFor="#bill of bills?.data">
-                  <a [routerLink]="['Bill', {bill_id: bill.bill_id, congress: bill.congress}]">Go here</a><li>{{bill.short_title}}
-                     <button
-                      (click)="selectBill(bill.bill_id)">
-                      {{bill.bill_id}}
-                     </button>
-                    </li>
-                </ul>
-              </div>
-            </div>
-
-           `,
+  templateUrl: 'app/bills/templates/bills.html',
   providers: [TitleService],
   directives: [ROUTER_DIRECTIVES],
   styles:[`
+    .subject-button {
+      display: inline-block;
+      vertical-align: top;
 
+      width: 15%;
+      height: 200px;
+      border: solid 1px gray;
+    }
+    .categories-row {
+      position: relative;
+      width: 100%;
+    }
   `]
 })
 export class BillsComponent implements OnInit {
