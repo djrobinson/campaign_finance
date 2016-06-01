@@ -3,7 +3,7 @@
   <div
     class="subject-button"
     *ngFor="#subject of subjects?.data"
-    (click)="searchSubject(subject)"
+    [routerLink]="['Subject', {subject: subject}]"
     >
     <h5>{{subject}}</h5>
   </div>

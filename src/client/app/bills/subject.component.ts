@@ -1,7 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {TitleService} from '../api_services/title.service';
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
-
+import {RouteParams} from 'angular2/router';
 
 @Component({
   selector: 'subject-view',
@@ -23,14 +23,17 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
   `]
 })
 export class SubjectComponent implements OnInit {
-  constructor(private _titleService: TitleService
-              private router: Router) {
+  private subject: string;
+  constructor(private _titleService: TitleService,
+              private router: Router,
+              private params: RouteParams) {
+    this.subject = params.get('subject');
   }
-  private subjects = {};
   private bills = {};
 
   ngOnInit() {
-
+    console.log(this.subject);
+    this.searchSubject(this.subject);
   }
 
   selectBill(bill_id) {
