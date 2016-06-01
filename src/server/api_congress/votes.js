@@ -79,7 +79,11 @@ router.get('/:cand_id/yeas',function(req, res, next){
                     },
                     {"$limit": 5},
                     {"$project":
-                      {"question":1, "source_url": 1, "vote_id": 1}
+                      {"question":1,
+                        "source_url": 1,
+                        "vote_id": 1,
+                        "congress": "$congress",
+                        "number": "$number"}
                     }],
                     function(err, vote){
       if (err) throw err;

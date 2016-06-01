@@ -178,6 +178,7 @@ export class CongressPopupComponent implements OnInit, OnChanges {
 
   tallyAllVotes(candVotes, allNays, allYeas, allAbsents) {
     return candVotes.reduce((prev, curr) => {
+      console.log("Curr shit: ", curr);
       var nays = allNays.reduce(function(inPrev, inCurr) {
         if (inCurr._id.vote_id === curr.vote_id) {
           inPrev[inCurr._id.party] = inCurr.count;
@@ -220,6 +221,8 @@ export class CongressPopupComponent implements OnInit, OnChanges {
       var pushable = {
         vote_id: curr.vote_id,
         question: curr.question,
+        bill_id: 'h'+curr.number+'113',
+        congress: curr.congress,
         yeas: yeas,
         nays: nays,
         absents: absents

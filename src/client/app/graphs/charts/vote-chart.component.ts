@@ -1,14 +1,17 @@
 import {Component, Input, OnInit, ElementRef} from 'angular2/core';
+import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 @Component({
   selector: 'vote-chart',
   template: `
+      <p><a [routerLink] = "['Bill', {bill_id: votes.bill_id, congress: votes.congress}]">Linky Link</a></p>
+      <p>{{votes.congress}} , {{votes.bill_id}}</p>
       <p>{{votes.question}}</p>
       <div class="votesChart">
       </div>
 
   `,
-  directives: [],
+  directives: [ROUTER_DIRECTIVES],
   styles: [`
 
   `],
@@ -17,7 +20,7 @@ import {Component, Input, OnInit, ElementRef} from 'angular2/core';
 export class VoteChartComponent implements OnInit {
   @Input() votes: Object;
   elementRef: ElementRef;
-
+  // [routerLink] = "['Bill', {bill_id: bill.bill_id, congress: bill.congress}]"
   constructor(elementRef: ElementRef){
     this.elementRef = elementRef;
   }
