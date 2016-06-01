@@ -6,15 +6,26 @@ import {Component, Input, Output, EventEmitter, OnInit} from 'angular2/core';
 
               <div class="lobby-container row">
                 <h2>Lobbyist Issues w/ Bill</h2>
-                <ul>
-                  <li *ngFor="#issue of issues">
-                    <button (click)="showLobby(issue.transaction_id)"> {{issue.bill_id}} </button>
-                  </li>
-                </ul>
+                <div
+                  class="issue"
+                  *ngFor="#issue of issues"
+                  (click)="showLobby(issue.transaction_id)">
+                  <p>{{issue.bill_id}}</p>
+                  <p>{{issue.client_name}}</p>
+                  <p>{{issue.general_issue}}</p>
+                  <p>{{issue.amount}}</p>
+                </div>
               </div>
   `,
   styles: [`
+    .issue {
+      display: inline-block;
+      width: 20%;
+      height: 180px;
+      vertical-align: top;
+      border: solid 1px gray;
 
+    }
   `],
   directives: []
 })
