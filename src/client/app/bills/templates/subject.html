@@ -2,12 +2,11 @@
   <p>Sidebar</p>
 </div>
 <div class="nine columns">
-  <ul *ngFor="#bill of bills?.data">
-    <a [routerLink]="['Bill', {bill_id: bill.bill_id, congress: bill.congress}]">Go here</a><li>{{bill.short_title}}
-       <button
-        (click)="selectBill(bill.bill_id)">
-        {{bill.bill_id}}
-       </button>
-      </li>
-  </ul>
+  <div *ngFor="#bill of bills?.data"
+        class="bill-button"
+        [routerLink]="['Bill', {bill_id: bill.bill_id, congress: bill.congress}]">
+    <h3>{{bill.short_title}}</h3>
+    <p>{{bill.bill_id}}</p>
+    <p>{{bill.official_title}}</p>
+  </div>
 </div>

@@ -10,10 +10,8 @@ import {RouteParams} from 'angular2/router';
   directives: [ROUTER_DIRECTIVES],
   styles: [`
     .bill-button {
-      display: inline-block;
       vertical-align: top;
-      width: 15%;
-      height: 200px;
+      width: 100%;
       border: solid 1px gray;
     }
     .categories-row {
@@ -47,6 +45,7 @@ export class SubjectComponent implements OnInit {
         result.sort(function(a, b) {
           return b.actions.length - a.actions.length;
         });
+        console.log(result);
         this.bills.data = result;
       },
       error => console.error('Error: ' + err),
