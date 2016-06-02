@@ -55,10 +55,6 @@ import {PieComponent} from './charts/pie-chart.component';
       width: 2.5%;
     }
 
-    .enlarge {
-      height: 100% !important;
-      width: 100% !important;
-    }
 
     .associated-committees {
       position: absolute;
@@ -148,8 +144,10 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   @Input() candidate: string;
   @Output() exitEmit = new EventEmitter();
   @Output() cmteEmit = new EventEmitter();
-  @ViewChild(PieComponent)
-  private pieComponent:PieComponent;
+  @Output() treemapEmit = new EventEmitter();
+  @ViewChild(PieComponent) pieComponent: PieComponent;
+  @ViewChild(TreemapComponent) treemapComponent: TreemapComponent;
+
   private disbursements: Object;
   private candidateInfo: Object;
   private contributions: Object;
@@ -157,7 +155,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   private associatedCommittees: Object = {};
   private pacSpends: Object;
   private route: string;
-  private enlargeTreemap: boolean;
 
   constructor(private _TitleService: TitleService,
               private http: Http) {
@@ -174,9 +171,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
   }
 
-  treemapExpand() {
-    this.enlargeTreemap = true;
-  }
 
   callPresApis(fecId){
     this.route = '/api/pac/aggregate/' + fecId;
@@ -206,7 +200,12 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
     );
   }
 
-
+  showTreemapEmit(route){
+    console.log(route);
+    this.treemapEmit.emit({
+      route: route
+    })
+  }
 
   cmtePopupEmit(cmte) {
     console.log(cmte);

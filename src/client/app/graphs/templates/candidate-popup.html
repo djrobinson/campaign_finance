@@ -1,4 +1,4 @@
-<div class="cand-style">
+<div class="cand-style" id="full-size">
     <div class="cand-pic text-center">
         <h4>{{candidate?.CANDIDATE_NAME}}</h4>
         <img [src]="imageVar?.image" alt="picture">
@@ -24,13 +24,12 @@
       </pie-chart>
     </div>
 
-    <treemap route="{{route}}" [class.enlarge]="enlargeTreemap">
+    <treemap route="{{route}}">
     </treemap>
-    <div class="expand" (click)="treemapExpand()">
+    <div class="expand" (click)="showTreemapEmit(route)">
       Expand
     </div>
     <div class="associated-committees">
-
       <div class="assoc-container">
         <h5>Associated Committees</h5>
         <div class="assoc-tile">

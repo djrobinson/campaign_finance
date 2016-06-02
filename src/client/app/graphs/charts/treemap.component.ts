@@ -3,7 +3,7 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
 @Component({
   selector: 'treemap',
   template: `
-      <div class="table-div" id="containerChart">
+      <div id="containerChart">
         <div id="chart"></div>
       </div>
   `,
@@ -26,7 +26,13 @@ export class TreemapComponent implements OnInit, OnChanges {
   @Input() route: string;
 
   ngOnInit(){
+
     this.buildTreeMap(this.route);
+  }
+
+  rebuildMap(route){
+    d3.selectAll("svg").remove();
+    this.buildTreeMap(route);
   }
 
   buildTreeMap(route) {
@@ -67,9 +73,10 @@ export class TreemapComponent implements OnInit, OnChanges {
       };
     })();
 
-    var margin = { top: 30, right: 0, bottom: 20, left: 0 };
     var width = document.getElementById('containerChart').offsetWidth;
     var height = document.getElementById('containerChart').offsetHeight;
+    var margin = { top: 30, right: 0, bottom: 20, left: 0 };
+
     formatNumber = d3.format(",%"),
       colorDomain = [-.6, 0, .6],
       colorRange = ["#373a93", 'white', "#936638"],
@@ -96,6 +103,7 @@ export class TreemapComponent implements OnInit, OnChanges {
       .sort(function(a, b) { return a.value - b.value; })
       .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
       .round(false);
+    console.log("Width: ", width, "Height: ", height);
 
     var svg = d3.select("#chart").append("svg")
       .attr("width", width + margin.left + margin.right)

@@ -7,6 +7,7 @@ import {IndividualPopupComponent} from './individual-popup.component.ts';
 import {CommitteePopupComponent} from './committee-popup.component.ts';
 import {CandidatePopupComponent} from './candidate-popup.component.ts';
 import {CongressPopupComponent} from './congress-popup.component.ts';
+import {TreemapComponent} from './charts/treemap.component.ts';
 
 @Component({
   selector: 'graph-view',
@@ -38,6 +39,10 @@ import {CongressPopupComponent} from './congress-popup.component.ts';
                 (exitEmit)="exit()">
               </individual-popup>
             </div>
+            <div *ngIf="fullTreemap">
+              <treemap route="{{fullRoute}}">
+              </treemap>
+            </div>
             <div *ngIf="cmtePopup">
               <committee-popup
                 [committee]="selectedCommittee"
@@ -51,6 +56,7 @@ import {CongressPopupComponent} from './congress-popup.component.ts';
                 [candidate]="selectedCandidate"
                 (exitEmit)="exit()"
                 (cmteEmit)="changeCmte($event)"
+                (treemapEmit)="showTreemap($event)"
               >
               </candidate-popup>
             </div>
@@ -65,6 +71,8 @@ import {CongressPopupComponent} from './congress-popup.component.ts';
            `,
   styles: [
     `
+
+
     inputs-view {
       position: absolute;
       left: 0;
@@ -114,6 +122,16 @@ import {CongressPopupComponent} from './congress-popup.component.ts';
       border: solid 1px #75717B;
       background-color: #FEFFFE;
     }
+    treemap {
+      position: absolute;
+      z-index: 5;
+      width: 90%;
+      height: 90%;
+      top: 5%;
+      left: 5%;
+      border: solid 1px #75717B;
+      background-color: #FEFFFE;
+    }
     congress-popup {
       position: absolute;
       width: 90%;
@@ -126,20 +144,23 @@ import {CongressPopupComponent} from './congress-popup.component.ts';
   `
   ],
   providers: [GraphService, TitleService],
-  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent, CommitteePopupComponent, CandidatePopupComponent, CongressPopupComponent]
+  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent, CommitteePopupComponent, CandidatePopupComponent, CongressPopupComponent, TreemapComponent]
 })
 export class GraphComponent implements OnInit  {
-  selectedNode: Object;
-  candidate: Object;
-  indivPopup: boolean;
-  cmtePopup: boolean;
-  individualTran: string;
-  indivName: string;
-  selectedCommittee: string;
-  result: Object;
-  nodeData = Array;
-  linkData = Array;
-  graph: boolean;
+  private selectedNode: Object;
+  private candidate: Object;
+  private indivPopup: boolean;
+  private cmtePopup: boolean;
+  private individualTran: string;
+  private indivName: string;
+  private selectedCommittee: string;
+  private result: Object;
+  private nodeData = Array;
+  private linkData = Array;
+  private graph: boolean;
+  private fullRoute: string = "";
+  private fullTreemap: boolean;
+
   constructor(
     private _graphService: GraphService,
     private _TitleService: TitleService
@@ -162,6 +183,11 @@ export class GraphComponent implements OnInit  {
     this.indivPopup = true;
     this.individualTran = event.tranId;
     this.selectedNode = false;
+  }
+
+  showTreemap(event){
+    this.fullRoute = event.route;
+    this.fullTreemap = true;
   }
 
   showCmtePopup(event){
