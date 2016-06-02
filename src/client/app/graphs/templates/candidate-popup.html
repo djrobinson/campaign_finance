@@ -24,8 +24,11 @@
       </pie-chart>
     </div>
 
-    <treemap route="/api/pac/aggregate/P00003392">
+    <treemap route="{{route}}" [class.enlarge]="enlargeTreemap">
     </treemap>
+    <div class="expand" (click)="treemapExpand()">
+      Expand
+    </div>
     <div class="associated-committees">
 
       <div class="assoc-container">

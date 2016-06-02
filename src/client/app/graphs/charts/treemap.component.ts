@@ -13,7 +13,7 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
     }
     #containerChart {
       position: absolute;
-      height: 80%;
+      height: 90%;
       width: 100%;
     }
     rect {
@@ -296,7 +296,7 @@ export class TreemapComponent implements OnInit, OnChanges {
         var height = d.dy;
         var length = 0;
         d3.select(this).style("font-size", size + "px").text(word);
-        while (((this.getBBox().width >= width) || (this.getBBox().height >= height / 3)) && (size > 8)) {
+        while (((this.getBBox().width >= width) || (this.getBBox().height >= height / 4)) && (size > 8)) {
           size--;
           d3.select(this).style("font-size", size + "px");
           this.firstChild.data = words.join(' ');
@@ -366,7 +366,6 @@ export class TreemapComponent implements OnInit, OnChanges {
         text.attr("x", function(d) { return x(d.x) + 6; })
           .attr("y", function(d) { return y(d.y) + 6; })
           .attr("fill", function(d) { return 'black' })
-          .attr("font-size", "1rem");
       }
 
       function rect(rect) {
@@ -375,18 +374,20 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
           .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); })
           .attr("fill", function(d) {
-            if (d.support === "Support") {
-              var max = 150;
-              var min = 100;
-              var green = Math.floor(Math.random() * (max - min + 1)) + min;
-              return "rgb(0," + green + ",0)";
-            } else if (d.support === "Oppose") {
-              var max = 150;
-              var min = 100;
-              var red = Math.floor(Math.random() * (max - min + 1)) + min;
-              return "rgb(" + red + ",0,0)";
+            if (d.support){
+              if (d.support === "Support") {
+                var max = 150;
+                var min = 100;
+                var green = Math.floor(Math.random() * (max - min + 1)) + min;
+                return "rgb(0," + green + ",0)";
+              } else if (d.support === "Oppose") {
+                var max = 150;
+                var min = 100;
+                var red = Math.floor(Math.random() * (max - min + 1)) + min;
+                return "rgb(" + red + ",0,0)";
+              }
             } else {
-              return 'randomColor()';
+              return randomColor();
             }
           });
       }

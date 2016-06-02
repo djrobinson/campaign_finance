@@ -45,6 +45,21 @@ import {PieComponent} from './charts/pie-chart.component';
       width: 50%;
     }
 
+    .expand {
+      position: absolute;
+      left: 47%;
+      bottom: 47.5%;
+      z-index: 2;
+      color: white;
+      height: 2.5%;
+      width: 2.5%;
+    }
+
+    .enlarge {
+      height: 100% !important;
+      width: 100% !important;
+    }
+
     .associated-committees {
       position: absolute;
       bottom: 0;
@@ -141,7 +156,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   private imageVar: Object;
   private associatedCommittees: Object = {};
   private pacSpends: Object;
-
+  private route: string;
+  private enlargeTreemap: boolean;
 
   constructor(private _TitleService: TitleService,
               private http: Http) {
@@ -158,8 +174,12 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
   }
 
+  treemapExpand() {
+    this.enlargeTreemap = true;
+  }
 
   callPresApis(fecId){
+    this.route = '/api/pac/aggregate/' + fecId;
     Observable.forkJoin(
       this.http.get('/api/candidates/'+fecId).map((res: Response) => res.json()),
       this.http.get('/api/disbursements/'+fecId+'/candidate').map((res: Response) => res.json()),
