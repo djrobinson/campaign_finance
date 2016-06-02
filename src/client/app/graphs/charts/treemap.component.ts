@@ -37,6 +37,17 @@ export class TreemapComponent implements OnInit, OnChanges {
 
   buildTreeMap(route) {
 
+    Number.prototype.formatMoney = function(c, d, t) {
+      var n = this,
+        c = isNaN(c = Math.abs(c)) ? 2 : c,
+        d = d == undefined ? "." : d,
+        t = t == undefined ? "," : t,
+        s = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+      return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+    };
+
     var randomColor = (function() {
       var golden_ratio_conjugate = 0.618033988749895;
       var h = Math.random();
@@ -259,8 +270,7 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("dy", "0.75em")
           .call(text)
           .each(fontSize)
-          .each(wordWrap)
-          ;
+          .each(wordWrap);
 
         function transition(d) {
           if (transitioning || !d) return;
@@ -302,6 +312,9 @@ export class TreemapComponent implements OnInit, OnChanges {
         console.log("Font Size ", d);
         var size = d.dx / 5;
         var words = d.name.split(' ');
+        if (d.value){
+          words.push("$" + (d.value).formatMoney(2));
+        }
         var word = words[0];
         var width = d.dx;
         var height = d.dy;
@@ -329,7 +342,7 @@ export class TreemapComponent implements OnInit, OnChanges {
         console.log("text function! ", text)
         text.attr("x", function(d) { return x(d.x) + 6; })
           .attr("y", function(d) { return y(d.y) + 6; })
-          .attr("fill", function(d) { return 'black' })
+          .attr("fill", function(d) { return 'black' });
       }
 
       function rect(rect) {
