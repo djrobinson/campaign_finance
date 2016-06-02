@@ -40,8 +40,12 @@ import {TreemapComponent} from './charts/treemap.component.ts';
               </individual-popup>
             </div>
             <div *ngIf="fullTreemap">
+              <div class="tree-close">
+                <button (click)="closeTreemap()">Close</button>
+              </div>
               <treemap route="{{fullRoute}}">
               </treemap>
+
             </div>
             <div *ngIf="cmtePopup">
               <committee-popup
@@ -72,7 +76,12 @@ import {TreemapComponent} from './charts/treemap.component.ts';
   styles: [
     `
 
-
+    .tree-close {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      text-align: center;
+    }
     inputs-view {
       position: absolute;
       left: 0;
@@ -188,6 +197,10 @@ export class GraphComponent implements OnInit  {
   showTreemap(event){
     this.fullRoute = event.route;
     this.fullTreemap = true;
+  }
+
+  closeTreemap(){
+    this.fullTreemap = false;
   }
 
   showCmtePopup(event){
