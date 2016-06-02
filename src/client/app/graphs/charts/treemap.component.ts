@@ -269,8 +269,29 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("dx", "0.35em")
           .attr("dy", "0.75em")
           .call(text)
-          .each(fontSize)
-          .each(wordWrap);
+          .each(function(d, i) {
+            var size = d.dx / 5;
+            var words = d.name.split(' ');
+            var wordsArr = [];
+            var word = words[0];
+            var width = d.dx;
+            var height = d.dy;
+            var length = 0;
+            var j = 1;
+            d3.select(this).style("font-size", size + "px").text(word);
+            while (size > 12) {
+              size--;
+              d3.select(this).style("font-size", size + "px");
+              while (((this.getBBox().width >= width) || (this.getBBox().height >= height)){
+                wordsArr.push(words[j]);
+                console.log(words);
+                word = wordsArr.join(' ');
+                d3.select(this).text(word)
+                j++;
+              }
+
+            }
+          });
 
         function transition(d) {
           if (transitioning || !d) return;
@@ -284,60 +305,34 @@ export class TreemapComponent implements OnInit, OnChanges {
           x.domain([d.x, d.x + d.dx]);
           y.domain([d.y, d.y + d.dy]);
 
+
           // Enable anti-aliasing during the transition.
           svg.style("shape-rendering", null);
 
           // Draw child nodes on top of parent nodes.
           svg.selectAll(".depth").sort(function(a, b) { return a.depth - b.depth; });
 
+
           // Fade-in entering text.
           g2.selectAll("text").style("fill-opacity", 0);
 
           // Transition to the new view.
-          t1.selectAll("rect").call(rect);
-          t2.selectAll("rect").call(rect);
-          t1.selectAll("text").call(text).style("fill-opacity", 0);
-          t2.selectAll("text").call(text).style("fill-opacity", 1);
 
+            t1.selectAll("rect").call(rect);
+            t2.selectAll("rect").call(rect);
+
+            t1.selectAll("text").call(text).style("fill-opacity", 0);
+            t2.selectAll("text").call(text).style("fill-opacity", 1);
+            t1.remove().each("end", function() {
+              svg.style("shape-rendering", "crispEdges");
+              transitioning = false;
+            });
           // Remove the old node when the transition is finished.
-          t1.remove().each("end", function() {
-            svg.style("shape-rendering", "crispEdges");
-            transitioning = false;
-          });
+
         }
         return g;
       }
 
-      function fontSize(d, i) {
-        console.log("Font Size ", d);
-        var size = d.dx / 5;
-        var words = d.name.split(' ');
-        if (d.value){
-          words.push("$" + (d.value).formatMoney(2));
-        }
-        var word = words[0];
-        var width = d.dx;
-        var height = d.dy;
-        var length = 0;
-        d3.select(this).style("font-size", size + "px").text(word);
-        while (((this.width >= width / 2) || (this.getBBox().height >= height / 4)) && (size > 12)) {
-          size--;
-          d3.select(this).style("font-size", size + "px");
-          this.firstChild.data = words.join(' ');
-        }
-      }
-
-      function wordWrap(d, i) {
-        console.log("Word Wrap ", this.getBBox().width);
-        var words = d.name.split(' ');
-        var line = new Array();
-        var length = 0;
-        var text = "";
-        var width = d.dx;
-        var height = d.dy;
-        var word;
-
-      }
       function text(text) {
         console.log("text function! ", text)
         text.attr("x", function(d) { return x(d.x) + 6; })
