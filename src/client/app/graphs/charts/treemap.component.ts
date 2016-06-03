@@ -270,27 +270,22 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("dy", "0.75em")
           .call(text)
           .each(function(d, i) {
-            var size = d.dx / 5;
+            var size = 16;
             var words = d.name.split(' ');
+            var word = words.join(' ');
             var wordsArr = [];
-            var word = words[0];
             var width = d.dx;
             var height = d.dy;
             var length = 0;
             var j = 1;
             d3.select(this).style("font-size", size + "px").text(word);
-            while (size > 12) {
-              size--;
-              d3.select(this).style("font-size", size + "px");
-              while (((this.getBBox().width >= width) || (this.getBBox().height >= height)){
-                wordsArr.push(words[j]);
-                console.log(words);
-                word = wordsArr.join(' ');
-                d3.select(this).text(word)
-                j++;
-              }
 
-            }
+              while (((this.getBBox().width >= width) || (this.getBBox().height >= height)){
+                console.log(words);
+                var word = words.join(' ');
+                d3.select(this).text(word);
+                words.pop();
+              }
           });
 
         function transition(d) {
