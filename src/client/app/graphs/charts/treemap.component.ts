@@ -300,7 +300,6 @@ export class TreemapComponent implements OnInit, OnChanges {
             });
 
         g.attr("class", "cell")
-          .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
           .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); })
           .on('mouseover', function(d) {
             // this variable will be used in a loop to store the current node being inspected
