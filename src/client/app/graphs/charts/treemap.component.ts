@@ -255,6 +255,8 @@ export class TreemapComponent implements OnInit, OnChanges {
           .datum(d)
           .attr("class", "depth");
 
+
+
         var g = g1.selectAll("g")
           .data(d._children)
           .enter().append("g");
@@ -273,6 +275,7 @@ export class TreemapComponent implements OnInit, OnChanges {
           .call(rect)
 
         g.append("text")
+         .filter(function(d) { return d.category === "grandparent" })
           .attr("x", 0)
           .attr("dx", "0.35em")
           .attr("dy", "0.75em")
@@ -289,7 +292,6 @@ export class TreemapComponent implements OnInit, OnChanges {
           var length = 0;
           var j = 1;
           d3.select(this).append('tspan').style("font-size", size + "px").text(word);
-
           while (this.getBBox().width >= width) {
             console.log(words);
             var word = words.join(' ');
@@ -297,6 +299,7 @@ export class TreemapComponent implements OnInit, OnChanges {
             var tspan = el.append('tspan').text(word);
             words.pop();
           }
+
         }
 
         g.attr("class", "cell")
@@ -318,7 +321,7 @@ export class TreemapComponent implements OnInit, OnChanges {
             //  join the array with slashes (as you have in your example)
             // now nameList should look like 'flare/animate/interpolate'
             //  use this to set the tooltip text
-            d3.select('#tooltip').text(d.name +" "+ d.amount)
+            d3.select('#tooltip').text(d.name +" "+ d.purpose+" "+d.value)
           })
 
         function transition(d) {
@@ -342,7 +345,6 @@ export class TreemapComponent implements OnInit, OnChanges {
 
 
             // Fade-in entering text.
-            g2.selectAll("text").style("fill-opacity", 0);
 
             // Transition to the new view.
 
@@ -350,11 +352,24 @@ export class TreemapComponent implements OnInit, OnChanges {
             t2.selectAll("rect").call(rect);
 
             t1.selectAll("text").call(text).style("fill-opacity", 0);
-            t2.selectAll("text").style("fill-opacity", 1);
+
+            g2.append("text")
+              .filter(function(d) { return d.category === "parent" })
+              .attr("x", 0)
+              .attr("dx", "0.35em")
+              .attr("dy", "0.75em")
+              .call(text)
+              .text("lajsdfk")
+              .style("fill-opacity", 1);
+
+              // .each(cutWord);
+
             t1.remove().each("end", function() {
               svg.style("shape-rendering", "crispEdges");
               transitioning = false;
             });
+
+
             // Remove the old node when the transition is finished.
 
           }
@@ -365,7 +380,6 @@ export class TreemapComponent implements OnInit, OnChanges {
 
 
       function text(text) {
-        console.log("text function! ", text)
         text.attr("x", function(d) { return x(d.x) + 6; })
           .attr("y", function(d) { return y(d.y) + 6; })
           .attr("fill", function(d) { return 'black' });
@@ -377,21 +391,20 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
           .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); })
           .attr("fill", function(d) {
-            if (d.support){
-              if (d.support === "Support") {
+
+              if (d.support === "Support" && d.category === "grandparent") {
                 var max = 150;
                 var min = 100;
                 var green = Math.floor(Math.random() * (max - min + 1)) + min;
                 return "rgb(0," + green + ",0)";
-              } else if (d.support === "Oppose") {
+              } else if (d.support === "Oppose" && d.category === "grandparent") {
                 var max = 150;
                 var min = 100;
                 var red = Math.floor(Math.random() * (max - min + 1)) + min;
                 return "rgb(" + red + ",0,0)";
+              } else {
+                return randomColor();
               }
-            } else {
-              return randomColor();
-            }
           });
       }
       function name(d) {
