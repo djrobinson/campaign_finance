@@ -4,6 +4,8 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
   selector: 'treemap',
   template: `
       <div id="containerChart">
+        <div id="tooltip" class="hidden">
+        </div>
         <div id="chart"></div>
       </div>
   `,
@@ -19,6 +21,14 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
     rect {
       stroke: black;
       stroke-width: 1px;
+    }
+
+    #tooltip {
+      position: absolute;
+      width: 200px;
+      height: 50px;
+      bottom: 0;
+      background-color: white;
     }
   `]
 })
@@ -197,7 +207,6 @@ export class TreemapComponent implements OnInit, OnChanges {
       return (colorDomain[colorDomain.length - 1] - colorDomain[0]) / 18 * d + colorDomain[0];
     }
 
-
     legend.append("rect")
       .attr("x", function(d) { return margin.left + d * 40 })
       .attr("y", 0)
@@ -233,6 +242,7 @@ export class TreemapComponent implements OnInit, OnChanges {
           .select("text")
           .text(name(d))
 
+
         // color header based on grandparent's rate
         grandparent
           .datum(d.parent)
@@ -240,6 +250,7 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("fill", function() {
             return 'gray';
           })
+
 
         var g1 = svg.insert("g", ".grandparent")
           .datum(d)
@@ -263,60 +274,77 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("class", "parent")
           .call(rect)
 
-
         g.append("text")
           .attr("x", 0)
           .attr("dx", "0.35em")
           .attr("dy", "0.75em")
           .call(text)
           .each(function(d, i) {
-            var size = 16;
-            var words = d.name.split(' ');
-            var word = words.join(' ');
-            var wordsArr = [];
-            var width = d.dx;
-            var height = d.dy;
-            var length = 0;
-            var j = 1;
-            d3.select(this).append('tspan').style("font-size", size + "px").text(word);
+              var size = 16;
+              var words = d.name.split(' ');
+              var word = words.join(' ');
+              var wordsArr = [];
+              var width = d.dx;
+              var height = d.dy;
+              var length = 0;
+              var j = 1;
+              d3.select(this).append('tspan').style("font-size", size + "px").text(word);
 
-
-              while (this.getBBox().width >= width){
+              while (this.getBBox().width >= width) {
                 console.log(words);
                 var word = words.join(' ');
                 var el = d3.select(this).text('');
                 var tspan = el.append('tspan').text(word);
                 words.pop();
               }
-              var el = d3.select(this);
-              var tspan2 = el.append('tspan');
-              tspan2.text(d.amount).style('font-size', '8px').attr('dy', '16');
-          });
+            });
+
+        g.attr("class", "cell")
+          .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+          .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); })
+          .on('mouseover', function(d) {
+            // this variable will be used in a loop to store the current node being inspected
+            var currentNode = d;
+            // this array will hold the names of each subsequent parent node
+            var nameList = [currentNode.name];
+            // as long as the current node has a parent...
+            while (typeof currentNode.parent === 'object') {
+              // go up a level in the hierarchy
+              currentNode = currentNode.parent;
+              // add the name to the beginning of the list
+              nameList.unshift(currentNode.name);
+            }
+            // now nameList should look like ['flare','animate','interpolate']
+            //  join the array with slashes (as you have in your example)
+            // now nameList should look like 'flare/animate/interpolate'
+            //  use this to set the tooltip text
+            d3.select('#tooltip').text('Mouse hovering . Cell size = ' + d.area)
+          })
 
         function transition(d) {
-          if (transitioning || !d) return;
-          transitioning = true;
+            if (transitioning || !d) return;
+            transitioning = true;
 
-          var g2 = display(d),
-            t1 = g1.transition().duration(750),
-            t2 = g2.transition().duration(750);
+            var g2 = display(d),
+              t1 = g1.transition().duration(750),
+              t2 = g2.transition().duration(750);
 
-          // Update the domain only after entering new elements.
-          x.domain([d.x, d.x + d.dx]);
-          y.domain([d.y, d.y + d.dy]);
-
-
-          // Enable anti-aliasing during the transition.
-          svg.style("shape-rendering", null);
-
-          // Draw child nodes on top of parent nodes.
-          svg.selectAll(".depth").sort(function(a, b) { return a.depth - b.depth; });
+            // Update the domain only after entering new elements.
+            x.domain([d.x, d.x + d.dx]);
+            y.domain([d.y, d.y + d.dy]);
 
 
-          // Fade-in entering text.
-          g2.selectAll("text").style("fill-opacity", 0);
+            // Enable anti-aliasing during the transition.
+            svg.style("shape-rendering", null);
 
-          // Transition to the new view.
+            // Draw child nodes on top of parent nodes.
+            svg.selectAll(".depth").sort(function(a, b) { return a.depth - b.depth; });
+
+
+            // Fade-in entering text.
+            g2.selectAll("text").style("fill-opacity", 0);
+
+            // Transition to the new view.
 
             t1.selectAll("rect").call(rect);
             t2.selectAll("rect").call(rect);
@@ -327,11 +355,14 @@ export class TreemapComponent implements OnInit, OnChanges {
               svg.style("shape-rendering", "crispEdges");
               transitioning = false;
             });
-          // Remove the old node when the transition is finished.
+            // Remove the old node when the transition is finished.
 
-        }
+          }
         return g;
       }
+
+
+
 
       function text(text) {
         console.log("text function! ", text)
@@ -366,7 +397,7 @@ export class TreemapComponent implements OnInit, OnChanges {
       function name(d) {
         return d.parent ? name(d.parent) + "." + d.name : d.name;
       }
-    });
+    })
   }
 
   close() {
