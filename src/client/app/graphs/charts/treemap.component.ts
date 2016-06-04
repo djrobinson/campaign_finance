@@ -124,7 +124,6 @@ export class TreemapComponent implements OnInit, OnChanges {
       .sort(function(a, b) { return a.value - b.value; })
       .ratio(height / width * 0.5 * (1 + Math.sqrt(5)))
       .round(false);
-    console.log("Width: ", width, "Height: ", height);
 
     var svg = d3.select("#chart").append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -262,7 +261,6 @@ export class TreemapComponent implements OnInit, OnChanges {
 
         g.filter(function(d) { return d._children; })
           .classed("children", true)
-          .on("click", transition);
 
         g.selectAll(".child")
           .data(function(d) { return d._children || [d]; })
@@ -279,29 +277,32 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("dx", "0.35em")
           .attr("dy", "0.75em")
           .call(text)
-          .each(function(d, i) {
-              var size = 16;
-              var words = d.name.split(' ');
-              var word = words.join(' ');
-              var wordsArr = [];
-              var width = d.dx;
-              var height = d.dy;
-              var length = 0;
-              var j = 1;
-              d3.select(this).append('tspan').style("font-size", size + "px").text(word);
+          .each(cutWord);
 
-              while (this.getBBox().width >= width) {
-                console.log(words);
-                var word = words.join(' ');
-                var el = d3.select(this).text('');
-                var tspan = el.append('tspan').text(word);
-                words.pop();
-              }
-            });
+        function cutWord(d, i) {
+          var size = 16;
+          var words = d.name.split(' ');
+          var word = words.join(' ');
+          var wordsArr = [];
+          var width = d.dx;
+          var height = d.dy;
+          var length = 0;
+          var j = 1;
+          d3.select(this).append('tspan').style("font-size", size + "px").text(word);
+
+          while (this.getBBox().width >= width) {
+            console.log(words);
+            var word = words.join(' ');
+            var el = d3.select(this).text('');
+            var tspan = el.append('tspan').text(word);
+            words.pop();
+          }
+        }
 
         g.attr("class", "cell")
-          .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); })
+          .on("click", transition)
           .on('mouseover', function(d) {
+            console.log(d);
             // this variable will be used in a loop to store the current node being inspected
             var currentNode = d;
             // this array will hold the names of each subsequent parent node
@@ -317,7 +318,7 @@ export class TreemapComponent implements OnInit, OnChanges {
             //  join the array with slashes (as you have in your example)
             // now nameList should look like 'flare/animate/interpolate'
             //  use this to set the tooltip text
-            d3.select('#tooltip').text('Mouse hovering . Cell size = ' + d.area)
+            d3.select('#tooltip').text(d.name +" "+ d.amount)
           })
 
         function transition(d) {
@@ -349,7 +350,7 @@ export class TreemapComponent implements OnInit, OnChanges {
             t2.selectAll("rect").call(rect);
 
             t1.selectAll("text").call(text).style("fill-opacity", 0);
-            t2.selectAll("text").call(text).style("fill-opacity", 1);
+            t2.selectAll("text").style("fill-opacity", 1);
             t1.remove().each("end", function() {
               svg.style("shape-rendering", "crispEdges");
               transitioning = false;

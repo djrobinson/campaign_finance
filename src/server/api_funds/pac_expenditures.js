@@ -118,6 +118,7 @@ router.get('/aggregate/:cand_id', function(req, res, next){
               "children": [{
                 "name": curr.pay,
                 "value": exp_amo,
+                "category": "parent",
                 "children": [{
                   "name": curr.spe_nam,
                   "to": curr.pay,
@@ -125,14 +126,16 @@ router.get('/aggregate/:cand_id', function(req, res, next){
                   "amount": curr.exp_amo,
                   "value": exp_amo,
                   "date": curr.rec_dat,
-                  "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.ima_num
+                  "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.ima_num,
+                  "category": "child"
                 }]
               }],
               "support": curr.sup_opp,
               "name": curr.spe_nam,
               "id": curr.spe_id,
               "value": exp_amo,
-              "amount": exp_amo
+              "amount": exp_amo,
+              "category": "grandparent"
             })
             return prev;
           } else {
@@ -145,6 +148,7 @@ router.get('/aggregate/:cand_id', function(req, res, next){
               "name": curr.pay,
               "purpose": curr.pur,
               "value": exp_amo,
+              "category": "parent",
               "children": [{
                   "name": curr.spe_nam,
                   "to": curr.pay,
@@ -152,7 +156,8 @@ router.get('/aggregate/:cand_id', function(req, res, next){
                   "amount": curr.exp_amo,
                   "value": exp_amo,
                   "date": curr.rec_dat,
-                  "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.ima_num
+                  "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.ima_num,
+                  "category": "child"
                 }]
             })
             return prev;
