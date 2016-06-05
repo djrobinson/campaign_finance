@@ -406,17 +406,16 @@ export class GraphComponent implements OnInit  {
       .attr("class", "node")
       .attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; })
-      .call(drag);
-    // .style("fill", function(d){
-    //   if ( d.party === undefined ){
-    //     return "black";
-    //   } else if ( d.party === "R"){
-    //     return "#742121";
-    //   } else if ( d.party === "D"){
-    //     return "#29339B";
-    //   }
-    // })
-    // .call(drag);
+      .call(drag)
+      .style("fill", function(d){
+        if ( d.graphtype === "candidate" ){
+          return "#083D77";
+        } else if ( d.graphtype === "committee"){
+          return "#DA4167";
+        } else if ( d.graphtype === "individual"){
+          return "#2E4057";
+        }
+      })
 
     node.append("circle")
       .attr("class", "circle")
