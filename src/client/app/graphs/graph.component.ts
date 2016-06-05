@@ -399,6 +399,7 @@ export class GraphComponent implements OnInit  {
       .style("stroke", "gray");
 
 
+
     var node = container.append("g")
       .selectAll(".node")
       .data(this.nodeData)
@@ -410,20 +411,72 @@ export class GraphComponent implements OnInit  {
       .style("fill", function(d){
         if ( d.graphtype === "candidate" ){
           return "#083D77";
-        } else if ( d.graphtype === "committee"){
-          return "#DA4167";
+        } else if ( d.graphtype === "committee" || d.graphtype === "associated"){
+          switch (d.CMTE_TP){
+            case "C":
+              return "#FE7F2D";
+            case "D":
+              return "#619B8A";
+            case "E":
+              return "#D741A7";
+            case "H":
+              return "#E6F14A";
+            case "I":
+              return "#575D90";
+            case "N":
+              return "#C3D350";
+            case "O":
+              return "#273D1D";
+            case "P":
+              return "#385B28";
+            case "Q":
+              return "#1E2EDE";
+            case "S":
+              return "#3A1772";
+            case "U":
+              return "#5398BE";
+            case "V":
+              return "#4E3822";
+            case "W":
+              return "#2F1B25";
+            case "X":
+              return "#DCABDF";
+            case "Y":
+              return "#C792DF";
+            case "Z":
+              return "#95C623";
+              break;
+          }
         } else if ( d.graphtype === "individual"){
-          return "#2E4057";
+          return "#6D0033";
         }
       })
 
     node.append("circle")
       .attr("class", "circle")
       .attr("r",function(d) {
-        if ( d.graphtype === "candidate") return 40;
-        if ( d.graphtype === "committee" || d.graphtype === "associated") return 20;
-        return 10;
+        if ( d.graphtype === "candidate") {
+          return 40;
+        } else if ( d.graphtype === "committee" || d.graphtype === "associated"){
+          return 20;
+        } else {
+          return 10;
+        }
+
       })
+
+
+    var candNode = svg.selectAll(".node")
+      .filter(function(d) { return d.graphtype === "candidate" });
+
+    console.log(candNode);
+
+    candNode.append("image")
+      .attr("xlink:href", "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg")
+      .attr("x", -8)
+      .attr("y", -8)
+      .attr("width", 70)
+      .attr("height", 70);
 
 
     node.append("text")
