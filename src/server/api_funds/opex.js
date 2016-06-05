@@ -69,17 +69,20 @@ router.get('/aggregate/:cmte_id', function(req, res, next){
               "children": [{
                 "name": curr.NAME,
                 "value": exp_amo,
+                "category": "parent",
                 "children": [{
                   "name": curr.NAME,
                   "purpose": curr.PURPOSE,
                   "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.IMAGE_NUM,
                   "amount": curr.exp_amo,
-                  "value": exp_amo
+                  "value": exp_amo,
+                  "category": "child"
                 }]
               }],
               "name": curr.NAME,
               "id": curr.CMTE_ID,
-              "value": exp_amo
+              "value": exp_amo,
+              "category": "grandparent"
             })
             return prev;
           } else {
@@ -89,12 +92,14 @@ router.get('/aggregate/:cmte_id', function(req, res, next){
               "name": curr.NAME,
               "purpose": curr.PURPOSE,
               "value": exp_amo,
+              "category": "parent",
               "children": [{
                   "name": curr.NAME,
                   "purpose": curr.PURPOSE,
                   "value": exp_amo,
                   "date": curr.TRANSACTION_DT,
-                  "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.IMAGE_NUM
+                  "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.IMAGE_NUM,
+                  "category": "child"
                 }]
             })
             return prev;
