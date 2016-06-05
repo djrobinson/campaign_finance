@@ -275,25 +275,22 @@ export class TreemapComponent implements OnInit, OnChanges {
           .call(rect)
 
         g.append("text")
-         .filter(function(d) { return d.category === "grandparent" })
+          .filter(function(d) { return d.category === "grandparent" })
           .attr("x", 0)
           .attr("dx", "0.35em")
           .attr("dy", "0.75em")
           .call(text)
           .each(cutWord);
 
-        function cutWord(d, i) {
-          var size = 16;
+        function cutWord(d) {
+          var size = 12;
           var words = d.name.split(' ');
-          var word = words.join(' ');
-          var wordsArr = [];
           var width = d.dx;
           var height = d.dy;
           var length = 0;
-          var j = 1;
-          d3.select(this).append('tspan').style("font-size", size + "px").text(word);
+          d3.select(this).append('tspan').style("font-size", size + "px").text(words.join(' '));
           while (this.getBBox().width >= width) {
-            console.log(words);
+            console.log(words, "dx ", width, "bbox ",this.getBBox().width);
             var word = words.join(' ');
             var el = d3.select(this).text('');
             var tspan = el.append('tspan').text(word);
@@ -321,53 +318,54 @@ export class TreemapComponent implements OnInit, OnChanges {
             //  join the array with slashes (as you have in your example)
             // now nameList should look like 'flare/animate/interpolate'
             //  use this to set the tooltip text
-            d3.select('#tooltip').text(d.name +" "+ d.purpose+" "+d.value)
+            d3.select('#tooltip').text(d.name + " " + d.purpose + " " + d.value)
           })
 
         function transition(d) {
-            if (transitioning || !d) return;
-            transitioning = true;
+          if (transitioning || !d) return;
+          transitioning = true;
 
-            var g2 = display(d),
-              t1 = g1.transition().duration(750),
-              t2 = g2.transition().duration(750);
+          var g2 = display(d),
+            t1 = g1.transition().duration(750),
+            t2 = g2.transition().duration(750);
 
-            // Update the domain only after entering new elements.
-            x.domain([d.x, d.x + d.dx]);
-            y.domain([d.y, d.y + d.dy]);
+          console.log(this.getBoundingClientRect().width);
 
-
-            // Enable anti-aliasing during the transition.
-            svg.style("shape-rendering", null);
-
-            // Draw child nodes on top of parent nodes.
-            svg.selectAll(".depth").sort(function(a, b) { return a.depth - b.depth; });
+          // Update the domain only after entering new elements.
+          x.domain([d.x, d.x + d.dx]);
+          y.domain([d.y, d.y + d.dy]);
 
 
-            // Fade-in entering text.
+          // Enable anti-aliasing during the transition.
+          svg.style("shape-rendering", null);
 
-            // Transition to the new view.
+          // Draw child nodes on top of parent nodes.
+          svg.selectAll(".depth").sort(function(a, b) { return a.depth - b.depth; });
 
-            t1.selectAll("rect").call(rect);
-            t2.selectAll("rect").call(rect);
 
-            t1.selectAll("text").call(text).style("fill-opacity", 0);
+          // Fade-in entering text.
 
+          // Transition to the new view.
+
+          t1.selectAll("rect").call(rect);
+          t2.selectAll("rect").call(rect);
+
+          t1.selectAll("text").call(text).style("fill-opacity", 0);
+
+          t1.remove().each("end", function() {
+            svg.style("shape-rendering", "crispEdges");
+            transitioning = false;
+          });
+          setTimeout(function() {
             g2.append("text")
               .filter(function(d) { return d.category === "parent" })
               .attr("x", 0)
               .attr("dx", "0.35em")
               .attr("dy", "0.75em")
               .call(text)
-              .text("lajsdfk")
+              .each(cutWord)
               .style("fill-opacity", 1);
-
-              // .each(cutWord);
-
-            t1.remove().each("end", function() {
-              svg.style("shape-rendering", "crispEdges");
-              transitioning = false;
-            });
+            }, 800);
 
 
             // Remove the old node when the transition is finished.
