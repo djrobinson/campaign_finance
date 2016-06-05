@@ -121,17 +121,20 @@ router.get('/graph/:cand_id', function(req, res, next){
               "children": [{
                 "name": curr.rec_nam,
                 "value": exp_amo,
+                "category": "parent",
                 "children": [{
                   "name": curr.rec_nam,
                   "purpose": curr.dis_pur_des,
                   "fec": curr.lin_ima,
                   "amount": curr.dis_amo,
-                  "value": exp_amo
+                  "value": exp_amo,
+                  "category": "child"
                 }]
               }],
               "name": curr.rec_nam,
               "id": curr.com_id,
-              "value": exp_amo
+              "value": exp_amo,
+              "category": "grandparent"
             })
             return prev;
           } else {
@@ -142,13 +145,15 @@ router.get('/graph/:cand_id', function(req, res, next){
               "name": curr.rec_nam,
               "purpose": curr.dis_pur_des,
               "value": exp_amo,
+              "category": "parent",
               "children": [{
                   "name": curr.rec_nam,
                   "purpose": curr.dis_pur_des,
                   "amount": curr.dis_amo,
                   "value": exp_amo,
                   "date": curr.dis_dat,
-                  "fec": curr.lin_ima
+                  "fec": curr.lin_ima,
+                  "category": "child"
                 }]
             })
             return prev;
