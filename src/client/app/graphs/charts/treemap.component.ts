@@ -275,17 +275,18 @@ export class TreemapComponent implements OnInit, OnChanges {
           .call(rect)
 
         g.append("text")
-          .filter(function(d) { return d.category === "grandparent" })
           .attr("x", 0)
           .attr("dx", "0.35em")
           .attr("dy", "0.75em")
           .call(text)
-          .each(cutWord);
+          .each(addText);
 
-        function cutWord(d) {
+        function addText(d) {
           var size = 12;
           var words = d.name.split(' ');
-          var cutwidth = d.dx;
+          var parentwidth = d3.select(this.parentNode.parentNode)[0][0].__data__.dx;
+          var ratio = width / parentwidth;
+          var cutwidth = d.dx * ratio;
           console.log(d3.select(this.parentNode.parentNode)[0][0].__data__.dx);
           var length = 0;
           d3.select(this).append('tspan').style("font-size", size + "px").text(words.join(' '));
@@ -342,20 +343,20 @@ export class TreemapComponent implements OnInit, OnChanges {
 
 
           // Fade-in entering text.
-
+          t2.selectAll("text").style("fill-opactiy", 0);
           // Transition to the new view.
 
           t1.selectAll("rect").call(rect);
           t2.selectAll("rect").call(rect);
 
           t1.selectAll("text").call(text).style("fill-opacity", 0);
+          t2.selectAll("text").call(text).style("fill-opactiy", 1);
 
           t1.remove().each("end", function() {
             svg.style("shape-rendering", "crispEdges");
             transitioning = false;
           });
 
-          var ratio = width / this.getBoundingClientRect().width;
           setTimeout(function(){
 
             g2.append("text")
