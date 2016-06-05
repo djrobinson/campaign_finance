@@ -30,6 +30,10 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
       bottom: 0;
       background-color: white;
     }
+
+    .child-div {
+      z-index: 5;
+    }
   `]
 })
 export class TreemapComponent implements OnInit, OnChanges {
@@ -287,16 +291,60 @@ export class TreemapComponent implements OnInit, OnChanges {
           var parentwidth = d3.select(this.parentNode.parentNode)[0][0].__data__.dx;
           var ratio = width / parentwidth;
           var cutwidth = d.dx * ratio;
-          console.log(d3.select(this.parentNode.parentNode)[0][0].__data__.dx);
           var length = 0;
-          d3.select(this).append('tspan').style("font-size", size + "px").text(words.join(' '));
-          while (this.getBBox().width >= cutwidth) {
-            var word = words.join(' ');
-            var el = d3.select(this).text('');
-            var tspan = el.append('tspan').text(word);
-            words.pop();
+          if (d.category === "parent" || d.category === "grandparent") {
+            d3.select(this).append("tspan").style("font-size", size + "px").text(words.join(' '));
+            while (this.getBBox().width >= cutwidth) {
+              var word = words.join(' ');
+              var el = d3.select(this).text('');
+              var tspan = el.append("tspan").text(word);
+              words.pop();
+            }
+          } else if (d.category === "child"){
+            d3.select(this)
+              .append("tspan")
+              .attr("class", "child-tspan")
+              .text(d.name)
+              .attr("x", 0)
+              .attr("dx", "0.35em")
+              .attr("dy", "1em")
+            d3.select(this)
+              .append("tspan")
+              .attr("class", "child-tspan")
+              .text(d.to)
+              .attr("x", 0)
+              .attr("dx", "0.35em")
+              .attr("dy", "1em")
+            d3.select(this)
+              .append("tspan")
+              .attr("class", "child-tspan")
+              .text(d.purpose)
+              .attr("x", 0)
+              .attr("dx", "0.35em")
+              .attr("dy", "1em")
+            d3.select(this)
+              .append("tspan")
+              .attr("class", "child-tspan")
+              .text(d.amount)
+              .attr("x", 0)
+              .attr("dx", "0.35em")
+              .attr("dy", "1em")
+            d3.select(this)
+              .append("tspan")
+              .attr("class", "child-tspan")
+              .text(d.date)
+              .attr("x", 0)
+              .attr("dx", "0.35em")
+              .attr("dy", "1em")
+            d3.select(this)
+              .append("a")
+              .attr("xlink:href", function(d) { return "http://"+d.fec; })
+              .append("tspan")
+              .attr("x", 0)
+              .attr("dx", "0.35em")
+              .attr("dy", "1em")
+              .text("FEC Link")
           }
-
         }
 
         g.attr("class", "cell")
@@ -365,7 +413,7 @@ export class TreemapComponent implements OnInit, OnChanges {
               .attr("dx", "0.35em")
               .attr("dy", "0.75em")
               .call(text)
-              .each(cutWord)
+              .each(addText)
               .style("fill-opacity", 1);
 
             }, 800)
