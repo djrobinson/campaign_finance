@@ -419,17 +419,12 @@ export class GraphComponent implements OnInit  {
     // .call(drag);
 
     node.append("circle")
-      .attr("r", 10)
-      .attr("class", "circle");
-    // .attr("r",function(d) {
-    //   if ( d.type === "pres") return 40;
-    //   if ( d.type === "committee") return 20;
-    //   return 10;
-    // })
-    // .attr("id", function(d){
-    //   return d.id;
-    // })
-    // .attr("class", "circle");
+      .attr("class", "circle")
+      .attr("r",function(d) {
+        if ( d.graphtype === "candidate") return 40;
+        if ( d.graphtype === "committee" || d.graphtype === "associated") return 20;
+        return 10;
+      })
 
 
     node.append("text")
