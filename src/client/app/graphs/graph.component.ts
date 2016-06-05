@@ -150,6 +150,10 @@ import {TreemapComponent} from './charts/treemap.component.ts';
       border: solid 1px #75717B;
       background-color: #FEFFFE;
     }
+    circle {
+      stroke: black;
+      stroke-width: 1.5px;
+    }
   `
   ],
   providers: [GraphService, TitleService],
@@ -395,7 +399,7 @@ export class GraphComponent implements OnInit  {
       .data(this.linkData)
       .enter().append("line")
       .attr("class", "link")
-      .attr("stroke-width", 1)
+      .attr("stroke-width", 3)
       .style("stroke", "gray");
 
 
@@ -408,9 +412,10 @@ export class GraphComponent implements OnInit  {
       .attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; })
       .call(drag)
+      .style("stroke", "black")
       .style("fill", function(d){
         if ( d.graphtype === "candidate" ){
-          return "#083D77";
+          return "none";
         } else if ( d.graphtype === "committee" || d.graphtype === "associated"){
           switch (d.CMTE_TP){
             case "C":
@@ -473,8 +478,8 @@ export class GraphComponent implements OnInit  {
 
     candNode.append("image")
       .attr("xlink:href", "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg")
-      .attr("x", -8)
-      .attr("y", -8)
+      .attr("x", -35)
+      .attr("y", -35)
       .attr("width", 70)
       .attr("height", 70);
 
