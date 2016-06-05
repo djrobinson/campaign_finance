@@ -486,10 +486,21 @@ export class GraphComponent implements OnInit  {
 
     node.append("text")
       .attr("dx", "-5rem")
-      .attr("dy", "-1.5rem")
-      .style("fill", "blue")
-      .style("font-size", ".5rem")
-      .text(function(d) { return d.CANDIDATE || d.NAME || d.CMTE_NM; });
+      .attr("dy", "-2rem")
+      .text(function(d) { return d.CANDIDATE || d.NAME || d.CMTE_NM; })
+      .each(addText);
+
+    function addText(d) {
+      var size = "1rem";
+      var name = d.CANDIDATE || d.NAME || d.CMTE_NM;
+      var words = name.split(' ');
+        var el = d3.select(this).style("font-size", size).text(words.join(' '));
+        while (this.getBBox().width >= 120) {
+          var word = words.join(' ');
+          var tspan = el.text(word);
+          words.pop();
+        }
+      }
 
     force.on("tick", function() {
       link.attr("x1", function(d) { return d.source.x; })
