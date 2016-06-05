@@ -285,12 +285,11 @@ export class TreemapComponent implements OnInit, OnChanges {
         function cutWord(d) {
           var size = 12;
           var words = d.name.split(' ');
-          var width = d.dx;
-          var height = d.dy;
+          var cutwidth = d.dx;
+          console.log(d3.select(this.parentNode.parentNode)[0][0].__data__.dx);
           var length = 0;
           d3.select(this).append('tspan').style("font-size", size + "px").text(words.join(' '));
-          while (this.getBBox().width >= width) {
-            console.log(words, "dx ", width, "bbox ",this.getBBox().width);
+          while (this.getBBox().width >= cutwidth) {
             var word = words.join(' ');
             var el = d3.select(this).text('');
             var tspan = el.append('tspan').text(word);
@@ -329,7 +328,6 @@ export class TreemapComponent implements OnInit, OnChanges {
             t1 = g1.transition().duration(750),
             t2 = g2.transition().duration(750);
 
-          console.log(this.getBoundingClientRect().width);
 
           // Update the domain only after entering new elements.
           x.domain([d.x, d.x + d.dx]);
@@ -356,7 +354,10 @@ export class TreemapComponent implements OnInit, OnChanges {
             svg.style("shape-rendering", "crispEdges");
             transitioning = false;
           });
-          setTimeout(function() {
+
+          var ratio = width / this.getBoundingClientRect().width;
+          setTimeout(function(){
+
             g2.append("text")
               .filter(function(d) { return d.category === "parent" })
               .attr("x", 0)
@@ -365,8 +366,8 @@ export class TreemapComponent implements OnInit, OnChanges {
               .call(text)
               .each(cutWord)
               .style("fill-opacity", 1);
-            }, 800);
 
+            }, 800)
 
             // Remove the old node when the transition is finished.
 
