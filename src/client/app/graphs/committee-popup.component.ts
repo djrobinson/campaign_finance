@@ -3,6 +3,7 @@ import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {TitleService} from '../api_services/title.service';
 import {TreemapComponent} from './charts/treemap.component';
+import {BubbleComponent} from './charts/bubble-chart.component';
 
 @Component({
   selector: 'committee-popup',
@@ -74,6 +75,7 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
   private recieveds: Object = {};
   private contributeds: Object = {};
   private route: Object = {};
+  private bubble: Object = {};
 
 
   constructor(private _TitleService: TitleService,
@@ -95,7 +97,9 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
       this.http.get('/api/individuals/committee/' + this.committee + '/limit').map((res: Response) => res.json()),
       this.http.get('/api/transfers/' + this.committee + '/contributor').map((res: Response) => res.json()),
       this.http.get('/api/transfers/' + this.committee + '/recipient').map((res: Response) => res.json()),
-      this.http.get('/api/opex/committee/' + this.committee).map((res: Response) => res.json())
+      this.http.get('/api/opex/committee/' + this.committee).map((res: Response) => res.json()),
+      this.http.get('/api/individuals/bubble/'+ this.committee).map((res: Response) => res.json()
+      )
 
     ).subscribe(
       data => {
@@ -117,6 +121,7 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
         })
         this.recieveds.data = data[3];
         this.opex.data = data[4];
+        this.bubble.data = data[5];
 
       },
       err => console.error(err)

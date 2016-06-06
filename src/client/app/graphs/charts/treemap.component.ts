@@ -40,7 +40,6 @@ export class TreemapComponent implements OnInit, OnChanges {
   @Input() route: string;
 
   ngOnInit(){
-
     this.buildTreeMap(this.route);
   }
 
