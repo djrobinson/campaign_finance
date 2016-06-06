@@ -85,21 +85,26 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
       z-index: 2;
       border-top: solid 1px gray;
     }
+    .container {
+      margin-left: 10%;
+    }
 
   `],
   template: `
     <div class="app">
-      <div class="tileContainer">
-        <a [routerLink]="[title.name]"
-          *ngFor="#title of titles"
-          (click)="setSelected(title.id)"
-          [style.color]="isSelected(title)"
-          class="tile"
-          >
-          <div>
-            <p>{{title.name}}</p>
-          </div>
-        </a>
+      <div class="container">
+        <div class="tileContainer">
+          <a [routerLink]="[title.name]"
+            *ngFor="#title of titles"
+            (click)="setSelected(title.id)"
+            [style.color]="isSelected(title)"
+            class="tile"
+            >
+            <div>
+              <p>{{title.name}}</p>
+            </div>
+          </a>
+        </div>
       </div>
       <div class="row">
           <router-outlet></router-outlet>
