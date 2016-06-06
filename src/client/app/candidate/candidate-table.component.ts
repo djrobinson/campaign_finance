@@ -6,16 +6,14 @@ import {CORE_DIRECTIVES} from 'angular2/common';
   selector: 'candidate-table',
   directives: [CORE_DIRECTIVES],
   template: `
+
                 <table>
                   <tr>
-                    <th ng-if="graph">Graph</th>
                     <th>Candidate Name</th>
-                    <th>Candidate ID</th>
                     <th>Party</th>
                     <th>Cash on Hand</th>
                     <th>Net Contributions</th>
                     <th>Total Distributions</th>
-                    <th>Operating Expenditures</th>
                     <th>FEC Docs</th>
                   </tr>
                   <tr *ngFor="#candidate of candidates">
@@ -23,21 +21,29 @@ import {CORE_DIRECTIVES} from 'angular2/common';
                       <button
                         (click)="buildGraph(candidate.CANDIDATE_ID)"
                       >
-                      Create Graph
+                      {{candidate.can_nam}}
                       </button>
                     </td>
-                    <td>{{candidate.can_nam}}</td>
-                    <td>{{candidate.CANDIDATE_ID}}</td>
                     <td>{{candidate.PARTY}}</td>
                     <td>{{parseFloat(candidate.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
                     <td>{{parseFloat(candidate.net_con) | currency:'USD':true}}</td>
                     <td>{{parseFloat(candidate.tot_dis) | currency:'USD':true}}</td>
-                    <td>{{parseFloat(candidate.ope_exp) | currency:'USD':true}}</td>
                     <td><a [href]="candidate.lin_ima">Link</a></td>
                   </tr>
                 </table>
            `,
-  providers: [CandidateService]
+  providers: [CandidateService],
+  styles: [`
+    button {
+      width: 100%;
+    }
+    table {
+      width: 90%;
+      margin-left: 5%;
+      margin-right: 5%;
+    }
+
+  `]
 })
 export class CandidateTableComponent {
   @Input() candidates;

@@ -17,6 +17,14 @@ import {PieComponent} from './charts/pie-chart.component';
       font-size: 10px;
     }
 
+    .close-button {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      height: 5px;
+      width: 5px;
+    }
+
     img {
       width: 80%;
     }
@@ -54,7 +62,6 @@ import {PieComponent} from './charts/pie-chart.component';
       height: 2.5%;
       width: 2.5%;
     }
-
 
     .associated-committees {
       position: absolute;

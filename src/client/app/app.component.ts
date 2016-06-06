@@ -85,14 +85,9 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
       z-index: 2;
       border-top: solid 1px gray;
     }
-    .container {
-      margin-left: 10%;
-    }
-
   `],
   template: `
     <div class="app">
-      <div class="container">
         <div class="tileContainer">
           <a [routerLink]="[title.name]"
             *ngFor="#title of titles"
@@ -104,7 +99,6 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
               <p>{{title.name}}</p>
             </div>
           </a>
-        </div>
       </div>
       <div class="row">
           <router-outlet></router-outlet>

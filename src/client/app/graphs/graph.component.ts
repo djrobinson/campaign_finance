@@ -19,7 +19,6 @@ import {TreemapComponent} from './charts/treemap.component.ts';
                 (buildEmit)="getGraphData($event.candId)"
               >
               </candidate-table>
-              <p>{{candId}}</p>
               <div class="force-container">
               </div>
             </div>
@@ -75,7 +74,6 @@ import {TreemapComponent} from './charts/treemap.component.ts';
            `,
   styles: [
     `
-
     .tree-close {
       position: absolute;
       top: 0;

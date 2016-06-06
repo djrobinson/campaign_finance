@@ -4,8 +4,8 @@ import {TitleService} from '../api_services/title.service';
   selector: 'mini-profile-view',
   template: `
     <div class="title">
-      <div class="four columns">
-        <h4>{{title}}</h4>
+      <div class="five columns">
+        <h5>{{title}}</h5>
         <p>FEC ID: {{id}}</p>
       </div>
       <div class="five columns">
