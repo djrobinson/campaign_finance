@@ -25,7 +25,7 @@ import {Observable} from 'rxjs/Rx';
 export class PieComponent implements OnInit, OnChanges {
   constructor(private http:Http) {}
 
-  callAsc(associatedCommittee) {
+  public callAsc(associatedCommittee) {
       var buildPieChart = this.buildPieChart;
       var http = this.http;
       var indivToCommittees = [];

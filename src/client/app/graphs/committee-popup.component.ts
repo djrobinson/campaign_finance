@@ -62,7 +62,7 @@ import {BubbleComponent} from './charts/bubble-chart.component';
       background-color: #FEFFFE;
     }
   `],
-  directives: [TreemapComponent]
+  directives: [TreemapComponent, BubbleComponent]
 })
 export class CommitteePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
