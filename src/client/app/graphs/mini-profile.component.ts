@@ -41,23 +41,25 @@ import {TitleService} from '../api_services/title.service';
             </tr>
           </table>
         </div>
-        <div *ngIf="popupType ==='individual || committee'">
-          <h4>Transaction Amount: {{parseFloat(amount) | currency:'USD':true}}</h4>
+        <div *ngIf="popupType ==='individual' || 'committee'">
+          <div class="transaction">
+            <h5>Transaction Amount: {{parseFloat(amount) | currency:'USD':true}}</h5>
+          </div>
         </div>
       </div>
-      <div class="flexbox-container">
+      <div class="two columns">
         <div>
           <div *ngIf="popupType === 'individual'">
-            <button (click)="indivPopupEmit(id, title)">Go to Profile</button>
+            <button (click)="indivPopupEmit(id, title)">Profile</button>
           </div>
           <div *ngIf="popupType === 'committee' || popupType === 'associated'">
-            <button (click)="cmtePopupEmit(id)">Go to Profile</button>
+            <button (click)="cmtePopupEmit(id)">Profile</button>
           </div>
           <div *ngIf="popupType === 'candidate'">
-            <button (click)="candPopupEmit(id)">Go to President Profile</button>
+            <button (click)="candPopupEmit(id)">Profile</button>
           </div>
           <div *ngIf="popupType === 'congress'">
-            <button (click)="congressPopupEmit(id)">Go to Congress Profile</button>
+            <button (click)="congressPopupEmit(id)">Profile</button>
           </div>
         </div>
       </div>
@@ -70,18 +72,19 @@ import {TitleService} from '../api_services/title.service';
       border: solid 1px #3B3561;
       height: 150px;
       background-color: white;
+      overflow: hidden;
     }
-    .flexbox-container {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
+
+    .transaction {
+      margin-top: 50px;
     }
+
     .cand-table {
       margin: 0 !important;;
     }
     button {
       position: relative;
-      top: 20px;
+      top: 50px;
     }
   `]
 })

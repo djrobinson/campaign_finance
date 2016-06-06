@@ -17,12 +17,21 @@ import {PieComponent} from './charts/pie-chart.component';
       font-size: 10px;
     }
 
+
     .close-button {
+      poisition: absolute;
+      top: 2px;
+      right: 2px;
+      height: 25px;
+      width: 25px;
+    }
+
+    .close-icon {
       position: absolute;
       top: 2px;
       right: 2px;
-      height: 5px;
-      width: 5px;
+      height: 25px;
+      width: 25px;
     }
 
     img {

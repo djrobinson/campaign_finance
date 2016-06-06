@@ -305,7 +305,7 @@ export class GraphComponent implements OnInit  {
           }
 
         }, [])
-        this.buildGraph(this);
+        this.buildGraph(this, candId);
         },
         error => console.error('Error: ' + err),
         () => {
@@ -319,7 +319,7 @@ export class GraphComponent implements OnInit  {
     this.selectedNode = selected;
   }
 
-  buildGraph(ctrl) {
+  buildGraph(ctrl, candId) {
     console.log();
     //HELPER FUNCTIONS FOR GRAPH
     function dottype(d) {
@@ -459,23 +459,19 @@ export class GraphComponent implements OnInit  {
       .attr("class", "circle")
       .attr("r",function(d) {
         if ( d.graphtype === "candidate") {
-          return 40;
+          return;
         } else if ( d.graphtype === "committee" || d.graphtype === "associated"){
           return 20;
         } else {
           return 10;
         }
-
       })
-
 
     var candNode = svg.selectAll(".node")
       .filter(function(d) { return d.graphtype === "candidate" });
 
-    console.log(candNode);
-
     candNode.append("image")
-      .attr("xlink:href", "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg")
+      .attr("xlink:href", "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/"+candId+".jpg")
       .attr("x", -35)
       .attr("y", -35)
       .attr("width", 70)
@@ -485,19 +481,21 @@ export class GraphComponent implements OnInit  {
     node.append("text")
       .attr("dx", "-5rem")
       .attr("dy", "-2rem")
-      .text(function(d) { return d.CANDIDATE || d.NAME || d.CMTE_NM; })
       .each(addText);
 
     function addText(d) {
-      var size = "1rem";
-      var name = d.CANDIDATE || d.NAME || d.CMTE_NM;
-      var words = name.split(' ');
+      if (!d.CANDIDATE){
+        var size = "1rem";
+        var name = d.CANDIDATE || d.NAME || d.CMTE_NM;
+        var words = name.split(' ');
         var el = d3.select(this).style("font-size", size).text(words.join(' '));
         while (this.getBBox().width >= 120) {
           var word = words.join(' ');
           var tspan = el.text(word);
           words.pop();
         }
+      }
+
       }
 
     force.on("tick", function() {
@@ -507,32 +505,7 @@ export class GraphComponent implements OnInit  {
         .attr("y2", function(d) { return d.target.y; })
 
       node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-
-
     });
-
-    //ATTRIBUTE CHANGES TO NODES AND LINKS
-    // force.charge(function(d){
-    //     if(d.type === "anchor") return 10;
-    //     if(d.type === "pres") return -100;
-    //     if(d.type === "committee") return -1000;
-    //     return -1000;
-    // })
-    // force.linkDistance(function(link){
-    //     if(link.type === "anchor") return 10;
-    //     if(link.type === "pres") return 30;
-    //     if(link.type === "committee") return 200;
-    //     return 50;
-    // })
-
-    // force.linkStrength(function(link){
-    //     if(link.type === "anchor") return 100;
-    //     if(link.type === "pres") return 5;
-    //     return 0.1;
-    // })
-
-
-
 
     //NODE EFFECTS & RELATION MGT
     var linkedByIndex = {};

@@ -1,5 +1,7 @@
 <div class="cand-style" id="full-size">
-    <img src="/images/close.png" class="close-button" />
+    <div (click)="close()" class="close-button">
+      <img src="/images/close.png" class="close-icon" />
+    </div>
     <div class="cand-pic text-center">
         <h4>{{candidate?.CANDIDATE_NAME}}</h4>
         <img [src]="imageVar?.image" alt="picture">
@@ -64,8 +66,6 @@
         </div>
       </div>
     </div>
-  <div class="row indiv twelve columns text-center">
-    <button (click)="close()">Close</button>
-  </div>
+
 </div>
 
