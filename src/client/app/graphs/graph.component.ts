@@ -8,10 +8,13 @@ import {CommitteePopupComponent} from './committee-popup.component.ts';
 import {CandidatePopupComponent} from './candidate-popup.component.ts';
 import {CongressPopupComponent} from './congress-popup.component.ts';
 import {TreemapComponent} from './charts/treemap.component.ts';
+import {SpinnerComponent} from '../loading/spinner.component';
 
 @Component({
   selector: 'graph-view',
   template: `
+            <spinner [isRunning]="isRequesting">
+            </spinner>
             <div class="row">
               <candidate-table
                 [candidates]="candidates"
@@ -152,10 +155,15 @@ import {TreemapComponent} from './charts/treemap.component.ts';
       stroke: black;
       stroke-width: 1.5px;
     }
+    spinner {
+      position: absolute;
+      top: 45%;
+      left: 45%;
+    }
   `
   ],
   providers: [GraphService, TitleService],
-  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent, CommitteePopupComponent, CandidatePopupComponent, CongressPopupComponent, TreemapComponent]
+  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent, CommitteePopupComponent, CandidatePopupComponent, CongressPopupComponent, TreemapComponent, SpinnerComponent]
 })
 export class GraphComponent implements OnInit  {
   private selectedNode: Object;
@@ -171,6 +179,7 @@ export class GraphComponent implements OnInit  {
   private graph: boolean;
   private fullRoute: string = "";
   private fullTreemap: boolean;
+  private isRequesting: boolean;
 
   constructor(
     private _graphService: GraphService,
@@ -251,7 +260,11 @@ export class GraphComponent implements OnInit  {
     this.congressPopup = false;
   }
 
-  getGraphData(candId) {
+  private stopRefreshing() {
+    this.isRequesting = false;
+  }
+
+  public getGraphData(candId): void {
 
     this._TitleService.getResult('/api/candidates/'+candId)
       .subscribe(
@@ -261,6 +274,8 @@ export class GraphComponent implements OnInit  {
       )
     var cand = candId;
     var graph = this._graphService;
+    this.isRequesting = true;
+
     graph.getResult(cand)
       .subscribe(
       result => {
@@ -306,9 +321,11 @@ export class GraphComponent implements OnInit  {
 
         }, [])
         this.buildGraph(this, candId);
+
         },
         error => console.error('Error: ' + err),
         () => {
+          this.stopRefreshing();
           console.log('Completed!')
         }
       );

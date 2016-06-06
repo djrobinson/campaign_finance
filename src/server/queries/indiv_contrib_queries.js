@@ -23,6 +23,12 @@ module.exports = {
     return knex('indiv_contrib')
             .where('TRAN_ID', tran_id);
   },
+  bubbleContrib: function(cmte_id){
+    return knex('indiv_contrib')
+            .select('TRANSACTION_AMT', 'NAME')
+            .where({'CMTE_ID': cmte_id})
+            .orderBy('TRANSACTION_AMT', 'desc')
+  },
   aggregateEmpl: function(donor, offset){
     return knex('indiv_contrib')
            .select('EMPLOYER')

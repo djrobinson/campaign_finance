@@ -101,6 +101,12 @@ router.get('/transaction/:tran_id', function(req, res, next){
   });
 });
 
+router.get('/bubble/:cmte_id', function(req, res, next){
+  query.bubbleContrib(req.params.cmte_id).then(function(data){
+    res.json(data);
+  });
+});
+
 
 
 

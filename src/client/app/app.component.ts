@@ -16,6 +16,7 @@ import {PacsComponent} from './pacs/pacs.component';
 import {VotesComponent} from './votes/votes.component';
 import {Landing} from './landing/landing.component';
 import {GraphComponent} from './graphs/graph.component';
+import {SpinnerComponent} from './loading/spinner.component';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
 
