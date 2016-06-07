@@ -105,7 +105,6 @@ import {PieComponent} from './charts/pie-chart.component';
       display: flex;
       flex-grow: 1;
       height: 50%;
-      border: solid 1px black;
     }
 
     .flexyrow {
@@ -114,13 +113,11 @@ import {PieComponent} from './charts/pie-chart.component';
     }
 
     pie-chart {
-      border: solid 1px blue;
       position: relative;
       flex-grow: 1;
     }
 
     treemap {
-      border: solid 1px blue;
       position:relative;
       flex-grow: 2;
     }

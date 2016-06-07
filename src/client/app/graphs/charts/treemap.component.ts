@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 
 @Component({
   selector: 'treemap',
@@ -7,9 +7,8 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
         <div id="tooltip">
           <div id="tip-name"></div>
           <div id="tip-support"></div>
-          <div id="tip-value"></div>
+          <div id="tip-amount"></div>
           <div id="tip-purpose"></div>
-
         </div>
         <div id="chart"></div>
       </div>
@@ -53,7 +52,6 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
 })
 export class TreemapComponent implements OnInit, OnChanges {
   @Input() route: string;
-
 
   constructor (){
     this.parseFloat = function(num) {
@@ -370,7 +368,7 @@ export class TreemapComponent implements OnInit, OnChanges {
             // now nameList should look like 'flare/animate/interpolate'
             //  use this to set the tooltip text
             d3.select('#tip-name').text(d.name);
-            d3.select('#tip-amount').text(d.value.formatMoney(2));
+            d3.select('#tip-amount').text("$" + d.value.formatMoney(2));
             d3.select('#tip-support').text(d.support);
             d3.select('#tip-purpose').text(d.purpose);
           })
