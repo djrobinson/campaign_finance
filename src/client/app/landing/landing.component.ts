@@ -1,16 +1,23 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
+import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
+
 @Component({
   selector: 'home',
   styles: [
   `
-    .row {
-      background-color: #17324f;
-    }
 
     .landing-container {
-      color: #17324f;
-      height: 100vh;
+      display: flex;
+      background-color: #17324f;
+      height: calc(100vh - 50px);
       width: 100%;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    .flexrow {
+      display: flex;
+      justify-content: space-around;
     }
 
     #oval {
@@ -19,7 +26,7 @@ import {Component} from 'angular2/core';
       justify-content: center;
       width: 50rem;
       height: 30rem;
-      margin: 10% auto;
+      border: solid 1px #16191F;
       background: #CBCED2;
       -moz-border-radius: 25rem / 15rem;
       -webkit-border-radius: 25rem / 15rem;
@@ -30,48 +37,36 @@ import {Component} from 'angular2/core';
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
       background-color: #16191F;
       height: 200px;
       color: #CBCED2;
     }
 
-    .text-center {
-      text-align: center;
+    .campaign:hover {
+      background-color: #c6b6ae;
+      color: #16191F;
     }
-
 
   `
   ],
-  template: `
+  templateUrl: 'app/landing/landing.html',
+  directives: [ROUTER_DIRECTIVES]
 
-    <div class="landing-container">
-      <div class="row">
-          <div class="twelve columns text-center">
-            <div id="oval">
-              <div class="title">
-                <h1>Citizens Hub</h1>
-                <h4>Data Driven Politics</h4>
-              </div>
-            </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="six columns text-center">
-          <div class="campaign six columns offset-by-three">
-            <h4>Campaign Finances</h4>
-          </div>
-        </div>
-        <div class="six columns text-center">
-          <div class="campaign six columns offset-by-three">
-            <h4>Lobbyists & Legislation</h4>
-          </div>
-        </div>
-      </div>
-    </div>
-  `
 })
-export class Landing {
-  constructor() {
+export class Landing implements OnInit {
+  public landing: boolean;
+  constructor(private router: Router) {  }
 
+  ngOnInit() {
+    this.landing = true;
+  }
+
+  public graphs():void {
+    this.router.navigate(['Graphs']);
+  }
+
+  public votes():void {
+    this.router.navigate(['Bills']);
   }
 }

@@ -19,6 +19,7 @@ import {GraphComponent} from './graphs/graph.component';
 import {SpinnerComponent} from './loading/spinner.component';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
+import {RouteParams} from 'angular2/router';
 
 @Component({
   selector: 'my-app',
@@ -29,52 +30,6 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
       flex-direction: row;
       align-items: stretch;
       background: #EBF5EE;
-    }
-    a {
-      text-decoration: none;
-    }
-    .header {
-      height: 3rem;
-      text-align: center;
-      font-size: 3rem;
-      background: #283044;
-      color: #EBF5EE;
-      padding-bottom: 5rem;
-      margin: 0 !important;
-    }
-    .header, .app, .footer {
-      flex: 1 100%;
-    }
-    .tileContainer {
-
-      padding: 0;
-      margin: 0;
-
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-
-      width: 100%;
-
-      -webkit-flex-flow: row;
-      justify-content: space-around;
-    }
-    .tile {
-      display: flex;
-      width: 100%;
-      background: #78A1BB;
-      height: 5rem;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-align: center;
-      padding-top: 2rem;
-    }
-    .tileContainer a {
-      text-decoration: none;
-      flex-grow: 1;
     }
     .footer {
       position: fixed;
@@ -89,21 +44,10 @@ import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
   `],
   template: `
     <div class="app">
-        <div class="tileContainer">
-          <a [routerLink]="[title.name]"
-            *ngFor="#title of titles"
-            (click)="setSelected(title.id)"
-            [style.color]="isSelected(title)"
-            class="tile"
-            >
-            <div>
-              <p>{{title.name}}</p>
-            </div>
-          </a>
+      <div class="flexrow">
+         <h4>Citizens Hub</h4>
       </div>
-      <div class="row">
-          <router-outlet></router-outlet>
-      </div>
+      <router-outlet></router-outlet>
     </div>
 
 

@@ -34,11 +34,11 @@ export class SubjectComponent implements OnInit {
     this.searchSubject(this.subject);
   }
 
-  selectBill(bill_id) {
+  private selectBill(bill_id):void {
     this.router.navigate(['/bills']);
   }
 
-  searchSubject(subject) {
+  private searchSubject(subject):void {
     this._titleService.getResult('/api/hr/subject/' + subject)
       .subscribe(
       result => {
