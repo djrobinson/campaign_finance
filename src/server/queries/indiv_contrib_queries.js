@@ -25,7 +25,7 @@ module.exports = {
   },
   bubbleContrib: function(cmte_id){
     return knex('indiv_contrib')
-            .select('TRANSACTION_AMT', 'NAME')
+            .select('TRANSACTION_AMT', 'NAME', 'TRAN_ID')
             .where({'CMTE_ID': cmte_id})
             .orderBy('TRANSACTION_AMT', 'desc')
   },

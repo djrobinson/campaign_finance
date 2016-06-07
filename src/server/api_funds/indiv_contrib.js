@@ -107,7 +107,8 @@ router.get('/bubble/:cmte_id', function(req, res, next){
               'children': data.map(function(d){
                 return {
                   'name': d.NAME,
-                  'size': d.TRANSACTION_AMT
+                  'size': d.TRANSACTION_AMT,
+                  'TRAN_ID': d.TRAN_ID
                 }
               })});
   });

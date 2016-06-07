@@ -8,8 +8,11 @@ import {TitleService} from '../api_services/title.service';
   templateUrl: 'app/graphs/templates/individual-popup.html',
   styles: [`
     .indiv {
+      position: absolute;
       text-align: center;
-      height: 10%;
+      height: 100%;
+      background-color: #17324f;
+      color: #cbced2;
     }
     .indiv-list {
       position: absolute;
@@ -32,6 +35,22 @@ import {TitleService} from '../api_services/title.service';
       border: solid 1px #75717B;
       background-color: #FEFFFE;
     }
+    .close-button {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      height: 25px;
+      width: 25px;
+      z-index: 2;
+    }
+
+    .close-icon {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      height: 25px;
+      width: 25px;
+    }
   `]
 })
 export class IndividualPopupComponent implements OnInit, OnChanges {
@@ -44,7 +63,11 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   private dataStore: Observable<Object>;
 
   constructor(private _TitleService: TitleService,
-              private http:Http) { }
+              private http:Http) {
+    this.parseFloat = function(num) {
+      return parseFloat(num);
+    }
+  }
 
   ngOnInit() {
     console.log(this.individualTran, this.indivName);

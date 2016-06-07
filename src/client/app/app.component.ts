@@ -41,6 +41,13 @@ import {RouteParams} from 'angular2/router';
       z-index: 2;
       border-top: solid 1px gray;
     }
+
+    .flexrow {
+      text-align: center;
+      padding-top: 4px;
+      padding-left: 4px;
+      border-bottom: solid 1px #ABA4A3;
+    }
   `],
   template: `
     <div class="app">

@@ -34,6 +34,7 @@ import {Component, Input, Output, EventEmitter, OnInit} from 'angular2/core';
       justify-items: center;
       height: 100%;
       width: 100%;
+      background-color: #ABA4A3;
     }
 
     #chart3 {
@@ -49,10 +50,19 @@ export class BubbleComponent implements OnInit {
 
   ngOnInit(){
     console.log(this.cmte);
-    this.buildBubbles(this.cmte);
+    this.buildBubbles(this.cmte, this);
   }
 
-  public buildBubbles(cmte){
+
+  public buildBubbles(cmte, ctrl){
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
     var diameter = document.getElementById('containerChart3').offsetHeight,
       format = d3.format(",d"),
       color = d3.scale.category20c();
@@ -88,8 +98,8 @@ export class BubbleComponent implements OnInit {
         .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
       node.append("circle")
-        .attr("r", function(d) { return d.r; })
-        .style("fill", '#86CA6F')
+        .attr("r", function(d) { console.log(d); return d.r; })
+        .style("fill", function(d){ return getRandomColor(); })
         .on("mouseover", function(d) {
           tooltip.text(d.className + ": " + format(d.value));
           tooltip.style("visibility", "visible");
@@ -97,7 +107,8 @@ export class BubbleComponent implements OnInit {
         .on("mousemove", function() {
           return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
         })
-        .on("mouseout", function() { return tooltip.style("visibility", "hidden"); });
+        .on("mouseout", function() { return tooltip.style("visibility", "hidden"); })
+        .on("click", function(d) { console.log(d.TRAN_ID);})
 
       node.append("text")
         .attr("dy", ".3em")
@@ -111,7 +122,7 @@ export class BubbleComponent implements OnInit {
 
       function recurse(name, node) {
         if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-        else classes.push({ packageName: name, className: node.name, value: node.size });
+        else classes.push({ packageName: name, className: node.name, value: node.size, TRAN_ID: node.TRAN_ID });
       }
 
       recurse(null, root);

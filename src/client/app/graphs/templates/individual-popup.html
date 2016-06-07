@@ -1,4 +1,7 @@
 <div class="indiv-container">
+  <div (click)="close()" class="close-button">
+    <img src="/images/close.png" class="close-icon" />
+  </div>
   <div class="row">
     <div class="indiv six columns">
       <h3>{{individual?.NAME}}</h3>
@@ -8,7 +11,7 @@
       <h5>{{individual?.NAME}}</h5>
       <h5>{{individual?.TRANSACTION_DT}}</h5>
       <p><a [href]="individual?.FEC_LINK">Link</a></p>
-      <h4>Transaction Amount: {{individual?.TRANSACTION_AMT}}</h4>
+      <h4>Transaction Amount: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}}</h4>
     </div>
     <div class="indiv-list six columns">
       <h5>Other Donations</h5>
@@ -22,7 +25,7 @@
             <p>{{indiv?.CMTE_ID}}</p>
           </div>
           <div class="one-half column">
-            <p>Donation: {{indiv?.TRANSACTION_AMT}}</p>
+            <p>Donation: {{parseFloat(indiv?.TRANSACTION_AMT) | currency:'USD':true}}</p>
             <button (click)="changeIndiv(indiv?.TRAN_ID)">
               See Donation
             </button>
@@ -30,8 +33,5 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row indiv twelve columns">
-    <button (click)="close()">Close</button>
   </div>
 </div>
