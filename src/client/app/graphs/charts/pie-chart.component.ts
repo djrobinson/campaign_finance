@@ -1,42 +1,90 @@
 import {Component, Input, OnInit, OnChanges, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
+import {SpinnerComponent} from '../../loading/spinner.component';
 
 @Component({
   selector: 'pie-chart',
   template: `
       <div id="containerChart2">
+        <div class="pie-title">
+          <h5>Donations by Size</h5>
+        </div>
         <div id="chart2">
+          <spinner [isRunning]="isRequesting">
+          </spinner>
         </div>
         <div class="tooltip">
-          <div class="label">
-          </div>
-          <div class="percent">
-          </div>
-          <div class="count">
-          </div>
+          <table class="cand-table">
+            <tr>
+              <th>
+                Size
+              </th>
+              <th>
+                Count
+              </th>
+              <th>
+                Percentage
+              </th>
+            </tr>
+            <tr>
+              <td class="label"></td>
+              <td class="count"></td>
+              <td class="percent"></td>
+            </tr>
+          </table>
         </div>
       </div>
   `,
   styles: [`
 
     #containerChart2 {
+      display: flex;
+      flex-direction: column;
       position: absolute;
       height: 100%;
       width: 100%;
     }
 
-    .tooltip {
-      width: 100%;
-      margin-top: -20%;
-      font-size: 2rem;
+    #chart2 {
+      flex-grow: 1;
       display: flex;
-
+      width: 100%;
+      top: 10%;
     }
 
-  `]
+    .chart-title {
+      display: block;
+      position: absolute;
+      height: 10%;
+      width: 100%;
+    }
+
+    .tooltip {
+      display: flex;
+      align-self: flex-end;
+      width: 100%;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+    }
+    th {
+      font-size: 1rem;
+      text-align: center;
+    }
+    td {
+      text-align: center;
+    }
+    spinner {
+      position: absolute;
+      left: 30%;
+    }
+  `],
+  directives: [SpinnerComponent]
 })
 export class PieComponent implements OnInit, OnChanges {
+  public isRequesting: boolean;
   constructor(private http:Http) {}
 
   public callAsc(associatedCommittee) {
@@ -71,6 +119,7 @@ export class PieComponent implements OnInit, OnChanges {
         }
       ];
       var j = 0;
+        this.isRequesting = true;
         http.get('api/individuals/committee/'+associatedCommittee.CMTE_ID).map(response => response.json()).subscribe(
           data=>{
           // indivToCommittees = indivToCommittees.concat(data);
@@ -99,19 +148,25 @@ export class PieComponent implements OnInit, OnChanges {
             }
 
           }, pieData)
-          buildPieChart(chartStuff);
-        })
+          buildPieChart(chartStuff)
+        },
+          error => console.error('Error: ' + error),
+          () => {
+            this.stopRefreshing();
+    })
   }
 
-
+  private stopRefreshing() {
+    this.isRequesting = false;
+  }
 
   buildPieChart(pieData) {
     (function(d3) {
       'use strict';
 
-      var width = document.getElementById('containerChart2').offsetWidth;
-      var height = document.getElementById('containerChart2').offsetHeight;
-      var radius = Math.min(width, height) / 3;
+      var width = document.getElementById('chart2').offsetWidth;
+      var height = document.getElementById('chart2').offsetHeight;
+      var radius = Math.min(width, height) / 2.25;
       var donutWidth = 15;
       var legendRectSize = 18;
       var legendSpacing = 4;
@@ -136,6 +191,8 @@ export class PieComponent implements OnInit, OnChanges {
 
       var tooltip = d3.select('.tooltip')
 
+
+
       start(pieData);
       function start(dataset){
         dataset.forEach(function(d) {
@@ -152,13 +209,14 @@ export class PieComponent implements OnInit, OnChanges {
           });
 
         path.on('mouseover', function(d) {
+          tooltip.style('display', 'flex');
           var total = d3.sum(dataset.map(function(d) {
             return d.count;
           }));
           var percent = Math.round(1000 * d.data.count / total) / 10;
-          tooltip.select('.label').text(d.data.label);
-          tooltip.select('.count').text(d.data.count);
-          tooltip.select('.percent').text(percent + '%');
+          tooltip.select('.label').html(d.data.label);
+          tooltip.select('.count').html(d.data.count);
+          tooltip.select('.percent').html(percent + '%');
         });
 
         path.on('mouseout', function() {

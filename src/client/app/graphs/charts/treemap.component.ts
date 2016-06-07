@@ -32,9 +32,11 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
       width: 30%;
       height: 100%;
       bottom: 0;
-      background-color: #5b4f49;
       font-size: 2rem;
-      color: #CBCED2;
+      color: #5b4f49;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
     }
 
     #chart {
@@ -117,7 +119,7 @@ export class TreemapComponent implements OnInit, OnChanges {
 
     var width = document.getElementById('chart').offsetWidth;
     var height = document.getElementById('chart').offsetHeight;
-    var margin = { top: 30, right: 0, bottom: 20, left: 0 };
+    var margin = { top: 30, right: 0, bottom: 0, left: 0 };
 
     formatNumber = d3.format(",%"),
       colorDomain = [-.6, 0, .6],
@@ -384,7 +386,7 @@ export class TreemapComponent implements OnInit, OnChanges {
             // now nameList should look like 'flare/animate/interpolate'
             //  use this to set the tooltip text
             d3.select('#tip-name').text(d.name);
-            d3.select('#tip-amount').text(d.value.toFixed(2));
+            d3.select('#tip-amount').text(d.value.formatMoney(2));
             d3.select('#tip-support').text(d.support);
             d3.select('#tip-purpose').text(d.purpose);
           })

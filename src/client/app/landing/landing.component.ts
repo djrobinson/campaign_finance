@@ -26,7 +26,7 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
       justify-content: center;
       width: 50rem;
       height: 30rem;
-      border: solid 1px #16191F;
+      border: solid 7px #16191F;
       background: #CBCED2;
       -moz-border-radius: 25rem / 15rem;
       -webkit-border-radius: 25rem / 15rem;

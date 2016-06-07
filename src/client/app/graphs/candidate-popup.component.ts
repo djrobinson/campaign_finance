@@ -19,7 +19,7 @@ import {PieComponent} from './charts/pie-chart.component';
 
 
     .close-button {
-      poisition: absolute;
+      position: absolute;
       top: 2px;
       right: 2px;
       height: 25px;
@@ -57,6 +57,7 @@ import {PieComponent} from './charts/pie-chart.component';
       height: 100%;
       display: flex;
       flex-direction: column;
+
     }
 
     .cand-pic {
@@ -73,7 +74,7 @@ import {PieComponent} from './charts/pie-chart.component';
     .cand-option {
       display: flex;
       justify-content: center;
-      align-content: center;
+      align-items: center;
       border: #CBCED2;
       color: #CBCED2;
       font-size: 3rem;
@@ -95,7 +96,13 @@ import {PieComponent} from './charts/pie-chart.component';
     .flexrow {
       display: flex;
       flex-grow: 1;
+      height: 50%;
       border: solid 1px black;
+    }
+
+    .flexyrow {
+      display: flex;
+      flex-grow: 1;
     }
 
     pie-chart {
@@ -107,7 +114,11 @@ import {PieComponent} from './charts/pie-chart.component';
     treemap {
       border: solid 1px blue;
       position:relative;
-      flex-grow: 1;
+      flex-grow: 2;
+    }
+
+    table {
+      font-size: 1rem;
     }
 
     .main-info {
@@ -163,6 +174,22 @@ import {PieComponent} from './charts/pie-chart.component';
     .donor-tile {
       border: solid 1px #75717B;
       background-color: #FEFFFE;
+    }
+
+    .cand-table {
+      width: 100%;
+    }
+
+    .finances {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .finance-title {
+      display: block;
+      width: 100%;
+      text-align: center;
     }
 
   `]

@@ -157,7 +157,7 @@ import {SpinnerComponent} from '../loading/spinner.component';
     }
     spinner {
       position: absolute;
-      top: 45%;
+      top: 35%;
       left: 45%;
     }
   `
