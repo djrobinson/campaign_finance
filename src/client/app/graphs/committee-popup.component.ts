@@ -9,6 +9,48 @@ import {BubbleComponent} from './charts/bubble-chart.component';
   selector: 'committee-popup',
   templateUrl: 'app/graphs/templates/committee-popup.html',
   styles: [`
+
+    .close-button {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      height: 25px;
+      width: 25px;
+      z-index: 2;
+    }
+
+    .close-icon {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      height: 25px;
+      width: 25px;
+    }
+
+    .cmte-options {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: space-around;
+      width: 100%;
+    }
+
+    .cmte-option {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: #CBCED2;
+      color: #CBCED2;
+      font-size: 3rem;
+      text-align: center;
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    .cmte-option:hover {
+      background-color: #16191F;
+    }
+
     .indiv {
       text-align: center;
       height: 10%;
@@ -103,6 +145,7 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
   @Output() exitEmit = new EventEmitter();
   @Output() indivEmit = new EventEmitter();
   @Output() cmteEmit = new EventEmitter();
+  @Output() bubbleEmit = new EventEmitter();
   private opex: Object = {};
   private individuals: Object = {};
   private recieveds: Object = {};
@@ -167,6 +210,14 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
       transaction: indiv.TRAN_ID,
       name: indiv.NAME
     })
+  }
+
+
+  showBubbleEmit(cmte){
+    console.log(cmte);
+    this.bubbleEmit.emit({
+      cmte: cmte
+    });
   }
 
   changeCmte(cmte) {

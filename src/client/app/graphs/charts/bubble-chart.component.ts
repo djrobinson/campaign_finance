@@ -1,27 +1,51 @@
-import {Component, Input, OnInit} from 'angular2/core';
+import {Component, Input, Output, EventEmitter, OnInit} from 'angular2/core';
 
 @Component({
   selector: 'bubble-chart',
   template: `
       <div id="containerChart3">
+        <div (click)="close()" class="close-button">
+          <img src="/images/close.png" class="close-icon" />
+        </div>
         <div id="chart3">
         </div>
       </div>
   `,
   styles: [`
-    .indiv {
-      text-align: center;
+
+    .close-button {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      height: 25px;
+      width: 25px;
+    }
+
+    .close-icon {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      height: 25px;
+      width: 25px;
     }
 
     #containerChart3 {
+      display: flex;
+      justify-items: center;
       height: 100%;
       width: 100%;
+    }
+
+    #chart3 {
+      display: block;
+      margin: 0 auto;
     }
 
   `]
 })
 export class BubbleComponent implements OnInit {
   @Input() cmte: string;
+  @Output() exitEmit = new EventEmitter();
 
   ngOnInit(){
     console.log(this.cmte);
@@ -29,7 +53,7 @@ export class BubbleComponent implements OnInit {
   }
 
   public buildBubbles(cmte){
-    var diameter = document.getElementById('containerChart3').offsetWidth,
+    var diameter = document.getElementById('containerChart3').offsetHeight,
       format = d3.format(",d"),
       color = d3.scale.category20c();
 
@@ -52,7 +76,7 @@ export class BubbleComponent implements OnInit {
       .style("padding", "8px")
       .style("background-color", "rgba(0, 0, 0, 0.75)")
       .style("border-radius", "6px")
-      .style("font", "12px sans-serif")
+      .style("font", "8px sans-serif")
       .text("tooltip");
 
     d3.json("/api/individuals/bubble/"+cmte, function(error, root) {
@@ -65,7 +89,7 @@ export class BubbleComponent implements OnInit {
 
       node.append("circle")
         .attr("r", function(d) { return d.r; })
-        .style("fill", function(d) { return color(d.packageName); })
+        .style("fill", '#86CA6F')
         .on("mouseover", function(d) {
           tooltip.text(d.className + ": " + format(d.value));
           tooltip.style("visibility", "visible");
@@ -82,7 +106,6 @@ export class BubbleComponent implements OnInit {
         .text(function(d) { return d.className.substring(0, d.r / 3); });
     });
 
-    // Returns a flattened hierarchy containing all leaf nodes under the root.
     function classes(root) {
       var classes = [];
 
@@ -97,5 +120,13 @@ export class BubbleComponent implements OnInit {
 
     d3.select(self.frameElement).style("height", diameter + "px");
 
+  }
+
+
+  close() {
+    console.log"CLOSING!");
+    this.exitEmit.emit({
+      exit: true
+    });
   }
 }

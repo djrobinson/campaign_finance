@@ -29,10 +29,18 @@
         <td class="red">{{parseFloat(committee?.deb_owe_by_com) | currency:'USD':true}}</td>
       </tr>
     </table>
+    <div class="cmte-options">
+      <div (click)="showBubbleEmit(committee?.com_id)" class="cmte-option">
+        <h5>Show All Individuals</h5>
+      </div>
+    </div>
   </div>
   <div class="eight columns flexcontainer">
     <div class="flexrow">
       <div class="twelve columns treemap">
+        <div (click)="close()" class="close-button">
+          <img src="/images/close.png" class="close-icon" />
+        </div>
         <treemap route="{{route?.data}}">
         </treemap>
       </div>
@@ -101,8 +109,4 @@
       </div>
     </div>
   </div>
-
 </div>
-  <div class="row indiv twelve columns">
-    <button (click)="close()">Close</button>
-  </div>

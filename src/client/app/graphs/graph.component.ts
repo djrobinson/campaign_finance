@@ -8,6 +8,7 @@ import {CommitteePopupComponent} from './committee-popup.component.ts';
 import {CandidatePopupComponent} from './candidate-popup.component.ts';
 import {CongressPopupComponent} from './congress-popup.component.ts';
 import {TreemapComponent} from './charts/treemap.component.ts';
+import {BubbleComponent} from './charts/bubble-chart.component';
 import {SpinnerComponent} from '../loading/spinner.component';
 
 @Component({
@@ -47,14 +48,20 @@ import {SpinnerComponent} from '../loading/spinner.component';
               </div>
               <treemap route="{{fullRoute}}">
               </treemap>
-
+            </div>
+            <div *ngIf="fullBubble">
+              <bubble-chart
+                cmte="{{bubbleCmte}}"
+                (exitEmit)="closeBubble()">
+              </bubble-chart>
             </div>
             <div *ngIf="cmtePopup">
               <committee-popup
                 [committee]="selectedCommittee"
                 (exitEmit)="exit()"
                 (cmteEmit)="changeCmte($event)"
-                (indivEmit)="changeIndiv($event)">
+                (indivEmit)="changeIndiv($event)"
+                (bubbleEmit)="showBubble($event)">
               </committee-popup>
             </div>
             <div *ngIf="candPopup">
@@ -142,6 +149,16 @@ import {SpinnerComponent} from '../loading/spinner.component';
       border: solid 1px #75717B;
       background-color: #FEFFFE;
     }
+    bubble-chart {
+      position: absolute;
+      z-index: 5;
+      width: 90%;
+      height: 90%;
+      top: 5%;
+      left: 5%;
+      border: solid 1px #75717B;
+      background-color: #FEFFFE;
+    }
     congress-popup {
       position: absolute;
       width: 90%;
@@ -163,7 +180,7 @@ import {SpinnerComponent} from '../loading/spinner.component';
   `
   ],
   providers: [GraphService, TitleService],
-  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent, CommitteePopupComponent, CandidatePopupComponent, CongressPopupComponent, TreemapComponent, SpinnerComponent]
+  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent, CommitteePopupComponent, CandidatePopupComponent, CongressPopupComponent, TreemapComponent, BubbleComponent, SpinnerComponent]
 })
 export class GraphComponent implements OnInit  {
   private selectedNode: Object;
@@ -179,7 +196,9 @@ export class GraphComponent implements OnInit  {
   private graph: boolean;
   private fullRoute: string = "";
   private fullTreemap: boolean;
+  private fullBubble: boolean;
   private isRequesting: boolean;
+  private bubbleCmte: string;
 
   constructor(
     private _graphService: GraphService,
@@ -208,6 +227,15 @@ export class GraphComponent implements OnInit  {
   showTreemap(event){
     this.fullRoute = event.route;
     this.fullTreemap = true;
+  }
+
+  showBubble(event){
+    this.bubbleCmte = event.cmte;
+    this.fullBubble = true;
+  }
+
+  closeBubble() {
+    this.fullBubble = false;
   }
 
   closeTreemap(){
@@ -250,6 +278,8 @@ export class GraphComponent implements OnInit  {
     this.individualTran = event.transaction;
     this.selectedNode = false;
   }
+
+
 
 
   exit(){

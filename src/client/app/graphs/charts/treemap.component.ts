@@ -190,30 +190,14 @@ export class TreemapComponent implements OnInit, OnChanges {
       root.depth = 0;
     }
 
-
-    // Aggregate the amounts for internal nodes. This is normally done by the
-    // treemap layout, but not here because of our custom implementation.
-    // We also take a snapshot of the original children (_children) to avoid
-    // the children being overwritten when when layout is computed.
     function accumulate(d) {
       return (d._children = d.children)
-        // recursion step, note that p and v are defined by reduce
         ? d.value = d.children.reduce(function(p, v) { return p + accumulate(v); }, 0)
         : d.value;
     }
 
-
-
-    // Compute the treemap layout recursively such that each group of siblings
-    // uses the same size (1×1) rather than the dimensions of the parent cell.
-    // This optimizes the layout for the current zoom state. Note that a wrapper
-    // object is created for the parent node for each group of siblings so that
-    // the parent’s dimensions are not discarded as we recurse. Since each group
-    // of sibling was laid out in 1×1, we must rescale to fit using absolute
-    // coordinates. This lets us use a viewport to zoom.
     function layout(d) {
       if (d._children) {
-        // treemap nodes comes from the treemap set of functions as part of d3
         treemap.nodes({ _children: d._children });
         d._children.forEach(function(c) {
           c.x = d.x + c.x * d.dx;
@@ -246,7 +230,6 @@ export class TreemapComponent implements OnInit, OnChanges {
       .attr('y', 20)
       .attr('x', function(d) { return margin.left + d * 40 + 20 });
 
-    // determines if white or black will be better contrasting color
     function getContrast50(hexcolor) {
       return (parseInt(hexcolor.replace('#', ''), 16) > 0xffffff / 3) ? 'black' : 'white';
     }
@@ -267,7 +250,6 @@ export class TreemapComponent implements OnInit, OnChanges {
           .text(name(d))
 
 
-        // color header based on grandparent's rate
         grandparent
           .datum(d.parent)
           .select("rect")
@@ -401,22 +383,14 @@ export class TreemapComponent implements OnInit, OnChanges {
             t1 = g1.transition().duration(750),
             t2 = g2.transition().duration(750);
 
-
-          // Update the domain only after entering new elements.
           x.domain([d.x, d.x + d.dx]);
           y.domain([d.y, d.y + d.dy]);
 
-
-          // Enable anti-aliasing during the transition.
           svg.style("shape-rendering", null);
 
-          // Draw child nodes on top of parent nodes.
           svg.selectAll(".depth").sort(function(a, b) { return a.depth - b.depth; });
 
-
-          // Fade-in entering text.
           t2.selectAll("text").style("fill-opactiy", 0);
-          // Transition to the new view.
 
           t1.selectAll("rect").call(rect);
           t2.selectAll("rect").call(rect);
@@ -441,9 +415,6 @@ export class TreemapComponent implements OnInit, OnChanges {
               .style("fill-opacity", 1);
 
             }, 800)
-
-            // Remove the old node when the transition is finished.
-
           }
         return g;
       }
