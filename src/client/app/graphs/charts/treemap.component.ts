@@ -46,7 +46,9 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
       right: 0;
       bottom: 0;
     }
-\
+    .child-tspan {
+      font-size: 2rem;
+    }
   `]
 })
 export class TreemapComponent implements OnInit, OnChanges {

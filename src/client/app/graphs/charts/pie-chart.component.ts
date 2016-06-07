@@ -50,14 +50,15 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       flex-grow: 1;
       display: flex;
       width: 100%;
-      top: 10%;
+      margin-top: 10%;
     }
 
-    .chart-title {
+    .pie-title {
       display: block;
       position: absolute;
       height: 10%;
       width: 100%;
+      text-align: center;
     }
 
     .tooltip {
@@ -70,11 +71,12 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       text-align: center;
     }
     th {
-      font-size: 1rem;
+      font-size: 1.5rem;
       text-align: center;
     }
     td {
       text-align: center;
+      font-size: 1.5rem;
     }
     spinner {
       position: absolute;

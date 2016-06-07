@@ -17,6 +17,14 @@ import {PieComponent} from './charts/pie-chart.component';
       font-size: 10px;
     }
 
+    .green {
+      color: #86ca6f;
+    }
+
+    .red {
+      color: #af3e4d;
+    }
+
 
     .close-button {
       position: absolute;
@@ -190,6 +198,10 @@ import {PieComponent} from './charts/pie-chart.component';
       display: block;
       width: 100%;
       text-align: center;
+    }
+
+    td {
+      font-size: 2rem;
     }
 
   `]

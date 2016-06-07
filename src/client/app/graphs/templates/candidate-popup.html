@@ -1,6 +1,5 @@
 <div class="cand-style" id="full-size">
-
-    <div class="four columns choices">
+  <div class="four columns choices">
       <div class="cand-pic text-center">
           <h5>{{candidate?.CANDIDATE_NAME}}</h5>
           <img [src]="imageVar?.image" alt="picture">
@@ -11,9 +10,6 @@
           <p><a [href]="candidate?.lin_ima">FEC Filing</a></p>
       </div>
       <div class="cand-options">
-        <div class="cand-option">
-          <h5>PAC Expenditures</h5>
-        </div>
         <div (click)="showTreemapEmit(route)" class="cand-option">
           <h5>Expand SuperPAC View</h5>
         </div>
@@ -36,23 +32,23 @@
             <table class="cand-table">
               <tr>
                 <td>Cash</td>
-                <td>{{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
+                <td class="green">{{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
               </tr>
               <tr>
                 <td>Net Contributions</td>
-                <td>{{parseFloat(candidate?.net_con) | currency:'USD':true}}</td>
+                <td class="green">{{parseFloat(candidate?.net_con) | currency:'USD':true}}</td>
               </tr>
               <tr>
                 <td>Net Distributions</td>
-                <td>{{parseFloat(candidate?.tot_dis) | currency:'USD':true}}</td>
+                <td class="red">{{parseFloat(candidate?.tot_dis) | currency:'USD':true}}</td>
               </tr>
               <tr>
                 <td>Net Opex</td>
-                <td>{{parseFloat(candidate?.net_ope_exp) | currency:'USD':true}}</td>
+                <td class="red">{{parseFloat(candidate?.net_ope_exp) | currency:'USD':true}}</td>
               </tr>
               <tr>
                 <td>Debts Owed</td>
-                <td>{{parseFloat(candidate?.deb_owe_by_com) | currency:'USD':true}}</td>
+                <td class="red">{{parseFloat(candidate?.deb_owe_by_com) | currency:'USD':true}}</td>
               </tr>
             </table>
           </div>

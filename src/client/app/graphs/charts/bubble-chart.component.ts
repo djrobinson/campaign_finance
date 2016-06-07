@@ -3,7 +3,6 @@ import {Component, Input, OnInit} from 'angular2/core';
 @Component({
   selector: 'bubble-chart',
   template: `
-      <h4>Bubble Chart</h4>
       <div id="containerChart3">
         <div id="chart3">
         </div>
@@ -14,7 +13,7 @@ import {Component, Input, OnInit} from 'angular2/core';
       text-align: center;
     }
 
-    #containerChart2 {
+    #containerChart3 {
       height: 100%;
       width: 100%;
     }

@@ -25,29 +25,20 @@ import {BubbleComponent} from './charts/bubble-chart.component';
       font-size: 8px;
     }
     .treemap {
+      display: flex;
+      flex-grow: 1;
       position: relative;
       height: 100%;
     }
-    treemap {
-      position: absolute;
-      height: 100%;
-      width: 100%;
-    }
+
     .committee-container {
       position: relative;
+      display: flex;
       height: 90%;
-    }
-    .top-row-container {
-      position: relative;
-      height: 50%;
-    }
-    .bottom-row-container {
-      position: relative;
-      height: 40%;
     }
     .outer-table {
       position: relative;
-      height: 100%;
+      flex-grow: 1;
     }
     .other-donations {
       position: absolute;
@@ -60,6 +51,47 @@ import {BubbleComponent} from './charts/bubble-chart.component';
     .donor-tile {
       border: solid 1px #75717B;
       background-color: #FEFFFE;
+    }
+
+    .financials {
+      text-align: center;
+      height: 100%;
+    }
+    table {
+      display: flex;
+      width: 100%;
+    }
+    td {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    .green {
+      color: #86ca6f;
+    }
+
+    .red {
+      color: #af3e4d;
+    }
+    tr {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    a {
+      text-decoration: none;
+      color: #cbced2;
+    }
+    .flexrow {
+      display: flex;
+      flex-grow: 1;
+      height: 50%;
+    }
+    .flexcontainer {
+      display: flex;
+      flex-direction: column;
+      height: 90%;
+    }
+    table {
+      width: 100%;
     }
   `],
   directives: [TreemapComponent, BubbleComponent]
