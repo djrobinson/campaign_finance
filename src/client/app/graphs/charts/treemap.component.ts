@@ -4,15 +4,18 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
   selector: 'treemap',
   template: `
       <div id="containerChart">
-        <div id="tooltip" class="hidden">
+        <div id="tooltip">
+          <div id="tip-name"></div>
+          <div id="tip-support"></div>
+          <div id="tip-value"></div>
+          <div id="tip-purpose"></div>
+
         </div>
         <div id="chart"></div>
       </div>
   `,
   styles: [`
-    .indiv {
-      text-align: center;
-    }
+
     #containerChart {
       position: absolute;
       height: 90%;
@@ -25,19 +28,34 @@ import {Component, Input, OnInit, EventEmitter} from 'angular2/core';
 
     #tooltip {
       position: absolute;
-      width: 200px;
-      height: 50px;
+      text-align: center;
+      width: 30%;
+      height: 100%;
       bottom: 0;
-      background-color: white;
+      background-color: #5b4f49;
+      font-size: 2rem;
+      color: #CBCED2;
     }
 
-    .child-div {
-      z-index: 5;
+    #chart {
+      position: absolute;
+      width: 70%;
+      height: 100%;
+      right: 0;
+      bottom: 0;
     }
+\
   `]
 })
 export class TreemapComponent implements OnInit, OnChanges {
   @Input() route: string;
+
+
+  constructor (){
+    this.parseFloat = function(num) {
+      return parseFloat(num);
+    }
+  }
 
   ngOnInit(){
     this.buildTreeMap(this.route);
@@ -97,8 +115,8 @@ export class TreemapComponent implements OnInit, OnChanges {
       };
     })();
 
-    var width = document.getElementById('containerChart').offsetWidth;
-    var height = document.getElementById('containerChart').offsetHeight;
+    var width = document.getElementById('chart').offsetWidth;
+    var height = document.getElementById('chart').offsetHeight;
     var margin = { top: 30, right: 0, bottom: 20, left: 0 };
 
     formatNumber = d3.format(",%"),
@@ -365,7 +383,10 @@ export class TreemapComponent implements OnInit, OnChanges {
             //  join the array with slashes (as you have in your example)
             // now nameList should look like 'flare/animate/interpolate'
             //  use this to set the tooltip text
-            d3.select('#tooltip').text(d.name + " " + d.purpose + " " + d.value)
+            d3.select('#tip-name').text(d.name);
+            d3.select('#tip-amount').text(d.value.toFixed(2));
+            d3.select('#tip-support').text(d.support);
+            d3.select('#tip-purpose').text(d.purpose);
           })
 
         function transition(d) {

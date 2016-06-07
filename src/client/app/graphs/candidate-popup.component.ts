@@ -12,7 +12,7 @@ import {PieComponent} from './charts/pie-chart.component';
   directives: [TreemapComponent, PieComponent],
   styles: [`
     .cand-style {
-      position: relative;
+      display: flex;
       height: 100%;
       font-size: 10px;
     }
@@ -35,7 +35,7 @@ import {PieComponent} from './charts/pie-chart.component';
     }
 
     img {
-      width: 80%;
+      width: 60%;
     }
     p {
       margin: 0 !important;
@@ -50,52 +50,64 @@ import {PieComponent} from './charts/pie-chart.component';
       overflow: scroll;
     }
 
-    pie {
-      position: absolute;
+    .choices {
+      background-color: #17324f;
+      color: #cbced2;
+      text-align: center;
       height: 100%;
-    }
-
-    treemap {
-      position: absolute;
-      bottom: 0;
-      height: 50%;
-      width: 50%;
-    }
-
-    .expand {
-      position: absolute;
-      left: 47%;
-      bottom: 47.5%;
-      z-index: 2;
-      color: white;
-      height: 2.5%;
-      width: 2.5%;
-    }
-
-    .associated-committees {
-      position: absolute;
-      bottom: 0;
-      height: 50%;
-      width: 25%;
-      left: 50%;
+      display: flex;
+      flex-direction: column;
     }
 
     .cand-pic {
-      position: absolute;
-      height: 40%;
-      width: 25%;
+      flex-grow: 1;
     }
 
-    .pie-chart {
-      position: absolute;
-      height: 40%;
-      width: 25%;
-      left: 50%;
+    .cand-options {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: space-around;
+    }
+
+    .cand-option {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      border: #CBCED2;
+      color: #CBCED2;
+      font-size: 3rem;
       text-align: center;
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    .cand-option:hover {
+      background-color: #16191F;
+    }
+
+    .outerrow {
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+    }
+
+    .flexrow {
+      display: flex;
+      flex-grow: 1;
+      border: solid 1px black;
     }
 
     pie-chart {
+      border: solid 1px blue;
       position: relative;
+      flex-grow: 1;
+    }
+
+    treemap {
+      border: solid 1px blue;
+      position:relative;
+      flex-grow: 1;
     }
 
     .main-info {

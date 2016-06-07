@@ -125,10 +125,10 @@ import {SpinnerComponent} from '../loading/spinner.component';
     }
     candidate-popup {
       position: absolute;
-      width: 90%;
+      width: 80%;
       height: 90%;
       top: 5%;
-      left: 5%;
+      left: 10%;
       border: solid 1px #75717B;
       background-color: #FEFFFE;
     }

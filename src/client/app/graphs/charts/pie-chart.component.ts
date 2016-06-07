@@ -8,16 +8,30 @@ import {Observable} from 'rxjs/Rx';
       <div id="containerChart2">
         <div id="chart2">
         </div>
+        <div class="tooltip">
+          <div class="label">
+          </div>
+          <div class="percent">
+          </div>
+          <div class="count">
+          </div>
+        </div>
       </div>
   `,
   styles: [`
-    .indiv {
-      text-align: center;
-    }
 
     #containerChart2 {
+      position: absolute;
       height: 100%;
       width: 100%;
+    }
+
+    .tooltip {
+      width: 100%;
+      margin-top: -20%;
+      font-size: 2rem;
+      display: flex;
+
     }
 
   `]
@@ -97,8 +111,8 @@ export class PieComponent implements OnInit, OnChanges {
 
       var width = document.getElementById('containerChart2').offsetWidth;
       var height = document.getElementById('containerChart2').offsetHeight;
-      var radius = Math.min(width, height) / 2.25;
-      var donutWidth = 75;
+      var radius = Math.min(width, height) / 3;
+      var donutWidth = 15;
       var legendRectSize = 18;
       var legendSpacing = 4;
 
@@ -120,18 +134,7 @@ export class PieComponent implements OnInit, OnChanges {
         .value(function(d) { return d.count; })
         .sort(null);
 
-      var tooltip = d3.select('#chart2')
-        .append('div')
-        .attr('class', 'tooltip');
-
-      tooltip.append('div')
-        .attr('class', 'label');
-
-      tooltip.append('div')
-        .attr('class', 'count');
-
-      tooltip.append('div')
-        .attr('class', 'percent');
+      var tooltip = d3.select('.tooltip')
 
       start(pieData);
       function start(dataset){
@@ -153,10 +156,9 @@ export class PieComponent implements OnInit, OnChanges {
             return d.count;
           }));
           var percent = Math.round(1000 * d.data.count / total) / 10;
-          tooltip.select('.label').html(d.data.label);
-          tooltip.select('.count').html(d.data.count);
-          tooltip.select('.percent').html(percent + '%');
-          tooltip.style('display', 'block');
+          tooltip.select('.label').text(d.data.label);
+          tooltip.select('.count').text(d.data.count);
+          tooltip.select('.percent').text(percent + '%');
         });
 
         path.on('mouseout', function() {

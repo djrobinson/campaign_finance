@@ -1,69 +1,64 @@
 <div class="cand-style" id="full-size">
-    <div (click)="close()" class="close-button">
+<!--     <div (click)="close()" class="close-button">
       <img src="/images/close.png" class="close-icon" />
-    </div>
-    <div class="cand-pic text-center">
-        <h4>{{candidate?.CANDIDATE_NAME}}</h4>
-        <img [src]="imageVar?.image" alt="picture">
-    </div>
-    <div class="main-info">
-      <p>Office Sought: {{candidate?.CANDIDATE_OFFICE}}</p>
-      <p>Hometown: {{candidate?.can_cit}}, {{candidate?.STATE}}</p>
-      <p>Birthdate: {{candidateInfo?.bio?.birthday}}</p>
-      <p>Gender: {{candidateInfo?.bio?.gender}}</p>
-      <p>Religion: {{candidateInfo?.bio?.religion}}</p>
-      <p><a [href]="candidate?.lin_ima">FEC Filing Link</a></p>
-      <p><em>Begin Cash: </em> {{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</p>
-      <p><em>End Cash: </em> {{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</p>
-      <p><em>Debt: </em> {{parseFloat(candidate?.deb_owe_by_com) | currency:'USD':true}}</p>
-      <p><em>Funding from Candidate: </em> {{parseFloat(candidate?.can_con) | currency:'USD':true}}</p>
-      <p><em>Net Contributions: </em> {{parseFloat(candidate?.net_con) | currency:'USD':true}}</p>
-      <p><em>Net Opex: </em> {{parseFloat(candidate?.net_ope_exp) | currency:'USD':true}}</p>
-      <p><em>Distributions: </em> {{parseFloat(candidate?.tot_dis) | currency:'USD':true}}</p>
-    </div>
-    <div class="pie-chart">
-      <h5>Donations by Amount</h5>
-      <pie-chart>
-      </pie-chart>
-    </div>
-
-    <treemap route="{{route}}">
-    </treemap>
-    <div class="expand" (click)="showTreemapEmit(route)">
-      Expand
-    </div>
-    <div class="associated-committees">
-      <div class="assoc-container">
-        <h5>Associated Committees</h5>
-        <div class="assoc-tile">
-          <h5>{{associatedCommittees?.CMTE_NM}}</h5>
-          <p>ID: {{associatedCommittees?.CMTE_ID}}</p>
-          <h5>Cash: {{associatedCommittees?.cas_on_han_clo_of_per}}</h5>
-          <h5>Distributions: {{associatedCommittees?.tot_dis}}</h5>
-          <h5>Contributions: {{associatedCommittees?.net_con}}</h5>
-          <p><a [href]="associatedCommittees?.lin_ima">FEC Link</a></p>
-          <button (click)="cmtePopupEmit(associatedCommittees?.CMTE_ID)">Committee Page</button>
+    </div> -->
+    <div class="four columns choices">
+      <div class="cand-pic text-center">
+          <h5>{{candidate?.CANDIDATE_NAME}}</h5>
+          <img [src]="imageVar?.image" alt="picture">
+          <p>Party: {{candidate?.PARTY}}</p>
+          <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
+          <p>FEC ID: {{candidate?.CANDIDATE_ID}}</p>
+          <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
+          <p><a [href]="candidate?.lin_ima">FEC Filing</a></p>
+      </div>
+      <div class="cand-options">
+        <div class="cand-option">
+          <h5>PAC Expenditures</h5>
+        </div>
+        <div class="cand-option">
+          <h5>Associated Committees</h5>
+        </div>
+        <div (click)="showTreemapEmit(route)" class="cand-option">
+          <h5>Expand SuperPAC View</h5>
         </div>
       </div>
     </div>
-
-    <div class="pac-spend">
-      <h3>Usage of Funds</h3>
-      <div class="other-donations">
-        <div *ngFor="#contrib of contributions"
-               class="row donor-tile">
-          <div class="one-half column text-center">
-            <p>To: {{contrib?.NAME}}</p>
-            <p>From: {{contrib?.com_nam}}</p>
-            <p>{{contrib?.CITY}}, {{contrib?.STATE}}</p>
-            <p>{{contrib?.CMTE_ID}}</p>
-          </div>
-          <div class="one-half column">
-            <p>Donation: {{contrib?.TRANSACTION_AMT}}</p>
-            <p><a [href]="contrib?.IMAGE_NUM">FEC Link</a></p>
-            <button (click)="cmtePopupEmit(contrib?.CMTE_ID)">Committee Page</button>
-          </div>
+    <div class="eight columns outerrow">
+      <div class="flexrow">
+        <div class="six columns flexrow">
+          <pie-chart>
+          </pie-chart>
         </div>
+        <div class="six columns flexrow">
+          <h5>Financial Info</h5>
+          <table class="cand-table">
+            <tr>
+              <td>Cash</td>
+              <td>{{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
+            </tr>
+            <tr>
+              <td>Net Contributions</td>
+              <td>{{parseFloat(candidate?.net_con) | currency:'USD':true}}</td>
+            </tr>
+            <tr>
+              <td>Net Distributions</td>
+              <td>{{parseFloat(candidate?.tot_dis) | currency:'USD':true}}</td>
+            </tr>
+            <tr>
+              <td>Net Opex</td>
+              <td>{{parseFloat(candidate?.net_ope_exp) | currency:'USD':true}}</td>
+            </tr>
+            <tr>
+              <td>Debts Owed</td>
+              <td>{{parseFloat(candidate?.deb_owe_by_com) | currency:'USD':true}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="flexrow">
+        <treemap route="{{route}}">
+        </treemap>
       </div>
     </div>
 
