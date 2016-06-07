@@ -43,7 +43,6 @@ import {TitleService} from '../api_services/title.service';
       width: 25px;
       z-index: 2;
     }
-
     .close-icon {
       position: absolute;
       top: 2px;

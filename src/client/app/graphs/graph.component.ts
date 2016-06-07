@@ -52,7 +52,8 @@ import {SpinnerComponent} from '../loading/spinner.component';
             <div *ngIf="fullBubble">
               <bubble-chart
                 cmte="{{bubbleCmte}}"
-                (exitEmit)="closeBubble()">
+                (exitEmit)="closeBubble()"
+                (indivEmit)="changeIndiv($event)">
               </bubble-chart>
             </div>
             <div *ngIf="cmtePopup">
@@ -277,6 +278,7 @@ export class GraphComponent implements OnInit  {
     this.indivName = event.name;
     this.individualTran = event.transaction;
     this.selectedNode = false;
+    this.fullBubble = false;
   }
 
 

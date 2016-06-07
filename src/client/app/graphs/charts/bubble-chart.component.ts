@@ -47,6 +47,7 @@ import {Component, Input, Output, EventEmitter, OnInit} from 'angular2/core';
 export class BubbleComponent implements OnInit {
   @Input() cmte: string;
   @Output() exitEmit = new EventEmitter();
+  @Output() indivEmit = new EventEmitter();
 
   ngOnInit(){
     console.log(this.cmte);
@@ -99,7 +100,7 @@ export class BubbleComponent implements OnInit {
 
       node.append("circle")
         .attr("r", function(d) { console.log(d); return d.r; })
-        .style("fill", function(d){ return getRandomColor(); })
+        .style("fill", function(d) { return getRandomColor(); })
         .on("mouseover", function(d) {
           tooltip.text(d.className + ": " + format(d.value));
           tooltip.style("visibility", "visible");
@@ -108,7 +109,14 @@ export class BubbleComponent implements OnInit {
           return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
         })
         .on("mouseout", function() { return tooltip.style("visibility", "hidden"); })
-        .on("click", function(d) { console.log(d.TRAN_ID);})
+        .on("click", function(d) {
+          console.log(d);
+          var indiv = {
+            NAME: d.className,
+            TRAN_ID: d.TRAN_ID
+          }
+          ctrl.changeIndiv(indiv);
+        });
 
       node.append("text")
         .attr("dy", ".3em")
@@ -133,6 +141,13 @@ export class BubbleComponent implements OnInit {
 
   }
 
+  changeIndiv(indiv) {
+    console.log(indiv);
+    this.indivEmit.emit({
+      transaction: indiv.TRAN_ID,
+      name: indiv.NAME
+    })
+  }
 
   close() {
     console.log"CLOSING!");
