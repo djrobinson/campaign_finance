@@ -34,7 +34,7 @@ import {BubbleComponent} from './charts/bubble-chart.component';
     .committee-container {
       position: relative;
       display: flex;
-      height: 90%;
+      height: 100%;
     }
     .outer-table {
       position: relative;
@@ -54,16 +54,24 @@ import {BubbleComponent} from './charts/bubble-chart.component';
     }
 
     .financials {
+      color: #cbced2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
       height: 100%;
+      background-color: #17324f;
     }
     table {
-      display: flex;
-      width: 100%;
+      width: 70%;
+      margin-left: 15;
+      display: block;
+      text-align: center;
     }
     td {
       font-size: 1.5rem;
       text-align: center;
+      color: #cbced2;
     }
     .green {
       color: #86ca6f;
@@ -71,10 +79,6 @@ import {BubbleComponent} from './charts/bubble-chart.component';
 
     .red {
       color: #af3e4d;
-    }
-    tr {
-      margin: 0 !important;
-      padding: 0 !important;
     }
     a {
       text-decoration: none;
@@ -89,9 +93,6 @@ import {BubbleComponent} from './charts/bubble-chart.component';
       display: flex;
       flex-direction: column;
       height: 90%;
-    }
-    table {
-      width: 100%;
     }
   `],
   directives: [TreemapComponent, BubbleComponent]
