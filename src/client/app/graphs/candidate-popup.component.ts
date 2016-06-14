@@ -224,7 +224,13 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
 
   callPresApis(fecId){
-    this.route = '/api/pac/aggregate/' + fecId;
+    if (fecId.charAt(0)==="P"){
+      this.route = '/api/pac/aggregate/' + fecId;
+    } else {
+      this.route = '/api/disbursements/graph/' + fecId;
+    }
+
+
     Observable.forkJoin(
       this.http.get('/api/candidates/'+fecId).map((res: Response) => res.json()),
       this.http.get('/api/disbursements/'+fecId+'/candidate').map((res: Response) => res.json()),
