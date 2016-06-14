@@ -131,11 +131,11 @@ export class MiniProfileComponent implements OnChanges {
       this.cash = this.node.data.cas_on_han_clo_of_per;
       this.contributions = this.node.data.tot_con;
       this.distributions = this.node.data.tot_dis;
-      if (this.node.CAND_ID.charAt(0)==="P"){
+      // if (this.node.CAND_ID.charAt(0)==="P"){
         this.popupType = "candidate";
-      } else {
-        this.popupType = "congress";
-      }
+      // } else {
+      //   this.popupType = "congress";
+      // }
 
     }
   }

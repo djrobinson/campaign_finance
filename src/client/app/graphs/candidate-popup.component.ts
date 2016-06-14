@@ -16,16 +16,12 @@ import {PieComponent} from './charts/pie-chart.component';
       height: 100%;
       font-size: 10px;
     }
-
     .green {
       color: #86ca6f;
     }
-
     .red {
       color: #af3e4d;
     }
-
-
     .close-button {
       position: absolute;
       top: 2px;
@@ -33,7 +29,6 @@ import {PieComponent} from './charts/pie-chart.component';
       height: 25px;
       width: 25px;
     }
-
     .close-icon {
       position: absolute;
       top: 2px;
@@ -49,7 +44,6 @@ import {PieComponent} from './charts/pie-chart.component';
       margin: 0 !important;
       padding: 0 !important;
     }
-
     li {
       font-size: 8px;
     }
@@ -57,7 +51,6 @@ import {PieComponent} from './charts/pie-chart.component';
       height: 600px;
       overflow: scroll;
     }
-
     .choices {
       background-color: #17324f;
       color: #cbced2;
@@ -65,20 +58,16 @@ import {PieComponent} from './charts/pie-chart.component';
       height: 100%;
       display: flex;
       flex-direction: column;
-
     }
-
     .cand-pic {
       flex-grow: 1;
     }
-
     .cand-options {
       flex-grow: 1;
       display: flex;
       flex-direction: column;
       align-items: space-around;
     }
-
     .cand-option {
       display: flex;
       justify-content: center;
@@ -90,11 +79,9 @@ import {PieComponent} from './charts/pie-chart.component';
       flex-grow: 1;
       width: 100%;
     }
-
     .cand-option:hover {
       background-color: #16191F;
     }
-
     .outerrow {
       display: flex;
       height: 100%;
