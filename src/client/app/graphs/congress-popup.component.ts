@@ -123,7 +123,7 @@ export class CongressPopupComponent implements OnInit, OnChanges {
         this.imageVar = {};
         this.imageVar.image = "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + this.candidateInfo.id.bioguide + ".jpg";
 
-    }, error => console.log('Could not load todos.'));
+    }, error => console.log('Could not load candidate info.'));
     //Call teh legislators api to get the vote inputs
 
   }

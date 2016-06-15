@@ -217,18 +217,27 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
   ngOnInit(){
       this.imageVar = {};
-      this.imageVar.image = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/"+ this.candidate + ".jpg";
+      console.log(this.candidate);
+      if (this.candidate.charAt(0) === "P") {
+        this.route = '/api/pac/aggregate/' + this.candidate;
+        this.imageVar.image = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + this.candidate + ".jpg";
+      } else {
+        this.route = '/api/disbursements/graph/' + this.candidate;
+        this.http.get('/api/legislators/' + this.candidate).map(response => response.json()).subscribe(data => {
+          this.candidateInfo = data[0];
+          this.imageVar = {};
+          this.imageVar.image = "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + this.candidateInfo.id.bioguide + ".jpg";
+
+        }, error => console.log('Could not load candidate info.'));
+      }
+
       this.callPresApis(this.candidate)
 
   }
 
 
   callPresApis(fecId){
-    if (fecId.charAt(0)==="P"){
-      this.route = '/api/pac/aggregate/' + fecId;
-    } else {
-      this.route = '/api/disbursements/graph/' + fecId;
-    }
+
 
 
     Observable.forkJoin(
