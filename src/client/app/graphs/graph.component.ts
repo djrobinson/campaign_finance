@@ -23,8 +23,12 @@ import {SpinnerComponent} from '../loading/spinner.component';
                 (buildEmit)="getGraphData($event.candId)"
               >
               </candidate-table>
+
               <div class="force-container">
               </div>
+            </div>
+            <div *ngIf="!graph" class="legend">
+              <p>The small nodes represent individuals. Large nodes are PACs, color coded by type. More information coming soon on categorization. Click on each node for additional information about the candidate, committee, or individual</p>
             </div>
             <div *ngIf="selectedNode">
               <mini-profile-view
@@ -85,6 +89,14 @@ import {SpinnerComponent} from '../loading/spinner.component';
            `,
   styles: [
     `
+    .legend {
+      width: 20%;
+      height: 20%;
+      position: absolute;
+      top: 65px;
+      left: 10px;
+      font-size: 1rem;
+    }
     .tree-close {
       position: absolute;
       bottom: 0;
@@ -304,7 +316,6 @@ export class GraphComponent implements OnInit  {
     var cand = candId;
     var graph = this._graphService;
     this.isRequesting = true;
-
     graph.getResult(cand)
       .subscribe(
       result => {
@@ -366,6 +377,7 @@ export class GraphComponent implements OnInit  {
   }
 
   buildGraph(ctrl, candId) {
+    this.graph = false;
     console.log();
     //HELPER FUNCTIONS FOR GRAPH
     function dottype(d) {

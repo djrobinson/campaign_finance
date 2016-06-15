@@ -188,6 +188,10 @@ import {PieComponent} from './charts/pie-chart.component';
       font-size: 2rem;
     }
 
+    .text-center {
+      text-align: center;
+    }
+
   `]
 })
 export class CandidatePopupComponent implements OnInit, OnChanges {
@@ -206,6 +210,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   private associatedCommittees: Object = {};
   private pacSpends: Object;
   private route: string;
+  private typeString: string;
 
   constructor(private _TitleService: TitleService,
               private http: Http) {
@@ -221,13 +226,14 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       if (this.candidate.charAt(0) === "P") {
         this.route = '/api/pac/aggregate/' + this.candidate;
         this.imageVar.image = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + this.candidate + ".jpg";
+        this.typeString = "Superpac";
       } else {
         this.route = '/api/disbursements/graph/' + this.candidate;
         this.http.get('/api/legislators/' + this.candidate).map(response => response.json()).subscribe(data => {
           this.candidateInfo = data[0];
           this.imageVar = {};
           this.imageVar.image = "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + this.candidateInfo.id.bioguide + ".jpg";
-
+          this.typeString = "candidate disbursement";
         }, error => console.log('Could not load candidate info.'));
       }
 
