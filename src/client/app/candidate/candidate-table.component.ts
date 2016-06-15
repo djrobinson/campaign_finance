@@ -5,8 +5,11 @@ import {CORE_DIRECTIVES} from 'angular2/common';
 @Component({
   selector: 'candidate-table',
   directives: [CORE_DIRECTIVES],
-  template: `
-
+  template: `   <div class="row twelve-columns text-center">
+                  <h5>
+                    Click on a candidate to create a Force diagram of all donor connections by candidate.
+                  </h5>
+                </div>
                 <table>
                   <tr>
                     <th>Candidate Name</th>
@@ -24,6 +27,7 @@ import {CORE_DIRECTIVES} from 'angular2/common';
                       {{candidate.can_nam}}
                       </button>
                     </td>
+                    <td>{{candidate.CANDIDATE_OFFICE}}</td>
                     <td>{{candidate.PARTY}}</td>
                     <td>{{parseFloat(candidate.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
                     <td>{{parseFloat(candidate.net_con) | currency:'USD':true}}</td>
@@ -41,6 +45,9 @@ import {CORE_DIRECTIVES} from 'angular2/common';
       width: 90%;
       margin-left: 5%;
       margin-right: 5%;
+    }
+    .text-center {
+      text-align: center;
     }
 
   `]
