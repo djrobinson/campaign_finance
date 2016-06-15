@@ -17,7 +17,7 @@ import {VotesComponent} from './votes/votes.component';
 import {Landing} from './landing/landing.component';
 import {GraphComponent} from './graphs/graph.component';
 import {SpinnerComponent} from './loading/spinner.component';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
 import {RouteParams} from 'angular2/router';
 
@@ -51,8 +51,8 @@ import {RouteParams} from 'angular2/router';
   `],
   template: `
     <div class="app">
-      <div class="flexrow">
-         <h4>Citizens Hub</h4>
+      <div class="flexrow" (click)="graphs()">
+          <h4>Citizens Hub</h4>
       </div>
       <router-outlet></router-outlet>
     </div>
@@ -137,22 +137,26 @@ import {RouteParams} from 'angular2/router';
   }
 ])
 export class AppComponent implements OnInit {
-  constructor(private _titleService: TitleService) {
+  constructor(private _titleService: TitleService,
+              private router: Router) {
   }
-  getTitles() {
+  public getTitles() {
     this._titleService.getTitles().then(titles => this.titles = titles);
   }
   ngOnInit() {
     this.getTitles();
   }
-  setSelected(id) {
+  private setSelected(id) {
     console.log(id);
     this.selected = id;
   }
-  isSelected(title) {
+  private isSelected(title) {
     if (this.selected === title.id) {
       return " black";
     }
+  }
+  public graphs(): void {
+    this.router.navigate(['Landing']);
   }
 
 }
