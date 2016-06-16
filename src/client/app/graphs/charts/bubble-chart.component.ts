@@ -91,12 +91,17 @@ export class BubbleComponent implements OnInit {
       .text("tooltip");
 
     d3.json("/api/individuals/bubble/"+cmte, function(error, root) {
+      console.log(root);
       var node = svg.selectAll(".node")
         .data(bubble.nodes(classes(root))
           .filter(function(d) { return !d.children; }))
         .enter().append("g")
         .attr("class", "node")
-        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        .attr("transform", function(d) {
+          console.log(d);
+          return "translate(" +
+            d.x + "," +
+            d.y + ")"; });
 
       node.append("circle")
         .attr("r", function(d) { console.log(d); return d.r; })
