@@ -10,6 +10,9 @@ import {CongressPopupComponent} from './congress-popup.component.ts';
 import {TreemapComponent} from './charts/treemap.component.ts';
 import {BubbleComponent} from './charts/bubble-chart.component';
 import {SpinnerComponent} from '../loading/spinner.component';
+import {Observable} from 'rxjs/Rx';
+import {Http, Response} from 'angular2/http';
+
 
 @Component({
   selector: 'graph-view',
@@ -212,10 +215,12 @@ export class GraphComponent implements OnInit  {
   private fullBubble: boolean;
   private isRequesting: boolean;
   private bubbleCmte: string;
+  private bioguideId: string;
 
   constructor(
     private _graphService: GraphService,
-    private _TitleService: TitleService
+    private _TitleService: TitleService,
+    private http: Http
     ) {
     this.graph = true;
 
@@ -306,12 +311,16 @@ export class GraphComponent implements OnInit  {
   }
 
   public getGraphData(candId): void {
-
-    this._TitleService.getResult('/api/candidates/'+candId)
-      .subscribe(
-      result => { this.candidate = result },
-      error => console.error('Error: ' + err),
-      () => { }
+    Observable.forkJoin(
+      this.http.get('/api/candidates/' + candId).map((res: Response) => res.json()),
+      this.http.get('/api/legislators/' + candId).map((res: Response) => res.json())
+    ).subscribe(
+      data => {
+        console.log(data);
+        this.candidate = data[0];
+        this.bioguideId = data[1];
+      },
+      err => console.error(err)
       )
     var cand = candId;
     var graph = this._graphService;
