@@ -324,6 +324,7 @@ export class GraphComponent implements OnInit  {
       )
     var cand = candId;
     var graph = this._graphService;
+
     this.isRequesting = true;
     graph.getResult(cand)
       .subscribe(
@@ -386,6 +387,7 @@ export class GraphComponent implements OnInit  {
   }
 
   buildGraph(ctrl, candId) {
+    console.log("bioguide ", ctrl.bioguideId);
     this.graph = false;
     console.log();
     //HELPER FUNCTIONS FOR GRAPH
@@ -538,7 +540,14 @@ export class GraphComponent implements OnInit  {
       .filter(function(d) { return d.graphtype === "candidate" });
 
     candNode.append("image")
-      .attr("xlink:href", "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/"+candId+".jpg")
+      .attr("xlink:href", function() {
+        if (ctrl.bioguideId){
+          return "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + ctrl.bioguideId[0].id.bioguide + ".jpg";
+        } else {
+          "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + candId + ".jpg"
+        }
+
+      })
       .attr("x", -35)
       .attr("y", -35)
       .attr("width", 70)
