@@ -48,11 +48,21 @@ import {RouteParams} from 'angular2/router';
       padding-left: 4px;
       border-bottom: solid 1px #ABA4A3;
     }
+    .flexrow h4 {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .flexrow p {
+      margin: 0;
+      padding: 0;
+    }
   `],
   template: `
     <div class="app">
       <div class="flexrow" (click)="graphs()">
           <h4>Citizens Hub</h4>
+          <p>Alpha</p>
       </div>
       <router-outlet></router-outlet>
     </div>

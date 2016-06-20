@@ -24,6 +24,7 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
       width: 50rem;
       height: 30rem;
       border: solid 7px #16191F;
@@ -31,6 +32,11 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
       -moz-border-radius: 25rem / 15rem;
       -webkit-border-radius: 25rem / 15rem;
       border-radius: 25rem / 15rem;
+    }
+
+    .notice {
+      text-align: center;
+      color: #AF3E4D;
     }
 
     .campaign {
@@ -44,7 +50,7 @@ import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
     }
 
     .campaign:hover {
-      background-color: #c6b6ae;
+      background-color: #CBCED2;
       color: #16191F;
     }
 

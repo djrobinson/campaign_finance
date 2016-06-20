@@ -96,7 +96,7 @@ import {Http, Response} from 'angular2/http';
       width: 20%;
       height: 20%;
       position: absolute;
-      top: 65px;
+      top: 75px;
       left: 10px;
       font-size: 1rem;
     }
@@ -273,14 +273,12 @@ export class GraphComponent implements OnInit  {
   }
 
   showCongressPopup(event) {
-    console.log("Congress event emitted ", event);
     this.congressPopup = true;
     this.selectedCandidate = event.cand;
     this.selectedNode = false;
   }
 
   changeCmte(event){
-    console.log("Change cmte event emmitted ", event);
     this.candPopup = false;
     this.congressPopup = false;
     this.cmtePopup = true;
@@ -289,7 +287,6 @@ export class GraphComponent implements OnInit  {
   }
 
   changeIndiv(event) {
-    console.log("Change cmte event emmitted ", event);
     this.cmtePopup = false;
     this.indivPopup = true;
     this.indivName = event.name;
@@ -316,7 +313,6 @@ export class GraphComponent implements OnInit  {
       this.http.get('/api/legislators/' + candId).map((res: Response) => res.json())
     ).subscribe(
       data => {
-        console.log(data);
         this.candidate = data[0];
         this.bioguideId = data[1];
       },
@@ -382,14 +378,11 @@ export class GraphComponent implements OnInit  {
   }
 
   setSelected(selected:string) {
-    console.log(selected);
     this.selectedNode = selected;
   }
 
   buildGraph(ctrl, candId) {
-    console.log("bioguide ", ctrl.bioguideId);
     this.graph = false;
-    console.log();
     //HELPER FUNCTIONS FOR GRAPH
     function dottype(d) {
       d.x = +d.x;
@@ -542,10 +535,8 @@ export class GraphComponent implements OnInit  {
     candNode.append("image")
       .attr("xlink:href", function() {
         if (ctrl.bioguideId.length){
-          console.log("Here's bioguide!")
           return "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + ctrl.bioguideId[0].id.bioguide + ".jpg";
         } else {
-          console.log("Here's president!", candId);
           return "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + candId + ".jpg"
         }
 
