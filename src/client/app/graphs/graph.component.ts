@@ -541,7 +541,7 @@ export class GraphComponent implements OnInit  {
 
     candNode.append("image")
       .attr("xlink:href", function() {
-        if (ctrl.bioguideId){
+        if (ctrl.bioguideId.length){
           return "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + ctrl.bioguideId[0].id.bioguide + ".jpg";
         } else {
           "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + candId + ".jpg"

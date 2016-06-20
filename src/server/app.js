@@ -34,10 +34,10 @@ var earmark = require('./api_congress/earmark.js');
 
 //Connect to Mongo
 //Production
-// mongoose.connect('mongodb://heroku_2f1pj73r:tsu0gvp9jelb0lqkchsg86alh@ds023452.mlab.com:23452/heroku_2f1pj73r');
+mongoose.connect('mongodb://heroku_2f1pj73r:tsu0gvp9jelb0lqkchsg86alh@ds023452.mlab.com:23452/heroku_2f1pj73r');
 
 //Test
-mongoose.connect('mongodb://localhost/testPolis');
+// mongoose.connect('mongodb://localhost/testPolis');
 // *** express instance *** //
 var app = express();
 
