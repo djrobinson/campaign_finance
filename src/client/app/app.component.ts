@@ -3,17 +3,7 @@ import {TitleService} from './api_services/title.service';
 import {GraphService} from './api_services/graph.service';
 import {CandidateComponent} from './candidate/candidate.component.ts';
 import {CommitteeComponent} from './committees/committee.component';
-import {ContributionsComponent} from './contributions/contributions.component';
-import {DisbursementsComponent} from './disbursements/disbursements.component';
-import {IndividualsComponent} from './individuals/individuals.component';
-import {LegislatorsComponent} from './legislators/legislators.component';
 import {MiniProfileComponent} from './graphs/mini-profile.component.ts';
-import {BillPopupComponent} from './bills/bill-popup.component.ts';
-import {BillsComponent} from './bills/bills.component.ts';
-import {SubjectComponent} from './bills/subject.component.ts';
-import {OpexComponent} from './opex/opex.component';
-import {PacsComponent} from './pacs/pacs.component';
-import {VotesComponent} from './votes/votes.component';
 import {Landing} from './landing/landing.component';
 import {GraphComponent} from './graphs/graph.component';
 import {SpinnerComponent} from './loading/spinner.component';
@@ -80,64 +70,14 @@ import {RouteParams} from 'angular2/router';
     component: CandidateComponent
   },
   {
-    path: '/contributions',
-    as: 'Contributions',
-    component: ContributionsComponent
-  },
-  {
     path: '/committees',
     as: 'Committees',
     component: CommitteeComponent
   },
   {
-    path: '/disbursements',
-    as: 'Disbursements',
-    component: DisbursementsComponent
-  },
-  {
-    path: '/individuals',
-    as: 'Individual Contributions',
-    component: IndividualsComponent
-  },
-  {
-    path: '/pacs',
-    as: 'PAC Expenditures',
-    component: PacsComponent
-  },
-  {
-    path: '/opex',
-    as: 'Committee Opex',
-    component: OpexComponent
-  },
-  {
-    path: '/legislators',
-    as: 'Legislators',
-    component: LegislatorsComponent
-  },
-  {
-    path: '/votes',
-    as: 'Congressional Votes',
-    component: VotesComponent
-  },
-  {
     path: '/graph',
     as: 'Graphs',
     component: GraphComponent
-  },
-  {
-    path: '/bills',
-    as: 'Bills',
-    component: BillsComponent
-  },
-  {
-    path: '/bills/:subject',
-    as: 'Subject',
-    component: SubjectComponent
-  },
-  {
-    path: '/bill/:congress/:bill_id',
-    as: 'Bill',
-    component: BillPopupComponent
   },
   {
     path: '/',
