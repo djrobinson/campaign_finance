@@ -21,35 +21,63 @@ import {RouteParams} from 'angular2/router';
       align-items: stretch;
       background: #EBF5EE;
     }
-    .footer {
+    .navbar {
       position: fixed;
+      display: flex;
+      background: #110B11;
+      justify-content: space-around;
+      height: 7vh;
       width: 100%;
-      bottom: 0;
+      border-bottom: solid 1px #EFF1F3;
+      box-sizing: border-box;
+    }
+    .ul {
+      padding-top: 1rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 100%;
+      flex-grow: 1;
+    }
+    a {
+      text-decoration: none;
+      color: #EFF1F3;
+    }
+    .nav-title {
+      width: 40%;
+      text-align: center
+    }
+    .nav-button {
+      flex-grow: 1;
       text-align: center;
-      font-size: 3rem;
-      background-color: white;
-      z-index: 2;
-      border-top: solid 1px gray;
+      height: 5vh;
+      padding-top: 1vh;
     }
+    .nav-button:hover {
+      background: #EFF1F3;
 
-    .flexrow {
-      text-align: center;
-      padding-top: 4px;
-      padding-left: 4px;
-      border-bottom: solid 1px #ABA4A3;
     }
-    .flexrow h4 {
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .flexrow p {
-      margin: 0;
-      padding: 0;
+    .nav-button:hover a {
+      color: #110B11;
     }
   `],
   template: `
     <div class="app">
+      <div class="navbar">
+        <div class="ul">
+            <div class="nav-button"><h5><a href="#">About</a></h5></div>
+            <div class="nav-button"><h5><a href="#">Presidential Candidates</a></h5></div>
+            <div class="nav-button"><h5><a href="#">Super PACs</a></h5></div>
+        </div>
+        <div class="nav-title">
+          <h2><a href="#">Citizens Hub</a></h2>
+        </div>
+        <div class="ul">
+            <div class="nav-button"><h5><a href="#">Senators</a></h5></div>
+            <div class="nav-button"><h5><a href="#">House Representatives</a></h5></div>
+            <div class="nav-button"><h5><a href="#">Support</a></h5></div>
+        </div>
+      </div>
       <router-outlet></router-outlet>
     </div>
 
