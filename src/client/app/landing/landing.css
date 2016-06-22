@@ -1,0 +1,30 @@
+.landing-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #020002;
+}
+
+.banner {
+  width: 100vw;
+  text-align: center;
+  margin-top: 15%;
+}
+
+.banner h1 {
+  font-family: 'Kanit';
+  font-size: 14vw;
+  font-weight: 600;
+  color: #EFF1F3;
+}
+
+.subtitle-container {
+  width: 50%;
+  margin-left: 25%;
+}
+
+.subtitle-container h4 {
+  color: white;
+}
+
+

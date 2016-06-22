@@ -50,10 +50,6 @@ import {RouteParams} from 'angular2/router';
   `],
   template: `
     <div class="app">
-      <div class="flexrow" (click)="graphs()">
-          <h4>Citizens Hub</h4>
-          <p>Alpha</p>
-      </div>
       <router-outlet></router-outlet>
     </div>
 
