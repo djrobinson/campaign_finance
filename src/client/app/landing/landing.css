@@ -1,13 +1,13 @@
 .landing-container {
   position: absolute;
-  height: 93vh;
+  height: 100vh;
   width: 100%;
   bottom: 0;
   background: #110B11;
 }
 
 .banner {
-  margin-top: 5%;
+  margin-top: 2%;
   width: 100vw;
   text-align: center;
 }
@@ -24,9 +24,8 @@
   margin-left: 25%;
 }
 
-.subtitle-container h4 {
+.subtitle-container {
   color: white;
-
 }
 
 .main-candidates {
@@ -51,8 +50,16 @@
 .main-candidates img {
   width: 100%;
   border-radius: 50%;
+  border: solid 3px #EFF1F3;
 }
 
+hr.style-two {
+    border: 0;
+    height: 2px;
+    width: 80%;
+    background-image: linear-gradient(to right, rgba(239,241,243, 0), rgba(239,241,243, 0.75), rgba(0, 0, 0, 0));
+}
 
+.main-button {
 
-
+}

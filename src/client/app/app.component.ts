@@ -14,70 +14,21 @@ import {RouteParams} from 'angular2/router';
 @Component({
   selector: 'my-app',
   styles: [`
-    .app {
-      min-height: 100vh;
-      width: 100%;
-      flex-direction: row;
-      align-items: stretch;
-      background: #EBF5EE;
-    }
-    .navbar {
-      position: fixed;
-      display: flex;
-      background: #110B11;
-      justify-content: space-around;
-      height: 7vh;
-      width: 100%;
-      border-bottom: solid 1px #EFF1F3;
-      box-sizing: border-box;
-    }
-    .ul {
-      padding-top: 1rem;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      width: 100%;
-      flex-grow: 1;
-    }
-    a {
-      text-decoration: none;
-      color: #EFF1F3;
-    }
-    .nav-title {
-      width: 40%;
-      text-align: center
-    }
-    .nav-button {
-      flex-grow: 1;
-      text-align: center;
-      height: 5vh;
-      padding-top: 1vh;
-    }
-    .nav-button:hover {
-      background: #EFF1F3;
-
-    }
-    .nav-button:hover a {
-      color: #110B11;
+    #lines {
+        position: fixed;
+        top: 2rem;
+        left: 2rem;
+        z-index: 3;
+        border-bottom: 17px double #6C6F7D;
+        border-top: 6px solid #6C6F7D;
+        content:"";
+        height: 5px;
+        width:30px;
     }
   `],
   template: `
     <div class="app">
-      <div class="navbar">
-        <div class="ul">
-            <div class="nav-button"><h5><a href="#">About</a></h5></div>
-            <div class="nav-button"><h5><a href="#">Presidential Candidates</a></h5></div>
-            <div class="nav-button"><h5><a href="#">Super PACs</a></h5></div>
-        </div>
-        <div class="nav-title">
-          <h2><a href="#">Citizens Hub</a></h2>
-        </div>
-        <div class="ul">
-            <div class="nav-button"><h5><a href="#">Senators</a></h5></div>
-            <div class="nav-button"><h5><a href="#">House Representatives</a></h5></div>
-            <div class="nav-button"><h5><a href="#">Support</a></h5></div>
-        </div>
-      </div>
+      <div id="lines"></div>
       <router-outlet></router-outlet>
     </div>
 
