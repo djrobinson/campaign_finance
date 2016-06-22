@@ -25,11 +25,31 @@ import {RouteParams} from 'angular2/router';
         height: 5px;
         width:30px;
     }
+    #menu {
+      display: flex;
+      position: fixed;
+      width: 15%;
+      height: 100%;
+      background: white;
+      z-index: 4;
+    }
+    .content-width {
+      position: absolute;
+      width: 85%;
+      height: 100%;
+      right: 0;
+    }
+
   `],
   template: `
     <div class="app">
-      <div id="lines"></div>
-      <router-outlet></router-outlet>
+      <div *ngIf="sideMenu" id="menu">
+        <p>Haldo!</p>
+      </div>
+      <div id="lines" (click)="showMenu()"></div>
+      <div [class.content-width]="sideMenu">
+        <router-outlet></router-outlet>
+      </div>
     </div>
 
 
@@ -62,6 +82,7 @@ import {RouteParams} from 'angular2/router';
   }
 ])
 export class AppComponent implements OnInit {
+  public sideMenu: boolean = false;
   constructor(private _titleService: TitleService,
               private router: Router) {
   }
@@ -71,6 +92,12 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.getTitles();
   }
+
+  private showMenu(){
+    console.log("showing!");
+    this.sideMenu = true;
+  }
+
   private setSelected(id) {
     console.log(id);
     this.selected = id;
