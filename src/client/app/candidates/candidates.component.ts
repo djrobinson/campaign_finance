@@ -1,4 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit, Input} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
 
@@ -10,6 +10,7 @@ import {CORE_DIRECTIVES} from 'angular2/common';
 })
 export class CandidatesComponent implements OnInit {
   private candidates: string;
+  @Input() type: string;
   constructor() {
 
   }

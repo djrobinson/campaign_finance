@@ -127,6 +127,7 @@ export class AppComponent implements OnInit {
   public candPath(): void {
     console.log("inbound");
     this.router.navigate(['Candidates']);
+    this.sideMenu = false;
   }
 
 }

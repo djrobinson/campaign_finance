@@ -78,6 +78,12 @@ router.get('/:cand_id/committees', function(req, res, next){
 router.get('/:cand_id/associated', function(req, res, next){
   query.getGraphAsc(req.params.cand_id).then(function(comms){
     res.json(comms);
-  })
-})
+  });
+});
+
+router.get('/:cand_office_code/type', function(req, res, next){
+  query.getCandSumByOffice(req.params.cand_office_code).then(function(cands){
+    res.json(cands);
+  });
+});
 module.exports = router;
