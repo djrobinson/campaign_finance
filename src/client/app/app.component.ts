@@ -1,9 +1,10 @@
 import {Component, OnInit} from 'angular2/core';
 import {TitleService} from './api_services/title.service';
 import {GraphService} from './api_services/graph.service';
-import {CandidateComponent} from './candidate/candidate.component.ts';
+import {CandidateComponent} from './candidate/candidate.component';
 import {CommitteeComponent} from './committees/committee.component';
-import {MiniProfileComponent} from './graphs/mini-profile.component.ts';
+import {CandidatesComponent} from './candidates/candidates.component';
+import {MiniProfileComponent} from './graphs/mini-profile.component';
 import {Landing} from './landing/landing.component';
 import {GraphComponent} from './graphs/graph.component';
 import {SpinnerComponent} from './loading/spinner.component';
@@ -66,7 +67,7 @@ import {RouteParams} from 'angular2/router';
       <div *ngIf="sideMenu" id="menu">
         <div class="menu-option"><h5>Home</h5></div>
         <div class="menu-option"><h5>About</h5></div>
-        <div class="menu-option"><h5>Presidential Funding</h5></div>
+        <div class="menu-option" (click)="candPath()"><h5>Presidential Funding</h5></div>
         <div class="menu-option"><h5>Super PACs</h5></div>
         <div class="menu-option"><h5>Senate Funding</h5></div>
         <div class="menu-option"><h5>House Funding</h5></div>
@@ -86,11 +87,6 @@ import {RouteParams} from 'angular2/router';
 @RouteConfig([
   { path: '*', redirectTo: ['Landing'] },
   {
-    path: '/candidates',
-    as: 'Candidates',
-    component: CandidateComponent
-  },
-  {
     path: '/committees',
     as: 'Committees',
     component: CommitteeComponent
@@ -99,6 +95,11 @@ import {RouteParams} from 'angular2/router';
     path: '/graph',
     as: 'Graphs',
     component: GraphComponent
+  },
+  {
+    path: '/candidates',
+    as: 'Candidates',
+    component: CandidatesComponent
   },
   {
     path: '/',
@@ -121,6 +122,11 @@ export class AppComponent implements OnInit {
 
   public graphs(): void {
     this.router.navigate(['Landing']);
+  }
+
+  public candPath(): void {
+    console.log("inbound");
+    this.router.navigate(['Candidates']);
   }
 
 }
