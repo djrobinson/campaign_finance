@@ -15,39 +15,65 @@ import {RouteParams} from 'angular2/router';
   selector: 'my-app',
   styles: [`
     #lines {
-        position: fixed;
-        top: 2rem;
-        left: 2rem;
-        z-index: 3;
-        border-bottom: 17px double #6C6F7D;
-        border-top: 6px solid #6C6F7D;
-        content:"";
-        height: 5px;
-        width:30px;
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      z-index: 3;
+      border-bottom: 17px double #6C6F7D;
+      border-top: 6px solid #6C6F7D;
+      content:"";
+      height: 5px;
+      width:30px;
     }
     #menu {
       display: flex;
       position: fixed;
-      width: 15%;
+      width: 17%;
       height: 100%;
-      background: white;
+      background: #364760;
       z-index: 4;
+      flex-direction: column;
     }
     .content-width {
       position: absolute;
-      width: 85%;
+      width: 83%;
       height: 100%;
       right: 0;
     }
+    .menu-option {
+      display: flex;
+      height: 7%;
+      width: 100%;
+      color: #EFF1F3;
+      align-items: center;
+    }
+    .menu-option h5 {
+      padding: 0;
+      margin: 0;
+      padding-left: 1rem;
+    }
+    .menu-option:first-child {
+      background: #2A394F;
+      justify-content: center;
+    }
+    .menu-option:hover {
+      background: #110B11;
 
+    }
   `],
   template: `
     <div class="app">
       <div *ngIf="sideMenu" id="menu">
-        <p>Haldo!</p>
+        <div class="menu-option"><h5>Home</h5></div>
+        <div class="menu-option"><h5>About</h5></div>
+        <div class="menu-option"><h5>Presidential Funding</h5></div>
+        <div class="menu-option"><h5>Super PACs</h5></div>
+        <div class="menu-option"><h5>Senate Funding</h5></div>
+        <div class="menu-option"><h5>House Funding</h5></div>
       </div>
-      <div id="lines" (click)="showMenu()"></div>
+
       <div [class.content-width]="sideMenu">
+        <div id="lines" (click)="showMenu()"></div>
         <router-outlet></router-outlet>
       </div>
     </div>
@@ -83,30 +109,16 @@ import {RouteParams} from 'angular2/router';
 ])
 export class AppComponent implements OnInit {
   public sideMenu: boolean = false;
-  constructor(private _titleService: TitleService,
-              private router: Router) {
+  constructor(private router: Router) {
   }
-  public getTitles() {
-    this._titleService.getTitles().then(titles => this.titles = titles);
-  }
+
   ngOnInit() {
-    this.getTitles();
   }
 
-  private showMenu(){
-    console.log("showing!");
-    this.sideMenu = true;
+  private showMenu(): void{
+    this.sideMenu = !this.sideMenu;
   }
 
-  private setSelected(id) {
-    console.log(id);
-    this.selected = id;
-  }
-  private isSelected(title) {
-    if (this.selected === title.id) {
-      return " black";
-    }
-  }
   public graphs(): void {
     this.router.navigate(['Landing']);
   }
