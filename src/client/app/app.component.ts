@@ -97,7 +97,7 @@ import {RouteParams} from 'angular2/router';
     component: GraphComponent
   },
   {
-    path: '/candidates',
+    path: '/candidates/:type',
     as: 'Candidates',
     component: CandidatesComponent
   },
@@ -111,9 +111,11 @@ import {RouteParams} from 'angular2/router';
 export class AppComponent implements OnInit {
   public sideMenu: boolean = false;
   constructor(private router: Router) {
+
   }
 
   ngOnInit() {
+
   }
 
   private showMenu(): void{
@@ -126,7 +128,7 @@ export class AppComponent implements OnInit {
 
   public candPath(): void {
     console.log("inbound");
-    this.router.navigate(['Candidates']);
+    this.router.navigate(['Candidates', { type: 'P' } ]);
     this.sideMenu = false;
   }
 
