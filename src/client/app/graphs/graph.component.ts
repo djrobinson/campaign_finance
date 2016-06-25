@@ -20,13 +20,6 @@ import { Router, RouteParams } from 'angular2/router';
             <spinner [isRunning]="isRequesting">
             </spinner>
             <div class="row">
-              <candidate-table
-                [candidates]="candidates"
-                [graph]="graph"
-                (buildEmit)="getGraphData($event.candId)"
-              >
-              </candidate-table>
-
               <div class="force-container">
               </div>
             </div>
@@ -229,12 +222,6 @@ export class GraphComponent implements OnInit  {
   }
 
   ngOnInit() {
-    // this._TitleService.getResult('/api/candidates')
-    //     .subscribe(
-    //       result => { this.candidates = result },
-    //       error => console.error('Error: ' + error),
-    //       () => {}
-    //     )
     this.getGraphData  (this.candidate_id);
   }
 
