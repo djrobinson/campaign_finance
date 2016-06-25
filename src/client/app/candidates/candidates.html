@@ -1,35 +1,35 @@
-<div class="row twelve-columns totals-box">
-  <div class="totals">
+<div class="candidates-container">
+  <div class="row totals-box">
+    <div class="totals four columns first">
+    </div>
+    <div class="totals four columns second">
+    </div>
+    <div class="totals four columns third">
+    </div>
   </div>
-  <div class="totals">
-  </div>
-  <div class="totals">
-  </div>
-  <div class="totals">
-  </div>
+  <table>
+    <tr>
+      <th>Candidate Name</th>
+      <th>Party</th>
+      <th>Cash on Hand</th>
+      <th>Net Contributions</th>
+      <th>Total Distributions</th>
+      <th>FEC Docs</th>
+    </tr>
+    <tr *ngFor="#candidate of candidates">
+      <td ng-if="graph">
+        <button
+          (click)="buildGraph(candidate.CANDIDATE_ID)"
+        >
+        {{candidate.can_nam}}
+        </button>
+      </td>
+      <td>{{candidate.CANDIDATE_OFFICE}}</td>
+      <td>{{candidate.PARTY}}</td>
+      <td>{{parseFloat(candidate.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
+      <td>{{parseFloat(candidate.net_con) | currency:'USD':true}}</td>
+      <td>{{parseFloat(candidate.tot_dis) | currency:'USD':true}}</td>
+      <td><a [href]="candidate.lin_ima">Link</a></td>
+    </tr>
+  </table>
 </div>
-<table>
-  <tr>
-    <th>Candidate Name</th>
-    <th>Party</th>
-    <th>Cash on Hand</th>
-    <th>Net Contributions</th>
-    <th>Total Distributions</th>
-    <th>FEC Docs</th>
-  </tr>
-  <tr *ngFor="#candidate of candidates">
-    <td ng-if="graph">
-      <button
-        (click)="buildGraph(candidate.CANDIDATE_ID)"
-      >
-      {{candidate.can_nam}}
-      </button>
-    </td>
-    <td>{{candidate.CANDIDATE_OFFICE}}</td>
-    <td>{{candidate.PARTY}}</td>
-    <td>{{parseFloat(candidate.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
-    <td>{{parseFloat(candidate.net_con) | currency:'USD':true}}</td>
-    <td>{{parseFloat(candidate.tot_dis) | currency:'USD':true}}</td>
-    <td><a [href]="candidate.lin_ima">Link</a></td>
-  </tr>
-</table>
