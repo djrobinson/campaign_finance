@@ -56,3 +56,12 @@ th, td {
 td {
   font-size: 2rem;
 }
+
+.fec {
+  height: 4rem;
+}
+
+.profile-img {
+  height: 8rem;
+  border-radius: 50%;
+}

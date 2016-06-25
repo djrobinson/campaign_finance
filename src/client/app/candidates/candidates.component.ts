@@ -28,7 +28,14 @@ export class CandidatesComponent implements OnInit {
     this.http.get('/api/candidates/'+this.type+'/type')
       .map(res => res.json())
       .subscribe(
-        data => this.candidates = data,
+        data => {
+          //IF PRESIDENT
+          data.forEach((item, i)=>{
+            data[i].profile_img = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + item.CANDIDATE_ID + '.jpg';
+          })
+          this.candidates = data
+          console.log(this.candidates);
+        },
         err => this.logError(err),
         () => console.log('Candidates Complete')
       );
