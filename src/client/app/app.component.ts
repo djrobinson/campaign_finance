@@ -92,7 +92,7 @@ import {RouteParams} from 'angular2/router';
     component: CommitteeComponent
   },
   {
-    path: '/graph',
+    path: '/graph/:id',
     as: 'Graphs',
     component: GraphComponent
   },

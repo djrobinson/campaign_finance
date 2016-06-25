@@ -214,7 +214,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
   constructor(private _TitleService: TitleService,
               private http: Http) {
-
     this.parseFloat = function(num){
       return parseFloat(num);
     }

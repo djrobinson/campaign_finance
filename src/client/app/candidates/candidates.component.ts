@@ -1,5 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
-import { RouteParams } from 'angular2/router';
+import { Router, RouteParams } from 'angular2/router';
 import {Http, Response} from 'angular2/http';
 
 @Component({
@@ -14,9 +14,13 @@ export class CandidatesComponent implements OnInit {
 
   constructor(
     private _params: RouteParams,
-    private http: Http
+    public router: Router,
+    public http: Http
     ){
     this.type = _params.get('type');
+    this.parseFloat = function(num) {
+      return parseFloat(num);
+    }
     console.log(this.type);
   }
 
@@ -26,7 +30,13 @@ export class CandidatesComponent implements OnInit {
       .subscribe(
         data => this.candidates = data,
         err => this.logError(err),
-        () => console.log('Random Quote Complete')
+        () => console.log('Candidates Complete')
       );
   }
+
+  public buildGraph(candidate_id): void {
+    console.log("inbound");
+    this.router.navigate(['Graphs', { id: candidate_id }]);
+  }
+
 }

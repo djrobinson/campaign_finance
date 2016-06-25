@@ -12,7 +12,7 @@ import {BubbleComponent} from './charts/bubble-chart.component';
 import {SpinnerComponent} from '../loading/spinner.component';
 import {Observable} from 'rxjs/Rx';
 import {Http, Response} from 'angular2/http';
-
+import { Router, RouteParams } from 'angular2/router';
 
 @Component({
   selector: 'graph-view',
@@ -201,6 +201,7 @@ import {Http, Response} from 'angular2/http';
 export class GraphComponent implements OnInit  {
   private selectedNode: Object;
   private candidate: Object;
+  private candidate_id: string;
   private indivPopup: boolean;
   private cmtePopup: boolean;
   private individualTran: string;
@@ -218,21 +219,23 @@ export class GraphComponent implements OnInit  {
   private bioguideId: string;
 
   constructor(
+    private _params: RouteParams,
     private _graphService: GraphService,
     private _TitleService: TitleService,
     private http: Http
     ) {
     this.graph = true;
-
+    this.candidate_id = _params.get('id');
   }
 
   ngOnInit() {
-    this._TitleService.getResult('/api/candidates')
-        .subscribe(
-          result => { this.candidates = result },
-          error => console.error('Error: ' + error),
-          () => {}
-        )
+    // this._TitleService.getResult('/api/candidates')
+    //     .subscribe(
+    //       result => { this.candidates = result },
+    //       error => console.error('Error: ' + error),
+    //       () => {}
+    //     )
+    this.getGraphData  (this.candidate_id);
   }
 
   showIndivPopup(event){
