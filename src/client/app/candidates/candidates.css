@@ -9,3 +9,19 @@ table {
 .text-center {
   text-align: center;
 }
+.totals {
+  display: inline-block;
+  width: 20%;
+  height: 200px;
+  border: solid 1px black;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.totals-box {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
