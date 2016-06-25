@@ -14,6 +14,8 @@ table {
   height: 200px;
   margin: 0;
   padding: 0;
+  text-align: center;
+  justify-content: center;
 }
 
 .totals-box {
@@ -44,4 +46,13 @@ table {
   bottom: 0;
   background: #110B11;
   color: #EFF1F3;
+}
+
+th, td {
+  font-family: 'Alegreya Sans SC', sans-serif;
+  font-weight: 300;
+}
+
+td {
+  font-size: 2rem;
 }
