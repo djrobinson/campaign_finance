@@ -29,9 +29,14 @@ export class CandidatesComponent implements OnInit {
       .map(res => res.json())
       .subscribe(
         data => {
-          //IF PRESIDENT
+          /* IF PRESIDENT */
           data.forEach((item, i)=>{
-            data[i].profile_img = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + item.CANDIDATE_ID + '.jpg';
+            var currImg = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + item.CANDIDATE_ID + '.jpg';
+            if (currImg){
+              data[i].profile_img = currImg;
+            } else {
+              data[i].profile_img = 'http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png';
+            }
           })
           this.candidates = data
           console.log(this.candidates);

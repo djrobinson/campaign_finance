@@ -11,29 +11,38 @@
       <h3>Total Disbursements</h3>
     </div>
   </div>
-  <table>
-    <tr>
-      <th>Candidate Name</th>
-      <th>Party</th>
-      <th>Cash on Hand</th>
-      <th>Net Contributions</th>
-      <th>Total Distributions</th>
-      <th>FEC Docs</th>
-    </tr>
-    <tr *ngFor="#candidate of candidates">
-      <td ng-if="graph">
-        <img [src]="candidate.profile_img" class="profile-img">
-        <button
-          (click)="buildGraph(candidate.CANDIDATE_ID)"
-        >
-        {{candidate.can_nam}}
-        </button>
-      </td>
-      <td>{{candidate.PARTY}}</td>
-      <td>{{parseFloat(candidate.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
-      <td>{{parseFloat(candidate.net_con) | currency:'USD':true}}</td>
-      <td>{{parseFloat(candidate.tot_dis) | currency:'USD':true}}</td>
-      <td><a [href]="candidate.lin_ima"><img src="images/fec.png" class="fec" /></a></td>
-    </tr>
-  </table>
+  <div class="row select-options">
+    <h3>Sort By:</h3>
+    <div class="button">
+      Contributions
+    </div>
+    <div class="button">
+      Cash on Hand
+    </div>
+    <div class="button">
+      Distributions
+    </div>
+  </div>
+  <div class="row">
+    <ul class="list">
+      <li *ngFor="#candidate of candidates" class="list-item">
+        <div class="candidate-profile">
+          <div class="profile-header">
+            <h5>{{candidate.can_nam}}</h5>
+            <a [href]="candidate.lin_ima"><img src="images/fec.png" class="fec" /></a>
+          </div>
+          <img [src]="candidate.profile_img" onerror="this.src='http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png'" class="profile-img">
+          <p>{{candidate.PARTY}}</p>
+          <p>{{parseFloat(candidate.cas_on_han_clo_of_per) | currency:'USD':true}}</p>
+          <p>{{parseFloat(candidate.net_con) | currency:'USD':true}}</p>
+          <p>{{parseFloat(candidate.tot_dis) | currency:'USD':true}}</p>
+          <div class="button"
+                (click)="buildGraph(candidate.CANDIDATE_ID)"
+              >
+                <p>Donor Graph</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>
