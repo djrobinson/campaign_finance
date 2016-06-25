@@ -16,8 +16,9 @@ export class Landing implements OnInit {
     this.landing = true;
   }
 
-  public graphs():void {
-    this.router.navigate(['Graphs']);
+  public buildGraph(candidate_id): void {
+    console.log("inbound");
+    this.router.navigate(['Graphs', { id: candidate_id }]);
   }
 
 }
