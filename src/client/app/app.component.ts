@@ -67,10 +67,10 @@ import {RouteParams} from 'angular2/router';
       <div *ngIf="sideMenu" id="menu">
         <div class="menu-option"><h5>Home</h5></div>
         <div class="menu-option"><h5>About</h5></div>
-        <div class="menu-option" (click)="candPath()"><h5>Presidential Funding</h5></div>
+        <div class="menu-option" (click)="candPath('P')"><h5>Presidential Funding</h5></div>
         <div class="menu-option"><h5>Super PACs</h5></div>
-        <div class="menu-option"><h5>Senate Funding</h5></div>
-        <div class="menu-option"><h5>House Funding</h5></div>
+        <div class="menu-option" (click)="candPath('S')"><h5>Senate Funding</h5></div>
+        <div class="menu-option" (click)="candPath('H')"><h5>House Funding</h5></div>
       </div>
 
       <div [class.content-width]="sideMenu">
@@ -126,9 +126,9 @@ export class AppComponent implements OnInit {
     this.router.navigate(['Landing']);
   }
 
-  public candPath(): void {
+  public candPath(typeVar): void {
     console.log("inbound");
-    this.router.navigate(['Candidates', { type: 'P' } ]);
+    this.router.navigate(['Candidates', { type: typeVar } ]);
     this.sideMenu = false;
   }
 

@@ -41,11 +41,11 @@ table {
 
 .candidates-container {
   position: absolute;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   bottom: 0;
-  background: #110B11;
-  color: #EFF1F3;
+  background: #CDCDCD;
+  color: #303845;
 }
 
 .fec {
@@ -73,7 +73,14 @@ table {
 }
 
 .select-options {
-  margin: 2rem 0 2rem 0;
+  text-align: left;
+  margin: 2rem 0 2rem 10%;
+  clear: both;
+}
+
+.select-option h5 {
+  padding: 0;
+  margin: 0;
 }
 
 .button {
@@ -83,7 +90,6 @@ table {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    margin: 4px 2px;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
@@ -117,6 +123,7 @@ table {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #E8F1F2;
 }
 
 
