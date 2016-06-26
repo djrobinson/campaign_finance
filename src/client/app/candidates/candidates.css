@@ -6,6 +6,7 @@ table {
   margin-left: 5%;
   margin-right: 5%;
 }
+
 .text-center {
   text-align: center;
 }
@@ -128,21 +129,18 @@ table {
 
 
 
-.list-item:nth-child(4n-2){
-  background: #303845;
-}
 
-.list-item:nth-child(4n-1){
+/*.list-item:nth-child(3n-1){
   background: #91ADC5;
 }
 
-.list-item:nth-child(4n){
+.list-item:nth-child(3n){
   background: #CCDBDC;
 }
 
-.list-item:nth-child(4n-3){
+.list-item:nth-child(3n-2){
   background: #145C9E;
-}
+}*/
 
 .candidate-profile {
   text-align: center;

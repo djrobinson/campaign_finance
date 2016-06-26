@@ -11,6 +11,7 @@ export class CandidatesComponent implements OnInit {
   private candidates: string;
   private type: string;
   private sub: any;
+  public headerType: string;
 
   constructor(
     private _params: RouteParams,
@@ -25,19 +26,37 @@ export class CandidatesComponent implements OnInit {
   }
 
   ngOnInit() {
+    var repColors = ['#8D0801', '#6F1D1B', '#A85863'];
+    var demColors = ['#91ADC5', '#145C9E', '#38369A'];
     this.http.get('/api/candidates/'+this.type+'/type')
       .map(res => res.json())
       .subscribe(
         data => {
           /* IF PRESIDENT */
           if (this.type === 'P'){
-            data.forEach((item, i) => {
+            this.headerType = 'Presidential';
+            var finalData = data.map((item) => {
               var currImg = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + item.CANDIDATE_ID + '.jpg';
-              data[i].profile_img = currImg;
+              item.profile_img = currImg;
+              if (item.PARTY_CODE === 'DEM'){
+                item.tile_color = demColors[Math.floor(Math.random() * 3)];
+                return item;
+              } else if (item.PARTY_CODE === 'REP'){
+                item.tile_color = repColors[Math.floor(Math.random() * 3)];
+                return item;
+              } else {
+                item.tile_color = '#4C4664';
+                return item;
+              }
             })
           /* if congressman */
           } else {
-             var finalData = data.map((item) => {
+            if (this.type === 'S'){
+              this.headerType = 'Senate';
+            } else if (this.type === 'H'){
+              this.headerType = 'House';
+            }
+            var finalData = data.map((item) => {
                this.http.get('/api/legislators/' + item.CANDIDATE_ID)
                  .map(res => res.json())
                  .subscribe(

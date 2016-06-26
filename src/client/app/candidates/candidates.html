@@ -1,5 +1,5 @@
 <div class="candidates-container text-center">
-  <h1>Presidential Candidates</h1>
+  <h1>{{headerType}} Candidates</h1>
   <div class="row totals-box">
     <div class="totals four columns first text-center">
       <h3>Total Contributions</h3>
@@ -25,7 +25,7 @@
   </div>
   <div class="row">
     <ul class="list">
-      <li *ngFor="#candidate of candidates" class="list-item">
+      <li *ngFor="#candidate of candidates" class="list-item" [style.background]="candidate.tile_color">
         <div class="candidate-profile">
           <div class="profile-header">
             <h5>{{candidate.can_nam}}</h5>
@@ -33,9 +33,20 @@
           </div>
           <img [src]="candidate.profile_img" onerror="this.src='http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png'" class="profile-img">
           <p>{{candidate.PARTY}}</p>
-          <p>{{parseFloat(candidate.cas_on_han_clo_of_per) | currency:'USD':true}}</p>
-          <p>{{parseFloat(candidate.net_con) | currency:'USD':true}}</p>
-          <p>{{parseFloat(candidate.tot_dis) | currency:'USD':true}}</p>
+          <table>
+            <tr>
+              <td>Cash on Hand</td>
+              <td>{{parseFloat(candidate.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
+            </tr>
+            <tr>
+              <td>Net Contributions</td>
+              <td>{{parseFloat(candidate.net_con) | currency:'USD':true}}</td>
+            </tr>
+            <tr>
+              <td>Total Distributions</td>
+              <td>{{parseFloat(candidate.tot_dis) | currency:'USD':true}}</td>
+            </tr>
+          </table>
           <div class="button"
                 (click)="buildGraph(candidate.CANDIDATE_ID)"
               >
