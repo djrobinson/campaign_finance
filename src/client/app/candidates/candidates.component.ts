@@ -30,14 +30,32 @@ export class CandidatesComponent implements OnInit {
       .subscribe(
         data => {
           /* IF PRESIDENT */
-          data.forEach((item, i)=>{
-            var currImg = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + item.CANDIDATE_ID + '.jpg';
-            if (currImg){
+          if (this.type === 'P'){
+            data.forEach((item, i) => {
+              var currImg = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + item.CANDIDATE_ID + '.jpg';
               data[i].profile_img = currImg;
-            } else {
-              data[i].profile_img = 'http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png';
-            }
-          })
+            })
+          /* if congressman */
+          } else {
+             var finalData = data.map((item) => {
+               this.http.get('/api/legislators/' + item.CANDIDATE_ID)
+                 .map(res => res.json())
+                 .subscribe(
+                 secondData => {
+                   console.log(secondData);
+                   if (secondData[0].id){
+                     item.profile_img = "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + secondData[0].id.bioguide + ".jpg";
+                     return item;
+                   }
+                 },
+                 err => console.log(err),
+                 () => console.log("Image Call Complete")
+               )
+             })
+             console.log("Final Data ", finalData);
+
+          }
+
           this.candidates = data
           console.log(this.candidates);
         },
