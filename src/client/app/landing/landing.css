@@ -58,6 +58,10 @@
   border: solid 3px #EFF1F3;
 }
 
+.main-candidates img:hover {
+  border: solid 8px #EFF1F3;
+}
+
 hr.style-two {
     border: 0;
     height: 2px;

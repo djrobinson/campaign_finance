@@ -65,7 +65,7 @@ import {RouteParams} from 'angular2/router';
   template: `
     <div class="app">
       <div *ngIf="sideMenu" id="menu">
-        <div class="menu-option"><h5>Home</h5></div>
+        <div class="menu-option" (click)="home()"><h5>Home</h5></div>
         <div class="menu-option"><h5>About</h5></div>
         <div class="menu-option" (click)="candPath('P')"><h5>Presidential Funding</h5></div>
         <div class="menu-option"><h5>Super PACs</h5></div>
@@ -122,7 +122,7 @@ export class AppComponent implements OnInit {
     this.sideMenu = !this.sideMenu;
   }
 
-  public graphs(): void {
+  public home(): void {
     this.router.navigate(['Landing']);
   }
 
