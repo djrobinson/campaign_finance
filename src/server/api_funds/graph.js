@@ -33,7 +33,9 @@ var appender = function(parArr, subArr){
 
 var typeMap = function(arr){
   arr.forEach(function(item){
-    if (item.tot_dis){
+    if (item.CMTE_DSGN === 'P'){
+      item.graphtype = "candidate";
+    } else if (item.tot_dis){
       item.graphtype = "associated";
     } else if (item.NAME){
       item.graphtype = "individual";

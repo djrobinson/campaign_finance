@@ -321,11 +321,13 @@ export class GraphComponent implements OnInit  {
           return elem.CMTE_DSGN !== 'P';
         });
 
-        var cand = result.filter((elem)=>{
+        var candArr = result.filter((elem)=>{
           return elem.CMTE_DSGN === 'P';
         });
-
-        var resultOrdered = cand.concat(nonCand);
+        candArr[0].CANDIDATE = cand;
+        candArr[0].CAND_ID = cand;
+        candArr[0].data = this.candidate[0];
+        var resultOrdered = candArr.concat(nonCand);
         this.nodeData = resultOrdered.map((elem, i)=>{
           if (elem.CAND_ID){
             elem.CORE = true;
