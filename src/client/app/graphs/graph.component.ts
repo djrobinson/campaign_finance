@@ -26,6 +26,7 @@ import { Router, RouteParams } from 'angular2/router';
             </div>
             <div *ngIf="selectedNode">
               <mini-profile-view
+                class="three columns"
                 [node]="selectedNode"
                 (indivEmit)="showIndivPopup($event)"
                 (cmteEmit)="showCmtePopup($event)"
@@ -107,9 +108,8 @@ import { Router, RouteParams } from 'angular2/router';
     }
     mini-profile-view {
       position: absolute;
-      bottom: 0;
-      width: 70%;
-      margin-left: 15%;
+      top: 0;
+      right: 0;
     }
     outputs-view {
       position: absolute;

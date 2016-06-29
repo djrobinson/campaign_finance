@@ -1,9 +1,5 @@
 <div class="title">
-  <div class="five columns">
-    <h5>{{title}}</h5>
     <p>FEC ID: {{id}}</p>
-  </div>
-  <div class="five columns">
     <div *ngIf="popupType ==='candidate'">
       <table class="cand-table">
         <tr>
@@ -41,8 +37,6 @@
         <h5>Transaction Amount: {{parseFloat(amount) | currency:'USD':true}}</h5>
       </div>
     </div>
-  </div>
-  <div class="two columns">
     <div>
       <div *ngIf="popupType === 'individual'">
         <button (click)="indivPopupEmit(id, title)">Profile</button>
@@ -57,5 +51,4 @@
         <button (click)="congressPopupEmit(id)">Profile</button>
       </div>
     </div>
-  </div>
 </div>
