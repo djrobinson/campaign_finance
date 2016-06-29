@@ -1,6 +1,6 @@
 <div class="title">
-    <h3>
-    <p>FEC ID: {{id}}</p>
+    <img [src]="picture">
+    <h5>{{title}}</h5>
     <div *ngIf="popupType ==='associated'">
       <table class="cand-table">
         <tr>
@@ -17,7 +17,12 @@
         </tr>
       </table>
     </div>
-    <div *ngIf="popupType ==='individual' || 'committee'">
+    <div *ngIf="popupType ==='individual'">
+      <div class="transaction">
+        <h5>Transaction Amount: {{parseFloat(amount) | currency:'USD':true}}</h5>
+      </div>
+    </div>
+    <div *ngIf="popupType ==='committee'">
       <div class="transaction">
         <h5>Transaction Amount: {{parseFloat(amount) | currency:'USD':true}}</h5>
       </div>

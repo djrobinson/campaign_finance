@@ -7,6 +7,11 @@
   z-index: 5;
 }
 
+img {
+  height: 100px;
+  border-radius: 50%;
+}
+
 .transaction {
   margin-top: 50px;
 }
@@ -20,17 +25,37 @@ button {
 }
 
 .summary {
-  width: 90%;
-  margin-left: 5%;
-  height: 150px;
-  border: solid 1px black;
-}
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 10px;
+ }
 
 .summary-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 50px;
-  border: solid 1px black;
+  background: #364760;
+  font-family: 'Oswald';
+  font-weight: 300;
+  color: #EFF1F3;
 }
 
 .summary-body {
-  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  background: #2A394F;
+  color: #EFF1F3;
+}
+
+.summary-header h5 {
+  font-family: 'Oswald';
+  font-weight: 300;
+}
+
+.summary-body h5 {
+  font-family: 'Oswald';
+  font-weight: 400;
 }

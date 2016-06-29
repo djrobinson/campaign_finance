@@ -1,11 +1,12 @@
-import {Component, OnChanges, Input, Output, EventEmitter} from 'angular2/core';
+import {Component, OnChanges, OnInit, Input, Output, EventEmitter} from 'angular2/core';
 @Component({
   selector: 'mini-profile-view',
   templateUrl: 'app/graphs/mini-profile/mini-profile.html',
   styleUrls: ['app/graphs/mini-profile/mini-profile.css']
 })
-export class MiniProfileComponent implements OnChanges {
+export class MiniProfileComponent implements OnChanges, OnInit {
   @Input() node: Object;
+  @Input() bioguide: string;
   @Output() indivEmit = new EventEmitter();
   @Output() cmteEmit = new EventEmitter();
   @Output() candEmit = new EventEmitter();
@@ -14,11 +15,20 @@ export class MiniProfileComponent implements OnChanges {
   private id: string;
   private amount: number;
   private popupType: string;
+  public picture: string;
 
   constructor() {
     this.parseFloat = function(num){
       return parseFloat(num);
     }
+  }
+
+  ngOnInit(){
+    if (this.bioguide.length){
+          this.picture =  "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + this.bioguide[0].id.bioguide + ".jpg";
+        } else {
+          this.picture = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + this.node.CAND_ID + ".jpg"
+        }
   }
 
   ngOnChanges(changes: { [node: string]: SimpleChange }) {
@@ -54,6 +64,7 @@ export class MiniProfileComponent implements OnChanges {
       // }
 
     }
+    console.log("Popup type!!!", this.popupType);
   }
 
   indivPopupEmit(tranId, name){

@@ -28,6 +28,7 @@ import { Router, RouteParams } from 'angular2/router';
               <mini-profile-view
                 class="three columns"
                 [node]="selectedNode"
+                [bioguide]="bioguideId"
                 (indivEmit)="showIndivPopup($event)"
                 (cmteEmit)="showCmtePopup($event)"
                 (candEmit)="showCandPopup($event)"
