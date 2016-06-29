@@ -1,0 +1,20 @@
+.title {
+  width: 100%;
+  text-align: center;
+  border: solid 1px #3B3561;
+  height: 150px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.transaction {
+  margin-top: 50px;
+}
+
+.cand-table {
+  margin: 0 !important;;
+}
+button {
+  position: relative;
+  top: 50px;
+}
