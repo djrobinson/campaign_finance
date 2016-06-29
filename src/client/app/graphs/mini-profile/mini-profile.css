@@ -18,3 +18,19 @@ button {
   position: relative;
   top: 50px;
 }
+
+.summary {
+  width: 90%;
+  margin-left: 5%;
+  height: 150px;
+  border: solid 1px black;
+}
+
+.summary-header {
+  height: 50px;
+  border: solid 1px black;
+}
+
+.summary-body {
+  height: 100px;
+}

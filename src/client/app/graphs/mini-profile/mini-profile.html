@@ -1,25 +1,10 @@
 <div class="title">
+    <h3>
     <p>FEC ID: {{id}}</p>
-    <div *ngIf="popupType ==='candidate'">
-      <table class="cand-table">
-        <tr>
-          <td>Cash</td>
-          <td>{{parseFloat(cash) | currency:'USD':true}}</td>
-        </tr>
-        <tr>
-          <td>Net Contributions</td>
-          <td>{{parseFloat(contributions) | currency:'USD':true}}</td>
-        </tr>
-        <tr>
-          <td>Net Distributions</td>
-          <td>{{parseFloat(distributions) | currency:'USD':true}}</td>
-        </tr>
-      </table>
-    </div>
     <div *ngIf="popupType ==='associated'">
       <table class="cand-table">
         <tr>
-          <td>Cash</td>
+          <td></td>
           <td>{{parseFloat(cash) | currency:'USD':true}}</td>
         </tr>
         <tr>
@@ -37,6 +22,40 @@
         <h5>Transaction Amount: {{parseFloat(amount) | currency:'USD':true}}</h5>
       </div>
     </div>
+    <div *ngIf="popupType ==='candidate'">
+      <div class="summary">
+        <div class="summary-header">
+          <h5>Total Cash</h5>
+        </div>
+        <div class="summary-body">
+          <h5>{{parseFloat(cash) | currency:'USD':true}}</h5>
+        </div>
+      </div>
+      <div class="summary">
+        <div class="summary-header">
+          <h5>Total Raised</h5>
+        </div>
+        <div class="summary-body">
+          <h5>{{parseFloat(contributions) | currency:'USD':true}}</h5>
+        </div>
+      </div>
+      <div class="summary">
+        <div class="summary-header">
+          <h5>Total Spent</h5>
+        </div>
+        <div class="summary-body">
+          <h5>{{parseFloat(distributions) | currency:'USD':true}}</h5>
+        </div>
+      </div>
+      <div class="summary">
+        <div class="summary-header">
+          <h5>Total Debt</h5>
+        </div>
+        <div class="summary-body">
+          <h5>{{parseFloat(distributions) | currency:'USD':true}}</h5>
+        </div>
+      </div>
+    </div>
     <div>
       <div *ngIf="popupType === 'individual'">
         <button (click)="indivPopupEmit(id, title)">Profile</button>
@@ -50,5 +69,4 @@
       <div *ngIf="popupType === 'congress'">
         <button (click)="congressPopupEmit(id)">Profile</button>
       </div>
-    </div>
 </div>
