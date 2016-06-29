@@ -1,9 +1,8 @@
 import {Component, Input, Output, OnInit, OnChanges, EventEmitter, ViewChild} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
-import {TitleService} from '../api_services/title.service';
-import {TreemapComponent} from './charts/treemap.component';
-import {PieComponent} from './charts/pie-chart.component';
+import {TreemapComponent} from '../charts/treemap.component';
+import {PieComponent} from '../charts/pie-chart.component';
 
 
 @Component({
@@ -212,7 +211,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   private route: string;
   private typeString: string;
 
-  constructor(private _TitleService: TitleService,
+  constructor(
               private http: Http) {
     this.parseFloat = function(num){
       return parseFloat(num);

@@ -1,10 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
-import {TitleService} from './api_services/title.service';
 import {GraphService} from './api_services/graph.service';
-import {CandidateComponent} from './candidate/candidate.component';
-import {CommitteeComponent} from './committees/committee.component';
 import {CandidatesComponent} from './candidates/candidates.component';
-import {MiniProfileComponent} from './graphs/mini-profile.component';
 import {Landing} from './landing/landing.component';
 import {GraphComponent} from './graphs/graph.component';
 import {SpinnerComponent} from './loading/spinner.component';
@@ -81,16 +77,10 @@ import {RouteParams} from 'angular2/router';
 
 
   `,
-  directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, CandidateComponent, NgClass],
-  providers: [TitleService]
+  directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, NgClass]
 })
 @RouteConfig([
   { path: '*', redirectTo: ['Landing'] },
-  {
-    path: '/committees',
-    as: 'Committees',
-    component: CommitteeComponent
-  },
   {
     path: '/graph/:id',
     as: 'Graphs',

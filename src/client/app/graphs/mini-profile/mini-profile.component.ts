@@ -1,5 +1,4 @@
 import {Component, OnChanges, Input, Output, EventEmitter} from 'angular2/core';
-import {TitleService} from '../api_services/title.service';
 @Component({
   selector: 'mini-profile-view',
   template: `
@@ -99,7 +98,7 @@ export class MiniProfileComponent implements OnChanges {
   private amount: number;
   private popupType: string;
 
-  constructor(private _TitleService: TitleService) {
+  constructor() {
     this.parseFloat = function(num){
       return parseFloat(num);
     }

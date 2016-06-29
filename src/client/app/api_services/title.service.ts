@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {TITLES} from '../titles-list';
+// import {TITLES} from '../titles-list';
 import {Http, Response} from 'angular2/http';
 
 @Injectable()

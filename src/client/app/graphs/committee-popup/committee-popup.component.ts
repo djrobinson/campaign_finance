@@ -1,9 +1,8 @@
 import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
-import {TitleService} from '../api_services/title.service';
-import {TreemapComponent} from './charts/treemap.component';
-import {BubbleComponent} from './charts/bubble-chart.component';
+import {TreemapComponent} from '../charts/treemap.component';
+import {BubbleComponent} from '../charts/bubble-chart.component';
 
 @Component({
   selector: 'committee-popup',
@@ -154,8 +153,7 @@ export class CommitteePopupComponent implements OnInit, OnChanges {
   private bubble: Object = {};
 
 
-  constructor(private _TitleService: TitleService,
-    private http: Http) {
+  constructor(private http: Http) {
       this.parseFloat = function(num){
         return parseFloat(num);
       }

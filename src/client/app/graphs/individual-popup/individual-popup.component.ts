@@ -1,7 +1,6 @@
 import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
-import {TitleService} from '../api_services/title.service';
 
 @Component({
   selector: 'individual-popup',
@@ -61,7 +60,7 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   private otherIndividuals: Observable<Object>;
   private dataStore: Observable<Object>;
 
-  constructor(private _TitleService: TitleService,
+  constructor(
               private http:Http) {
     this.parseFloat = function(num) {
       return parseFloat(num);

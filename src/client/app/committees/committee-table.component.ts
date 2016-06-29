@@ -1,5 +1,4 @@
 import {Component, Input} from 'angular2/core';
-import {TitleService} from '../api_services/title.service';
 @Component({
   selector: 'committee-table',
   styles: [
@@ -26,8 +25,7 @@ import {TitleService} from '../api_services/title.service';
 
                   </tr>
                 </table>
-           `,
-  providers: [TitleService],
+           `
 })
 export class CommitteeTableComponent {
   @Input() committees: string;
