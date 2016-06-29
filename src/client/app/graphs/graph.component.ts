@@ -315,18 +315,27 @@ export class GraphComponent implements OnInit  {
     graph.getResult(cand)
       .subscribe(
       result => {
-        result.unshift({ "CANDIDATE": cand, "CAND_ID": cand, "CMTE_ID": cand, "NODE": 0, "graphtype": "candidate", data: this.candidate[0]});
+        // result.unshift({ "CANDIDATE": cand, "CAND_ID": cand, "CMTE_ID": cand, "NODE": 0, "graphtype": "candidate", data: this.candidate[0]});
         this.result = result;
+        var nonCand = result.filter((elem) => {
+          return elem.CMTE_DSGN !== 'P';
+        });
 
-        this.nodeData = result.map((elem, i)=>{
+        var cand = result.filter((elem)=>{
+          return elem.CMTE_DSGN === 'P';
+        });
+
+        var resultOrdered = cand.concat(nonCand);
+        this.nodeData = resultOrdered.map((elem, i)=>{
           if (elem.CAND_ID){
             elem.CORE = true;
           }
-
           elem.NODE = i;
+
           return elem;
         });
         var nodeData = this.nodeData;
+        console.log("Node Data ", nodeData);
         this.linkData = nodeData.reduce((prev, elem)=>{
           if (elem.CAND_ID){
             prev.push({ "source": elem.NODE, "target": 0, "value": 1 })
@@ -520,7 +529,7 @@ export class GraphComponent implements OnInit  {
       })
 
     var candNode = svg.selectAll(".node")
-      .filter(function(d) { return d.graphtype === "candidate" });
+      .filter(function(d) { return d.CMTE_DSGN === "P" });
 
     candNode.append("image")
       .attr("xlink:href", function() {
