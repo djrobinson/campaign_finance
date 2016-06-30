@@ -1,66 +1,39 @@
 <div class="cand-style" id="full-size">
-  <div class="four columns choices">
-      <div class="cand-pic text-center">
-          <h5>{{candidate?.CANDIDATE_NAME}}</h5>
-          <img [src]="imageVar?.image" alt="picture">
+  <div class="three columns choices">
+    <div class="cand-pic text-center">
+        <h5>{{candidate?.CANDIDATE_NAME}}</h5>
+        <img [src]="imageVar?.image" alt="picture">
+
+    </div>
+    <div class="cand-options">
+      <div class="cand-option">
+        <h5>Candidate Info</h5>
+      </div>
+      <div class="cand-option">
+        <h5>Primary Committee</h5>
+      </div>
+      <div class="cand-option">
+        <h5>SuperPac Expenditures</h5>
+      </div>
+      <div class="cand-option">
+        <h5>Individual Donors</h5>
+      </div>
+      <div class="cand-option">
+        <h5>Committee Donors</h5>
+      </div>
+    </div>
+    </div>
+    <div class="nine columns outerrow">
+      <div class="flexrow">
+        <div class="six columns flexyrow">
           <p>Party: {{candidate?.PARTY}}</p>
           <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
           <p>FEC ID: {{candidate?.CANDIDATE_ID}}</p>
           <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
           <p><a [href]="candidate?.lin_ima">FEC Filing</a></p>
-      </div>
-      <div class="cand-options">
-        <div (click)="showTreemapEmit(route)" class="cand-option">
-          <h5>Expand Treemap Diagram</h5>
+        </div>
+        <div class="six columns flexyrow">
         </div>
       </div>
     </div>
-    <div class="eight columns outerrow">
-      <div class="flexrow">
-        <div class="six columns flexyrow">
-          <pie-chart>
-          </pie-chart>
-        </div>
-        <div class="six columns flexyrow">
-          <div (click)="close()" class="close-button">
-            <img src="/images/close.png" class="close-icon" />
-          </div>
-          <div class="finances">
-            <div class="finance-title">
-              <h5>Financial Info</h5>
-            </div>
-            <table class="cand-table">
-              <tr>
-                <td>Cash</td>
-                <td class="green">{{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
-              </tr>
-              <tr>
-                <td>Net Contributions</td>
-                <td class="green">{{parseFloat(candidate?.net_con) | currency:'USD':true}}</td>
-              </tr>
-              <tr>
-                <td>Net Distributions</td>
-                <td class="red">{{parseFloat(candidate?.tot_dis) | currency:'USD':true}}</td>
-              </tr>
-              <tr>
-                <td>Net Opex</td>
-                <td class="red">{{parseFloat(candidate?.net_ope_exp) | currency:'USD':true}}</td>
-              </tr>
-              <tr>
-                <td>Debts Owed</td>
-                <td class="red">{{parseFloat(candidate?.deb_owe_by_com) | currency:'USD':true}}</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="text-center eight-columns offset-by-two">
-        <p>Each rectangle below represents a {{typeString}}.  Click on the rectangle to see more details.  Click on the top bar to exit out of the detailed view</p>
-      </div>
-      <div class="flexrow">
-        <treemap route="{{route}}">
-        </treemap>
-      </div>
-    </div>
-
 </div>

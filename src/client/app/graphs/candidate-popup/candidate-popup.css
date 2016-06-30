@@ -25,7 +25,8 @@
 }
 
 img {
-  width: 60%;
+  width: 80%;
+  border-radius: 50%;
 }
 p {
   margin: 0 !important;
@@ -57,8 +58,8 @@ li {
 }
 .cand-option {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-content: center;
+  padding-left: 5px;
   border: #CBCED2;
   color: #CBCED2;
   font-size: 3rem;
