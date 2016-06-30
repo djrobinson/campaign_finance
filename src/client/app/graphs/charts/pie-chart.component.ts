@@ -122,7 +122,7 @@ export class PieComponent implements OnInit, OnChanges {
       ];
       var j = 0;
         this.isRequesting = true;
-        http.get('api/individuals/committee/'+associatedCommittee.CMTE_ID).map(response => response.json()).subscribe(
+        http.get('api/individuals/committee/'+associatedCommittee.CMTE_ID+'/chart').map(response => response.json()).subscribe(
           data=>{
           // indivToCommittees = indivToCommittees.concat(data);
           var chartStuff =  data.reduce(function(prev, curr) {

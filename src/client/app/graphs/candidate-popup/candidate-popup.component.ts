@@ -38,7 +38,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
   ngOnInit(){
       this.imageVar = {};
-      console.log(this.candidate);
       if (this.candidate.charAt(0) === "P") {
         this.route = '/api/pac/aggregate/' + this.candidate;
         this.imageVar.image = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + this.candidate + ".jpg";
@@ -71,7 +70,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
     ).subscribe(
       data => {
-        console.log(data);
+        console.log("Candidate Data ", data);
         this.candidate = data[0][0];
         this.disbursements = data[1];
         data[2] = data[2].map(function(el){
@@ -89,14 +88,12 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   }
 
   showTreemapEmit(route){
-    console.log(route);
     this.treemapEmit.emit({
       route: route
     })
   }
 
   cmtePopupEmit(cmte) {
-    console.log(cmte);
     this.cmteEmit.emit({
       cmte: cmte
     })

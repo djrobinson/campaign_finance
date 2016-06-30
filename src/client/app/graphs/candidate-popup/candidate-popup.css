@@ -1,3 +1,8 @@
+h1, h2, h3, h4, h5, p {
+  font-family: 'Oswald';
+  font-weight: 300;
+}
+
 .cand-style {
   display: flex;
   height: 100%;
@@ -25,8 +30,9 @@
 }
 
 img {
-  width: 80%;
+  width: 50%;
   border-radius: 50%;
+  margin-top: 5rem;
 }
 p {
   margin: 0 !important;
@@ -40,7 +46,7 @@ li {
   overflow: scroll;
 }
 .choices {
-  background-color: #17324f;
+  background-color: #EFF1F3;
   color: #cbced2;
   text-align: center;
   height: 100%;
@@ -48,132 +54,35 @@ li {
   flex-direction: column;
 }
 .cand-pic {
-  flex-grow: 1;
+  background-color: #17324f;
+  padding-bottom: 5rem;
 }
 .cand-options {
-  flex-grow: 1;
+  background-color: #EFF1F3;
   display: flex;
   flex-direction: column;
-  align-items: space-around;
 }
 .cand-option {
   display: flex;
   align-content: center;
   padding-left: 5px;
-  border: #CBCED2;
-  color: #CBCED2;
+  border: #16191F;
   font-size: 3rem;
   text-align: center;
   flex-grow: 1;
   width: 100%;
+  color: #16191F;
+  box-sizing: border-box;
 }
 .cand-option:hover {
   background-color: #16191F;
-}
-.outerrow {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-}
-
-.flexrow {
-  display: flex;
-  flex-grow: 1;
-  height: 50%;
-}
-
-.flexyrow {
-  display: flex;
-  flex-grow: 1;
-}
-
-pie-chart {
-  position: relative;
-  flex-grow: 1;
+  color: #EFF1F3;
+  border-left: solid 5px #53B4C4;
 }
 
 treemap {
   position:relative;
   flex-grow: 2;
-}
-
-table {
-  font-size: 1rem;
-}
-
-.main-info {
-  position: absolute;
-  height: 40%;
-  width: 25%;
-  left: 25%;
-}
-
-.pac-spend {
-  position: absolute;
-  right: 0;
-  width: 25%;
-  height: 90%;
-}
-
-.indiv {
-  position: absolute;
-  text-align: right;
-  width: 100%;
-  height: 5%;
-  bottom: 0;
-}
-
-.assoc-container {
-  position: relative;
-  padding: 0 !important;
-  margin: 0 !important;
-  height: 100%;
-  width: 100%;
-  overflow: scroll;
-}
-
-.assoc-tile {
-  position: absolute;
-  padding: 0 !important;
-  margin: 0 !important;
-  vertical-align: top;
-  width: 100%;
-  text-align: center;
-  box-sizing: border-box;
-  border: solid 1px gray;
-}
-
-.other-donations {
-  position: absolute;
-  right: 0;
-  height: 100%;
-  overflow: scroll;
-  border: solid 1px #75717B;
-  background-color: #FEFFFE;
-}
-.donor-tile {
-  border: solid 1px #75717B;
-  background-color: #FEFFFE;
-}
-
-.cand-table {
-  width: 100%;
-}
-
-.finances {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.finance-title {
-  display: block;
-  width: 100%;
-  text-align: center;
-}
-
-td {
-  font-size: 2rem;
 }
 
 .text-center {

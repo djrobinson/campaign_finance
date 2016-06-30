@@ -1,14 +1,10 @@
 <div class="cand-style" id="full-size">
   <div class="three columns choices">
     <div class="cand-pic text-center">
-        <h5>{{candidate?.CANDIDATE_NAME}}</h5>
-        <img [src]="imageVar?.image" alt="picture">
-
+      <img [src]="imageVar?.image" alt="picture">
+      <h5>{{candidate?.CANDIDATE_NAME}}</h5>
     </div>
     <div class="cand-options">
-      <div class="cand-option">
-        <h5>Candidate Info</h5>
-      </div>
       <div class="cand-option">
         <h5>Primary Committee</h5>
       </div>
@@ -23,16 +19,16 @@
       </div>
     </div>
     </div>
-    <div class="nine columns outerrow">
+    <div class="nine columns">
       <div class="flexrow">
-        <div class="six columns flexyrow">
+        <div class="six columns">
           <p>Party: {{candidate?.PARTY}}</p>
           <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
           <p>FEC ID: {{candidate?.CANDIDATE_ID}}</p>
           <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
           <p><a [href]="candidate?.lin_ima">FEC Filing</a></p>
         </div>
-        <div class="six columns flexyrow">
+        <div class="six columns">
         </div>
       </div>
     </div>

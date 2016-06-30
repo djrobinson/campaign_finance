@@ -82,6 +82,12 @@ router.get('/committee/:cmte_id', function(req, res, next){
 
 });
 
+router.get('/committee/:cmte_id/chart', function(req, res, next){
+    query.indivByCmteChart(req.params.cmte_id).then(function(data){
+      res.json(data);
+    });
+});
+
 router.get('/committee/:cmte_id/limit', function(req, res, next){
   if (req.query.offset){
     var offset = +req.query.offset * 100;

@@ -64,6 +64,12 @@ module.exports = {
   indivByCmte: function(cmte_id, offset){
     return knex('indiv_contrib')
            .where({'CMTE_ID': cmte_id})
-           .orderBy('TRANSACTION_AMT', 'desc');
+           .orderBy('TRANSACTION_AMT', 'desc')
+           .limit(100);
+  },
+  indivByCmteChart: function(cmte_id, offset){
+    return knex('indiv_contrib')
+           .select('NAME', 'TRANSACTION_DT', 'TRANSACTION_AMT')
+           .where({'CMTE_ID': cmte_id});
   }
 }
