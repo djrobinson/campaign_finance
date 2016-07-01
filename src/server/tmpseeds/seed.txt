@@ -11,10 +11,19 @@ Notes:
 
 Works straight from download:
 committee_registrations
+ccl.txt
 
-Has extra column issue:
+Has extra data after last expected column Issue:
 campaign_cmte_rpts
 candidiate_summaries
+committee_summaries
+oppexp.txt < SOLVED: Had to remove extra '|', removed final rows. \COPY vs COPY issue
+
 
 Has number format issue:
 candidate_disbursements < SOLVED: negative number issue
+
+Note, it appears there is a difference between \COPY & COPY for postgres
+See the following article:
+http://stackoverflow.com/questions/26747748/error-missing-data-for-column-when-using-copy-in-psql
+
