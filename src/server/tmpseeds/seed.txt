@@ -6,22 +6,31 @@ psql -h remotehost -d remote_mydb -U myuser -c
 
 psql -h ec2-54-227-245-222.compute-1.amazonaws.com -d d5trlmin62h78n -U pxdyvjshswrkld -c "\COPY indiv_contrib FROM '/Users/danny/seeds/campaign_cmte.csv' DELIMITER ',' CSV header encoding 'UTF-8'"
 
+\COPY committee_master FROM '/Users/danny/Downloads/cm.txt' (DELIMITER('|'));
 
 Notes:
 
 Works straight from download:
 committee_registrations
 ccl.txt
+cn.txt
+cm.txt < Minor issue w/ '\'
+itoth.txt
+itcont.txt < '\' issue
+itpas2.txt
+
 
 Has extra data after last expected column Issue:
 campaign_cmte_rpts
 candidiate_summaries
 committee_summaries
-oppexp.txt < SOLVED: Had to remove extra '|', removed final rows. \COPY vs COPY issue
+oppexp.txt < SOLVED: Had to remove extra '|', removed final rows. \COPY vs COPY issue, '\' issue
 
 
 Has number format issue:
-candidate_disbursements < SOLVED: negative number issue
+candidate_disbursements < SOLVED: negative number issue, restructured the currency formatter
+
+Other note: some bulk txt files have backslashes that need to be removed
 
 Note, it appears there is a difference between \COPY & COPY for postgres
 See the following article:
