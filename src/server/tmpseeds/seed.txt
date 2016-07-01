@@ -19,12 +19,15 @@ itoth.txt
 itcont.txt < '\' issue
 itpas2.txt
 
-
 Has extra data after last expected column Issue:
 campaign_cmte_rpts
 candidiate_summaries
 committee_summaries
 oppexp.txt < SOLVED: Had to remove extra '|', removed final rows. \COPY vs COPY issue, '\' issue
+
+Missing data for column "..." issue:
+independent_expenditures.csv
+candidate_registratios.csv
 
 
 Has number format issue:
