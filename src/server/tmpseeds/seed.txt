@@ -5,3 +5,16 @@ psql -h remotehost -d remote_mydb -U myuser -c
     < /path/to/local/file.csv
 
 psql -h ec2-54-227-245-222.compute-1.amazonaws.com -d d5trlmin62h78n -U pxdyvjshswrkld -c "\COPY indiv_contrib FROM '/Users/danny/seeds/campaign_cmte.csv' DELIMITER ',' CSV header encoding 'UTF-8'"
+
+
+Notes:
+
+Works straight from download:
+committee_registrations
+
+Has extra column issue:
+campaign_cmte_rpts
+candidiate_summaries
+
+Has number format issue:
+candidate_disbursements < SOLVED: negative number issue

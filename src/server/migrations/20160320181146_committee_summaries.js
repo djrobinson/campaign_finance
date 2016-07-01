@@ -3,7 +3,6 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable('committee_summaries', function(table){
     table.string('com_nam');
     table.string('lin_ima');
-    table.string('rep_typ');
     table.string('com_typ');
     table.string('com_des');
     table.string('fil_fre');
