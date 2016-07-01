@@ -1,7 +1,7 @@
-\COPY indiv_contrib FROM '/Users/danny/Galvanize/projects/campaign_finances/new/src/server/data/indiv_contrib.csv' DELIMITER ',' CSV header encoding 'WINDOWS-1252';
+\COPY indiv_contrib FROM '/Users/danny/Downloads/campaign_cmte_rpts.csv' DELIMITER ',' CSV header encoding 'UTF-8';
 
 psql -h remotehost -d remote_mydb -U myuser -c
     "\COPY indiv_contrib FROM STDIN with delimiter as ',' CSV header encoding 'WINDOWS-1252'" \
     < /path/to/local/file.csv
 
-psql -h ec2-54-227-245-222.compute-1.amazonaws.com -d d5trlmin62h78n -U pxdyvjshswrkld -c "\COPY indiv_contrib FROM '/Users/danny/seeds/campaign_cmte.csv' DELIMITER ',' CSV header encoding 'WINDOWS-1252'"
+psql -h ec2-54-227-245-222.compute-1.amazonaws.com -d d5trlmin62h78n -U pxdyvjshswrkld -c "\COPY indiv_contrib FROM '/Users/danny/seeds/campaign_cmte.csv' DELIMITER ',' CSV header encoding 'UTF-8'"
