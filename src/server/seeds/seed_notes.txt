@@ -4,7 +4,7 @@ psql -h remotehost -d remote_mydb -U myuser -c
     "\COPY indiv_contrib FROM STDIN with delimiter as ',' CSV header encoding 'WINDOWS-1252'" \
     < /path/to/local/file.csv
 
-psql -h ec2-54-227-245-222.compute-1.amazonaws.com -d d5trlmin62h78n -U pxdyvjshswrkld -c "\COPY indiv_contrib FROM '/Users/danny/seeds/campaign_cmte.csv' DELIMITER ',' CSV header encoding 'UTF-8'"
+psql -h ec2-54-227-245-222.compute-1.amazonaws.com -d <database_name> -U <Username> -c "\COPY indiv_contrib FROM '/Users/danny/seeds/campaign_cmte.csv' DELIMITER ',' CSV header encoding 'UTF-8'"
 
 \COPY committee_master FROM '/Users/danny/Downloads/cm.txt' (DELIMITER('|'));
 
@@ -37,6 +37,3 @@ Other note: some bulk txt files have backslashes that need to be removed
 Note, it appears there is a difference between \COPY & COPY for postgres
 See the following article:
 http://stackoverflow.com/questions/26747748/error-missing-data-for-column-when-using-copy-in-psql
-
-
-
