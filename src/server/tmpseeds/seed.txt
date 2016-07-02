@@ -26,6 +26,8 @@ campaign_cmte_rpts <SOLVED: Had extra comma at the end of each line
 candidiate_summaries <Gonna take some work: A lot of extra quotes. getting an "Unterminated quoted csv" error on last line. Can't find where it opened.
 committee_summaries. *New update: Might need to do this one manually. A lot of extra quotes for nicknames
 
+*Candidate Summaries solution: Ran into the unterminnated quote error. Created file to test quote parity called count_quotes.js. Also need to do a search, changing quotes @ ," & ", to single quotes, then search for nicknames. After eliminating the nicknames, change back. Also note some nicknames have random commas that need to be manually searched for.
+
 Missing data for column "..." issue:
 independent_expenditures.csv  < Solved: Deleted blank rows at end of file
 candidate_registrations.csv <Solved: Same deal. Deleted blank rows.
