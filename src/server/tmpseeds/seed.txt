@@ -18,24 +18,23 @@ cm.txt < Minor issue w/ '\'
 itoth.txt
 itcont.txt < '\' issue
 itpas2.txt
+oppexp.txt < SOLVED: Had to remove extra '|', removed final rows. \COPY vs COPY issue, '\' issue
+candidate_disbursements < SOLVED: negative number issue, restructured the currency formatter
 
 Has extra data after last expected column Issue:
-campaign_cmte_rpts
-candidiate_summaries
-committee_summaries
-oppexp.txt < SOLVED: Had to remove extra '|', removed final rows. \COPY vs COPY issue, '\' issue
+campaign_cmte_rpts <SOLVED: Had extra comma at the end of each line
+candidiate_summaries <Gonna take some work: A lot of extra quotes. getting an "Unterminated quoted csv" error on last line. Can't find where it opened.
+committee_summaries. *New update: Might need to do this one manually. A lot of extra quotes for nicknames
 
 Missing data for column "..." issue:
-independent_expenditures.csv
-candidate_registratios.csv
-
-
-Has number format issue:
-candidate_disbursements < SOLVED: negative number issue, restructured the currency formatter
+independent_expenditures.csv  < Solved: Deleted blank rows at end of file
+candidate_registrations.csv <Solved: Same deal. Deleted blank rows.
 
 Other note: some bulk txt files have backslashes that need to be removed
 
 Note, it appears there is a difference between \COPY & COPY for postgres
 See the following article:
 http://stackoverflow.com/questions/26747748/error-missing-data-for-column-when-using-copy-in-psql
+
+
 
