@@ -37,3 +37,7 @@ Other note: some bulk txt files have backslashes that need to be removed
 Note, it appears there is a difference between \COPY & COPY for postgres
 See the following article:
 http://stackoverflow.com/questions/26747748/error-missing-data-for-column-when-using-copy-in-psql
+
+NOTES ON QUERYING:
+Appears that columns w/ knex are created w/ double quotes. therefore, need to use the following structure when running manual queries:
+SELECT * FROM indiv_contrib where "CMTE_ID" = 'C00452383';
