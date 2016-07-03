@@ -42,3 +42,5 @@ NOTES ON QUERYING:
 Appears that columns w/ knex are created w/ double quotes. therefore, need to use the following structure when running manual queries:
 SELECT * FROM indiv_contrib where "CMTE_ID" = 'C00452383';
 
+NOTES ON DATE FORMATTING:
+Created format file, but itoth is too large to be processed. Will try to seed db anyway.

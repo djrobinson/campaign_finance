@@ -14,7 +14,7 @@ exports.up = function(knex, Promise) {
     table.string('ZIP_CODE');
     table.string('EMPLOYER');
     table.string('OCCUPATION');
-    table.string('TRANSACTION_DT');
+    table.date('TRANSACTION_DT');
     table.decimal('TRANSACTION_AMT', 12);
     table.string('OTHER_ID');
     table.string('TRAN_ID');

@@ -80,6 +80,11 @@ module.exports = {
               sum(case when "TRANSACTION_AMT" > 2699 then 1 else 0 end) as "2700 and above"
               from indiv_contrib;
                     `);
+  },
+  indivByDate: function(cmte_id){
+    return knex.raw(
+
+                    );
   }
   /*\
     EXPLAIN ANALYZE
