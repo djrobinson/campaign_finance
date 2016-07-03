@@ -41,3 +41,4 @@ http://stackoverflow.com/questions/26747748/error-missing-data-for-column-when-u
 NOTES ON QUERYING:
 Appears that columns w/ knex are created w/ double quotes. therefore, need to use the following structure when running manual queries:
 SELECT * FROM indiv_contrib where "CMTE_ID" = 'C00452383';
+

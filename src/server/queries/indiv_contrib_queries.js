@@ -71,5 +71,23 @@ module.exports = {
     return knex('indiv_contrib')
            .select('NAME', 'TRANSACTION_DT', 'TRANSACTION_AMT')
            .where({'CMTE_ID': cmte_id});
+  },
+  indivByCmtePie: function(cmte_id){
+    return knex('indiv_contrib')
+            .raw(`select sum(case when TRANSACTION_AMT < 200 then 1 else 0 end) as [less than 200],
+                sum(case when value >= 200 and value <= 1499 then 1 else 0 end) as [200 to 1499],
+                sum(case when value >= 200 and value <= 1499 then 1 else 0 end) as [200 to 1499],
+                sum(case when value > 1499 then 1 else 0 end) as [above 1499]
+                from indiv_contrib
+                where "CMTE_ID" = 'C00575795'`)
   }
+  /*
+  select sum(case when "TRANSACTION_AMT" < 200 then 1 else 0 end) as "less than 200",
+                sum(case when "TRANSACTION_AMT" >= 200 and "TRANSACTION_AMT" <= 1499 then 1 else 0 end) as "200 to 1499",
+                sum(case when "TRANSACTION_AMT" >= 200 and "TRANSACTION_AMT" <= 1499 then 1 else 0 end) as "200 to 1499",
+                sum(case when "TRANSACTION_AMT" > 1499 then 1 else 0 end) as "above 1499"
+                from indiv_contrib
+                where "CMTE_ID" = 'C00575795';
+
+  */
 }
