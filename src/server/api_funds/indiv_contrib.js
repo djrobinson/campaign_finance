@@ -120,6 +120,13 @@ router.get('/bubble/:cmte_id', function(req, res, next){
   });
 });
 
+router.get('/committee/:cmte_id/pie', function(req, res, next){
+    query.indivByCmtePie(req.params.cmte_id).then(function(data){
+      console.log(data);
+      res.json(data);
+    });
+});
+
 
 
 
