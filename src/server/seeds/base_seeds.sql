@@ -1,6 +1,6 @@
 create schema campaign_finances_test;
 
-create table myschema.indiv_contrib(
+create table campaign_finances_test.indiv_contrib(
     CMTE_ID VARCHAR (20),
     AMNDT_IND VARCHAR (20),
     RPT_TP VARCHAR (20),
@@ -23,3 +23,5 @@ create table myschema.indiv_contrib(
     MEMO_TEXT VARCHAR (20),
     SUB_ID VARCHAR (20)
    );
+
+CREATE INDEX cmte_index ON indiv_contrib ("CMTE_ID");
