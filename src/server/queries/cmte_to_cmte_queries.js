@@ -22,5 +22,13 @@ module.exports = {
            .orderBy('TRANSACTION_AMT', 'desc')
            .limit(100)
            .offset(offset);
+  },
+  cmteByDate: function(cmte_id){
+    return knex.raw(`
+                    select count(*),date_trunc( 'month', "TRANSACTION_DT" ) from cmte_to_cmte
+                      WHERE "CMTE_ID" = '`+cmte_id+ `'
+                      group by
+                      date_trunc( 'month', "TRANSACTION_DT" );
+                    `);
   }
 }

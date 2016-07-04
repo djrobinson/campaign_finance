@@ -7,6 +7,9 @@ psql -h remotehost -d remote_mydb -U myuser -c
 psql -h ec2-54-227-245-222.compute-1.amazonaws.com -d <database_name> -U <Username> -c "\COPY indiv_contrib FROM '/Users/danny/seeds/campaign_cmte.csv' DELIMITER ',' CSV header encoding 'UTF-8'"
 
 \COPY committee_master FROM '/Users/danny/Downloads/cm.txt' (DELIMITER('|'));
+\COPY cmte_to_cmte FROM '/Users/danny/Downloads/itoth2.txt' (DELIMITER('|'));
+\COPY indiv_contrib FROM '/Users/danny/Downloads/itcont2.txt' (DELIMITER('|'));
+
 
 Notes:
 

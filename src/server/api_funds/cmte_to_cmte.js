@@ -45,5 +45,11 @@ router.get('/:cmte_id/recipient', function(req, res, next){
   }
 });
 
+router.get('/:cmte_id/date', function(req, res, next){
+  query.cmteByDate(req.params.cmte_id).then(function(data){
+    res.json(data.rows);
+  });
+});
+
 module.exports = router;
 
