@@ -57,5 +57,17 @@ router.get('/:cmte_id/designation', function(req, res, next){
   });
 });
 
+router.get('/:cmte_id/cmtetype', function(req, res, next){
+  query.cmteByCmteType(req.params.cmte_id).then(function(data){
+    res.json(data.rows);
+  });
+});
+
+router.get('/:cmte_id/orgtype', function(req, res, next){
+  query.cmteByOrgType(req.params.cmte_id).then(function(data){
+    res.json(data.rows);
+  });
+});
+
 module.exports = router;
 

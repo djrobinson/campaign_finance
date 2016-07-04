@@ -32,12 +32,35 @@ module.exports = {
                     `);
   },
   cmteByDsgn: function(cmte_id){
-    return knex('cmte_to_cmte')
-            .select(knex.raw('SUM("cmte_to_cmte.TRANSACTION_AMT")'))
-            .from('cmte_to_cmte')
-            .innerJoin('committee_master', 'committee_master.CMTE_ID', 'cmte_to_cmte.OTHER_ID')
-            .groupBy('cmte_master.CMTE_DSGN');
-      }
+    return knex.raw(`
+            SELECT SUM(cmte_to_cmte."TRANSACTION_AMT"), committee_master."CMTE_DSGN"
+              FROM cmte_to_cmte
+              INNER JOIN committee_master
+              ON cmte_to_cmte."CMTE_ID"=committee_master."CMTE_ID"
+              WHERE "OTHER_ID" = '`+cmte_id+`'
+              GROUP BY committee_master."CMTE_DSGN";
+            `);
+  },
+  cmteByCmteType: function(cmte_id){
+    return knex.raw(`
+            SELECT SUM(cmte_to_cmte."TRANSACTION_AMT"), committee_master."CMTE_TP"
+              FROM cmte_to_cmte
+              INNER JOIN committee_master
+              ON cmte_to_cmte."CMTE_ID"=committee_master."CMTE_ID"
+              WHERE "OTHER_ID" = '`+cmte_id+`'
+              GROUP BY committee_master."CMTE_TP";
+            `);
+  },
+  cmteByOrgType: function(cmte_id){
+    return knex.raw(`
+            SELECT SUM(cmte_to_cmte."TRANSACTION_AMT"), committee_master."ORG_TP"
+              FROM cmte_to_cmte
+              INNER JOIN committee_master
+              ON cmte_to_cmte."CMTE_ID"=committee_master."CMTE_ID"
+              WHERE "OTHER_ID" = '`+cmte_id+`'
+              GROUP BY committee_master."ORG_TP";
+            `);
+  }
   /*
     SELECT SUM(cmte_to_cmte."TRANSACTION_AMT"), committee_master."CMTE_DSGN"
       FROM cmte_to_cmte
