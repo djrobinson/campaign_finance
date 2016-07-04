@@ -82,9 +82,12 @@ module.exports = {
                     `);
   },
   indivByDate: function(cmte_id){
-    return knex.raw(
-
-                    );
+    return knex.raw(`
+                    select count(*),date_trunc( 'month', "TRANSACTION_DT" ) from indiv_contrib
+                      WHERE "CMTE_ID" = 'C00575795'
+                      group by
+                      date_trunc( 'month', "TRANSACTION_DT" );
+                    `);
   }
   /*\
     EXPLAIN ANALYZE
@@ -102,6 +105,11 @@ module.exports = {
               sum(case when "TRANSACTION_AMT" > 2699 then "TRANSACTION_AMT" else 0 end) as "2700 and above"
               from indiv_contrib
               WHERE "CMTE_ID" = 'C00575795';
+
+    select count(*),date_trunc( 'month', "TRANSACTION_DT" ) from indiv_contrib
+    WHERE "CMTE_ID" = 'C00575795'
+    group by
+    date_trunc( 'month', "TRANSACTION_DT" );
 
   */
 }
