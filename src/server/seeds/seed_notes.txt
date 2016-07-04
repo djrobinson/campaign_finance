@@ -20,6 +20,8 @@ psql -h ec2-54-227-245-222.compute-1.amazonaws.com -d <database_name> -U <Userna
 \COPY independent_expenditures FROM '/Users/danny/Downloads/new3/independent_expenditure.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <16536
 \COPY opex FROM '/Users/danny/Downloads/oppexp2.txt' (DELIMITER('|')); <982377
 
+\COPY committee_summaries FROM '/Users/danny/Downloads/new3/committee_summaries2.csv' DELIMITER ',' CSV header encoding 'UTF-8';
+
 Notes:
 
 FORGOT TO DO COMMITTEE SUMMARIES!!!
