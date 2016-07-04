@@ -54,6 +54,16 @@ module.exports = {
            .limit(100)
            .offset(offset);
   },
+  allEmployers: function(cmte_id){
+    return knex.raw(`
+              SELECT SUM("TRANSACTION_AMT"), "EMPLOYER"
+                FROM indiv_contrib
+                WHERE "CMTE_ID" = '`+cmte_id+`'
+                GROUP BY "EMPLOYER"
+                ORDER BY sum DESC
+                LIMIT 100;
+                    `)
+  },
   indivByCmteLimit: function(cmte_id, offset){
     return knex('indiv_contrib')
            .where({'CMTE_ID': cmte_id})
