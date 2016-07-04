@@ -30,5 +30,20 @@ module.exports = {
                       group by
                       date_trunc( 'month', "TRANSACTION_DT" );
                     `);
-  }
+  },
+  cmteByDsgn: function(cmte_id){
+    return knex('cmte_to_cmte')
+            .select(knex.raw('SUM("cmte_to_cmte.TRANSACTION_AMT")'))
+            .from('cmte_to_cmte')
+            .innerJoin('committee_master', 'committee_master.CMTE_ID', 'cmte_to_cmte.OTHER_ID')
+            .groupBy('cmte_master.CMTE_DSGN');
+      }
+  /*
+    SELECT SUM(cmte_to_cmte."TRANSACTION_AMT"), committee_master."CMTE_DSGN"
+      FROM cmte_to_cmte
+      INNER JOIN committee_master
+      ON cmte_to_cmte."CMTE_ID"=committee_master."CMTE_ID"
+      WHERE "OTHER_ID" = 'C00575795'
+      GROUP BY committee_master."CMTE_DSGN";
+  */
 }
