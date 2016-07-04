@@ -41,6 +41,7 @@ module.exports = {
     return knex('candidacy_statements')
            .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
            .where({'CANDIDATE_OFFICE_CODE': office})
+           .whereRaw('net_con IS NOT NULL')
            .orderBy('net_con', 'desc')
            .limit(100)
            .offset(offset);
