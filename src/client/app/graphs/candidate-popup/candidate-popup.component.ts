@@ -80,7 +80,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.contributions = data[2];
         this.associatedCommittees = data[3][0];
         this.pacSpends = data[4];
-        this.pieComponent.callAsc(data[3][0]);
+        // this.pieComponent.callAsc(data[3][0]);
 
       },
       err => console.error(err)
