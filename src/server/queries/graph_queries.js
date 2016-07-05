@@ -16,7 +16,7 @@ module.exports = {
             .innerJoin('committee_master', 'committee_master.CMTE_ID', 'cmte_to_cmte.OTHER_ID')
             .select('cmte_to_cmte.CMTE_ID', 'cmte_to_cmte.OTHER_ID', 'cmte_to_cmte.TRANSACTION_AMT', 'committee_master.CMTE_NM', 'cmte_to_cmte.IMAGE_NUM', 'committee_master.CMTE_TP')
             .where({'cmte_to_cmte.CMTE_ID': cmte.OTHER_ID})
-            .where('TRANSACTION_TP', 'LIKE', '18%')
+            .where('TRANSACTION_TP', 'LIKE', '1%')
             .orderBy('cmte_to_cmte.TRANSACTION_AMT', 'desc')
             .limit(10);
   },

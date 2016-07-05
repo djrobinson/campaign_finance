@@ -141,8 +141,8 @@ import { Router, RouteParams } from 'angular2/router';
     candidate-popup {
       position: absolute;
       width: 80%;
-      height: 90%;
-      top: 5%;
+      height: 80%;
+      top: 10%;
       left: 10%;
       border: solid 1px #75717B;
       background-color: #FEFFFE;

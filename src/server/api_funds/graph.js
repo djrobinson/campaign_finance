@@ -46,6 +46,12 @@ var typeMap = function(arr){
   return arr;
 };
 
+router.get('/:cmte_id/test', function(req, res, next){
+  graph.getTopCom(req.params.cmte_id).then(function(comms){
+    res.json(comms);
+  })
+})
+
 router.get('/:cand_id/candidate', function(req, res, next){
   var indexer = 0;
   var final = [];
@@ -59,7 +65,7 @@ router.get('/:cand_id/candidate', function(req, res, next){
         return prev.concat(arr);
       }, []);
       var indivComm = _.uniqBy(notUniqIndivComm, 'OTHER_ID');
-      // console.log("indivComm ", indivComm);
+      console.log("indivComm ", indivComm);
     appender(first, indivComm)
     .then(function(third){
       // console.log("third", third);
@@ -78,7 +84,7 @@ router.get('/:cand_id/candidate', function(req, res, next){
       var notUniqThirdComm = sixth.reduce(function(prev, arr){
         return prev.concat(arr);
       }, []);
-      var secondComm = _.uniqBy(notUniqSecondComm, 'OTHER_ID');
+      // var secondComm = _.uniqBy(notUniqSecondComm, 'OTHER_ID');
       // console.log("sixth ", sixth);
       appender(notUniqSecondComm, sixth)
     .then(function(data){
