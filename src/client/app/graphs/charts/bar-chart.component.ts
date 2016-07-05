@@ -67,15 +67,15 @@ export class BarComponent implements OnInit {
     d3.json("/api/individuals/committee/C00575795/date", function(error, data) {
       if (error) throw error;
 
-      data = data.map(function(d){
-        d.count = parseInt(d.count);
-        return d;
-      })
+
+      data.forEach(function(d) {
+        d.vals = data.map(function(name) { return {name: "Individuals", value: +d.count}; });
+      });
       console.log(data);
 
       x0.domain(data.map(function(d) { return d.date_trunc; }));
       x1.domain(data).rangeRoundBands([0, x0.rangeBand()]);
-      y.domain([0, d3.max(data, function(d) { return d.count })]);
+      y.domain([0, d3.max(data, function(d) { return d3.max(d.vals, function(d) { return d.value; })})]);
 
       svg.append("g")
           .attr("class", "x axis")
@@ -92,19 +92,20 @@ export class BarComponent implements OnInit {
           .style("text-anchor", "end")
           .text("Count");
 
-      var state = svg.selectAll(".state")
+      var donations = svg.selectAll(".donations")
           .data(data)
         .enter().append("g")
-          .attr("class", "state")
+          .attr("class", "donations")
           .attr("transform", function(d) { return "translate(" + x0(d.date_trunc) + ",0)"; });
 
-      state.selectAll("rect")
-          .data(function(d) { return d.count; })
+      donations.selectAll("rect")
+          .data(function(d) { return d.vals; })
         .enter().append("rect")
           .attr("width", x1.rangeBand())
-          .attr("y", function(d) { return y(d.count) })
-          .attr("height", function(d) { return height - y(d.count); })
-          .style("fill", function(d) { return color(d.count); });
+          .attr("x", function(d) { return x1(d.name); })
+          .attr("y", function(d) { return y(d.value) })
+          .attr("height", function(d) { return height - y(d.value); })
+          .style("fill", function(d) { return color(d.name); });
 
       // var legend = svg.selectAll(".legend")
       //     .data(ageNames.slice().reverse())
