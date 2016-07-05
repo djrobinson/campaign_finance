@@ -7,6 +7,7 @@ import {CommitteePopupComponent} from './committee-popup/committee-popup.compone
 import {CandidatePopupComponent} from './candidate-popup/candidate-popup.component.ts';
 import {TreemapComponent} from './charts/treemap.component.ts';
 import {BubbleComponent} from './charts/bubble-chart.component';
+import {BarComponent} from './charts/bar-chart.component';
 import {SpinnerComponent} from '../loading/spinner.component';
 import {Observable} from 'rxjs/Rx';
 import {Http, Response} from 'angular2/http';
@@ -188,7 +189,7 @@ import { Router, RouteParams } from 'angular2/router';
   `
   ],
   providers: [GraphService],
-  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent, CommitteePopupComponent, CandidatePopupComponent, TreemapComponent, BubbleComponent, SpinnerComponent]
+  directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent, CommitteePopupComponent, CandidatePopupComponent, TreemapComponent, BubbleComponent, BarComponent, SpinnerComponent]
 })
 export class GraphComponent implements OnInit  {
   private selectedNode: Object;

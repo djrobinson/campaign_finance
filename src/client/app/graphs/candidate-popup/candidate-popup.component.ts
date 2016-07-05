@@ -3,13 +3,13 @@ import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {TreemapComponent} from '../charts/treemap.component';
 import {PieComponent} from '../charts/pie-chart.component';
-
+import {BarComponent} from '../charts/bar-chart.component';
 
 @Component({
   selector: 'candidate-popup',
   templateUrl: 'app/graphs/candidate-popup/candidate-popup.html',
   styleUrls: ['app/graphs/candidate-popup/candidate-popup.css'],
-  directives: [TreemapComponent, PieComponent]
+  directives: [TreemapComponent, PieComponent, BarComponent]
 })
 export class CandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
