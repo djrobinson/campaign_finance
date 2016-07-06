@@ -46,10 +46,14 @@ module.exports = {
            .offset(offset);
   },
   sumOppByCand: function(cand_id){
-
+    return knex('independent_expenditures')
+            .sum('exp_amo as total')
+            .where({'can_id': cand_id, 'sup_opp': 'Oppose'});
   },
   sumSuppByCand: function(cand_id){
-
+    return knex('independent_expenditures')
+            .sum('exp_amo as total')
+            .where({'can_id': cand_id, 'sup_opp': 'Support'});
   },
   getOppByCmte: function(cmte_id, offset){
     return knex('independent_expenditures')

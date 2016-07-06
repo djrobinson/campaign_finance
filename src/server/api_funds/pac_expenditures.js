@@ -74,13 +74,13 @@ router.get('/:cand_id/oppose', function(req, res, next){
   }
 });
 
-router.get(':cand_id/oppose/sum', function(req, res, next){
+router.get('/:cand_id/oppose/sum', function(req, res, next){
   query.sumOppByCand(req.params.cand_id).then(function(data){
     res.json(data);
   })
 })
 
-router.get(':cand_id/support/sum', function(req, res, next){
+router.get('/:cand_id/support/sum', function(req, res, next){
   query.sumSuppByCand(req.params.cand_id).then(function(data){
     res.json(data);
   })
