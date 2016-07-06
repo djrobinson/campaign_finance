@@ -87,7 +87,8 @@ module.exports = {
             select sum(case when "TRANSACTION_AMT" < 200 then "TRANSACTION_AMT" else 0 end) as "less than 200",
               sum(case when "TRANSACTION_AMT" >= 200 and "TRANSACTION_AMT" <= 1499 then "TRANSACTION_AMT" else 0 end) as "200 to 1499",
               sum(case when "TRANSACTION_AMT" > 1499 and "TRANSACTION_AMT" <= 2699 then "TRANSACTION_AMT" else 0 end) as "1500 to 2699",
-              sum(case when "TRANSACTION_AMT" > 2699 then "TRANSACTION_AMT" else 0 end) as "Max Donation"
+              sum(case when "TRANSACTION_AMT" > 2699 then "TRANSACTION_AMT" else 0 end) as "Max Donation",
+              count("TRANSACTION_AMT")
               from indiv_contrib
               where "CMTE_ID" = '`+cmte_id+`';`);
   },
@@ -112,7 +113,8 @@ module.exports = {
     select sum(case when "TRANSACTION_AMT" < 200 then "TRANSACTION_AMT" else 0 end) as "less than 200",
               sum(case when "TRANSACTION_AMT" >= 200 and "TRANSACTION_AMT" <= 1499 then "TRANSACTION_AMT" else 0 end) as "200 to 1499",
               sum(case when "TRANSACTION_AMT" > 1499 and "TRANSACTION_AMT" <= 2699 then "TRANSACTION_AMT" else 0 end) as "1500 to 2699",
-              sum(case when "TRANSACTION_AMT" > 2699 then "TRANSACTION_AMT" else 0 end) as "2700 and above"
+              sum(case when "TRANSACTION_AMT" > 2699 then "TRANSACTION_AMT" else 0 end) as "2700 and above",
+              count("TRANSACTION_AMT")
               from indiv_contrib
               WHERE "CMTE_ID" = 'C00575795';
 

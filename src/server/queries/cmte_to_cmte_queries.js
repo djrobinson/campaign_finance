@@ -43,7 +43,8 @@ module.exports = {
   },
   cmteByCmteType: function(cmte_id){
     return knex.raw(`
-            SELECT SUM(cmte_to_cmte."TRANSACTION_AMT"), committee_master."CMTE_TP"
+            SELECT SUM(cmte_to_cmte."TRANSACTION_AMT"), committee_master."CMTE_TP",
+              count("TRANSACTION_AMT")
               FROM cmte_to_cmte
               INNER JOIN committee_master
               ON cmte_to_cmte."CMTE_ID"=committee_master."CMTE_ID"
@@ -53,7 +54,8 @@ module.exports = {
   },
   cmteByOrgType: function(cmte_id){
     return knex.raw(`
-            SELECT SUM(cmte_to_cmte."TRANSACTION_AMT"), committee_master."ORG_TP"
+            SELECT SUM(cmte_to_cmte."TRANSACTION_AMT"), committee_master."ORG_TP",
+              count("TRANSACTION_AMT")
               FROM cmte_to_cmte
               INNER JOIN committee_master
               ON cmte_to_cmte."CMTE_ID"=committee_master."CMTE_ID"

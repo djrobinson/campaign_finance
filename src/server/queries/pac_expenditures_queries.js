@@ -45,6 +45,12 @@ module.exports = {
            .limit(100)
            .offset(offset);
   },
+  sumOppByCand: function(cand_id){
+
+  },
+  sumSuppByCand: function(cand_id){
+
+  },
   getOppByCmte: function(cmte_id, offset){
     return knex('independent_expenditures')
            .where({'spe_id': cmte_id, 'sup_opp': 'Oppose'})
