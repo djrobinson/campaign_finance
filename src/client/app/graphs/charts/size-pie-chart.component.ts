@@ -100,10 +100,12 @@ export class SizePieComponent implements OnInit, OnChanges {
             console.log(data);
           //
           Object.keys(data[0]).forEach((key)=>{
-            pieData.push({
-              label: key,
-              amount: +data[0][key]
-            });
+            if (key !== "count"){
+              pieData.push({
+                label: key,
+                amount: +data[0][key]
+              });
+            }
           })
           buildPieChart(pieData);
         },
