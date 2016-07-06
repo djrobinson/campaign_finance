@@ -5,6 +5,7 @@ h1, h2, h3, h4, h5, p {
 
 .cand-style {
   display: flex;
+  flex-direction: row;
   height: 100%;
   font-size: 10px;
 }
@@ -78,6 +79,26 @@ li {
   background-color: #16191F;
   color: #EFF1F3;
   border-left: solid 5px #53B4C4;
+}
+
+bar-chart {
+  width: 100%;
+}
+
+.candidate-content {
+  height: 100%;
+  position: relative;
+}
+
+.flexy-row {
+  position: absolute;
+  height: 50%;
+  width: 100%;
+  border: solid 1px black;
+}
+
+.bottom {
+  bottom: 0;
 }
 
 treemap {

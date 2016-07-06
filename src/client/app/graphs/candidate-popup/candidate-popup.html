@@ -19,8 +19,14 @@
       </div>
     </div>
     </div>
-    <div class="nine columns">
-      <div class="flexrow">
+    <div class="nine columns candidate-content">
+      <div class="flexy-row twelve columns">
+        <div class="three columns">
+          <pie-chart2></pie-chart2>
+        </div>
+        <div class="three columns">
+          <pie-chart></pie-chart>
+        </div>
         <div class="six columns">
           <p>Party: {{candidate?.PARTY}}</p>
           <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
@@ -28,10 +34,8 @@
           <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
           <p><a [href]="candidate?.lin_ima">FEC Filing</a></p>
         </div>
-        <div class="six columns">
-        </div>
       </div>
-      <div class="flexrow">
+      <div class="flexy-row bottom twelve-columns">
         <bar-chart></bar-chart>
       </div>
     </div>

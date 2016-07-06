@@ -3,13 +3,14 @@ import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {TreemapComponent} from '../charts/treemap.component';
 import {PieComponent} from '../charts/pie-chart.component';
+import {PieComponent2} from '../charts/pie-chart2.component';
 import {BarComponent} from '../charts/bar-chart.component';
 
 @Component({
   selector: 'candidate-popup',
   templateUrl: 'app/graphs/candidate-popup/candidate-popup.html',
   styleUrls: ['app/graphs/candidate-popup/candidate-popup.css'],
-  directives: [TreemapComponent, PieComponent, BarComponent]
+  directives: [TreemapComponent, PieComponent, PieComponent2, BarComponent]
 })
 export class CandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
@@ -18,6 +19,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   @Output() cmteEmit = new EventEmitter();
   @Output() treemapEmit = new EventEmitter();
   @ViewChild(PieComponent) pieComponent: PieComponent;
+  @ViewChild(PieComponent2) pieComponent2: PieComponent2;
   @ViewChild(TreemapComponent) treemapComponent: TreemapComponent;
 
   private disbursements: Object;
@@ -80,7 +82,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.contributions = data[2];
         this.associatedCommittees = data[3][0];
         this.pacSpends = data[4];
-        // this.pieComponent.callAsc(data[3][0]);
+        this.pieComponent.callAsc(data[3][0]);
+        this.pieComponent2.callAsc(data[3][0]);
 
       },
       err => console.error(err)
