@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Rx';
 import {SpinnerComponent} from '../../loading/spinner.component';
 
 @Component({
-  selector: 'pie-chart',
+  selector: 'size-pie',
   template: `
       <div id="containerChart2">
         <p>Itemized Individual Donations by Size</p>
@@ -84,7 +84,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
   `],
   directives: [SpinnerComponent]
 })
-export class PieComponent implements OnInit, OnChanges {
+export class SizePieComponent implements OnInit, OnChanges {
   public isRequesting: boolean;
   constructor(private http:Http) {}
 

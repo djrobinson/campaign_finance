@@ -2,15 +2,15 @@ import {Component, Input, Output, OnInit, OnChanges, EventEmitter, ViewChild} fr
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {TreemapComponent} from '../charts/treemap.component';
-import {PieComponent} from '../charts/pie-chart.component';
-import {PieComponent2} from '../charts/pie-chart2.component';
+import {TypePieComponent} from '../charts/type-pie-chart.component';
+import {SizePieComponent} from '../charts/size-pie-chart.component';
 import {BarComponent} from '../charts/bar-chart.component';
 
 @Component({
   selector: 'candidate-popup',
   templateUrl: 'app/graphs/candidate-popup/candidate-popup.html',
   styleUrls: ['app/graphs/candidate-popup/candidate-popup.css'],
-  directives: [TreemapComponent, PieComponent, PieComponent2, BarComponent]
+  directives: [TreemapComponent, TypePieComponent, SizePieComponent, BarComponent]
 })
 export class CandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
@@ -18,8 +18,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   @Output() exitEmit = new EventEmitter();
   @Output() cmteEmit = new EventEmitter();
   @Output() treemapEmit = new EventEmitter();
-  @ViewChild(PieComponent) pieComponent: PieComponent;
-  @ViewChild(PieComponent2) pieComponent2: PieComponent2;
+  @ViewChild(TypePieComponent) typePieComponent: TypePieComponent;
+  @ViewChild(SizePieComponent) sizePieComponent: SizePieComponent;
   @ViewChild(TreemapComponent) treemapComponent: TreemapComponent;
 
   private disbursements: Object;
@@ -88,8 +88,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
           };
         });
         console.log("Primary ", primary_cmte);
-        this.pieComponent.callAsc(primary_cmte[0]);
-        this.pieComponent2.callAsc(primary_cmte[0]);
+        this.typePieComponent.callAsc(primary_cmte[0]);
+        this.sizePieComponent.callAsc(primary_cmte[0]);
 
       },
       err => console.error(err)
