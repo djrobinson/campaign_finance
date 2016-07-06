@@ -27,7 +27,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
             </tr>
             <tr>
               <td class="label"></td>
-              <td class="count"></td>
+              <td class="amount"></td>
               <td class="percent"></td>
             </tr>
           </table>
@@ -92,64 +92,21 @@ export class PieComponent implements OnInit, OnChanges {
       var buildPieChart = this.buildPieChart;
       var http = this.http;
       var indivToCommittees = [];
-      var pieData = [
-        {
-          label: '>2700',
-          amount: 0,
-          count: 0
-        },
-        {
-          label: '1500-2699',
-          amount: 0,
-          count: 0
-        },
-        {
-          label: '500-1499',
-          amount: 0,
-          count: 0
-        },
-        {
-          label: '200-499',
-          amount: 0,
-          count: 0
-        },
-        {
-          label: '<200',
-          amount: 0,
-          count: 0
-        }
-      ];
+      var pieData = [];
       var j = 0;
         this.isRequesting = true;
-        http.get('api/individuals/committee/'+associatedCommittee.CMTE_ID+'/chart').map(response => response.json()).subscribe(
+        http.get('/api/individuals/committee/'+associatedCommittee.CMTE_ID+'/pie').map(response => response.json()).subscribe(
           data=>{
-          // indivToCommittees = indivToCommittees.concat(data);
-          var chartStuff =  data.reduce(function(prev, curr) {
-            var amt = parseFloat(curr.TRANSACTION_AMT);
-            if (amt > 2700) {
-              prev[0].amount += amt;
-              prev[0].count += 1;
-              return prev;
-            } else if (amt > 1500) {
-              prev[1].amount += amt;
-              prev[1].count += 1;
-              return prev;
-            } else if (amt > 500) {
-              prev[2].amount += amt;
-              prev[2].count += 1;
-              return prev;
-            } else if (amt > 200) {
-              prev[3].amount += amt;
-              prev[3].count += 1;
-              return prev;
-            } else {
-              prev[4].amount += amt;
-              prev[4].count += 1;
-              return prev;
-            }
-
-          }, pieData)
-          buildPieChart(chartStuff)
+            console.log(data);
+          //
+          Object.keys(data[0]).forEach((key)=>{
+            pieData.push({
+              label: key,
+              amount: +data[0][key]
+            });
+          })
+          console.log("pie data", pieData);
+          buildPieChart(pieData);
         },
           error => console.error('Error: ' + error),
           () => {
@@ -187,7 +144,7 @@ export class PieComponent implements OnInit, OnChanges {
         .outerRadius(radius);
 
       var pie = d3.layout.pie()
-        .value(function(d) { return d.count; })
+        .value(function(d) { return d.amount; })
         .sort(null);
 
       var tooltip = d3.select('.tooltip')
@@ -197,7 +154,7 @@ export class PieComponent implements OnInit, OnChanges {
       start(pieData);
       function start(dataset){
         dataset.forEach(function(d) {
-          d.count = +d.count;
+          d.amount = +d.amount;
         });
 
         var path = svg.selectAll('path')
@@ -212,11 +169,11 @@ export class PieComponent implements OnInit, OnChanges {
         path.on('mouseover', function(d) {
           tooltip.style('display', 'flex');
           var total = d3.sum(dataset.map(function(d) {
-            return d.count;
+            return d.amount;
           }));
-          var percent = Math.round(1000 * d.data.count / total) / 10;
+          var percent = Math.round(1000 * d.data.amount / total) / 10;
           tooltip.select('.label').html(d.data.label);
-          tooltip.select('.count').html(d.data.count);
+          tooltip.select('.amount').html(d.data.amount);
           tooltip.select('.percent').html(percent + '%');
         });
 
