@@ -7,9 +7,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
   selector: 'pie-chart',
   template: `
       <div id="containerChart2">
-        <div class="pie-title">
-          <h5>Donations by Size</h5>
-        </div>
+        <h5>Donations by Size</h5>
         <div id="chart2">
           <spinner [isRunning]="isRequesting">
           </spinner>
@@ -49,7 +47,6 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       flex-grow: 1;
       display: flex;
       width: 100%;
-      margin-top: 10%;
     }
 
     .pie-title {
@@ -57,6 +54,8 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       height: 10%;
       width: 100%;
       text-align: center;
+      margin: 0;
+      padding: 0;
     }
 
     .tooltip {
@@ -166,9 +165,9 @@ export class PieComponent implements OnInit, OnChanges {
     (function(d3) {
       'use strict';
 
-      var width = document.getElementById('chart2').offsetWidth;
-      var height = document.getElementById('chart2').offsetHeight;
-      var radius = Math.min(width, height) / 2.25;
+      var width = document.getElementById('chart22').offsetWidth;
+      var height = width;
+      var radius = width /  2.25;
       var donutWidth = 15;
       var legendRectSize = 18;
       var legendSpacing = 4;
