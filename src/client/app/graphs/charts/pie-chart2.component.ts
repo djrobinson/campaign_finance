@@ -7,12 +7,12 @@ import {SpinnerComponent} from '../../loading/spinner.component';
   selector: 'pie-chart2',
   template: `
       <div id="containerChart2">
-        <h5>Donations by type</h5>
+        <p>Donations by Committee type</p>
         <div id="chart22">
           <spinner [isRunning]="isRequesting">
           </spinner>
         </div>
-        <div class="tooltip">
+        <div class="type-tooltip">
           <table class="cand-table">
             <tr>
               <th>
@@ -27,8 +27,8 @@ import {SpinnerComponent} from '../../loading/spinner.component';
             </tr>
             <tr>
               <td class="type-label"></td>
-              <td class="type-label"></td>
-              <td class="type-label"></td>
+              <td class="type-amount"></td>
+              <td class="type-percent"></td>
             </tr>
           </table>
         </div>
@@ -68,12 +68,12 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       text-align: center;
     }
     th {
-      font-size: 1.5rem;
+      font-size: 1rem;
       text-align: center;
     }
     td {
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 1rem;
     }
     spinner {
       left: 30%;
@@ -95,17 +95,14 @@ export class PieComponent2 implements OnInit, OnChanges {
       var pieData = [];
       var j = 0;
         this.isRequesting = true;
-        http.get('/api/individuals/committee/'+associatedCommittee.CMTE_ID+'/pie').map(response => response.json()).subscribe(
+        http.get('api/transfers/'+associatedCommittee.CMTE_ID+'/cmtetype').map(response => response.json()).subscribe(
           data=>{
-            console.log(data);
-          //
-          Object.keys(data[0]).forEach((key)=>{
+          data.forEach((item)=>{
             pieData.push({
-              label: key,
-              amount: +data[0][key]
+              label: item.CMTE_TP,
+              amount: +item.sum
             });
           })
-          console.log("pie data", pieData);
           buildPieChart(pieData);
         },
           error => console.error('Error: ' + error),
@@ -144,17 +141,17 @@ export class PieComponent2 implements OnInit, OnChanges {
         .outerRadius(radius);
 
       var pie = d3.layout.pie()
-        .value(function(d) { return d.count; })
+        .value(function(d) { return d.amount; })
         .sort(null);
 
-      var tooltip = d3.select('.tooltip')
+      var tooltip = d3.select('.type-tooltip')
 
 
 
       start(pieData);
       function start(dataset){
         dataset.forEach(function(d) {
-          d.count = +d.count;
+          d.amount = +d.amount;
         });
 
         var path = svg.selectAll('path')
@@ -169,12 +166,12 @@ export class PieComponent2 implements OnInit, OnChanges {
         path.on('mouseover', function(d) {
           tooltip.style('display', 'flex');
           var total = d3.sum(dataset.map(function(d) {
-            return d.count;
+            return d.amount;
           }));
-          var percent = Math.round(1000 * d.data.count / total) / 10;
-          tooltip.select('.label').html(d.data.label);
-          tooltip.select('.count').html(d.data.count);
-          tooltip.select('.percent').html(percent + '%');
+          var percent = Math.round(1000 * d.data.amount / total) / 10;
+          tooltip.select('.type-label').html(d.data.label);
+          tooltip.select('.type-amount').html(d.data.amount);
+          tooltip.select('.type-percent').html(percent + '%');
         });
 
         path.on('mouseout', function() {

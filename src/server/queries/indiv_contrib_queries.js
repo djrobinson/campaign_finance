@@ -88,8 +88,8 @@ module.exports = {
               sum(case when "TRANSACTION_AMT" >= 200 and "TRANSACTION_AMT" <= 1499 then "TRANSACTION_AMT" else 0 end) as "200 to 1499",
               sum(case when "TRANSACTION_AMT" > 1499 and "TRANSACTION_AMT" <= 2699 then "TRANSACTION_AMT" else 0 end) as "1500 to 2699",
               sum(case when "TRANSACTION_AMT" > 2699 then "TRANSACTION_AMT" else 0 end) as "Max Donation"
-              from indiv_contrib;
-                    `);
+              from indiv_contrib
+              where "CMTE_ID" = '`+cmte_id+`';`);
   },
   indivByDate: function(cmte_id){
     return knex.raw(`

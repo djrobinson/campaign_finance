@@ -82,8 +82,14 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.contributions = data[2];
         this.associatedCommittees = data[3][0];
         this.pacSpends = data[4];
-        this.pieComponent.callAsc(data[3][0]);
-        this.pieComponent2.callAsc(data[3][0]);
+        var primary_cmte = data[3].filter((cmte)=>{
+          if(cmte.CMTE_DSGN === "P"){
+            return cmte
+          };
+        });
+        console.log("Primary ", primary_cmte);
+        this.pieComponent.callAsc(primary_cmte[0]);
+        this.pieComponent2.callAsc(primary_cmte[0]);
 
       },
       err => console.error(err)

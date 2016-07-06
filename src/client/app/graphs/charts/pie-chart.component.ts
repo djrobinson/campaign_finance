@@ -7,12 +7,12 @@ import {SpinnerComponent} from '../../loading/spinner.component';
   selector: 'pie-chart',
   template: `
       <div id="containerChart2">
-        <h5>Donations by Size</h5>
+        <p>Itemized Individual Donations by Size</p>
         <div id="chart2">
           <spinner [isRunning]="isRequesting">
           </spinner>
         </div>
-        <div class="tooltip">
+        <div class="size-tooltip">
           <table class="cand-table">
             <tr>
               <th>
@@ -68,12 +68,12 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       text-align: center;
     }
     th {
-      font-size: 1.5rem;
+      font-size: 1rem;
       text-align: center;
     }
     td {
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 1rem;
     }
     spinner {
       left: 30%;
@@ -105,7 +105,6 @@ export class PieComponent implements OnInit, OnChanges {
               amount: +data[0][key]
             });
           })
-          console.log("pie data", pieData);
           buildPieChart(pieData);
         },
           error => console.error('Error: ' + error),
@@ -122,7 +121,7 @@ export class PieComponent implements OnInit, OnChanges {
     (function(d3) {
       'use strict';
 
-      var width = document.getElementById('chart22').offsetWidth;
+      var width = document.getElementById('chart2').offsetWidth;
       var height = width;
       var radius = width /  2.25;
       var donutWidth = 15;
@@ -147,7 +146,7 @@ export class PieComponent implements OnInit, OnChanges {
         .value(function(d) { return d.amount; })
         .sort(null);
 
-      var tooltip = d3.select('.tooltip')
+      var tooltip = d3.select('.size-tooltip')
 
 
 
