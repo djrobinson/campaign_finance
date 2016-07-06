@@ -84,10 +84,10 @@ module.exports = {
   },
   indivByCmtePie: function(cmte_id){
     return knex.raw(`
-            select sum(case when "TRANSACTION_AMT" < 200 then 1 else 0 end) as "less than 200",
-              sum(case when "TRANSACTION_AMT" >= 200 and "TRANSACTION_AMT" <= 1499 then 1 else 0 end) as "200 to 1499",
-              sum(case when "TRANSACTION_AMT" > 1499 and "TRANSACTION_AMT" <= 2699 then 1 else 0 end) as "1500 to 2699",
-              sum(case when "TRANSACTION_AMT" > 2699 then 1 else 0 end) as "2700 and above"
+            select sum(case when "TRANSACTION_AMT" < 200 then "TRANSACTION_AMT" else 0 end) as "less than 200",
+              sum(case when "TRANSACTION_AMT" >= 200 and "TRANSACTION_AMT" <= 1499 then "TRANSACTION_AMT" else 0 end) as "200 to 1499",
+              sum(case when "TRANSACTION_AMT" > 1499 and "TRANSACTION_AMT" <= 2699 then "TRANSACTION_AMT" else 0 end) as "1500 to 2699",
+              sum(case when "TRANSACTION_AMT" > 2699 then "TRANSACTION_AMT" else 0 end) as "Max Donation"
               from indiv_contrib;
                     `);
   },

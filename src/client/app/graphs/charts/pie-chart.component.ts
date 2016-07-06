@@ -26,9 +26,9 @@ import {SpinnerComponent} from '../../loading/spinner.component';
               </th>
             </tr>
             <tr>
-              <td class="label"></td>
-              <td class="amount"></td>
-              <td class="percent"></td>
+              <td class="size-label"></td>
+              <td class="size-amount"></td>
+              <td class="size-percent"></td>
             </tr>
           </table>
         </div>
@@ -172,9 +172,9 @@ export class PieComponent implements OnInit, OnChanges {
             return d.amount;
           }));
           var percent = Math.round(1000 * d.data.amount / total) / 10;
-          tooltip.select('.label').html(d.data.label);
-          tooltip.select('.amount').html(d.data.amount);
-          tooltip.select('.percent').html(percent + '%');
+          tooltip.select('.size-label').html(d.data.label);
+          tooltip.select('.size-amount').html(d.data.amount);
+          tooltip.select('.size-percent').html(percent + '%');
         });
 
         path.on('mouseout', function() {
