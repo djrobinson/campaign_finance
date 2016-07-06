@@ -4,13 +4,14 @@ import {Observable} from 'rxjs/Rx';
 import {TreemapComponent} from '../charts/treemap.component';
 import {TypePieComponent} from '../charts/type-pie-chart.component';
 import {SizePieComponent} from '../charts/size-pie-chart.component';
+import {DsgnPieComponent} from '../charts/dsgn-pie-chart.component';
 import {BarComponent} from '../charts/bar-chart.component';
 
 @Component({
   selector: 'candidate-popup',
   templateUrl: 'app/graphs/candidate-popup/candidate-popup.html',
   styleUrls: ['app/graphs/candidate-popup/candidate-popup.css'],
-  directives: [TreemapComponent, TypePieComponent, SizePieComponent, BarComponent]
+  directives: [TreemapComponent, TypePieComponent, SizePieComponent, DsgnPieComponent, BarComponent]
 })
 export class CandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
@@ -20,6 +21,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   @Output() treemapEmit = new EventEmitter();
   @ViewChild(TypePieComponent) typePieComponent: TypePieComponent;
   @ViewChild(SizePieComponent) sizePieComponent: SizePieComponent;
+  @ViewChild(DsgnPieComponent) dsgnPieComponent: DsgnPieComponent;
   @ViewChild(TreemapComponent) treemapComponent: TreemapComponent;
 
   private disbursements: Object;
@@ -90,6 +92,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         console.log("Primary ", primary_cmte);
         this.typePieComponent.callAsc(primary_cmte[0]);
         this.sizePieComponent.callAsc(primary_cmte[0]);
+        this.dsgnPieComponent.callAsc(primary_cmte[0]);
 
       },
       err => console.error(err)
