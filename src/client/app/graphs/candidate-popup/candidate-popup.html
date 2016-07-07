@@ -5,7 +5,7 @@
       <h5>{{candidate?.CANDIDATE_NAME}}</h5>
     </div>
     <div class="cand-options">
-      <div class="cand-option">
+      <div class="cand-option" (click)="choice('opex')">
         <h5>Committee Opex</h5>
       </div>
       <div class="cand-option">
@@ -20,25 +20,24 @@
     </div>
     </div>
     <div class="nine columns candidate-content">
-      <!-- Thinking about the following:
-        <div *ngIf="individuals">
+        <div *ngIf="selection==='individuals'">
           <individuals-section>
           </individuals-section>
         </div>
-        <div *ngIf="committees">
+        <div *ngIf="selection==='committees'">
           <committees-section>
           </committees-section>
         </div>
-        <div *ngIf="superpacs">
+        <div *ngIf="selection==='superpacs'">
           <pacs-section>
           </pacs-section>
         </div>
-        <div *ngIf="opex">
+        <div *ngIf="selection==='opex'">
+          <h1>blahblahblah</h1>
           <opex-section>
           </opex-section>
         </div>
-        Have these layered over the content below, that way I don't have to reload that data upon clicking back on main.
-       -->
+
       <div class="flexy-row twelve columns">
         <div class="three columns">
           <size-pie></size-pie>

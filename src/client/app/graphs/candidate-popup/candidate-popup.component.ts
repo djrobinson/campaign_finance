@@ -151,4 +151,9 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
     });
   }
 
+  public choice(selection) {
+    console.log(selection);
+    this.selection = selection;
+  }
+
 }
