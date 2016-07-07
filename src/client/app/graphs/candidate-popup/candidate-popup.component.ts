@@ -109,9 +109,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
         var barChartData = data[8].concat(data[9]);
         this.barComponent.buildChart(barChartData);
-        console.log("barrrrr ", barChartData);
-
-
       },
       err => console.error(err)
     );

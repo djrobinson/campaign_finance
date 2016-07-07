@@ -15,7 +15,6 @@ import {Component, Input, OnInit} from 'angular2/core';
       justify-items: center;
       height: 100%;
       width: 100%;
-      background-color: #ABA4A3;
     }
 
     #chart4 {
@@ -62,15 +61,29 @@ export class BarComponent {
 
     var data = graphData;
 
-      data.forEach(function(d) {
-        d.vals = data.map(function(name) { return {name: d.type, value: +d.count}; });
+      data.forEach(function(d, i){
+        data[i].count = +d.count;
       });
 
-      console.log("Bar Data ", data);
+      var valTypes = data.map((item)=>item.date_trunc);
+      console.log(valTypes);
 
-      x0.domain(data.map(function(d) { return d.date_trunc; }));
-      x1.domain(data).rangeRoundBands([0, x0.rangeBand()]);
-      y.domain([0, d3.max(data, function(d) { return d3.max(d.vals, function(d) { return d.value; })})]);
+      var barFinal = valTypes.map(function(date) {
+        return {
+          date: date,
+          vals: data.filter(function(d) {
+            if (date === d.date_trunc){
+              return d;
+            }
+          })
+        }
+      });
+
+      console.log("Bar Data ", barFinal);
+
+      x0.domain(barFinal.map(function(d) { return d.date; }));
+      x1.domain(valTypes).rangeRoundBands([0, x0.rangeBand()]);
+      y.domain([0, d3.max(data, function(d) { return +d.count})]);
 
       svg.append("g")
           .attr("class", "x axis")
@@ -88,18 +101,18 @@ export class BarComponent {
           .text("Count");
 
       var donations = svg.selectAll(".donations")
-          .data(data)
+          .data(barFinal)
         .enter().append("g")
           .attr("class", "donations")
-          .attr("transform", function(d) { return "translate(" + x0(d.date_trunc) + ",0)"; });
+          .attr("transform", function(d) { return "translate(" + x0(d.date) + ",0)"; });
 
       donations.selectAll("rect")
           .data(function(d) { return d.vals; })
         .enter().append("rect")
           .attr("width", x1.rangeBand())
           .attr("x", function(d) { return x1(d.name); })
-          .attr("y", function(d) { return y(d.value) })
-          .attr("height", function(d) { return height - y(d.value); })
+          .attr("y", function(d) { console.log("count ", d.count, "data", d); return y(d.count) })
+          .attr("height", function(d) { return height - y(d.count); })
           .style("fill", function(d) { return color(d.name); });
 
       // var legend = svg.selectAll(".legend")
