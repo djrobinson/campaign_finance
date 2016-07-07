@@ -17,6 +17,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
   @Input() candidate: string;
   @Input() committee: string;
+  @Input() isCandidate: boolean;
   @Output() exitEmit = new EventEmitter();
   @Output() cmteEmit = new EventEmitter();
   @Output() treemapEmit = new EventEmitter();
@@ -39,7 +40,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   public barChartData: any;
 
   constructor(
-              private http: Http) {
+    private http: Http) {
     this.parseFloat = function(num){
       return parseFloat(num);
     }

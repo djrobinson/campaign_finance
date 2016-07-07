@@ -20,6 +20,25 @@
     </div>
     </div>
     <div class="nine columns candidate-content">
+      <!-- Thinking about the following:
+        <div *ngIf="individuals">
+          <individuals-chart>
+          </individuals-chart>
+        </div>
+        <div *ngIf="committees">
+          <committees-chart>
+          </committees-chart>
+        </div>
+        <div *ngIf="superpacs">
+          <pacs-chart>
+          </pacs-chart>
+        </div>
+        <div *ngIf="opex">
+          <opex-chart>
+          </opex-chart>
+        </div>
+        Have these layered over the content below, that way I don't have to reload that data upon clicking back on main.
+       -->
       <div class="flexy-row twelve columns">
         <div class="three columns">
           <size-pie></size-pie>

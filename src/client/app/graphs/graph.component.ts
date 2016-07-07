@@ -59,6 +59,7 @@ import { Router, RouteParams } from 'angular2/router';
             </div>
             <div *ngIf="cmtePopup">
               <committee-popup
+                [isCandidate]="false"
                 [committee]="selectedCommittee"
                 (exitEmit)="exit()"
                 (cmteEmit)="changeCmte($event)"
@@ -68,6 +69,7 @@ import { Router, RouteParams } from 'angular2/router';
             </div>
             <div *ngIf="candPopup">
               <candidate-popup
+                [isCandidate]="true"
                 [candidate]="selectedCandidate"
                 [committee]="selectedCommittee"
                 (exitEmit)="exit()"
