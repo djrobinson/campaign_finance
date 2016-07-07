@@ -67,16 +67,21 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   callPresApis(fecId){
 
     Observable.forkJoin(
-      this.http.get('/api/candidates/'+fecId).map((res: Response) => res.json()),
-      this.http.get('/api/disbursements/'+fecId+'/candidate').map((res: Response) => res.json()),
-      this.http.get('/api/contributions/'+fecId+'/candidate').map((res: Response) => res.json()),
-      this.http.get('/api/candidates/'+fecId+'/associated').map((res: Response) => res.json()),
-      this.http.get('/api/pac/'+fecId+'/candidate').map((res: Response) => res.json()),
-      this.http.get('api/transfers/'+this.committee+'/designation').map((res: Response) => res.json()),
-      this.http.get('api/transfers/'+this.committee+'/cmtetype').map((res: Response) => res.json()),
-      this.http.get('/api/individuals/committee/'+this.committee+'/pie').map((res: Response) => res.json())
+      this.http.get('/api/candidates/'+fecId).map((res: Response) => res.json()), //0
+      this.http.get('/api/disbursements/'+fecId+'/candidate').map((res: Response) => res.json()), //1
+      this.http.get('/api/contributions/'+fecId+'/candidate').map((res: Response) => res.json()), //2
+      this.http.get('/api/candidates/'+fecId+'/associated').map((res: Response) => res.json()), //3
+      this.http.get('/api/pac/'+fecId+'/candidate').map((res: Response) => res.json()), //4
+      this.http.get('api/transfers/'+this.committee+'/designation').map((res: Response) => res.json()), //5
+      this.http.get('api/transfers/'+this.committee+'/cmtetype').map((res: Response) => res.json()), //6
+      this.http.get('/api/individuals/committee/'+this.committee+'/pie').map((res: Response) => res.json()), //7
+      this.http.get('/api/individuals/committee/'+this.committee+'/date').map((res: Response) => res.json()), //8
+      this.http.get('/api/transfers/'+this.committee+'/date').map((res: Response) => res.json()), //9
+      this.http.get('/api/pac/'+fecId+'/support/sum').map((res: Response) => res.json()), //10
+      this.http.get('/api/pac/'+fecId+'/oppose/sum').map((res: Response) => res.json()) //11
     ).subscribe(
       data => {
+        console.log("All candidate data: ", data);
         this.candidate = data[0][0];
         this.disbursements = data[1];
         data[2] = data[2].map(function(el){
@@ -95,7 +100,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.sizePieComponent.callAsc(data[7]);
         this.dsgnPieComponent.callAsc(data[5]);
 
-        this.itemizedDonations = +data[7].count;
+        this.itemizedDonations = parseInt(data[7].count);
         this.committeeDonations = data[6].reduce((prev, item)=>{
           return prev + +item.count;
         }, 0)
