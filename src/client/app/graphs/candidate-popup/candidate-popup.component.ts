@@ -72,6 +72,9 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       this.http.get('/api/contributions/'+fecId+'/candidate').map((res: Response) => res.json()),
       this.http.get('/api/candidates/'+fecId+'/associated').map((res: Response) => res.json()),
       this.http.get('/api/pac/'+fecId+'/candidate').map((res: Response) => res.json()),
+      this.http.get('api/transfers/'+this.committee+'/designation').map((res: Response) => res.json()),
+      this.http.get('api/transfers/'+this.committee+'/cmtetype').map((res: Response) => res.json()),
+      this.http.get('/api/individuals/committee/'+this.committee+'/pie').map((res: Response) => res.json()),
 
     ).subscribe(
       data => {
@@ -91,9 +94,9 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
           };
         });
         console.log("Primary ", primary_cmte);
-        this.typePieComponent.callAsc(primary_cmte[0]);
-        this.sizePieComponent.callAsc(primary_cmte[0]);
-        this.dsgnPieComponent.callAsc(primary_cmte[0]);
+        this.typePieComponent.callAsc(primary_cmte[7]);
+        this.sizePieComponent.callAsc(primary_cmte[6]);
+        this.dsgnPieComponent.callAsc(primary_cmte[5]);
 
       },
       err => console.error(err)

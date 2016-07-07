@@ -89,30 +89,19 @@ export class SizePieComponent implements OnInit, OnChanges {
   constructor(private http:Http) {}
 
   public callAsc(associatedCommittee) {
-      var buildPieChart = this.buildPieChart;
-      var http = this.http;
-      var indivToCommittees = [];
-      var pieData = [];
-      var j = 0;
-        this.isRequesting = true;
-        http.get('/api/individuals/committee/'+associatedCommittee.CMTE_ID+'/pie').map(response => response.json()).subscribe(
-          data=>{
-            console.log(data);
-          //
-          Object.keys(data[0]).forEach((key)=>{
-            if (key !== "count"){
-              pieData.push({
-                label: key,
-                amount: +data[0][key]
-              });
-            }
-          })
-          buildPieChart(pieData);
-        },
-          error => console.error('Error: ' + error),
-          () => {
-            this.stopRefreshing();
-    })
+    var buildPieChart = this.buildPieChart;
+    var http = this.http;
+    var pieData = [];
+      this.isRequesting = true;
+        Object.keys(data[0]).forEach((key)=>{
+          if (key !== "count"){
+            pieData.push({
+              label: key,
+              amount: +data[0][key]
+            });
+          }
+        })
+        buildPieChart(pieData);
   }
 
   private stopRefreshing() {

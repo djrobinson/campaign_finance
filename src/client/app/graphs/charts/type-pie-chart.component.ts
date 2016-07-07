@@ -88,27 +88,17 @@ export class TypePieComponent implements OnInit, OnChanges {
   public isRequesting: boolean;
   constructor(private http:Http) {}
 
-  public callAsc(associatedCommittee) {
-      var buildPieChart = this.buildPieChart;
-      var http = this.http;
-      var indivToCommittees = [];
-      var pieData = [];
-      var j = 0;
-        this.isRequesting = true;
-        http.get('api/transfers/'+associatedCommittee.CMTE_ID+'/cmtetype').map(response => response.json()).subscribe(
-          data=>{
-          data.forEach((item)=>{
-            pieData.push({
-              label: item.CMTE_TP,
-              amount: +item.sum
-            });
-          })
-          buildPieChart(pieData);
-        },
-          error => console.error('Error: ' + error),
-          () => {
-            this.stopRefreshing();
-    })
+  public callAsc(data) {
+    var buildPieChart = this.buildPieChart;
+    var http = this.http;
+    var pieData = [];
+        data.forEach((item)=>{
+          pieData.push({
+            label: item.CMTE_TP,
+            amount: +item.sum
+          });
+        })
+        buildPieChart(pieData);
   }
 
   private stopRefreshing() {
