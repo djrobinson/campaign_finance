@@ -6,6 +6,10 @@ import {TypePieComponent} from '../charts/type-pie-chart.component';
 import {SizePieComponent} from '../charts/size-pie-chart.component';
 import {DsgnPieComponent} from '../charts/dsgn-pie-chart.component';
 import {BarComponent} from '../charts/bar-chart.component';
+import {OpexSectionComponent} from './opex/opex.component';
+import {SuperpacsSectionComponent} from './superpacs/superpacs.component';
+import {IndividualsSectionComponent} from './individuals/individuals.component.ts';
+import {CommitteesSectionComponent} from './committees/committees.component';
 
 @Component({
   selector: 'candidate-popup',
