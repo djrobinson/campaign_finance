@@ -32,11 +32,8 @@
           <pacs-section>
           </pacs-section>
         </div>
-        <div *ngIf="selection==='opex'">
-          <h1>blahblahblah</h1>
-          <opex-section>
-          </opex-section>
-        </div>
+        <opex-section *ngIf="selection==='opex'">
+        </opex-section>
 
       <div class="flexy-row twelve columns">
         <div class="three columns">

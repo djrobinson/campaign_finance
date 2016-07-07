@@ -90,6 +90,14 @@ bar-chart {
   position: relative;
 }
 
+opex-section {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: blue;
+  z-index: 3;
+}
+
 .flexy-row {
   position: absolute;
   height: 50%;

@@ -7,5 +7,7 @@ import {Component, Input, Output, OnInit} from 'angular2/core';
   directives: []
 })
 export class OpexSectionComponent implements OnInit {
-
+  ngOnInit(){
+    console.log("We've got opex going on!");
+  }
 }

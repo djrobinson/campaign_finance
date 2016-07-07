@@ -15,7 +15,7 @@ import {CommitteesSectionComponent} from './committees/committees.component';
   selector: 'candidate-popup',
   templateUrl: 'app/graphs/candidate-popup/candidate-popup.html',
   styleUrls: ['app/graphs/candidate-popup/candidate-popup.css'],
-  directives: [TreemapComponent, TypePieComponent, SizePieComponent, DsgnPieComponent, BarComponent]
+  directives: [TreemapComponent, TypePieComponent, SizePieComponent, DsgnPieComponent, BarComponent, OpexSectionComponent, SuperpacsSectionComponent, CommitteesSectionComponent]
 })
 export class CandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
