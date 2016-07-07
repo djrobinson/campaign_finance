@@ -47,7 +47,13 @@ router.get('/:cmte_id/recipient', function(req, res, next){
 
 router.get('/:cmte_id/date', function(req, res, next){
   query.cmteByDate(req.params.cmte_id).then(function(data){
-    res.json(data.rows);
+    res.json(data.rows.map((item)=>{
+      return {
+        count: item.count,
+        date_trunc: item.date_trunc,
+        type: "committees"
+      }
+    }));
   });
 });
 

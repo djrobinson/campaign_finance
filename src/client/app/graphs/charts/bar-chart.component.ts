@@ -25,15 +25,11 @@ import {Component, Input, OnInit} from 'angular2/core';
 
   `]
 })
-export class BarComponent implements OnInit {
+export class BarComponent {
+  @Input() graphData: any;
 
 
-  ngOnInit(){
-    this.buildChart();
-  }
-
-
-  public buildChart(){
+  public buildChart(graphData){
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
         width = document.getElementById('containerChart4').offsetWidth - margin.left - margin.right,
         height = document.getElementById('containerChart4').offsetHeight - margin.top - margin.bottom;
@@ -64,13 +60,13 @@ export class BarComponent implements OnInit {
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.json("/api/individuals/committee/C00575795/date", function(error, data) {
-      if (error) throw error;
-
+    var data = graphData;
 
       data.forEach(function(d) {
-        d.vals = data.map(function(name) { return {name: "Individuals", value: +d.count}; });
+        d.vals = data.map(function(name) { return {name: d.type, value: +d.count}; });
       });
+
+      console.log("Bar Data ", data);
 
       x0.domain(data.map(function(d) { return d.date_trunc; }));
       x1.domain(data).rangeRoundBands([0, x0.rangeBand()]);
@@ -125,5 +121,5 @@ export class BarComponent implements OnInit {
       //     .style("text-anchor", "end")
       //     .text(function(d) { return d; });
     });
-  }
+
 }

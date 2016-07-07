@@ -24,6 +24,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   @ViewChild(SizePieComponent) sizePieComponent: SizePieComponent;
   @ViewChild(DsgnPieComponent) dsgnPieComponent: DsgnPieComponent;
   @ViewChild(TreemapComponent) treemapComponent: TreemapComponent;
+  @ViewChild(BarComponent) barComponent: BarComponent;
 
   private disbursements: Object;
   private candidateInfo: Object;
@@ -35,6 +36,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   private typeString: string;
   public itemizedDonations: number;
   public committeeDonations: number;
+  public barChartData: any;
 
   constructor(
               private http: Http) {
@@ -105,6 +107,9 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
           return prev + +item.count;
         }, 0)
 
+        var barChartData = data[8].concat(data[9]);
+        this.barComponent.buildChart(barChartData);
+        console.log("barrrrr ", barChartData);
 
 
       },

@@ -98,7 +98,6 @@ export class TypePieComponent implements OnInit, OnChanges {
         amount: +item.sum
       });
     });
-    console.log(pieData);
     buildPieChart(pieData);
     this.stopRefreshing();
   }

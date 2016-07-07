@@ -102,7 +102,6 @@ export class SizePieComponent implements OnInit, OnChanges {
           });
         }
       });
-      console.log(pieData);
       buildPieChart(pieData);
       this.stopRefreshing();
   }
