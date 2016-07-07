@@ -33,6 +33,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   private pacSpends: Object;
   private route: string;
   private typeString: string;
+  public itemizedDonations: number;
+  public committeeDonations: number;
 
   constructor(
               private http: Http) {
@@ -64,8 +66,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
   callPresApis(fecId){
 
-    console.log(this.committee);
-
     Observable.forkJoin(
       this.http.get('/api/candidates/'+fecId).map((res: Response) => res.json()),
       this.http.get('/api/disbursements/'+fecId+'/candidate').map((res: Response) => res.json()),
@@ -74,11 +74,9 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       this.http.get('/api/pac/'+fecId+'/candidate').map((res: Response) => res.json()),
       this.http.get('api/transfers/'+this.committee+'/designation').map((res: Response) => res.json()),
       this.http.get('api/transfers/'+this.committee+'/cmtetype').map((res: Response) => res.json()),
-      this.http.get('/api/individuals/committee/'+this.committee+'/pie').map((res: Response) => res.json()),
-
+      this.http.get('/api/individuals/committee/'+this.committee+'/pie').map((res: Response) => res.json())
     ).subscribe(
       data => {
-        console.log("Candidate Data ", data);
         this.candidate = data[0][0];
         this.disbursements = data[1];
         data[2] = data[2].map(function(el){
@@ -93,10 +91,16 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
             return cmte
           };
         });
-        console.log("Primary ", primary_cmte);
-        this.typePieComponent.callAsc(primary_cmte[7]);
-        this.sizePieComponent.callAsc(primary_cmte[6]);
-        this.dsgnPieComponent.callAsc(primary_cmte[5]);
+        this.typePieComponent.callAsc(data[6]);
+        this.sizePieComponent.callAsc(data[7]);
+        this.dsgnPieComponent.callAsc(data[5]);
+
+        this.itemizedDonations = +data[7].count;
+        this.committeeDonations = data[6].reduce((prev, item)=>{
+          return prev + +item.count;
+        }, 0)
+
+
 
       },
       err => console.error(err)

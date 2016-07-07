@@ -92,13 +92,15 @@ export class DsgnPieComponent implements OnInit, OnChanges {
     var buildPieChart = this.buildPieChart;
     var http = this.http;
     var pieData = [];
-        data.forEach((item)=>{
-          pieData.push({
-            label: item.CMTE_DSGN,
-            amount: +item.sum
-          });
-        })
-        buildPieChart(pieData);
+    data.forEach((item)=>{
+      pieData.push({
+        label: item.CMTE_DSGN,
+        amount: +item.sum
+      });
+    });
+    console.log(pieData);
+    buildPieChart(pieData);
+    this.stopRefreshing();
   }
 
   private stopRefreshing() {

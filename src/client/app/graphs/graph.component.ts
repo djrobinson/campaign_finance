@@ -373,7 +373,6 @@ export class GraphComponent implements OnInit  {
         error => console.error('Error: ' + err),
         () => {
           this.stopRefreshing();
-          console.log('Completed!')
         }
       );
   }

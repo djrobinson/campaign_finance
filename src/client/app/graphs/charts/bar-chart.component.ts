@@ -71,7 +71,6 @@ export class BarComponent implements OnInit {
       data.forEach(function(d) {
         d.vals = data.map(function(name) { return {name: "Individuals", value: +d.count}; });
       });
-      console.log(data);
 
       x0.domain(data.map(function(d) { return d.date_trunc; }));
       x1.domain(data).rangeRoundBands([0, x0.rangeBand()]);
