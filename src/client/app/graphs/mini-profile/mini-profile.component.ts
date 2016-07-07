@@ -13,6 +13,7 @@ export class MiniProfileComponent implements OnChanges, OnInit {
   @Output() congressEmit = new EventEmitter();
   private title: string;
   private id: string;
+  private cmte_id: string;
   private amount: number;
   private popupType: string;
   public picture: string;
@@ -40,13 +41,11 @@ export class MiniProfileComponent implements OnChanges, OnInit {
     } else if (this.node.graphtype === "committee") {
       this.title = this.node.CMTE_NM;
       this.id = this.node.OTHER_ID;
-      console.log("committee id ", this.id)
       this.amount = this.node.TRANSACTION_AMT;
       this.popupType = "committee";
     } else if (this.node.graphtype === "associated"){
       this.title = this.node.CMTE_NM;
       this.id = this.node.OTHER_ID || this.node.CMTE_ID;
-      console.log("committee id ", this.id)
       this.cash = this.node.cas_on_han_clo_of_per;
       this.contributions = this.node.net_con;
       this.distributions = this.node.tot_dis;
@@ -54,17 +53,12 @@ export class MiniProfileComponent implements OnChanges, OnInit {
     } else if (this.node.graphtype === "candidate"){
       this.title = this.node.data.CANDIDATE_NAME;
       this.id = this.node.CAND_ID;
+      this.cmte_id = this.node.CMTE_ID;
       this.cash = this.node.data.cas_on_han_clo_of_per;
       this.contributions = this.node.data.tot_con;
       this.distributions = this.node.data.tot_dis;
-      // if (this.node.CAND_ID.charAt(0)==="P"){
-        this.popupType = "candidate";
-      // } else {
-      //   this.popupType = "congress";
-      // }
-
+      this.popupType = "candidate";
     }
-    console.log("Popup type!!!", this.popupType);
   }
 
   indivPopupEmit(tranId, name){
@@ -75,21 +69,19 @@ export class MiniProfileComponent implements OnChanges, OnInit {
   }
 
   cmtePopupEmit(cmte){
-    console.log(cmte);
     this.cmteEmit.emit({
       cmte: cmte
     })
   }
 
-  candPopupEmit(cand){
-    console.log(cand);
+  candPopupEmit(cand, cmte_id){
     this.candEmit.emit({
-      cand: cand
+      cand: cand,
+      cmte_id: cmte_id
     })
   }
 
   congressPopupEmit(cand) {
-    console.log(cand);
     this.congressEmit.emit({
       cand: cand
     })

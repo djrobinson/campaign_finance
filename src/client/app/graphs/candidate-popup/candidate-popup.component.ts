@@ -16,6 +16,7 @@ import {BarComponent} from '../charts/bar-chart.component';
 export class CandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
   @Input() candidate: string;
+  @Input() committee: string;
   @Output() exitEmit = new EventEmitter();
   @Output() cmteEmit = new EventEmitter();
   @Output() treemapEmit = new EventEmitter();
@@ -63,7 +64,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
   callPresApis(fecId){
 
-
+    console.log(this.committee);
 
     Observable.forkJoin(
       this.http.get('/api/candidates/'+fecId).map((res: Response) => res.json()),

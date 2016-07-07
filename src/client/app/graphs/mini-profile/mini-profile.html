@@ -69,7 +69,7 @@
         <button (click)="cmtePopupEmit(id)">Profile</button>
       </div>
       <div *ngIf="popupType === 'candidate'">
-        <button (click)="candPopupEmit(id)">Profile</button>
+        <button (click)="candPopupEmit(id, cmte_id)">Profile</button>
       </div>
       <div *ngIf="popupType === 'congress'">
         <button (click)="congressPopupEmit(id)">Profile</button>

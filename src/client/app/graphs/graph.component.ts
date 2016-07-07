@@ -69,6 +69,7 @@ import { Router, RouteParams } from 'angular2/router';
             <div *ngIf="candPopup">
               <candidate-popup
                 [candidate]="selectedCandidate"
+                [committee]="selectedCommittee"
                 (exitEmit)="exit()"
                 (cmteEmit)="changeCmte($event)"
                 (treemapEmit)="showTreemap($event)"
@@ -258,6 +259,7 @@ export class GraphComponent implements OnInit  {
   showCandPopup(event){
     this.candPopup = true;
     this.selectedCandidate = event.cand;
+    this.selectedCommittee = event.cmte_id;
     this.selectedNode = false;
   }
 
@@ -336,7 +338,6 @@ export class GraphComponent implements OnInit  {
           return elem;
         });
         var nodeData = this.nodeData;
-        console.log("Node Data ", nodeData);
         this.linkData = nodeData.reduce((prev, elem)=>{
           if (elem.CAND_ID){
             prev.push({ "source": elem.NODE, "target": 0, "value": 1 })
@@ -613,7 +614,6 @@ export class GraphComponent implements OnInit  {
     })
 
     .on("click", function(d){
-      console.log(d);
       ctrl.setSelected(d);
     })
 

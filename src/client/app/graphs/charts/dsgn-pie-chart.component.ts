@@ -115,7 +115,7 @@ export class DsgnPieComponent implements OnInit, OnChanges {
     this.isRequesting = false;
   }
 
-  buildPieChart(pieData) {
+  public buildPieChart(pieData) {
     (function(d3) {
       'use strict';
 
