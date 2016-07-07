@@ -38,6 +38,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   public itemizedDonations: number;
   public committeeDonations: number;
   public barChartData: any;
+  public selection: string;
 
   constructor(
     private http: Http) {
@@ -48,6 +49,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
   ngOnInit(){
       this.imageVar = {};
+      this.selection = "main";
       if (this.candidate.charAt(0) === "P") {
         this.route = '/api/pac/aggregate/' + this.candidate;
         this.imageVar.image = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + this.candidate + ".jpg";
@@ -70,18 +72,30 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   callPresApis(fecId){
 
     Observable.forkJoin(
-      this.http.get('/api/candidates/'+fecId).map((res: Response) => res.json()), //0
-      this.http.get('/api/disbursements/'+fecId+'/candidate').map((res: Response) => res.json()), //1
-      this.http.get('/api/contributions/'+fecId+'/candidate').map((res: Response) => res.json()), //2
-      this.http.get('/api/candidates/'+fecId+'/associated').map((res: Response) => res.json()), //3
-      this.http.get('/api/pac/'+fecId+'/candidate').map((res: Response) => res.json()), //4
-      this.http.get('api/transfers/'+this.committee+'/designation').map((res: Response) => res.json()), //5
-      this.http.get('api/transfers/'+this.committee+'/cmtetype').map((res: Response) => res.json()), //6
-      this.http.get('/api/individuals/committee/'+this.committee+'/pie').map((res: Response) => res.json()), //7
-      this.http.get('/api/individuals/committee/'+this.committee+'/date').map((res: Response) => res.json()), //8
-      this.http.get('/api/transfers/'+this.committee+'/date').map((res: Response) => res.json()), //9
-      this.http.get('/api/pac/'+fecId+'/support/sum').map((res: Response) => res.json()), //10
-      this.http.get('/api/pac/'+fecId+'/oppose/sum').map((res: Response) => res.json()) //11
+      this.http.get('/api/candidates/'+fecId)
+        .map((res: Response) => res.json()), //0
+      this.http.get('/api/disbursements/'+fecId+'/candidate')
+        .map((res: Response) => res.json()), //1
+      this.http.get('/api/contributions/'+fecId+'/candidate')
+        .map((res: Response) => res.json()), //2
+      this.http.get('/api/candidates/'+fecId+'/associated')
+        .map((res: Response) => res.json()), //3
+      this.http.get('/api/pac/'+fecId+'/candidate')
+        .map((res: Response) => res.json()), //4
+      this.http.get('api/transfers/'+this.committee+'/designation')
+        .map((res: Response) => res.json()), //5
+      this.http.get('api/transfers/'+this.committee+'/cmtetype')
+        .map((res: Response) => res.json()), //6
+      this.http.get('/api/individuals/committee/'+this.committee+'/pie')
+        .map((res: Response) => res.json()), //7
+      this.http.get('/api/individuals/committee/'+this.committee+'/date')
+        .map((res: Response) => res.json()), //8
+      this.http.get('/api/transfers/'+this.committee+'/date')
+        .map((res: Response) => res.json()), //9
+      this.http.get('/api/pac/'+fecId+'/support/sum')
+        .map((res: Response) => res.json()), //10
+      this.http.get('/api/pac/'+fecId+'/oppose/sum')
+        .map((res: Response) => res.json()) //11
     ).subscribe(
       data => {
         console.log("All candidate data: ", data);
