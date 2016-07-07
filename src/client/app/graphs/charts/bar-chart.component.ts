@@ -82,7 +82,7 @@ export class BarComponent {
       console.log("Bar Data ", barFinal);
 
       x0.domain(barFinal.map(function(d) { return d.date; }));
-      x1.domain(valTypes).rangeRoundBands([0, x0.rangeBand()]);
+      x1.domain(["individuals", "committees"]).rangeRoundBands([0, x0.rangeBand()]);
       y.domain([0, d3.max(data, function(d) { return +d.count})]);
 
       svg.append("g")
@@ -110,10 +110,10 @@ export class BarComponent {
           .data(function(d) { return d.vals; })
         .enter().append("rect")
           .attr("width", x1.rangeBand())
-          .attr("x", function(d) { return x1(d.name); })
-          .attr("y", function(d) { console.log("count ", d.count, "data", d); return y(d.count) })
+          .attr("x", function(d) { return x1(d.type); })
+          .attr("y", function(d) { return y(d.count) })
           .attr("height", function(d) { return height - y(d.count); })
-          .style("fill", function(d) { return color(d.name); });
+          .style("fill", function(d) { return color(d.type); });
 
       // var legend = svg.selectAll(".legend")
       //     .data(ageNames.slice().reverse())
