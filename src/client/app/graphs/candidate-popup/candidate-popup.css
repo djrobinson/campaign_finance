@@ -98,6 +98,30 @@ opex-section {
   z-index: 3;
 }
 
+superpacs-section {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: blue;
+  z-index: 3;
+}
+
+individuals-section {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: blue;
+  z-index: 3;
+}
+
+committees-section {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: blue;
+  z-index: 3;
+}
+
 .flexy-row {
   position: absolute;
   height: 50%;
