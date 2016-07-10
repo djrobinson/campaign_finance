@@ -8,8 +8,9 @@ import {TreemapComponent} from '../../charts/treemap.component';
   directives: [TreemapComponent]
 })
 export class OpexSectionComponent implements OnInit {
-  public route: string;
+  @Input() cmte: string;
+  private route: string;
   ngOnInit(){
-
+    this.route = '/api/opex/aggregate/' + this.cmte;
   }
 }
