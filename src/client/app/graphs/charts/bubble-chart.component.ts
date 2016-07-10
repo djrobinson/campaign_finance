@@ -4,30 +4,11 @@ import {Component, Input, Output, EventEmitter, OnInit} from 'angular2/core';
   selector: 'bubble-chart',
   template: `
       <div id="containerChart3">
-        <div (click)="close()" class="close-button">
-          <img src="/images/close.png" class="close-icon" />
-        </div>
         <div id="chart3">
         </div>
       </div>
   `,
   styles: [`
-
-    .close-button {
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      height: 25px;
-      width: 25px;
-    }
-
-    .close-icon {
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      height: 25px;
-      width: 25px;
-    }
 
     #containerChart3 {
       display: flex;
@@ -152,12 +133,5 @@ export class BubbleComponent implements OnInit {
       transaction: indiv.TRAN_ID,
       name: indiv.NAME
     })
-  }
-
-  close() {
-    console.log"CLOSING!");
-    this.exitEmit.emit({
-      exit: true
-    });
   }
 }

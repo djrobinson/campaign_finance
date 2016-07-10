@@ -1,6 +1,10 @@
 <div class="middle">
   <h1>Individuals</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, ipsa! Consequatur, facere blanditiis ex optio, maxime ipsa minima, ipsam accusamus repellat sint nostrum officia rerum explicabo similique voluptatem illum ea.</p>
+  <button (click)="callIndividuals()">List Format</button>
+  <individuals-list
+    *ngIf="showList"
+    [cmte]="cmte">
+  </individuals-list>
 </div>
 <bubble-chart [cmte]="cmte">
 </bubble-chart>
