@@ -8,6 +8,12 @@ import {TreemapComponent} from '../../charts/treemap.component';
   directives: [TreemapComponent]
 })
 export class SuperpacsSectionComponent implements OnInit {
-  public route = string;
+  @Input() cand: any;
+  private route: string;
+
+  ngOnInit() {
+    console.log(this.cand);
+    this.route = '/api/pac/aggregate/' + this.cand.CANDIDATE_ID;
+  }
 
 }

@@ -8,30 +8,28 @@
       <div class="cand-option" (click)="choice('opex')">
         <h5>Committee Opex</h5>
       </div>
-      <div class="cand-option">
+      <div class="cand-option" (click)="choice('superpacs')">
         <h5>SuperPac Expenditures</h5>
       </div>
-      <div class="cand-option">
+      <div class="cand-option" (click)="choice('individuals')">
         <h5>Individual Donors</h5>
       </div>
-      <div class="cand-option">
+      <div class="cand-option" (click)="choice('committees')">
         <h5>Committee Donors</h5>
       </div>
     </div>
     </div>
     <div class="nine columns candidate-content">
-        <div *ngIf="selection==='individuals'">
-          <individuals-section>
-          </individuals-section>
-        </div>
-        <div *ngIf="selection==='committees'">
-          <committees-section>
-          </committees-section>
-        </div>
-        <div *ngIf="selection==='superpacs'">
-          <pacs-section>
-          </pacs-section>
-        </div>
+        <individuals-section
+          *ngIf="selection==='individuals'">
+        </individuals-section>
+        <committees-section
+          *ngIf="selection==='committees'">
+        </committees-section>
+        <superpacs-section
+          *ngIf="selection==='superpacs'"
+          [cand]="candidate">
+        </superpacs-section>
         <opex-section
           *ngIf="selection==='opex'"
           [cmte]="committee">
