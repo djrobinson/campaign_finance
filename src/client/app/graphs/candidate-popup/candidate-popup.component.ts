@@ -8,14 +8,14 @@ import {DsgnPieComponent} from '../charts/dsgn-pie-chart.component';
 import {BarComponent} from '../charts/bar-chart.component';
 import {OpexSectionComponent} from './opex/opex.component';
 import {SuperpacsSectionComponent} from './superpacs/superpacs.component';
-import {IndividualsSectionComponent} from './individuals/individuals.component.ts';
+import {IndividualsSectionComponent} from './individuals/individuals.component';
 import {CommitteesSectionComponent} from './committees/committees.component';
 
 @Component({
   selector: 'candidate-popup',
   templateUrl: 'app/graphs/candidate-popup/candidate-popup.html',
   styleUrls: ['app/graphs/candidate-popup/candidate-popup.css'],
-  directives: [TypePieComponent, SizePieComponent, DsgnPieComponent, BarComponent, OpexSectionComponent, SuperpacsSectionComponent, CommitteesSectionComponent]
+  directives: [TypePieComponent, SizePieComponent, DsgnPieComponent, BarComponent, OpexSectionComponent, SuperpacsSectionComponent, CommitteesSectionComponent, IndividualsSectionComponent]
 })
 export class CandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
@@ -144,7 +144,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   }
 
   public choice(selection) {
-    console.log(selection);
     this.selection = selection;
   }
 

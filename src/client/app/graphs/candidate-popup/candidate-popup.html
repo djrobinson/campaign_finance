@@ -21,10 +21,12 @@
     </div>
     <div class="nine columns candidate-content">
         <individuals-section
-          *ngIf="selection==='individuals'">
+          *ngIf="selection==='individuals'"
+          [cmte]="committee">
         </individuals-section>
         <committees-section
-          *ngIf="selection==='committees'">
+          *ngIf="selection==='committees'"
+          [cmte]="committee">
         </committees-section>
         <superpacs-section
           *ngIf="selection==='superpacs'"

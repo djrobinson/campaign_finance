@@ -8,5 +8,10 @@ import {BubbleComponent} from '../../charts/bubble-chart.component';
   directives: [BubbleComponent]
 })
 export class IndividualsSectionComponent implements OnInit {
-
+  @Input() cmte: string;
+  ngOnInit(){
+    console.log("Individuals!!");
+  }
 }
+
+
