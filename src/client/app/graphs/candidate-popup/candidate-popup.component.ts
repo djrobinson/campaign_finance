@@ -15,7 +15,7 @@ import {CommitteesSectionComponent} from './committees/committees.component';
   selector: 'candidate-popup',
   templateUrl: 'app/graphs/candidate-popup/candidate-popup.html',
   styleUrls: ['app/graphs/candidate-popup/candidate-popup.css'],
-  directives: [TreemapComponent, TypePieComponent, SizePieComponent, DsgnPieComponent, BarComponent, OpexSectionComponent, SuperpacsSectionComponent, CommitteesSectionComponent]
+  directives: [TypePieComponent, SizePieComponent, DsgnPieComponent, BarComponent, OpexSectionComponent, SuperpacsSectionComponent, CommitteesSectionComponent]
 })
 export class CandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
@@ -24,11 +24,9 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   @Input() isCandidate: boolean;
   @Output() exitEmit = new EventEmitter();
   @Output() cmteEmit = new EventEmitter();
-  @Output() treemapEmit = new EventEmitter();
   @ViewChild(TypePieComponent) typePieComponent: TypePieComponent;
   @ViewChild(SizePieComponent) sizePieComponent: SizePieComponent;
   @ViewChild(DsgnPieComponent) dsgnPieComponent: DsgnPieComponent;
-  @ViewChild(TreemapComponent) treemapComponent: TreemapComponent;
   @ViewChild(BarComponent) barComponent: BarComponent;
 
   private disbursements: Object;
@@ -131,12 +129,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       },
       err => console.error(err)
     );
-  }
-
-  showTreemapEmit(route){
-    this.treemapEmit.emit({
-      route: route
-    })
   }
 
   cmtePopupEmit(cmte) {
