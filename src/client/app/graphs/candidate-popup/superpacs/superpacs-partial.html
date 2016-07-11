@@ -1,6 +1,11 @@
 <div class="middle">
   <h1>Superpacs</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, ipsa! Consequatur, facere blanditiis ex optio, maxime ipsa minima, ipsam accusamus repellat sint nostrum officia rerum explicabo similique voluptatem illum ea.</p>
+  <button (click)="callSuperpacs()">List Format</button>
+  <superpacs-list
+    *ngIf="showList"
+    [cand]="cand"
+  >
+  </superpacs-list>
 </div>
 <treemap route="{{route}}">
 </treemap>
