@@ -17,6 +17,6 @@ export class OpexSectionComponent implements OnInit {
   }
 
   public callList(){
-    this.showList = true;
+    this.showList = !this.showList;
   }
 }

@@ -19,7 +19,7 @@ export class SuperpacsSectionComponent implements OnInit {
   }
 
   public callSuperpacs(){
-    this.showList = true;
+    this.showList = !this.showList;
   }
 
 }

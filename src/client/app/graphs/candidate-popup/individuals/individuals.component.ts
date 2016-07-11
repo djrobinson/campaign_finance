@@ -15,7 +15,7 @@ export class IndividualsSectionComponent implements OnInit {
   }
 
   public callIndividuals(){
-    this.showList = true;
+    this.showList = !this.showList;
   }
 }
 
