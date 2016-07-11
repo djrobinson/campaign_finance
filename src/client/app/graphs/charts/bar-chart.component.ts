@@ -4,23 +4,22 @@ import {Component, Input, OnInit} from 'angular2/core';
   selector: 'bar-chart',
   template: `
       <div id="containerChart4">
-        <div id="chart4">
-        </div>
       </div>
   `,
   styles: [`
 
     #containerChart4 {
       display: flex;
+      position: absolute;
       justify-items: center;
       height: 100%;
       width: 100%;
     }
 
-    #chart4 {
-      display: block;
-      margin: 0 auto;
+    svg {
+      bottom: 0;
     }
+
 
   `]
 })
@@ -53,7 +52,7 @@ export class BarComponent {
         .orient("left")
         .tickFormat(d3.format(".2s"));
 
-    var svg = d3.select("#chart4").append("svg")
+    var svg = d3.select("#containerChart4").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
       .append("g")

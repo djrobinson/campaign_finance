@@ -31,46 +31,47 @@
       </div>
     </div>
     </div>
-    <div class="nine columns candidate-content">
-        <individuals-section
-          *ngIf="selection==='individuals'"
-          [cmte]="committee">
-        </individuals-section>
-        <committees-section
-          *ngIf="selection==='committees'"
-          [cmte]="committee">
-        </committees-section>
-        <superpacs-section
-          *ngIf="selection==='superpacs'"
-          [cand]="candidate">
-        </superpacs-section>
-        <opex-section
-          *ngIf="selection==='opex'"
-          [cmte]="committee">
-        </opex-section>
+    <div class="nine columns">
+      <individuals-section
+        *ngIf="selection==='individuals'"
+        [cmte]="committee">
+      </individuals-section>
+      <committees-section
+        *ngIf="selection==='committees'"
+        [cmte]="committee">
+      </committees-section>
+      <superpacs-section
+        *ngIf="selection==='superpacs'"
+        [cand]="candidate">
+      </superpacs-section>
+      <opex-section
+        *ngIf="selection==='opex'"
+        [cmte]="committee">
+      </opex-section>
 
-      <div class="flexy-row twelve columns">
-        <div class="three columns">
-          <size-pie></size-pie>
-        </div>
-        <div class="three columns">
-          <type-pie></type-pie>
-        </div>
-        <div class="three columns">
-          <dsgn-pie></dsgn-pie>
-        </div>
-        <div class="three columns">
-          <p>Party: {{candidate?.PARTY}}</p>
-          <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
-          <p>FEC ID: {{candidate?.CANDIDATE_ID}}</p>
-          <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
-          <p><a [href]="candidate?.lin_ima">FEC Filing</a></p>
-          <p>Itemized Donations: {{itemizedDonations}}</p>
-          <p>Committee Donations: {{committeeDonations}}</p>
-        </div>
+
+      <div class="four columns pies">
+        <size-pie></size-pie>
+        <type-pie></type-pie>
+        <dsgn-pie></dsgn-pie>
       </div>
-      <div class="flexy-row bottom twelve-columns">
-        <bar-chart [graphData]="c"></bar-chart>
+      <div class="eight columns candidate-content">
+        <div class="twelve columns top-row">
+          <div class="four columns">
+            <p>Party: {{candidate?.PARTY}}</p>
+            <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
+            <p>FEC ID: {{candidate?.CANDIDATE_ID}}</p>
+            <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
+            <p><a [href]="candidate?.lin_ima">FEC Filing</a></p>
+            <p>Itemized Donations: {{itemizedDonations}}</p>
+            <p>Committee Donations: {{committeeDonations}}</p>
+          </div>
+        </div>
+        <bar-chart
+          class="twelve columns"
+          [graphData]="c">
+        </bar-chart>
       </div>
+
     </div>
 </div>

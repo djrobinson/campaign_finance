@@ -82,12 +82,31 @@ li {
 }
 
 bar-chart {
-  width: 100%;
+  position: relative;
+  background-color: blue;
+  flex-grow: 1;
 }
 
 .candidate-content {
   height: 100%;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.pies {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+}
+
+.top-row {
+  background-color: red;
+  flex-grow: 1;
+}
+
+.bar-container {
+
 }
 
 opex-section {
@@ -143,10 +162,6 @@ committees-section {
   bottom: 0;
 }
 
-treemap {
-  position:relative;
-  flex-grow: 2;
-}
 
 .text-center {
   text-align: center;

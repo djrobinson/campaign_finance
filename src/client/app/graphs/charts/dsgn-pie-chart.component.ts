@@ -12,26 +12,6 @@ import {SpinnerComponent} from '../../loading/spinner.component';
           <spinner [isRunning]="isRequesting">
           </spinner>
         </div>
-        <div class="dsgn-tooltip">
-          <table class="cand-table">
-            <tr>
-              <th>
-                Size
-              </th>
-              <th>
-                Count
-              </th>
-              <th>
-                Percentage
-              </th>
-            </tr>
-            <tr>
-              <td class="dsgn-label"></td>
-              <td class="dsgn-amount"></td>
-              <td class="dsgn-percent"></td>
-            </tr>
-          </table>
-        </div>
       </div>
   `,
   styles: [`
