@@ -5,16 +5,28 @@
       <h5>{{candidate?.CANDIDATE_NAME}}</h5>
     </div>
     <div class="cand-options">
-      <div class="cand-option" (click)="choice('opex')">
+      <div class="cand-option"
+        (click)="choice('opex')"
+        [class.active]="selection==='opex'"
+        >
         <h5>Committee Opex</h5>
       </div>
-      <div class="cand-option" (click)="choice('superpacs')">
+      <div class="cand-option"
+        (click)="choice('superpacs')"
+        [class.active]="selection==='superpacs'"
+        >
         <h5>SuperPac Expenditures</h5>
       </div>
-      <div class="cand-option" (click)="choice('individuals')">
+      <div class="cand-option"
+        (click)="choice('individuals')"
+        [class.active]="selection==='individuals'"
+        >
         <h5>Individual Donors</h5>
       </div>
-      <div class="cand-option" (click)="choice('committees')">
+      <div class="cand-option"
+        (click)="choice('committees')"
+        [class.active]="selection==='committees'"
+        >
         <h5>Committee Donors</h5>
       </div>
     </div>

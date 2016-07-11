@@ -126,6 +126,12 @@ committees-section {
   background-color: #FEFFFE;
 }
 
+.active {
+  background-color: #16191F;
+  color: #EFF1F3;
+  border-left: solid 5px #53B4C4;
+}
+
 .flexy-row {
   position: absolute;
   height: 50%;
