@@ -4,3 +4,8 @@
   left: 0;
   z-index: 100;
 }
+
+opex-list {
+  height: 100%;
+  width: 100%;
+}
