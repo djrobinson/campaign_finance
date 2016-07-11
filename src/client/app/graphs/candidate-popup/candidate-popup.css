@@ -94,32 +94,36 @@ opex-section {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: blue;
   z-index: 3;
+  overflow: scroll;
+  background-color: #FEFFFE;
 }
 
 superpacs-section {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: blue;
   z-index: 3;
+  overflow: scroll;
+  background-color: #FEFFFE;
 }
 
 individuals-section {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: blue;
   z-index: 3;
+  overflow: scroll;
+  background-color: #FEFFFE;
 }
 
 committees-section {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: blue;
   z-index: 3;
+  overflow: scroll;
+  background-color: #FEFFFE;
 }
 
 .flexy-row {
