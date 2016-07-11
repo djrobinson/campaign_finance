@@ -6,7 +6,7 @@ import {Http, Response} from 'angular2/http';
   template: `
     <h1>Howdy</h1>
     <ul *ngFor="#opex of opexes">
-      <li>{{opex}}</li>
+      <li>{{opex.CMTE_ID}}</li>
     </ul>
   `,
   styles: [`

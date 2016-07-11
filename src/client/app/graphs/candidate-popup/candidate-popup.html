@@ -51,12 +51,18 @@
 
 
       <div class="four columns pies">
+        <h5>Donations by Size</h5>
         <size-pie></size-pie>
+        <h5>Donations by Committee Type</h5>
         <type-pie></type-pie>
+        <h5>Donations by Committee Designation</h5>
         <dsgn-pie></dsgn-pie>
       </div>
       <div class="eight columns candidate-content">
         <div class="twelve columns top-row">
+          <div class="four columns">
+            <h3>Hover over pie charts to see details below</h3>
+          </div>
           <div class="four columns">
             <p>Party: {{candidate?.PARTY}}</p>
             <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>

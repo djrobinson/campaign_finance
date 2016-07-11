@@ -6,5 +6,5 @@
     [cmte]="cmte">
   </individuals-list>
 </div>
-<bubble-chart [cmte]="cmte">
+<bubble-chart *ngIf="!showList" [cmte]="cmte">
 </bubble-chart>
