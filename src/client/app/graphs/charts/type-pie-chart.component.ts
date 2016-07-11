@@ -1,32 +1,28 @@
 import {Component, Input, OnInit, OnChanges, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
-import {SpinnerComponent} from '../../loading/spinner.component';
 
 @Component({
   selector: 'type-pie',
   template: `
-      <div id="containerChart2">
-        <p>Donations by Committee type</p>
-        <div id="chart22">
-          <spinner [isRunning]="isRequesting">
-          </spinner>
+        <div id="chartType">
         </div>
-      </div>
   `,
   styles: [`
 
-    #containerChart2 {
+    #containerChart22 {
       display: flex;
       flex-direction: column;
       height: 100%;
       width: 100%;
     }
 
-    #chart2 {
+    #chartType {
+      position: absolute;
       flex-grow: 1;
       display: flex;
       width: 100%;
+      height: 100%;
     }
 
     .pie-title {
@@ -62,7 +58,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       width: 100%;
     }
   `],
-  directives: [SpinnerComponent]
+  directives: []
 })
 export class TypePieComponent implements OnInit, OnChanges {
   public isRequesting: boolean;
@@ -90,16 +86,16 @@ export class TypePieComponent implements OnInit, OnChanges {
     (function(d3) {
       'use strict';
 
-      var width = document.getElementById('chart22').offsetWidth;
+      var width = document.getElementById('chartType').offsetHeight;
       var height = width;
-      var radius = width /  2.25;
+      var radius = width / 2.25;
       var donutWidth = 15;
       var legendRectSize = 18;
       var legendSpacing = 4;
 
       var color = d3.scale.category20b();
 
-      var svg = d3.select('#chart22')
+      var svg = d3.select('#chartType')
         .append('svg')
         .attr('width', width)
         .attr('height', height)

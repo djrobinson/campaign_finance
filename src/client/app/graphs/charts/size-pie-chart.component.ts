@@ -1,18 +1,12 @@
 import {Component, Input, OnInit, OnChanges, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
-import {SpinnerComponent} from '../../loading/spinner.component';
 
 @Component({
   selector: 'size-pie',
   template: `
-      <div id="containerChart2">
-        <p>Itemized Individual Donations by Size</p>
         <div id="chart2">
-          <spinner [isRunning]="isRequesting">
-          </spinner>
         </div>
-      </div>
   `,
   styles: [`
 
@@ -24,9 +18,11 @@ import {SpinnerComponent} from '../../loading/spinner.component';
     }
 
     #chart2 {
+      position: absolute;
       flex-grow: 1;
       display: flex;
       width: 100%;
+      height: 100%;
     }
 
     .pie-title {
@@ -62,7 +58,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       width: 100%;
     }
   `],
-  directives: [SpinnerComponent]
+  directives: []
 })
 export class SizePieComponent implements OnInit, OnChanges {
   public isRequesting: boolean;
@@ -94,7 +90,7 @@ export class SizePieComponent implements OnInit, OnChanges {
     (function(d3) {
       'use strict';
 
-      var width = document.getElementById('chart2').offsetWidth;
+      var width = document.getElementById('chart2').offsetHeight;
       var height = width;
       var radius = width /  2.25;
       var donutWidth = 15;

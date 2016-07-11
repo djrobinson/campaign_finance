@@ -1,18 +1,12 @@
 import {Component, Input, OnInit, OnChanges, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
-import {SpinnerComponent} from '../../loading/spinner.component';
 
 @Component({
   selector: 'dsgn-pie',
   template: `
-      <div id="containerChart2">
-        <p>Donations by Committee Designation</p>
         <div id="chartDsgn">
-          <spinner [isRunning]="isRequesting">
-          </spinner>
         </div>
-      </div>
   `,
   styles: [`
 
@@ -23,10 +17,12 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       width: 100%;
     }
 
-    #chart2 {
+    #chartDsgn {
+      position: absolute;
       flex-grow: 1;
       display: flex;
       width: 100%;
+      height: 100%;
     }
 
     .pie-title {
@@ -62,7 +58,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       width: 100%;
     }
   `],
-  directives: [SpinnerComponent]
+  directives: []
 })
 export class DsgnPieComponent implements OnInit, OnChanges {
   public isRequesting: boolean;
@@ -90,9 +86,9 @@ export class DsgnPieComponent implements OnInit, OnChanges {
     (function(d3) {
       'use strict';
 
-      var width = document.getElementById('chartDsgn').offsetWidth;
+      var width = document.getElementById('chartDsgn').offsetHeight;
       var height = width;
-      var radius = width /  2.25;
+      var radius = width / 2.25;
       var donutWidth = 15;
       var legendRectSize = 18;
       var legendSpacing = 4;

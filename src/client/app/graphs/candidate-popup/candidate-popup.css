@@ -83,8 +83,12 @@ li {
 
 bar-chart {
   position: relative;
-  background-color: blue;
-  flex-grow: 1;
+  height: 50%;
+}
+
+.top-row {
+  position: relative;
+  height: 50%;
 }
 
 .candidate-content {
@@ -100,13 +104,22 @@ bar-chart {
   align-items: center;
 }
 
-.top-row {
-  background-color: red;
+size-pie {
+  position: relative;
+  width: 100%;
   flex-grow: 1;
 }
 
-.bar-container {
+type-pie {
+  position: relative;
+  width: 100%;
+  flex-grow: 1;
+}
 
+dsgn-pie {
+  position: relative;
+  width: 100%;
+  flex-grow: 1;
 }
 
 opex-section {

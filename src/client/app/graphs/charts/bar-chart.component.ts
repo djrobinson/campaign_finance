@@ -11,12 +11,8 @@ import {Component, Input, OnInit} from 'angular2/core';
     #containerChart4 {
       display: flex;
       position: absolute;
-      justify-items: center;
       height: 100%;
       width: 100%;
-    }
-
-    svg {
       bottom: 0;
     }
 
