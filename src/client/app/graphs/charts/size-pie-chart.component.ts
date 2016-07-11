@@ -94,8 +94,8 @@ export class SizePieComponent implements OnInit, OnChanges {
       var height = width;
       var radius = width /  2.25;
       var donutWidth = 15;
-      var legendRectSize = 18;
-      var legendSpacing = 4;
+      var legendRectSize = 12;
+      var legendSpacing = 2;
 
       var color = d3.scale.category20b();
 

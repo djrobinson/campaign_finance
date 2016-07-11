@@ -31,7 +31,7 @@
       </div>
     </div>
     </div>
-    <div class="nine columns">
+    <div class="nine columns main-content">
       <individuals-section
         *ngIf="selection==='individuals'"
         [cmte]="committee">
@@ -65,6 +65,18 @@
             <p><a [href]="candidate?.lin_ima">FEC Filing</a></p>
             <p>Itemized Donations: {{itemizedDonations}}</p>
             <p>Committee Donations: {{committeeDonations}}</p>
+          </div>
+        </div>
+        <div class="twelve columns middle-row">
+          <div class="highlight-tile three columns">
+          </div>
+          <div class="highlight-tile three columns">
+          </div>
+          <div class="highlight-tile three columns">
+          </div>
+          <div class="highlight-tile three columns">
+          </div>
+          <div class="highlight-tile three columns">
           </div>
         </div>
         <bar-chart

@@ -83,12 +83,28 @@ li {
 
 bar-chart {
   position: relative;
-  height: 50%;
+  height: 35%;
 }
 
 .top-row {
   position: relative;
-  height: 50%;
+  height: 45%;
+}
+
+.middle-row {
+  display: flex;
+  position: relative;
+  height: 20%;
+  background-color: aqua;
+  width: 100%;
+  flex-direction: row;
+}
+
+.highlight-tile {
+  flex-grow: 1;
+  border: solid 1px black;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .candidate-content {
