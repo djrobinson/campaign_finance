@@ -109,6 +109,10 @@ bar-chart {
   padding: 0 !important;
 }
 
+.top-row td {
+  font-size: 1.5rem;
+}
+
 #pies-title {
   font-size: 2rem;
   width: 100%;
