@@ -3,8 +3,18 @@
     <div class="cand-pic text-center">
       <img [src]="imageVar?.image" alt="picture">
       <h5>{{candidate?.CANDIDATE_NAME}}</h5>
+      <p>Party: {{candidate?.PARTY}}</p>
+      <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
+      <p>FEC ID: {{candidate?.CANDIDATE_ID}}</p>
+      <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
     </div>
     <div class="cand-options">
+      <div class="cand-option"
+        (click)="choice('main')"
+        [class.active]="selection==='main'"
+        >
+        <h5>Main Info</h5>
+      </div>
       <div class="cand-option"
         (click)="choice('opex')"
         [class.active]="selection==='opex'"
@@ -60,16 +70,24 @@
       </div>
       <div class="eight columns candidate-content">
         <div class="twelve columns top-row">
+            <p>Candidate's Primary Committee:</p>
+            <h4>{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h4>
 
-          <div class="four columns">
-            <p>Party: {{candidate?.PARTY}}</p>
-            <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
-            <p>FEC ID: {{candidate?.CANDIDATE_ID}}</p>
-            <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
-            <p><a [href]="candidate?.lin_ima">FEC Filing</a></p>
-            <p>Itemized Donations: {{itemizedDonations}}</p>
-            <p>Committee Donations: {{committeeDonations}}</p>
-          </div>
+
+            <table>
+              <tr>
+                <th></th>
+                <th>Savings</th>
+              </tr>
+              <tr>
+                <td>January</td>
+                <td>$100</td>
+              </tr>
+              <tr>
+                <td>February</td>
+                <td>$80</td>
+              </tr>
+            </table>
         </div>
         <div class="twelve columns middle-row">
           <div class="highlight-tile three columns">

@@ -12,7 +12,7 @@ import {Observable} from 'rxjs/Rx';
   styles: [`
 
     p {
-      size: 2rem;
+      size: 3rem;
       margin: 0 !important;
       font-family: 'Oswald';
       font-weight: 300;

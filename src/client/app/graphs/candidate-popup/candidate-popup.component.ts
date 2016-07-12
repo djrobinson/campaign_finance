@@ -41,6 +41,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   public committeeDonations: number;
   public barChartData: any;
   public selection: string;
+  public primaryCmte: any;
 
   constructor(
     private http: Http) {
@@ -110,11 +111,11 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.contributions = data[2];
         this.associatedCommittees = data[3][0];
         this.pacSpends = data[4];
-        var primary_cmte = data[3].filter((cmte)=>{
+        this.primaryCmte = data[3].filter((cmte)=>{
           if(cmte.CMTE_DSGN === "P"){
             return cmte
           };
-        });
+        })[0];
         this.typePieComponent.callAsc(data[6]);
         this.sizePieComponent.callAsc(data[7]);
         this.dsgnPieComponent.callAsc(data[5]);
