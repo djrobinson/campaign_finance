@@ -88,13 +88,54 @@ bar-chart {
 
 .top-row {
   position: relative;
-  height: 45%;
+  height: 40%;
+}
+
+#pies-title {
+  font-size: 2rem;
+  width: 100%;
+  flex-direction: column;
+  text-align: center;
+}
+
+.fill {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pie-tooltip {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pie-label {
+  font-family: 'Oswald';
+  font-weight: 300;
+  font-size: 2rem;
+}
+
+.pie-amount {
+  font-family: 'Oswald';
+  font-weight: 300;
+  font-size: 2rem;
+}
+
+.pie-percent {
+  font-family: 'Oswald';
+  font-weight: 300;
+  font-size: 2rem;
 }
 
 .middle-row {
   display: flex;
   position: relative;
-  height: 20%;
+  height: 25%;
   background-color: aqua;
   width: 100%;
   flex-direction: row;

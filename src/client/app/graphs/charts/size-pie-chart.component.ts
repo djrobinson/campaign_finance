@@ -10,6 +10,11 @@ import {Observable} from 'rxjs/Rx';
   `,
   styles: [`
 
+    h1, h2, h3, h4, h5, p {
+      font-family: 'Oswald';
+      font-weight: 300;
+    }
+
     #containerChart2 {
       display: flex;
       flex-direction: column;
@@ -115,7 +120,7 @@ export class SizePieComponent implements OnInit, OnChanges {
         .value(function(d) { return d.amount; })
         .sort(null);
 
-      var tooltip = d3.select('.size-tooltip')
+      var tooltip = d3.select('.pie-tooltip')
 
 
 
@@ -140,9 +145,9 @@ export class SizePieComponent implements OnInit, OnChanges {
             return d.amount;
           }));
           var percent = Math.round(1000 * d.data.amount / total) / 10;
-          tooltip.select('.size-label').html(d.data.label);
-          tooltip.select('.size-amount').html(d.data.amount);
-          tooltip.select('.size-percent').html(percent + '%');
+          tooltip.select('.pie-label').html(d.data.label);
+          tooltip.select('.pie-amount').html(d.data.amount);
+          tooltip.select('.pie-percent').html(percent + '%');
         });
 
         path.on('mouseout', function() {

@@ -60,8 +60,13 @@
       </div>
       <div class="eight columns candidate-content">
         <div class="twelve columns top-row">
-          <div class="four columns">
-            <h3>Hover over pie charts to see details below</h3>
+          <div class="four columns fill">
+            <div id="pies-title"><p>Hover over pie charts to see details below</p></div>
+            <div class="pie-tooltip">
+              <div class="pie-label"></div>
+              <div class="pie-amount"></div>
+              <div class="pie-percent"></div>
+            </div>
           </div>
           <div class="four columns">
             <p>Party: {{candidate?.PARTY}}</p>
@@ -74,8 +79,6 @@
           </div>
         </div>
         <div class="twelve columns middle-row">
-          <div class="highlight-tile three columns">
-          </div>
           <div class="highlight-tile three columns">
           </div>
           <div class="highlight-tile three columns">
