@@ -34,26 +34,6 @@ import {Observable} from 'rxjs/Rx';
       padding: 0;
     }
 
-    .tooltip {
-      display: flex;
-      align-self: flex-end;
-      width: 100%;
-      font-size: 1rem;
-      display: flex;
-      justify-content: space-between;
-      text-align: center;
-    }
-    th {
-      font-size: 1rem;
-      text-align: center;
-    }
-    td {
-      text-align: center;
-      font-size: 1rem;
-    }
-    spinner {
-      left: 30%;
-    }
     .cand-table {
       width: 100%;
     }
@@ -174,6 +154,7 @@ export class TypePieComponent implements OnInit, OnChanges {
         legend.append('text')
           .attr('x', legendRectSize + legendSpacing)
           .attr('y', legendRectSize - legendSpacing)
+          .style('fill', '#ECF9FD')
           .text(function(d) { return d; });
 
       });

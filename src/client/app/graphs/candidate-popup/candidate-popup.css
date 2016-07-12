@@ -1,6 +1,7 @@
 h1, h2, h3, h4, h5, p {
   font-family: 'Oswald';
   font-weight: 300;
+
 }
 
 .cand-style {
@@ -56,7 +57,7 @@ li {
   flex-direction: column;
 }
 .cand-pic {
-  background-color: #17324f;
+  background-color: #929DA7;
   padding-bottom: 5rem;
 }
 .cand-options {
@@ -80,6 +81,10 @@ li {
   background-color: #16191F;
   color: #EFF1F3;
   border-left: solid 5px #53B4C4;
+}
+
+.main-content {
+  color: #ECF9FD;
 }
 
 bar-chart {
@@ -159,6 +164,7 @@ bar-chart {
   flex-direction: column;
   height: 100%;
   align-items: center;
+  text-align: center;
 }
 
 size-pie {
