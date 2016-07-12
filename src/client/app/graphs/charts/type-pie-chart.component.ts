@@ -111,7 +111,7 @@ export class TypePieComponent implements OnInit, OnChanges {
         .value(function(d) { return d.amount; })
         .sort(null);
 
-      var tooltip = d3.select('.type-tooltip')
+      var tooltip = d3.select('.pie-tooltip')
 
 
 
@@ -136,9 +136,9 @@ export class TypePieComponent implements OnInit, OnChanges {
             return d.amount;
           }));
           var percent = Math.round(1000 * d.data.amount / total) / 10;
-          tooltip.select('.type-label').html(d.data.label);
-          tooltip.select('.type-amount').html(d.data.amount);
-          tooltip.select('.type-percent').html(percent + '%');
+          tooltip.select('.pie-label').html(d.data.label);
+          tooltip.select('.pie-amount').html(d.data.amount);
+          tooltip.select('.pie-percent').html(percent + '%');
         });
 
         path.on('mouseout', function() {
