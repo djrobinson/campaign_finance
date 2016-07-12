@@ -70,22 +70,38 @@
       </div>
       <div class="eight columns candidate-content">
         <div class="twelve columns top-row">
-            <p>Candidate's Primary Committee:</p>
-            <h4>{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h4>
-
-
+            <h5>{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
             <table>
               <tr>
-                <th></th>
-                <th>Savings</th>
+                <th colspan="2">Receipts</th>
               </tr>
               <tr>
-                <td>January</td>
-                <td>$100</td>
+                <td>Itemized Individual Contributions</td>
+                <td>{{candidate?.ind_ite_con}}</td>
               </tr>
               <tr>
-                <td>February</td>
-                <td>$80</td>
+                <td>Unitemized Individual Contributions</td>
+                <td>{{candidate?.ind_uni_con}}</td>
+              </tr>
+              <tr>
+                <td>Total Individual Contributions</td>
+                <td>{{candidate?.ind_con}}</td>
+              </tr>
+              <tr>
+                <td>Party Committee Contributions</td>
+                <td>{{candidate?.par_com_con}}</td>
+              </tr>
+              <tr>
+                <td>Other Committee Contributions</td>
+                <td>{{candidate?.oth_com_con}}</td>
+              </tr>
+              <tr>
+                <td>Candidate Contributions</td>
+                <td>{{candidate?.can_con}}</td>
+              </tr>
+              <tr>
+                <td>Total Contributions</td>
+                <td>{{candidate?.tot_con}}</td>
               </tr>
             </table>
         </div>

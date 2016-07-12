@@ -101,6 +101,12 @@ bar-chart {
 .top-row {
   position: relative;
   height: 40%;
+  text-align: center;
+}
+
+.top-row * {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 #pies-title {
