@@ -6,8 +6,8 @@ import {Observable} from 'rxjs/Rx';
   selector: 'type-pie',
   template: `
         <p>Donations by Committee Type</p>
-        <div id="chartType">
-        </div>
+          <div id="chartType">
+          </div>
   `,
   styles: [`
 
@@ -16,6 +16,13 @@ import {Observable} from 'rxjs/Rx';
       margin: 0 !important;
       font-family: 'Oswald';
       font-weight: 300;
+    }
+
+    .chartContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
     }
 
     #chartType {
@@ -131,7 +138,7 @@ export class TypePieComponent implements OnInit, OnChanges {
             var offset = height * color.domain().length / 2;
             var horz = -2 * legendRectSize;
             var vert = i * height - offset;
-            var moveLeft = radius + 5;
+            var moveLeft = radius + 10;
             return 'translate(' + moveLeft + ',' + vert + ')';
           });
 
