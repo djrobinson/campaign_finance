@@ -8,6 +8,7 @@ h1, h2, h3, h4, h5, p {
   flex-direction: row;
   height: 100%;
   font-size: 10px;
+  background-color: #2C3A46;
 }
 .green {
   color: #86ca6f;
@@ -136,16 +137,15 @@ bar-chart {
   display: flex;
   position: relative;
   height: 25%;
-  background-color: aqua;
   width: 100%;
   flex-direction: row;
 }
 
 .highlight-tile {
   flex-grow: 1;
-  border: solid 1px black;
-  margin: 0 !important;
+  margin: 0 10px 0 0;
   padding: 0 !important;
+  background-color: #929DA7;
 }
 
 .candidate-content {
