@@ -45,6 +45,28 @@ export class DsgnPieComponent implements OnInit, OnChanges {
     var http = this.http;
     var pieData = [];
     data.forEach((item)=>{
+      switch(item.CMTE_DSGN){
+        case 'A':
+          item.CMTE_DSGN = 'Candidate Authorized';
+          break;
+        case 'B':
+          item.CMTE_DSGN = 'Lobbyist/Registrant';
+          break;
+        case 'D':
+          item.CMTE_DSGN = 'Leadership PAC';
+          break;
+        case 'J':
+          item.CMTE_DSGN = 'Joint fundraiser';
+          break;
+        case 'P':
+          item.CMTE_DSGN = 'Candidate Cmte';
+          break;
+        case 'U':
+          item.CMTE_DSGN = 'Unauthorized';
+          break;
+        default:
+          item.CMTE_DSGN = item.CMTE_DSGN;
+      }
       pieData.push({
         label: item.CMTE_DSGN,
         amount: +item.sum
