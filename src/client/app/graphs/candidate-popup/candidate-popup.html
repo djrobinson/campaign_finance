@@ -51,23 +51,16 @@
 
 
       <div class="four columns pies">
-        <h5>Donations by Size</h5>
+
         <size-pie></size-pie>
-        <h5>Donations by Committee Type</h5>
+
         <type-pie></type-pie>
-        <h5>Donations by Committee Designation</h5>
+
         <dsgn-pie></dsgn-pie>
       </div>
       <div class="eight columns candidate-content">
         <div class="twelve columns top-row">
-          <div class="four columns fill">
-            <div id="pies-title"><p>Hover over pie charts to see details below</p></div>
-            <div class="pie-tooltip">
-              <div class="pie-label"></div>
-              <div class="pie-amount"></div>
-              <div class="pie-percent"></div>
-            </div>
-          </div>
+
           <div class="four columns">
             <p>Party: {{candidate?.PARTY}}</p>
             <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
@@ -80,6 +73,14 @@
         </div>
         <div class="twelve columns middle-row">
           <div class="highlight-tile three columns">
+            <div class="fill">
+              <div id="pies-title"><p>Hover over pie charts to see details below</p></div>
+              <div class="pie-tooltip">
+                <div class="pie-label"></div>
+                <div class="pie-amount"></div>
+                <div class="pie-percent"></div>
+              </div>
+            </div>
           </div>
           <div class="highlight-tile three columns">
           </div>

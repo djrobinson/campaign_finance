@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Rx';
 @Component({
   selector: 'size-pie',
   template: `
+        <p>Donations by Size</p>
         <div id="chart2">
         </div>
   `,

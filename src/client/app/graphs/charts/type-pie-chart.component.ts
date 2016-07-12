@@ -5,19 +5,21 @@ import {Observable} from 'rxjs/Rx';
 @Component({
   selector: 'type-pie',
   template: `
+        <p>Donations by Committee Type</p>
         <div id="chartType">
         </div>
   `,
   styles: [`
 
-    #containerChart22 {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      width: 100%;
+    p {
+      size: 2rem;
+      margin: 0 !important;
+      font-family: 'Oswald';
+      font-weight: 300;
     }
 
     #chartType {
+      margin: 0 !important;
       position: absolute;
       flex-grow: 1;
       display: flex;
@@ -25,18 +27,6 @@ import {Observable} from 'rxjs/Rx';
       height: 100%;
     }
 
-    .pie-title {
-      display: block;
-      height: 10%;
-      width: 100%;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-    }
-
-    .cand-table {
-      width: 100%;
-    }
   `],
   directives: []
 })
@@ -68,7 +58,7 @@ export class TypePieComponent implements OnInit, OnChanges {
 
       var width = document.getElementById('chart2').offsetWidth;
       var height = document.getElementById('chart2').offsetHeight;
-      var radius = height / 2.25;
+      var radius = height / 3 ;
       var donutWidth = 15;
       var legendRectSize = 12;
       var legendSpacing = 2;
@@ -80,8 +70,8 @@ export class TypePieComponent implements OnInit, OnChanges {
         .attr('width', width)
         .attr('height', height)
         .append('g')
-        .attr('transform', 'translate(' + (radius) +
-        ',' + (height / 2) + ')');
+        .attr('transform', 'translate(' + (radius + 10) +
+        ',' + (height / 2.5) + ')');
 
       var arc = d3.svg.arc()
         .innerRadius(radius - donutWidth)
@@ -168,3 +158,5 @@ export class TypePieComponent implements OnInit, OnChanges {
     });
   }
 }
+
+0103559920101053

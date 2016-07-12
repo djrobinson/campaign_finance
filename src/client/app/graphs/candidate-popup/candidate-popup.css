@@ -57,7 +57,7 @@ li {
   flex-direction: column;
 }
 .cand-pic {
-  background-color: #929DA7;
+  background-color: #3B4E5E;
   padding-bottom: 5rem;
 }
 .cand-options {
@@ -147,10 +147,12 @@ bar-chart {
 }
 
 .highlight-tile {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
   margin: 0 10px 0 0;
   padding: 0 !important;
-  background-color: #929DA7;
+  background-color: #3B4E5E;
 }
 
 .candidate-content {
@@ -171,18 +173,24 @@ size-pie {
   position: relative;
   width: 100%;
   flex-grow: 1;
+  background-color: #3B4E5E;
+  margin: 1rem 0 1rem 0;
 }
 
 type-pie {
   position: relative;
   width: 100%;
   flex-grow: 1;
+  background-color: #3B4E5E;
+  margin: 1rem 0 1rem 0;
 }
 
 dsgn-pie {
   position: relative;
   width: 100%;
   flex-grow: 1;
+  background-color: #3B4E5E;
+  margin: 1rem 0 1rem 0;
 }
 
 opex-section {
