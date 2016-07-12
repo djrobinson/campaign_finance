@@ -86,9 +86,9 @@ export class DsgnPieComponent implements OnInit, OnChanges {
     (function(d3) {
       'use strict';
 
-      var width = document.getElementById('chartDsgn').offsetHeight;
-      var height = width;
-      var radius = width / 2.25;
+      var width = document.getElementById('chart2').offsetWidth;
+      var height = document.getElementById('chart2').offsetHeight;
+      var radius = height / 2.25;
       var donutWidth = 15;
       var legendRectSize = 12;
       var legendSpacing = 2;
@@ -100,7 +100,7 @@ export class DsgnPieComponent implements OnInit, OnChanges {
         .attr('width', width)
         .attr('height', height)
         .append('g')
-        .attr('transform', 'translate(' + (width / 2) +
+        .attr('transform', 'translate(' + (radius) +
         ',' + (height / 2) + ')');
 
       var arc = d3.svg.arc()
@@ -161,7 +161,8 @@ export class DsgnPieComponent implements OnInit, OnChanges {
             var offset = height * color.domain().length / 2;
             var horz = -2 * legendRectSize;
             var vert = i * height - offset;
-            return 'translate(' + horz + ',' + vert + ')';
+            var moveLeft = radius + 5;
+            return 'translate(' + moveLeft + ',' + vert + ')';
           });
 
         legend.append('rect')
