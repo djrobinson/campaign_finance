@@ -92,9 +92,8 @@ export class SizePieComponent implements OnInit, OnChanges {
         .value(function(d) { return d.amount; })
         .sort(null);
 
-      var tooltip = d3.select('.pie-tooltip')
-
-
+      var tooltip = d3.select('.pie-tooltip');
+      var pieTitle = d3.select('#pies-title');
 
       start(pieData);
       function start(dataset){
@@ -113,6 +112,7 @@ export class SizePieComponent implements OnInit, OnChanges {
 
         path.on('mouseover', function(d) {
           tooltip.style('display', 'flex');
+          pieTitle.style('display', 'none');
           var total = d3.sum(dataset.map(function(d) {
             return d.amount;
           }));
@@ -124,6 +124,7 @@ export class SizePieComponent implements OnInit, OnChanges {
 
         path.on('mouseout', function() {
           tooltip.style('display', 'none');
+          pieTitle.style('display', 'flex');
         });
 
         path.on('mousemove', function(d) {

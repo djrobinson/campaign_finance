@@ -46,6 +46,59 @@ export class TypePieComponent implements OnInit, OnChanges {
     var http = this.http;
     var pieData = [];
     data.forEach((item)=>{
+      switch(item.CMTE_TP){
+        case 'C':
+          item.CMTE_TP = 'Communication Cost';
+          break;
+        case 'D':
+          item.CMTE_TP = 'Delegate Committee';
+          break;
+        case 'E':
+          item.CMTE_TP = 'Electioneering Communication';
+          break;
+        case 'H':
+          item.CMTE_TP = 'House';
+          break;
+        case 'I':
+          item.CMTE_TP = 'Independent Expenditor';
+          break;
+        case 'N':
+          item.CMTE_TP = 'PAC - Nonqualified';
+          break;
+        case 'O':
+          item.CMTE_TP = 'Super PAC';
+          break;
+        case 'P':
+          item.CMTE_TP = 'Presidential';
+          break;
+        case 'Q':
+          item.CMTE_TP = 'PAC - Qualified';
+          break;
+        case 'S':
+          item.CMTE_TP = 'Senate';
+          break;
+        case 'U':
+          item.CMTE_TP = 'Single Cand Super PAC';
+          break;
+        case 'V':
+          item.CMTE_TP = 'PAC w/ Non-Contribution Account - Nonqualified';
+          break;
+        case 'W':
+          item.CMTE_TP = 'PAC w/ Non-Contribution Account - Qualified';
+          break;
+        case 'X':
+          item.CMTE_TP = 'Party - Nonqualified';
+          break;
+        case 'Y':
+          item.CMTE_TP = 'Party - Qualified';
+          break;
+        case 'Z':
+          item.CMTE_TP = 'National Party Nonfederal Account';
+          break;
+        default:
+          item.CMTE_TP = item.CMTE_DSGN;
+      }
+
       pieData.push({
         label: item.CMTE_TP,
         amount: +item.sum
@@ -88,9 +141,8 @@ export class TypePieComponent implements OnInit, OnChanges {
         .value(function(d) { return d.amount; })
         .sort(null);
 
-      var tooltip = d3.select('.pie-tooltip')
-
-
+      var tooltip = d3.select('.pie-tooltip');
+      var pieTitle = d3.select('#pies-title');
 
       start(pieData);
       function start(dataset){
@@ -109,6 +161,7 @@ export class TypePieComponent implements OnInit, OnChanges {
 
         path.on('mouseover', function(d) {
           tooltip.style('display', 'flex');
+          pieTitle.style('display', 'none');
           var total = d3.sum(dataset.map(function(d) {
             return d.amount;
           }));
@@ -120,6 +173,7 @@ export class TypePieComponent implements OnInit, OnChanges {
 
         path.on('mouseout', function() {
           tooltip.style('display', 'none');
+          pieTitle.style('display', 'flex');
         });
 
         path.on('mousemove', function(d) {
