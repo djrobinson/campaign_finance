@@ -132,18 +132,18 @@
           </div>
           <div class="highlight-tile three columns">
             <div class="top-highlight">
-              <h2>{{itemizedDonations}}</h2>
+              <h2>{{parseFloat(itemizedDonations) | currency:'USD':true}}</h2>
             </div>
             <div class="bottom-highlight">
-              <h2>{{committeeDonations}}</h2>
+              <h2>{{parseFloat(committeeDonations)  | currency:'USD':true}}</h2>
             </div>
           </div>
           <div class="highlight-tile three columns">
             <div class="top-highlight support">
-              <h2>{{pacSupport}}</h2>
+              <h2>{{parseFloat(pacSupport)  | currency:'USD':true}}</h2>
             </div>
             <div class="bottom-highlight oppose">
-              <h2>{{pacOppose}}</h2>
+              <h2>{{parseFloat(pacOppose)  | currency:'USD':true}}</h2>
             </div>
           </div>
         </div>

@@ -22,7 +22,6 @@ export class CandidatesComponent implements OnInit {
     this.parseFloat = function(num) {
       return parseFloat(num);
     }
-    console.log(this.type);
   }
 
   ngOnInit() {
