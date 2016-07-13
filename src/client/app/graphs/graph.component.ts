@@ -16,79 +16,88 @@ import { Router, RouteParams } from 'angular2/router';
 @Component({
   selector: 'graph-view',
   template: `
-            <spinner [isRunning]="isRequesting">
-            </spinner>
-            <div class="row">
-              <div class="force-container">
+            <div class="graph-container">
+              <spinner [isRunning]="isRequesting">
+              </spinner>
+              <div class="row">
+                <div class="force-container">
+                </div>
               </div>
-            </div>
-            <div *ngIf="!graph" class="legend">
-              <p>The small nodes represent individuals. Large nodes are PACs, color coded by type. More information coming soon on categorization. Click on each node for additional information about the candidate, committee, or individual</p>
-            </div>
-            <div *ngIf="selectedNode">
-              <mini-profile-view
-                class="three columns"
-                [node]="selectedNode"
-                [bioguide]="bioguideId"
-                (indivEmit)="showIndivPopup($event)"
-                (cmteEmit)="showCmtePopup($event)"
-                (candEmit)="showCandPopup($event)"
-                (congressEmit)="showCongressPopup($event)">
-              </mini-profile-view>
-            </div>
-            <div *ngIf="indivPopup">
-              <individual-popup
-                [individualTran]="individualTran"
-                [indivName]="indivName"
-                (exitEmit)="exit()">
-              </individual-popup>
-            </div>
-            <div *ngIf="fullTreemap">
-              <div class="tree-close">
-                <button (click)="closeTreemap()">Close</button>
+              <div *ngIf="!graph" class="legend">
+                <p>The small nodes represent individuals. Large nodes are PACs, color coded by type. More information coming soon on categorization. Click on each node for additional information about the candidate, committee, or individual</p>
               </div>
-              <treemap route="{{fullRoute}}">
-              </treemap>
-            </div>
-            <div *ngIf="fullBubble">
-              <bubble-chart
-                cmte="{{bubbleCmte}}"
-                (exitEmit)="closeBubble()"
-                (indivEmit)="changeIndiv($event)">
-              </bubble-chart>
-            </div>
-            <div *ngIf="cmtePopup">
-              <committee-popup
-                [isCandidate]="false"
-                [committee]="selectedCommittee"
-                (exitEmit)="exit()"
-                (cmteEmit)="changeCmte($event)"
-                (indivEmit)="changeIndiv($event)"
-                (bubbleEmit)="showBubble($event)">
-              </committee-popup>
-            </div>
-            <div *ngIf="candPopup">
-              <candidate-popup
-                [isCandidate]="true"
-                [candidate]="selectedCandidate"
-                [committee]="selectedCommittee"
-                (exitEmit)="exit()"
-                (cmteEmit)="changeCmte($event)"
-                (treemapEmit)="showTreemap($event)"
-              >
-              </candidate-popup>
-            </div>
-            <div *ngIf="congressPopup">
-              <congress-popup
-                [candidate]="selectedCandidate"
-                (exitEmit)="exit()"
-                (cmteEmit)="changeCmte($event)"
-              >
-              </congress-popup>
+              <div *ngIf="selectedNode">
+                <mini-profile-view
+                  class="three columns"
+                  [node]="selectedNode"
+                  [bioguide]="bioguideId"
+                  (indivEmit)="showIndivPopup($event)"
+                  (cmteEmit)="showCmtePopup($event)"
+                  (candEmit)="showCandPopup($event)"
+                  (congressEmit)="showCongressPopup($event)">
+                </mini-profile-view>
+              </div>
+              <div *ngIf="indivPopup">
+                <individual-popup
+                  [individualTran]="individualTran"
+                  [indivName]="indivName"
+                  (exitEmit)="exit()">
+                </individual-popup>
+              </div>
+              <div *ngIf="fullTreemap">
+                <div class="tree-close">
+                  <button (click)="closeTreemap()">Close</button>
+                </div>
+                <treemap route="{{fullRoute}}">
+                </treemap>
+              </div>
+              <div *ngIf="fullBubble">
+                <bubble-chart
+                  cmte="{{bubbleCmte}}"
+                  (exitEmit)="closeBubble()"
+                  (indivEmit)="changeIndiv($event)">
+                </bubble-chart>
+              </div>
+              <div *ngIf="cmtePopup">
+                <committee-popup
+                  [isCandidate]="false"
+                  [committee]="selectedCommittee"
+                  (exitEmit)="exit()"
+                  (cmteEmit)="changeCmte($event)"
+                  (indivEmit)="changeIndiv($event)"
+                  (bubbleEmit)="showBubble($event)">
+                </committee-popup>
+              </div>
+              <div *ngIf="candPopup">
+                <candidate-popup
+                  [isCandidate]="true"
+                  [candidate]="selectedCandidate"
+                  [committee]="selectedCommittee"
+                  (exitEmit)="exit()"
+                  (cmteEmit)="changeCmte($event)"
+                  (treemapEmit)="showTreemap($event)"
+                >
+                </candidate-popup>
+              </div>
+              <div *ngIf="congressPopup">
+                <congress-popup
+                  [candidate]="selectedCandidate"
+                  (exitEmit)="exit()"
+                  (cmteEmit)="changeCmte($event)"
+                >
+                </congress-popup>
+              </div>
             </div>
            `,
   styles: [
     `
+    .graph-container {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .legend {
       width: 20%;
       height: 20%;
@@ -184,11 +193,7 @@ import { Router, RouteParams } from 'angular2/router';
       stroke: black;
       stroke-width: 1.5px;
     }
-    spinner {
-      position: absolute;
-      top: 35%;
-      left: 45%;
-    }
+
   `
   ],
   providers: [GraphService],
