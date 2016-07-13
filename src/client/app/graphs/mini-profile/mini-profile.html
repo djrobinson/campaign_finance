@@ -1,6 +1,18 @@
 <div class="title">
     <img [src]="picture">
     <h5>{{title}}</h5>
+    <div *ngIf="popupType === 'individual'">
+      <div class="button" (click)="indivPopupEmit(id, title)">Profile</div>
+    </div>
+    <div *ngIf="popupType === 'committee' || popupType === 'associated'">
+      <div class="button" (click)="cmtePopupEmit(id)">Profile</div>
+    </div>
+    <div *ngIf="popupType === 'candidate'">
+      <div class="button" (click)="candPopupEmit(id, cmte_id)">Profile</div>
+    </div>
+    <div *ngIf="popupType === 'congress'">
+      <div class="button" (click)="congressPopupEmit(id)">Profile</div>
+    </div>
     <div *ngIf="popupType ==='associated'">
       <table class="cand-table">
         <tr>
@@ -61,17 +73,5 @@
         </div>
       </div>
     </div>
-    <div>
-      <div *ngIf="popupType === 'individual'">
-        <button (click)="indivPopupEmit(id, title)">Profile</button>
-      </div>
-      <div *ngIf="popupType === 'committee' || popupType === 'associated'">
-        <button (click)="cmtePopupEmit(id)">Profile</button>
-      </div>
-      <div *ngIf="popupType === 'candidate'">
-        <button (click)="candPopupEmit(id, cmte_id)">Profile</button>
-      </div>
-      <div *ngIf="popupType === 'congress'">
-        <button (click)="congressPopupEmit(id)">Profile</button>
-      </div>
+
 </div>

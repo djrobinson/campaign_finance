@@ -308,6 +308,26 @@ committees-section {
   background-color: #3D0C11;
 }
 
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+    border-radius: 25px;
+}
+
+.button:hover {
+    background-color: #008CBA;
+    color: white;
+}
 
 .text-center {
   text-align: center;
