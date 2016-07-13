@@ -1,7 +1,6 @@
 h1, h2, h3, h4, h5, p {
   font-family: 'Oswald';
   font-weight: 300;
-
 }
 
 .cand-style {
@@ -11,6 +10,8 @@ h1, h2, h3, h4, h5, p {
   font-size: 10px;
   background-color: #2C3A46;
 }
+
+
 
 .spinner-container {
   position: absolute;
@@ -101,6 +102,13 @@ li {
 
 .main-content {
   color: #ECF9FD;
+  position: relative;
+}
+
+.innards{
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 bar-chart {
@@ -226,6 +234,8 @@ dsgn-pie {
 }
 
 opex-section {
+  margin: 0;
+  padding: 0;
   position: absolute;
   height: 100%;
   width: 100%;
@@ -235,6 +245,8 @@ opex-section {
 }
 
 superpacs-section {
+  margin: 0;
+  padding: 0;
   position: absolute;
   height: 100%;
   width: 100%;
@@ -244,6 +256,8 @@ superpacs-section {
 }
 
 individuals-section {
+  margin: 0;
+  padding: 0;
   position: absolute;
   height: 100%;
   width: 100%;
@@ -253,6 +267,8 @@ individuals-section {
 }
 
 committees-section {
+  margin: 0;
+  padding: 0;
   position: absolute;
   height: 100%;
   width: 100%;
