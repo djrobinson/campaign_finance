@@ -31,8 +31,8 @@
       <td>
         {{committee.CMTE_ID}}
       </td>
-      <td>
-        {{committee.TRANSACTION_AMT}}
+      <td class="green">
+        {{parseFloat(committee.TRANSACTION_AMT) | currency:'USD':true}}
       </td>
       <td>
         {{committee.CITY}}, {{committee.STATE}}

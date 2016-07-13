@@ -20,13 +20,6 @@ import {Component, Input, OnDestroy} from 'angular2/core';
         </div>
     `
     styles: [`
-        .spinner {
-          width: 200px;
-          height: 200px;
-
-          position: relative;
-          margin: 100px auto;
-        }
 
         .sk-cube-grid {
           width: 40px;

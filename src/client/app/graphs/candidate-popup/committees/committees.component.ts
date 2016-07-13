@@ -11,7 +11,13 @@ export class CommitteesSectionComponent implements OnInit {
   @Input() cmte: string;
   private committees: any;
 
-  constructor(private http:Http) {}
+  constructor(private http:Http) {
+
+  }
+
+  public parseFloat = function(num){
+    return parseFloat(num);
+  }
 
   ngOnInit(){
     this.http.get('/api/transfers/' + this.cmte + '/recipient').map(response => response.json()).subscribe(data => {
