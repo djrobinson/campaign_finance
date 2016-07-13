@@ -3,7 +3,6 @@
   </spinner>
 </div>
 <div class="cand-style" id="full-size">
-
   <div class="three columns choices">
     <div class="cand-pic text-center">
       <img [src]="imageVar?.image" alt="picture">
@@ -74,6 +73,7 @@
         <dsgn-pie></dsgn-pie>
       </div>
       <div class="eight columns candidate-content">
+        <div *ngIf="!isRequesting" (click)="close()" class="close-button">×</div>
         <div class="twelve columns top-row">
             <h5>{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
             <table>
