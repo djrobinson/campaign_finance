@@ -1,23 +1,51 @@
 <div class="content">
   <h1>Committees</h1>
-  <ul *ngFor="#committee of committees">
-    <li>{{committee.OTHER_ID}}</li>
-  </ul>
   <table>
     <tr>
       <th>
         Committee Name
       </th>
       <th>
+        Committee ID
       </th>
       <th>
+        Transaction Amount
       </th>
       <th>
+        Location
       </th>
       <th>
+        Memo Text
       </th>
       <th>
+        FEC File
       </th>
+      <th>
+        Committe Link
+      </th>
+    </tr>
+    <tr *ngFor="#committee of committees">
+      <td class="cmte-name">
+        {{committee.NAME}}
+      </td>
+      <td>
+        {{committee.CMTE_ID}}
+      </td>
+      <td>
+        {{committee.TRANSACTION_AMT}}
+      </td>
+      <td>
+        {{committee.CITY}}, {{committee.STATE}}
+      </td>
+      <td>
+        {{committee.MEMO_TEXT}}
+      </td>
+      <td>
+        {{committee.IMAGE_NUM}}
+      </td>
+      <td>
+        {{committee.CMTE_ID}}
+      </td>
     </tr>
   </table>
 </div>
