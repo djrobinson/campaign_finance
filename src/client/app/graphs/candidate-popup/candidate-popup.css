@@ -19,8 +19,8 @@ h1, h2, h3, h4, h5, p {
 }
 
 .fec {
-  height: 2rem;
-  width: 2rem;
+  height: 3rem;
+  width: 3rem;
 }
 
 .close-button {
@@ -111,6 +111,8 @@ bar-chart {
 
 .top-row td {
   font-size: 1.5rem;
+  font-family: 'Oswald';
+  font-weight: 300;
 }
 
 #pies-title {
@@ -164,12 +166,14 @@ bar-chart {
 }
 
 .highlight-tile {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   margin: 0 10px 0 0;
   padding: 0 !important;
   background-color: #3B4E5E;
+  text-align: center;
 }
 
 .candidate-content {
@@ -261,6 +265,29 @@ committees-section {
 
 .bottom {
   bottom: 0;
+}
+
+.top-highlight {
+
+  position: absolute;
+  height: 50%;
+  width: 100%;
+  top: 0;
+}
+
+.bottom-highlight {
+  position: absolute;
+  height: 50%;
+  width: 100%;
+  bottom: 0;
+}
+
+.support {
+  background-color: #04471C;
+}
+
+.oppose {
+  background-color: #3D0C11;
 }
 
 

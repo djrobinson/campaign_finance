@@ -42,6 +42,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   public barChartData: any;
   public selection: string;
   public primaryCmte: any;
+  public pacSupport: any;
+  public pacOppose: any;
 
   constructor(
     private http: Http) {
@@ -120,10 +122,13 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.sizePieComponent.callAsc(data[7]);
         this.dsgnPieComponent.callAsc(data[5]);
 
-        this.itemizedDonations = parseInt(data[7].count);
+        this.itemizedDonations = parseInt(data[7][0].count);
         this.committeeDonations = data[6].reduce((prev, item)=>{
           return prev + +item.count;
         }, 0)
+
+        this.pacSupport = parseInt(data[10][0].total);
+        this.pacOppose = parseInt(data[11][0].total);
 
         var barChartData = data[8].concat(data[9]);
         this.barComponent.buildChart(barChartData);
