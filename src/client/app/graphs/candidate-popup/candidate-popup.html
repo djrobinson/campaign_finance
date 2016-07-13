@@ -78,44 +78,44 @@
               </tr>
               <tr>
                 <td>Itemized Individual Contributions</td>
-                <td>{{candidate?.ind_ite_con}}</td>
+                <td>{{parseFloat(candidate.ind_ite_con) | currency:'USD':true}}</td>
                 <td>Operating Expenditures</td>
-                <td>{{candidate?.ope_exp}}</td>
+                <td>{{parseFloat(candidate?.ope_exp) | currency:'USD':true}}</td>
               </tr>
               <tr>
                 <td>Unitemized Individual Contributions</td>
-                <td>{{candidate?.ind_uni_con}}</td>
+                <td>{{parseFloat(candidate?.ind_uni_con) | currency:'USD':true}}</td>
                 <td>Total Loan Repayments</td>
-                <td>{{candidate?.tot_loa_rep}}</td>
+                <td>{{parseFloat(candidate?.tot_loa_rep) | currency:'USD':true}}</td>
               </tr>
               <tr>
                 <td>Total Individual Contributions</td>
-                <td>{{candidate?.ind_con}}</td>
+                <td>{{parseFloat(candidate?.ind_con) | currency:'USD':true}}</td>
                 <td>Individual Refunds</td>
-                <td>{{candidate?.ind_ref}}</td>
+                <td>{{parseFloat(candidate?.ind_ref) | currency:'USD':true}}</td>
               </tr>
               <tr>
                 <td>Party Committee Contributions</td>
-                <td>{{candidate?.par_com_con}}</td>
+                <td>{{parseFloat(candidate?.par_com_con) | currency:'USD':true}}</td>
                 <td>Total Disbursements</td>
-                <td>{{candidate?.tot_dis}}</td>
+                <td>{{parseFloat(candidate?.tot_dis) | currency:'USD':true}}</td>
               </tr>
               <tr>
                 <td>Other Committee Contributions</td>
-                <td>{{candidate?.oth_com_con}}</td>
+                <td>{{parseFloat(candidate?.oth_com_con) | currency:'USD':true}}</td>
                 <td colspan="2">Cash Summary</td>
               </tr>
               <tr>
                 <td>Candidate Contributions</td>
-                <td>{{candidate?.can_con}}</td>
+                <td>{{parseFloat(candidate?.can_con) | currency:'USD':true}}</td>
                 <td>Ending Cash on Hand</td>
-                <td>{{candidate?.cas_on_han_clo_of_per}}</td>
+                <td>{{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
               </tr>
               <tr>
                 <td>Total Contributions</td>
-                <td>{{candidate?.tot_con}}</td>
+                <td>{{parseFloat(candidate?.tot_con) | currency:'USD':true}}</td>
                 <td>Total Loans</td>
-                <td>{{candidate?.tot_loa}}</td>
+                <td>{{parseFloat(candidate?.tot_loa) | currency:'USD':true}}</td>
               </tr>
             </table>
         </div>
