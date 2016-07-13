@@ -2,7 +2,7 @@
   <spinner [isRunning]="isRequesting">
   </spinner>
 </div>
-<div class="cand-style" id="full-size">
+<div class="cand-style">
   <div class="three columns choices">
     <div class="cand-pic text-center">
       <img [src]="imageVar?.image" alt="picture">
@@ -44,119 +44,119 @@
         <h5>Committee Donors</h5>
       </div>
     </div>
-    </div>
-    <div class="nine columns main-content">
-      <individuals-section
-        *ngIf="selection==='individuals'"
-        [cmte]="committee">
-      </individuals-section>
-      <committees-section
-        *ngIf="selection==='committees'"
-        [cmte]="committee">
-      </committees-section>
-      <superpacs-section
-        *ngIf="selection==='superpacs'"
-        [cand]="candidate">
-      </superpacs-section>
-      <opex-section
-        *ngIf="selection==='opex'"
-        [cmte]="committee">
-      </opex-section>
+  </div>
+  <div class="nine columns main-content">
+    <individuals-section
+      *ngIf="selection==='individuals'"
+      [cmte]="committee">
+    </individuals-section>
+    <committees-section
+      *ngIf="selection==='committees'"
+      [cmte]="committee">
+    </committees-section>
+    <superpacs-section
+      *ngIf="selection==='superpacs'"
+      [cand]="candidate">
+    </superpacs-section>
+    <opex-section
+      *ngIf="selection==='opex'"
+      [cmte]="committee">
+    </opex-section>
 
-      <div class="innards">
-        <div class="four columns pies">
+    <div class="innards">
+      <div class="four columns pies">
 
-          <size-pie></size-pie>
+        <size-pie></size-pie>
 
-          <type-pie></type-pie>
+        <type-pie></type-pie>
 
-          <dsgn-pie></dsgn-pie>
+        <dsgn-pie></dsgn-pie>
+      </div>
+      <div class="eight columns candidate-content">
+        <div *ngIf="!isRequesting" (click)="close()" class="close-button">×</div>
+        <div class="twelve columns top-row">
+            <h5>{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
+            <table>
+              <tr>
+                <td colspan="2">Receipts</td>
+                <td colspan="2">Disbursements</td>
+              </tr>
+              <tr>
+                <td>Itemized Individual Contributions</td>
+                <td>{{parseFloat(candidate.ind_ite_con) | currency:'USD':true}}</td>
+                <td>Operating Expenditures</td>
+                <td>{{parseFloat(candidate?.ope_exp) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Unitemized Individual Contributions</td>
+                <td>{{parseFloat(candidate?.ind_uni_con) | currency:'USD':true}}</td>
+                <td>Total Loan Repayments</td>
+                <td>{{parseFloat(candidate?.tot_loa_rep) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Total Individual Contributions</td>
+                <td>{{parseFloat(candidate?.ind_con) | currency:'USD':true}}</td>
+                <td>Individual Refunds</td>
+                <td>{{parseFloat(candidate?.ind_ref) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Party Committee Contributions</td>
+                <td>{{parseFloat(candidate?.par_com_con) | currency:'USD':true}}</td>
+                <td>Total Disbursements</td>
+                <td>{{parseFloat(candidate?.tot_dis) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Other Committee Contributions</td>
+                <td>{{parseFloat(candidate?.oth_com_con) | currency:'USD':true}}</td>
+                <td colspan="2">Cash Summary</td>
+              </tr>
+              <tr>
+                <td>Candidate Contributions</td>
+                <td>{{parseFloat(candidate?.can_con) | currency:'USD':true}}</td>
+                <td>Ending Cash on Hand</td>
+                <td>{{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Total Contributions</td>
+                <td>{{parseFloat(candidate?.tot_con) | currency:'USD':true}}</td>
+                <td>Total Loans</td>
+                <td>{{parseFloat(candidate?.tot_loa) | currency:'USD':true}}</td>
+              </tr>
+            </table>
         </div>
-        <div class="eight columns candidate-content">
-          <div *ngIf="!isRequesting" (click)="close()" class="close-button">×</div>
-          <div class="twelve columns top-row">
-              <h5>{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
-              <table>
-                <tr>
-                  <td colspan="2">Receipts</td>
-                  <td colspan="2">Disbursements</td>
-                </tr>
-                <tr>
-                  <td>Itemized Individual Contributions</td>
-                  <td>{{parseFloat(candidate.ind_ite_con) | currency:'USD':true}}</td>
-                  <td>Operating Expenditures</td>
-                  <td>{{parseFloat(candidate?.ope_exp) | currency:'USD':true}}</td>
-                </tr>
-                <tr>
-                  <td>Unitemized Individual Contributions</td>
-                  <td>{{parseFloat(candidate?.ind_uni_con) | currency:'USD':true}}</td>
-                  <td>Total Loan Repayments</td>
-                  <td>{{parseFloat(candidate?.tot_loa_rep) | currency:'USD':true}}</td>
-                </tr>
-                <tr>
-                  <td>Total Individual Contributions</td>
-                  <td>{{parseFloat(candidate?.ind_con) | currency:'USD':true}}</td>
-                  <td>Individual Refunds</td>
-                  <td>{{parseFloat(candidate?.ind_ref) | currency:'USD':true}}</td>
-                </tr>
-                <tr>
-                  <td>Party Committee Contributions</td>
-                  <td>{{parseFloat(candidate?.par_com_con) | currency:'USD':true}}</td>
-                  <td>Total Disbursements</td>
-                  <td>{{parseFloat(candidate?.tot_dis) | currency:'USD':true}}</td>
-                </tr>
-                <tr>
-                  <td>Other Committee Contributions</td>
-                  <td>{{parseFloat(candidate?.oth_com_con) | currency:'USD':true}}</td>
-                  <td colspan="2">Cash Summary</td>
-                </tr>
-                <tr>
-                  <td>Candidate Contributions</td>
-                  <td>{{parseFloat(candidate?.can_con) | currency:'USD':true}}</td>
-                  <td>Ending Cash on Hand</td>
-                  <td>{{parseFloat(candidate?.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
-                </tr>
-                <tr>
-                  <td>Total Contributions</td>
-                  <td>{{parseFloat(candidate?.tot_con) | currency:'USD':true}}</td>
-                  <td>Total Loans</td>
-                  <td>{{parseFloat(candidate?.tot_loa) | currency:'USD':true}}</td>
-                </tr>
-              </table>
-          </div>
-          <div class="twelve columns middle-row">
-            <div class="highlight-tile three columns">
-              <div class="fill">
-                <div id="pies-title"><p>Hover over pie charts to see details below</p></div>
-                <div class="pie-tooltip">
-                  <div class="pie-label"></div>
-                  <div class="pie-amount"></div>
-                  <div class="pie-percent"></div>
-                </div>
-              </div>
-            </div>
-            <div class="highlight-tile three columns">
-              <div class="top-highlight">
-                <h2>{{itemizedDonations}}</h2>
-              </div>
-              <div class="bottom-highlight">
-                <h2>{{committeeDonations}}</h2>
-              </div>
-            </div>
-            <div class="highlight-tile three columns">
-              <div class="top-highlight support">
-                <h2>{{parseFloat(pacSupport)  | currency:'USD':true}}</h2>
-              </div>
-              <div class="bottom-highlight oppose">
-                <h2>{{parseFloat(pacOppose)  | currency:'USD':true}}</h2>
+        <div class="twelve columns middle-row">
+          <div class="highlight-tile three columns">
+            <div class="fill">
+              <div id="pies-title"><p>Hover over pie charts to see details below</p></div>
+              <div class="pie-tooltip">
+                <div class="pie-label"></div>
+                <div class="pie-amount"></div>
+                <div class="pie-percent"></div>
               </div>
             </div>
           </div>
-          <bar-chart
-            class="twelve columns"
-            [graphData]="c">
-          </bar-chart>
+          <div class="highlight-tile three columns">
+            <div class="top-highlight">
+              <h2>{{itemizedDonations}}</h2>
+            </div>
+            <div class="bottom-highlight">
+              <h2>{{committeeDonations}}</h2>
+            </div>
+          </div>
+          <div class="highlight-tile three columns">
+            <div class="top-highlight support">
+              <h2>{{parseFloat(pacSupport)  | currency:'USD':true}}</h2>
+            </div>
+            <div class="bottom-highlight oppose">
+              <h2>{{parseFloat(pacOppose)  | currency:'USD':true}}</h2>
+            </div>
+          </div>
         </div>
+        <bar-chart
+          class="twelve columns"
+          [graphData]="c">
+        </bar-chart>
       </div>
     </div>
+  </div>
 </div>
