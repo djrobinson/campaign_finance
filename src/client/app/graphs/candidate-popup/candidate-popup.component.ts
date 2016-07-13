@@ -10,12 +10,13 @@ import {OpexSectionComponent} from './opex/opex.component';
 import {SuperpacsSectionComponent} from './superpacs/superpacs.component';
 import {IndividualsSectionComponent} from './individuals/individuals.component';
 import {CommitteesSectionComponent} from './committees/committees.component';
+import {SpinnerComponent} from '../../loading/spinner.component';
 
 @Component({
   selector: 'candidate-popup',
   templateUrl: 'app/graphs/candidate-popup/candidate-popup.html',
   styleUrls: ['app/graphs/candidate-popup/candidate-popup.css'],
-  directives: [TypePieComponent, SizePieComponent, DsgnPieComponent, BarComponent, OpexSectionComponent, SuperpacsSectionComponent, CommitteesSectionComponent, IndividualsSectionComponent]
+  directives: [TypePieComponent, SizePieComponent, DsgnPieComponent, BarComponent, OpexSectionComponent, SuperpacsSectionComponent, CommitteesSectionComponent, IndividualsSectionComponent, SpinnerComponent]
 })
 export class CandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
@@ -37,6 +38,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   private pacSpends: Object;
   private route: string;
   private typeString: string;
+  private isRequesting: boolean;
   public itemizedDonations: number;
   public committeeDonations: number;
   public barChartData: any;
@@ -53,6 +55,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(){
+      this.isRequesting = true;
       this.imageVar = {};
       this.selection = "main";
       if (this.candidate.charAt(0) === "P") {
@@ -68,11 +71,12 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
           this.typeString = "candidate disbursement";
         }, error => console.log('Could not load candidate info.'));
       }
-
       this.callPresApis(this.candidate)
-
   }
 
+  private stopRefreshing() {
+    this.isRequesting = false;
+  }
 
   callPresApis(fecId){
 
@@ -132,6 +136,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
         var barChartData = data[8].concat(data[9]);
         this.barComponent.buildChart(barChartData);
+        this.stopRefreshing();
       },
       err => console.error(err)
     );

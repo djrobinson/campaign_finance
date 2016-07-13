@@ -1,4 +1,9 @@
+<div *ngIf="isRequesting" class="spinner-container">
+  <spinner [isRunning]="isRequesting">
+  </spinner>
+</div>
 <div class="cand-style" id="full-size">
+
   <div class="three columns choices">
     <div class="cand-pic text-center">
       <img [src]="imageVar?.image" alt="picture">
@@ -132,10 +137,10 @@
           </div>
           <div class="highlight-tile three columns">
             <div class="top-highlight">
-              <h2>{{parseFloat(itemizedDonations) | currency:'USD':true}}</h2>
+              <h2>{{itemizedDonations}}</h2>
             </div>
             <div class="bottom-highlight">
-              <h2>{{parseFloat(committeeDonations)  | currency:'USD':true}}</h2>
+              <h2>{{committeeDonations}}</h2>
             </div>
           </div>
           <div class="highlight-tile three columns">

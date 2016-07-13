@@ -11,6 +11,18 @@ h1, h2, h3, h4, h5, p {
   font-size: 10px;
   background-color: #2C3A46;
 }
+
+.spinner-container {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+  align-items: center;
+  justify-content: center;
+  background-color: #EFF1F3;
+}
+
 .green {
   color: #86ca6f;
 }
