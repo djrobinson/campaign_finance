@@ -4,10 +4,57 @@ import {Http, Response} from 'angular2/http';
 @Component({
   selector: 'individuals-list',
   template: `
-    <h1>Howdy</h1>
-    <ul *ngFor="#individual of individuals">
-      <li>{{individual.NAME}}</li>
-    </ul>
+    <div class="content">
+      <h1>Individuals</h1>
+      <table>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Employer
+          </th>
+          <th>
+            Title
+          </th>
+          <th>
+            Transaction Amount
+          </th>
+          <th>
+            Memo Text
+          </th>
+          <th>
+            FEC File
+          </th>
+          <th>
+            Committe Link
+          </th>
+        </tr>
+        <tr *ngFor="#individual of individuals">
+          <td class="cmte-name">
+            {{individual.NAME}}
+          </td>
+          <td>
+            {{individual.EMPLOYER}}
+          </td>
+          <td>
+            {{individual.TITLE}
+          </td>
+          <td class="green">
+            {{parseFloat(individual.TRANSACTION_AMT) | currency:'USD':true}}
+          </td>
+          <td>
+            {{individual.CITY}}, {{individual.STATE}}
+          </td>
+          <td>
+            {{individual.IMAGE_NUM}}
+          </td>
+          <td>
+            {{individual.CMTE_ID}}
+          </td>
+        </tr>
+      </table>
+    </div>
   `,
   styles: [`
     width: 100%;
