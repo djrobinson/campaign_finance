@@ -1,11 +1,13 @@
-<div class="middle">
-  <h1>Superpacs</h1>
-  <button (click)="callSuperpacs()">List Format</button>
+<div class="content">
+  <div class="superpac-header">
+    <h1>Superpacs</h1>
+    <button (click)="callSuperpacs()">List Format</button>
+  </div>
   <superpacs-list
     *ngIf="showList"
     [cand]="cand"
   >
   </superpacs-list>
+  <treemap *ngIf="!showList" route="{{route}}">
+  </treemap>
 </div>
-<treemap *ngIf="!showList" route="{{route}}">
-</treemap>
