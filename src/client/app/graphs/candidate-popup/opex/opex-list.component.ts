@@ -4,14 +4,80 @@ import {Http, Response} from 'angular2/http';
 @Component({
   selector: 'opex-list',
   template: `
-    <h1>Howdy</h1>
-    <ul *ngFor="#opex of opexes">
-      <li>{{opex.CMTE_ID}}</li>
-    </ul>
+    <table>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Employer
+          </th>
+          <th>
+            Title
+          </th>
+          <th>
+            Transaction Amount
+          </th>
+          <th>
+            Memo Text
+          </th>
+          <th>
+            FEC File
+          </th>
+          <th>
+            Committe Link
+          </th>
+        </tr>
+        <tr *ngFor="#opex of opexes">
+          <td class="cmte-name">
+            {{opex.NAME}}
+          </td>
+          <td>
+            {{opex.EMPLOYER}}
+          </td>
+          <td>
+            {{opex.OCCUPATION}}
+          </td>
+          <td class="green">
+            {{parseFloat(opex.TRANSACTION_AMT) | currency:'USD':true}}
+          </td>
+          <td>
+            {{opex.CITY}}, {{opex.STATE}}
+          </td>
+          <td>
+            {{opex.IMAGE_NUM}}
+          </td>
+          <td>
+            {{opex.TRAN_ID}}
+          </td>
+        </tr>
+      </table>
   `,
   styles: [`
-    width: 100%;
-    height; 100%;
+    h1, h2, h3, h4, h5, p, td, th {
+      font-family: 'Oswald';
+      font-weight: 300;
+    }
+
+    .content {
+      position: absolute;
+      background-color: #2C3A46;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .cmte-name {
+      width: 15%;
+    }
+
+    .green {
+      color: #86ca6f;
+    }
+
+    td {
+      text-align: center;
+    }
   `],
   directives: []
 })

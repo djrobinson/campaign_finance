@@ -1,10 +1,12 @@
-<div class="middle">
-  <h1>Opex</h1>
-  <button (click)="callList()">List Format</button>
+<div class="content">
+  <div class="opex-header">
+    <button (click)="callList()">List Format</button>
+    <h1>Opex</h1>
+  </div>
   <opex-list
     *ngIf="showList"
     [cmte]="cmte">
   </opex-list>
-</div>
-<treemap *ngIf="!showList" route="{{route}}">
+  <treemap *ngIf="!showList" route="{{route}}">
 </treemap>
+</div>

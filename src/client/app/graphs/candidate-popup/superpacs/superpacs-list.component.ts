@@ -31,7 +31,7 @@ import {Http, Response} from 'angular2/http';
             FEC File
           </th>
           <th>
-            Committe Link
+            Committee Link
           </th>
         </tr>
         <tr *ngFor="#pac of pacs">
