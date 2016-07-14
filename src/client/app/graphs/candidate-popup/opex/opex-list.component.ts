@@ -10,13 +10,13 @@ import {Http, Response} from 'angular2/http';
             Name
           </th>
           <th>
-            Employer
-          </th>
-          <th>
-            Title
+            Purpose
           </th>
           <th>
             Transaction Amount
+          </th>
+          <th>
+            Date
           </th>
           <th>
             Memo Text
@@ -24,31 +24,25 @@ import {Http, Response} from 'angular2/http';
           <th>
             FEC File
           </th>
-          <th>
-            Committe Link
-          </th>
         </tr>
         <tr *ngFor="#opex of opexes">
           <td class="cmte-name">
             {{opex.NAME}}
           </td>
           <td>
-            {{opex.EMPLOYER}}
-          </td>
-          <td>
-            {{opex.OCCUPATION}}
+            {{opex.PURPOSE}}
           </td>
           <td class="green">
             {{parseFloat(opex.TRANSACTION_AMT) | currency:'USD':true}}
           </td>
           <td>
-            {{opex.CITY}}, {{opex.STATE}}
+            {{opex.TRANSACTION_DT}}
+          </td>
+          <td>
+            {{opex.MEMO_TEXT}}
           </td>
           <td>
             {{opex.IMAGE_NUM}}
-          </td>
-          <td>
-            {{opex.TRAN_ID}}
           </td>
         </tr>
       </table>
@@ -86,6 +80,10 @@ export class OpexListComponent implements OnInit {
   private opexes: any;
 
   constructor(private http:Http) {}
+
+  public parseFloat = function(num){
+    return parseFloat(num);
+  }
 
   ngOnInit(){
     this.http.get('/api/opex/committee/' + this.cmte ).map(response => response.json()).subscribe(data => {
