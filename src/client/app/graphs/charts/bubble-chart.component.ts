@@ -11,6 +11,7 @@ import {Component, Input, Output, EventEmitter, OnInit} from 'angular2/core';
   styles: [`
 
     #containerChart3 {
+      position: absolute;
       display: flex;
       justify-items: center;
       height: 100%;

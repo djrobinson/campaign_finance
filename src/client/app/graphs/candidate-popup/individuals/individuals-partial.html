@@ -1,6 +1,8 @@
 <div class="content">
-  <div class="button" (click)="callIndividuals()">List Format</div>
-  <h1>Individuals</h1>
+  <div class="individual-header">
+    <div class="button" (click)="callIndividuals()">List Format</div>
+    <h1>Individuals</h1>
+  </div>
   <individuals-list
     *ngIf="showList"
     [cmte]="cmte">
