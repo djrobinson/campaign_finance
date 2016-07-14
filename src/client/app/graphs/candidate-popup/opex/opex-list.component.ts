@@ -36,7 +36,7 @@ import {Http, Response} from 'angular2/http';
             {{opex.TRANSACTION_DT}}
           </td>
           <td>
-            {{opex.IMAGE_NUM}}
+            <a [href]="'http://docquery.fec.gov/cgi-bin/fecimg?'+opex?.IMAGE_NUM"><img src="images/fec.png" class="fec" /></a>
           </td>
         </tr>
       </table>
@@ -65,6 +65,10 @@ import {Http, Response} from 'angular2/http';
 
     td {
       text-align: center;
+    }
+    .fec {
+      height: 3rem;
+      width: 3rem;
     }
   `],
   directives: []

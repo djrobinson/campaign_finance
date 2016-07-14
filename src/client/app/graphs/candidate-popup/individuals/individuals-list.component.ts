@@ -46,7 +46,7 @@ import {Http, Response} from 'angular2/http';
             {{individual.CITY}}, {{individual.STATE}}
           </td>
           <td>
-            {{individual.IMAGE_NUM}}
+            <a [href]="'http://docquery.fec.gov/cgi-bin/fecimg?'+individual?.IMAGE_NUM"><img src="images/fec.png" class="fec" /></a>
           </td>
           <td>
             {{individual.TRAN_ID}}
@@ -78,6 +78,10 @@ import {Http, Response} from 'angular2/http';
 
     td {
       text-align: center;
+    }
+    .fec {
+      height: 3rem;
+      width: 3rem;
     }
   `],
   directives: []

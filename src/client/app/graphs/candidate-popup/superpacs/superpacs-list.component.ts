@@ -57,7 +57,7 @@ import {Http, Response} from 'angular2/http';
             {{pac.rec_dat}}
           </td>
           <td>
-            {{pac.ima_num}}
+            <a [href]="'http://docquery.fec.gov/cgi-bin/fecimg?'+pac?.ima_num"><img src="images/fec.png" class="fec" /></a>
           </td>
           <td>
             {{pac.spe_id}}
@@ -89,6 +89,10 @@ import {Http, Response} from 'angular2/http';
 
     td {
       text-align: center;
+    }
+    .fec {
+      height: 3rem;
+      width: 3rem;
     }
   `],
   directives: []
