@@ -1,11 +1,18 @@
 <div class="content">
   <div class="opex-header">
     <h1>Opex</h1>
-    <label class="switch">
-      <input  (click)="callList()" type="checkbox">
-      <div class="slider"></div>
-    </label>
-
+    <div class="opex-options">
+      <div class="option">
+        <h5>Treemap View</h5>
+      </div>
+      <label class="switch">
+        <input  (click)="callList()" type="checkbox">
+        <div class="slider"></div>
+      </label>
+      <div class="option">
+        <h5>Table View</h5>
+      </div>
+    </div>
   </div>
   <opex-list
     *ngIf="showList"
