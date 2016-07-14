@@ -16,6 +16,7 @@ individuals-list {
   height: 80%;
   width: 100%;
   bottom: 0;
+  overflow: scroll;
 }
 
 h1, h2, h3, h4, h5, p, td, th {

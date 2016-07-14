@@ -19,9 +19,6 @@ import {Http, Response} from 'angular2/http';
             Date
           </th>
           <th>
-            Memo Text
-          </th>
-          <th>
             FEC File
           </th>
         </tr>
@@ -37,9 +34,6 @@ import {Http, Response} from 'angular2/http';
           </td>
           <td>
             {{opex.TRANSACTION_DT}}
-          </td>
-          <td>
-            {{opex.MEMO_TEXT}}
           </td>
           <td>
             {{opex.IMAGE_NUM}}
