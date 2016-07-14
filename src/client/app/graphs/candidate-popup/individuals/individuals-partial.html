@@ -1,10 +1,10 @@
-<div class="middle">
+<div class="content">
+  <div class="button" (click)="callIndividuals()">List Format</div>
   <h1>Individuals</h1>
-  <button (click)="callIndividuals()">List Format</button>
   <individuals-list
     *ngIf="showList"
     [cmte]="cmte">
   </individuals-list>
+  <bubble-chart *ngIf="!showList" [cmte]="cmte">
+  </bubble-chart>
 </div>
-<bubble-chart *ngIf="!showList" [cmte]="cmte">
-</bubble-chart>

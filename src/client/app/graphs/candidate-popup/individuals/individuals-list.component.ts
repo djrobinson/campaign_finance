@@ -4,8 +4,7 @@ import {Http, Response} from 'angular2/http';
 @Component({
   selector: 'individuals-list',
   template: `
-    <div class="content">
-      <h1>Individuals</h1>
+
       <table>
         <tr>
           <th>
@@ -38,7 +37,7 @@ import {Http, Response} from 'angular2/http';
             {{individual.EMPLOYER}}
           </td>
           <td>
-            {{individual.TITLE}
+            {{individual.OCCUPATION}}
           </td>
           <td class="green">
             {{parseFloat(individual.TRANSACTION_AMT) | currency:'USD':true}}
@@ -50,15 +49,36 @@ import {Http, Response} from 'angular2/http';
             {{individual.IMAGE_NUM}}
           </td>
           <td>
-            {{individual.CMTE_ID}}
+            {{individual.TRAN_ID}}
           </td>
         </tr>
       </table>
-    </div>
   `,
   styles: [`
-    width: 100%;
-    height; 100%;
+    h1, h2, h3, h4, h5, p, td, th {
+      font-family: 'Oswald';
+      font-weight: 300;
+    }
+
+    .content {
+      position: absolute;
+      background-color: #2C3A46;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .cmte-name {
+      width: 15%;
+    }
+
+    .green {
+      color: #86ca6f;
+    }
+
+    td {
+      text-align: center;
+    }
   `],
   directives: []
 })
@@ -68,6 +88,10 @@ export class IndividualsListComponent implements OnInit {
 
 
   constructor(private http:Http) {}
+
+  public parseFloat = function(num){
+    return parseFloat(num);
+  }
 
   ngOnInit(){
     this.http.get('/api/individuals/' + this.cmte + '/recipient').map(response => response.json()).subscribe(data => {
