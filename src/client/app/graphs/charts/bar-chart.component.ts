@@ -28,8 +28,8 @@ export class BarComponent {
         width = document.getElementById('containerChart4').offsetWidth - margin.left - margin.right,
         height = document.getElementById('containerChart4').offsetHeight - margin.top - margin.bottom;
 
-    var x0 = d3.scale.ordinal()
-        .rangeRoundBands([0, width], .1);
+    var x0 = d3.time.scale();
+        // .rangeRoundBands([0, width], .1);
 
     var x1 = d3.scale.ordinal();
 
@@ -41,12 +41,12 @@ export class BarComponent {
 
     var xAxis = d3.svg.axis()
         .scale(x0)
-        .orient("bottom");
+        .orient("bottom")
+        .tickFormat(d3.time.format("%Y-%m"));
 
     var yAxis = d3.svg.axis()
         .scale(y)
-        .orient("left")
-        .tickFormat(d3.format(".2s"));
+        .orient("left");
 
     var svg = d3.select("#containerChart4").append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -61,11 +61,18 @@ export class BarComponent {
       });
 
       var valTypes = data.map((item)=>item.date_trunc);
-      console.log(valTypes);
-
+      var minDate = new Date();
+      var maxDate = new Date(0);
       var barFinal = valTypes.map(function(date) {
+        var convertDate = new Date(date);
+        if (convertDate < minDate){
+          minDate = convertDate;
+        }
+        if (convertDate > maxDate){
+          maxDate = convertDate;
+        }
         return {
-          date: date,
+          date: convertDate,
           vals: data.filter(function(d) {
             if (date === d.date_trunc){
               return d;
@@ -74,24 +81,32 @@ export class BarComponent {
         }
       });
 
-      console.log("Bar Data ", barFinal);
+      console.log("minmax ", minDate, maxDate);
 
-      x0.domain(barFinal.map(function(d) { return d.date; }));
-      x1.domain(["individuals", "committees"]).rangeRoundBands([0, x0.rangeBand()]);
+      // x0.domain(barFinal.map(function(d) {
+      //   // var tickDate = new Date(d.date);
+      //   // return tickDate;
+      //   return d.date;
+      // }));
+      x0.domain([minDate, maxDate]).range([0, width]);
+      x1.domain(["individuals", "committees"]).rangeRoundBands([0, width / barFinal.length]);
       y.domain([0, d3.max(data, function(d) { return +d.count})]);
 
       svg.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + height + ")")
+          .attr("stroke", "#ECF9FD")
           .call(xAxis);
 
       svg.append("g")
           .attr("class", "y axis")
+          .attr("stroke", "#ECF9FD")
           .call(yAxis)
         .append("text")
           .attr("transform", "rotate(-90)")
           .attr("y", 6)
           .attr("dy", ".71em")
+          .attr("stroke", "#ECF9FD")
           .style("text-anchor", "end")
           .text("Count");
 
