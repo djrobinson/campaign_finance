@@ -1,7 +1,18 @@
 <div class="content">
   <div class="superpac-header">
     <h1>Superpacs</h1>
-    <div class="button" (click)="callSuperpacs()">List Format</div>
+    <div class="options">
+      <div class="option">
+        <h5>Treemap View</h5>
+      </div>
+      <label class="switch">
+        <input  (click)="callSuperpacs()" type="checkbox">
+        <div class="slider"></div>
+      </label>
+      <div class="option">
+        <h5>Table View</h5>
+      </div>
+    </div>
   </div>
   <superpacs-list
     *ngIf="showList"

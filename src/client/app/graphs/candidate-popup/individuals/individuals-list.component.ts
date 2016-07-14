@@ -20,7 +20,7 @@ import {Http, Response} from 'angular2/http';
             Transaction Amount
           </th>
           <th>
-            Memo Text
+            Location
           </th>
           <th>
             FEC File

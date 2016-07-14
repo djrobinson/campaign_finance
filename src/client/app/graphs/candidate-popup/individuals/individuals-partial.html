@@ -1,7 +1,18 @@
 <div class="content">
   <div class="individual-header">
-    <div class="button" (click)="callIndividuals()">List Format</div>
     <h1>Individuals</h1>
+    <div class="options">
+      <div class="option">
+        <h5>Bubble View</h5>
+      </div>
+      <label class="switch">
+        <input  (click)="callIndividuals()" type="checkbox">
+        <div class="slider"></div>
+      </label>
+      <div class="option">
+        <h5>Table View</h5>
+      </div>
+    </div>
   </div>
   <individuals-list
     *ngIf="showList"
