@@ -7,19 +7,25 @@ import {Http, Response} from 'angular2/http';
     <table>
         <tr>
           <th>
-            Name
+            Superpac
           </th>
           <th>
-            Employer
+            Targeting
           </th>
           <th>
-            Title
+            Amount
           </th>
           <th>
-            Transaction Amount
+            Recipient
           </th>
           <th>
-            Memo Text
+            Support/Oppose
+          </th>
+          <th>
+            Purpose
+          </th>
+          <th>
+            Date
           </th>
           <th>
             FEC File
@@ -30,25 +36,31 @@ import {Http, Response} from 'angular2/http';
         </tr>
         <tr *ngFor="#pac of pacs">
           <td class="cmte-name">
-            {{pac.NAME}}
+            {{pac.spe_nam}}
           </td>
           <td>
-            {{pac.EMPLOYER}}
-          </td>
-          <td>
-            {{pac.OCCUPATION}}
+            {{pac.can_nam}}
           </td>
           <td class="green">
-            {{parseFloat(pac.TRANSACTION_AMT) | currency:'USD':true}}
+            {{parseFloat(pac.exp_amo) | currency:'USD':true}}
           </td>
           <td>
-            {{pac.CITY}}, {{pac.STATE}}
+            {{pac.pay}}
           </td>
           <td>
-            {{pac.IMAGE_NUM}}
+            {{pac.sup_opp}}
           </td>
           <td>
-            {{pac.TRAN_ID}}
+            {{pac.pur}}
+          </td>
+          <td>
+            {{pac.rec_dat}}
+          </td>
+          <td>
+            {{pac.ima_num}}
+          </td>
+          <td>
+            {{pac.spe_id}}
           </td>
         </tr>
       </table>
