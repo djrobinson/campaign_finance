@@ -62,7 +62,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         // this.route = '/api/pac/aggregate/' + this.candidate;
         this.imageVar.image = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + this.candidate + ".jpg";
         this.typeString = "Superpac";
-      } else {
+      } else if (this.isCandidate === true) {
         // this.route = '/api/disbursements/graph/' + this.candidate;
         this.http.get('/api/legislators/' + this.candidate).map(response => response.json()).subscribe(data => {
           this.candidateInfo = data[0];
@@ -106,6 +106,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       data => {
         console.log("All candidate data: ", data);
         this.candidate = data[0][0];
+        console.log("Candidate working? ", this.candidate);
         this.primaryCmte = data[1].filter((cmte)=>{
           if(cmte.CMTE_DSGN === "P"){
             return cmte

@@ -4,8 +4,15 @@
 </div>
 <div class="cand-style">
   <div class="three columns choices">
-    <div class="cand-pic text-center">
+    <div *ngIf="isCandidate" class="cand-pic text-center">
       <img [src]="imageVar?.image" alt="picture">
+      <h5>{{candidate?.CANDIDATE_NAME}}</h5>
+      <p>Party: {{candidate?.PARTY}}</p>
+      <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
+      <p>FEC ID: {{candidate?.CANDIDATE_ID}}</p>
+      <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
+    </div>
+    <div *ngIf="!isCandidate" class="cand-pic text-center">
       <h5>{{candidate?.CANDIDATE_NAME}}</h5>
       <p>Party: {{candidate?.PARTY}}</p>
       <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
@@ -25,7 +32,7 @@
         >
         <h5>Committee Opex</h5>
       </div>
-      <div class="cand-option"
+      <div *ngIf="isCandidate" class="cand-option"
         (click)="choice('superpacs')"
         [class.active]="selection==='superpacs'"
         >
@@ -83,7 +90,7 @@
               </tr>
               <tr>
                 <td>Itemized Individual Contributions</td>
-                <td>{{parseFloat(candidate.ind_ite_con) | currency:'USD':true}}</td>
+                <td>{{parseFloat(candidate?.ind_ite_con) | currency:'USD':true}}</td>
                 <td>Operating Expenditures</td>
                 <td>{{parseFloat(candidate?.ope_exp) | currency:'USD':true}}</td>
               </tr>
