@@ -17,6 +17,9 @@ export class MiniProfileComponent implements OnChanges, OnInit {
   private amount: number;
   private popupType: string;
   public picture: string;
+  public cash: number;
+  public contributions: number;
+  public distributions: number;
 
   constructor() {
     this.parseFloat = function(num){
@@ -40,16 +43,11 @@ export class MiniProfileComponent implements OnChanges, OnInit {
       this.popupType = "individual";
     } else if (this.node.graphtype === "committee") {
       this.title = this.node.CMTE_NM;
-      this.id = this.node.OTHER_ID;
-      this.amount = this.node.TRANSACTION_AMT;
-      this.popupType = "committee";
-    } else if (this.node.graphtype === "associated"){
-      this.title = this.node.CMTE_NM;
       this.id = this.node.OTHER_ID || this.node.CMTE_ID;
       this.cash = this.node.cas_on_han_clo_of_per;
       this.contributions = this.node.net_con;
       this.distributions = this.node.tot_dis;
-      this.popupType = "associated";
+      this.popupType = "committee";
     } else if (this.node.graphtype === "candidate"){
       this.title = this.node.data.CANDIDATE_NAME;
       this.id = this.node.CAND_ID;
