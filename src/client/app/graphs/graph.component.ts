@@ -536,8 +536,28 @@ export class GraphComponent implements OnInit  {
         }
       })
 
+  // svg.append("defs")
+  //   .append("pattern")
+  //   .attr("id", "bg")
+  //   .attr('width', 1)
+  //           .attr('height', 1)
+  //           .attr('patternContentUnits', 'objectBoundingBox')
+  //           .append("svg:image")
+  //               .attr("xlink:xlink:href", "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg") // "icon" is my image url. It comes from json too. The double xlink:xlink is a necessary hack (first "xlink:" is lost...).
+  //               .attr("x", -35)
+  //               .attr("y", -35)
+  //               .attr("height", 70)
+  //               .attr("width", 70)
+  //       .attr("preserveAspectRatio", "xMinYMin slice");
+
     var candNode = svg.selectAll(".node")
-      .filter(function(d) { return d.CMTE_DSGN === "P" });
+      .filter(function(d) { return d.CMTE_DSGN === "P" })
+
+    // candNode
+    //   .append("circle")
+    //   .attr("class", "circle")
+    //   .attr("r", 40);
+      // .style("fill", "url(#bg)")
 
     candNode.append("image")
       .attr("xlink:href", function() {
@@ -546,12 +566,14 @@ export class GraphComponent implements OnInit  {
         } else {
           return "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + candId + ".jpg"
         }
-
       })
       .attr("x", -35)
       .attr("y", -35)
       .attr("width", 70)
       .attr("height", 70);
+
+
+
 
 
     node.append("text")
