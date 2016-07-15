@@ -22,7 +22,7 @@ module.exports = {
   },
   getTopInd: function(cmte){
     return knex('indiv_contrib')
-            .select('CMTE_ID', 'NAME', 'TRANSACTION_AMT', 'TRAN_ID')
+            .select('CMTE_ID', 'NAME', 'TRANSACTION_AMT', 'TRAN_ID', 'EMPLOYER' )
             .where({'CMTE_ID': cmte.OTHER_ID})
             .orderBy('TRANSACTION_AMT', 'desc')
             .limit(10);

@@ -15,11 +15,23 @@
     <div *ngIf="popupType ==='committee'" class="spacer">
 
     </div>
-    <h4>{{title}}</h4>
+    <h3>{{title}}</h3>
     <div *ngIf="popupType === 'individual'">
-      <div class="button" (click)="indivPopupEmit(id, title)">Profile</div>
+
+      <div class="summary">
+        <div class="summary-header">
+          <h5>Employer</h5>
+        </div>
+        <div class="summary-body">
+          <h5>{{employer}}</h5>
+        </div>
+      </div>
+      <div class="button individual-button" (click)="indivPopupEmit(id, title)">Profile</div>
+      <div class="button individual-button" (click)="searchName(title)">Search Name</div>
+      <div class="button individual-button" (click)="searchNameTitle(title, employer)">Search Name & Employer</div>
+
     </div>
-    <div *ngIf="popupType === 'committee' || popupType === 'associated'">
+    <div *ngIf="popupType === 'committee'">
       <div class="button" (click)="cmtePopupEmit(id)">Profile</div>
     </div>
     <div *ngIf="popupType === 'candidate'">
@@ -28,22 +40,6 @@
     <div *ngIf="popupType === 'congress'">
       <div class="button" (click)="congressPopupEmit(id)">Profile</div>
     </div>
-    <!-- <div *ngIf="popupType ==='associated'">
-      <table class="cand-table">
-        <tr>
-          <td></td>
-          <td>{{parseFloat(cash) | currency:'USD':true}}</td>
-        </tr>
-        <tr>
-          <td>Net Contributions</td>
-          <td>{{parseFloat(contributions) | currency:'USD':true}}</td>
-        </tr>
-        <tr>
-          <td>Net Distributions</td>
-          <td>{{parseFloat(distributions) | currency:'USD':true}}</td>
-        </tr>
-      </table>
-    </div> -->
 
 
     <!-- Candidate Mini Profile section -->

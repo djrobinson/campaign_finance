@@ -20,6 +20,7 @@ export class MiniProfileComponent implements OnChanges, OnInit {
   public cash: number;
   public contributions: number;
   public distributions: number;
+  public employer: string;
 
   constructor() {
     this.parseFloat = function(num){
@@ -40,6 +41,7 @@ export class MiniProfileComponent implements OnChanges, OnInit {
       this.title = this.node.NAME;
       this.id = this.node.TRAN_ID;
       this.amount = this.node.TRANSACTION_AMT;
+      this.employer = this.node.EMPLOYER;
       this.popupType = "individual";
     } else if (this.node.graphtype === "committee") {
       this.title = this.node.CMTE_NM;
@@ -57,6 +59,14 @@ export class MiniProfileComponent implements OnChanges, OnInit {
       this.distributions = this.node.data.tot_dis;
       this.popupType = "candidate";
     }
+  }
+
+  public searchNameTitle(name, employer){
+    window.open('http://google.com/search?q='+name+' '+employer);
+  }
+
+  public searchName(name){
+     window.open('http://google.com/search?q='+name);
   }
 
   indivPopupEmit(tranId, name){

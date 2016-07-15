@@ -36,11 +36,16 @@ img {
     color: black;
     border: 2px solid #008CBA;
     border-radius: 25px;
+    width: 80%;
 }
 
 .button:hover {
     background-color: #008CBA;
     color: white;
+}
+
+.individual-button {
+  margin-top: 2rem;
 }
 
 .summary {
