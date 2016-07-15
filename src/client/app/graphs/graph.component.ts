@@ -70,7 +70,7 @@ import { Router, RouteParams } from 'angular2/router';
               </div>
               <div *ngIf="candPopup">
                 <candidate-popup
-                  [isCandidate]="true"
+                  [isCandidate]="isCand"
                   [candidate]="selectedCandidate"
                   [committee]="selectedCommittee"
                   (exitEmit)="exit()"
@@ -218,6 +218,8 @@ export class GraphComponent implements OnInit  {
   private isRequesting: boolean;
   private bubbleCmte: string;
   private bioguideId: string;
+  private selectedCandidate: string;
+  private isCand: boolean;
 
   constructor(
     private _params: RouteParams,
@@ -258,13 +260,15 @@ export class GraphComponent implements OnInit  {
   }
 
   showCmtePopup(event){
-    this.cmtePopup = true;
+    this.candPopup = true;
+    this.isCand = false;
     this.selectedCommittee = event.cmte;
     this.selectedNode = false;
   }
 
   showCandPopup(event){
     this.candPopup = true;
+    this.isCand = true;
     this.selectedCandidate = event.cand;
     this.selectedCommittee = event.cmte_id;
     this.selectedNode = false;

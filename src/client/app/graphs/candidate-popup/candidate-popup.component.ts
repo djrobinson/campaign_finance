@@ -58,12 +58,12 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       this.isRequesting = true;
       this.imageVar = {};
       this.selection = "main";
-      if (this.candidate.charAt(0) === "P") {
-        this.route = '/api/pac/aggregate/' + this.candidate;
+      if (this.isCandidate === true && this.candidate.charAt(0) === "P") {
+        // this.route = '/api/pac/aggregate/' + this.candidate;
         this.imageVar.image = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + this.candidate + ".jpg";
         this.typeString = "Superpac";
       } else {
-        this.route = '/api/disbursements/graph/' + this.candidate;
+        // this.route = '/api/disbursements/graph/' + this.candidate;
         this.http.get('/api/legislators/' + this.candidate).map(response => response.json()).subscribe(data => {
           this.candidateInfo = data[0];
           this.imageVar = {};
@@ -71,26 +71,23 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
           this.typeString = "candidate disbursement";
         }, error => console.log('Could not load candidate info.'));
       }
-      this.callPresApis(this.candidate)
+      if (this.isCandidate === true){
+        this.callPresApis(this.candidate)
+      } else {
+        this.callCmteApis(this.committee);
+      }
   }
 
   private stopRefreshing() {
     this.isRequesting = false;
   }
 
-  callPresApis(fecId){
-
+  public callPresApis(fecId){
     Observable.forkJoin(
       this.http.get('/api/candidates/'+fecId)
-        .map((res: Response) => res.json()), //0
-      this.http.get('/api/disbursements/'+fecId+'/candidate')
-        .map((res: Response) => res.json()), //1
-      this.http.get('/api/contributions/'+fecId+'/candidate')
-        .map((res: Response) => res.json()), //2
+        .map((res: Response) => res.json()), //0 Needed
       this.http.get('/api/candidates/'+fecId+'/associated')
-        .map((res: Response) => res.json()), //3
-      this.http.get('/api/pac/'+fecId+'/candidate')
-        .map((res: Response) => res.json()), //4
+        .map((res: Response) => res.json()), //3 Needed
       this.http.get('api/transfers/'+this.committee+'/designation')
         .map((res: Response) => res.json()), //5
       this.http.get('api/transfers/'+this.committee+'/cmtetype')
@@ -109,32 +106,59 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       data => {
         console.log("All candidate data: ", data);
         this.candidate = data[0][0];
-        this.disbursements = data[1];
-        data[2] = data[2].map(function(el){
-          el.IMAGE_NUM = "http://docquery.fec.gov/cgi-bin/fecimg/?" + el.IMAGE_NUM;
-          return el;
-        })
-        this.contributions = data[2];
-        this.associatedCommittees = data[3][0];
-        this.pacSpends = data[4];
-        this.primaryCmte = data[3].filter((cmte)=>{
+        this.primaryCmte = data[1].filter((cmte)=>{
           if(cmte.CMTE_DSGN === "P"){
             return cmte
           };
         })[0];
-        this.typePieComponent.callAsc(data[6]);
-        this.sizePieComponent.callAsc(data[7]);
-        this.dsgnPieComponent.callAsc(data[5]);
+        this.typePieComponent.callAsc(data[3]);
+        this.sizePieComponent.callAsc(data[4]);
+        this.dsgnPieComponent.callAsc(data[2]);
 
-        this.itemizedDonations = parseInt(data[7][0].count);
-        this.committeeDonations = data[6].reduce((prev, item)=>{
+        this.itemizedDonations = parseInt(data[4][0].count);
+        this.committeeDonations = data[3].reduce((prev, item)=>{
           return prev + +item.count;
         }, 0)
 
-        this.pacSupport = parseInt(data[10][0].total);
-        this.pacOppose = parseInt(data[11][0].total);
+        this.pacSupport = parseInt(data[7][0].total);
+        this.pacOppose = parseInt(data[8][0].total);
 
-        var barChartData = data[8].concat(data[9]);
+        var barChartData = data[5].concat(data[6]);
+        this.barComponent.buildChart(barChartData);
+        this.stopRefreshing();
+      },
+      err => console.error(err)
+    );
+  }
+
+  public callCmteApis(cmte){
+    Observable.forkJoin(
+      this.http.get('/api/committees/'+cmte)
+        .map((res: Response) => res.json()),
+      this.http.get('api/transfers/'+cmte+'/designation')
+        .map((res: Response) => res.json()),
+      this.http.get('api/transfers/'+cmte+'/cmtetype')
+        .map((res: Response) => res.json()),
+      this.http.get('/api/individuals/committee/'+cmte+'/pie')
+        .map((res: Response) => res.json()),
+      this.http.get('/api/individuals/committee/'+cmte+'/date')
+        .map((res: Response) => res.json()),
+      this.http.get('/api/transfers/'+cmte+'/date')
+        .map((res: Response) => res.json())
+    ).subscribe(
+      data => {
+        console.log("All committee data: ", data);
+        this.candidate = data[0][0];
+        this.typePieComponent.callAsc(data[2]);
+        this.sizePieComponent.callAsc(data[3]);
+        this.dsgnPieComponent.callAsc(data[1]);
+
+        this.itemizedDonations = parseInt(data[3][0].count);
+        this.committeeDonations = data[2].reduce((prev, item)=>{
+          return prev + +item.count;
+        }, 0)
+
+        var barChartData = data[4].concat(data[5]);
         this.barComponent.buildChart(barChartData);
         this.stopRefreshing();
       },
