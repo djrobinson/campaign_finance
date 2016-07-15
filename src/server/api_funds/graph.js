@@ -36,7 +36,7 @@ var typeMap = function(arr){
     if (item.CMTE_DSGN === 'P'){
       item.graphtype = "candidate";
     } else if (item.tot_dis){
-      item.graphtype = "associated";
+      item.graphtype = "committee";
     } else if (item.NAME){
       item.graphtype = "individual";
     } else {

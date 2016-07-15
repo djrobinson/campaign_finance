@@ -1,6 +1,21 @@
 <div class="title">
-    <img [src]="picture">
-    <h5>{{title}}</h5>
+
+    <div *ngIf="popupType ==='individual'">
+      <div class="transaction">
+        <h5>Transaction Amount: {{parseFloat(amount) | currency:'USD':true}}</h5>
+      </div>
+    </div>
+    <div *ngIf="popupType ==='committee'">
+      <div class="transaction">
+        <h5>Transaction Amount: {{parseFloat(amount) | currency:'USD':true}}</h5>
+      </div>
+    </div>
+
+    <img *ngIf="popupType === 'candidate'" [src]="picture">
+    <div *ngIf="popupType ==='committee'" class="spacer">
+
+    </div>
+    <h4>{{title}}</h4>
     <div *ngIf="popupType === 'individual'">
       <div class="button" (click)="indivPopupEmit(id, title)">Profile</div>
     </div>
@@ -13,7 +28,7 @@
     <div *ngIf="popupType === 'congress'">
       <div class="button" (click)="congressPopupEmit(id)">Profile</div>
     </div>
-    <div *ngIf="popupType ==='associated'">
+    <!-- <div *ngIf="popupType ==='associated'">
       <table class="cand-table">
         <tr>
           <td></td>
@@ -28,18 +43,47 @@
           <td>{{parseFloat(distributions) | currency:'USD':true}}</td>
         </tr>
       </table>
-    </div>
-    <div *ngIf="popupType ==='individual'">
-      <div class="transaction">
-        <h5>Transaction Amount: {{parseFloat(amount) | currency:'USD':true}}</h5>
-      </div>
-    </div>
-    <div *ngIf="popupType ==='committee'">
-      <div class="transaction">
-        <h5>Transaction Amount: {{parseFloat(amount) | currency:'USD':true}}</h5>
-      </div>
-    </div>
+    </div> -->
+
+
+    <!-- Candidate Mini Profile section -->
     <div *ngIf="popupType ==='candidate'">
+      <div class="summary">
+        <div class="summary-header">
+          <h5>Total Cash</h5>
+        </div>
+        <div class="summary-body">
+          <h5>{{parseFloat(cash) | currency:'USD':true}}</h5>
+        </div>
+      </div>
+      <div class="summary">
+        <div class="summary-header">
+          <h5>Total Raised</h5>
+        </div>
+        <div class="summary-body">
+          <h5>{{parseFloat(contributions) | currency:'USD':true}}</h5>
+        </div>
+      </div>
+      <div class="summary">
+        <div class="summary-header">
+          <h5>Total Spent</h5>
+        </div>
+        <div class="summary-body">
+          <h5>{{parseFloat(distributions) | currency:'USD':true}}</h5>
+        </div>
+      </div>
+      <div class="summary">
+        <div class="summary-header">
+          <h5>Total Debt</h5>
+        </div>
+        <div class="summary-body">
+          <h5>{{parseFloat(distributions) | currency:'USD':true}}</h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- Committee Popup  -->
+    <div *ngIf="popupType ==='committee'">
       <div class="summary">
         <div class="summary-header">
           <h5>Total Cash</h5>

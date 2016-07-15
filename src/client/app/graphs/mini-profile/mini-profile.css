@@ -6,6 +6,7 @@
   z-index: 5;
 }
 
+
 img {
   height: 100px;
   border-radius: 50%;
@@ -51,8 +52,8 @@ img {
 .summary-header {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 50px;
+  align-content: center;
+  height: 40px;
   background: #364760;
   font-family: 'Oswald';
   font-weight: 300;
@@ -62,8 +63,8 @@ img {
 .summary-body {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 80px;
+  align-content: center;
+  height: 70px;
   background: #2A394F;
   color: #EFF1F3;
 }
