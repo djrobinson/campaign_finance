@@ -13,11 +13,12 @@
       <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
     </div>
     <div *ngIf="!isCandidate" class="cand-pic text-center">
-      <h5>{{candidate?.CANDIDATE_NAME}}</h5>
-      <p>Party: {{candidate?.PARTY}}</p>
-      <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
-      <p>FEC ID: {{candidate?.CANDIDATE_ID}}</p>
-      <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
+      <h5>{{candidate?.com_nam}}</h5>
+      <p>Designation: {{candidate?.com_des}}</p>
+      <p>Type: {{candidate?.com_typ}}</p>
+      <p>FEC ID: {{candidate?.com_id}}</p>
+      <p>Address: {{candidate?.add}}</p>
+      <p>Home City: {{candidate?.cit}}</p>
     </div>
     <div class="cand-options">
       <div class="cand-option"
@@ -144,17 +145,21 @@
           </div>
           <div class="highlight-tile three columns">
             <div class="top-highlight">
+              <p>Number of Itemized Donations</p>
               <h4>{{itemizedDonations}}</h4>
             </div>
             <div class="bottom-highlight">
+              <p>Number of Committee Donations</p>
               <h4>{{committeeDonations}}</h4>
             </div>
           </div>
           <div class="highlight-tile three columns">
             <div class="top-highlight support">
+              <p>Superpac Support Total</p>
               <h4>{{parseFloat(pacSupport)  | currency:'USD':true}}</h4>
             </div>
             <div class="bottom-highlight oppose">
+              <p>Superpac Opposition Total</p>
               <h4>{{parseFloat(pacOppose)  | currency:'USD':true}}</h4>
             </div>
           </div>
