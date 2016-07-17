@@ -83,7 +83,8 @@
       <div class="eight columns candidate-content">
         <div *ngIf="!isRequesting" (click)="close()" class="close-button">×</div>
         <div class="twelve columns top-row">
-            <h5>{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
+            <h5 *ngIf="isCandidate">{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
+            <h5 *ngIf="!isCandidate">{{candidate?.com_nam}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
             <table>
               <tr>
                 <td colspan="2">Receipts</td>
@@ -153,7 +154,15 @@
               <h4>{{committeeDonations}}</h4>
             </div>
           </div>
-          <div class="highlight-tile three columns">
+          <div *ngIf="!isCandidate" class="highlight-tile three columns">
+            <div class="top-highlight">
+              <p>Other</p>
+            </div>
+            <div class="bottom-highlight">
+              <p>Other</p>
+            </div>
+          </div>
+          <div *ngIf="isCandidate" class="highlight-tile three columns">
             <div class="top-highlight support">
               <p>Superpac Support Total</p>
               <h4>{{parseFloat(pacSupport)  | currency:'USD':true}}</h4>
