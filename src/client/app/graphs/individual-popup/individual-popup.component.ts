@@ -4,52 +4,8 @@ import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'individual-popup',
-  templateUrl: 'app/graphs/templates/individual-popup.html',
-  styles: [`
-    .indiv {
-      position: absolute;
-      text-align: center;
-      height: 100%;
-      background-color: #17324f;
-      color: #cbced2;
-    }
-    .indiv-list {
-      position: absolute;
-      right: 0;
-      height: 75%;
-    }
-    .indiv-container {
-      position:relative;
-      height: 100%;
-    }
-    .other-donations {
-      position: absolute;
-      right: 0;
-      height: 100%;
-      overflow: scroll;
-      border: solid 1px #75717B;
-      background-color: #FEFFFE;
-    }
-    .donor-tile {
-      border: solid 1px #75717B;
-      background-color: #FEFFFE;
-    }
-    .close-button {
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      height: 25px;
-      width: 25px;
-      z-index: 2;
-    }
-    .close-icon {
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      height: 25px;
-      width: 25px;
-    }
-  `]
+  templateUrl: 'app/graphs/individual-popup/individual-popup.html',
+  styleUrls: ['app/graphs/individual-popup/individual-popup.css']
 })
 export class IndividualPopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.

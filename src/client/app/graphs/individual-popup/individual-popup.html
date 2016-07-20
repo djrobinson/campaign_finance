@@ -1,0 +1,37 @@
+<div class="indiv-container">
+  <div (click)="close()" class="close-button">
+    <img src="/images/close.png" class="close-icon" />
+  </div>
+  <div class="row">
+    <div class="indiv six columns">
+      <h3>{{individual?.NAME}}</h3>
+      <h5>{{individual?.CITY }}, {{individual?.STATE}}</h5>
+      <h5>{{individual?.EMPLOYER}}</h5>
+      <h5>{{individual?.OCCUPATION}}</h5>
+      <h5>{{individual?.NAME}}</h5>
+      <h5>{{individual?.TRANSACTION_DT}}</h5>
+      <p><a [href]="individual?.FEC_LINK">Link</a></p>
+      <h4>Transaction Amount: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}}</h4>
+    </div>
+    <div class="indiv-list six columns">
+      <h5>Other Donations</h5>
+      <div class="twelve columns other-donations">
+        <div *ngFor="#indiv of otherIndividuals?.data"
+             class="row donor-tile">
+          <div class="one-half column text-center">
+            <p>{{indiv?.NAME}}</p>
+            <p>{{indiv?.EMPLOYER}}</p>
+            <p>{{indiv?.OCCUPATION}}</p>
+            <p>{{indiv?.CMTE_ID}}</p>
+          </div>
+          <div class="one-half column">
+            <p>Donation: {{parseFloat(indiv?.TRANSACTION_AMT) | currency:'USD':true}}</p>
+            <button (click)="changeIndiv(indiv?.TRAN_ID)">
+              See Donation
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
