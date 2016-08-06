@@ -5,10 +5,10 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
   template: `
       <div id="containerChart">
         <div id="tooltip">
-          <div id="tip-name"></div>
-          <div id="tip-support"></div>
-          <div id="tip-amount"></div>
-          <div id="tip-purpose"></div>
+          <div class="tree-tip" id="tip-name"></div>
+          <div class="tree-tip" id="tip-support"></div>
+          <div class="tree-tip" id="tip-amount"></div>
+          <div class="tree-tip" id="tip-purpose"></div>
         </div>
         <div id="chart"></div>
       </div>
@@ -34,8 +34,13 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       font-size: 2rem;
       color: #5b4f49;
       display: flex;
-      flex-direction: column;
-      justify-content: space-around;
+    }
+
+    .tree-tip {
+      padding: 10px;
+      text-align: center;
+      justify-content: center;
+      background-color: aqua;
     }
 
     #chart {
@@ -48,6 +53,8 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
     .child-tspan {
       font-size: 2rem;
     }
+
+
   `]
 })
 export class TreemapComponent implements OnInit, OnChanges {
