@@ -5,10 +5,15 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
   template: `
       <div id="containerChart">
         <div id="tooltip">
-          <div class="tree-tip" id="tip-name"></div>
-          <div class="tree-tip" id="tip-support"></div>
-          <div class="tree-tip" id="tip-amount"></div>
-          <div class="tree-tip" id="tip-purpose"></div>
+          <div class="tip-top">
+            <div class="tree-tip" id="tip-name"></div>
+            <div class="tree-tip" id="tip-support"></div>
+            <div class="tree-tip" id="tip-amount"></div>
+            <div class="tree-tip" id="tip-purpose"></div>
+          </div>
+          <div class="instructions">
+            Test Test
+          </div>
         </div>
         <div id="chart"></div>
       </div>
@@ -21,6 +26,19 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       width: 100%;
       background: #EFF1F3;
     }
+
+    .instructions {
+      background: white;
+      height: 100%;
+      width: 100%;
+    }
+
+    .tip-top {
+      height: 100%;
+      width: 100%;
+      background: blue;
+    }
+
     rect {
       stroke: black;
       stroke-width: 1px;
@@ -32,6 +50,16 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       font-weight: 300;
       color: #EFF1F3;
       background: #364760;
+    }
+
+    .tree-tip {
+      font-family: 'Oswald';
+      font-weight: 300;
+    }
+
+    #tip-purpose {
+      background: #364760;
+      width: 100%;
     }
 
     #tooltip {
