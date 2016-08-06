@@ -563,14 +563,12 @@ export class GraphComponent implements OnInit  {
     //   .attr("r", 40);
       // .style("fill", "url(#bg)")
 
-    candNode.append("image")
-      .attr("xlink:href", function() {
-        if (ctrl.bioguideId.length){
-          return "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + ctrl.bioguideId[0].id.bioguide + ".jpg";
-        } else {
-          return "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + candId + ".jpg"
-        }
-      })
+
+
+
+
+    candNode.append("div")
+      .attr("id", "cand-node")
       .attr("x", -35)
       .attr("y", -35)
       .attr("width", 70)
@@ -578,7 +576,46 @@ export class GraphComponent implements OnInit  {
 
 
 
+    var croppingImg = function(src, $dim) {
+      console.log("Cropping img");
+      var tmpCanvas = document.createElement('canvas');
+      var tmpCtx = tmpCanvas.getContext('2d');
+      var thumbImg = document.createElement('img');
 
+      tmpCanvas.width = tmpCanvas.height = $dim*4 || 50;
+      document.getElementById("cand-node").appendChild(tmpCanvas);
+
+      thumbImg.src = src;
+      thumbImg.onload = function() {
+          tmpCtx.save();
+          tmpCtx.beginPath();
+          tmpCtx.arc(25, 25, 2 * $dim, 0, Math.PI*2, true);
+          tmpCtx.closePath();
+          tmpCtx.clip();
+
+          tmpCtx.drawImage(thumbImg, 0, 0, 4 * $dim, 4 * $dim);
+
+          tmpCtx.beginPath();
+          tmpCtx.arc(0, 0, 2 * $dim, 0, Math.PI*2, true);
+          tmpCtx.clip();
+          tmpCtx.closePath();
+          tmpCtx.restore();
+        }
+
+      }
+
+
+      var $dim = 12;
+
+      var src = function() {
+        if (ctrl.bioguideId.length){
+          return "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + ctrl.bioguideId[0].id.bioguide + ".jpg";
+        } else {
+          return "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + candId + ".jpg";
+        }
+      }
+
+      croppingImg(src, $dim);
 
     node.append("text")
       .attr("dx", "-5rem")

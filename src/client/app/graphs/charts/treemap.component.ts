@@ -31,6 +31,9 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       background: white;
       height: 100%;
       width: 100%;
+      text-align: center;
+      justify-content: center;
+      align-content;
     }
 
     .tip-top {
