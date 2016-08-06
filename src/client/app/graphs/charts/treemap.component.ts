@@ -19,10 +19,19 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       position: absolute;
       height: 90%;
       width: 100%;
+      background: #EFF1F3;
     }
     rect {
       stroke: black;
       stroke-width: 1px;
+    }
+
+    #tip-name {
+      width: 100%;
+      font-family: 'Oswald';
+      font-weight: 300;
+      color: #EFF1F3;
+      background: #364760;
     }
 
     #tooltip {
@@ -34,14 +43,11 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       font-size: 2rem;
       color: #5b4f49;
       display: flex;
+      flex-direction: column;
+      justify-content: space-around;
     }
 
-    .tree-tip {
-      padding: 10px;
-      text-align: center;
-      justify-content: center;
-      background-color: aqua;
-    }
+
 
     #chart {
       position: absolute;
