@@ -26,6 +26,9 @@ import { Router, RouteParams } from 'angular2/router';
               <div *ngIf="!graph" class="legend">
                 <p>The small nodes represent individuals. Large nodes are PACs, color coded by type. More information coming soon on categorization. Click on each node for additional information about the candidate, committee, or individual</p>
               </div>
+              <div id="legend">
+                Here Here
+              </div>
               <div *ngIf="selectedNode">
                 <mini-profile-view
                   class="three columns"
@@ -192,6 +195,15 @@ import { Router, RouteParams } from 'angular2/router';
     circle {
       stroke: black;
       stroke-width: 1.5px;
+    }
+
+    #legend {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: blue;
+      height: 400px;
+      width: 400px;
     }
 
   `
@@ -384,9 +396,62 @@ export class GraphComponent implements OnInit  {
         error => console.error('Error: ' + err),
         () => {
           this.stopRefreshing();
+
+        var ctrl = this;
+
+
+        setTimeout(function(){
+          console.log("Top this", ctrl);
+
+          var croppingImg = function(src, $dim) {
+          console.log(src);
+          var tmpCanvas = document.createElement('canvas');
+          var tmpCtx = tmpCanvas.getContext('2d');
+          var thumbImg = document.createElement('img');
+
+          tmpCanvas.width = tmpCanvas.height = $dim*80 || 50;
+          document.getElementById("legend").appendChild(tmpCanvas);
+
+          thumbImg.src = src;
+          thumbImg.onload = function() {
+            console.log("thumb image", thumbImg);
+              tmpCtx.save();
+              tmpCtx.beginPath();
+              tmpCtx.arc(25, 25, 2 * $dim, 0, Math.PI*2, true);
+              tmpCtx.closePath();
+              tmpCtx.clip();
+
+              tmpCtx.drawImage(thumbImg, 0, 0, 10 * $dim, 4 * $dim);
+
+              tmpCtx.beginPath();
+              tmpCtx.arc(0, 0, 2 * $dim, 0, Math.PI*2, true);
+              tmpCtx.clip();
+              tmpCtx.closePath();
+              tmpCtx.restore();
+            }
+
+          }
+
+
+          var $dim = 12;
+
+          var src = getSource();
+
+          function getSource() {
+            console.log(ctrl);
+            if (ctrl.bioguideId.length){
+              return "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + ctrl.bioguideId[0].id.bioguide + ".jpg";
+            } else {
+              return "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + candId + ".jpg";
+            }
+          }
+          croppingImg(src, $dim)
+
+        }, 5000);
         }
       );
   }
+
 
   setSelected(selected:string) {
     this.selectedNode = selected;
@@ -540,22 +605,28 @@ export class GraphComponent implements OnInit  {
         }
       })
 
-  // svg.append("defs")
-  //   .append("pattern")
-  //   .attr("id", "bg")
-  //   .attr('width', 1)
-  //           .attr('height', 1)
-  //           .attr('patternContentUnits', 'objectBoundingBox')
-  //           .append("svg:image")
-  //               .attr("xlink:xlink:href", "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg") // "icon" is my image url. It comes from json too. The double xlink:xlink is a necessary hack (first "xlink:" is lost...).
-  //               .attr("x", -35)
-  //               .attr("y", -35)
-  //               .attr("height", 70)
-  //               .attr("width", 70)
-  //       .attr("preserveAspectRatio", "xMinYMin slice");
+  svg.append("defs")
+    .append("pattern")
+    .attr("id", "icon-img")
+    .attr('width', 100)
+            .attr('height', 100)
+            .attr('patternContentUnits', 'objectBoundingBox')
+            .append("svg:image")
+                .attr("xlink:xlink:href", "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg") // "icon" is my image url. It comes from json too. The double xlink:xlink is a necessary hack (first "xlink:" is lost...).
+                .attr("x", -35)
+                .attr("y", -35)
+                .attr("height", "700px")
+                .attr("width", "700px")
+        .attr("preserveAspectRatio", "xMinYMin slice");
 
     var candNode = svg.selectAll(".node")
       .filter(function(d) { return d.CMTE_DSGN === "P" })
+      .attr("width", 70)
+      .attr("height", 70)
+        .append("circle")
+        .attr("id", "cand-node")
+        .style("fill", "url(#icon-img)")
+        .attr("r", 50)
 
     // candNode
     //   .append("circle")
@@ -567,55 +638,10 @@ export class GraphComponent implements OnInit  {
 
 
 
-    candNode.append("div")
-      .attr("id", "cand-node")
-      .attr("x", -35)
-      .attr("y", -35)
-      .attr("width", 70)
-      .attr("height", 70);
 
 
 
-    var croppingImg = function(src, $dim) {
-      console.log("Cropping img");
-      var tmpCanvas = document.createElement('canvas');
-      var tmpCtx = tmpCanvas.getContext('2d');
-      var thumbImg = document.createElement('img');
-
-      tmpCanvas.width = tmpCanvas.height = $dim*4 || 50;
-      document.getElementById("cand-node").appendChild(tmpCanvas);
-
-      thumbImg.src = src;
-      thumbImg.onload = function() {
-          tmpCtx.save();
-          tmpCtx.beginPath();
-          tmpCtx.arc(25, 25, 2 * $dim, 0, Math.PI*2, true);
-          tmpCtx.closePath();
-          tmpCtx.clip();
-
-          tmpCtx.drawImage(thumbImg, 0, 0, 4 * $dim, 4 * $dim);
-
-          tmpCtx.beginPath();
-          tmpCtx.arc(0, 0, 2 * $dim, 0, Math.PI*2, true);
-          tmpCtx.clip();
-          tmpCtx.closePath();
-          tmpCtx.restore();
-        }
-
-      }
-
-
-      var $dim = 12;
-
-      var src = function() {
-        if (ctrl.bioguideId.length){
-          return "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + ctrl.bioguideId[0].id.bioguide + ".jpg";
-        } else {
-          return "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + candId + ".jpg";
-        }
-      }
-
-      croppingImg(src, $dim);
+      // croppingImg(src, $dim);
 
     node.append("text")
       .attr("dx", "-5rem")
@@ -634,8 +660,7 @@ export class GraphComponent implements OnInit  {
           words.pop();
         }
       }
-
-      }
+    }
 
     force.on("tick", function() {
       link.attr("x1", function(d) { return d.source.x; })
