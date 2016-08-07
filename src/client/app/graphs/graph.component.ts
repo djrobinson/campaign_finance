@@ -409,7 +409,7 @@ export class GraphComponent implements OnInit  {
           var tmpCtx = tmpCanvas.getContext('2d');
           var thumbImg = document.createElement('img');
 
-          tmpCanvas.width = tmpCanvas.height = $dim*80 || 50;
+          tmpCanvas.width = tmpCanvas.height = 100;
           document.getElementById("legend").appendChild(tmpCanvas);
 
           thumbImg.src = src;
