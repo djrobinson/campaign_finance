@@ -21,13 +21,22 @@ import { Router, RouteParams } from 'angular2/router';
               </spinner>
               <div class="row">
                 <div class="force-container">
+                  <svg id="force">
+                    <g class="node" cx="1187.9967638368162" cy="95.53427083322501" width="70" height="70" transform="translate(816.0521490674969,320.64927527561935)" fill-opacity="false" style="stroke: black; fill: none;">
+                      <circle id="cand-node" r="50" style="fill: url('#circles-1');"></circle>
+                    </g>
+                    <defs>
+                      <pattern id="circles-1" patternUnits="userSpaceOnUse" width="1000" height="1000">
+                        <image xlink:href="https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg"
+                        width="1000" height="1000">
+                        </image>
+                      </pattern>
+                    </defs>
+                  </svg>
                 </div>
               </div>
               <div *ngIf="!graph" class="legend">
                 <p>The small nodes represent individuals. Large nodes are PACs, color coded by type. More information coming soon on categorization. Click on each node for additional information about the candidate, committee, or individual</p>
-              </div>
-              <div id="legend">
-                Here Here
               </div>
               <div *ngIf="selectedNode">
                 <mini-profile-view
@@ -400,54 +409,54 @@ export class GraphComponent implements OnInit  {
         var ctrl = this;
 
 
-        setTimeout(function(){
-          console.log("Top this", ctrl);
+        // setTimeout(function(){
+        //   console.log("Top this", ctrl);
 
-          var croppingImg = function(src, $dim) {
-          console.log(src);
-          var tmpCanvas = document.createElement('canvas');
-          var tmpCtx = tmpCanvas.getContext('2d');
-          var thumbImg = document.createElement('img');
+        //   var croppingImg = function(src, $dim) {
+        //   console.log(src);
+        //   var tmpCanvas = document.createElement('canvas');
+        //   var tmpCtx = tmpCanvas.getContext('2d');
+        //   var thumbImg = document.createElement('img');
 
-          tmpCanvas.width = tmpCanvas.height = 100;
-          document.getElementById("legend").appendChild(tmpCanvas);
+        //   tmpCanvas.width = tmpCanvas.height = 100;
+        //   document.getElementById("legend").appendChild(tmpCanvas);
 
-          thumbImg.src = src;
-          thumbImg.onload = function() {
-            console.log("thumb image", thumbImg);
-              tmpCtx.save();
-              tmpCtx.beginPath();
-              tmpCtx.arc(25, 25, 2 * $dim, 0, Math.PI*2, true);
-              tmpCtx.closePath();
-              tmpCtx.clip();
+        //   thumbImg.src = src;
+        //   thumbImg.onload = function() {
+        //     console.log("thumb image", thumbImg);
+        //       tmpCtx.save();
+        //       tmpCtx.beginPath();
+        //       tmpCtx.arc(25, 25, 2 * $dim, 0, Math.PI*2, true);
+        //       tmpCtx.closePath();
+        //       tmpCtx.clip();
 
-              tmpCtx.drawImage(thumbImg, 0, 0, 10 * $dim, 4 * $dim);
+        //       tmpCtx.drawImage(thumbImg, 0, 0, 10 * $dim, 4 * $dim);
 
-              tmpCtx.beginPath();
-              tmpCtx.arc(0, 0, 2 * $dim, 0, Math.PI*2, true);
-              tmpCtx.clip();
-              tmpCtx.closePath();
-              tmpCtx.restore();
-            }
+        //       tmpCtx.beginPath();
+        //       tmpCtx.arc(0, 0, 2 * $dim, 0, Math.PI*2, true);
+        //       tmpCtx.clip();
+        //       tmpCtx.closePath();
+        //       tmpCtx.restore();
+        //     }
 
-          }
+        //   }
 
 
-          var $dim = 12;
+          // var $dim = 12;
 
-          var src = getSource();
+          // var src = getSource();
 
-          function getSource() {
-            console.log(ctrl);
-            if (ctrl.bioguideId.length){
-              return "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + ctrl.bioguideId[0].id.bioguide + ".jpg";
-            } else {
-              return "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + candId + ".jpg";
-            }
-          }
-          croppingImg(src, $dim)
+          // function getSource() {
+          //   console.log(ctrl);
+          //   if (ctrl.bioguideId.length){
+          //     return "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + ctrl.bioguideId[0].id.bioguide + ".jpg";
+          //   } else {
+          //     return "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + candId + ".jpg";
+          //   }
+          // }
+          // croppingImg(src, $dim)
 
-        }, 5000);
+        // }, 5000);
         }
       );
   }
@@ -472,7 +481,6 @@ export class GraphComponent implements OnInit  {
 
     function dragstarted(d) {
       d3.event.sourceEvent.stopPropagation();
-
       d3.select(this).classed("dragging", true);
       force.start();
     }
@@ -506,7 +514,7 @@ export class GraphComponent implements OnInit  {
 
     //SETS UP AREA OF THE FORCE LAYOUT
     d3.select("candidate-table").remove();
-    var svg = d3.select(".force-container").append("svg")
+    var svg = d3.select("#force")
       .attr("width", width)
       .attr("height", height)
       .append("g") //< added
@@ -586,7 +594,6 @@ export class GraphComponent implements OnInit  {
               return "#C792DF";
             case "Z":
               return "#95C623";
-              break;
           }
         } else if ( d.graphtype === "individual"){
           return "#6D0033";
@@ -605,19 +612,19 @@ export class GraphComponent implements OnInit  {
         }
       })
 
-  svg.append("defs")
-    .append("pattern")
-    .attr("id", "icon-img")
-    .attr('width', 100)
-            .attr('height', 100)
-            .attr('patternContentUnits', 'objectBoundingBox')
-            .append("svg:image")
-                .attr("xlink:xlink:href", "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg") // "icon" is my image url. It comes from json too. The double xlink:xlink is a necessary hack (first "xlink:" is lost...).
-                .attr("x", -35)
-                .attr("y", -35)
-                .attr("height", "700px")
-                .attr("width", "700px")
-        .attr("preserveAspectRatio", "xMinYMin slice");
+  // svg.append("defs")
+  //   .append("pattern")
+  //   .attr("id", "icon-img")
+  //   .attr('width', 100)
+  //           .attr('height', 100)
+  //           .attr('patternContentUnits', 'objectBoundingBox')
+  //           .append("svg:image")
+  //               .attr("xlink:xlink:href", "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg") // "icon" is my image url. It comes from json too. The double xlink:xlink is a necessary hack (first "xlink:" is lost...).
+  //               .attr("x", -35)
+  //               .attr("y", -35)
+  //               .attr("height", "700px")
+  //               .attr("width", "700px")
+  //       .attr("preserveAspectRatio", "xMinYMin slice");
 
     var candNode = svg.selectAll(".node")
       .filter(function(d) { return d.CMTE_DSGN === "P" })
@@ -625,23 +632,22 @@ export class GraphComponent implements OnInit  {
       .attr("height", 70)
         .append("circle")
         .attr("id", "cand-node")
-        .style("fill", "url(#icon-img)")
+        .style("fill", "url(#circles-1)")
         .attr("r", 50)
+        .on("mouseover", function(){
+               d3.select(this)
+                   .style("fill", "blue");
+         })
+          .on("mouseout", function(){
+               d3.select(this)
+                   .style("fill", "url(#circles-1)");
+         });
 
     // candNode
     //   .append("circle")
     //   .attr("class", "circle")
     //   .attr("r", 40);
       // .style("fill", "url(#bg)")
-
-
-
-
-
-
-
-
-      // croppingImg(src, $dim);
 
     node.append("text")
       .attr("dx", "-5rem")
