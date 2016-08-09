@@ -26,7 +26,7 @@ import {LocationStrategy} from  'angular2/router'
 
                     </g>
                     <defs>
-                      <pattern  patternUnits="userSpaceOnUse" id="circles-1" width="1000" height="1000" style="margin-left: 200px">
+                      <pattern patternUnits="userSpaceOnUse" id="circles-1" width="1000" height="1000" style="margin-left: 200px">
                         <image xlink:href="https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg"
                         width="1000" height="1000" style="margin-left: 200px">
                         </image>
