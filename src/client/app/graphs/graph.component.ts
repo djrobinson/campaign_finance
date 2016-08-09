@@ -12,18 +12,18 @@ import {SpinnerComponent} from '../loading/spinner.component';
 import {Observable} from 'rxjs/Rx';
 import {Http, Response} from 'angular2/http';
 import { Router, RouteParams } from 'angular2/router';
+import {LocationStrategy} from  'angular2/router'
 
 @Component({
   selector: 'graph-view',
   template: `
-            <div class="graph-container">
-              <spinner [isRunning]="isRequesting">
-              </spinner>
-              <div class="row">
+
+
 
                   <svg id="force" height="900" width="1600">
                     <g class="node" width="70" height="70" transform="translate(700,700)" fill-opacity="false" style="stroke: black; fill: none;">
-                      <circle id="cand-node" r="50" style="fill: url(#circles-1);"></circle>
+                      <circle r="50" style="fill: url({{absUrl}}#circles-1);"></circle>
+
                     </g>
                     <defs>
                       <pattern  patternUnits="userSpaceOnUse" id="circles-1" width="1000" height="1000" style="margin-left: 200px">
@@ -34,72 +34,8 @@ import { Router, RouteParams } from 'angular2/router';
                     </defs>
                   </svg>
 
-              </div>
-              <div *ngIf="!graph" class="legend">
-                <p>The small nodes represent individuals. Large nodes are PACs, color coded by type. More information coming soon on categorization. Click on each node for additional information about the candidate, committee, or individual</p>
-              </div>
-              <div *ngIf="selectedNode">
-                <mini-profile-view
-                  class="three columns"
-                  [node]="selectedNode"
-                  [bioguide]="bioguideId"
-                  (indivEmit)="showIndivPopup($event)"
-                  (cmteEmit)="showCmtePopup($event)"
-                  (candEmit)="showCandPopup($event)"
-                  (congressEmit)="showCongressPopup($event)">
-                </mini-profile-view>
-              </div>
-              <div *ngIf="indivPopup">
-                <individual-popup
-                  [individualTran]="individualTran"
-                  [indivName]="indivName"
-                  (exitEmit)="exit()">
-                </individual-popup>
-              </div>
-              <div *ngIf="fullTreemap">
-                <div class="tree-close">
-                  <button (click)="closeTreemap()">Close</button>
-                </div>
-                <treemap route="{{fullRoute}}">
-                </treemap>
-              </div>
-              <div *ngIf="fullBubble">
-                <bubble-chart
-                  cmte="{{bubbleCmte}}"
-                  (exitEmit)="closeBubble()"
-                  (indivEmit)="changeIndiv($event)">
-                </bubble-chart>
-              </div>
-              <div *ngIf="cmtePopup">
-                <committee-popup
-                  [isCandidate]="false"
-                  [committee]="selectedCommittee"
-                  (exitEmit)="exit()"
-                  (cmteEmit)="changeCmte($event)"
-                  (indivEmit)="changeIndiv($event)"
-                  (bubbleEmit)="showBubble($event)">
-                </committee-popup>
-              </div>
-              <div *ngIf="candPopup">
-                <candidate-popup
-                  [isCandidate]="isCand"
-                  [candidate]="selectedCandidate"
-                  [committee]="selectedCommittee"
-                  (exitEmit)="exit()"
-                  (cmteEmit)="changeCmte($event)"
-                  (treemapEmit)="showTreemap($event)"
-                >
-                </candidate-popup>
-              </div>
-              <div *ngIf="congressPopup">
-                <congress-popup
-                  [candidate]="selectedCandidate"
-                  (exitEmit)="exit()"
-                  (cmteEmit)="changeCmte($event)"
-                >
-                </congress-popup>
-              </div>
-            </div>
+
+
            `,
   styles: [
     `
@@ -249,18 +185,25 @@ export class GraphComponent implements OnInit  {
   private bioguideId: string;
   private selectedCandidate: string;
   private isCand: boolean;
+  public absUrl: string;
 
   constructor(
     private _params: RouteParams,
     private _graphService: GraphService,
-    private http: Http
+    private http: Http,
+    private location: LocationStrategy;
     ) {
     this.graph = true;
     this.candidate_id = _params.get('id');
+
+
   }
 
   ngOnInit() {
     this.getGraphData  (this.candidate_id);
+
+    this.absUrl = this.location.path();
+    console.log(this.absUrl);
   }
 
   showIndivPopup(event){
