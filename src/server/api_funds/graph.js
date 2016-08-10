@@ -12,15 +12,12 @@ var Graph = mongoose.model('Graph', { id: String, data: [] });
 
 
 
-router.get('/test', function(req, res, next){
-  Graph.findOne({}, function(err, data){
+router.get('/test/:cmte_id', function(req, res, next){
+  Graph.findOne({id: req.params.cmte_id}, function(err, data){
     if (err) handleError(err);
-    console.log(data);
+    console.log(data.data);
     res.json(data);
   })
-  // graph.getTopCom(req.params.cmte_id).then(function(comms){
-  // res.json(comms);
-  // })
 })
 
 
