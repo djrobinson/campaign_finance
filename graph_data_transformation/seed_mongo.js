@@ -18,15 +18,11 @@ var i = 0;
 
     return http.get('http://localhost:5000/api/graph/'+candId+'/candidate'
     , function(response) {
-      console.log(response);
-        // Continuously update stream with data
         var body = '';
         response.on('data', function(d) {
             body += d;
         });
         response.on('end', function() {
-
-            // Data reception is done, do whatever with it!
             var parsed = JSON.parse(body);
             callback(parsed);
         });
@@ -49,6 +45,7 @@ function printData(data){
   if (i < candIds.length){
     getCandidateGraph(printData, candIds[i]);
   }
+
 }
 //mongo --eval 'db.test.update({"name":"foo"},{$set:{"this":"that"}});'
 

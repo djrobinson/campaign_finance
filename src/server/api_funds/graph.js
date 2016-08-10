@@ -57,15 +57,15 @@ router.get('/:cand_id/candidate', function(req, res, next){
   var final = [];
   cand.getGraphAsc(req.params.cand_id)
     .then(function(first){
+      console.log("First", first);
       //this function will need to then call the committee info page
     callAsc(first)
     .then(function(second){
-      // console.log("second", second);
+      console.log("second", second);
       var notUniqIndivComm = second.reduce(function(prev, arr){
         return prev.concat(arr);
       }, []);
       var indivComm = _.uniqBy(notUniqIndivComm, 'OTHER_ID');
-      console.log("indivComm ", indivComm);
     appender(first, indivComm)
     .then(function(third){
       // console.log("third", third);
@@ -101,7 +101,6 @@ router.get('/:cand_id/candidate', function(req, res, next){
       //Here I'm making sure every name is unique.
       var result = uniqIndiv.concat(uniqCmte);
       result = typeMap(result);
-      console.log("result: ", result);
       res.json(result);
       // //Original
       // var uniquify = _.uniqBy(data, 'CMTE_NM');

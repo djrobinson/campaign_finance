@@ -21,10 +21,6 @@ import {LocationStrategy} from  'angular2/router'
 
 
                   <svg id="force" height="900" width="1600">
-                    <g class="node" width="70" height="70" transform="translate(700,700)" fill-opacity="false" style="stroke: black; fill: none;">
-                      <circle r="50" style="fill: url({{absUrl}}#circles-1);"></circle>
-
-                    </g>
                     <defs>
                       <pattern patternUnits="userSpaceOnUse" id="circles-1" width="1000" height="1000" style="margin-left: 200px">
                         <image xlink:href="https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg"
@@ -195,8 +191,6 @@ export class GraphComponent implements OnInit  {
     ) {
     this.graph = true;
     this.candidate_id = _params.get('id');
-
-
   }
 
   ngOnInit() {
@@ -350,7 +344,7 @@ export class GraphComponent implements OnInit  {
           }
 
         }, [])
-        this.buildGraph(this, candId);
+        this.buildGraph(this, candId, this.absUrl);
 
         },
         error => console.error('Error: ' + err),
@@ -360,54 +354,7 @@ export class GraphComponent implements OnInit  {
         var ctrl = this;
 
 
-        // setTimeout(function(){
-        //   console.log("Top this", ctrl);
 
-        //   var croppingImg = function(src, $dim) {
-        //   console.log(src);
-        //   var tmpCanvas = document.createElement('canvas');
-        //   var tmpCtx = tmpCanvas.getContext('2d');
-        //   var thumbImg = document.createElement('img');
-
-        //   tmpCanvas.width = tmpCanvas.height = 100;
-        //   document.getElementById("legend").appendChild(tmpCanvas);
-
-        //   thumbImg.src = src;
-        //   thumbImg.onload = function() {
-        //     console.log("thumb image", thumbImg);
-        //       tmpCtx.save();
-        //       tmpCtx.beginPath();
-        //       tmpCtx.arc(25, 25, 2 * $dim, 0, Math.PI*2, true);
-        //       tmpCtx.closePath();
-        //       tmpCtx.clip();
-
-        //       tmpCtx.drawImage(thumbImg, 0, 0, 10 * $dim, 4 * $dim);
-
-        //       tmpCtx.beginPath();
-        //       tmpCtx.arc(0, 0, 2 * $dim, 0, Math.PI*2, true);
-        //       tmpCtx.clip();
-        //       tmpCtx.closePath();
-        //       tmpCtx.restore();
-        //     }
-
-        //   }
-
-
-          // var $dim = 12;
-
-          // var src = getSource();
-
-          // function getSource() {
-          //   console.log(ctrl);
-          //   if (ctrl.bioguideId.length){
-          //     return "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + ctrl.bioguideId[0].id.bioguide + ".jpg";
-          //   } else {
-          //     return "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + candId + ".jpg";
-          //   }
-          // }
-          // croppingImg(src, $dim)
-
-        // }, 5000);
         }
       );
   }
@@ -417,256 +364,248 @@ export class GraphComponent implements OnInit  {
     this.selectedNode = selected;
   }
 
-  buildGraph(ctrl, candId) {
-  //   this.graph = false;
-  //   //HELPER FUNCTIONS FOR GRAPH
-  //   function dottype(d) {
-  //     d.x = +d.x;
-  //     d.y = +d.y;
-  //     return d;
-  //   }
+  buildGraph(ctrl, candId, absUrl) {
+    this.graph = false;
+    //HELPER FUNCTIONS FOR GRAPH
+    function dottype(d) {
+      d.x = +d.x;
+      d.y = +d.y;
+      return d;
+    }
 
-  //   function zoomed() {
-  //     container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-  //   }
+    function zoomed() {
+      container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    }
 
-  //   function dragstarted(d) {
-  //     d3.event.sourceEvent.stopPropagation();
-  //     d3.select(this).classed("dragging", true);
-  //     force.start();
-  //   }
+    function dragstarted(d) {
+      d3.event.sourceEvent.stopPropagation();
+      d3.select(this).classed("dragging", true);
+      force.start();
+    }
 
-  //   function dragged(d) {
-  //     d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
-  //   }
+    function dragged(d) {
+      d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+    }
 
-  //   function dragended(d) {
-  //     d3.select(this).classed("dragging", false);
-  //   }
+    function dragended(d) {
+      d3.select(this).classed("dragging", false);
+    }
 
-  //   var height = 900;
-  //   var width = 1600;
+    var height = 900;
+    var width = 1600;
 
-  //   //BEHAVIOR SETUP FOR FORCE GRAPH. USES HELPER FUNCTIONS BELOW
-  //   var zoom = d3.behavior.zoom()
-  //     .scaleExtent([1, 10])
-  //     .on("zoom", zoomed);
+    //BEHAVIOR SETUP FOR FORCE GRAPH. USES HELPER FUNCTIONS BELOW
+    var zoom = d3.behavior.zoom()
+      .scaleExtent([1, 10])
+      .on("zoom", zoomed);
 
-  //   var drag = d3.behavior.drag()
-  //     .origin(function(d) { return d; })
-  //     .on("dragstart", function(d) {
-  //       d3.event.sourceEvent.stopPropagation();
-  //       d3.select(this).classed("dragging", true);
-  //       force.start();
-  //     })
-  //     .on("drag", dragged)
-  //     .on("dragend", dragended);
-
-
-  //   //SETS UP AREA OF THE FORCE LAYOUT
-  //   d3.select("candidate-table").remove();
-  //   var svg = d3.select("#force")
-  //     .attr("width", width)
-  //     .attr("height", height)
-  //     .append("g") //< added
-  //     .call(zoom);
-
-  //   var rect = svg.append("rect") //<= Added
-  //     .attr("width", width)
-  //     .attr("height", height)
-  //     .style("fill", "none")
-  //     .style("pointer-events", "all");
-
-  //   var container = svg.append("g");
-
-  //   //STARTS FORCE LAYOUT. ADDS DATA, CREATES LINKS AND NODES
-  //   var force = d3.layout.force()
-  //     .gravity(.05)
-  //     .size([width, height])
-  //     .nodes(this.nodeData)
-  //     .links(this.linkData)
-  //     .distance(150)
-  //     .charge(-1000)
-  //     .start();
-
-  //   var link = container.append("g")
-  //     .selectAll(".link")
-  //     .data(this.linkData)
-  //     .enter().append("line")
-  //     .attr("class", "link")
-  //     .attr("stroke-width", 3)
-  //     .style("stroke", "gray");
+    var drag = d3.behavior.drag()
+      .origin(function(d) { return d; })
+      .on("dragstart", function(d) {
+        d3.event.sourceEvent.stopPropagation();
+        d3.select(this).classed("dragging", true);
+        force.start();
+      })
+      .on("drag", dragged)
+      .on("dragend", dragended);
 
 
+    //SETS UP AREA OF THE FORCE LAYOUT
+    d3.select("candidate-table").remove();
+    var svg = d3.select("#force")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g") //< added
+      .call(zoom);
 
-  //   var node = container.append("g")
-  //     .selectAll(".node")
-  //     .data(this.nodeData)
-  //     .enter().append("g")
-  //     .attr("class", "node")
-  //     .attr("cx", function(d) { return d.x; })
-  //     .attr("cy", function(d) { return d.y; })
-  //     .call(drag)
-  //     .style("stroke", "black")
-  //     .style("fill", function(d){
-  //       if ( d.graphtype === "candidate" ){
-  //         return "none";
-  //       } else if ( d.graphtype === "committee" || d.graphtype === "associated"){
-  //         switch (d.CMTE_TP){
-  //           case "C":
-  //             return "#FE7F2D";
-  //           case "D":
-  //             return "#619B8A";
-  //           case "E":
-  //             return "#D741A7";
-  //           case "H":
-  //             return "#E6F14A";
-  //           case "I":
-  //             return "#575D90";
-  //           case "N":
-  //             return "#C3D350";
-  //           case "O":
-  //             return "#273D1D";
-  //           case "P":
-  //             return "#385B28";
-  //           case "Q":
-  //             return "#1E2EDE";
-  //           case "S":
-  //             return "#3A1772";
-  //           case "U":
-  //             return "#5398BE";
-  //           case "V":
-  //             return "#4E3822";
-  //           case "W":
-  //             return "#2F1B25";
-  //           case "X":
-  //             return "#DCABDF";
-  //           case "Y":
-  //             return "#C792DF";
-  //           case "Z":
-  //             return "#95C623";
-  //         }
-  //       } else if ( d.graphtype === "individual"){
-  //         return "#6D0033";
-  //       }
-  //     })
+    var rect = svg.append("rect") //<= Added
+      .attr("width", width)
+      .attr("height", height)
+      .style("fill", "none")
+      .style("pointer-events", "all");
 
-  //   node.append("circle")
-  //     .attr("class", "circle")
-  //     .attr("r",function(d) {
-  //       if ( d.graphtype === "candidate") {
-  //         return;
-  //       } else if ( d.graphtype === "committee" || d.graphtype === "associated"){
-  //         return 20;
-  //       } else {
-  //         return 10;
-  //       }
-  //     })
+    var container = svg.append("g");
 
-  // // svg.append("defs")
-  // //   .append("pattern")
-  // //   .attr("id", "icon-img")
-  // //   .attr('width', 100)
-  // //           .attr('height', 100)
-  // //           .attr('patternContentUnits', 'objectBoundingBox')
-  // //           .append("svg:image")
-  // //               .attr("xlink:xlink:href", "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg") // "icon" is my image url. It comes from json too. The double xlink:xlink is a necessary hack (first "xlink:" is lost...).
-  // //               .attr("x", -35)
-  // //               .attr("y", -35)
-  // //               .attr("height", "700px")
-  // //               .attr("width", "700px")
-  // //       .attr("preserveAspectRatio", "xMinYMin slice");
+    //STARTS FORCE LAYOUT. ADDS DATA, CREATES LINKS AND NODES
+    var force = d3.layout.force()
+      .gravity(.05)
+      .size([width, height])
+      .nodes(this.nodeData)
+      .links(this.linkData)
+      .distance(150)
+      .charge(-1000)
+      .start();
 
-  //   var candNode = svg.selectAll(".node")
-  //     .filter(function(d) { return d.CMTE_DSGN === "P" })
-  //     .attr("width", 70)
-  //     .attr("height", 70)
-  //       .append("circle")
-  //       .attr("id", "cand-node")
-  //       .style("fill", "blue")
-  //       .attr("r", 50)
-  //       .on("mouseover", function(){
-  //              d3.select(this)
-  //                  .style("fill", "blue");
-  //        })
-  //         .on("mouseout", function(){
-  //              d3.select(this)
-  //                  .style("fill", "red");
-  //        });
+    var link = container.append("g")
+      .selectAll(".link")
+      .data(this.linkData)
+      .enter().append("line")
+      .attr("class", "link")
+      .attr("stroke-width", 3)
+      .style("stroke", "gray");
 
-  //   // candNode
-  //   //   .append("circle")
-  //   //   .attr("class", "circle")
-  //   //   .attr("r", 40);
-  //     // .style("fill", "url(#bg)")
 
-  //   node.append("text")
-  //     .attr("dx", "-5rem")
-  //     .attr("dy", "-2rem")
-  //     .each(addText);
 
-  //   function addText(d) {
-  //     if (!d.CANDIDATE){
-  //       var size = "1rem";
-  //       var name = d.CANDIDATE || d.NAME || d.CMTE_NM;
-  //       var words = name.split(' ');
-  //       var el = d3.select(this).style("font-size", size).text(words.join(' '));
-  //       while (this.getBBox().width >= 120) {
-  //         var word = words.join(' ');
-  //         var tspan = el.text(word);
-  //         words.pop();
-  //       }
-  //     }
-  //   }
+    var node = container.append("g")
+      .selectAll(".node")
+      .data(this.nodeData)
+      .enter().append("g")
+      .attr("class", "node")
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; })
+      .call(drag)
+      .style("stroke", "black")
+      .style("fill", function(d){
+        if ( d.graphtype === "candidate" ){
+          return "none";
+        } else if ( d.graphtype === "committee" || d.graphtype === "associated"){
+          switch (d.CMTE_TP){
+            case "C":
+              return "#FE7F2D";
+            case "D":
+              return "#619B8A";
+            case "E":
+              return "#D741A7";
+            case "H":
+              return "#E6F14A";
+            case "I":
+              return "#575D90";
+            case "N":
+              return "#C3D350";
+            case "O":
+              return "#273D1D";
+            case "P":
+              return "#385B28";
+            case "Q":
+              return "#1E2EDE";
+            case "S":
+              return "#3A1772";
+            case "U":
+              return "#5398BE";
+            case "V":
+              return "#4E3822";
+            case "W":
+              return "#2F1B25";
+            case "X":
+              return "#DCABDF";
+            case "Y":
+              return "#C792DF";
+            case "Z":
+              return "#95C623";
+          }
+        } else if ( d.graphtype === "individual"){
+          return "#6D0033";
+        }
+      })
 
-  //   force.on("tick", function() {
-  //     link.attr("x1", function(d) { return d.source.x; })
-  //       .attr("y1", function(d) { return d.source.y; })
-  //       .attr("x2", function(d) { return d.target.x; })
-  //       .attr("y2", function(d) { return d.target.y; })
+    node.append("circle")
+      .attr("class", "circle")
+      .attr("r",function(d) {
+        if ( d.graphtype === "candidate") {
+          return;
+        } else if ( d.graphtype === "committee" || d.graphtype === "associated"){
+          return 20;
+        } else {
+          return 10;
+        }
+      })
 
-  //     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-  //   });
+  // svg.append("defs")
+  //   .append("pattern")
+  //   .attr("id", "icon-img")
+  //   .attr('width', 100)
+  //           .attr('height', 100)
+  //           .attr('patternContentUnits', 'objectBoundingBox')
+  //           .append("svg:image")
+  //               .attr("xlink:xlink:href", "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg") // "icon" is my image url. It comes from json too. The double xlink:xlink is a necessary hack (first "xlink:" is lost...).
+  //               .attr("x", -35)
+  //               .attr("y", -35)
+  //               .attr("height", "700px")
+  //               .attr("width", "700px")
+  //       .attr("preserveAspectRatio", "xMinYMin slice");
 
-  //   //NODE EFFECTS & RELATION MGT
-  //   var linkedByIndex = {};
-  //   this.linkData.forEach(function(d) {
-  //     linkedByIndex[d.source.index + "," + d.target.index] = 1;
-  //   });
+    var candNode = svg.selectAll(".node")
+      .filter(function(d) { return d.CMTE_DSGN === "P" })
+      .attr("width", 70)
+      .attr("height", 70)
+        .append("circle")
+        .attr("id", "cand-node")
+        .style("fill", "url('"+absUrl+"#circles-1')")
+        .attr("r", 50);
 
-  //   function isConnected(a, b) {
-  //     return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index];
-  //   }
+    // candNode
+    //   .append("circle")
+    //   .attr("class", "circle")
+    //   .attr("r", 40);
+      // .style("fill", "url(#bg)")
 
-  //   node.on("mouseover", function(d) {
+    node.append("text")
+      .attr("dx", "-5rem")
+      .attr("dy", "-2rem")
+      .each(addText);
 
-  //     node.classed("node-active", function(o) {
-  //       thisOpacity = isConnected(d, o) ? true : false;
-  //       this.setAttribute('fill-opacity', thisOpacity);
-  //       return thisOpacity;
-  //     });
+    function addText(d) {
+      if (!d.CANDIDATE){
+        var size = "1rem";
+        var name = d.CANDIDATE || d.NAME || d.CMTE_NM;
+        var words = name.split(' ');
+        var el = d3.select(this).style("font-size", size).text(words.join(' '));
+        while (this.getBBox().width >= 120) {
+          var word = words.join(' ');
+          var tspan = el.text(word);
+          words.pop();
+        }
+      }
+    }
 
-  //     link.classed("link-active", function(o) {
-  //       return o.source === d || o.target === d ? true : false;
-  //     });
+    force.on("tick", function() {
+      link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; })
 
-  //     d3.select(this).classed("node-active", true);
-  //     d3.select(this).select("circle").transition()
-  //       .duration(750)
-  //   })
+      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    });
 
-  //   .on("mouseout", function(d) {
+    //NODE EFFECTS & RELATION MGT
+    var linkedByIndex = {};
+    this.linkData.forEach(function(d) {
+      linkedByIndex[d.source.index + "," + d.target.index] = 1;
+    });
 
-  //     node.classed("node-active", false);
-  //     link.classed("link-active", false);
+    function isConnected(a, b) {
+      return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index];
+    }
 
-  //     d3.select(this).select("circle").transition()
-  //       .duration(750);
-  //   })
+    node.on("mouseover", function(d) {
 
-  //   .on("click", function(d){
-  //     ctrl.setSelected(d);
-  //   })
+      node.classed("node-active", function(o) {
+        thisOpacity = isConnected(d, o) ? true : false;
+        this.setAttribute('fill-opacity', thisOpacity);
+        return thisOpacity;
+      });
+
+      link.classed("link-active", function(o) {
+        return o.source === d || o.target === d ? true : false;
+      });
+
+      d3.select(this).classed("node-active", true);
+      d3.select(this).select("circle").transition()
+        .duration(750)
+    })
+
+    .on("mouseout", function(d) {
+
+      node.classed("node-active", false);
+      link.classed("link-active", false);
+
+      d3.select(this).select("circle").transition()
+        .duration(750);
+    })
+
+    .on("click", function(d){
+      ctrl.setSelected(d);
+    })
 
   }
 
