@@ -1,14 +1,17 @@
+var http = require('http');
+
 //Get the list of candidates that you will seed the db with:
 
+var candIds = ['P00003392', 'P60007168'];
 
 
 //Structure and send a call to each candidate at the graph endpoint
+var i = 0;
+  getCandidateGraph(printData, candIds[i]);
 
-var http = require('http');
+  function getCandidateGraph(callback, candId) {
 
-function getCandidateGraph(callback, candId) {
-
-    return http.get('http://localhost:5000/api/graph/P00003392/candidate'
+    return http.get('http://localhost:5000/api/graph/'+candId+'/candidate'
     , function(response) {
       console.log(response);
         // Continuously update stream with data
@@ -23,13 +26,16 @@ function getCandidateGraph(callback, candId) {
             callback(parsed);
         });
     });
+  }
 
-}
-
-var graphData = getCandidateGraph(printData, 'P00003392');
 //Save the return value from the service call send to mongo
 function printData(data){
+  i++;
   console.log(data);
+  if (i < candIds.length){
+    getCandidateGraph(printData, candIds[i]);
+  }
+
 }
 //mongo --eval 'db.test.update({"name":"foo"},{$set:{"this":"that"}});'
 
