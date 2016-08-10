@@ -4,6 +4,26 @@ var cand      = require('../queries/candidate_queries.js');
 var graph     = require('../queries/graph_queries.js');
 var _         = require('lodash');
 
+var mongoose = require('mongoose');
+
+var Schema = mongoose.Schema;
+
+var Graph = mongoose.model('Graph', { id: String, data: [] });
+
+
+
+router.get('/test', function(req, res, next){
+  Graph.findOne({}, function(err, data){
+    if (err) handleError(err);
+    console.log(data);
+    res.json(data);
+  })
+  // graph.getTopCom(req.params.cmte_id).then(function(comms){
+  // res.json(comms);
+  // })
+})
+
+
 var callAsc = function(input){
  return Promise.all(
   input.map(graph.getTopCom)

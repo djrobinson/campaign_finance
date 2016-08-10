@@ -1,6 +1,6 @@
 var http = require('http');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/testPolis');
+mongoose.connect('mongodb://heroku_2f1pj73r:tsu0gvp9jelb0lqkchsg86alh@ds023452.mlab.com:23452/heroku_2f1pj73r/testPolis');
 
 
 var Graph = mongoose.model('Graph', { id: String, data: [] });

@@ -3,6 +3,8 @@ var Vote = require('../mongo/votes_schema.js');
 var express = require('express');
 var router = express.Router();
 
+
+
 router.get('/',function(req, res, next){
   Vote.findOne( {}, function(err, vote) {
     if (err) throw err;
