@@ -1,4 +1,9 @@
 var http = require('http');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/testPolis');
+
+
+var Graph = mongoose.model('Graph', { id: String, data: [] });
 
 //Get the list of candidates that you will seed the db with:
 
@@ -30,14 +35,24 @@ var i = 0;
 
 //Save the return value from the service call send to mongo
 function printData(data){
-  i++;
+
   console.log(data);
+  var graphData = new Graph({id: candIds[i], data: data});
+  graphData.save(function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Inserted');
+    }
+  });
+  i++;
   if (i < candIds.length){
     getCandidateGraph(printData, candIds[i]);
   }
-
 }
 //mongo --eval 'db.test.update({"name":"foo"},{$set:{"this":"that"}});'
+
+
 
 //Handle some asynchronous logic here where only after the call has completed the next fires
 
