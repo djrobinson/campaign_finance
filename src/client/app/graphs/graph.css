@@ -1,0 +1,118 @@
+circle {
+  z-index: 20;
+}
+image {
+  z-index: 20;
+  margin-left: 200px;
+}
+.graph-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.legend {
+  width: 20%;
+  height: 20%;
+  position: absolute;
+  top: 75px;
+  left: 10px;
+  font-size: 1rem;
+}
+.tree-close {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+inputs-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 15%;
+  height: 100vh;
+  background-color: blue;
+}
+mini-profile-view {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+outputs-view {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15%;
+  height: 100vh;
+  background-color: blue;
+}
+individual-popup {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  top: 30%;
+  left: 20%;
+  border: solid 1px #75717B;
+  background-color: #FEFFFE;
+}
+committee-popup {
+  position: absolute;
+  width: 90%;
+  height: 80%;
+  top: 10%;
+  left: 5%;
+  border: solid 1px #75717B;
+  background-color: #FEFFFE;
+}
+candidate-popup {
+  position: absolute;
+  width: 90%;
+  height: 80%;
+  top: 10%;
+  left: 5%;
+  border: solid 1px #75717B;
+  background-color: #FEFFFE;
+}
+treemap {
+  position: absolute;
+  z-index: 5;
+  width: 90%;
+  height: 90%;
+  top: 5%;
+  left: 5%;
+  border: solid 1px #75717B;
+  background-color: #FEFFFE;
+}
+bubble-chart {
+  position: absolute;
+  z-index: 5;
+  width: 90%;
+  height: 90%;
+  top: 5%;
+  left: 5%;
+  border: solid 1px #75717B;
+  background-color: #FEFFFE;
+}
+congress-popup {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  top: 5%;
+  left: 5%;
+  border: solid 1px #75717B;
+  background-color: #FEFFFE;
+}
+circle {
+  stroke: black;
+  stroke-width: 1.5px;
+}
+
+#legend {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: blue;
+  height: 400px;
+  width: 400px;
+}

@@ -1,0 +1,78 @@
+<spinner [isRunning]="isRequesting">
+</spinner>
+
+<svg id="force">
+<id="force" height="900" width="1600">
+  <defs>
+    <pattern id="circles-1" width="100" height="100">
+      <image xlink:href="https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg"
+      width="100" height="100">
+      </image>
+    </pattern>
+  </defs>
+</svg>
+
+<div *ngIf="!graph" class="legend">
+  <p>The small nodes represent individuals. Large nodes are PACs, color coded by type. More information coming soon on categorization. Click on each node for additional information about the candidate, committee, or individual</p>
+</div>
+<div *ngIf="selectedNode">
+  <mini-profile-view
+    class="three columns"
+    [node]="selectedNode"
+    [bioguide]="bioguideId"
+    (indivEmit)="showIndivPopup($event)"
+    (cmteEmit)="showCmtePopup($event)"
+    (candEmit)="showCandPopup($event)"
+    (congressEmit)="showCongressPopup($event)">
+  </mini-profile-view>
+</div>
+<div *ngIf="indivPopup">
+  <individual-popup
+    [individualTran]="individualTran"
+    [indivName]="indivName"
+    (exitEmit)="exit()">
+  </individual-popup>
+</div>
+<div *ngIf="fullTreemap">
+  <div class="tree-close">
+    <button (click)="closeTreemap()">Close</button>
+  </div>
+  <treemap route="{{fullRoute}}">
+  </treemap>
+</div>
+<div *ngIf="fullBubble">
+  <bubble-chart
+    cmte="{{bubbleCmte}}"
+    (exitEmit)="closeBubble()"
+    (indivEmit)="changeIndiv($event)">
+  </bubble-chart>
+</div>
+<div *ngIf="cmtePopup">
+  <committee-popup
+    [isCandidate]="false"
+    [committee]="selectedCommittee"
+    (exitEmit)="exit()"
+    (cmteEmit)="changeCmte($event)"
+    (indivEmit)="changeIndiv($event)"
+    (bubbleEmit)="showBubble($event)">
+  </committee-popup>
+</div>
+<div *ngIf="candPopup">
+  <candidate-popup
+    [isCandidate]="isCand"
+    [candidate]="selectedCandidate"
+    [committee]="selectedCommittee"
+    (exitEmit)="exit()"
+    (cmteEmit)="changeCmte($event)"
+    (treemapEmit)="showTreemap($event)"
+  >
+  </candidate-popup>
+</div>
+<div *ngIf="congressPopup">
+  <congress-popup
+    [candidate]="selectedCandidate"
+    (exitEmit)="exit()"
+    (cmteEmit)="changeCmte($event)"
+  >
+  </congress-popup>
+</div>
