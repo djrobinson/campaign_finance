@@ -35,7 +35,6 @@ export class BarComponent {
                       this.buildChart(result._body);
                     },
             error => console.log(error))
-
   }
 
 

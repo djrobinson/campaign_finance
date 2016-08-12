@@ -92,8 +92,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         .map((res: Response) => res.json()),
       this.http.get('api/transfers/'+this.committee+'/cmtetype')
         .map((res: Response) => res.json()),
-      // this.http.get('/api/individuals/committee/'+this.committee+'/pie')
-      //   .map((res: Response) => res.json()),
+      this.http.get('/api/individuals/committee/'+this.committee+'/pie')
+        .map((res: Response) => res.json()),
       // this.http.get('/api/individuals/committee/'+this.committee+'/date')
       //   .map((res: Response) => res.json())
 

@@ -66,7 +66,19 @@ import {Observable} from 'rxjs/Rx';
 })
 export class SizePieComponent implements OnInit, OnChanges {
   public isRequesting: boolean;
+  @Input() cmte: string;
+
   constructor(private http:Http) {}
+
+  ngOnInit(){
+      this.http.get('/api/individuals/committee/'+this.cmte+'/pie')
+        .subscribe(
+            result => {
+                      console.log(result._body);
+                      this.callAsc(JSON.parse(result._body));
+                    },
+            error => console.log(error))
+  }
 
   public callAsc(data) {
 
@@ -148,9 +160,9 @@ export class SizePieComponent implements OnInit, OnChanges {
             return d.amount;
           }));
           var percent = Math.round(1000 * d.data.amount / total) / 10;
-          tooltip.select('.pie-label').html(d.data.label);
-          tooltip.select('.pie-amount').html(d.data.amount);
-          tooltip.select('.pie-percent').html(percent + '%');
+          // tooltip.select('.pie-label').html(d.data.label);
+          // tooltip.select('.pie-amount').html(d.data.amount);
+          // tooltip.select('.pie-percent').html(percent + '%');
           console.log("event: ", d3.event.pageX);
           d3.select("#tooltip")
               .style("left", d3.event.pageX + "px")
