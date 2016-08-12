@@ -133,7 +133,7 @@
               </tr>
             </table>
         </div>
-        <div class="twelve columns middle-row">
+        <div class="three columns middle-row">
           <div class="highlight-tile three columns">
             <div class="fill">
               <div id="pies-title"><p>Hover over pie charts to see details below</p></div>
@@ -144,39 +144,11 @@
               </div>
             </div>
           </div>
-          <div class="highlight-tile three columns">
-            <div class="top-highlight">
-              <p>Number of Itemized Donations</p>
-              <h4>{{itemizedDonations}}</h4>
-            </div>
-            <div class="bottom-highlight">
-              <p>Number of Committee Donations</p>
-              <h4>{{committeeDonations}}</h4>
-            </div>
-          </div>
-          <div *ngIf="!isCandidate" class="highlight-tile three columns">
-            <div class="top-highlight">
-              <p>Other</p>
-            </div>
-            <div class="bottom-highlight">
-              <p>Other</p>
-            </div>
-          </div>
-          <div *ngIf="isCandidate" class="highlight-tile three columns">
-            <div class="top-highlight support">
-              <p>Superpac Support Total</p>
-              <h4>{{parseFloat(pacSupport)  | currency:'USD':true}}</h4>
-            </div>
-            <div class="bottom-highlight oppose">
-              <p>Superpac Opposition Total</p>
-              <h4>{{parseFloat(pacOppose)  | currency:'USD':true}}</h4>
-            </div>
-          </div>
+          <bar-chart
+            class="nine columns"
+            [graphData]="c">
+          </bar-chart>
         </div>
-        <bar-chart
-          class="twelve columns"
-          [graphData]="c">
-        </bar-chart>
       </div>
     </div>
   </div>

@@ -155,7 +155,6 @@ export class GraphComponent implements OnInit  {
       .subscribe(
       result => {
         console.log("result", result);
-        // result.unshift({ "CANDIDATE": cand, "CAND_ID": cand, "CMTE_ID": cand, "NODE": 0, "graphtype": "candidate", data: this.candidate[0]});
         result = result.data;
         this.result = result;
         console.log(this.result);
@@ -175,7 +174,6 @@ export class GraphComponent implements OnInit  {
             elem.CORE = true;
           }
           elem.NODE = i;
-
           return elem;
         });
         var nodeData = this.nodeData;
@@ -209,12 +207,10 @@ export class GraphComponent implements OnInit  {
 
         }, [])
         this.buildGraph(this, candId, this.absUrl);
-
         },
         error => console.error('Error: ' + error  ),
         () => {
           this.stopRefreshing();
-
         var ctrl = this;
         }
       );

@@ -115,12 +115,12 @@ li {
 
 bar-chart {
   position: relative;
-  height: 35%;
+  height: 100%;
 }
 
 .top-row {
   position: relative;
-  height: 40%;
+  height: 50%;
   text-align: center;
 }
 
@@ -180,7 +180,7 @@ bar-chart {
 .middle-row {
   display: flex;
   position: relative;
-  height: 25%;
+  height: 40%;
   width: 100%;
   flex-direction: row;
 }
