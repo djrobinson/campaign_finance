@@ -1,10 +1,14 @@
 import {Component, Input, OnInit, OnChanges, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
+import {SpinnerComponent} from '../../loading/spinner.component';
 
 @Component({
   selector: 'size-pie',
   template: `
+
+        <spinner [isRunning]="isRequestingPie">
+        </spinner>
         <p>Donations by Size</p>
           <div id="chart2">
           </div>
@@ -62,20 +66,22 @@ import {Observable} from 'rxjs/Rx';
     }
 
   `],
-  directives: []
+  directives: [SpinnerComponent]
 })
 export class SizePieComponent implements OnInit, OnChanges {
-  public isRequesting: boolean;
+  public isRequestingPie: boolean;
   @Input() cmte: string;
 
   constructor(private http:Http) {}
 
   ngOnInit(){
+      this.isRequestingPie = true;
       this.http.get('/api/individuals/committee/'+this.cmte+'/pie')
         .subscribe(
             result => {
                       console.log(result._body);
                       this.callAsc(JSON.parse(result._body));
+                      this.stopRefreshing();
                     },
             error => console.log(error))
   }
@@ -85,7 +91,7 @@ export class SizePieComponent implements OnInit, OnChanges {
     var buildPieChart = this.buildPieChart;
     var http = this.http;
     var pieData = [];
-    this.isRequesting = true;
+
       Object.keys(data[0]).forEach((key)=>{
         if (key !== "count"){
           pieData.push({
@@ -99,7 +105,7 @@ export class SizePieComponent implements OnInit, OnChanges {
   }
 
   private stopRefreshing() {
-    this.isRequesting = false;
+    this.isRequestingPie = false;
   }
 
   public buildPieChart(pieData) {

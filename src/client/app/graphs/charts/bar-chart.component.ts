@@ -1,11 +1,14 @@
 import {Component, Input, OnInit} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
-
+import {SpinnerComponent} from '../../loading/spinner.component';
 
 @Component({
   selector: 'bar-chart',
   template: `
+
       <div id="containerChart4">
+      <spinner [isRunning]="isRequestingBar">
+      </spinner>
       </div>
   `,
   styles: [`
@@ -17,24 +20,31 @@ import {Http, Response} from 'angular2/http';
       width: 90%;
       bottom: 0;
     }
-
-
-  `]
+  `],
+  directives: [SpinnerComponent]
 })
 export class BarComponent {
   @Input() graphData: any;
   @Input() cmte: string;
+  private isRequestingBar: boolean;
 
   constructor(private http: Http){};
 
   ngOnInit(){
+    this.isRequestingBar = true;
     this.http.get('/api/individuals/committee/'+this.cmte+'/date')
         .subscribe(
             result => {
                       console.log(result._body);
+                      this.stopRefreshing();
                       this.buildChart(result._body);
+
                     },
             error => console.log(error))
+  }
+
+  private stopRefreshing() {
+    this.isRequestingBar = false;
   }
 
 

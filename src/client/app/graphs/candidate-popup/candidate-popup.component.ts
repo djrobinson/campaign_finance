@@ -12,6 +12,7 @@ import {IndividualsSectionComponent} from './individuals/individuals.component';
 import {CommitteesSectionComponent} from './committees/committees.component';
 import {SpinnerComponent} from '../../loading/spinner.component';
 
+
 @Component({
   selector: 'candidate-popup',
   templateUrl: 'app/graphs/candidate-popup/candidate-popup.html',
@@ -92,8 +93,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         .map((res: Response) => res.json()),
       this.http.get('api/transfers/'+this.committee+'/cmtetype')
         .map((res: Response) => res.json()),
-      this.http.get('/api/individuals/committee/'+this.committee+'/pie')
-        .map((res: Response) => res.json()),
+      // this.http.get('/api/individuals/committee/'+this.committee+'/pie')
+      //   .map((res: Response) => res.json()),
       // this.http.get('/api/individuals/committee/'+this.committee+'/date')
       //   .map((res: Response) => res.json())
 
