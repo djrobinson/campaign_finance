@@ -34,6 +34,33 @@ import {Observable} from 'rxjs/Rx';
       height: 100%;
     }
 
+    #tooltip {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: auto;
+      padding: 10px;
+      background-color: white;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+      -mox-box-shadow: 4px 4px 4px 10px rgba(0, 0, 0, 0.4);
+      box-shadow: 4px 4px 10px rbga(0, 0, 0, 0.4) pointer-events: none;
+      z-index: 6;
+    }
+    #tooltip.hidden {
+        opacity: 0;
+    }
+    #tooltip p {
+        margin: 0;
+        font-family: sans-serif;
+        font-size: 16px;
+        line-height: 20px;
+        color: black;
+    }
+
   `],
   directives: []
 })
@@ -88,6 +115,10 @@ export class SizePieComponent implements OnInit, OnChanges {
         .innerRadius(radius - donutWidth)
         .outerRadius(radius);
 
+      var arcOver = d3.svg.arc()
+        .innerRadius(radius - 20)
+        .outerRadius(radius + 5);
+
       var pie = d3.layout.pie()
         .value(function(d) { return d.amount; })
         .sort(null);
@@ -120,17 +151,28 @@ export class SizePieComponent implements OnInit, OnChanges {
           tooltip.select('.pie-label').html(d.data.label);
           tooltip.select('.pie-amount').html(d.data.amount);
           tooltip.select('.pie-percent').html(percent + '%');
-        });
-
-        path.on('mouseout', function() {
-          tooltip.style('display', 'none');
-          pieTitle.style('display', 'flex');
-        });
-
-        path.on('mousemove', function(d) {
-          tooltip.style('top', (d3.event.pageY + 10) + 'px')
-            .style('left', (d3.event.pageX + 10) + 'px');
-        });
+          console.log("event: ", d3.event.pageX);
+          d3.select("#tooltip")
+              .style("left", d3.event.pageX + "px")
+              .style("top", d3.event.pageY + "px")
+              .style("opacity", 1)
+              .select("#value")
+              .text(d.amount);
+              console.log("below tooltip function");
+          d3.select(this).transition()
+              .duration(400)
+              .attr("d", arcOver);
+        })
+        .on("mouseout", function () {
+              // Hide the tooltip
+              d3.select("#tooltip")
+                  .style("opacity", 0);;
+              tooltip.style('display', 'none');
+              pieTitle.style('display', 'flex');
+              d3.select(this).transition()
+                .duration(400)
+                .attr("d", arc);
+          });
 
 
         var legend = svg.selectAll('.legend')

@@ -138,8 +138,8 @@ export class DsgnPieComponent implements OnInit, OnChanges {
         .outerRadius(radius);
 
       var arcOver = d3.svg.arc()
-        .innerRadius(radius - 25)
-        .outerRadius(radius + 10);
+        .innerRadius(radius - 20)
+        .outerRadius(radius + 5);
 
       var pie = d3.layout.pie()
         .value(function(d) { return d.amount; })
