@@ -138,8 +138,8 @@ export class DsgnPieComponent implements OnInit, OnChanges {
         .outerRadius(radius);
 
       var arcOver = d3.svg.arc()
-        .innerRadius(0)
-        .outerRadius(150 + 10);
+        .innerRadius(radius - 25)
+        .outerRadius(radius + 10);
 
       var pie = d3.layout.pie()
         .value(function(d) { return d.amount; })
@@ -182,7 +182,7 @@ export class DsgnPieComponent implements OnInit, OnChanges {
               .text(d.amount);
               console.log("below tooltip function");
           d3.select(this).transition()
-              .duration(1000)
+              .duration(400)
               .attr("d", arcOver);
         })
         .on("mouseout", function () {
@@ -191,6 +191,9 @@ export class DsgnPieComponent implements OnInit, OnChanges {
                   .style("opacity", 0);;
               tooltip.style('display', 'none');
               pieTitle.style('display', 'flex');
+              d3.select(this).transition()
+                .duration(400)
+                .attr("d", arc);
           });
 
 
