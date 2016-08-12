@@ -85,23 +85,18 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   public callPresApis(fecId){
     Observable.forkJoin(
       this.http.get('/api/candidates/'+fecId)
-        .map((res: Response) => res.json()), //0 Needed
+        .map((res: Response) => res.json()),
       this.http.get('/api/candidates/'+fecId+'/associated')
-        .map((res: Response) => res.json()), //3 Needed
+        .map((res: Response) => res.json()),
       this.http.get('api/transfers/'+this.committee+'/designation')
-        .map((res: Response) => res.json()), //5
+        .map((res: Response) => res.json()),
       this.http.get('api/transfers/'+this.committee+'/cmtetype')
-        .map((res: Response) => res.json()), //6
-      this.http.get('/api/individuals/committee/'+this.committee+'/pie')
-        .map((res: Response) => res.json()), //7
-      this.http.get('/api/individuals/committee/'+this.committee+'/date')
-        .map((res: Response) => res.json()), //8
-      this.http.get('/api/transfers/'+this.committee+'/date')
-        .map((res: Response) => res.json()), //9
-      this.http.get('/api/pac/'+fecId+'/support/sum')
-        .map((res: Response) => res.json()), //10
-      this.http.get('/api/pac/'+fecId+'/oppose/sum')
-        .map((res: Response) => res.json()) //11
+        .map((res: Response) => res.json()),
+      // this.http.get('/api/individuals/committee/'+this.committee+'/pie')
+      //   .map((res: Response) => res.json()),
+      // this.http.get('/api/individuals/committee/'+this.committee+'/date')
+      //   .map((res: Response) => res.json())
+
     ).subscribe(
       data => {
         console.log("All candidate data: ", data);
@@ -112,21 +107,18 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
             return cmte
           };
         })[0];
+        this.stopRefreshing();
         this.typePieComponent.callAsc(data[3]);
-        this.sizePieComponent.callAsc(data[4]);
+        // this.sizePieComponent.callAsc(data[4]);
         this.dsgnPieComponent.callAsc(data[2]);
 
-        this.itemizedDonations = parseInt(data[4][0].count);
         this.committeeDonations = data[3].reduce((prev, item)=>{
           return prev + +item.count;
         }, 0)
 
-        this.pacSupport = parseInt(data[7][0].total);
-        this.pacOppose = parseInt(data[8][0].total);
+        // var barChartData = data[5].concat(data[6]);
+        // this.barComponent.buildChart(barChartData);
 
-        var barChartData = data[5].concat(data[6]);
-        this.barComponent.buildChart(barChartData);
-        this.stopRefreshing();
       },
       err => console.error(err)
     );
@@ -151,7 +143,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         console.log("All committee data: ", data);
         this.candidate = data[0][0];
         this.typePieComponent.callAsc(data[2]);
-        this.sizePieComponent.callAsc(data[3]);
+
         this.dsgnPieComponent.callAsc(data[1]);
 
         this.itemizedDonations = parseInt(data[3][0].count);
@@ -159,9 +151,11 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
           return prev + +item.count;
         }, 0)
 
+
+        this.sizePieComponent.callAsc(data[3]);
         var barChartData = data[4].concat(data[5]);
         this.barComponent.buildChart(barChartData);
-        this.stopRefreshing();
+
       },
       err => console.error(err)
     );

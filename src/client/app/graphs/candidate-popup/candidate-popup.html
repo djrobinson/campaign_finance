@@ -74,7 +74,7 @@
     <div class="innards">
       <div class="four columns pies">
 
-        <size-pie></size-pie>
+        <size-pie [cmte]="committee"></size-pie>
 
         <type-pie></type-pie>
 
@@ -145,8 +145,8 @@
             </div>
           </div> -->
           <bar-chart
-            class="twelve columns"
-            [graphData]="c">
+            [cmte]="committee"
+            class="twelve columns">
           </bar-chart>
         </div>
       </div>

@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from 'angular2/core';
+import {Http, Response} from 'angular2/http';
+
 
 @Component({
   selector: 'bar-chart',
@@ -12,7 +14,7 @@ import {Component, Input, OnInit} from 'angular2/core';
       display: flex;
       position: absolute;
       height: 100%;
-      width: 100%;
+      width: 90%;
       bottom: 0;
     }
 
@@ -21,6 +23,20 @@ import {Component, Input, OnInit} from 'angular2/core';
 })
 export class BarComponent {
   @Input() graphData: any;
+  @Input() cmte: string;
+
+  constructor(private http: Http){};
+
+  ngOnInit(){
+    this.http.get('/api/individuals/committee/'+this.cmte+'/date')
+        .subscribe(
+            result => {
+                      console.log(result._body);
+                      this.buildChart(result._body);
+                    },
+            error => console.log(error))
+
+  }
 
 
   public buildChart(graphData){
@@ -54,8 +70,9 @@ export class BarComponent {
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var data = graphData;
+    var data = JSON.parse(graphData);
 
+      console.log("Data!", typeof(data));
       data.forEach(function(d, i){
         data[i].count = +d.count;
       });
