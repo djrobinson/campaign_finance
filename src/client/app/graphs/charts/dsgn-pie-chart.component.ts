@@ -6,9 +6,14 @@ import {Observable} from 'rxjs/Rx';
   selector: 'dsgn-pie',
   template: `
         <p>Donations by Committee Designation</p>
-
+          <div id="tooltip" class="hidden">
+              <p><strong>Important Label Heading</strong>
+              </p>
+              <p><span id="value">100</span>%</p>
+          </div>
           <div id="chartDsgn">
           </div>
+
   `,
   styles: [`
     p {
@@ -32,6 +37,33 @@ import {Observable} from 'rxjs/Rx';
       display: flex;
       width: 100%;
       height: 100%;
+    }
+
+    #tooltip {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: auto;
+      padding: 10px;
+      background-color: white;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+      -mox-box-shadow: 4px 4px 4px 10px rgba(0, 0, 0, 0.4);
+      box-shadow: 4px 4px 10px rbga(0, 0, 0, 0.4) pointer-events: none;
+      z-index: 6;
+    }
+    #tooltip.hidden {
+        opacity: 0;
+    }
+    #tooltip p {
+        margin: 0;
+        font-family: sans-serif;
+        font-size: 16px;
+        line-height: 20px;
+        color: black;
     }
   `],
   directives: []
@@ -105,6 +137,10 @@ export class DsgnPieComponent implements OnInit, OnChanges {
         .innerRadius(radius - donutWidth)
         .outerRadius(radius);
 
+      var arcOver = d3.svg.arc()
+        .innerRadius(0)
+        .outerRadius(150 + 10);
+
       var pie = d3.layout.pie()
         .value(function(d) { return d.amount; })
         .sort(null);
@@ -125,7 +161,7 @@ export class DsgnPieComponent implements OnInit, OnChanges {
           .attr('d', arc)
           .attr('fill', function(d, i) {
             return color(d.data.label);
-          });
+          })
 
         path.on('mouseover', function(d) {
           tooltip.style('display', 'flex');
@@ -137,17 +173,31 @@ export class DsgnPieComponent implements OnInit, OnChanges {
           tooltip.select('.pie-label').html(d.data.label);
           tooltip.select('.pie-amount').html(d.data.amount);
           tooltip.select('.pie-percent').html(percent + '%');
-        });
+          console.log("event: ", d3.event.pageX);
+          d3.select("#tooltip")
+              .style("left", d3.event.pageX + "px")
+              .style("top", d3.event.pageY + "px")
+              .style("opacity", 1)
+              .select("#value")
+              .text(d.amount);
+              console.log("below tooltip function");
+          d3.select(this).transition()
+              .duration(1000)
+              .attr("d", arcOver);
+        })
+        .on("mouseout", function () {
+              // Hide the tooltip
+              d3.select("#tooltip")
+                  .style("opacity", 0);;
+              tooltip.style('display', 'none');
+              pieTitle.style('display', 'flex');
+          });
 
-        path.on('mouseout', function() {
-          tooltip.style('display', 'none');
-          pieTitle.style('display', 'flex');
-        });
 
-        path.on('mousemove', function(d) {
-          tooltip.style('top', (d3.event.pageY + 10) + 'px')
-            .style('left', (d3.event.pageX + 10) + 'px');
-        });
+        // path.on('mousemove', function(d) {
+        //   tooltip.style('top', (d3.event.pageY + 10) + 'px')
+        //     .style('left', (d3.event.pageX + 10) + 'px');
+        // });
 
 
         var legend = svg.selectAll('.legend')
