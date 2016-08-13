@@ -26,65 +26,14 @@
   align-items: center;
   justify-content: center;
   color: white;
+  -webkit-transition: background 1s ease, color 1s ease; /* Safari 3.1 to 6.0 */
+  transition: background color 1s ease, color 1s ease;
+
 }
 
 .main-menu-sel:hover {
   background: #9DBF9E;
+  color: #4d4d4d;
+
 }
 
-/*.banner {
-  margin-top: 2%;
-  width: 85vw;
-  text-align: center;
-}
-
-.banner h1 {
-  font-family: 'Kanit';
-  font-size: 13vw;
-  font-weight: 600;
-  color: #EFF1F3;
-}
-
-.subtitle-container {
-  width: 50%;
-  margin-left: 25%;
-}
-
-.subtitle-container {
-  color: white;
-}
-
-.main-candidates {
-  margin-top: 2%;
-  display: flex;
-  justify-content: space-around;
-  width: 80%;
-}
-
-.cand {
-  width: 20%;
-  text-align: center;
-  color: #EFF1F3;
-}
-
-.cand h5, p {
-  margin: 0;
-  padding: 0;
-}
-
-.main-candidates img {
-  width: 100%;
-  border-radius: 50%;
-  border: solid 3px #EFF1F3;
-}
-
-.main-candidates img:hover {
-  border: solid 8px #EFF1F3;
-}
-
-hr.style-two {
-    border: 0;
-    height: 2px;
-    width: 80%;
-    background-image: linear-gradient(to right, rgba(239,241,243, 0), rgba(239,241,243, 0.75), rgba(0, 0, 0, 0));
-}*/
