@@ -25,32 +25,40 @@
   <!-- </div> -->
   <div class="row">
     <ul class="list">
-      <li *ngFor="#candidate of candidates" class="list-item" [style.background]="candidate.tile_color">
+      <li *ngFor="#candidate of candidates" class="list-item" [style.border]="candidate.tile_color">
+
         <div class="candidate-profile">
-          <div class="profile-header">
-            <h5>{{candidate.can_nam}}</h5>
-            <a [href]="candidate.lin_ima"><img src="images/fec.png" class="fec" /></a>
+          <div class="row profile-header">
+
+            <div class="five columns">
+                <a [href]="candidate.lin_ima"><img src="images/fec.png" class="fec" /></a>
+              <h5>{{candidate.can_nam}}</h5>
+            </div>
+           <div class="seven columns">
+              <img [src]="candidate.profile_img" onerror="this.src='http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png'" class="profile-img">
+            </div>
           </div>
-          <img [src]="candidate.profile_img" onerror="this.src='http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png'" class="profile-img">
-          <p>{{candidate.PARTY}}</p>
-          <table>
-            <tr>
-              <td>Cash on Hand</td>
-              <td>{{parseFloat(candidate.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
-            </tr>
-            <tr>
-              <td>Net Contributions</td>
-              <td>{{parseFloat(candidate.net_con) | currency:'USD':true}}</td>
-            </tr>
-            <tr>
-              <td>Total Distributions</td>
-              <td>{{parseFloat(candidate.tot_dis) | currency:'USD':true}}</td>
-            </tr>
-          </table>
-          <div class="button"
-                (click)="buildGraph(candidate.CANDIDATE_ID)"
-              >
-                Donor Graph
+          <div class="row">
+            <p>{{candidate.PARTY}}</p>
+            <table>
+              <tr>
+                <td>Cash on Hand</td>
+                <td>{{parseFloat(candidate.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Net Contributions</td>
+                <td>{{parseFloat(candidate.net_con) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Total Distributions</td>
+                <td>{{parseFloat(candidate.tot_dis) | currency:'USD':true}}</td>
+              </tr>
+            </table>
+            <div class="button"
+                  (click)="buildGraph(candidate.CANDIDATE_ID)"
+                >
+                  Donor Graph
+            </div>
           </div>
         </div>
       </li>

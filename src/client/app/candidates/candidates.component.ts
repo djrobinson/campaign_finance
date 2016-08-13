@@ -38,10 +38,10 @@ export class CandidatesComponent implements OnInit {
               var currImg = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + item.CANDIDATE_ID + '.jpg';
               item.profile_img = currImg;
               if (item.PARTY_CODE === 'DEM'){
-                item.tile_color = demColors[0];
+                item.tile_color = "solid "+demColors[0]+" 5px";
                 return item;
               } else if (item.PARTY_CODE === 'REP'){
-                item.tile_color = repColors[0];
+                item.tile_color = "solid "+repColors[0]+" 5px";
                 return item;
               } else {
                 item.tile_color = '#4C4664';
@@ -70,7 +70,6 @@ export class CandidatesComponent implements OnInit {
                    console.log(secondData);
                    if (secondData[0].id){
                      item.profile_img = "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + secondData[0].id.bioguide + ".jpg";
-
                    }
                  },
                  err => console.log(err),
