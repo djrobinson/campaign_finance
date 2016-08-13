@@ -6,14 +6,16 @@
 
 }
 
-.flexrow {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #FCFCFC;
+.main-banner {
+  height: 100%;
 }
 
-.banner {
+.main-menu {
+  height: 100%;
+  background: #73877B;
+}
+
+/*.banner {
   margin-top: 2%;
   width: 85vw;
   text-align: center;
@@ -68,4 +70,4 @@ hr.style-two {
     height: 2px;
     width: 80%;
     background-image: linear-gradient(to right, rgba(239,241,243, 0), rgba(239,241,243, 0.75), rgba(0, 0, 0, 0));
-}
+}*/

@@ -20,4 +20,9 @@ export class Landing implements OnInit {
     this.router.navigate(['Graphs', { id: candidate_id }]);
   }
 
+  public home(): void {
+    console.log("Home");
+    this.router.navigate(['Landing']);
+  }
+
 }
