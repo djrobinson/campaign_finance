@@ -25,8 +25,8 @@ export class CandidatesComponent implements OnInit {
   }
 
   ngOnInit() {
-    var repColors = ['#8D0801', '#6F1D1B', '#A85863'];
-    var demColors = ['#91ADC5', '#145C9E', '#38369A'];
+    var repColors = ['maroon'];
+    var demColors = ['#001f3f'];
     this.http.get('/api/candidates/'+this.type+'/type')
       .map(res => res.json())
       .subscribe(
@@ -38,10 +38,10 @@ export class CandidatesComponent implements OnInit {
               var currImg = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + item.CANDIDATE_ID + '.jpg';
               item.profile_img = currImg;
               if (item.PARTY_CODE === 'DEM'){
-                item.tile_color = demColors[Math.floor(Math.random() * 3)];
+                item.tile_color = demColors[0];
                 return item;
               } else if (item.PARTY_CODE === 'REP'){
-                item.tile_color = repColors[Math.floor(Math.random() * 3)];
+                item.tile_color = repColors[0];
                 return item;
               } else {
                 item.tile_color = '#4C4664';

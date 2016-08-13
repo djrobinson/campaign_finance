@@ -25,4 +25,10 @@ export class Landing implements OnInit {
     this.router.navigate(['Landing']);
   }
 
+  public candPath(typeVar): void {
+    console.log("inbound");
+    this.router.navigate(['Candidates', { type: typeVar } ]);
+    this.sideMenu = false;
+  }
+
 }

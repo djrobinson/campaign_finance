@@ -1,21 +1,25 @@
 <div class="landing-container">
       <div class="main-banner seven columns">
-        <h1>Citizens Hub is a campaign finance data visualization project creating donor maps out of FEC Filing data. Click on a category to the right to see candidates and committees.</h1>
+        <div class="title">
+          <h1>CitizensHub.org</h1>
+        </div>
+        <h1>A campaign finance data visualization project creating donor maps out of FEC Filing data.</h1>
+        <h5>Click on a category to the right to see candidates and committees.</h5>
       </div>
       <div class="main-menu five columns">
         <div class="main-menu-sel six columns" (click)="home()">
           <h3>Home</h3>
         </div>
-        <div class="main-menu-sel six columns" (click)="home()">
+        <div class="main-menu-sel six columns" (click)="candPath('P')">
           <h3>Presidential <br> Candidates</h3>
         </div>
-        <div class="main-menu-sel six columns" (click)="home()">
+        <div class="main-menu-sel six columns" (click)="candPath('H')">
           <h3>House <br> Candidates</h3>
         </div>
-        <div class="main-menu-sel six columns" (click)="home()">
+        <div class="main-menu-sel six columns" (click)="candPath('S')">
           <h3>Senate <br> Candidates</h3>
         </div>
-        <div class="main-menu-sel six columns" (click)="home()">
+        <div class="main-menu-sel six columns" (click)="candPath('S')">
           <h3>Super PACs</h3>
         </div>
         <div class="main-menu-sel six columns" (click)="home()">
@@ -26,3 +30,5 @@
         </div>
       </div>
 </div>
+
+
