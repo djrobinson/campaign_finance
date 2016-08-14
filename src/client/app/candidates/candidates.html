@@ -28,18 +28,19 @@
       <li *ngFor="#candidate of candidates" class="list-item" [style.border]="candidate.tile_color">
 
         <div class="candidate-profile">
-          <div class="row profile-header">
+          <a [href]="candidate.lin_ima"><img src="images/fec.png" class="fec" /></a>
+          <div class="row profile-header ">
+            <div class="basic-info seven columns">
 
-            <div class="five columns">
-                <a [href]="candidate.lin_ima"><img src="images/fec.png" class="fec" /></a>
               <h5>{{candidate.can_nam}}</h5>
+              <p>{{candidate.PARTY}}</p>
             </div>
-           <div class="seven columns">
+           <div class="image-container five columns">
               <img [src]="candidate.profile_img" onerror="this.src='http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png'" class="profile-img">
             </div>
           </div>
           <div class="row">
-            <p>{{candidate.PARTY}}</p>
+
             <table>
               <tr>
                 <td>Cash on Hand</td>
