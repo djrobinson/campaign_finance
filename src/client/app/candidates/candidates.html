@@ -1,9 +1,15 @@
 <div class="candidates-container text-center">
   <h1>{{headerType}} Candidates</h1>
-  <div class="button"
-                  (click)="sortCandidates('net_con')">
-                 Sort by Con
-    </div>
+  <div class="button" (click)="sortCandidates('net_con')">
+    Sort by Net Contributions
+  </div>
+  <div class="button" (click)="sortCandidates('cas_on_han_clo_of_per
+')">
+    Sort by Cash
+  </div>
+  <div class="button" (click)="sortCandidates('tot_dis')">
+    Sort by distributions
+  </div>
   <div class="row">
     <ul class="list">
       <li *ngFor="#candidate of candidates" class="list-item" [style.border]="candidate.tile_color">
