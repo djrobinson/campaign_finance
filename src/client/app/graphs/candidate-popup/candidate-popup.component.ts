@@ -136,6 +136,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         .map((res: Response) => res.json())
     ).subscribe(
       data => {
+        this.stopRefreshing();
         console.log("All committee data: ", data);
         this.candidate = data[0][0];
         this.typePieComponent.callAsc(data[2]);
@@ -144,9 +145,9 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.committeeDonations = data[2].reduce((prev, item)=>{
           return prev + +item.count;
         }, 0)
-        this.sizePieComponent.callAsc(data[3]);
-        var barChartData = data[4].concat(data[5]);
-        this.barComponent.buildChart(barChartData);
+        // this.sizePieComponent.callAsc(data[3]);
+        // var barChartData = data[4].concat(data[5]);
+        // this.barComponent.buildChart(barChartData);
 
       },
       err => console.error(err)

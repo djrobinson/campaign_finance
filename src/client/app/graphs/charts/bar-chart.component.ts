@@ -81,7 +81,7 @@ export class BarComponent {
 
     var data = JSON.parse(graphData);
 
-      console.log("Data!", typeof(data));
+      console.log("Data!", data[0]);
       data.forEach(function(d, i){
         data[i].count = +d.count;
       });
