@@ -96,8 +96,10 @@ export class CandidatesComponent implements OnInit {
     this.router.navigate(['Graphs', { id: candidate_id }]);
   }
 
-  public sortCandidates(): void {
-    this.candidates = this.candidates;
+  public sortCandidates(column): void {
+    this.candidates = _.sortBy(this.candidates, column);
+    console.log("This Candidates")
+
   }
 
 }

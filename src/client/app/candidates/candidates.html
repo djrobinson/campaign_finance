@@ -1,14 +1,16 @@
 <div class="candidates-container text-center">
   <h1>{{headerType}} Candidates</h1>
+  <div class="button"
+                  (click)="sortCandidates('net_con')">
+                 Sort by Con
+    </div>
   <div class="row">
     <ul class="list">
       <li *ngFor="#candidate of candidates" class="list-item" [style.border]="candidate.tile_color">
-
         <div class="candidate-profile">
           <a [href]="candidate.lin_ima"><img src="images/fec.png" class="fec" /></a>
           <div class="row profile-header ">
             <div class="basic-info seven columns">
-
               <h5>{{candidate.can_nam}}</h5>
               <p>{{candidate.PARTY}}</p>
             </div>
