@@ -1,6 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import { Router, RouteParams } from 'angular2/router';
 import {Http, Response} from 'angular2/http';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'candidates-view',
@@ -25,6 +26,8 @@ export class CandidatesComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log('lodash version: ', _.VERSION);
     var repColors = ['maroon'];
     var demColors = ['#001f3f'];
     this.http.get('/api/candidates/'+this.type+'/type')
@@ -91,6 +94,10 @@ export class CandidatesComponent implements OnInit {
   public buildGraph(candidate_id): void {
     console.log("inbound");
     this.router.navigate(['Graphs', { id: candidate_id }]);
+  }
+
+  public sortCandidates(): void {
+    this.candidates = this.candidates;
   }
 
 }

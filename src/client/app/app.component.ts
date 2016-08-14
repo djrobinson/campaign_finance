@@ -101,7 +101,6 @@ import {RouteParams} from 'angular2/router';
 export class AppComponent implements OnInit {
   public sideMenu: boolean = false;
   constructor(private router: Router) {
-
   }
 
   ngOnInit() {
