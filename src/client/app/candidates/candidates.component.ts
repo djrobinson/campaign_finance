@@ -9,7 +9,7 @@ import * as _ from 'lodash';
   templateUrl: 'app/candidates/candidates.html'
 })
 export class CandidatesComponent implements OnInit {
-  private candidates: string;
+  private candidates: any[];
   private type: string;
   private sub: any;
   public headerType: string;
@@ -27,7 +27,6 @@ export class CandidatesComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log('lodash version: ', _.VERSION);
     var repColors = ['maroon'];
     var demColors = ['#001f3f'];
     this.http.get('/api/candidates/'+this.type+'/type')
@@ -86,7 +85,7 @@ export class CandidatesComponent implements OnInit {
           this.candidates = data
           console.log(this.candidates);
         },
-        err => this.logError(err),
+        err => console.log(err),
         () => console.log('Candidates Complete')
       );
   }
@@ -101,7 +100,12 @@ export class CandidatesComponent implements OnInit {
       return parseFloat(o[column]);
     }).reverse();
     console.log("This Candidates")
-
   }
 
+  public filterByState(state) {
+    this.candidates = this.candidates.filter(function(o){
+      return (o.can_sta === state);
+    });
+    console.log(this.candidates);
+  }
 }

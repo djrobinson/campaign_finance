@@ -10,6 +10,9 @@
   <div class="button" (click)="sortCandidates('tot_dis')">
     Sort by distributions
   </div>
+    <div class="button" (click)="filterByState('NY')">
+    Sort by State
+  </div>
   <div class="row">
     <ul class="list">
       <li *ngFor="#candidate of candidates" class="list-item" [style.border]="candidate.tile_color">
