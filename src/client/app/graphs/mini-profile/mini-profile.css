@@ -23,26 +23,29 @@ img {
 }
 
 .button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    cursor: pointer;
-    background-color: white;
-    color: black;
-    border: 2px solid #008CBA;
-    border-radius: 25px;
-    width: 80%;
+  font-family: 'Prata', serif;
+  background-color: #73877B; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 2px solid #9DBF9E;
+  border-radius: 25px;
+  box-sizing: border-box;;
+  width: 45%;
 }
 
 .button:hover {
-    background-color: #008CBA;
+    background-color: #9DBF9E;
     color: white;
 }
+
 
 .individual-button {
   margin-top: 2rem;
