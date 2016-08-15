@@ -351,7 +351,31 @@ export class GraphComponent implements OnInit  {
               return "#95C623";
           }
         } else if ( d.graphtype === "individual"){
-          return "#6D0033";
+          if (d.TRANSACTION_AMT < 500)
+          {
+            return "#ccece6";
+          }
+          else if (d.TRANSACTION_AMT < 1500)
+          {
+            return "#99d8c9";
+          }
+          else if (d.TRANSACTION_AMT < 4999)
+          {
+            return "#66c2a4";
+          }
+          else if (d.TRANSACTION_AMT < 10000)
+          {
+            return "#41ae76";
+          }
+          else if (d.TRANSACTION_AMT < 50000)
+          {
+            return "#238b45";
+          }
+          else if (d.TRASACITON_AMT >= 50000)
+          {
+            return "#005824";
+          }
+
         }
       })
       //Brewer scale colors
