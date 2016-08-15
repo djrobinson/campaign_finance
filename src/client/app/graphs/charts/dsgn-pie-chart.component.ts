@@ -5,22 +5,23 @@ import {Observable} from 'rxjs/Rx';
 @Component({
   selector: 'dsgn-pie',
   template: `
-        <p>Donations by Committee Designation</p>
-          <div id="tooltip" class="hidden">
-              <p><strong>Important Label Heading</strong>
-              </p>
-              <p><span id="value">100</span>%</p>
-          </div>
-          <div id="chartDsgn">
-          </div>
+        <div class="heading">
+          <p>Donations by Committee Designation</p>
+        </div>
+        <div id="tooltip" class="hidden">
+            <p><strong>Important Label Heading</strong>
+            </p>
+            <p><span id="value">100</span>%</p>
+        </div>
+        <div id="chartDsgn">
+        </div>
 
   `,
   styles: [`
-    p {
-      size: 3rem;
+    .heading p {
       margin: 0 !important;
-      font-family: 'Oswald';
-      font-weight: 300;
+      font-family: 'Prata', serif;
+      font-size: 1.5rem;
     }
 
     .chartContainer {
@@ -118,7 +119,7 @@ export class DsgnPieComponent implements OnInit, OnChanges {
 
       var width = document.getElementById('chart2').offsetWidth;
       var height = document.getElementById('chart2').offsetHeight;
-      var radius = height / 3;
+      var radius = height / 2.5;
       var donutWidth = 15;
       var legendRectSize = 12;
       var legendSpacing = 2;
@@ -226,7 +227,7 @@ export class DsgnPieComponent implements OnInit, OnChanges {
         legend.append('text')
           .attr('x', legendRectSize + legendSpacing)
           .attr('y', legendRectSize - legendSpacing)
-          .style('fill', '#ECF9FD')
+          .style('fill', '#4d4d4d')
           .text(function(d) { return d; });
 
       });

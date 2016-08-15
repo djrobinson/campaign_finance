@@ -9,17 +9,19 @@ import {SpinnerComponent} from '../../loading/spinner.component';
 
         <spinner [isRunning]="isRequestingPie">
         </spinner>
-        <p>Donations by Size</p>
+        <div class="header">
+          <p>Donations by Size</p>
+        </div>
           <div id="chart2">
           </div>
   `,
   styles: [`
 
-    p {
+    .header p {
       size: 3rem;
       margin: 0 !important;
-      font-family: 'Oswald';
-      font-weight: 300;
+      font-family: 'Prata', serif;
+      font-size: 1.5rem;
     }
 
     .chartContainer {
@@ -114,7 +116,7 @@ export class SizePieComponent implements OnInit, OnChanges {
 
       var width = document.getElementById('chart2').offsetWidth;
       var height = document.getElementById('chart2').offsetHeight;
-      var radius = height /  3;
+      var radius = height /  2.5;
       var donutWidth = 15;
       var legendRectSize = 12;
       var legendSpacing = 2;
@@ -216,7 +218,7 @@ export class SizePieComponent implements OnInit, OnChanges {
         legend.append('text')
           .attr('x', legendRectSize + legendSpacing)
           .attr('y', legendRectSize - legendSpacing)
-          .style('fill', '#ECF9FD')
+          .style('fill', '#4d4d4d')
           .text(function(d) { return d; });
 
       });
