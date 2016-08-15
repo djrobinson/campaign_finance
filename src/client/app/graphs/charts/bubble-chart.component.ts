@@ -16,7 +16,6 @@ import {Component, Input, Output, EventEmitter, OnInit} from 'angular2/core';
       justify-items: center;
       height: 100%;
       width: 100%;
-      background-color: #2C3A46;
     }
 
     #chart3 {

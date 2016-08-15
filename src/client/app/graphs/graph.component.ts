@@ -339,8 +339,12 @@ export class GraphComponent implements OnInit  {
           {
             return "#084594";
           }
+          else {
+            //TODO: CHANGE INCREMENTS WHEN REDOING MONGO
+            return "#6baed6";
+          }
 
-        } else if ( d.graphtype === "individual" || d.graphtype === "committee"){
+        } else if ( d.graphtype === "individual"){
           if (d.TRANSACTION_AMT < 500)
           {
             return "#ccece6";
