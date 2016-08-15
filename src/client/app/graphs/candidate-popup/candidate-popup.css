@@ -8,7 +8,7 @@ h1, h2, h3, h4, h5, p {
   flex-direction: row;
   height: 100%;
   font-size: 10px;
-  background-color: #2C3A46;
+  border: solid 1px #BDBBB6;
 }
 
 
@@ -67,7 +67,7 @@ li {
 }
 .choices {
   background-color: #EFF1F3;
-  color: #cbced2;
+  color: #07020D;
   text-align: center;
   height: 100%;
   display: flex;
@@ -101,7 +101,6 @@ li {
 }
 
 .main-content {
-  color: #ECF9FD;
   position: relative;
 }
 
@@ -215,7 +214,6 @@ size-pie {
   position: relative;
   width: 100%;
   flex-grow: 1;
-  background-color: #3B4E5E;
   margin: 1rem 0 1rem 0;
 }
 
@@ -223,7 +221,6 @@ type-pie {
   position: relative;
   width: 100%;
   flex-grow: 1;
-  background-color: #3B4E5E;
   margin: 1rem 0 1rem 0;
 }
 
@@ -231,7 +228,6 @@ dsgn-pie {
   position: relative;
   width: 100%;
   flex-grow: 1;
-  background-color: #3B4E5E;
   margin: 1rem 0 1rem 0;
 }
 

@@ -12,7 +12,6 @@ import {IndividualsSectionComponent} from './individuals/individuals.component';
 import {CommitteesSectionComponent} from './committees/committees.component';
 import {SpinnerComponent} from '../../loading/spinner.component';
 
-
 @Component({
   selector: 'candidate-popup',
   templateUrl: 'app/graphs/candidate-popup/candidate-popup.html',
@@ -105,16 +104,10 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         })[0];
         this.stopRefreshing();
         this.typePieComponent.callAsc(data[3]);
-        // this.sizePieComponent.callAsc(data[4]);
         this.dsgnPieComponent.callAsc(data[2]);
-
         this.committeeDonations = data[3].reduce((prev, item)=>{
           return prev + +item.count;
-        }, 0)
-
-        // var barChartData = data[5].concat(data[6]);
-        // this.barComponent.buildChart(barChartData);
-
+        }, 0);
       },
       err => console.error(err)
     );
