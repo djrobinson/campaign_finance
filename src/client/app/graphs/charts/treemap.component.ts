@@ -10,6 +10,12 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
             <div class="tree-tip" id="tip-support"></div>
             <div class="tree-tip" id="tip-amount"></div>
             <div class="tree-tip" id="tip-purpose"></div>
+            <div class="button">
+              Back Up a Level
+            </div>
+          </div>
+          <div class="button-container">
+
           </div>
           <div class="instructions">
             <div class="instruction-block">
@@ -42,16 +48,17 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
     }
 
     .instruction-block {
-      background: maroon;
+      background: #9DBF9E;
       height: 100px;
       width: 100%;
-      border: solid 1px black;
+      border-bottom: solid 2px #BDBBB6;
+      box-sizing: border-box;
     }
 
     .tip-top {
       height: 100%;
       width: 100%;
-      background: blue;
+      background: #73877B;
     }
 
     rect {
@@ -96,6 +103,36 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
     }
     .child-tspan {
       font-size: 2rem;
+    }
+
+    .button-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .button {
+      font-family: 'Prata', serif;
+      background-color: #73877B; /* Green */
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+      cursor: pointer;
+      background-color: white;
+      color: black;
+      border: 2px solid #9DBF9E;
+      border-radius: 25px;
+      box-sizing: border-box;;
+      width: 80%;
+    }
+
+    .button:hover {
+        background-color: #9DBF9E;
+        color: white;
     }
   `]
 })
