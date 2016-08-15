@@ -71,12 +71,10 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       font-family: 'Oswald';
       font-weight: 300;
     }
-
     #tip-purpose {
       background: #364760;
       width: 100%;
     }
-
     #tooltip {
       position: absolute;
       text-align: center;
@@ -89,9 +87,6 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       flex-direction: column;
       justify-content: space-around;
     }
-
-
-
     #chart {
       position: absolute;
       width: 70%;
@@ -102,8 +97,6 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
     .child-tspan {
       font-size: 2rem;
     }
-
-
   `]
 })
 export class TreemapComponent implements OnInit, OnChanges {
@@ -137,41 +130,16 @@ export class TreemapComponent implements OnInit, OnChanges {
       return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
     };
 
-    var randomColor = (function() {
-      var golden_ratio_conjugate = 0.618033988749895;
-      var h = Math.random();
+    function randomColor() {
 
-      var hslToRgb = function(h, s, l) {
-        var r, g, b;
+      var colorArray = ['#edf8b1', '#c7e9b4', '#7fcdbb', '#41b6c4', '#1d91c0', '#225ea8', '#253494', '#081d58'];
+            //#ffffd9
+      var random = Math.floor(Math.random() * colorArray.length);
+      console.log("Random", random);
+      console.log("Random Color ", colorArray[random]);
+      return colorArray[random];
 
-        if (s == 0) {
-          r = g = b = l; // achromatic
-        } else {
-          function hue2rgb(p, q, t) {
-            if (t < 0) t += 1;
-            if (t > 1) t -= 1;
-            if (t < 1 / 6) return p + (q - p) * 6 * t;
-            if (t < 1 / 2) return q;
-            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-            return p;
-          }
-
-          var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-          var p = 2 * l - q;
-          r = hue2rgb(p, q, h + 1 / 3);
-          g = hue2rgb(p, q, h);
-          b = hue2rgb(p, q, h - 1 / 3);
-        }
-
-        return '#' + Math.round(r * 255).toString(16) + Math.round(g * 255).toString(16) + Math.round(b * 255).toString(16);
-      };
-
-      return function() {
-        h += golden_ratio_conjugate;
-        h %= 1;
-        return hslToRgb(h, 0.5, 0.60);
-      };
-    })();
+    };
 
     var width = document.getElementById('chart').offsetWidth;
     var height = document.getElementById('chart').offsetHeight;
@@ -216,16 +184,6 @@ export class TreemapComponent implements OnInit, OnChanges {
     var grandparent = svg.append("g")
       .attr("class", "grandparent");
 
-    // grandparent.append("rect")
-    //   .attr("y", -margin.top)
-    //   .attr("width", width)
-    //   .attr("height", margin.top);
-
-    // grandparent.append("text")
-    //   .attr("x", 6)
-    //   .attr("y", 6 - margin.top)
-    //   .attr("dy", ".75em");
-
     var legend = d3.select("#legend").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", 30)
@@ -269,16 +227,6 @@ export class TreemapComponent implements OnInit, OnChanges {
       return (colorDomain[colorDomain.length - 1] - colorDomain[0]) / 18 * d + colorDomain[0];
     }
 
-    // legend.append("rect")
-    //   .attr("x", function(d) { return margin.left + d * 40 })
-    //   .attr("y", 0)
-    //   .attr("fill", function(d) {
-    //     return 'gray';
-    //    })
-    //   .attr('width', '40px')
-    //   .attr('height', '40px')
-
-
     legend.append("text")
       .text(function(d) { return formatNumber(colorIncrements(d)) })
       .attr('y', 20)
@@ -303,20 +251,12 @@ export class TreemapComponent implements OnInit, OnChanges {
           .select("text")
           .text(name(d))
 
-
         grandparent
           .datum(d.parent)
-          // .select("rect")
-          // .attr("fill", function() {
-          //   return 'gray';
-          // })
-
 
         var g1 = svg.insert("g", ".grandparent")
           .datum(d)
           .attr("class", "depth");
-
-
 
         var g = g1.selectAll("g")
           .data(d._children)
@@ -484,9 +424,6 @@ export class TreemapComponent implements OnInit, OnChanges {
           }
         return g;
       }
-
-
-
 
       function text(text) {
         text.attr("x", function(d) { return x(d.x) + 6; })
