@@ -83,7 +83,9 @@
       <div class="eight columns candidate-content">
         <div *ngIf="!isRequesting" (click)="close()" class="close-button">×</div>
         <div class="twelve columns top-row">
-            <h5 *ngIf="isCandidate">{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
+            <div class="header">
+              <h2 *ngIf="isCandidate">{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h2>
+            </div>
             <h5 *ngIf="!isCandidate">{{candidate?.com_nam}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
             <table>
               <tr>
@@ -133,22 +135,33 @@
               </tr>
             </table>
         </div>
-        <div class="twelve columns middle-row">
-          <!-- <div class="highlight-tile three columns">
-            <div class="fill">
-              <div id="pies-title"><p>Hover over pie charts to see details below</p></div>
-              <div class="pie-tooltip">
-                <div class="pie-label"></div>
-                <div class="pie-amount"></div>
-                <div class="pie-percent"></div>
-              </div>
+        <div class="twelve columns middle">
+          <div class="row">
+            <div class="button six columns">
+              Candidate Website
             </div>
-          </div> -->
+
+            <div class="button six columns">
+              Candidate Wikipedia
+            </div>
+          </div>
+          <div class="row">
+            <div class="button six columns">
+              Candidate Website
+            </div>
+            <div class="button six columns">
+              Candidate Wikipedia
+            </div>
+          </div>
+        </div>
+        <div class="twelve columns bottom-row">
+
           <bar-chart
             [cmte]="committee"
             class="twelve columns">
           </bar-chart>
         </div>
+
       </div>
     </div>
   </div>

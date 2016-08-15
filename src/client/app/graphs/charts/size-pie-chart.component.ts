@@ -7,13 +7,14 @@ import {SpinnerComponent} from '../../loading/spinner.component';
   selector: 'size-pie',
   template: `
 
-        <spinner [isRunning]="isRequestingPie">
-        </spinner>
+
         <div class="header">
           <p>Donations by Size</p>
         </div>
-          <div id="chart2">
-          </div>
+        <spinner [isRunning]="isRequestingPie">
+        </spinner>
+        <div id="chart2">
+        </div>
   `,
   styles: [`
 

@@ -121,18 +121,18 @@ export class BarComponent {
       svg.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + height + ")")
-          .attr("stroke", "#ECF9FD")
+          .attr("stroke", "#4d4d4d")
           .call(xAxis);
 
       svg.append("g")
           .attr("class", "y axis")
-          .attr("stroke", "#ECF9FD")
+          .attr("stroke", "#4d4d4d")
           .call(yAxis)
         .append("text")
           .attr("transform", "rotate(-90)")
           .attr("y", 6)
           .attr("dy", ".71em")
-          .attr("stroke", "#ECF9FD")
+          .attr("stroke", "#4d4d4d")
           .style("text-anchor", "end")
           .text("Count");
 
