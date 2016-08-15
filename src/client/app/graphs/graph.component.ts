@@ -58,7 +58,6 @@ export class GraphComponent implements OnInit  {
     this.getGraphData  (this.candidate_id);
 
     this.absUrl = this.location.path();
-    console.log(this.absUrl);
   }
 
   showIndivPopup(event){
@@ -154,10 +153,8 @@ export class GraphComponent implements OnInit  {
     graph.getResult(cand)
       .subscribe(
       result => {
-        console.log("result", result);
         result = result.data;
         this.result = result;
-        console.log(this.result);
         var nonCand = result.filter((elem) => {
           return elem.CMTE_DSGN !== 'P';
         });
@@ -316,41 +313,34 @@ export class GraphComponent implements OnInit  {
         if ( d.graphtype === "candidate" ){
           return "none";
         } else if ( d.graphtype === "committee" || d.graphtype === "associated"){
-          switch (d.CMTE_TP){
-            case "C":
-              return "#FE7F2D";
-            case "D":
-              return "#619B8A";
-            case "E":
-              return "#D741A7";
-            case "H":
-              return "#E6F14A";
-            case "I":
-              return "#575D90";
-            case "N":
-              return "#C3D350";
-            case "O":
-              return "#273D1D";
-            case "P":
-              return "#385B28";
-            case "Q":
-              return "#1E2EDE";
-            case "S":
-              return "#3A1772";
-            case "U":
-              return "#5398BE";
-            case "V":
-              return "#4E3822";
-            case "W":
-              return "#2F1B25";
-            case "X":
-              return "#DCABDF";
-            case "Y":
-              return "#C792DF";
-            case "Z":
-              return "#95C623";
+          console.log("Committees data type", d.tot_dis);
+          d.tot_dis = +d.tot_dis;
+          if (d.tot_dis < 1000)
+          {
+            return "#c6dbef";
           }
-        } else if ( d.graphtype === "individual"){
+          else if (d.tot_dis < 5000)
+          {
+            return "#9ecae1";
+          }
+          else if (d.tot_dis < 10000)
+          {
+            return "#6baed6";
+          }
+          else if (d.tot_dis < 50000)
+          {
+            return "#4292c6";
+          }
+          else if (d.tot_dis < 100000)
+          {
+            return "#2171b5";
+          }
+          else if (d.tot_dis >= 1000000)
+          {
+            return "#084594";
+          }
+
+        } else if ( d.graphtype === "individual" || d.graphtype === "committee"){
           if (d.TRANSACTION_AMT < 500)
           {
             return "#ccece6";
@@ -371,11 +361,10 @@ export class GraphComponent implements OnInit  {
           {
             return "#238b45";
           }
-          else if (d.TRASACITON_AMT >= 50000)
+          else if (d.TRANSACTION_AMT >= 50000)
           {
             return "#005824";
           }
-
         }
       })
       //Brewer scale colors
