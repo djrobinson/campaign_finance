@@ -1,6 +1,5 @@
 h1, h2, h3, h4, h5, p {
-  font-family: 'Oswald';
-  font-weight: 300;
+  font-family: 'Prata', serif;
 }
 
 .cand-style {
@@ -8,7 +7,7 @@ h1, h2, h3, h4, h5, p {
   flex-direction: row;
   height: 100%;
   font-size: 10px;
-  border: solid 1px #BDBBB6;
+  border: solid 3px #BDBBB6;
 }
 
 
@@ -66,38 +65,42 @@ li {
   overflow: scroll;
 }
 .choices {
-  background-color: #EFF1F3;
-  color: #07020D;
+  background-color: #73877B;
+  color: white;
   text-align: center;
   height: 100%;
   display: flex;
   flex-direction: column;
+  border-right: solid 3px #BDBBB6;
 }
 .cand-pic {
-  background-color: #3B4E5E;
+  background-color: #FCFCFC;
   padding-bottom: 5rem;
+  color: #4d4d4d;
 }
 .cand-options {
-  background-color: #EFF1F3;
+  background-color: #73877B;
   display: flex;
   flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
 .cand-option {
   display: flex;
   align-content: center;
-  padding-left: 5px;
-  border: #16191F;
-  font-size: 3rem;
+  border: #839788;
+  font-size: 2rem;
   text-align: center;
+  align-items: center;
   flex-grow: 1;
-  width: 100%;
-  color: #16191F;
+  color: white;
   box-sizing: border-box;
+  margin: 0;
+  padding: 2rem;
 }
 .cand-option:hover {
-  background-color: #16191F;
-  color: #EFF1F3;
-  border-left: solid 5px #53B4C4;
+  background-color: #9DBF9E;
+  color: #4d4d4d;
 }
 
 .main-content {
@@ -272,9 +275,8 @@ committees-section {
 }
 
 .active {
-  background-color: #16191F;
-  color: #EFF1F3;
-  border-left: solid 5px #53B4C4;
+  background-color: #9DBF9E;
+  color: #4d4d4d;
 }
 
 .flexy-row {

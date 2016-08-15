@@ -21,35 +21,35 @@
       <p>Home City: {{candidate?.cit}}</p>
     </div>
     <div class="cand-options">
-      <div class="cand-option"
+      <div class="cand-option six-columns"
         (click)="choice('main')"
         [class.active]="selection==='main'"
         >
-        <h5>Main Info</h5>
+        <p>Main Info</p>
       </div>
       <div class="cand-option"
         (click)="choice('opex')"
         [class.active]="selection==='opex'"
         >
-        <h5>Committee Opex</h5>
+        <p>Committee Opex</p>
       </div>
       <div *ngIf="isCandidate" class="cand-option"
         (click)="choice('superpacs')"
         [class.active]="selection==='superpacs'"
         >
-        <h5>SuperPac Expenditures</h5>
+        <p>SuperPac Expenditures</p>
       </div>
       <div class="cand-option"
         (click)="choice('individuals')"
         [class.active]="selection==='individuals'"
         >
-        <h5>Individual Donors</h5>
+        <p>Individual Donors</p>
       </div>
       <div class="cand-option"
         (click)="choice('committees')"
         [class.active]="selection==='committees'"
         >
-        <h5>Committee Donors</h5>
+        <p>Committee Donors</p>
       </div>
     </div>
   </div>
