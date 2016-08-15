@@ -1,9 +1,11 @@
 .title {
   height: 100vh;
   text-align: center;
-  background-color: #6C6F7D;
+  background-color: #FCFCFC;
   overflow: hidden;
   z-index: 5;
+  border-left: solid 3px #BDBBB6;
+  font-family: 'Prata', serif;
 }
 
 
@@ -38,7 +40,7 @@ img {
   border: 2px solid #9DBF9E;
   border-radius: 25px;
   box-sizing: border-box;;
-  width: 45%;
+  width: 80%;
 }
 
 .button:hover {
@@ -61,8 +63,8 @@ img {
   display: flex;
   justify-content: center;
   align-content: center;
-  height: 40px;
-  background: #364760;
+  height: 4rem;
+  background: #73877B;
   font-family: 'Oswald';
   font-weight: 300;
   color: #EFF1F3;
@@ -71,9 +73,9 @@ img {
 .summary-body {
   display: flex;
   justify-content: center;
-  align-content: center;
-  height: 70px;
-  background: #2A394F;
+  align-items: center;
+  height: 6rem;
+  background: #839788;
   color: #EFF1F3;
 }
 
