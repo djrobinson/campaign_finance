@@ -12,7 +12,12 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
             <div class="tree-tip" id="tip-purpose"></div>
           </div>
           <div class="instructions">
-            Test Test
+            <div class="instruction-block">
+            </div>
+            <div class="instruction-block">
+            </div>
+            <div class="instruction-block">
+            </div>
           </div>
         </div>
         <div id="chart"></div>
@@ -34,6 +39,13 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       text-align: center;
       justify-content: center;
       align-content;
+    }
+
+    .instruction-block {
+      background: maroon;
+      height: 100px;
+      width: 100%;
+      border: solid 1px black;
     }
 
     .tip-top {
@@ -163,7 +175,7 @@ export class TreemapComponent implements OnInit, OnChanges {
 
     var width = document.getElementById('chart').offsetWidth;
     var height = document.getElementById('chart').offsetHeight;
-    var margin = { top: 30, right: 0, bottom: 0, left: 0 };
+    var margin = { top: 0, right: 0, bottom: 0, left: 0 };
 
     formatNumber = d3.format(",%"),
       colorDomain = [-.6, 0, .6],
@@ -204,15 +216,15 @@ export class TreemapComponent implements OnInit, OnChanges {
     var grandparent = svg.append("g")
       .attr("class", "grandparent");
 
-    grandparent.append("rect")
-      .attr("y", -margin.top)
-      .attr("width", width)
-      .attr("height", margin.top);
+    // grandparent.append("rect")
+    //   .attr("y", -margin.top)
+    //   .attr("width", width)
+    //   .attr("height", margin.top);
 
-    grandparent.append("text")
-      .attr("x", 6)
-      .attr("y", 6 - margin.top)
-      .attr("dy", ".75em");
+    // grandparent.append("text")
+    //   .attr("x", 6)
+    //   .attr("y", 6 - margin.top)
+    //   .attr("dy", ".75em");
 
     var legend = d3.select("#legend").append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -257,14 +269,14 @@ export class TreemapComponent implements OnInit, OnChanges {
       return (colorDomain[colorDomain.length - 1] - colorDomain[0]) / 18 * d + colorDomain[0];
     }
 
-    legend.append("rect")
-      .attr("x", function(d) { return margin.left + d * 40 })
-      .attr("y", 0)
-      .attr("fill", function(d) {
-        return 'gray';
-       })
-      .attr('width', '40px')
-      .attr('height', '40px')
+    // legend.append("rect")
+    //   .attr("x", function(d) { return margin.left + d * 40 })
+    //   .attr("y", 0)
+    //   .attr("fill", function(d) {
+    //     return 'gray';
+    //    })
+    //   .attr('width', '40px')
+    //   .attr('height', '40px')
 
 
     legend.append("text")
@@ -294,10 +306,10 @@ export class TreemapComponent implements OnInit, OnChanges {
 
         grandparent
           .datum(d.parent)
-          .select("rect")
-          .attr("fill", function() {
-            return 'gray';
-          })
+          // .select("rect")
+          // .attr("fill", function() {
+          //   return 'gray';
+          // })
 
 
         var g1 = svg.insert("g", ".grandparent")
