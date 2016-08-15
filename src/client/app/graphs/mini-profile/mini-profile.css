@@ -88,3 +88,7 @@ img {
   font-family: 'Oswald';
   font-weight: 400;
 }
+
+.float-right {
+  text-align: right !important;
+}

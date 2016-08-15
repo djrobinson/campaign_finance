@@ -11,6 +11,11 @@ h5 {
   font-size: 2rem;
 }
 
+td {
+  font-family: 'Oswald';
+  font-weight: 300;
+}
+
 .text-center {
   text-align: center;
 }
