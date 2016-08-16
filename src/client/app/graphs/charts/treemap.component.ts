@@ -19,10 +19,16 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
           </div>
           <div class="instructions">
             <div class="instruction-block">
+              <p>Level 1</p>
+              <h5>Expenditure by Recipient</h5>
             </div>
             <div class="instruction-block">
+              <p>Level 2</p>
+              <h5>All Transactions to Recipient</h5>
             </div>
             <div class="instruction-block">
+              <p>Level 3</p>
+              <h5>Individual Transaction</h5>
             </div>
           </div>
         </div>
