@@ -17,16 +17,17 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
           <div class="button-container">
 
           </div>
-          <div class="instructions">
-            <div class="instruction-block">
+          <div  class="instructions">
+            <h1>{{level}}</h1>
+ra            <div *ngIf="level === 'main'" class="instruction-block">
               <p>Level 1</p>
               <h5>Expenditure by Recipient</h5>
             </div>
-            <div class="instruction-block">
+            <div *ngIf="level === 'parent'" class="instruction-block">
               <p>Level 2</p>
               <h5>All Transactions to Recipient</h5>
             </div>
-            <div class="instruction-block">
+            <div *ngIf="level === 'grandchild'" class="instruction-block">
               <p>Level 3</p>
               <h5>Individual Transaction</h5>
             </div>
@@ -144,6 +145,7 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 })
 export class TreemapComponent implements OnInit, OnChanges {
   @Input() route: string;
+  private level: string = "main";
 
   constructor (){
     this.parseFloat = function(num) {
@@ -152,15 +154,18 @@ export class TreemapComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(){
-    this.buildTreeMap(this.route);
+    var ctrl = this;
+    this.buildTreeMap(this.route, ctrl);
   }
 
   rebuildMap(route){
+    var ctrl = this;
     d3.selectAll("svg").remove();
-    this.buildTreeMap(route);
+    this.buildTreeMap(route, ctrl);
   }
 
-  buildTreeMap(route) {
+
+  buildTreeMap(route, ctrl) {
 
     Number.prototype.formatMoney = function(c, d, t) {
       var n = this,
@@ -178,8 +183,6 @@ export class TreemapComponent implements OnInit, OnChanges {
       var colorArray = ['#edf8b1', '#c7e9b4', '#7fcdbb', '#41b6c4', '#1d91c0', '#225ea8', '#253494', '#081d58'];
             //#ffffd9
       var random = Math.floor(Math.random() * colorArray.length);
-      console.log("Random", random);
-      console.log("Random Color ", colorArray[random]);
       return colorArray[random];
 
     };
@@ -426,6 +429,11 @@ export class TreemapComponent implements OnInit, OnChanges {
           })
 
         function transition(d) {
+          ctrl.level = d.category;
+          console.log(d.parent);
+          if (typeof d.parent === 'undefined'){
+            ctrl.level = 'main';
+          }
           if (transitioning || !d) return;
           transitioning = true;
 
@@ -476,6 +484,7 @@ export class TreemapComponent implements OnInit, OnChanges {
       }
 
       function rect(rect) {
+
         rect.attr("x", function(d) { return x(d.x); })
           .attr("y", function(d) { return y(d.y); })
           .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
