@@ -10,8 +10,8 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
             <div class="tree-tip" id="tip-support"></div>
             <div class="tree-tip" id="tip-amount"></div>
             <div class="tree-tip" id="tip-purpose"></div>
-            <div class="button">
-              Back Up a Level
+            <div class="button" id="backup">
+              Go Back
             </div>
           </div>
           <div class="button-container">
@@ -288,7 +288,8 @@ export class TreemapComponent implements OnInit, OnChanges {
       display(root);
 
       function display(d) {
-        grandparent
+        var backup = d3.select('#backup');
+        backup
           .datum(d.parent)
           .on("click", transition)
           .select("text")
@@ -480,7 +481,6 @@ export class TreemapComponent implements OnInit, OnChanges {
           .attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
           .attr("height", function(d) { return y(d.y + d.dy) - y(d.y); })
           .attr("fill", function(d) {
-
               if (d.support === "Support" && d.category === "grandparent") {
                 var max = 150;
                 var min = 100;
