@@ -8,7 +8,7 @@ export class GraphService {
     this.http = http;
   }
   getResult(cand) {
-    return this.http.get('api/graph/test/' + cand )
+    return this.http.get('api/graph/' + cand + '/candidate' )
       .map(response => response.json());
   }
   getCommitteeDonors(cmte) {

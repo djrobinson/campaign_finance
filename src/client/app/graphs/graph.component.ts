@@ -48,7 +48,7 @@ export class GraphComponent implements OnInit  {
     private _params: RouteParams,
     private _graphService: GraphService,
     private http: Http,
-    private location: LocationStrategy;
+    private location: LocationStrategy
     ) {
     this.graph = true;
     this.candidate_id = _params.get('id');
@@ -153,7 +153,8 @@ export class GraphComponent implements OnInit  {
     graph.getResult(cand)
       .subscribe(
       result => {
-        result = result.data;
+        //ONly for mongo
+        // result = result.data;
         this.result = result;
         var nonCand = result.filter((elem) => {
           return elem.CMTE_DSGN !== 'P';
