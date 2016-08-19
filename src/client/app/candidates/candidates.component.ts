@@ -69,7 +69,6 @@ export class CandidatesComponent implements OnInit {
                  .map(res => res.json())
                  .subscribe(
                  secondData => {
-                   console.log(secondData);
                    if (secondData[0].id){
                      item.profile_img = "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + secondData[0].id.bioguide + ".jpg";
                    }

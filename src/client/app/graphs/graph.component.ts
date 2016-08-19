@@ -175,19 +175,25 @@ export class GraphComponent implements OnInit  {
           return elem;
         });
         var nodeData = this.nodeData;
+        var onlyOne = 0;
         this.linkData = nodeData.reduce((prev, elem)=>{
-          if (elem.CAND_ID){
+          if (elem.CAND_ID && onlyOne === 0){
+            console.log("CAND", elem);
             prev.push({ "source": elem.NODE, "target": 0, "value": 1 })
+            onlyOne++;
             return prev;
           } else if (elem.OTHER_ID) {
             nodeData.forEach((el, i) => {
               if (el.CORE && el.CMTE_ID === elem.CMTE_ID ){
+                console.log("CORE", el, i);
                 prev.push({ "source": elem.NODE, "target": i, "value": 2 })
                 return prev;
               } else if (elem.CMTE_ID === el.OTHER_ID){
+                console.log("EXTERNAL");
                 prev.push({ "source": elem.NODE, "target": i, "value": 3 })
                 return prev;
               } else if (el.com_id === elem.OTHER_ID){
+                console.log("INDIV");
                 prev.push({ "source": elem.NODE, "target": i, "value": 2 })
                 return prev;
               }
@@ -220,6 +226,8 @@ export class GraphComponent implements OnInit  {
   }
 
   buildGraph(ctrl, candId, absUrl) {
+    console.log("Link Length ", this.linkData);
+    console.log("Node Length ", this.nodeData);
     this.graph = false;
     //HELPER FUNCTIONS FOR GRAPH
     function dottype(d) {
@@ -314,7 +322,6 @@ export class GraphComponent implements OnInit  {
         if ( d.graphtype === "candidate" ){
           return "none";
         } else if ( d.graphtype === "committee" || d.graphtype === "associated"){
-          console.log("Committees data type", d.tot_dis);
           d.tot_dis = +d.tot_dis;
           if (d.tot_dis < 1000)
           {
@@ -341,7 +348,6 @@ export class GraphComponent implements OnInit  {
             return "#084594";
           }
           else {
-            //TODO: CHANGE INCREMENTS WHEN REDOING MONGO
             return "#6baed6";
           }
 
@@ -372,16 +378,6 @@ export class GraphComponent implements OnInit  {
           }
         }
       })
-      //Brewer scale colors
-      //#ffffd9
-      // #edf8b1
-      // #c7e9b4
-      // #7fcdbb
-      // #41b6c4
-      // #1d91c0
-      // #225ea8
-      // #253494
-      // #081d58
 
     node.append("circle")
       .attr("class", "circle")
@@ -395,20 +391,6 @@ export class GraphComponent implements OnInit  {
         }
       })
 
-  // svg.append("defs")
-  //   .append("pattern")
-  //   .attr("id", "icon-img")
-  //   .attr('width', 100)
-  //           .attr('height', 100)
-  //           .attr('patternContentUnits', 'objectBoundingBox')
-  //           .append("svg:image")
-  //               .attr("xlink:xlink:href", "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg") // "icon" is my image url. It comes from json too. The double xlink:xlink is a necessary hack (first "xlink:" is lost...).
-  //               .attr("x", -35)
-  //               .attr("y", -35)
-  //               .attr("height", "700px")
-  //               .attr("width", "700px")
-  //       .attr("preserveAspectRatio", "xMinYMin slice");
-
     var candNode = svg.selectAll(".node")
       .filter(function(d) { return d.CMTE_DSGN === "P" })
       .attr("width", 70)
@@ -417,12 +399,6 @@ export class GraphComponent implements OnInit  {
         .attr("id", "cand-node")
         .style("fill", "url('"+absUrl+"#circles-1')")
         .attr("r", 50);
-
-    // candNode
-    //   .append("circle")
-    //   .attr("class", "circle")
-    //   .attr("r", 40);
-      // .style("fill", "url(#bg)")
 
     node.append("text")
       .attr("dx", "-5rem")

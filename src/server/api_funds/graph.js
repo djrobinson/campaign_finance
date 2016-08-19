@@ -117,6 +117,7 @@ router.get('/:cand_id/candidate', function(req, res, next){
       var uniqCmte  = _.uniqBy(cmtes, 'CMTE_NM');
       //Here I'm making sure every name is unique.
       var result = uniqIndiv.concat(uniqCmte);
+      console.log(result);
       result = typeMap(result);
       res.json(result);
       // //Original
