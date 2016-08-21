@@ -21,15 +21,15 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
           <div  class="instructions">
             <div *ngIf="level === 'main'" class="instruction-block">
               <h5>Expenditure by Recipient</h5>
-              <p></p>
+              <p>All blocks to the right represent the amount of money given to a specific recipient. Click on the block to analyze all transactions to the recipeint.</p>
             </div>
             <div *ngIf="level === 'grandparent'" class="instruction-block">
               <h5>All Transactions to Recipient</h5>
-              <p></p>
+              <p>All blocks to the right represent each transaction made to the selected recipient. Click the block to see further detail and link back to the FEC documentation</p>
             </div>
             <div *ngIf="level === 'parent'" class="instruction-block">
               <h5>Individual Transaction</h5>
-              <p></p>
+              <p>Click on the FEC Link to see the original filing.</p>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       height: 90%;
       width: 100%;
       background: #EFF1F3;
-      font-family: 'Osawald';
+      font-family: 'Oswald';
       font-weight: 300;
     }
 
@@ -56,8 +56,9 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 
     .instruction-block {
       position: absolute;
-      background: #9DBF9E;
-      height: 70%;
+      background: #364760;
+      color: white;
+      height: 60%;
       width: 100%;
       border-bottom: solid 2px #BDBBB6;
       box-sizing: border-box;
@@ -68,14 +69,15 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       position: absolute;
       top: 20%;
       display: block;
-      height: 10%;
+      height: 15%;
       width: 100%;
+      background: #EFF1F3;
     }
 
     .tip-top {
       top: 0;
       position: absolute;
-      height: 30%;
+      height: 25%;
       width: 100%;
       background:  #f2f2f2;
     }
