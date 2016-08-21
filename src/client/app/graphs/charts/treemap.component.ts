@@ -49,11 +49,10 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       height: 100%;
       width: 100%;
       text-align: center;
-      justify-content: center;
-      align-content;
     }
 
     .instruction-block {
+      position: absolute;
       background: #9DBF9E;
       height: 70%;
       width: 100%;
@@ -62,7 +61,14 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       bottom: 0;
     }
 
+    .button-container {
+      position: absolute;
+      height: 10%;
+    }
+
     .tip-top {
+      top: 0;
+      position: absolute;
       height: 30%;
       width: 100%;
       background: #73877B;
@@ -90,7 +96,7 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       width: 100%;
     }
     #tooltip {
-      position: absolute;
+      position: relative;
       text-align: center;
       width: 30%;
       height: 100%;
