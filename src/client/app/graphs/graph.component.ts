@@ -176,26 +176,18 @@ export class GraphComponent implements OnInit  {
         });
         var nodeData = this.nodeData;
         var onlyOne = 0;
-        console.log("Node Data", nodeData);
         this.linkData = nodeData.reduce((prev, elem)=>{
           if (elem.CAND_ID && onlyOne === 0){
-            // console.log("CAND Source: ", elem.NODE);
-            // console.log("CAND ", elem);
             prev.push({ "source": elem.NODE, "target": 0, "value": 1 })
               return prev;
           } else if (elem.OTHER_ID) {
             nodeData.forEach((el, i) => {
               if (el.CORE && el.CMTE_ID === elem.CMTE_ID ){
-                // console.log("CORE SOURCE:", elem.NODE, "CORE TARGET :",i);
-                // console.log("CORE ", elem);
                 prev.push({ "source": elem.NODE, "target": i, "value": 2 })
                 return prev;
               } else if (elem.CMTE_ID === el.OTHER_ID){
-                prev.push({ "source": elem.NODE, "target": i, "value": 3 })
                 return prev;
-              } else if (elem.NAME && el.CMTE_ID === elem.OTHER_ID){
-                console.log("INDIV SOURCE:", elem.NODE, "INDIV TARGET :",i);
-                console.log("INDIV ", elem);
+              } else if (el.CMTE_ID === elem.OTHER_ID){
                 prev.push({ "source": elem.NODE, "target": i, "value": 2 })
                 return prev;
               }
@@ -228,9 +220,7 @@ export class GraphComponent implements OnInit  {
   }
 
   buildGraph(ctrl, candId, absUrl) {
-    console.log("Link Length ", this.linkData.length);
-    console.log("Node Length ", this.nodeData.length);
-    this.graph = false;
+      this.graph = false;
     //HELPER FUNCTIONS FOR GRAPH
     function dottype(d) {
       d.x = +d.x;
