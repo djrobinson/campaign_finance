@@ -43,6 +43,7 @@ export class GraphComponent implements OnInit  {
   private selectedCandidate: string;
   private isCand: boolean;
   public absUrl: string;
+  public candImage: string;
 
   constructor(
     private _params: RouteParams,
@@ -52,6 +53,7 @@ export class GraphComponent implements OnInit  {
     ) {
     this.graph = true;
     this.candidate_id = _params.get('id');
+    this.candImage = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/"+this.candidate_id+".jpg";
   }
 
   ngOnInit() {
@@ -281,6 +283,18 @@ export class GraphComponent implements OnInit  {
       .style("pointer-events", "all");
 
     var container = svg.append("g");
+
+    svg.append('defs')
+        .append('pattern')
+            .attr('id', 'circles-1')
+            .attr('width', 1)
+            .attr('height', 1)
+            .append("svg:image")
+                .attr("xlink:xlink:href", function(d) { return 'https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/'+candId+'.jpg';}) // "icon" is my image url. It comes from json too. The double xlink:xlink is a necessary hack (first "xlink:" is lost...).
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("height", 100)
+                .attr("width", 100)
 
     //STARTS FORCE LAYOUT. ADDS DATA, CREATES LINKS AND NODES
     var force = d3.layout.force()
