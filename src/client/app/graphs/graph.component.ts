@@ -155,7 +155,6 @@ export class GraphComponent implements OnInit  {
     graph.getResult(cand)
       .subscribe(
       result => {
-        console.log("result! ", result);
         //ONly for mongo
         result = result.data;
         this.result = result;
@@ -199,7 +198,6 @@ export class GraphComponent implements OnInit  {
           } else {
             nodeData.forEach((el, i) => {
               if (el.OTHER_ID === elem.CMTE_ID || el.CAND_ID && el.CMTE_ID === elem.CMTE_ID){
-                console.log("Possibly individual? ", el, elem);
                 prev.push({ "source": elem.NODE, "target": i, "value": 3 })
                 return prev;
               }
@@ -283,7 +281,7 @@ export class GraphComponent implements OnInit  {
       .style("pointer-events", "all");
 
     var container = svg.append("g");
-
+    //TODO: Make a conditional for congressman
     svg.append('defs')
         .append('pattern')
             .attr('id', 'circles-1')

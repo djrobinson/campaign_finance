@@ -61,7 +61,7 @@ export class BubbleComponent implements OnInit {
 
     var tooltip = d3.select("#chart3")
       .append("div")
-      .style("position", "absolute")
+      .style("position", "fixed")
       .style("z-index", "10")
       .style("visibility", "hidden")
       .style("color", "white")
@@ -90,13 +90,15 @@ export class BubbleComponent implements OnInit {
         .on("mouseover", function(d) {
           tooltip.text(d.className + ": " + format(d.value));
           tooltip.style("visibility", "visible");
+          d3.select(this).style("fill", "#73877B")
         })
         .on("mousemove", function() {
           return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
         })
-        .on("mouseout", function() { return tooltip.style("visibility", "hidden"); })
+        .on("mouseout", function() {
+          d3.select(this).style("fill", function(d) { return getRandomColor(); });
+          return tooltip.style("visibility", "hidden"); })
         .on("click", function(d) {
-          console.log(d);
           var indiv = {
             NAME: d.className,
             TRAN_ID: d.TRAN_ID
