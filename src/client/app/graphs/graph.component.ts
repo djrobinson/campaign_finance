@@ -385,8 +385,8 @@ export class GraphComponent implements OnInit  {
 
     var candNode = svg.selectAll(".node")
       .filter(function(d) { return d.CMTE_DSGN === "P" })
-      .attr("width", 70)
-      .attr("height", 70)
+      .attr("width", 100)
+      .attr("height", 100)
         .append("circle")
         .attr("id", "cand-node")
         .style("fill", "url('"+absUrl+"#circles-1')")
