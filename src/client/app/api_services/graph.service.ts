@@ -8,12 +8,13 @@ export class GraphService {
     this.http = http;
   }
   getResult(cand) {
-    return this.http.get('api/graph/' + cand + '/candidate' )
+    return this.http.get('api/graph/test/' + cand )
       .map(response => response.json());
   }
   getCommitteeDonors(cmte) {
     console.log("committee donors is runnign! ", cmte);
-    return this.http.get('api/graph/' + cmte + '/committee')
+    // return this.http.get('api/graph/' + cmte + '/committee')
+    return this.http.get('api/graph/test/'+ cmte)
       .map(response => response.json());
   }
 }

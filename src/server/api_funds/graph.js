@@ -14,8 +14,9 @@ var Graph = mongoose.model('Graph', { id: String, data: [] });
 
 router.get('/test/:cmte_id', function(req, res, next){
   Graph.findOne({id: req.params.cmte_id}, function(err, data){
+    console.log(err,data);
     if (err) handleError(err);
-    console.log(data.data);
+    console.log(data);
     res.json(data);
   })
 })

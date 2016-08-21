@@ -153,8 +153,9 @@ export class GraphComponent implements OnInit  {
     graph.getResult(cand)
       .subscribe(
       result => {
+        console.log("result! ", result);
         //ONly for mongo
-        // result = result.data;
+        result = result.data;
         this.result = result;
         var nonCand = result.filter((elem) => {
           return elem.CMTE_DSGN !== 'P';

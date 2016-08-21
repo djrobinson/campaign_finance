@@ -55,14 +55,15 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 
     .instruction-block {
       background: #9DBF9E;
-      height: 100%;
+      height: 70%;
       width: 100%;
       border-bottom: solid 2px #BDBBB6;
       box-sizing: border-box;
+      bottom: 0;
     }
 
     .tip-top {
-      height: 100%;
+      height: 30%;
       width: 100%;
       background: #73877B;
     }
@@ -179,7 +180,7 @@ export class TreemapComponent implements OnInit, OnChanges {
 
     function randomColor() {
 
-      var colorArray = ['#edf8b1', '#c7e9b4', '#7fcdbb', '#41b6c4', '#1d91c0', '#225ea8', '#253494', '#081d58'];
+      var colorArray = ['#edf8b1', '#c7e9b4', '#7fcdbb', '#41b6c4', '#1d91c0', '#225ea8', '#253494'];
             //#ffffd9
       var random = Math.floor(Math.random() * colorArray.length);
       return colorArray[random];
