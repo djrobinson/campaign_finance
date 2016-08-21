@@ -18,16 +18,15 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 
           </div>
           <div  class="instructions">
-            <h1>{{level}}</h1>
-ra            <div *ngIf="level === 'main'" class="instruction-block">
+            <div *ngIf="level === 'main'" class="instruction-block">
               <p>Level 1</p>
               <h5>Expenditure by Recipient</h5>
             </div>
-            <div *ngIf="level === 'parent'" class="instruction-block">
+            <div *ngIf="level === 'grandparent'" class="instruction-block">
               <p>Level 2</p>
               <h5>All Transactions to Recipient</h5>
             </div>
-            <div *ngIf="level === 'grandchild'" class="instruction-block">
+            <div *ngIf="level === 'parent'" class="instruction-block">
               <p>Level 3</p>
               <h5>Individual Transaction</h5>
             </div>
@@ -56,7 +55,7 @@ ra            <div *ngIf="level === 'main'" class="instruction-block">
 
     .instruction-block {
       background: #9DBF9E;
-      height: 100px;
+      height: 100%;
       width: 100%;
       border-bottom: solid 2px #BDBBB6;
       box-sizing: border-box;
