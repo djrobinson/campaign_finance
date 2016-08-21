@@ -7,15 +7,42 @@
 
 }
 
+.title {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding-top: 20%;
+  font-size: 9rem !important;
+  color: #73877B;
+}
+
 .main-banner {
-  padding: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: center;
   height: 100%;
+}
+
+.content {
+  padding: 15%;
+  text-align: justify;
+  text-justify: auto;
+}
+
+.content h2 {
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .main-menu {
   height: 100%;
   background: #73877B;
 
+}
+
+.fec {
+  height: 2rem;
 }
 
 .main-menu-sel {
