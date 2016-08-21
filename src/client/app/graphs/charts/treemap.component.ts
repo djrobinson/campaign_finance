@@ -10,25 +10,26 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
             <div class="tree-tip" id="tip-support"></div>
             <div class="tree-tip" id="tip-amount"></div>
             <div class="tree-tip" id="tip-purpose"></div>
-            <div class="button" id="backup">
-              Go Back
-            </div>
           </div>
-          <div class="button-container">
-
+          <div *ngIf="level !=='main'">
+            <div class="button-container">
+              <div class="button" id="backup">
+                Go Back
+              </div>
+            </div>
           </div>
           <div  class="instructions">
             <div *ngIf="level === 'main'" class="instruction-block">
-              <p>Level 1</p>
               <h5>Expenditure by Recipient</h5>
+              <p></p>
             </div>
             <div *ngIf="level === 'grandparent'" class="instruction-block">
-              <p>Level 2</p>
               <h5>All Transactions to Recipient</h5>
+              <p></p>
             </div>
             <div *ngIf="level === 'parent'" class="instruction-block">
-              <p>Level 3</p>
               <h5>Individual Transaction</h5>
+              <p></p>
             </div>
           </div>
         </div>
@@ -42,6 +43,8 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       height: 90%;
       width: 100%;
       background: #EFF1F3;
+      font-family: 'Osawald';
+      font-weight: 300;
     }
 
     .instructions {
@@ -63,7 +66,10 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 
     .button-container {
       position: absolute;
+      top: 20%;
+      display: block;
       height: 10%;
+      width: 100%;
     }
 
     .tip-top {
@@ -71,7 +77,7 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       position: absolute;
       height: 30%;
       width: 100%;
-      background: #73877B;
+      background:  #f2f2f2;
     }
 
     rect {
@@ -81,19 +87,18 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 
     #tip-name {
       width: 100%;
-      font-family: 'Oswald';
-      font-weight: 300;
+
       color: #EFF1F3;
       background: #364760;
     }
 
     .tree-tip {
-      font-family: 'Oswald';
-      font-weight: 300;
+
     }
     #tip-purpose {
       background: #364760;
       width: 100%;
+      color: #EFF1F3;
     }
     #tooltip {
       position: relative;
