@@ -176,24 +176,24 @@ export class GraphComponent implements OnInit  {
         });
         var nodeData = this.nodeData;
         var onlyOne = 0;
+        console.log("Node Data", nodeData);
         this.linkData = nodeData.reduce((prev, elem)=>{
           if (elem.CAND_ID && onlyOne === 0){
-            console.log("CAND Source: ", elem.NODE);
-            console.log("CAND ", elem);
+            // console.log("CAND Source: ", elem.NODE);
+            // console.log("CAND ", elem);
             prev.push({ "source": elem.NODE, "target": 0, "value": 1 })
               return prev;
           } else if (elem.OTHER_ID) {
             nodeData.forEach((el, i) => {
               if (el.CORE && el.CMTE_ID === elem.CMTE_ID ){
-                console.log("CORE SOURCE:", elem.NODE, "CORE TARGET :",i);
-                console.log("CORE ", elem);
-
+                // console.log("CORE SOURCE:", elem.NODE, "CORE TARGET :",i);
+                // console.log("CORE ", elem);
                 prev.push({ "source": elem.NODE, "target": i, "value": 2 })
                 return prev;
               } else if (elem.CMTE_ID === el.OTHER_ID){
                 prev.push({ "source": elem.NODE, "target": i, "value": 3 })
                 return prev;
-              } else if (el.com_id === elem.OTHER_ID  || el.CMTE_ID === elem.OTHER_ID){
+              } else if (elem.NAME && el.CMTE_ID === elem.OTHER_ID){
                 console.log("INDIV SOURCE:", elem.NODE, "INDIV TARGET :",i);
                 console.log("INDIV ", elem);
                 prev.push({ "source": elem.NODE, "target": i, "value": 2 })
@@ -203,7 +203,8 @@ export class GraphComponent implements OnInit  {
             return prev;
           } else {
             nodeData.forEach((el, i) => {
-              if (el.OTHER_ID === elem.CMTE_ID ){
+              if (el.OTHER_ID === elem.CMTE_ID || el.CAND_ID && el.CMTE_ID === elem.CMTE_ID){
+                console.log("Possibly individual? ", el, elem);
                 prev.push({ "source": elem.NODE, "target": i, "value": 3 })
                 return prev;
               }
