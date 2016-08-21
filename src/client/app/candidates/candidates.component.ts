@@ -75,10 +75,9 @@ export class CandidatesComponent implements OnInit {
                  },
                  err => console.log(err),
                  () => console.log("Image Call Complete")
-               )
-             })
-             console.log("Final Data ", finalData);
-
+                )
+              })
+              console.log("Final Data ", finalData);
           }
 
           this.candidates = data
