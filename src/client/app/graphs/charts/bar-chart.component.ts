@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {SpinnerComponent} from '../../loading/spinner.component';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'bar-chart',
@@ -32,12 +33,21 @@ export class BarComponent {
 
   ngOnInit(){
     this.isRequestingBar = true;
-    this.http.get('/api/individuals/committee/'+this.cmte+'/date')
+
+    Observable.forkJoin(
+      this.http.get('/api/individuals/committee/'+this.cmte+'/date')
+        .map((res: Response) => res.json()),
+      this.http.get('/api/transfers/'+this.cmte+'/date')
+        .map((res: Response) => res.json())
+        )
         .subscribe(
             result => {
-                      console.log(result._body);
+                      console.log("This one matters! ", result);
+                      var indivData = result[0];
+                      var cmteData = result[1];
+                      var graphData = indivData.concat(cmteData);
                       this.stopRefreshing();
-                      this.buildChart(result._body);
+                      this.buildChart(graphData);
 
                     },
             error => console.log(error))
@@ -79,7 +89,7 @@ export class BarComponent {
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var data = JSON.parse(graphData);
+    var data = graphData;
 
       console.log("Data!", data[0]);
       data.forEach(function(d, i){
