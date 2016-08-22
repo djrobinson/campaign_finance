@@ -118,7 +118,7 @@ export class SizePieComponent implements OnInit, OnChanges {
       var width = document.getElementById('chart2').offsetWidth;
       var height = document.getElementById('chart2').offsetHeight;
       var radius = height /  2.5;
-      var donutWidth = 15;
+      var donutWidth = 50;
       var legendRectSize = 12;
       var legendSpacing = 2;
 
@@ -138,7 +138,7 @@ export class SizePieComponent implements OnInit, OnChanges {
 
       var arcOver = d3.svg.arc()
         .innerRadius(radius - 20)
-        .outerRadius(radius + 5);
+        .outerRadius(radius);
 
       var pie = d3.layout.pie()
         .value(function(d) { return d.amount; })

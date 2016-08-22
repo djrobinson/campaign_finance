@@ -9,9 +9,9 @@ import {Observable} from 'rxjs/Rx';
           <p>Donations by Committee Designation</p>
         </div>
         <div id="tooltip" class="hidden">
-            <p><strong>Important Label Heading</strong>
+            <p><span id="label"></span>
             </p>
-            <p><span id="value">100</span>%</p>
+            <p><span id="value"></span></p>
         </div>
         <div id="chartDsgn">
         </div>
@@ -120,7 +120,7 @@ export class DsgnPieComponent implements OnInit, OnChanges {
       var width = document.getElementById('chart2').offsetWidth;
       var height = document.getElementById('chart2').offsetHeight;
       var radius = height / 2.5;
-      var donutWidth = 15;
+      var donutWidth = 50;
       var legendRectSize = 12;
       var legendSpacing = 2;
 
@@ -140,7 +140,7 @@ export class DsgnPieComponent implements OnInit, OnChanges {
 
       var arcOver = d3.svg.arc()
         .innerRadius(radius - 20)
-        .outerRadius(radius + 5);
+        .outerRadius(radius);
 
       var pie = d3.layout.pie()
         .value(function(d) { return d.amount; })
@@ -164,24 +164,21 @@ export class DsgnPieComponent implements OnInit, OnChanges {
             return color(d.data.label);
           })
 
+        var formatCurrency = d3.format("$011,.2f");
+
         path.on('mouseover', function(d) {
-          tooltip.style('display', 'flex');
+          console.log("Tooltip ", d);
           pieTitle.style('display', 'none');
-          var total = d3.sum(dataset.map(function(d) {
-            return d.amount;
-          }));
-          var percent = Math.round(1000 * d.data.amount / total) / 10;
-          tooltip.select('.pie-label').html(d.data.label);
-          tooltip.select('.pie-amount').html(d.data.amount);
-          tooltip.select('.pie-percent').html(percent + '%');
           console.log("event: ", d3.event.pageX);
           d3.select("#tooltip")
               .style("left", d3.event.pageX + "px")
               .style("top", d3.event.pageY + "px")
               .style("opacity", 1)
               .select("#value")
-              .text(d.amount);
-              console.log("below tooltip function");
+              .text(d.data.label+" : "+formatCurrency(d.data.amount));
+              .select("#label")
+              .text(d.data.label);
+
           d3.select(this).transition()
               .duration(400)
               .attr("d", arcOver);
@@ -223,6 +220,8 @@ export class DsgnPieComponent implements OnInit, OnChanges {
           .attr('height', legendRectSize)
           .style('fill', color)
           .style('stroke', color);
+
+
 
         legend.append('text')
           .attr('x', legendRectSize + legendSpacing)
