@@ -132,7 +132,10 @@ export class BarComponent {
           .attr("class", "x axis")
           .attr("transform", "translate(0," + height + ")")
           .attr("stroke", "#4d4d4d")
-          .call(xAxis);
+          .call(xAxis)
+        .selectAll("text")
+          .attr("transform", "rotate(90)");
+
 
       svg.append("g")
           .attr("class", "y axis")
