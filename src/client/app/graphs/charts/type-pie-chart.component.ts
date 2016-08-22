@@ -8,8 +8,13 @@ import {Observable} from 'rxjs/Rx';
         <div class="header">
           <p>Donations by Committee Type</p>
         </div>
-          <div id="chartType">
-          </div>
+        <div id="tooltip" class="hidden">
+            <p><span id="label"></span>
+            </p>
+            <p><span id="value"></span></p>
+        </div>
+        <div id="chartType">
+        </div>
   `,
   styles: [`
 
@@ -192,6 +197,8 @@ export class TypePieComponent implements OnInit, OnChanges {
             return color(d.data.label);
           });
 
+        var formatCurrency = d3.format("+$,.2f");
+
         path.on('mouseover', function(d) {
           tooltip.style('display', 'flex');
           pieTitle.style('display', 'none');
@@ -199,17 +206,14 @@ export class TypePieComponent implements OnInit, OnChanges {
             return d.amount;
           }));
           var percent = Math.round(1000 * d.data.amount / total) / 10;
-          tooltip.select('.pie-label').html(d.data.label);
-          tooltip.select('.pie-amount').html(d.data.amount);
-          tooltip.select('.pie-percent').html(percent + '%');
           console.log("event: ", d3.event.pageX);
           d3.select("#tooltip")
               .style("left", d3.event.pageX + "px")
               .style("top", d3.event.pageY + "px")
               .style("opacity", 1)
               .select("#value")
-              .text(d.amount);
-              console.log("below tooltip function");
+              .text(d.data.label+" : "+formatCurrency(d.data.amount));
+
           d3.select(this).transition()
               .duration(400)
               .attr("d", arcOver);

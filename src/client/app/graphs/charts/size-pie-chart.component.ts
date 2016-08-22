@@ -13,6 +13,11 @@ import {SpinnerComponent} from '../../loading/spinner.component';
         </div>
         <spinner [isRunning]="isRequestingPie">
         </spinner>
+        <div id="tooltip" class="hidden">
+            <p><span id="label"></span>
+            </p>
+            <p><span id="value"></span></p>
+        </div>
         <div id="chart2">
         </div>
   `,
@@ -162,6 +167,9 @@ export class SizePieComponent implements OnInit, OnChanges {
             return color(d.data.label);
           });
 
+
+        var formatCurrency = d3.format("+$,.2f");
+
         path.on('mouseover', function(d) {
           tooltip.style('display', 'flex');
           pieTitle.style('display', 'none');
@@ -178,8 +186,8 @@ export class SizePieComponent implements OnInit, OnChanges {
               .style("top", d3.event.pageY + "px")
               .style("opacity", 1)
               .select("#value")
-              .text(d.amount);
-              console.log("below tooltip function");
+              .text(d.data.label+" : "+formatCurrency(d.data.amount));
+
           d3.select(this).transition()
               .duration(400)
               .attr("d", arcOver);

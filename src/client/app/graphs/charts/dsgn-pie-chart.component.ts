@@ -164,7 +164,7 @@ export class DsgnPieComponent implements OnInit, OnChanges {
             return color(d.data.label);
           })
 
-        var formatCurrency = d3.format("$011,.2f");
+        var formatCurrency = d3.format("$,.2f");
 
         path.on('mouseover', function(d) {
           console.log("Tooltip ", d);
@@ -175,9 +175,8 @@ export class DsgnPieComponent implements OnInit, OnChanges {
               .style("top", d3.event.pageY + "px")
               .style("opacity", 1)
               .select("#value")
-              .text(d.data.label+" : "+formatCurrency(d.data.amount));
-              .select("#label")
-              .text(d.data.label);
+              .text(d.data.label+" : "+formatCurrency(d.data.amount))
+
 
           d3.select(this).transition()
               .duration(400)
