@@ -138,10 +138,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.committeeDonations = data[2].reduce((prev, item)=>{
           return prev + +item.count;
         }, 0)
-        // this.sizePieComponent.callAsc(data[3]);
-        // var barChartData = data[4].concat(data[5]);
-        // this.barComponent.buildChart(barChartData);
-
       },
       err => console.error(err)
     );

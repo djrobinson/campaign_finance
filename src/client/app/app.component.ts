@@ -27,7 +27,7 @@ import {RouteParams} from 'angular2/router';
       position: fixed;
       width: 17%;
       height: 100%;
-      background: #364760;
+      background: #73877B;
       z-index: 4;
       flex-direction: column;
     }
@@ -38,6 +38,7 @@ import {RouteParams} from 'angular2/router';
       right: 0;
     }
     .menu-option {
+      font-family: 'Prata', serif;
       display: flex;
       height: 7%;
       width: 100%;
@@ -48,10 +49,6 @@ import {RouteParams} from 'angular2/router';
       padding: 0;
       margin: 0;
       padding-left: 1rem;
-    }
-    .menu-option:first-child {
-      background: #2A394F;
-      justify-content: center;
     }
     .menu-option:hover {
       background: #110B11;
@@ -67,9 +64,11 @@ import {RouteParams} from 'angular2/router';
         <div class="menu-option"><h5>Super PACs</h5></div>
         <div class="menu-option" (click)="candPath('S')"><h5>Senate Funding</h5></div>
         <div class="menu-option" (click)="candPath('H')"><h5>House Funding</h5></div>
+        <div class="menu-option"><h5>Resources</h5></div>
+        <div class="menu-option"><h5>Donate</h5></div>
+        <div class="menu-option"><h5>About</h5></div>
       </div>
-
-      <div [class.content-width]="sideMenu">
+      <div  [class.content-width]="sideMenu">
         <div id="lines" (click)="showMenu()"></div>
         <router-outlet></router-outlet>
       </div>
@@ -100,6 +99,7 @@ import {RouteParams} from 'angular2/router';
 ])
 export class AppComponent implements OnInit {
   public sideMenu: boolean = false;
+  public isLanding: boolean;
   constructor(private router: Router) {
   }
 
@@ -113,12 +113,15 @@ export class AppComponent implements OnInit {
 
   public home(): void {
     this.router.navigate(['Landing']);
+    this.isLanding = false;
   }
 
   public candPath(typeVar): void {
     console.log("inbound");
+    this.isLanding = true;
     this.router.navigate(['Candidates', { type: typeVar } ]);
     this.sideMenu = false;
+
   }
 
 }
