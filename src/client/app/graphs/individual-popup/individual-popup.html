@@ -13,7 +13,7 @@
       <h4>Transaction Amount: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}}</h4>
     </div>
     <div class="indiv-list six columns">
-      <h5>Other Donations</h5>
+      <p>Other Donations from Similar Names</p>
       <div class="twelve columns other-donations">
         <div *ngFor="#indiv of otherIndividuals?.data"
              class="row donor-tile">

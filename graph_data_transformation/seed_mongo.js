@@ -7,7 +7,7 @@ var Graph = mongoose.model('Graph', { id: String, data: [] });
 
 //Get the list of candidates that you will seed the db with:
 
-var candIds = ['P00003392', 'P60007168'];
+var candIds = ['P60006111'];
 
 
 //Structure and send a call to each candidate at the graph endpoint

@@ -14,7 +14,8 @@ module.exports = {
   getTopComSecondary: function(cmte){
     return knex('cmte_to_cmte')
             .innerJoin('committee_master', 'committee_master.CMTE_ID', 'cmte_to_cmte.OTHER_ID')
-            .select('cmte_to_cmte.CMTE_ID', 'cmte_to_cmte.OTHER_ID', 'cmte_to_cmte.TRANSACTION_AMT', 'committee_master.CMTE_NM', 'cmte_to_cmte.IMAGE_NUM', 'committee_master.CMTE_TP')
+            .innerJoin('committee_summaries', 'committee_summaries.com_id', 'cmte_to_cmte.OTHER_ID')
+            .select('cmte_to_cmte.CMTE_ID', 'cmte_to_cmte.OTHER_ID', 'cmte_to_cmte.TRANSACTION_AMT', 'committee_master.CMTE_NM', 'cmte_to_cmte.IMAGE_NUM', 'committee_master.CMTE_TP','committee_summaries.tot_dis')
             .where({'cmte_to_cmte.CMTE_ID': cmte.OTHER_ID})
             .where('TRANSACTION_TP', 'LIKE', '1%')
             .orderBy('cmte_to_cmte.TRANSACTION_AMT', 'desc')

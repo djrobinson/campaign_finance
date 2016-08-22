@@ -332,23 +332,23 @@ export class GraphComponent implements OnInit  {
           {
             return "#c6dbef";
           }
-          else if (d.tot_dis < 5000)
+          else if (+d.tot_dis < 5000)
           {
             return "#9ecae1";
           }
-          else if (d.tot_dis < 10000)
+          else if (+d.tot_dis < 10000)
           {
             return "#6baed6";
           }
-          else if (d.tot_dis < 50000)
+          else if (+d.tot_dis < 50000)
           {
             return "#4292c6";
           }
-          else if (d.tot_dis < 100000)
+          else if (+d.tot_dis < 100000)
           {
             return "#2171b5";
           }
-          else if (d.tot_dis >= 1000000)
+          else if (+d.tot_dis >= 1000000)
           {
             return "#084594";
           }
@@ -389,9 +389,9 @@ export class GraphComponent implements OnInit  {
         if ( d.graphtype === "candidate") {
           return;
         } else if ( d.graphtype === "committee" || d.graphtype === "associated"){
-          return 20;
+          return 25;
         } else {
-          return 10;
+          return 15;
         }
       })
 
