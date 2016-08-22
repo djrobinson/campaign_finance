@@ -126,11 +126,12 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       this.http.get('/api/individuals/committee/'+cmte+'/date')
         .map((res: Response) => res.json()),
       this.http.get('/api/transfers/'+cmte+'/date')
-        .map((res: Response) => res.json())
+        .map((res: Response) => res.json()),
+
     ).subscribe(
       data => {
+        console.log("This one: ", data);
         this.stopRefreshing();
-        console.log("All committee data: ", data);
         this.candidate = data[0][0];
         this.typePieComponent.callAsc(data[2]);
         this.dsgnPieComponent.callAsc(data[1]);

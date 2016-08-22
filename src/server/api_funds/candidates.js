@@ -43,6 +43,13 @@ router.get('/:cand_id', function(req, res, next){
   });
 });
 
+router.get('/:cand_id/master', function(req, res, next){
+  query.getCandMaster(req.params.cand_id)
+  .then(function(summ){
+    res.json(summ);
+  });
+});
+
 router.get('/sort/:column_name', function(req, res, next){
   if (req.query.office){
     if (req.query.offset){

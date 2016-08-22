@@ -28,6 +28,12 @@ module.exports = {
            .offset(offset);
   },
 
+  getCandMaster: function(cand_id){
+    return knex('campaign_cmte_rpts')
+            .select()
+            .where({'can_id': cand_id});
+  },
+
   getCandSumLimit: function(limit, offset){
     if (!limit) { limit = 100; }
     return knex('candidacy_statements')

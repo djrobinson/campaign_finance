@@ -50,7 +50,6 @@ export class BarComponent {
         )
         .subscribe(
             result => {
-                      console.log("This one matters! ", result);
                       var indivData = result[0];
                       var cmteData = result[1];
                       var graphData = indivData.concat(cmteData);
@@ -124,7 +123,6 @@ export class BarComponent {
         }
       });
 
-      console.log("minmax ", minDate, maxDate);
 
       // x0.domain(barFinal.map(function(d) {
       //   // var tickDate = new Date(d.date);
