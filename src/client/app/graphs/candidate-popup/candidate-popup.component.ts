@@ -94,6 +94,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         .map((res: Response) => res.json())
     ).subscribe(
       data => {
+
+        this.stopRefreshing();
         console.log("All candidate data: ", data);
         this.candidate = data[0][0];
         console.log("Candidate working? ", this.candidate);
@@ -102,7 +104,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
             return cmte
           };
         })[0];
-        this.stopRefreshing();
         this.typePieComponent.callAsc(data[3]);
         this.dsgnPieComponent.callAsc(data[2]);
         this.committeeDonations = data[3].reduce((prev, item)=>{

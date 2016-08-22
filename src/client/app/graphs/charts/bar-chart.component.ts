@@ -66,7 +66,7 @@ export class BarComponent {
 
 
   public buildChart(graphData){
-    var margin = {top: 20, right: 40, bottom: 60, left: 40},
+    var margin = {top: 20, right: 20, bottom: 60, left: 60},
         width = document.getElementById('containerChart4').offsetWidth - margin.left - margin.right,
         height = document.getElementById('containerChart4').offsetHeight - margin.top - margin.bottom;
 
@@ -79,7 +79,7 @@ export class BarComponent {
         .range([height, 0]);
 
     var color = d3.scale.ordinal()
-        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+        .range(["#98abc5", "#8a89a6"]);
 
     var xAxis = d3.svg.axis()
         .scale(x0)
@@ -131,7 +131,7 @@ export class BarComponent {
       // }));
       x0.domain([minDate, maxDate]).range([0, width]);
       x1.domain(["individuals", "committees"]).rangeRoundBands([0, width / barFinal.length]);
-      y.domain([0, d3.max(data, function(d) { return +d.count})]);
+      y.domain([0, d3.max(data, function(d) { return +d.sum})]);
 
       svg.append("g")
           .attr("class", "x axis")
@@ -159,7 +159,7 @@ export class BarComponent {
           .attr("dy", ".71em")
           .attr("stroke", "#4d4d4d")
           .style("text-anchor", "end")
-          .text("Count");
+          .text("Amount");
 
       var donations = svg.selectAll(".donations")
           .data(barFinal)
@@ -171,9 +171,12 @@ export class BarComponent {
           .data(function(d) { return d.vals; })
         .enter().append("rect")
           .attr("width", x1.rangeBand() * 1.5)
-          .attr("x", function(d) { return x1(d.type) * 1.5; })
-          .attr("y", function(d) { return y(d.count) })
-          .attr("height", function(d) { return height - y(d.count); })
+          .attr("x", function(d) {
+            console.log("Data for Rect ", d);
+            return x1(d.type) * 1.5;
+          })
+          .attr("y", function(d) { return y(d.sum) })
+          .attr("height", function(d) { return height - y(d.sum); })
           .style("fill", function(d) { return color(d.type); });
 
       var donorTypes = ["Individuals", "Committees"]
@@ -187,7 +190,9 @@ export class BarComponent {
           .attr("x", 24)
           .attr("width", 18)
           .attr("height", 18)
-          .style("fill", function(d) { return color(d.type)});
+          .style("fill", function(d, i) {
+            console.log("Color D: ", color(i));
+            return color(i)});
 
       legend.append("text")
           .attr("x", 44)

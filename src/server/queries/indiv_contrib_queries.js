@@ -95,7 +95,7 @@ module.exports = {
   },
   indivByDate: function(cmte_id){
     return knex.raw(`
-                    select count(*),date_trunc( 'month', "TRANSACTION_DT" ) from indiv_contrib
+                    select sum("TRANSACTION_AMT"),date_trunc( 'month', "TRANSACTION_DT" ) from indiv_contrib
                       WHERE "CMTE_ID" = '`+cmte_id+`'
                       group by
                       date_trunc( 'month', "TRANSACTION_DT" );

@@ -83,10 +83,12 @@
       <div class="eight columns candidate-content">
         <div *ngIf="!isRequesting" (click)="close()" class="close-button">×</div>
         <div class="twelve columns top-row">
-            <div class="header">
-              <h2 *ngIf="isCandidate">{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h2>
+            <div *ngIf="isCandidate" class="header">
+              <h2>{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h2>
             </div>
-            <h5 *ngIf="!isCandidate">{{candidate?.com_nam}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
+            <div *ngIf="!isCandidate"class="header">
+              <h5>{{candidate?.com_nam}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
+            </div>
             <table>
               <tr>
                 <td colspan="2" class="heading">Receipts</td>
