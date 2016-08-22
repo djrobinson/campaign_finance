@@ -5,12 +5,11 @@
   <div class="row">
     <div class="indiv six columns">
       <h3>{{individual?.NAME}}</h3>
-      <h5>{{individual?.CITY }}, {{individual?.STATE}}</h5>
-      <h5>{{individual?.EMPLOYER}}</h5>
-      <h5>{{individual?.OCCUPATION}}</h5>
-      <h5>{{individual?.NAME}}</h5>
-      <h5>{{individual?.TRANSACTION_DT}}</h5>
-      <p><a [href]="individual?.FEC_LINK">Link</a></p>
+      <p>{{individual?.CITY }}, {{individual?.STATE}}</p>
+      <p>{{individual?.EMPLOYER}}</p>
+      <p>{{individual?.OCCUPATION}}</p>
+      <p>{{individual?.TRANSACTION_DT}}</p>
+      <a [href]="individual?.FEC_LINK"><img src="images/fec.png" class="fec" /></a>
       <h4>Transaction Amount: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}}</h4>
     </div>
     <div class="indiv-list six columns">
@@ -26,9 +25,9 @@
           </div>
           <div class="one-half column">
             <p>Donation: {{parseFloat(indiv?.TRANSACTION_AMT) | currency:'USD':true}}</p>
-            <button (click)="changeIndiv(indiv?.TRAN_ID)">
+            <div class="button" (click)="changeIndiv(indiv?.TRAN_ID)">
               See Donation
-            </button>
+            </div>
           </div>
         </div>
       </div>
