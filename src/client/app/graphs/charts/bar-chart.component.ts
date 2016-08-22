@@ -6,11 +6,13 @@ import {Observable} from 'rxjs/Rx';
 @Component({
   selector: 'bar-chart',
   template: `
-
+    <div class="bar-chart-container">
+      <p>Donations by Month</p>
       <div id="containerChart4">
       <spinner [isRunning]="isRequestingBar">
       </spinner>
       </div>
+    </div>
   `,
   styles: [`
 
@@ -20,6 +22,12 @@ import {Observable} from 'rxjs/Rx';
       height: 100%;
       width: 90%;
       bottom: 0;
+    }
+
+    .bar-chart-container p {
+      text-align: center;
+      font-family: 'Prata', serif;
+      font-size: 1.5rem;
     }
   `],
   directives: [SpinnerComponent]
@@ -59,7 +67,7 @@ export class BarComponent {
 
 
   public buildChart(graphData){
-    var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    var margin = {top: 20, right: 40, bottom: 60, left: 40},
         width = document.getElementById('containerChart4').offsetWidth - margin.left - margin.right,
         height = document.getElementById('containerChart4').offsetHeight - margin.top - margin.bottom;
 
@@ -77,7 +85,7 @@ export class BarComponent {
     var xAxis = d3.svg.axis()
         .scale(x0)
         .orient("bottom")
-        .tickFormat(d3.time.format("%Y-%m"));
+        .tickFormat(d3.time.format("%b-%Y"));
 
     var yAxis = d3.svg.axis()
         .scale(y)
@@ -91,7 +99,6 @@ export class BarComponent {
 
     var data = graphData;
 
-      console.log("Data!", data[0]);
       data.forEach(function(d, i){
         data[i].count = +d.count;
       });
@@ -131,15 +138,22 @@ export class BarComponent {
       svg.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + height + ")")
-          .attr("stroke", "#4d4d4d")
           .call(xAxis)
         .selectAll("text")
-          .attr("transform", "rotate(90)");
+          .attr("dy", "2em")
+          .attr("dx", "-2em")
+          .attr("transform", "rotate(-45)");
 
+      svg.selectAll("path")
+          .attr("fill", "transparent")
+          .attr("stroke", "transparent");
+
+      svg.selectAll(".domain")
+          .attr("fill", "transparent")
+          .attr("stroke", "transparent");
 
       svg.append("g")
           .attr("class", "y axis")
-          .attr("stroke", "#4d4d4d")
           .call(yAxis)
         .append("text")
           .attr("transform", "rotate(-90)")
@@ -158,30 +172,31 @@ export class BarComponent {
       donations.selectAll("rect")
           .data(function(d) { return d.vals; })
         .enter().append("rect")
-          .attr("width", x1.rangeBand())
-          .attr("x", function(d) { return x1(d.type); })
+          .attr("width", x1.rangeBand() * 1.5)
+          .attr("x", function(d) { return x1(d.type) * 1.5; })
           .attr("y", function(d) { return y(d.count) })
           .attr("height", function(d) { return height - y(d.count); })
           .style("fill", function(d) { return color(d.type); });
 
-      // var legend = svg.selectAll(".legend")
-      //     .data(ageNames.slice().reverse())
-      //   .enter().append("g")
-      //     .attr("class", "legend")
-      //     .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+      var donorTypes = ["Individuals", "Committees"]
+      var legend = svg.selectAll(".legend")
+          .data(donorTypes.slice())
+        .enter().append("g")
+          .attr("class", "legend")
+          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
-      // legend.append("rect")
-      //     .attr("x", width - 18)
-      //     .attr("width", 18)
-      //     .attr("height", 18)
-      //     .style("fill", color);
+      legend.append("rect")
+          .attr("x", 24)
+          .attr("width", 18)
+          .attr("height", 18)
+          .style("fill", function(d) { return color(d.type)});
 
-      // legend.append("text")
-      //     .attr("x", width - 24)
-      //     .attr("y", 9)
-      //     .attr("dy", ".35em")
-      //     .style("text-anchor", "end")
-      //     .text(function(d) { return d; });
+      legend.append("text")
+          .attr("x", 44)
+          .attr("y", 9)
+          .attr("dy", ".35em")
+          .style("text-anchor", "start")
+          .text(function(d) { return d; });
     });
 
 }
