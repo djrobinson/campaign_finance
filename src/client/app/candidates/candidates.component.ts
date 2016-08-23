@@ -2,6 +2,7 @@ import {Component, OnInit} from 'angular2/core';
 import { Router, RouteParams } from 'angular2/router';
 import {Http, Response} from 'angular2/http';
 import * as _ from 'lodash';
+import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 
 @Component({
   selector: 'candidates-view',
@@ -13,6 +14,8 @@ export class CandidatesComponent implements OnInit {
   private type: string;
   private sub: any;
   public headerType: string;
+  private dropdown: boolean = false;
+  public states: string[] = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
 
   constructor(
     private _params: RouteParams,
@@ -97,7 +100,19 @@ export class CandidatesComponent implements OnInit {
     this.candidates = _.sortBy(this.candidates, function(o){
       return parseFloat(o[column]);
     }).reverse();
-    console.log("This Candidates")
+  }
+
+  public showDropdown()
+  {
+    console.log(this.dropdown);
+    this.dropdown = true;
+  }
+
+  public setState(state)
+  {
+    this.filterByState(state);
+    this.dropdown = true;
+    this.filterByState(state);
   }
 
   public filterByState(state) {

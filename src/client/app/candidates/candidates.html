@@ -1,18 +1,23 @@
+<script src="dropdown.js"></script>
 <div class="candidates-container text-center">
   <h1>{{headerType}} Candidates</h1>
-  <div class="button" (click)="sortCandidates('net_con')">
+  <div class="button button-top" (click)="sortCandidates('net_con')">
     Sort by Net Contributions
   </div>
-  <div class="button" (click)="sortCandidates('cas_on_han_clo_of_per
+  <div class="button button-top" (click)="sortCandidates('cas_on_han_clo_of_per
 ')">
     Sort by Cash
   </div>
-  <div class="button" (click)="sortCandidates('tot_dis')">
+  <div class="button button-top" (click)="sortCandidates('tot_dis')">
     Sort by distributions
   </div>
-    <div class="button" (click)="filterByState('NY')">
+  <div class="button button-top" (click)="showDropdown()">
     Sort by State
   </div>
+  <div class="dropdown-list">
+    <div *ngFor="#state of states" class="dropdown-item">{{state}}</div>
+  </div>
+
   <div class="row">
     <ul class="list">
       <li *ngFor="#candidate of candidates" class="list-item" [style.border]="candidate.tile_color">
