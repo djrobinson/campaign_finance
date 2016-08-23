@@ -10,14 +10,14 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
             <div class="tree-tip" id="tip-support"></div>
             <div class="tree-tip" id="tip-amount"></div>
             <div class="tree-tip" id="tip-purpose"></div>
-          </div>
-          <div *ngIf="level !=='main'">
+            <div *ngIf="level !=='main'">
             <div class="button-container">
               <div class="button" id="backup">
                 Go Back
               </div>
             </div>
           </div>
+        </div>
           <div  class="instructions">
             <div *ngIf="level === 'main'" class="instruction-block">
               <h5>Expenditure by Recipient</h5>
@@ -77,7 +77,7 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
     .tip-top {
       top: 0;
       position: absolute;
-      height: 25%;
+      height: 100%;
       width: 100%;
       background:  #f2f2f2;
     }
