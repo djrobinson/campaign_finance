@@ -15,7 +15,7 @@
     Sort by State
   <div class="list-container">
     <div class="dropdown-list">
-      <div *ngFor="#state of states" class="dropdown-item">{{state}}</div>
+      <div *ngFor="#state of states" class="dropdown-item" (click)="setState(state)">{{state}}</div>
     </div>
   </div>
   </div>
@@ -23,7 +23,7 @@
 
   <div class="row">
     <ul class="list">
-      <li *ngFor="#candidate of candidates" class="list-item" [style.border]="candidate.tile_color">
+      <li *ngFor="#candidate of candidatesView" class="list-item" [style.border]="candidate.tile_color">
         <div class="candidate-profile">
           <a [href]="candidate.lin_ima"><img src="images/fec.png" class="fec" /></a>
           <div class="row profile-header ">

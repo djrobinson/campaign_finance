@@ -16,6 +16,7 @@ export class CandidatesComponent implements OnInit {
   public headerType: string;
   private dropdown: boolean = false;
   public states: string[] = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
+  public candidatesView: any[];
 
   constructor(
     private _params: RouteParams,
@@ -84,6 +85,7 @@ export class CandidatesComponent implements OnInit {
           }
 
           this.candidates = data
+          this.candidatesView = data;
           console.log(this.candidates);
         },
         err => console.log(err),
@@ -102,21 +104,16 @@ export class CandidatesComponent implements OnInit {
     }).reverse();
   }
 
-  public showDropdown()
-  {
-    console.log(this.dropdown);
-    this.dropdown = true;
-  }
-
   public setState(state)
   {
+    console.log(this.candidates);
+    console.log("Saver ", this.candidatesView);
     this.filterByState(state);
-    this.dropdown = true;
     this.filterByState(state);
   }
 
   public filterByState(state) {
-    this.candidates = this.candidates.filter(function(o){
+    this.candidatesView = this.candidates.filter(function(o){
       return (o.can_sta === state);
     });
     console.log(this.candidates);
