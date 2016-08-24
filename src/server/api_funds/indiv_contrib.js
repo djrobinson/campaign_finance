@@ -6,6 +6,14 @@ var query = require('../queries/indiv_contrib_queries.js');
   OFFSET ON MAIN, RECIPIENT.  LIMIT ON EMPLOYER
 */
 
+var mongoose = require('mongoose');
+
+var Schema = mongoose.Schema;
+
+var Graph = mongoose.model('pie', { id: String, data: [] });
+
+
+
 router.get('/', function(req, res, next){
   if (req.query.donor){
     if (req.query.offset){
@@ -120,12 +128,23 @@ router.get('/bubble/:cmte_id', function(req, res, next){
   });
 });
 
+// router.get('/committee/:cmte_id/pie', function(req, res, next){
+//   query.indivByCmtePie(req.params.cmte_id).then(function(data){
+//     console.log(data);
+//     res.json(data.rows);
+//   });
+// });
+
 router.get('/committee/:cmte_id/pie', function(req, res, next){
-  query.indivByCmtePie(req.params.cmte_id).then(function(data){
+  console.log(Graph);
+  Graph.findOne({}, function(err, data){
+    console.log("Mongo ", err,data);
+    if (err) handleError(err);
     console.log(data);
-    res.json(data.rows);
+    res.json(data);
   });
 });
+
 
 router.get('/committee/:cmte_id/date', function(req, res, next){
   query.indivByDate(req.params.cmte_id).then(function(data){
