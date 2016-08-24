@@ -140,21 +140,20 @@ export class GraphComponent implements OnInit  {
   public getGraphData(candId): void {
     Observable.forkJoin(
       this.http.get('/api/candidates/' + candId).map((res: Response) => res.json()),
-      this.http.get('/api/legislators/' + candId).map((res: Response) => res.json())
+      this.http.get('/api/legislators/' + candId).map((res: Response) => res.json()),
+      this.http.get('api/graph/test/' + candId ).map((res: Response) => res.json())
     ).subscribe(
       data => {
+        console.log(data);
         this.candidate = data[0];
         this.bioguideId = data[1];
+        this.graphInit(data[2]);
       },
       err => console.error(err)
-      )
-    var cand = candId;
-    var graph = this._graphService;
+    )
+  }
 
-    this.isRequesting = true;
-    graph.getResult(cand)
-      .subscribe(
-      result => {
+  public graphInit(result){
         //ONly for mongo
         result = result.data;
         this.result = result;
@@ -165,8 +164,10 @@ export class GraphComponent implements OnInit  {
         var candArr = result.filter((elem)=>{
           return elem.CMTE_DSGN === 'P';
         });
-        candArr[0].CANDIDATE = cand;
-        candArr[0].CAND_ID = cand;
+        console.log("candArr", this.candidate);
+        candArr[0].CANDIDATE = this.candidate_id;
+        candArr[0].CAND_ID = this.candidate_id;
+        candArr[0].data = {};
         candArr[0].data = this.candidate[0];
         var resultOrdered = candArr.concat(nonCand);
         this.nodeData = resultOrdered.map((elem, i)=>{
@@ -205,15 +206,9 @@ export class GraphComponent implements OnInit  {
             return prev;
           }
         }, [])
-        this.buildGraph(this, candId, this.absUrl);
-        },
-        error => console.error('Error: ' + error  ),
-        () => {
-          this.stopRefreshing();
-        var ctrl = this;
-        }
-      );
+        this.buildGraph(this, this.candidate_id, this.absUrl);
   }
+
 
 
   setSelected(selected:string) {
