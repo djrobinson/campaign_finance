@@ -1,28 +1,36 @@
-var http = require('http');
+ var http = require('http');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://heroku_2f1pj73r:tsu0gvp9jelb0lqkchsg86alh@ds023452.mlab.com:23452/heroku_2f1pj73r/testPolis');
+// mongoose.connect('mongodb://heroku_2f1pj73r:tsu0gvp9jelb0lqkchsg86alh@ds023452.mlab.com:23452/heroku_2f1pj73r/testPolis');
+mongoose.connect('mongodb://localhost/testPolis');
 
 
-var Graph = mongoose.model('Graph', { id: String, data: [] });
+var Graph = mongoose.model('pie', { id: String, data: [] });
 
 //Get the list of candidates that you will seed the db with:
 
-var candIds = ['P60006111'];
-
+// var candIds = ['P60006111'];
+var cmteIds = ['C00574624'];
 
 //Structure and send a call to each candidate at the graph endpoint
 var i = 0;
-  getCandidateGraph(printData, candIds[i]);
+getCandidateGraph(printData, cmteIds[i]);
 
-  function getCandidateGraph(callback, candId) {
-
-    return http.get('http://localhost:5000/api/graph/'+candId+'/candidate'
+function getCandidateGraph(callback, cmte) {
+    console.log("Sanity check");
+    // return http.get('http://localhost:5000/api/graph/'+candId+'/candidate'
+  return http.get('http://localhost:5000/api/individuals/committee/C00574624/pie'
     , function(response) {
+      console.log(response);
         var body = '';
         response.on('data', function(d) {
+            console.log(d);
             body += d;
-        });
+        })
+        response.on('error', function(err){
+          console.log(err);
+        })
         response.on('end', function() {
+            console.log(body);
             var parsed = JSON.parse(body);
             callback(parsed);
         });
@@ -31,9 +39,8 @@ var i = 0;
 
 //Save the return value from the service call send to mongo
 function printData(data){
-
   console.log(data);
-  var graphData = new Graph({id: candIds[i], data: data});
+  var graphData = new Graph({id: cmteIds[i], data: data});
   graphData.save(function (err) {
     if (err) {
       console.log(err);
@@ -42,8 +49,8 @@ function printData(data){
     }
   });
   i++;
-  if (i < candIds.length){
-    getCandidateGraph(printData, candIds[i]);
+  if (i < cmteIds.length){
+    getCandidateGraph(printData, cmteIds[i]);
   }
 
 }
