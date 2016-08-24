@@ -10,8 +10,8 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var Graph = mongoose.model('pie', { id: String, data: [] });
-
+var pieGraph = mongoose.model('pie', { id: String, data: [] });
+var barGraph = mongoose.model('bar', { id: String, data: [] });
 
 
 router.get('/', function(req, res, next){
@@ -136,9 +136,7 @@ router.get('/bubble/:cmte_id', function(req, res, next){
 // });
 
 router.get('/committee/:cmte_id/pie', function(req, res, next){
-  console.log(Graph);
-  Graph.findOne({}, function(err, data){
-    console.log("Mongo ", err,data);
+  pieGraph.findOne({}, function(err, data){
     if (err) handleError(err);
     console.log(data);
     res.json(data);
@@ -147,8 +145,10 @@ router.get('/committee/:cmte_id/pie', function(req, res, next){
 
 
 router.get('/committee/:cmte_id/date', function(req, res, next){
-  query.indivByDate(req.params.cmte_id).then(function(data){
-    res.json(data.rows.map((item)=>{
+  barGraph.findOne({}, function(err, data){
+    console.log(data);
+    if (err) handleError(err);
+    res.json(data.data.map((item)=>{
       return {
         sum: parseFloat(item.sum),
         date_trunc: item.date_trunc,
