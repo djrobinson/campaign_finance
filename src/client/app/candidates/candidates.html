@@ -11,7 +11,7 @@
   <div class="button button-top" (click)="sortCandidates('tot_dis')">
     Sort by distributions
   </div>
-  <div class="button button-top" (click)="showDropdown()">
+  <div class="button button-top">
     Sort by State
   <div class="list-container">
     <div class="dropdown-list">
@@ -19,8 +19,6 @@
     </div>
   </div>
   </div>
-
-
   <div class="row">
     <ul class="list">
       <li *ngFor="#candidate of candidatesView" class="list-item" [style.border]="candidate.tile_color">
