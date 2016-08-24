@@ -120,17 +120,29 @@ td {
 
 .button:hover {
     background-color: #9DBF9E;
-    color: white;
 }
 
+.button:hover > .list-container {
+  display: block;
+}
+
+.list-container {
+  position: relative;
+  width: 100%;
+  display: none;
+}
+
+
 .dropdown-list {
+  top: -2px;
   position: absolute;
   height: 200px;
-  background: blue;
-  right: 0;
-  top: 0;
-  width: 200px;
+  overflow: scroll;
+  background: white;
+  border: solid #9DBF93 1px;
+  width: 100%;
   z-index: 40;
+
 }
 
 

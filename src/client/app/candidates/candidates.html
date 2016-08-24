@@ -13,10 +13,13 @@
   </div>
   <div class="button button-top" (click)="showDropdown()">
     Sort by State
+  <div class="list-container">
+    <div class="dropdown-list">
+      <div *ngFor="#state of states" class="dropdown-item">{{state}}</div>
+    </div>
   </div>
-  <div class="dropdown-list">
-    <div *ngFor="#state of states" class="dropdown-item">{{state}}</div>
   </div>
+
 
   <div class="row">
     <ul class="list">
