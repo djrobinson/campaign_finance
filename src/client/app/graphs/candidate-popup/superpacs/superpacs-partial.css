@@ -23,6 +23,25 @@ treemap {
   bottom: 0;
 }
 
+.choose-treemap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  background: blue;
+  display: inline;
+  height: 100px;
+}
+
+.choose-list {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  background: red;
+  display: inline;
+}
+
 superpacs-list {
   position: absolute;
   height: 80%;

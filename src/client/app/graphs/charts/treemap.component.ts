@@ -6,16 +6,15 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       <div id="containerChart">
         <div id="tooltip">
           <div class="tip-top">
+            <p>Recipient:</p>
             <div class="tree-tip" id="tip-name"></div>
             <div class="tree-tip" id="tip-support"></div>
             <div class="tree-tip" id="tip-amount"></div>
             <div class="tree-tip" id="tip-purpose"></div>
             <div *ngIf="level !=='main'">
-            <div class="button-container">
               <div class="button" id="backup">
                 Go Back
               </div>
-            </div>
           </div>
         </div>
           <div  class="instructions">
@@ -52,17 +51,24 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       height: 100%;
       width: 100%;
       text-align: center;
+
+    }
+
+    .instructions p {
+      font-size: 1.5rem;
     }
 
     .instruction-block {
       position: absolute;
-      background: #364760;
-      color: white;
-      height: 60%;
+      color: black;
+      height: 50%;
       width: 100%;
       border-bottom: solid 2px #BDBBB6;
       box-sizing: border-box;
+      background:  #f2f2f2;;
       bottom: 0;
+      overflow: scroll;
+      border-top: solid 1px black;
     }
 
     .button-container {
@@ -75,11 +81,26 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
     }
 
     .tip-top {
+      display: flex;
+      padding: 3%;
       top: 0;
       position: absolute;
-      height: 100%;
+      height: 50%;
       width: 100%;
       background:  #f2f2f2;
+      font-family: 'Prata', serif;
+      font-size: 2rem;
+      display: flex;
+      align-items: space-between;
+      justify-content: center;
+      flex-direction: column;
+      overflow: scroll;
+    }
+
+    .tip-top p {
+      font-size: 1.5rem;
+      disply: flex;
+      align-self: left;
     }
 
     rect {
@@ -89,18 +110,11 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 
     #tip-name {
       width: 100%;
-
-      color: #EFF1F3;
-      background: #364760;
     }
 
-    .tree-tip {
 
-    }
     #tip-purpose {
-      background: #364760;
       width: 100%;
-      color: #EFF1F3;
     }
     #tooltip {
       position: relative;
@@ -108,7 +122,6 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       width: 30%;
       height: 100%;
       bottom: 0;
-      font-size: 2rem;
       color: #5b4f49;
       display: flex;
       flex-direction: column;
@@ -122,13 +135,7 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       bottom: 0;
     }
     .child-tspan {
-      font-size: 2rem;
-    }
-
-    .button-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-size: 3rem;
     }
 
     .button {
@@ -343,7 +350,7 @@ export class TreemapComponent implements OnInit, OnChanges {
           .each(addText);
 
         function addText(d) {
-          var size = 12;
+          var size = 16;
           var words = d.name.split(' ');
           var parentwidth = d3.select(this.parentNode.parentNode)[0][0].__data__.dx;
           var ratio = width / parentwidth;
@@ -364,8 +371,8 @@ export class TreemapComponent implements OnInit, OnChanges {
               .text(d.name)
               .attr("x", 0)
               .attr("dx", "0.35em")
-              .attr("dy", "2rem")
-              .style("font-size", "2rem")
+              .attr("dy", "4rem")
+              .style("font-size", "4rem")
 
             d3.select(this)
               .append("tspan")
@@ -373,8 +380,8 @@ export class TreemapComponent implements OnInit, OnChanges {
               .text(d.to)
               .attr("x", 0)
               .attr("dx", "0.35em")
-              .attr("dy", "2rem")
-              .style("font-size", "2rem")
+              .attr("dy", "4rem")
+              .style("font-size", "4rem")
 
             d3.select(this)
               .append("tspan")
@@ -382,8 +389,8 @@ export class TreemapComponent implements OnInit, OnChanges {
               .text(d.purpose)
               .attr("x", 0)
               .attr("dx", "0.35em")
-              .attr("dy", "2rem")
-              .style("font-size", "2rem")
+              .attr("dy", "4rem")
+              .style("font-size", "4rem")
 
 
             d3.select(this)
@@ -392,27 +399,30 @@ export class TreemapComponent implements OnInit, OnChanges {
               .text(d.amount)
               .attr("x", 0)
               .attr("dx", "0.35em")
-              .attr("dy", "2rem")
-              .style("font-size", "2rem")
+              .attr("dy", "4rem")
+              .style("font-size", "4rem")
             d3.select(this)
               .append("tspan")
               .attr("class", "child-tspan")
               .text(d.date)
               .attr("x", 0)
               .attr("dx", "0.35em")
-              .attr("dy", "2rem")
-              .style("font-size", "2rem")
+              .attr("dy", "4rem")
+              .style("font-size", "4rem")
 
             d3.select(this)
-              .append("a")
-              .attr("xlink:href", function(d) { return "http://"+d.fec; })
               .append("tspan")
-              .attr("x", 0)
-              .attr("dx", "0.35em")
-              .attr("dy", "2rem")
-              .text("FEC Link")
-              .style("font-size", "2rem")
+                .attr("class", "child-tspan")
+                .attr("x", 0)
+                .attr("dx", "0.35em")
+              .attr("dy", "4rem")
+              .append("a")
+                .attr("xlink:href", function(d) { return "http://"+d.fec; })
+                .attr("class", "fec")
 
+            d3.selectAll(".fec")
+                .append("svg:img")
+                  .attr("xlink:href", "http://www.fec.gov/finance/disclosure/ftpdet.shtml#a2015_2016")
           }
         }
 
