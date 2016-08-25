@@ -1,13 +1,4 @@
-.superpac-header {
-  position: absolute;
-  height: 20%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  align-content: space-around;
-}
+
 
 .options {
   width: 100%;
@@ -18,22 +9,25 @@
 
 treemap {
   position: absolute;
-  height: 80%;
+  height: 90%;
   width: 100%;
   bottom: 0;
 }
 
 .choose-treemap {
+  height: 10%;
+  text-align: center;
   position: absolute;
   left: 0;
   top: 0;
   width: 50%;
   background: blue;
   display: inline;
-  height: 100px;
 }
 
 .choose-list {
+  height: 10%;
+  text-align: center;
   position: absolute;
   right: 0;
   top: 0;
@@ -55,8 +49,9 @@ h1, h2, h3, h4, h5, p, td, th {
 }
 
 .content {
+  margin-top: 3%;
   position: relative;
-  width: 100%;
+  width: 95%;
   height: 100%;
   overflow: hidden;
 }
