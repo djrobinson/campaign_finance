@@ -325,30 +325,30 @@ export class GraphComponent implements OnInit  {
           d.tot_dis = +d.tot_dis;
           if (d.tot_dis < 1000)
           {
-            return "#c6dbef";
+            return "#edf8b1";
           }
           else if (+d.tot_dis < 5000)
           {
-            return "#9ecae1";
+            return "#c7e9b4";
           }
           else if (+d.tot_dis < 10000)
           {
-            return "#6baed6";
+            return "#7fcdbb";
           }
           else if (+d.tot_dis < 50000)
           {
-            return "#4292c6";
+            return "#41b6c4";
           }
           else if (+d.tot_dis < 100000)
           {
-            return "#2171b5";
+            return "#1d91c0";
           }
           else if (+d.tot_dis >= 1000000)
           {
-            return "#084594";
+            return "#225ea8";
           }
           else {
-            return "#6baed6";
+            return "#ffffd9";
           }
         } else if ( d.graphtype === "individual"){
           if (d.TRANSACTION_AMT < 500)

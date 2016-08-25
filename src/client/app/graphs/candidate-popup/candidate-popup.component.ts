@@ -96,9 +96,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       data => {
 
         this.stopRefreshing();
-        console.log("All candidate data: ", data);
         this.candidate = data[0][0];
-        console.log("Candidate working? ", this.candidate);
         this.primaryCmte = data[1].filter((cmte)=>{
           if(cmte.CMTE_DSGN === "P"){
             return cmte
@@ -131,7 +129,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
     ).subscribe(
       data => {
-        console.log("This one: ", data);
         this.stopRefreshing();
         this.candidate = data[0][0];
         this.typePieComponent.callAsc(data[2]);

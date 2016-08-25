@@ -79,7 +79,7 @@ export class BarComponent {
         .range([height, 0]);
 
     var color = d3.scale.ordinal()
-        .range(["#98abc5", "#8a89a6"]);
+        .range(["#305252", "#35978F"]);
 
     var xAxis = d3.svg.axis()
         .scale(x0)
@@ -172,7 +172,6 @@ export class BarComponent {
         .enter().append("rect")
           .attr("width", x1.rangeBand() * 1.5)
           .attr("x", function(d) {
-            console.log("Data for Rect ", d);
             return x1(d.type) * 1.5;
           })
           .attr("y", function(d) { return y(d.sum) })
@@ -191,7 +190,6 @@ export class BarComponent {
           .attr("width", 18)
           .attr("height", 18)
           .style("fill", function(d, i) {
-            console.log("Color D: ", color(i));
             return color(i)});
 
       legend.append("text")

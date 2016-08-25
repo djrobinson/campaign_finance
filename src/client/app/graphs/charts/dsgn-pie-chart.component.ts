@@ -124,7 +124,25 @@ export class DsgnPieComponent implements OnInit, OnChanges {
       var legendRectSize = 12;
       var legendSpacing = 2;
 
-      var color = d3.scale.category20b();
+
+      var colors = [ '#bf812d', '#dfc27d', '#f6e8c3', '#c7eae5', '#80cdc1','#35978f',  '#7B9E87', '#01665e'];
+
+      var countColors = [];
+
+      var colorIterator = 0;;
+      function color(d){
+        if (colorIterator < colors.length)
+        {
+          colorIterator++;
+          countColors.push(d);
+          return colors[colorIterator];
+        } else {
+          countColors.push(d);
+          colorIterator = 0;
+          return colors[colorIterator];
+        }
+
+      };
 
       var svg = d3.select('#chartDsgn')
         .append('svg')
@@ -139,8 +157,8 @@ export class DsgnPieComponent implements OnInit, OnChanges {
         .outerRadius(radius);
 
       var arcOver = d3.svg.arc()
-        .innerRadius(radius - 20)
-        .outerRadius(radius);
+        .innerRadius(radius - 40)
+        .outerRadius(radius + 10);
 
       var pie = d3.layout.pie()
         .value(function(d) { return d.amount; })
@@ -201,13 +219,13 @@ export class DsgnPieComponent implements OnInit, OnChanges {
 
 
         var legend = svg.selectAll('.legend')
-          .data(color.domain())
+          .data(countColors)
           .enter()
           .append('g')
           .attr('class', 'legend')
           .attr('transform', function(d, i) {
             var height = legendRectSize + legendSpacing;
-            var offset = height * color.domain().length / 2;
+            var offset = height * countColors.length / 2;
             var horz = -2 * legendRectSize;
             var vert = i * height - offset;
             var moveLeft = radius + 10;
@@ -218,7 +236,6 @@ export class DsgnPieComponent implements OnInit, OnChanges {
           .attr('width', legendRectSize)
           .attr('height', legendRectSize)
           .style('fill', color)
-          .style('stroke', color);
 
 
 
