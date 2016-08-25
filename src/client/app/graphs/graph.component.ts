@@ -323,71 +323,62 @@ export class GraphComponent implements OnInit  {
           return "none";
         } else if ( d.graphtype === "committee" || d.graphtype === "associated"){
           d.tot_dis = +d.tot_dis;
-          if (d.tot_dis < 1000)
+          if (+d.tot_dis < 10000)
           {
-            return "#edf8b1";
-          }
-          else if (+d.tot_dis < 5000)
-          {
-            return "#c7e9b4";
-          }
-          else if (+d.tot_dis < 10000)
-          {
-            return "#7fcdbb";
+            return "#F6F5AE";
           }
           else if (+d.tot_dis < 50000)
           {
-            return "#41b6c4";
+            return "#F5C396";
           }
           else if (+d.tot_dis < 100000)
           {
-            return "#1d91c0";
+            return "#EB9486";
           }
-          else if (+d.tot_dis >= 1000000)
+          else if (+d.tot_dis > 500000)
           {
-            return "#225ea8";
+            return "#DB7F67";
+          } else if (d.tot_dis  > 1000000){
+            return '#DB504A'
+          } else {
+            return "#F6F5AE"
           }
-          else {
-            return "#ffffd9";
-          }
+
         } else if ( d.graphtype === "individual"){
-          if (d.TRANSACTION_AMT < 500)
-          {
-            return "#ccece6";
-          }
-          else if (d.TRANSACTION_AMT < 1500)
-          {
-            return "#99d8c9";
-          }
-          else if (d.TRANSACTION_AMT < 4999)
-          {
-            return "#66c2a4";
-          }
-          else if (d.TRANSACTION_AMT < 10000)
-          {
-            return "#41ae76";
-          }
-          else if (d.TRANSACTION_AMT < 50000)
-          {
-            return "#238b45";
-          }
-          else if (d.TRANSACTION_AMT >= 50000)
-          {
-            return "#005824";
-          }
+          return "#35978F"
         }
       })
 
     node.append("circle")
       .attr("class", "circle")
       .attr("r",function(d) {
-        if ( d.graphtype === "candidate") {
-          return;
-        } else if ( d.graphtype === "committee" || d.graphtype === "associated"){
-          return 25;
-        } else {
-          return 15;
-        }
+        if (d.TRANSACTION_AMT < 2699)
+          {
+            return 15;
+          }
+          else if (d.TRANSACTION_AMT < 4999)
+          {
+            return 20;
+          }
+          else if (d.TRANSACTION_AMT < 9999)
+          {
+            return 25;
+          }
+          else if (d.TRANSACTION_AMT < 50000)
+          {
+            return 30;
+          }
+          else if (d.TRANSACTION_AMT < 300000)
+          {
+            return 35;
+          }
+          else if (d.TRANSACTION_AMT >= 300000)
+          {
+            return 40;
+          } else {
+            return 15;
+          }
+
       })
 
     var candNode = svg.selectAll(".node")
