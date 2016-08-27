@@ -6,7 +6,6 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       <div id="containerChart">
         <div id="tooltip">
           <div class="tip-top">
-            <p>Recipient:</p>
             <div class="tree-tip" id="tip-name"></div>
             <div class="tree-tip" id="tip-support"></div>
             <div class="tree-tip" id="tip-amount"></div>
@@ -39,7 +38,7 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 
     #containerChart {
       position: absolute;
-      height: 90%;
+      height: 100%;
       width: 100%;
       background: #EFF1F3;
       font-family: 'Oswald';
