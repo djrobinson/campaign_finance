@@ -1,6 +1,7 @@
 import {Component, Input, Output, OnInit} from 'angular2/core';
 import {TreemapComponent} from '../../charts/treemap.component';
 import {PacsListComponent} from './superpacs-list.component';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'superpacs-section',
@@ -12,6 +13,7 @@ export class SuperpacsSectionComponent implements OnInit {
   @Input() cand: any;
   private route: string;
   private showList: boolean=false;
+  private isSelected: boolean=false;
 
   ngOnInit() {
     console.log(this.cand);
@@ -19,6 +21,7 @@ export class SuperpacsSectionComponent implements OnInit {
   }
 
   public callSuperpacs(){
+    this.isSelected = !this.isSelected;
     this.showList = !this.showList;
   }
 
