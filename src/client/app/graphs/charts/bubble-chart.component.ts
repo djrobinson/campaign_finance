@@ -1,34 +1,44 @@
 import {Component, Input, Output, EventEmitter, OnInit} from 'angular2/core';
+import {SpinnerComponent} from '../../loading/spinner.component';
 
 @Component({
   selector: 'bubble-chart',
   template: `
-      <div id="containerChart3">
+
+        <spinner [isRunning]="isRequesting">
+        </spinner>
         <div id="chart3">
         </div>
-      </div>
   `,
   styles: [`
 
-    #containerChart3 {
+    spinner {
       position: absolute;
-      display: flex;
-      justify-items: center;
       height: 100%;
       width: 100%;
     }
 
+
     #chart3 {
-      display: block;
+      position: absolute;
+      display: flex;
       margin: 0 auto;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+
     }
 
-  `]
+  `],
+   directives: [SpinnerComponent]
 })
 export class BubbleComponent implements OnInit {
   @Input() cmte: string;
   @Output() exitEmit = new EventEmitter();
   @Output() indivEmit = new EventEmitter();
+  public isRequesting: boolean=true;
 
   ngOnInit(){
     console.log(this.cmte);
@@ -45,7 +55,7 @@ export class BubbleComponent implements OnInit {
         }
         return color;
     }
-    var diameter = document.getElementById('containerChart3').offsetHeight,
+    var diameter = document.getElementById('chart3').offsetHeight,
       format = d3.format(",d"),
       color = d3.scale.category20c();
 
@@ -72,6 +82,7 @@ export class BubbleComponent implements OnInit {
       .text("tooltip");
 
     d3.json("/api/individuals/bubble/"+cmte, function(error, root) {
+      ctrl.isRequesting = false;
       console.log(root);
       var node = svg.selectAll(".node")
         .data(bubble.nodes(classes(root))

@@ -1,11 +1,13 @@
 import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
+import {SpinnerComponent} from '../../loading/spinner.component';
 
 @Component({
   selector: 'individual-popup',
   templateUrl: 'app/graphs/individual-popup/individual-popup.html',
-  styleUrls: ['app/graphs/individual-popup/individual-popup.css']
+  styleUrls: ['app/graphs/individual-popup/individual-popup.css'],
+  directives: [SpinnerComponent]
 })
 export class IndividualPopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.

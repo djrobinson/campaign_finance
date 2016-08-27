@@ -74,6 +74,10 @@ import {Component, Input, OnDestroy} from 'angular2/core';
           35% {
             -webkit-transform: scale3D(0, 0, 1);
                     transform: scale3D(0, 0, 1); } }
+        .spinner {
+          height: 100%;
+          width: 100%;
+        }
     `]
 })
 export class SpinnerComponent implements OnDestroy {
