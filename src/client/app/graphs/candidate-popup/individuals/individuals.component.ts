@@ -13,12 +13,13 @@ export class IndividualsSectionComponent implements OnInit {
   @Input() cmte: string;
   public showList: boolean = false;
   private isRequesting: boolean;
+  private isSelected: boolean = false;
 
   ngOnInit(){
-
   }
 
   public callIndividuals(){
+    this.isSelected = !this.selected;
     this.showList = !this.showList;
   }
 }

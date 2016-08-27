@@ -1,20 +1,10 @@
 <div class="content">
-  <div class="individual-header">
-    <h1>Individuals</h1>
-    <div class="options">
-      <div class="option">
-        <h5>Bubble View</h5>
-      </div>
-      <label class="switch">
-        <input  (click)="callIndividuals()" type="checkbox">
-        <div class="slider"></div>
-      </label>
-      <div class="option">
-        <h5>Table View</h5>
-      </div>
-    </div>
+  <div class="choose-bubble" (click)="callIndividuals()" [class.selected]="isSelected">
+    <h3>Bubble Chart</h3>
   </div>
-
+  <div class="choose-list" (click)="callIndividuals()" [class.selected]="!isSelected">
+    <h3>List</h3>
+  </div>
   <individuals-list
     *ngIf="showList"
     [cmte]="cmte">
