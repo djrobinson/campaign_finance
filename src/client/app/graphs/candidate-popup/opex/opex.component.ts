@@ -12,11 +12,13 @@ export class OpexSectionComponent implements OnInit {
   @Input() cmte: string;
   private route: string;
   private showList: boolean=false;
+  private isSelected: boolean=false;
   ngOnInit(){
     this.route = '/api/opex/aggregate/' + this.cmte;
   }
 
   public callList(){
+    this.isSelected = !this.isSelected;
     this.showList = !this.showList;
   }
 }

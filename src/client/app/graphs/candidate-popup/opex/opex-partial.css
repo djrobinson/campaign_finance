@@ -1,31 +1,15 @@
-.opex-header {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  height: 20%;
-  width: 100%;
-  text-align: center;
-  justify-content: center;
-  align-content: space-around;
-}
 
-.opex-options {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
 
 treemap {
   position: absolute;
-  height: 80%;
+  height: 90%;
   width: 100%;
   bottom: 0;
 }
 
 opex-list {
   position: absolute;
-  height: 80%;
+  height: 90%;
   width: 100%;
   bottom: 0;
   overflow: scroll;
@@ -36,58 +20,35 @@ h1, h2, h3, h4, h5, p, td, th {
 }
 
 .content {
+  margin-top: 3%;
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 95%;
+  height: 90%;
   overflow: hidden;
+  border: solid 2px gray;
 }
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-  margin: 0 10px 0 10px;
-}
-
-.switch input {display:none;}
-
-.slider {
-  display: inline-block;
+.choose-treemap {
+  height: 10%;
+  text-align: center;
   position: absolute;
-  cursor: pointer;
-  top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-
+  top: 0;
+  width: 50%;
+  display: inline;
 }
 
-.slider:before {
+.choose-list {
+  height: 10%;
+  text-align: center;
   position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  right: 0;
+  top: 0;
+  width: 50%;
+  background: transparent ;
+  display: inline;
 }
 
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+.selected {
+  background: #73877B;
 }
