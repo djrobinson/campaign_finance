@@ -18,6 +18,7 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   private otherIndividuals: Observable<Object>;
   private dataStore: Observable<Object>;
   private showList: boolean=true;
+  private isSelected: boolean=false;
 
   constructor(
               private http:Http) {
@@ -56,6 +57,11 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
     this.exitEmit.emit({
       exit: true
     });
+  }
+
+  public callList(){
+    this.isSelected = !this.isSelected;
+    this.showList = !this.showList;
   }
 
 }
