@@ -14,6 +14,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
 
     spinner {
       position: absolute;
+      top: 30%;
       height: 100%;
       width: 100%;
     }

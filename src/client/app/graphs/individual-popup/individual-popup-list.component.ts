@@ -1,6 +1,8 @@
 import {Component, Input, Output, OnInit} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
+import {SpinnerComponent} from '../../loading/spinner.component';
+
 
 @Component({
   selector: 'individual-popup-list',
@@ -55,11 +57,12 @@ import {Observable} from 'rxjs/Rx';
       background-color: #f2f2f2;
     }
   `],
-  directives: []
+  directives: [SpinnerComponent]
 })
 export class IndividualListPopupComponent implements OnInit {
   @Input() indivName: string;
   public otherIndividuals: any;
+  public isRequesting: boolean=true;
 
   constructor(private http:Http) {}
 
@@ -79,6 +82,7 @@ export class IndividualListPopupComponent implements OnInit {
     ).subscribe(
       data => {
         console.log(data);
+        this.isRequesting = false;
         this.otherIndividuals = data[1];
       },
       err => console.error(err)

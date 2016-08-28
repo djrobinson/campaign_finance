@@ -22,6 +22,7 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   private dataStore: Observable<Object>;
   private showList: boolean=true;
   private isSelected: boolean=false;
+  public isRequesting: boolean=true;
 
   constructor(
               private http:Http) {
@@ -37,6 +38,7 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
       this.http.get('/api/individuals/transaction/'+this.individualTran).map((res: Response) => res.json())
     ).subscribe(
       data => {
+        this.isRequesting = false;
         console.log(data);
         data[0][0].FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + data[0][0].IMAGE_NUM;
         this.individual = data[0][0];
