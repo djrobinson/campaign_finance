@@ -32,18 +32,14 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log(this.individualListPopupComponent);
     var internalList = this.individualListPopupComponent;
     Observable.forkJoin(
-      this.http.get('/api/individuals/transaction/'+this.individualTran).map((res: Response) => res.json()),
-      this.http.get('/api/individuals?donor=' + this.indivName).map((res: Response) => res.json())
+      this.http.get('/api/individuals/transaction/'+this.individualTran).map((res: Response) => res.json())
     ).subscribe(
       data => {
         console.log(data);
         data[0][0].FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + data[0][0].IMAGE_NUM;
         this.individual = data[0][0];
-        console.log(internalList.createList);
-        internalList.createList(data[1]);
       },
       err => console.error(err)
       );

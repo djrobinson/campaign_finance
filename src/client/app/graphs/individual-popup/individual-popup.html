@@ -8,7 +8,7 @@
     <div class="choose-list" (click)="callList()" [class.selected]="!isSelected">
       <h3>Other transactions</h3>
     </div>
-    <div class="indiv" *ngIf="showList">
+    <div class="indiv" *ngIf="!isSelected">
       <h3>{{individual?.NAME}}</h3>
       <p>{{individual?.CITY }}, {{individual?.STATE}}</p>
       <p>{{individual?.EMPLOYER}}</p>
@@ -17,6 +17,6 @@
       <a [href]="individual?.FEC_LINK"><img src="images/fec.png" class="fec" /></a>
       <h4>Transaction Amount: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}}</h4>
     </div>
-    <individual-popup-list>
+    <individual-popup-list *ngIf="isSelected" [indivName]="individual?.NAME">
     </individual-popup-list>
 </div>

@@ -1,6 +1,6 @@
 import {Component, Input, Output, OnInit} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
-
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'individual-popup-list',
@@ -58,6 +58,7 @@ import {Http, Response} from 'angular2/http';
   directives: []
 })
 export class IndividualListPopupComponent implements OnInit {
+  @Input() indivName: string;
   public otherIndividuals: any;
 
   constructor(private http:Http) {}
@@ -72,7 +73,15 @@ export class IndividualListPopupComponent implements OnInit {
     this.otherIndividuals = list;
   }
 
-  ngOnInit(){
-
+  ngOnInit() {
+    Observable.forkJoin(
+      this.http.get('/api/individuals?donor=' + this.indivName).map((res: Response) => res.json())
+    ).subscribe(
+      data => {
+        console.log(data);
+        this.otherIndividuals = data[1];
+      },
+      err => console.error(err)
+      );
   }
 }
