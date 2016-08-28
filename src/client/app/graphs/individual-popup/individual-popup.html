@@ -31,9 +31,12 @@
         <td>{{individual?.TRANSACTION_DT.substring(0,10)}}</td>
       </tr>
     </table>
+    <div class="button individual-button" (click)="searchName(individual?.NAME)">Search Name</div>
 
-    <a [href]="individual?.FEC_LINK"><img src="images/fec.png" class="fec" /></a>
-    <h4>Transaction Amount: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}}</h4>
+    <div class="button individual-button" (click)="searchNameTitle(individual?.NAME, individual?.EMPLOYER)">Search Name & Employer</div>
+
+
+    <h4>Transaction Amount: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}} <a [href]="individual?.FEC_LINK"><img src="images/fec.png" class="fec" /></a></h4>
   </div>
   <individual-popup-list *ngIf="isSelected" [indivName]="individual?.NAME">
   </individual-popup-list>

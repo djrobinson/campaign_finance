@@ -94,6 +94,4 @@ export class MiniProfileComponent implements OnChanges, OnInit {
       cand: cand
     })
   }
-
-
 }

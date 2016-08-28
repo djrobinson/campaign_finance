@@ -69,6 +69,14 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
     });
   }
 
+  public searchNameTitle(name, employer){
+    window.open('http://google.com/search?q='+name+' '+employer);
+  }
+
+  public searchName(name){
+     window.open('http://google.com/search?q='+name);
+  }
+
   public callList(){
     this.isSelected = !this.isSelected;
     this.showList = !this.showList;

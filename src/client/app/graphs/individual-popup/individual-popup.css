@@ -94,7 +94,7 @@ td:nth-child(2n) {
 }
 
 .fec {
-  height: 2rem;
+  height: 3rem;
 }
 
 .donor-tile:nth-child(2n) {
@@ -138,7 +138,7 @@ td:nth-child(2n) {
   border: 2px solid #9DBF9E;
   border-radius: 25px;
   box-sizing: border-box;;
-  width: 80%;
+  width: 45%;
 }
 
 .button:hover {
