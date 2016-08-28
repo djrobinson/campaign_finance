@@ -23,6 +23,8 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   private showList: boolean=true;
   private isSelected: boolean=false;
   public isRequesting: boolean=true;
+  public title: string;
+  public
 
   public testData: Date = new Date();
 
