@@ -3,12 +3,12 @@ import {Http, Response} from 'angular2/http';
 
 
 @Component({
-  selector: 'superpacs-list',
+  selector: 'individual-popup-list',
   template: `
     <div class="indiv-list six columns">
       <p>Other Donations from Similar Names</p>
       <div class="twelve columns other-donations">
-        <div *ngFor="#indiv of otherIndividuals?.data"
+        <div *ngFor="#indiv of otherIndividuals"
              class="row donor-tile">
           <div class="one-half column text-center">
             <p>{{indiv?.NAME}}</p>
@@ -57,20 +57,22 @@ import {Http, Response} from 'angular2/http';
   `],
   directives: []
 })
-export class PacsListComponent implements OnInit {
-  @Input() indiv: any;
+export class IndividualListPopupComponent implements OnInit {
+  public otherIndividuals: any;
 
   constructor(private http:Http) {}
 
 
-  public parseFloat = function(num){
+  public parseFloat(num){
     return parseFloat(num);
   }
 
+  createList(list){
+    console.log(list);
+    this.otherIndividuals = list;
+  }
+
   ngOnInit(){
-    this.http.get('/api/pac/' + this.cand.CANDIDATE_ID + '/candidate').map(response => response.json()).subscribe(data => {
-      console.log(data);
-      this.pacs = data;
-    }, error => console.log('Could not load individuals.'));
+
   }
 }

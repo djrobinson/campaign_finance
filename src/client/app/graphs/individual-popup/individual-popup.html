@@ -17,6 +17,6 @@
       <a [href]="individual?.FEC_LINK"><img src="images/fec.png" class="fec" /></a>
       <h4>Transaction Amount: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}}</h4>
     </div>
-    <individual-popup-list *ngIf="!showList" [indiv]="otherIndividuals?.data">
+    <individual-popup-list>
     </individual-popup-list>
 </div>

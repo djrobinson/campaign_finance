@@ -1,19 +1,22 @@
-import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, OnInit, OnChanges, EventEmitter, ViewChild} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {SpinnerComponent} from '../../loading/spinner.component';
+import {IndividualListPopupComponent} from './individual-popup-list.component';
 
 @Component({
   selector: 'individual-popup',
   templateUrl: 'app/graphs/individual-popup/individual-popup.html',
   styleUrls: ['app/graphs/individual-popup/individual-popup.css'],
-  directives: [SpinnerComponent]
+  directives: [SpinnerComponent, IndividualListPopupComponent]
 })
 export class IndividualPopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
   @Input() individualTran: string;
   @Input() indivName: string;
   @Output() exitEmit = new EventEmitter();
+  @ViewChild(IndividualListPopupComponent) individualListPopupComponent: IndividualListPopupComponent;
+
   private individual: Observable<Object>;
   private otherIndividuals: Observable<Object>;
   private dataStore: Observable<Object>;
@@ -22,13 +25,15 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
 
   constructor(
               private http:Http) {
-    this.parseFloat = function(num) {
-      return parseFloat(num);
-    }
+  }
+
+  public parseFloat = function(num) {
+    return parseFloat(num);
   }
 
   ngOnInit() {
-    console.log(this.individualTran, this.indivName);
+    console.log(this.individualListPopupComponent);
+    var internalList = this.individualListPopupComponent;
     Observable.forkJoin(
       this.http.get('/api/individuals/transaction/'+this.individualTran).map((res: Response) => res.json()),
       this.http.get('/api/individuals?donor=' + this.indivName).map((res: Response) => res.json())
@@ -37,11 +42,16 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
         console.log(data);
         data[0][0].FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + data[0][0].IMAGE_NUM;
         this.individual = data[0][0];
-        this.otherIndividuals = {};
-        this.otherIndividuals.data = data[1];
+        console.log(internalList.createList);
+        internalList.createList(data[1]);
       },
       err => console.error(err)
       );
+  }
+
+  buildList(data){
+    console.log("Indivudial list cmpt ", this.individualListPopupComponent);
+    this.individualListPopupComponent.createList(data);
   }
 
   changeIndiv(tranId){

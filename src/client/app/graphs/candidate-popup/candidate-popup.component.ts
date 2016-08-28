@@ -55,6 +55,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(){
+      console.log(this.typePieComponent);
       this.isRequesting = true;
       this.imageVar = {};
       this.selection = "main";
@@ -156,14 +157,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
   public choice(selection) {
     this.selection = selection;
-  }
-
-  public goToWikipedia() {
-    console.log("Wikipedia");
-  }
-
-  public goToWebsite() {
-    console.log("Website");
   }
 
 }

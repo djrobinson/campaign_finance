@@ -283,5 +283,3 @@ export class TypePieComponent implements OnInit, OnChanges {
     });
   }
 }
-
-0103559920101053
