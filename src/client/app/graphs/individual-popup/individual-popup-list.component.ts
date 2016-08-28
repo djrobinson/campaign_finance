@@ -9,7 +9,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
   template: `
     <div class="indiv-list">
       <p>Other Donations from Similar Names</p>
-      <div class="twelve columns other-donations">
+      <div class="other-donations">
         <spinner [isRunning]="isRequesting">
         </spinner>
         <div *ngFor="#indiv of otherIndividuals?.data"
@@ -39,10 +39,11 @@ import {SpinnerComponent} from '../../loading/spinner.component';
     .indiv-list {
       position: absolute;
       bottom: 0;
-      width: 100%;
-      height: 90%;
+      width: 80%;
+      height: 80%;
       font-family: 'Prata', serif;
       text-align: center;
+      overflow: scroll;
     }
 
     .donor-tile:nth-child(2n+1) {
