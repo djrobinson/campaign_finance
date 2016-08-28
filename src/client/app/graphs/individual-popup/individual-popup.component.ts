@@ -17,6 +17,7 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   private individual: Observable<Object>;
   private otherIndividuals: Observable<Object>;
   private dataStore: Observable<Object>;
+  private showList: boolean=true;
 
   constructor(
               private http:Http) {

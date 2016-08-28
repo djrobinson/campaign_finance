@@ -2,14 +2,13 @@
   <div (click)="close()" class="close-button">
     <img src="/images/close.png" class="close-icon" />
   </div>
-    <div class="choose-treemap" (click)="callSuperpacs()" [class.selected]="isSelected">
+    <div class="choose-profile" (click)="callSuperpacs()" [class.selected]="isSelected">
     <h3>Profile</h3>
   </div>
   <div class="choose-list" (click)="callSuperpacs()" [class.selected]="!isSelected">
     <h3>Other transactions</h3>
   </div>
-  <div class="row">
-    <div class="indiv six columns" *ngIf="showList">
+    <div class="indiv" *ngIf="showList">
       <h3>{{individual?.NAME}}</h3>
       <p>{{individual?.CITY }}, {{individual?.STATE}}</p>
       <p>{{individual?.EMPLOYER}}</p>
@@ -18,7 +17,6 @@
       <a [href]="individual?.FEC_LINK"><img src="images/fec.png" class="fec" /></a>
       <h4>Transaction Amount: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}}</h4>
     </div>
-      <individual-popup-list *ngIf="!showList" [indiv]="otherIndividuals?.data">
-      </individual-popup-list>
-  </div>
+    <individual-popup-list *ngIf="!showList" [indiv]="otherIndividuals?.data">
+    </individual-popup-list>
 </div>
