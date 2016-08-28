@@ -7,10 +7,12 @@ import {SpinnerComponent} from '../../loading/spinner.component';
 @Component({
   selector: 'individual-popup-list',
   template: `
-    <div class="indiv-list six columns">
+    <div class="indiv-list">
       <p>Other Donations from Similar Names</p>
       <div class="twelve columns other-donations">
-        <div *ngFor="#indiv of otherIndividuals"
+        <spinner [isRunning]="isRequesting">
+        </spinner>
+        <div *ngFor="#indiv of otherIndividuals?.data"
              class="row donor-tile">
           <div class="one-half column text-center">
             <p>{{indiv?.NAME}}</p>
@@ -36,12 +38,10 @@ import {SpinnerComponent} from '../../loading/spinner.component';
 
     .indiv-list {
       position: absolute;
-      right: 0;
-      height: 75%;
+      bottom: 0;
+      width: 100%;
+      height: 90%;
       font-family: 'Prata', serif;
-      width: 50%;
-      margin-right: 1rem;
-      margin-left: 1rem;
       text-align: center;
     }
 
@@ -71,19 +71,15 @@ export class IndividualListPopupComponent implements OnInit {
     return parseFloat(num);
   }
 
-  createList(list){
-    console.log(list);
-    this.otherIndividuals = list;
-  }
-
   ngOnInit() {
     Observable.forkJoin(
       this.http.get('/api/individuals?donor=' + this.indivName).map((res: Response) => res.json())
     ).subscribe(
       data => {
-        console.log(data);
+        console.log("For Individuals list: ", data);
         this.isRequesting = false;
-        this.otherIndividuals = data[1];
+        this.otherIndividuals = {};
+        this.otherIndividuals.data = data[0];
       },
       err => console.error(err)
       );
