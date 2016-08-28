@@ -24,6 +24,8 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   private isSelected: boolean=false;
   public isRequesting: boolean=true;
 
+  public testData: Date = new Date();
+
   constructor(
               private http:Http) {
   }

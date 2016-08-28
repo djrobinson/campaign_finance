@@ -7,8 +7,10 @@ import {SpinnerComponent} from '../../loading/spinner.component';
 @Component({
   selector: 'individual-popup-list',
   template: `
+    <div class="title">
+      <p>Other Donations from Similar Names:</p>
+    </div>
     <div class="indiv-list">
-      <p>Other Donations from Similar Names</p>
       <div class="other-donations">
         <spinner [isRunning]="isRequesting">
         </spinner>
@@ -40,7 +42,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       position: absolute;
       bottom: 0;
       width: 80%;
-      height: 80%;
+      height: 90%;
       font-family: 'Prata', serif;
       text-align: center;
       overflow: scroll;
@@ -56,6 +58,12 @@ import {SpinnerComponent} from '../../loading/spinner.component';
 
     .donor-tile:nth-child(2n) {
       background-color: #f2f2f2;
+    }
+
+    .title {
+      position: absolute;
+      height: 10%;
+      top: 0;
     }
   `],
   directives: [SpinnerComponent]

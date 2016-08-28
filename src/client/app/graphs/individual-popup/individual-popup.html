@@ -3,20 +3,35 @@
     <img src="/images/close.png" class="close-icon" />
   </div>
 
-  <div class="choose-profile" (click)="callList()" [class.selected]="isSelected">
+  <div class="choose-profile" (click)="callList()" [class.selected]="!isSelected">
     <h3>Profile</h3>
   </div>
-  <div class="choose-list" (click)="callList()" [class.selected]="!isSelected">
+  <div class="choose-list" (click)="callList()" [class.selected]="isSelected">
     <h3>Other transactions</h3>
   </div>
   <spinner [isRunning]="isRequesting">
   </spinner>
   <div class="indiv" *ngIf="!isSelected && !isRequesting">
     <h3>{{individual?.NAME}}</h3>
-    <p>{{individual?.CITY }}, {{individual?.STATE}}</p>
-    <p>{{individual?.EMPLOYER}}</p>
-    <p>{{individual?.OCCUPATION}}</p>
-    <p>{{individual?.TRANSACTION_DT}}</p>
+    <table>
+      <tr>
+        <td>State:</td>
+        <td>{{individual?.CITY }}, {{individual?.STATE}}</td>
+      </tr>
+      <tr>
+        <td>Employer:</td>
+        <td>{{individual?.EMPLOYER}}</td>
+      </tr>
+      <tr>
+        <td>Occupation:</td>
+        <td>{{individual?.OCCUPATION}}</td>
+      </tr>
+      <tr>
+        <td>Transaction Date:</td>
+        <td>{{individual?.TRANSACTION_DT.substring(0,10)}}</td>
+      </tr>
+    </table>
+
     <a [href]="individual?.FEC_LINK"><img src="images/fec.png" class="fec" /></a>
     <h4>Transaction Amount: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}}</h4>
   </div>
