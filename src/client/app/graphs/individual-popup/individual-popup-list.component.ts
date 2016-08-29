@@ -1,4 +1,4 @@
-import {Component, Input, Output, OnInit} from 'angular2/core';
+import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {SpinnerComponent} from '../../loading/spinner.component';
@@ -24,7 +24,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
           </div>
           <div class="one-half column">
             <p>Donation: {{parseFloat(indiv?.TRANSACTION_AMT) | currency:'USD':true}}</p>
-            <div class="button" (click)="changeIndiv(indiv?.TRAN_ID)">
+            <div class="button" (click)="changeTran(indiv)">
               See Donation
             </div>
           </div>
@@ -72,6 +72,7 @@ export class IndividualListPopupComponent implements OnInit {
   @Input() indivName: string;
   public otherIndividuals: any;
   public isRequesting: boolean=true;
+  @Output() changeIndiv = new EventEmitter();
 
   constructor(private http:Http) {}
 
@@ -92,5 +93,13 @@ export class IndividualListPopupComponent implements OnInit {
       },
       err => console.error(err)
       );
+  }
+
+  changeTran(indiv) {
+    console.log("Calling the changeIndiv func");
+    this.changeIndiv.emit({
+      transaction: indiv.TRAN_ID,
+      name: indiv.NAME
+    })
   }
 }

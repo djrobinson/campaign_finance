@@ -56,12 +56,14 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   }
 
   changeIndiv(tranId){
-    console.log("Change indiv: ", tranId);
-    this.individualTran = tranId;
+    console.log("Transaction ID from event ", tranId);
+    this.individualTran = tranId.transaction;
     this.http.get('/api/individuals/transaction/' + this.individualTran).map(response => response.json()).subscribe(data => {
       console.log("Transaction change indiv ", data);
       this.individual = data[0];
     }, error => console.log('Could not load transactions.'));
+    this.isSelected = !this.isSelected;
+    this.showList = !this.showList;
   }
 
   close(){
