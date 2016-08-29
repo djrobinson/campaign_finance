@@ -41,8 +41,25 @@ export class CandidatesComponent implements OnInit {
           if (this.type === 'P'){
             this.headerType = 'Presidential';
             var finalData = data.map((item) => {
-              var currImg = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + item.CANDIDATE_ID + '.jpg';
-              item.profile_img = currImg;
+              // var currImg = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + item.CANDIDATE_ID + '.jpg';
+
+              function imageExists(url, callback) {
+                var img = new Image();
+                img.onload = function() { callback(true); };
+                img.onerror = function() { callback(false); };
+                img.src = url;
+              }
+
+              // Sample usage
+              var imageUrl = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + item.CANDIDATE_ID + '.jpg';
+              imageExists(imageUrl, function(exists) {
+                if (exists) {
+                  console.log(imageUrl);
+                  item.profile_img = imageUrl;
+                } else {
+                  item.profile_img = 'http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png';
+                }
+              });
               if (item.PARTY_CODE === 'DEM'){
                 item.tile_color = "solid "+demColors[0]+" 5px";
                 return item;

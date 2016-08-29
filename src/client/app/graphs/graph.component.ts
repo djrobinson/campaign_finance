@@ -127,16 +127,15 @@ export class GraphComponent implements OnInit  {
   }
 
   exit(){
+    console.log("Exit called ");
     this.indivPopup = false;
     this.selectedNode = false;
     this.cmtePopup = false;
     this.candPopup = false;
-    this.congressPopup = false;
   }
 
   exitIndiv(){
     this.indivPopup = false;
-    this.selectedNode = false;
   }
 
   private stopRefreshing() {

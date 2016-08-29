@@ -8,7 +8,6 @@
   font-family: 'Prata', serif;
 }
 
-
 img {
   height: 100px;
   border-radius: 50%;
@@ -91,4 +90,8 @@ img {
 
 .float-right {
   text-align: right !important;
+}
+
+.spacer {
+  height: 5rem;
 }

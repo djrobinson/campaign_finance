@@ -135,7 +135,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         this.candidate = data[0][0];
         this.typePieComponent.callAsc(data[2]);
         this.dsgnPieComponent.callAsc(data[1]);
-        this.itemizedDonations = parseInt(data[3][0].count);
         this.committeeDonations = data[2].reduce((prev, item)=>{
           return prev + +item.count;
         }, 0)
