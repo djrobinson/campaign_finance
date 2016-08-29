@@ -26,6 +26,7 @@
   <individual-popup
     [individualTran]="individualTran"
     [indivName]="indivName"
+    (changeIndiv)="showIndivPopup($event)"
     (exitEmit)="exit()">
   </individual-popup>
 </div>

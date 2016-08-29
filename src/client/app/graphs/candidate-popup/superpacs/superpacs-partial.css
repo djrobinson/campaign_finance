@@ -15,17 +15,19 @@ treemap {
 }
 
 .choose-treemap {
-  height: 10%;
+  height: 9%;
   text-align: center;
   position: absolute;
   left: 0;
   top: 0;
   width: 50%;
   display: inline;
+  font-family: 'Oswald';
+  font-weight: 300;
 }
 
 .choose-list {
-  height: 10%;
+  height: 9%;
   text-align: center;
   position: absolute;
   right: 0;
@@ -33,6 +35,8 @@ treemap {
   width: 50%;
   background: transparent ;
   display: inline;
+  font-family: 'Oswald';
+  font-weight: 300;
 }
 
 superpacs-list {
@@ -43,7 +47,7 @@ superpacs-list {
   overflow: scroll;
 }
 
-h1, h2, h3, h4, h5, p, td, th {
+h1, h2, h4, h5, p, td, th {
   font-family: 'Prata', serif;
 }
 
@@ -56,6 +60,17 @@ h1, h2, h3, h4, h5, p, td, th {
   border: solid 2px gray;
 }
 
+.choose-treemap:hover {
+  background: #9DBF9E;
+  color: #4d4d4d;
+}
+
+.choose-list:hover {
+  background: #9DBF9E;
+  color: #4d4d4d;
+}
+
 .selected {
-  background: #73877B;
+  background: #9DBF9E;
+  color: #4d4d4d;
 }

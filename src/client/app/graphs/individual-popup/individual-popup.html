@@ -35,6 +35,8 @@
 
     <div class="button individual-button" (click)="searchNameTitle(individual?.NAME, individual?.EMPLOYER)">Search Name & Employer</div>
 
+    <div class="button individual-button" (click)="changeIndiv(individual?.TRAN_ID)">Search Name & Employer</div>
+
 
     <h4>Transaction Amount: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}} <a [href]="individual?.FEC_LINK"><img src="images/fec.png" class="fec" /></a></h4>
   </div>

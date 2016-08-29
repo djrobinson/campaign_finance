@@ -24,7 +24,6 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   private isSelected: boolean=false;
   public isRequesting: boolean=true;
   public title: string;
-  public
 
   public testData: Date = new Date();
 
@@ -43,7 +42,7 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
     ).subscribe(
       data => {
         this.isRequesting = false;
-        console.log(data);
+        console.log("Here's the indiv data: ", data);
         data[0][0].FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + data[0][0].IMAGE_NUM;
         this.individual = data[0][0];
       },
@@ -57,9 +56,10 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   }
 
   changeIndiv(tranId){
+    console.log("Change indiv: ", tranId);
     this.individualTran = tranId;
     this.http.get('/api/individuals/transaction/' + this.individualTran).map(response => response.json()).subscribe(data => {
-      console.log(data);
+      console.log("Transaction change indiv ", data);
       this.individual = data[0];
     }, error => console.log('Could not load transactions.'));
   }

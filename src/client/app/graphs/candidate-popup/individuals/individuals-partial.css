@@ -31,7 +31,7 @@ individuals-list {
   overflow: scroll;
 }
 
-h1, h2, h3, h4, h5, p, td, th {
+h1, h2, h4, h5, p, td, th {
   font-family: 'Prata', serif;
 }
 
@@ -45,7 +45,7 @@ h1, h2, h3, h4, h5, p, td, th {
 }
 
 .choose-bubble {
-  height: 10%;
+  height: 9%;
   text-align: center;
   position: absolute;
   left: 0;
@@ -53,10 +53,12 @@ h1, h2, h3, h4, h5, p, td, th {
   width: 50%;
   display: inline;
   border-bottom: solid 2px gray;
+  font-family: 'Oswald';
+  font-weight: 300;
 }
 
 .choose-list {
-  height: 10%;
+  height: 9%;
   text-align: center;
   position: absolute;
   right: 0;
@@ -65,8 +67,22 @@ h1, h2, h3, h4, h5, p, td, th {
   background: transparent ;
   display: inline;
   border-bottom: solid 2px gray;
+  font-family: 'Oswald';
+  font-weight: 300;
+}
+
+
+.choose-bubble:hover {
+  background: #9DBF9E;
+  color: #4d4d4d;
+}
+
+.choose-list:hover {
+  background: #9DBF9E;
+  color: #4d4d4d;
 }
 
 .selected {
-  background: #73877B;
+  background: #9DBF9E;
+  color: #4d4d4d;
 }

@@ -19,9 +19,17 @@ export class IndividualsSectionComponent implements OnInit {
   }
 
   public callIndividuals(){
-    this.isSelected = !this.selected;
+    this.isSelected = !this.isSelected;
     this.showList = !this.showList;
   }
+
+  // public changeIndiv(tranId){
+  //   this.individualTran = tranId;
+  //   this.http.get('/api/individuals/transaction/' + this.individualTran).map(response => response.json()).subscribe(data => {
+  //     console.log(data);
+  //     this.individual = data[0];
+  //   }, error => console.log('Could not load transactions.'));
+  // }
 }
 
 
