@@ -134,6 +134,11 @@ export class GraphComponent implements OnInit  {
     this.congressPopup = false;
   }
 
+  exitIndiv(){
+    this.indivPopup = false;
+    this.selectedNode = false;
+  }
+
   private stopRefreshing() {
     this.isRequesting = false;
   }
