@@ -63,6 +63,7 @@ export class GraphComponent implements OnInit  {
   }
 
   showIndivPopup(event){
+    console.log("Graph level event : ", event);
     this.indivName = event.name;
     this.indivPopup = true;
     this.individualTran = event.tranId;

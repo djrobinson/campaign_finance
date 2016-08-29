@@ -142,7 +142,7 @@ export class BubbleComponent implements OnInit {
   }
 
   changeIndiv(indiv) {
-    console.log("Calling the changeIndiv func");
+    console.log("Change Indiv bubble chart ", indiv);
     this.indivEmit.emit({
       transaction: indiv.TRAN_ID,
       name: indiv.NAME

@@ -9,6 +9,8 @@
     *ngIf="showList"
     [cmte]="cmte">
   </individuals-list>
-  <bubble-chart *ngIf="!showList" [cmte]="cmte">
+  <bubble-chart *ngIf="!showList"
+    [cmte]="cmte"
+    (indivEmit)="changeTran($event)">
   </bubble-chart>
 </div>

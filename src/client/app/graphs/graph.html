@@ -26,7 +26,7 @@
   <individual-popup
     [individualTran]="individualTran"
     [indivName]="indivName"
-    (changeIndiv)="showIndivPopup($event)"
+
     (exitEmit)="exit()">
   </individual-popup>
 </div>
@@ -61,6 +61,7 @@
     [committee]="selectedCommittee"
     (exitEmit)="exit()"
     (cmteEmit)="changeCmte($event)"
+    (changeIndiv)="showIndivPopup($event)"
     (treemapEmit)="showTreemap($event)"
   >
   </candidate-popup>

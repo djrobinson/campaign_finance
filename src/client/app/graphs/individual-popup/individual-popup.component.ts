@@ -37,6 +37,7 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     var internalList = this.individualListPopupComponent;
+    console.log(this.individualTran);
     Observable.forkJoin(
       this.http.get('/api/individuals/transaction/'+this.individualTran).map((res: Response) => res.json())
     ).subscribe(

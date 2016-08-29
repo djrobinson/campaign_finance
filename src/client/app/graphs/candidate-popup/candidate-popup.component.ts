@@ -25,6 +25,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   @Input() isCandidate: boolean;
   @Output() exitEmit = new EventEmitter();
   @Output() cmteEmit = new EventEmitter();
+  @Output() changeIndiv = new EventEmitter();
   @ViewChild(TypePieComponent) typePieComponent: TypePieComponent;
   @ViewChild(SizePieComponent) sizePieComponent: SizePieComponent;
   @ViewChild(DsgnPieComponent) dsgnPieComponent: DsgnPieComponent;
@@ -147,6 +148,14 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
     this.cmteEmit.emit({
       cmte: cmte
     })
+  }
+
+  public changeTran(event){
+    console.log("Change indiv Candidate Level", event);
+    this.changeIndiv.emit({
+      tranId: event.transaction,
+      name: event.name
+    });
   }
 
   close() {

@@ -48,6 +48,7 @@ individual-popup {
   left: 30%;
   border: solid 1px #75717B;
   background-color: #FEFFFE;
+  z-index: 5;
 }
 committee-popup {
   position: absolute;

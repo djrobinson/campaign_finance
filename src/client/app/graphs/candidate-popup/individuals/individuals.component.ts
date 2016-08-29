@@ -1,4 +1,4 @@
-import {Component, Input, Output, OnInit} from 'angular2/core';
+import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 import {BubbleComponent} from '../../charts/bubble-chart.component';
 import {IndividualsListComponent} from './individuals-list.component';
 
@@ -14,6 +14,7 @@ export class IndividualsSectionComponent implements OnInit {
   public showList: boolean = false;
   private isRequesting: boolean;
   private isSelected: boolean = false;
+  @Output() changeIndiv = new EventEmitter();
 
   ngOnInit(){
   }
@@ -23,13 +24,13 @@ export class IndividualsSectionComponent implements OnInit {
     this.showList = !this.showList;
   }
 
-  // public changeIndiv(tranId){
-  //   this.individualTran = tranId;
-  //   this.http.get('/api/individuals/transaction/' + this.individualTran).map(response => response.json()).subscribe(data => {
-  //     console.log(data);
-  //     this.individual = data[0];
-  //   }, error => console.log('Could not load transactions.'));
-  // }
+  public changeTran(event){
+    console.log("Change indiv Individual Level", event);
+    this.changeIndiv.emit({
+      transaction: event.transaction,
+      name: event.name
+    });
+  }
 }
 
 

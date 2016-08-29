@@ -56,7 +56,8 @@
   <div class="nine columns main-content">
     <individuals-section
       *ngIf="selection==='individuals'"
-      [cmte]="committee">
+      [cmte]="committee"
+      (changeIndiv)="changeTran($event)">
     </individuals-section>
     <committees-section
       *ngIf="selection==='committees'"
