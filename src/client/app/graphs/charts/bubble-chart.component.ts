@@ -75,11 +75,11 @@ export class BubbleComponent implements OnInit {
       .style("position", "fixed")
       .style("z-index", "10")
       .style("visibility", "hidden")
-      .style("color", "white")
+      .style("background-color", "white")
       .style("padding", "8px")
-      .style("background-color", "rgba(0, 0, 0, 0.75)")
-      .style("border-radius", "6px")
-      .style("font", "8px sans-serif")
+      .style("border-radius", "10px")
+      .style("font", "14px sans-serif")
+      .style("box-shadow", "4px 4px 10px rbga(0, 0, 0, 0.4)")
       .text("tooltip");
 
     d3.json("/api/individuals/bubble/"+cmte, function(error, root) {

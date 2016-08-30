@@ -242,7 +242,6 @@ export class DsgnPieComponent implements OnInit, OnChanges {
         legend.append('text')
           .attr('x', legendRectSize + legendSpacing)
           .attr('y', legendRectSize - legendSpacing)
-          .style('fill', '#4d4d4d')
           .text(function(d) { return d; });
 
       });
