@@ -176,7 +176,6 @@ export class TypePieComponent implements OnInit, OnChanges {
           remColors.push(colors[colorIterator]);
           return colors[colorIterator];
         }
-
       };
 
       var svg = d3.select('#chartType')
@@ -264,12 +263,13 @@ export class TypePieComponent implements OnInit, OnChanges {
             return 'translate(' + moveLeft + ',' + vert + ')';
           });
 
+
         legend.append('rect')
           .attr('width', legendRectSize)
           .attr('height', legendRectSize)
           .style('fill', function(d, i){
             console.log("Count Colors arr: ", countColors[i]);
-            return colors[i];
+            return remColors[i];
           })
 
         legend.append('text')
