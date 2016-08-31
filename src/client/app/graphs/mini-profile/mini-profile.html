@@ -1,5 +1,5 @@
 <div class="title">
-
+    <h1>Mini Prof!!!</h1>
     <div *ngIf="popupType ==='individual'">
       <div class="transaction">
         <h5>Transaction Amount: {{parseFloat(amount) | currency:'USD':true}}</h5>
@@ -68,8 +68,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Committee Popup  -->
     <div *ngIf="popupType ==='committee'">
       <div class="summary">
         <div class="summary-header">

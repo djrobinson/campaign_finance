@@ -221,7 +221,7 @@ export class GraphComponent implements OnInit  {
   }
 
   buildGraph(ctrl, candId, absUrl) {
-      this.graph = false;
+    this.graph = false;
     //HELPER FUNCTIONS FOR GRAPH
     function dottype(d) {
       d.x = +d.x;
@@ -236,10 +236,17 @@ export class GraphComponent implements OnInit  {
     function dragstarted(d) {
       // d3.event.sourceEvent.stopPropagation();
       d3.select(this).classed("dragging", true);
+
       force.start();
     }
 
     function dragged(d) {
+      ctrl.candPopup = true;
+      ctrl.isCand = true;
+      // this.selectedCandidate = event.cand;
+      // this.selectedCommittee = event.cmte_id;
+      ctrl.selectedNode = false;
+      console.log(ctrl);
       d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
     }
 
@@ -258,6 +265,7 @@ export class GraphComponent implements OnInit  {
     var drag = d3.behavior.drag()
       .origin(function(d) { return d; })
       .on("dragstart", function(d) {
+        ctrl.setSelected(d);
         d3.event.sourceEvent.stopPropagation();
         d3.select(this).classed("dragging", true);
         force.start();
@@ -296,12 +304,13 @@ export class GraphComponent implements OnInit  {
 
     //STARTS FORCE LAYOUT. ADDS DATA, CREATES LINKS AND NODES
     var force = d3.layout.force()
-      .gravity(.05)
+      .gravity(.01)
+      .friction(.7)
       .size([width, height])
       .nodes(this.nodeData)
       .links(this.linkData)
-      .distance(150)
-      .charge(-1400)
+      .distance(220)
+      .charge(-1000)
       .start();
 
     var link = container.append("g")
@@ -469,10 +478,6 @@ export class GraphComponent implements OnInit  {
 
       d3.select(this).select("circle").transition()
         .duration(750);
-    })
-
-    .on("click", function(d){
-      ctrl.setSelected(d);
     })
 
   }

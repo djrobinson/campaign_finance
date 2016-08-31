@@ -29,36 +29,6 @@ export class MiniProfileComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(){
-    if (this.bioguide.length){
-          this.picture =  "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + this.bioguide[0].id.bioguide + ".jpg";
-        } else {
-          this.picture = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + this.node.CAND_ID + ".jpg"
-        }
-  }
-
-  ngOnChanges(changes: { [node: string]: SimpleChange }) {
-    if (this.node.graphtype === "individual") {
-      this.title = this.node.NAME;
-      this.id = this.node.TRAN_ID;
-      this.amount = this.node.TRANSACTION_AMT;
-      this.employer = this.node.EMPLOYER;
-      this.popupType = "individual";
-    } else if (this.node.graphtype === "committee") {
-      this.title = this.node.CMTE_NM;
-      this.id = this.node.OTHER_ID || this.node.CMTE_ID;
-      this.cash = this.node.cas_on_han_clo_of_per;
-      this.contributions = this.node.net_con;
-      this.distributions = this.node.tot_dis;
-      this.popupType = "committee";
-    } else if (this.node.graphtype === "candidate"){
-      this.title = this.node.data.CANDIDATE_NAME;
-      this.id = this.node.CAND_ID;
-      this.cmte_id = this.node.CMTE_ID;
-      this.cash = this.node.data.cas_on_han_clo_of_per;
-      this.contributions = this.node.data.tot_con;
-      this.distributions = this.node.data.tot_dis;
-      this.popupType = "candidate";
-    }
   }
 
   public searchNameTitle(name, employer){

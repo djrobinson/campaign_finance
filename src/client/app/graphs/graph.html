@@ -11,22 +11,16 @@
   </defs> -->
 </svg>
 
-<div *ngIf="selectedNode">
+<div>
   <mini-profile-view
     class="three columns"
-    [node]="selectedNode"
-    [bioguide]="bioguideId"
-    (indivEmit)="showIndivPopup($event)"
-    (cmteEmit)="showCmtePopup($event)"
-    (candEmit)="showCandPopup($event)"
-    (congressEmit)="showCongressPopup($event)">
+  >
   </mini-profile-view>
 </div>
 <div *ngIf="indivPopup">
   <individual-popup
     [individualTran]="individualTran"
     [indivName]="indivName"
-
     (exitEmit)="exitIndiv()">
   </individual-popup>
 </div>
