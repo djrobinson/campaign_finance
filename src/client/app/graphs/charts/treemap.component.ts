@@ -58,6 +58,7 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
     }
 
     .instruction-block {
+      padding: 1rem;
       position: absolute;
       color: black;
       height: 50%;
@@ -88,7 +89,7 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       width: 100%;
       background:  #f2f2f2;
       font-family: 'Prata', serif;
-      font-size: 2rem;
+      font-size: 1.5rem;
       display: flex;
       align-items: space-between;
       justify-content: center;
@@ -380,7 +381,7 @@ export class TreemapComponent implements OnInit, OnChanges {
               .attr("x", 0)
               .attr("dx", "0.35em")
               .attr("dy", "4rem")
-              .style("font-size", "4rem")
+              .style("font-size", "3rem")
 
             d3.select(this)
               .append("tspan")
@@ -389,7 +390,7 @@ export class TreemapComponent implements OnInit, OnChanges {
               .attr("x", 0)
               .attr("dx", "0.35em")
               .attr("dy", "4rem")
-              .style("font-size", "4rem")
+              .style("font-size", "3rem")
 
 
             d3.select(this)
@@ -399,7 +400,7 @@ export class TreemapComponent implements OnInit, OnChanges {
               .attr("x", 0)
               .attr("dx", "0.35em")
               .attr("dy", "4rem")
-              .style("font-size", "4rem")
+              .style("font-size", "3rem")
             d3.select(this)
               .append("tspan")
               .attr("class", "child-tspan")
@@ -407,21 +408,20 @@ export class TreemapComponent implements OnInit, OnChanges {
               .attr("x", 0)
               .attr("dx", "0.35em")
               .attr("dy", "4rem")
-              .style("font-size", "4rem")
+              .style("font-size", "3rem")
 
             d3.select(this)
               .append("tspan")
                 .attr("class", "child-tspan")
-                .attr("x", 0)
+                .attr("x", "1rem")
                 .attr("dx", "0.35em")
-              .attr("dy", "4rem")
+                .attr("dy", "4rem")
               .append("a")
                 .attr("xlink:href", function(d) { return "http://"+d.fec; })
-                .attr("class", "fec")
+                .text("Link to FEC Record")
+                .style("font-size", "3rem")
+                .attr("fill", "white");
 
-            d3.selectAll(".fec")
-                .append("svg:img")
-                  .attr("xlink:href", "http://www.fec.gov/finance/disclosure/ftpdet.shtml#a2015_2016")
           }
         }
 
