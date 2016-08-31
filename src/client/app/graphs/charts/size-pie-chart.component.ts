@@ -131,6 +131,7 @@ export class SizePieComponent implements OnInit, OnChanges {
       var colors = [ '#bf812d', '#dfc27d', '#f6e8c3', '#c7eae5', '#80cdc1','#35978f',  '#7B9E87', '#01665e'];
 
       var countColors = [];
+      var remColors = [];
 
       var colorIterator = 0;;
       function color(d){
@@ -138,10 +139,12 @@ export class SizePieComponent implements OnInit, OnChanges {
         {
           colorIterator++;
           countColors.push(d);
+          remColors.push(colors[colorIterator]);
           return colors[colorIterator];
         } else {
           countColors.push(d);
           colorIterator = 0;
+          remColors.push(colors[colorIterator]);
           return colors[colorIterator];
         }
 
@@ -240,7 +243,9 @@ export class SizePieComponent implements OnInit, OnChanges {
         legend.append('rect')
           .attr('width', legendRectSize)
           .attr('height', legendRectSize)
-          .style('fill', color)
+          .style('fill', function(d, i){
+            return remColors[i];
+          })
 
         legend.append('text')
           .attr('x', legendRectSize + legendSpacing)
