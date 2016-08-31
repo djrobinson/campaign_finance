@@ -451,11 +451,17 @@ export class TreemapComponent implements OnInit, OnChanges {
           })
 
         function transition(d) {
+          console.log("Here's D! ", d);
+          if (d._children === undefined) {
+            console.log("No Transition?");
+            return;
+          };
           ctrl.level = d.category;
           console.log(d.parent);
           if (typeof d.parent === 'undefined'){
             ctrl.level = 'main';
           }
+
           if (transitioning || !d) return;
           transitioning = true;
 

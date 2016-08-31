@@ -110,16 +110,19 @@ td:nth-child(2n) {
   position: absolute;
   top: 2px;
   right: 2px;
-  height: 25px;
-  width: 25px;
+  height: 15px;
+  width: 15px;
   z-index: 2;
+  color: #BDBBB6;
+
 }
 .close-icon {
   position: absolute;
   top: 2px;
   right: 2px;
-  height: 20px;
-  width: 20px;
+  height: 15px;
+  width: 15px;
+  color: #BDBBB6;
 }
 
 .button {
