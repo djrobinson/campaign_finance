@@ -234,7 +234,7 @@ export class GraphComponent implements OnInit  {
     }
 
     function dragstarted(d) {
-      d3.event.sourceEvent.stopPropagation();
+      // d3.event.sourceEvent.stopPropagation();
       d3.select(this).classed("dragging", true);
       force.start();
     }
@@ -301,7 +301,7 @@ export class GraphComponent implements OnInit  {
       .nodes(this.nodeData)
       .links(this.linkData)
       .distance(150)
-      .charge(-1000)
+      .charge(-1400)
       .start();
 
     var link = container.append("g")
@@ -310,7 +310,7 @@ export class GraphComponent implements OnInit  {
       .enter().append("line")
       .attr("class", "link")
       .attr("stroke-width", 3)
-      .style("stroke", "gray");
+      .style("stroke", "#DCDCDC");
 
 
 
@@ -322,7 +322,6 @@ export class GraphComponent implements OnInit  {
       .attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; })
       .call(drag)
-      .style("stroke", "black")
       .style("fill", function(d){
         if ( d.graphtype === "candidate" ){
           return "none";
@@ -396,10 +395,6 @@ export class GraphComponent implements OnInit  {
         .attr("r", 50);
 
     node.append("text")
-      .style('fill', 'blue')
-      .style('stroke', 'blue')
-      .attr("dx", "-5rem")
-      .attr("dy", "-2rem")
       .each(addText)
 
 
@@ -410,13 +405,23 @@ export class GraphComponent implements OnInit  {
         var name = d.CANDIDATE || d.NAME || d.CMTE_NM;
         var words = name.split(' ');
         var el = d3.select(this).style("font-size", size).text(words.join(' '))
-                        .style('fill', 'blue')
-                        .style('stroke', 'blue');
-        while (this.getBBox().width >= 120) {
+                        .style('stroke', '#4d4d4d')
+                        .style('fill', '#4d4d4d')
+                        .style('font-family', 'Oswald')
+                        .style('font-weight', '300')
+                        .style('font-size', '1.5rem')
+                        .attr("dx", "-" + this.getBBox().width / 2)
+                        .attr("dy", "-3rem");
+        while (this.getBBox().width >= 200) {
           var word = words.join(' ');
           var tspan = el.text(word)
-                        .style('fill', 'blue')
-                        .style('stroke', 'blue');
+                        .style('stroke', '#4d4d4d')
+                        .style('fill', '#4d4d4d')
+                        .style('font-family', 'Oswald')
+                        .style('font-weight', '300')
+                        .style('font-size', '1.5rem')
+                        .attr("dx", "-100")
+                        .attr("dy", "-3rem");
           words.pop();
         }
       }
@@ -443,23 +448,22 @@ export class GraphComponent implements OnInit  {
 
     node.on("mouseover", function(d) {
 
+      console.log(d);
       node.classed("node-active", function(o) {
-        thisOpacity = isConnected(d, o) ? true : false;
-        this.setAttribute('fill-opacity', thisOpacity);
-        return thisOpacity;
       });
 
       link.classed("link-active", function(o) {
         return o.source === d || o.target === d ? true : false;
       });
 
+      d3.select(this).style('fill-opacity', '.5');
       d3.select(this).classed("node-active", true);
       d3.select(this).select("circle").transition()
         .duration(750)
     })
 
     .on("mouseout", function(d) {
-
+      d3.select(this).style('fill-opacity', '1');
       node.classed("node-active", false);
       link.classed("link-active", false);
 
