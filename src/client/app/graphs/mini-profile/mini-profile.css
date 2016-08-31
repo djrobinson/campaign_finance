@@ -69,6 +69,12 @@ img {
   color: #EFF1F3;
 }
 
+svg {
+  font-family: 'Oswald';
+  font-weight: 300;
+
+}
+
 .summary-body {
   display: flex;
   justify-content: center;

@@ -396,19 +396,27 @@ export class GraphComponent implements OnInit  {
         .attr("r", 50);
 
     node.append("text")
+      .style('fill', 'blue')
+      .style('stroke', 'blue')
       .attr("dx", "-5rem")
       .attr("dy", "-2rem")
-      .each(addText);
+      .each(addText)
+
+
 
     function addText(d) {
       if (!d.CANDIDATE){
         var size = "1rem";
         var name = d.CANDIDATE || d.NAME || d.CMTE_NM;
         var words = name.split(' ');
-        var el = d3.select(this).style("font-size", size).text(words.join(' '));
+        var el = d3.select(this).style("font-size", size).text(words.join(' '))
+                        .style('fill', 'blue')
+                        .style('stroke', 'blue');
         while (this.getBBox().width >= 120) {
           var word = words.join(' ');
-          var tspan = el.text(word);
+          var tspan = el.text(word)
+                        .style('fill', 'blue')
+                        .style('stroke', 'blue');
           words.pop();
         }
       }
