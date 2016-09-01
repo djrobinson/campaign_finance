@@ -5,7 +5,23 @@
   overflow: hidden;
   z-index: 5;
   border-left: solid 3px #BDBBB6;
-  font-family: 'Prata', serif;
+  font-family: 'Oswald';
+  font-weight: 300;
+}
+
+.cmte-name {
+  font-family: 'Oswald';
+  font-weight: 700;
+  font-size: 3rem;
+  color: white;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background: #9DBF9E;
+  color: #4d4d4d;
 }
 
 img {
@@ -13,6 +29,31 @@ img {
   border-radius: 50%;
   margin-top: 2rem;
   border: solid 3px white;
+}
+
+table {
+  margin-top: 0;
+}
+
+tr {
+  border-top: solid 1px #BDBBB6;
+}
+
+td {
+  font-size: 1.5rem;
+  padding: 1rem 2rem 1rem 2rem;
+}
+
+tr:last-child {
+  font-size: 2rem;
+  font-weight: 500;
+  color: white;
+  background: #839788;
+}
+
+
+td:nth-child(2n) {
+  text-align: right;
 }
 
 .transaction {
@@ -24,7 +65,8 @@ img {
 }
 
 .button {
-  font-family: 'Prata', serif;
+  font-family: 'Oswald';
+  font-weight: 300;
   background-color: #73877B; /* Green */
   border: none;
   color: white;

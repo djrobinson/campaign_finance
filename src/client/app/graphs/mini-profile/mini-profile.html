@@ -1,6 +1,29 @@
 <div class="title">
-    <h1>Mini Prof!!!</h1>
-    <div *ngIf="popupType ==='individual'">
+    <div class="profile-tooltip">
+      <div class="cmte-name">
+        Hillary Victory Fund
+      </div>
+      <table>
+        <tr>
+          <td>Cash:</td>
+          <td>$300,000,000</td>
+        </tr>
+        <tr>
+          <td>Distributions:</td>
+          <td>$30,000,000</td>
+        </tr>
+        <tr>
+          <td>Contributions:</td>
+          <td>$1,000,000</td>
+        </tr>
+        <tr>
+          <td>Transaction Amount:</td>
+          <td>$300,000</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- <div *ngIf="popupType ==='individual'">
       <div class="transaction">
         <h5>Transaction Amount: {{parseFloat(amount) | currency:'USD':true}}</h5>
       </div>
@@ -40,8 +63,6 @@
       <div class="button" (click)="congressPopupEmit(id)">Profile</div>
     </div>
 
-
-    <!-- Candidate Mini Profile section -->
     <div *ngIf="popupType ==='candidate'">
       <div class="summary">
         <div class="summary-header">
@@ -94,5 +115,5 @@
         </div>
       </div>
     </div>
-
+ -->
 </div>
