@@ -21,6 +21,7 @@ export class MiniProfileComponent implements OnChanges, OnInit {
   public contributions: number;
   public distributions: number;
   public employer: string;
+  private cmte: Object;
 
   constructor() {
     this.parseFloat = function(num){
@@ -31,8 +32,9 @@ export class MiniProfileComponent implements OnChanges, OnInit {
   ngOnInit(){
   }
 
-  public testViewChild(d){
+  public updateMiniProfile(d){
     console.log("View Child Blah ", d);
+    this.cmte = d;
   }
 
   public searchNameTitle(name, employer){

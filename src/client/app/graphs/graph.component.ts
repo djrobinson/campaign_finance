@@ -216,8 +216,7 @@ export class GraphComponent implements OnInit  {
   }
 
   public onHover(d){
-    console.log("On Hover blah ", d);
-    this.miniProfileComponent.testViewChild(d);
+    this.miniProfileComponent.updateMiniProfile(d);
   }
 
   setSelected(selected:string) {

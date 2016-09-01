@@ -1,12 +1,12 @@
 <div class="title">
     <div class="profile-tooltip">
       <div class="cmte-name">
-        Hillary Victory Fund
+        {{cmte?.CMTE_NM}}
       </div>
-      <table>
+      <table *ngIf="!isIndividual">
         <tr>
           <td>Cash:</td>
-          <td>$300,000,000</td>
+          <td>stats.</td>
         </tr>
         <tr>
           <td>Distributions:</td>
@@ -16,7 +16,9 @@
           <td>Contributions:</td>
           <td>$1,000,000</td>
         </tr>
-        <tr>
+      </table>
+      <table>
+        <tr class="tran-amount">
           <td>Transaction Amount:</td>
           <td>$300,000</td>
         </tr>

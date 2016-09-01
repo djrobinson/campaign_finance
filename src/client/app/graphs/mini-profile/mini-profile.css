@@ -43,11 +43,15 @@ td {
   padding: 1rem 2rem 1rem 2rem;
 }
 
-tr:last-child {
+.tran-amount {
   font-size: 2rem;
   font-weight: 500;
   color: white;
   background: #839788;
+}
+
+.committee-rows {
+  width: 100%;
 }
 
 
