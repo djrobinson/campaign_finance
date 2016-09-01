@@ -8,12 +8,19 @@
   background-color:rgba(350, 350, 350, 0.9);
 }
 
+.profile-tooltip {
+  position: relative;
+  height: 50%;
+  width: 100%;
+  overflow: scroll;
+}
+
 .cmte-name {
+  position: relative;
   font-family: 'Oswald';
   font-weight: 700;
   font-size: 2rem;
   color: white;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,6 +28,10 @@
   padding-bottom: 2rem;
   background: #9DBF9E;
   color: #4d4d4d;
+}
+
+.instructions {
+  width: 100%;
 }
 
 .legend {
@@ -57,6 +68,8 @@ td {
   font-size: 1.5rem;
   padding: 1rem 2rem 1rem 2rem;
 }
+
+
 
 .tran-amount {
   font-size: 2rem;
@@ -112,46 +125,11 @@ td:nth-child(2n) {
   margin-top: 2rem;
 }
 
-.summary {
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 10px;
-}
-
-.summary-header {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  height: 4rem;
-  background: #73877B;
-  font-family: 'Oswald';
-  font-weight: 300;
-  color: #EFF1F3;
-}
 
 svg {
   font-family: 'Oswald';
   font-weight: 300;
 
-}
-
-.summary-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 6rem;
-  background: #839788;
-  color: #EFF1F3;
-}
-
-.summary-header h5 {
-  font-family: 'Oswald';
-  font-weight: 300;
-}
-
-.summary-body h5 {
-  font-family: 'Oswald';
-  font-weight: 400;
 }
 
 .float-right {

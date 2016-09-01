@@ -256,13 +256,17 @@ export class GraphComponent implements OnInit  {
       if (d3.event.defaultPrevented) return; // dragged
 
       ctrl.setSelected(d);
-      ctrl.candPopup = true;
-      ctrl.isCand = false;
-      // this.selectedCandidate = event.cand;
-      // this.selectedCommittee = event.cmte_id;
-      ctrl.selectedNode = false;
-      ctrl.selectedCommittee = d.CMTE_ID;
-      console.log(ctrl);
+      if (d.graphtype === 'individual'){
+        ctrl.indivName = d.NAME;
+        ctrl.indivPopup = true;
+        ctrl.individualTran = d.TRAN_ID;
+        ctrl.selectedNode = false;
+      } else {
+        ctrl.candPopup = true;
+        ctrl.isCand = false;
+        ctrl.selectedNode = false;
+        ctrl.selectedCommittee = d.CMTE_ID;
+      }
     }
 
     var height = 900;
