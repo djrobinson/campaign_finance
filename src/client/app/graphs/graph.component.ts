@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
+import {Component, OnInit, Output, EventEmitter, ViewChild} from 'angular2/core';
 import {GraphService} from '../api_services/graph.service';
 import {CandidateTableComponent} from '../candidate/candidate-table.component';
 import {MiniProfileComponent} from './mini-profile/mini-profile.component.ts';
@@ -44,6 +44,7 @@ export class GraphComponent implements OnInit  {
   private isCand: boolean;
   public absUrl: string;
   public candImage: string;
+  @ViewChild(MiniProfileComponent) miniProfileComponent: MiniProfileComponent;
 
   constructor(
     private _params: RouteParams,
@@ -214,7 +215,10 @@ export class GraphComponent implements OnInit  {
         this.buildGraph(this, this.candidate_id, this.absUrl);
   }
 
-
+  public onHover(d){
+    console.log("On Hover blah ", d);
+    this.miniProfileComponent.testViewChild(d);
+  }
 
   setSelected(selected:string) {
     this.selectedNode = selected;
@@ -458,6 +462,7 @@ export class GraphComponent implements OnInit  {
     node.on("mouseover", function(d) {
 
       console.log(d);
+      ctrl.onHover(d);
       node.classed("node-active", function(o) {
       });
 

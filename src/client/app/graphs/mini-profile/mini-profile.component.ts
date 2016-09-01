@@ -31,6 +31,10 @@ export class MiniProfileComponent implements OnChanges, OnInit {
   ngOnInit(){
   }
 
+  public testViewChild(d){
+    console.log("View Child Blah ", d);
+  }
+
   public searchNameTitle(name, employer){
     window.open('http://google.com/search?q='+name+' '+employer);
   }
