@@ -1,26 +1,30 @@
 <div class="title">
     <div class="profile-tooltip">
       <div class="cmte-name">
-        {{cmte?.CMTE_NM}}
+        {{cmte?.CMTE_NM || cmte?.NAME}}
       </div>
-      <table *ngIf="!isIndividual">
+      <table *ngIf="cmte?.graphtype !== 'individual'">
         <tr>
           <td>Cash:</td>
-          <td>stats.</td>
+          <td>{{cmte?.cas_on_han_clo_of_per}}</td>
         </tr>
         <tr>
           <td>Distributions:</td>
-          <td>$30,000,000</td>
+          <td>{{cmte?.tot_dis}}</td>
         </tr>
         <tr>
           <td>Contributions:</td>
-          <td>$1,000,000</td>
+          <td>{{cmte?.net_con}}</td>
         </tr>
       </table>
       <table>
+        <tr *ngIf="cmte?.graphtype === 'individual'">
+          <td>Employer</td>
+          <td>{{cmte?.EMPLOYER}}</td>
+        </tr>
         <tr class="tran-amount">
           <td>Transaction Amount:</td>
-          <td>$300,000</td>
+          <td>{{cmte?.TRANSACTION_AMT}}</td>
         </tr>
       </table>
     </div>

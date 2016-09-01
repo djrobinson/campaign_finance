@@ -5,13 +5,13 @@
   z-index: 5;
   font-family: 'Oswald';
   font-weight: 300;
-  background-color:rgba(350, 350, 350, 0.85);
+  background-color:rgba(350, 350, 350, 0.9);
 }
 
 .cmte-name {
   font-family: 'Oswald';
   font-weight: 700;
-  font-size: 3rem;
+  font-size: 2rem;
   color: white;
   height: 100%;
   display: flex;

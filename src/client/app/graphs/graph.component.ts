@@ -237,24 +237,32 @@ export class GraphComponent implements OnInit  {
     }
 
     function dragstarted(d) {
-      // d3.event.sourceEvent.stopPropagation();
+      d3.event.sourceEvent.stopPropagation();
       d3.select(this).classed("dragging", true);
 
       force.start();
     }
 
     function dragged(d) {
-      ctrl.candPopup = true;
-      ctrl.isCand = true;
-      // this.selectedCandidate = event.cand;
-      // this.selectedCommittee = event.cmte_id;
-      ctrl.selectedNode = false;
-      console.log(ctrl);
+
       d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
     }
 
     function dragended(d) {
       d3.select(this).classed("dragging", false);
+    }
+
+    function clicked(d, i) {
+      if (d3.event.defaultPrevented) return; // dragged
+
+      ctrl.setSelected(d);
+      ctrl.candPopup = true;
+      ctrl.isCand = false;
+      // this.selectedCandidate = event.cand;
+      // this.selectedCommittee = event.cmte_id;
+      ctrl.selectedNode = false;
+      ctrl.selectedCommittee = d.CMTE_ID;
+      console.log(ctrl);
     }
 
     var height = 900;
@@ -268,13 +276,14 @@ export class GraphComponent implements OnInit  {
     var drag = d3.behavior.drag()
       .origin(function(d) { return d; })
       .on("dragstart", function(d) {
-        ctrl.setSelected(d);
+
         d3.event.sourceEvent.stopPropagation();
         d3.select(this).classed("dragging", true);
         force.start();
       })
       .on("drag", dragged)
-      .on("dragend", dragended);
+      .on("dragend", dragended)
+      ;
 
 
     //SETS UP AREA OF THE FORCE LAYOUT
@@ -457,6 +466,8 @@ export class GraphComponent implements OnInit  {
     function isConnected(a, b) {
       return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index];
     }
+
+    node.on("click", clicked);
 
     node.on("mouseover", function(d) {
 
