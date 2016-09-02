@@ -315,8 +315,8 @@ export class GraphComponent implements OnInit  {
                 .attr("xlink:xlink:href", function(d) { return 'https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/'+candId+'.jpg';}) // "icon" is my image url. It comes from json too. The double xlink:xlink is a necessary hack (first "xlink:" is lost...).
                 .attr("x", 0)
                 .attr("y", 0)
-                .attr("height", 100)
-                .attr("width", 100)
+                .attr("height", 120)
+                .attr("width", 120)
 
     //STARTS FORCE LAYOUT. ADDS DATA, CREATES LINKS AND NODES
     var force = d3.layout.force()
@@ -417,7 +417,7 @@ export class GraphComponent implements OnInit  {
         .append("circle")
         .attr("id", "cand-node")
         .style("fill", "url('"+absUrl+"#circles-1')")
-        .attr("r", 50);
+        .attr("r", 60);
 
     node.append("text")
       .each(addText)

@@ -28,10 +28,12 @@
   padding-bottom: 2rem;
   background: #9DBF9E;
   color: #4d4d4d;
+  margin: 2rem;
 }
 
 .instructions {
   width: 100%;
+  font-weight: 500;
 }
 
 .legend {

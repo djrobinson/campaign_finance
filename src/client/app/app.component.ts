@@ -38,7 +38,8 @@ import {RouteParams} from 'angular2/router';
       right: 0;
     }
     .menu-option {
-      font-family: 'Prata', serif;
+      font-family: 'Oswald';
+      font-weight: 300;
       display: flex;
       height: 7%;
       width: 100%;

@@ -3,7 +3,7 @@
   </spinner>
 </div>
 <div class="cand-style">
-  <div class="three columns choices">
+  <div class="two columns choices">
     <div *ngIf="isCandidate" class="cand-pic text-center">
       <img [src]="imageVar?.image" alt="picture">
       <h5>{{candidate?.CANDIDATE_NAME}}</h5>
@@ -53,7 +53,7 @@
       </div>
     </div>
   </div>
-  <div class="nine columns main-content">
+  <div class="ten columns main-content">
     <individuals-section
       *ngIf="selection==='individuals'"
       [cmte]="committee"
@@ -85,7 +85,7 @@
         <div *ngIf="!isRequesting" (click)="close()" class="close-button">×</div>
         <div class="twelve columns top-row">
             <div *ngIf="isCandidate" class="header">
-              <h5>{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
+              <h2>{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h2>
             </div>
             <div *ngIf="!isCandidate"class="header">
               <h5>{{candidate?.com_nam}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
