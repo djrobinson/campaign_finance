@@ -1,4 +1,7 @@
   //check// *** main dependencies *** //
+require('dotenv').config();
+
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -6,6 +9,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+
 
 // *** routes *** //
 var votes = require('./api_congress/votes.js');
@@ -33,8 +37,8 @@ var earmark = require('./api_congress/earmark.js');
 
 
 //Connect to Mongo
-Production
-mongoose.connect('mongodb://heroku_2f1pj73r:tsu0gvp9jelb0lqkchsg86alh@ds023452.mlab.com:23452/heroku_2f1pj73r');
+//lProduction
+mongoose.connect('mongodb://'+process.env.MONGO_CONNECTION_STRING+'/'+ process.env.MONGO_TABLE);
 
 // //Test
 // mongoose.connect('mongodb://localhost/testPolis');
