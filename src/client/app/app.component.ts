@@ -105,7 +105,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   private showMenu(): void{

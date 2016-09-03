@@ -263,7 +263,7 @@ export class GraphComponent implements OnInit  {
         ctrl.selectedNode = false;
       } else {
         ctrl.candPopup = true;
-        ctrl.isCand = false;
+        ctrl.isCand = true;
         ctrl.selectedNode = false;
         ctrl.selectedCommittee = d.CMTE_ID;
       }

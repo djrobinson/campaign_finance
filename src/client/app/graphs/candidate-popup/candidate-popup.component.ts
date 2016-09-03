@@ -22,7 +22,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
   @Input() candidate: string;
   @Input() committee: string;
-  @Input() isCandidate: boolean;
+  @Input() isCand: boolean;
   @Output() exitEmit = new EventEmitter();
   @Output() cmteEmit = new EventEmitter();
   @Output() changeIndiv = new EventEmitter();

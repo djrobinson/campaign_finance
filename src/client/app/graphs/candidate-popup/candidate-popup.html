@@ -33,7 +33,7 @@
         >
         <p>Committee Opex</p>
       </div>
-      <div *ngIf="isCandidate" class="cand-option"
+      <div *ngIf="isCand" class="cand-option"
         (click)="choice('superpacs')"
         [class.active]="selection==='superpacs'"
         >
@@ -139,13 +139,11 @@
             </table>
         </div>
         <div class="twelve columns bottom-row">
-
           <bar-chart
             [cmte]="committee"
             class="twelve columns">
           </bar-chart>
         </div>
-
       </div>
     </div>
   </div>
