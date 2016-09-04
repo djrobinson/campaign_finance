@@ -44,6 +44,7 @@ export class GraphComponent implements OnInit  {
   private isCand: boolean;
   public absUrl: string;
   public candImage: string;
+  public size: string = 'small';
   @ViewChild(MiniProfileComponent) miniProfileComponent: MiniProfileComponent;
 
   constructor(
@@ -58,7 +59,7 @@ export class GraphComponent implements OnInit  {
   }
 
   ngOnInit() {
-    this.getGraphData  (this.candidate_id);
+    this.getGraphData(this.candidate_id, this.size);
 
     this.absUrl = this.location.path();
   }
@@ -139,15 +140,26 @@ export class GraphComponent implements OnInit  {
     this.indivPopup = false;
   }
 
+  public changeSize(){
+    if (this.size === 'small') {
+      this.size = 'big';
+      this.getGraphData(this.candidate_id, 'big');
+    } else {
+      this.size = 'small';
+      this.getGraphData(this.candidate_id, 'small');
+    }
+
+  }
+
   private stopRefreshing() {
     this.isRequesting = false;
   }
 
-  public getGraphData(candId): void {
+  public getGraphData(candId, size): void {
     Observable.forkJoin(
       this.http.get('/api/candidates/' + candId).map((res: Response) => res.json()),
       this.http.get('/api/legislators/' + candId).map((res: Response) => res.json()),
-      this.http.get('api/graph/test/' + candId ).map((res: Response) => res.json())
+      this.http.get('api/graph/test/' + candId + '/' + size).map((res: Response) => res.json())
     ).subscribe(
       data => {
         console.log(data);

@@ -4,12 +4,12 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/testPolis');
 
 
-var Graph = mongoose.model('pie', { id: String, data: [] });
+var Graph = mongoose.model('graphs', { id: String, size: String, data: [] });
 
 //Get the list of candidates that you will seed the db with:
 
 // var candIds = ['P60006111'];
-var cmteIds = ['C00574624'];
+// var cmteIds = ['C00574624'];
 
 //Structure and send a call to each candidate at the graph endpoint
 var i = 0;
@@ -18,7 +18,8 @@ getCandidateGraph(printData, cmteIds[i]);
 function getCandidateGraph(callback, cmte) {
     console.log("Sanity check");
     // return http.get('http://localhost:5000/api/graph/'+candId+'/candidate'
-  return http.get('http://localhost:5000/api/individuals/committee/C00574624/pie'
+  // return http.get('http://localhost:5000/api/individuals/committee/C00574624/pie'
+  return http.get('http://localhost:5000/api/graph/P00003392/candidate'
     , function(response) {
       console.log(response);
         var body = '';
@@ -40,7 +41,7 @@ function getCandidateGraph(callback, cmte) {
 //Save the return value from the service call send to mongo
 function printData(data){
   console.log(data);
-  var graphData = new Graph({id: cmteIds[i], data: data});
+  var graphData = new Graph({id: 'P00003392', size: 'small', data: data});
   graphData.save(function (err) {
     if (err) {
       console.log(err);
@@ -50,7 +51,7 @@ function printData(data){
   });
   i++;
   if (i < cmteIds.length){
-    getCandidateGraph(printData, cmteIds[i]);
+    getCandidateGraph(printData, 'P00003392');
   }
 
 }

@@ -5,6 +5,15 @@ image {
   z-index: 20;
   margin-left: 200px;
 }
+
+.test-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  height: 100px;
+  width: 200px;
+  z-index: 40;
+}
 .graph-container {
   height: 100vh;
   width: 100vw;
