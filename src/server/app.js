@@ -87,8 +87,6 @@ app.use('/api/sres', sres);
 app.use('/api/lobby', lobby_bill);
 app.use('/api/earmark', earmark);
 
-
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

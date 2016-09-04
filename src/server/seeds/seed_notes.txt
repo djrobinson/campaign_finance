@@ -6,21 +6,21 @@ psql -h remotehost -d remote_mydb -U myuser -c
 
 psql -h ec2-54-227-245-222.compute-1.amazonaws.com -d <database_name> -U <Username> -c "\COPY indiv_contrib FROM '/Users/danny/seeds/campaign_cmte.csv' DELIMITER ',' CSV header encoding 'UTF-8'"
 
-\COPY committee_master FROM '/Users/danny/Downloads/cm.txt' (DELIMITER('|')); <16721
-\COPY cmte_to_cmte FROM '/Users/danny/Downloads/itoth2.txt' (DELIMITER('|')); <398111
-\COPY indiv_contrib FROM '/Users/danny/Downloads/itcont2.txt' (DELIMITER('|')); <7000075
-\COPY cmte_cand_linkage FROM '/Users/danny/Downloads/ccl.txt' (DELIMITER('|')); <6136
-\COPY campaign_cmte_rpts FROM '/Users/danny/Downloads/new3/campaign_cmte_rpts2.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <9958
-\COPY candidacy_statements FROM '/Users/danny/Downloads/new3/candidate_registrations.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <3821
-\COPY candidate_disbursements FROM '/Users/danny/Downloads/new3/candidate_disbursements.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <392891
-\COPY candidate_master FROM '/Users/danny/Downloads/cm.txt' (DELIMITER('|')); <16721
-\COPY candidate_summaries FROM '/Users/danny/Downloads/candidate_summ_debug/new4/candidate_summaries.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <4432
-\COPY cmte_to_cand FROM '/Users/danny/Downloads/itpas2.txt' (DELIMITER('|')); <193635
-\COPY committee_registrations FROM '/Users/danny/Downloads/new3/committee_registrations.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <4890
-\COPY independent_expenditures FROM '/Users/danny/Downloads/new3/independent_expenditure.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <16536
-\COPY opex FROM '/Users/danny/Downloads/oppexp2.txt' (DELIMITER('|')); <982377
+\COPY committee_master FROM '/Users/danny/Downloads/cm.txt' (DELIMITER('|')); <16721, 17172
+\COPY cmte_to_cmte FROM '/Users/danny/Downloads/itoth.txt' (DELIMITER('|')); <398111, 540498
+\COPY indiv_contrib FROM '/Users/danny/Downloads/itcont 2.txt' (DELIMITER('|')); <7000075, 12018811
+\COPY cmte_to_cand FROM '/Users/danny/Downloads/itpas2 2.txt' (DELIMITER('|')); < 193635, 233244
+\COPY candidate_master FROM '/Users/danny/Downloads/cn 2.txt' (DELIMITER('|')); <16721, 7330
+\COPY opex FROM '/Users/danny/Downloads/oppexp 2.txt' (DELIMITER('|')); <982377,
+\COPY cmte_cand_linkage FROM '/Users/danny/Downloads/ccl 2.txt' (DELIMITER('|')); <6136
 
-\COPY committee_summaries FROM '/Users/danny/Downloads/comm_summ_debug/new4/committee_summaries2.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <9744
+\COPY campaign_cmte_rpts FROM '/Users/danny/Downloads/prodData/prod/campaign_cmte_rpts2.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <9958, 12467
+\COPY candidacy_statements FROM '/Users/danny/Downloads/prodData/prod/candidate_registrations.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <3821, 3981
+\COPY candidate_disbursements FROM '/Users/danny/Downloads/prodData/prod/candidate_disbursements.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <392891, 512831
+\COPY candidate_summaries FROM '/Users/danny/Downloads/prodData/prod/candidate_summaries.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <4432, 4639
+\COPY committee_registrations FROM '/Users/danny/Downloads/prodData/prod/committee_registrations.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <4890, 5306
+\COPY independent_expenditures FROM '/Users/danny/Downloads/prodData/prod/independent_expenditure.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <16536, 49887
+\COPY committee_summaries FROM '/Users/danny/Downloads/prodData/prod/committee_summaries2.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <9744, 10291
 
 Notes:
 
@@ -58,3 +58,5 @@ SELECT * FROM indiv_contrib where "CMTE_ID" = 'C00452383';
 
 NOTES ON DATE FORMATTING:
 Created format file, but itoth is too large to be processed. Will try to seed db anyway.
+
+Killing process of long running query: SELECT pg_cancel_backend(17683);
