@@ -142,9 +142,11 @@ export class GraphComponent implements OnInit  {
 
   public changeSize(){
     if (this.size === 'small') {
+      d3.select("svg").selectAll("*").remove();
       this.size = 'big';
       this.getGraphData(this.candidate_id, 'big');
     } else {
+      d3.select("svg").selectAll("*").remove();
       this.size = 'small';
       this.getGraphData(this.candidate_id, 'small');
     }
