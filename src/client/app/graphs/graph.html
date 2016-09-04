@@ -11,8 +11,11 @@
   </defs> -->
 </svg>
 
-  <div class="test-button" (click)="changeSize()">
-    Click for Size
+  <div *ngIf="size==='small'" class="button test-button" (click)="changeSize()">
+    More Nodes
+  </div>
+    <div *ngIf="size==='big'" class="button test-button" (click)="changeSize()">
+    Less Nodes
   </div>
 <div>
   <mini-profile-view

@@ -10,9 +10,7 @@ image {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  height: 100px;
-  width: 200px;
-  z-index: 40;
+  z-index: 3;
 }
 .graph-container {
   height: 100vh;
@@ -117,4 +115,30 @@ circle {
   background: blue;
   height: 400px;
   width: 400px;
+}
+
+.button {
+  font-family: 'Oswald';
+  font-weight: 500;
+  background-color: #73877B; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 2px solid #9DBF9E;
+  border-radius: 25px;
+  box-sizing: border-box;;
+  width: 15%;
+
+}
+
+.button:hover {
+    background-color: #9DBF9E;
+    color: white;
 }
