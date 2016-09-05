@@ -1,5 +1,5 @@
   //check// *** main dependencies *** //
-// require('dotenv').config();
+require('dotenv').config();
 
 
 
@@ -39,12 +39,12 @@ var earmark = require('./api_congress/earmark.js');
 
 //Connect to Mongo
 //lProduction
-mongoose.connect('mongodb://'+process.env.MONGO_CONNECTION_STRING+'/'+ process.env.MONGO_TABLE);
+// mongoose.connect('mongodb://'+process.env.MONGO_CONNECTION_STRING+'/'+ process.env.MONGO_TABLE);
 
 
 
 // //Test
-// mongoose.connect('mongodb://localhost/testPolis');
+mongoose.connect('mongodb://localhost/testPolis');
 // *** express instance *** //
 var app = express();
 

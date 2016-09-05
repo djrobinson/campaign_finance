@@ -25,7 +25,7 @@ var i = 0;
 function getCandidateGraph(callback, cmte) {
     console.log("Sanity check");
     // return http.get('http://localhost:5000/api/graph/'+candId+'/candidate'
-  return http.get('https://warm-cove-43638.herokuapp.com/api/individuals/committee/'+cmteIds[i].id+'/pie'
+  return http.get('http://warm-cove-43638.herokuapp.com/api/individuals/committee/'+cmteIds[i].id+'/pie'
   // return http.get('http://localhost:5000/api/graph/P00003392/candidate'
     , function(response) {
         var body = '';
