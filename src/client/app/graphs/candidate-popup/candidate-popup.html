@@ -4,7 +4,7 @@
 </div>
 <div class="cand-style">
   <div class="two columns choices">
-    <div *ngIf="isCandidate" class="cand-pic text-center">
+    <div *ngIf="isCand" class="cand-pic text-center">
       <img [src]="imageVar?.image" alt="picture">
       <h5>{{candidate?.CANDIDATE_NAME}}</h5>
       <p>Party: {{candidate?.PARTY}}</p>
@@ -12,7 +12,7 @@
       <p>FEC ID: {{candidate?.CANDIDATE_ID}}</p>
       <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
     </div>
-    <div *ngIf="!isCandidate" class="cand-pic text-center">
+    <div *ngIf="!isCand" class="cand-pic text-center">
       <h5>{{candidate?.com_nam}}</h5>
       <p>Designation: {{candidate?.com_des}}</p>
       <p>Type: {{candidate?.com_typ}}</p>
@@ -84,10 +84,10 @@
       <div class="eight columns candidate-content">
         <div *ngIf="!isRequesting" (click)="close()" class="close-button">×</div>
         <div class="twelve columns top-row">
-            <div *ngIf="isCandidate" class="header">
+            <div *ngIf="isCand" class="header">
               <h2>{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h2>
             </div>
-            <div *ngIf="!isCandidate"class="header">
+            <div *ngIf="!isCand"class="header">
               <h5>{{candidate?.com_nam}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
             </div>
             <table>

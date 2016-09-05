@@ -60,11 +60,11 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       this.isRequesting = true;
       this.imageVar = {};
       this.selection = "main";
-      if (this.isCandidate === true && this.candidate.charAt(0) === "P") {
+      if (this.isCand === true && this.candidate.charAt(0) === "P") {
         // this.route = '/api/pac/aggregate/' + this.candidate;
         this.imageVar.image = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + this.candidate + ".jpg";
         this.typeString = "Superpac";
-      } else if (this.isCandidate === true) {
+      } else if (this.isCand === true) {
         // this.route = '/api/disbursements/graph/' + this.candidate;
         this.http.get('/api/legislators/' + this.candidate).map(response => response.json()).subscribe(data => {
           this.candidateInfo = data[0];
@@ -73,7 +73,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
           this.typeString = "candidate disbursement";
         }, error => console.log('Could not load candidate info.'));
       }
-      if (this.isCandidate === true){
+      if (this.isCand === true){
         this.callPresApis(this.candidate)
       } else {
         this.callCmteApis(this.committee);
@@ -127,7 +127,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       this.http.get('/api/individuals/committee/'+cmte+'/date')
         .map((res: Response) => res.json()),
       this.http.get('/api/transfers/'+cmte+'/date')
-        .map((res: Response) => res.json()),
+        .map((res: Response) => res.json())
 
     ).subscribe(
       data => {

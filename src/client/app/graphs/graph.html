@@ -46,7 +46,7 @@
 </div>
 <div *ngIf="cmtePopup">
   <committee-popup
-    [isCandidate]="false"
+    [isCand]="false"
     [committee]="selectedCommittee"
     (exitEmit)="exit()"
     (cmteEmit)="changeCmte($event)"
@@ -56,7 +56,7 @@
 </div>
 <div *ngIf="candPopup">
   <candidate-popup
-    [isCandidate]="isCand"
+    [isCand]="isCand"
     [candidate]="selectedCandidate"
     [committee]="selectedCommittee"
     (exitEmit)="exit()"

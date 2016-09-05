@@ -92,7 +92,6 @@ export class GraphComponent implements OnInit  {
 
   showCmtePopup(event){
     this.candPopup = true;
-    this.isCand = false;
     this.selectedCommittee = event.cmte;
     this.selectedNode = false;
   }
@@ -279,6 +278,7 @@ export class GraphComponent implements OnInit  {
         ctrl.candPopup = true;
         ctrl.isCand = true;
         ctrl.selectedNode = false;
+        ctrl.selectedCandidate = d.CAND_ID;
         ctrl.selectedCommittee = d.CMTE_ID;
       }
     }
