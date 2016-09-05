@@ -91,14 +91,16 @@
             </div>
             <table>
               <tr>
-                <td colspan="2" class="heading">Receipts</td>
-                <td colspan="2" class="heading">Disbursements</td>
+                <td class="heading">Receipts</td>
+                <td></td>
+                <td class="heading">Disbursements</td>
+                <td></td>
               </tr>
               <tr>
                 <td>Itemized Individual Contributions</td>
                 <td>{{parseFloat((candidate?.ind_ite_con) ? candidate?.ind_ite_con : 0.00) | currency:'USD':true}}</td>
                 <td>Operating Expenditures</td>
-                <td>{{parseFloat((candidate?.ope_exp) ? candidate?.ope_exp : 0.00)}}</td>
+                <td>{{parseFloat((candidate?.ope_exp) ? candidate?.ope_exp : 0.00)  | currency:'USD':true}}</td>
               </tr>
               <tr>
                 <td>Unitemized Individual Contributions</td>
@@ -131,7 +133,7 @@
               </tr>
               <tr>
                 <td>Total Contributions</td>
-                <td>{{parseFloat((candidate?.con) ? candidate?.tot_con : 0.00 ) | currency:'USD':true}}</td>
+                <td>{{parseFloat((candidate?.tot_con) ? candidate?.tot_con : 0.00 ) | currency:'USD':true}}</td>
                 <td>Total Loans</td>
                 <td>{{parseFloat((candidate?.tot_loa) ? candidate?.tot_loa : 0.00 ) | currency:'USD':true}}</td>
               </tr>

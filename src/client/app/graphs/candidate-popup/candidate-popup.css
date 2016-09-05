@@ -158,6 +158,11 @@ bar-chart {
   font-weight: 300;
 }
 
+td:nth-child(2n){
+  text-align: right;
+  margin-right: 3rem;
+}
+
 #pies-title {
   font-size: 2rem;
   width: 100%;
