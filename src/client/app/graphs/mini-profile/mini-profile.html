@@ -6,15 +6,15 @@
       <table *ngIf="cmte?.graphtype !== 'individual'">
         <tr>
           <td>Cash:</td>
-          <td>{{cmte?.cas_on_han_clo_of_per}}</td>
+          <td>{{parseFloat((cmte?.cas_on_han_clo_of_per) ? cmte?.cas_on_han_clo_of_per : 0.00) | currency:'USD':true}}</td>
         </tr>
         <tr>
           <td>Distributions:</td>
-          <td>{{cmte?.tot_dis}}</td>
+          <td>{{parseFloat((cmte?.tot_dis) ? cmte?.tot_dis : 0.00) | currency:'USD':true}}</td>
         </tr>
         <tr>
           <td>Contributions:</td>
-          <td>{{cmte?.net_con}}</td>
+          <td>{{parseFloat((cmte?.tot_rec) ? cmte?.net_con : 0.00)| currency:'USD':true}}</td>
         </tr>
       </table>
       <table>
@@ -24,7 +24,7 @@
         </tr>
         <tr class="tran-amount">
           <td>Transaction Amount:</td>
-          <td>{{cmte?.TRANSACTION_AMT}}</td>
+          <td>{{ parseFloat(cmte?.TRANSACTION_AMT) | currency:'USD':true}}</td>
         </tr>
       </table>
       <div class="instructions">
@@ -41,7 +41,7 @@
         <g transform="translate(50, 90)">
           <circle r="40" style="fill: #35978F">
           </circle>
-          <text dx="0" dy="1rem">>$3000K</text>
+          <text dx="0" dy="1rem">>$300K</text>
         </g>
         <g transform="translate(50, 160)">
           <circle r="35" style="fill: #35978F">

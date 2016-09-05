@@ -64,14 +64,9 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         // this.route = '/api/pac/aggregate/' + this.candidate;
         this.imageVar.image = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + this.candidate + ".jpg";
         this.typeString = "Superpac";
-      } else if (this.isCand === true) {
-        // this.route = '/api/disbursements/graph/' + this.candidate;
-        this.http.get('/api/legislators/' + this.candidate).map(response => response.json()).subscribe(data => {
-          this.candidateInfo = data[0];
-          this.imageVar = {};
-          this.imageVar.image = "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + this.candidateInfo.id.bioguide + ".jpg";
-          this.typeString = "candidate disbursement";
-        }, error => console.log('Could not load candidate info.'));
+        this.isCand = true;
+      } else {
+        this.isCand = false;
       }
       if (this.isCand === true){
         this.callPresApis(this.candidate)

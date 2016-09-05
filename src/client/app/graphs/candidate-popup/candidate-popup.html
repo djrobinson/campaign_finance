@@ -1,6 +1,5 @@
 <div *ngIf="isRequesting" class="spinner-container">
-  <spinner [isRunning]="isRequesting">
-  </spinner>
+
 </div>
 <div class="cand-style">
   <div class="two columns choices">
@@ -99,7 +98,7 @@
                 <td>Itemized Individual Contributions</td>
                 <td>{{parseFloat((candidate?.ind_ite_con) ? candidate?.ind_ite_con : 0.00) | currency:'USD':true}}</td>
                 <td>Operating Expenditures</td>
-                <td>{{parseFloat((candidate?.ope_exp) ? candidate?.ope_exp : 0.00) | currency:'USD':true}}</td>
+                <td>{{parseFloat((candidate?.ope_exp) ? candidate?.ope_exp : 0.00)}}</td>
               </tr>
               <tr>
                 <td>Unitemized Individual Contributions</td>

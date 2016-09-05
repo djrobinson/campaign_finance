@@ -66,7 +66,7 @@ export class BarComponent {
 
 
   public buildChart(graphData){
-    var margin = {top: 20, right: 20, bottom: 60, left: 60},
+    var margin = {top: 20, right: 40, bottom: 60, left: 60},
         width = document.getElementById('containerChart4').offsetWidth - margin.left - margin.right,
         height = document.getElementById('containerChart4').offsetHeight - margin.top - margin.bottom;
 
