@@ -149,7 +149,7 @@ bar-chart {
 
 .top-row * {
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 0;
 }
 
 .top-row td {
@@ -158,9 +158,10 @@ bar-chart {
   font-weight: 300;
 }
 
+
 td:nth-child(2n){
   text-align: right;
-  margin-right: 3rem;
+  padding-right: 3rem !important;
 }
 
 #pies-title {
