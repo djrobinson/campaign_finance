@@ -4,7 +4,7 @@ mongoose.connect('mongodb://heroku_2f1pj73r:tsu0gvp9jelb0lqkchsg86alh@ds023452.m
 // mongoose.connect('mongodb://localhost/testPolis');
 
 
-var Graph = mongoose.model('pie', { id: String, data: [] });
+var Graph = mongoose.model('bar', { id: String, data: [] });
 
 //Get the list of candidates that you will seed the db with:
 var columns = ['id'];
@@ -12,7 +12,7 @@ var columns = ['id'];
 var cmteIds = [];
 
 require("csv-to-array")({
-   file: "/tmp/test.csv",
+   file: "/tmp/test2.csv",
    columns: columns
 }, function (err, array) {
   cmteIds = array;
@@ -25,7 +25,7 @@ var i = 0;
 function getCandidateGraph(callback, cmte) {
     console.log("Sanity check");
     // return http.get('http://localhost:5000/api/graph/'+candId+'/candidate'
-  return http.get('http://warm-cove-43638.herokuapp.com/api/individuals/committee/'+cmteIds[i].id+'/pie'
+  return http.get('http://warm-cove-43638.herokuapp.com/api/individuals/committee/'+cmteIds[i].id+'/date'
   // return http.get('http://localhost:5000/api/graph/P00003392/candidate'
     , function(response) {
         var body = '';
