@@ -135,4 +135,8 @@ export class CandidatesComponent implements OnInit {
     });
     console.log(this.candidates);
   }
+
+  public openFec(lin_ima){
+    window.open(lin_ima);
+  }
 }

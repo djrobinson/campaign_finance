@@ -31,4 +31,8 @@ export class Landing implements OnInit {
     this.sideMenu = false;
   }
 
+  public openFec(){
+    window.open('http://www.fec.gov/finance/disclosure/ftpdet.shtml#a2015_2016');
+  }
+
 }

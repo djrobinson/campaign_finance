@@ -10,6 +10,9 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
             <div class="tree-tip" id="tip-support"></div>
             <div class="tree-tip" id="tip-amount"></div>
             <div class="tree-tip" id="tip-purpose"></div>
+            <div *ngIf="level === 'parent'">
+              <img src="images/fec.png" class="fec" (click)="openFec(lin_ima)" />
+            </div>
             <div *ngIf="level !=='main'">
               <div class="button" id="backup">
                 Go Back
@@ -161,11 +164,16 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
         background-color: #9DBF9E;
         color: white;
     }
+
+    .fec {
+      height: 4rem;
+    }
   `]
 })
 export class TreemapComponent implements OnInit, OnChanges {
   @Input() route: string;
   private level: string = "main";
+  private lin_ima: string;
 
   constructor (){
     this.parseFloat = function(num) {
@@ -417,7 +425,9 @@ export class TreemapComponent implements OnInit, OnChanges {
                 .attr("dx", "0.35em")
                 .attr("dy", "4rem")
               .append("a")
-                .attr("xlink:href", function(d) { return "http://"+d.fec; })
+                .attr("xlink:href", function(d) {
+                  ctrl.lin_ima = d.fec;
+                  return "http://"+d.fec; })
                 .text("Link to FEC Record")
                 .style("font-size", "3rem")
                 .attr("fill", "white");
@@ -543,6 +553,11 @@ export class TreemapComponent implements OnInit, OnChanges {
     this.exitEmit.emit({
       exit: true
     });
+  }
+
+  public openFec(lin_ima){
+    console.log("Open FEC: ", lin_ima);
+    window.open("http://"+lin_ima);
   }
 
 }

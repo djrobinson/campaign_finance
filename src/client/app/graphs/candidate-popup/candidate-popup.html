@@ -84,10 +84,10 @@
         <div *ngIf="!isRequesting" (click)="close()" class="close-button">×</div>
         <div class="twelve columns top-row">
             <div *ngIf="isCand" class="header">
-              <h2>{{primaryCmte?.CMTE_NM}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h2>
+              <h2>{{primaryCmte?.CMTE_NM}} <img src="images/fec.png" class="fec" (click)="openFec()"/></h2>
             </div>
             <div *ngIf="!isCand"class="header">
-              <h5>{{candidate?.com_nam}} <a [href]="candidate?.lin_ima"><img src="images/fec.png" class="fec" /></a></h5>
+              <h5>{{candidate?.com_nam}} <img src="images/fec.png" class="fec" (click)="openFec()" /></h5>
             </div>
             <table>
               <tr>

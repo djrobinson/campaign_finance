@@ -16,7 +16,7 @@
     <ul class="list">
       <li *ngFor="#candidate of candidatesView" class="list-item" [style.border]="candidate.tile_color">
         <div class="candidate-profile">
-          <a [href]="candidate.lin_ima"><img src="images/fec.png" class="fec" /></a>
+          <img src="images/fec.png" class="fec" (click)="openFec()" />
           <div class="row profile-header ">
             <div class="basic-info seven columns">
               <h5>{{candidate.can_nam}}</h5>

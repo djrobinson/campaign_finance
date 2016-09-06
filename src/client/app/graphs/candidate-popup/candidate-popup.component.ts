@@ -162,4 +162,8 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
     this.selection = selection;
   }
 
+  public openFec(){
+    window.open(this.candidate.lin_ima);
+  }
+
 }
