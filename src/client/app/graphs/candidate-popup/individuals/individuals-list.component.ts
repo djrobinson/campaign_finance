@@ -46,7 +46,7 @@ import {Http, Response} from 'angular2/http';
             {{individual.CITY}}, {{individual.STATE}}
           </td>
           <td>
-            <a [href]="'http://docquery.fec.gov/cgi-bin/fecimg?'+individual?.IMAGE_NUM"><img src="images/fec.png" class="fec" /></a>
+            <img src="images/fec.png" class="fec" (click)="openFec('http://docquery.fec.gov/cgi-bin/fecimg?'+individual?.IMAGE_NUM)" />
           </td>
           <td>
             {{individual.TRAN_ID}}
@@ -101,5 +101,9 @@ export class IndividualsListComponent implements OnInit {
       console.log(data);
       this.individuals = data;
     }, error => console.log('Could not load individuals.'));
+  }
+
+  openFec(lin_ima){
+    window.open(lin_ima);
   }
 }

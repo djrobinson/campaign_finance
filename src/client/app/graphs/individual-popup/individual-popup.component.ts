@@ -87,4 +87,8 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
     this.showList = !this.showList;
   }
 
+  openFec(lin_ima){
+    window.open(lin_ima);
+  }
+
 }

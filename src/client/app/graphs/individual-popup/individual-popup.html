@@ -35,7 +35,7 @@
 
     <div class="button individual-button" (click)="searchNameTitle(individual?.NAME, individual?.EMPLOYER)">Search Name & Employer</div>
 
-    <h4>Transaction Amount: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}} <a [href]="individual?.FEC_LINK"><img src="images/fec.png" class="fec" /></a></h4>
+    <h4>Transaction Amount: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}} <img src="images/fec.png" class="fec" (click)="openFec(individual?.FEC_LINK)"/></h4>
   </div>
   <individual-popup-list *ngIf="isSelected"
     [indivName]="individual?.NAME"
