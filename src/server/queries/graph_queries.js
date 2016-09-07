@@ -9,7 +9,7 @@ module.exports = {
             .where({'cmte_to_cmte.CMTE_ID': cmte.CMTE_ID})
             .where('TRANSACTION_TP', 'LIKE', '1%')
             .orderBy('cmte_to_cmte.TRANSACTION_AMT', 'desc')
-            .limit(25);
+            .limit(12);
   },
   getTopComSecondary: function(cmte){
     return knex('cmte_to_cmte')
