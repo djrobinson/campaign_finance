@@ -1,14 +1,17 @@
 import {Component, OnInit} from 'angular2/core';
+import {StripeFormComponent} from './stripe-form.component';
 
 @Component({
   selector: 'funding',
+  template: `
+    <h1>Funding Template</h1>
+    <sd-stripe-form></sd-stripe-form>
+  `,
   styles: [`
 
   `],
-  template: `
-    <h1>Funding Page</h1>
-  `,
-  directives: []
+
+  directives: [StripeFormComponent]
 
 })
 export class FundingComponent implements OnInit {
@@ -21,3 +24,7 @@ export class FundingComponent implements OnInit {
   }
 
 }
+
+
+
+
