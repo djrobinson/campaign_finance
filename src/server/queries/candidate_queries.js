@@ -53,6 +53,8 @@ module.exports = {
            .offset(offset);
   },
 
+  //select "can_id" from candidate_summaries where "can_id" LIKE 'P%' AND "net_con" IS NOT NULL order by "tot_con" desc limit 100
+
   getCandByOffSort: function(office, col, offset){
     return knex('candidacy_statements')
            .innerJoin('candidate_summaries', 'CANDIDATE_ID', 'can_id')
