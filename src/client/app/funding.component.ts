@@ -4,9 +4,9 @@ import {Component, OnInit} from 'angular2/core';
   selector: 'funding',
   template: `
     <div class="funding-container">
-      <h1>Help Fund Citizens Hub</h1>
+      <h1>Give to Citizens Hub</h1>
       <h5>Contribute to the development and hosting of Citizens Hub.</h5>
-      <div class="button" (click)="openCheckout()">Donate</div>
+      <div class="button" (click)="openCheckout()">Contribute</div>
     </div>
   `,
   styles: [`

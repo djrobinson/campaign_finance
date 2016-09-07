@@ -64,3 +64,11 @@
   color: #4d4d4d;
 }
 
+.coming-soon:hover:after{
+    content: 'Coming Soon';
+}
+
+.coming-soon:hover .hide-soon {
+  display: none;
+}
+

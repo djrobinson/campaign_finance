@@ -5,7 +5,7 @@
     </div>
     <div class="content">
       <h2>A campaign finance data visualization project that makes FEC donation data accessible to all voters</h2>
-      <p>Click on a category to the right to see candidates and committees. Thanks to the FEC for making this data public. Every<img src="images/fec.png" class="fec" (click)="openFec()" /> icon throughout the site is a link to the original FEC document containing the source data for the page your on.</p>
+      <p>Click on a category to the right to see candidates and committees. Thanks to the FEC for making this data public. Every <img src="images/fec.png" class="fec" (click)="openFec()" /> icon throughout the site is a link to the original FEC document containing the source data for the page your on.</p>
     </div>
   </div>
   <div class="main-menu five columns">
@@ -15,20 +15,20 @@
     <div class="main-menu-sel six columns" (click)="candPath('P')">
       <h3>Presidential <br> Candidates</h3>
     </div>
-    <div class="main-menu-sel six columns" (click)="candPath('H')">
-      <h3>House <br> Candidates</h3>
+    <div class="main-menu-sel six columns coming-soon" (click)="redirect('home')">
+      <h3 class="hide-soon">House <br> Candidates</h3>
     </div>
-    <div class="main-menu-sel six columns" (click)="candPath('S')">
-      <h3>Senate <br> Candidates</h3>
+    <div class="main-menu-sel six columns coming-soon" (click)="redirect('home')">
+      <h3  class="hide-soon">Senate <br> Candidates</h3>
     </div>
-    <div class="main-menu-sel six columns" (click)="candPath('S')">
-      <h3>Super PACs</h3>
+    <div class="main-menu-sel six columns coming-soon" (click)="redirect('home')">
+      <h3  class="hide-soon">Super PACs</h3>
     </div>
     <div class="main-menu-sel six columns" (click)="about('about')">
       <h3>About</h3>
     </div>
     <div class="main-menu-sel six columns" (click)="funding('funding')">
-      <h3>Donate</h3>
+      <h3>Give</h3>
     </div>
     <div class="main-menu-sel six columns" (click)="methods('methods')">
       <h3>Resources</h3>

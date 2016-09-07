@@ -70,4 +70,8 @@ export class MiniProfileComponent implements OnChanges, OnInit {
       cand: cand
     })
   }
+
+  public openFec(img_num){
+    window.open('http://docquery.fec.gov/cgi-bin/fecimg?' + img_num);
+  }
 }

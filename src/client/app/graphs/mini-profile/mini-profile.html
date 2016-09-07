@@ -1,8 +1,12 @@
 <div class="title">
     <div class="profile-tooltip">
       <div class="cmte-name">
-        {{cmte?.CMTE_NM || cmte?.NAME}}
+        {{cmte?.CMTE_NM  || cmte?.NAME}}
+      <span *ngIf="cmte?.graphtype === 'committee'">
+        <img src="images/fec.png" class="fec" (click)="openFec(cmte.IMAGE_NUM)" />
+      </span>
       </div>
+
       <table *ngIf="cmte?.graphtype !== 'individual'">
         <tr>
           <td>Cash:</td>
