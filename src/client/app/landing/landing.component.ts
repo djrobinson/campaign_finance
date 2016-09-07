@@ -25,6 +25,21 @@ export class Landing implements OnInit {
     this.router.navigate(['Landing']);
   }
 
+  public about(): void {
+    console.log("Home");
+    this.router.navigate(['About']);
+  }
+
+  public methods(): void {
+    console.log("Home");
+    this.router.navigate(['Methods']);
+  }
+
+  public funding(): void {
+    console.log("Home");
+    this.router.navigate(['Funding']);
+  }
+
   public candPath(typeVar): void {
     console.log("inbound");
     this.router.navigate(['Candidates', { type: typeVar } ]);

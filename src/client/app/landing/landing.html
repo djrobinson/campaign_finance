@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="main-menu five columns">
-    <div class="main-menu-sel six columns" (click)="home()">
+    <div class="main-menu-sel six columns" (click)="redirect('home')">
       <h3>Home</h3>
     </div>
     <div class="main-menu-sel six columns" (click)="candPath('P')">
@@ -24,13 +24,13 @@
     <div class="main-menu-sel six columns" (click)="candPath('S')">
       <h3>Super PACs</h3>
     </div>
-    <div class="main-menu-sel six columns" (click)="home()">
+    <div class="main-menu-sel six columns" (click)="about('about')">
       <h3>About</h3>
     </div>
-    <div class="main-menu-sel six columns" (click)="home()">
+    <div class="main-menu-sel six columns" (click)="funding('funding')">
       <h3>Donate</h3>
     </div>
-    <div class="main-menu-sel six columns" (click)="home()">
+    <div class="main-menu-sel six columns" (click)="methods('methods')">
       <h3>Resources</h3>
     </div>
   </div>

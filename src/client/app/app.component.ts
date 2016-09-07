@@ -7,6 +7,11 @@ import {SpinnerComponent} from './loading/spinner.component';
 import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {CORE_DIRECTIVES, NgClass} from 'angular2/common';
 import {RouteParams} from 'angular2/router';
+import {AboutComponent} from './about.component';
+import {MethodsComponent} from './methods.component';
+import {FundingComponent} from './funding.component';
+
+
 
 @Component({
   selector: 'my-app',
@@ -96,6 +101,21 @@ import {RouteParams} from 'angular2/router';
     as: 'Landing',
     component: Landing,
     useAsDefault: true
+  },
+  {
+    path: '/about',
+    as: 'About',
+    component: AboutComponent
+  },
+  {
+    path: '/methods',
+    as: 'Methods',
+    component: MethodsComponent
+  },
+  {
+    path: '/funding',
+    as: 'Funding',
+    component: FundingComponent
   }
 ])
 export class AppComponent implements OnInit {

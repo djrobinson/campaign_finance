@@ -1,5 +1,5 @@
   //check// *** main dependencies *** //
-// require('dotenv').config();
+require('dotenv').config();
 
 
 
