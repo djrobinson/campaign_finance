@@ -1,17 +1,54 @@
 import {Component, OnInit} from 'angular2/core';
-import {StripeFormComponent} from './stripe-form.component';
 
 @Component({
   selector: 'funding',
   template: `
-    <h1>Funding Template</h1>
-    <sd-stripe-form></sd-stripe-form>
+    <div class="funding-container">
+      <h1>Help Fund Citizens Hub</h1>
+      <h5>Contribute to the development and hosting of Citizens Hub.</h5>
+      <div class="button" (click)="openCheckout()">Donate</div>
+    </div>
   `,
   styles: [`
+    .funding-container {
+      font-family: 'Oswald';
+      font-weight: 300;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .button {
+      font-family: 'Oswald';
+      font-weight: 500;
+      background-color: #73877B; /* Green */
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+      cursor: pointer;
+      background-color: white;
+      color: black;
+      border: 2px solid #9DBF9E;
+      border-radius: 25px;
+      box-sizing: border-box;;
+      width: 15%;
 
+    }
+
+    .button:hover {
+        background-color: #9DBF9E;
+        color: white;
+    }
   `],
 
-  directives: [StripeFormComponent]
+  directives: []
 
 })
 export class FundingComponent implements OnInit {
@@ -21,6 +58,24 @@ export class FundingComponent implements OnInit {
 
   public openFec(){
     window.open('http://www.fec.gov/finance/disclosure/ftpdet.shtml#a2015_2016');
+  }
+
+  openCheckout() {
+    var handler = (<any>window).StripeCheckout.configure({
+      key: 'pk_test_oi0sKPJYLGjdvOXOM8tE8cMa',
+      locale: 'auto',
+      token: function (token: any) {
+        // You can access the token ID with `token.id`.
+        // Get the token ID to your server-side code for use.
+      }
+    });
+
+    handler.open({
+      name: 'Citizens Hub',
+      description: 'Hosting & Development',
+      amount: 2000
+    });
+
   }
 
 }
