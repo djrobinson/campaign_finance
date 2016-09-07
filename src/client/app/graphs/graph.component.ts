@@ -279,7 +279,7 @@ export class GraphComponent implements OnInit  {
         ctrl.isCand = true;
         ctrl.selectedNode = false;
         ctrl.selectedCandidate = d.CAND_ID;
-        ctrl.selectedCommittee = d.CMTE_ID;
+        ctrl.selectedCommittee = d.OTHER_ID;
       }
     }
 

@@ -27,7 +27,7 @@ function getCandidateGraph(callback, cmte) {
     console.log(cmte);
     // return http.get('http://localhost:5000/api/graph/'+candId+'/candidate'
   // return http.get('http://warm-cove-43638.herokuapp.com/api/individuals/committee/'+cmteIds[i].id+'/date'
-  return http.get('http://warm-cove-43638.herokuapp.com/api/graph/'+cmte.id+'/candidate'
+  return http.get('http://localhost:5000/api/graph/'+cmte.id+'/candidate'
     , function(response) {
         var body = '';
         response.on('data', function(d) {
@@ -46,7 +46,7 @@ function getCandidateGraph(callback, cmte) {
 //Save the return value from the service call send to mongo
 function printData(data){
   console.log(data);
-  var graphData = new Graph({id: cmteIds[i].id, size: 'small', data: data});
+  var graphData = new Graph({id: cmteIds[i].id, size: 'big', data: data});
   graphData.save(function (err) {
     if (err) {
       console.log(err);
