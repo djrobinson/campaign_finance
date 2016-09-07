@@ -1,8 +1,6 @@
   //check// *** main dependencies *** //
 require('dotenv').config();
 
-
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -10,7 +8,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-
 
 // *** routes *** //
 var votes = require('./api_congress/votes.js');
@@ -35,8 +32,6 @@ var hr = require('./api_congress/hr.js');
 var lobby_bill = require('./api_congress/lobby_bill.js');
 var earmark = require('./api_congress/earmark.js');
 
-
-
 //Connect to Mongo
 //lProduction
 mongoose.connect('mongodb://'+process.env.MONGO_CONNECTION_STRING+'/'+ process.env.MONGO_TABLE);
@@ -60,11 +55,30 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client/')));
 
-
 // *** main routes *** //
 app.get('/', function(req, res, next) {
   console.log("index.html");
   res.sendFile(path.join(__dirname, '../client', 'index.html'));
+});
+
+app.post('/api/stripe', function(req, res, next) {
+  console.log("Stripe being called, ", req.body);
+  // Obtain StripeToken
+  var stripeToken = req.body.stripeToken;
+        // Create Charge
+    var charge = {
+      amount: parseInt(req.body.amount)*100,
+      currency: 'USD',
+      card: stripeToken
+    };
+    stripe.charges.create(charge, function(err, charge) {
+      if(err) {
+        return next(err);
+      } else {
+        console.log("Success");
+        res.redirect('/');
+      }
+    });
 });
 
 app.use('/api/votes', votes); //check
@@ -88,6 +102,8 @@ app.use('/api/sjres', sjres);
 app.use('/api/sres', sres);
 app.use('/api/lobby', lobby_bill);
 app.use('/api/earmark', earmark);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

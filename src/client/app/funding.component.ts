@@ -1,4 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
+import {Http, Response} from 'angular2/http';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'funding',
@@ -53,6 +55,12 @@ import {Component, OnInit} from 'angular2/core';
 })
 export class FundingComponent implements OnInit {
 
+  constructor(private http: Http) {
+    this.parseFloat = function(num){
+      return parseFloat(num);
+    }
+  }
+
   ngOnInit() {
   }
 
@@ -62,12 +70,22 @@ export class FundingComponent implements OnInit {
 
   openCheckout() {
     var handler = (<any>window).StripeCheckout.configure({
-      key: 'pk_test_oi0sKPJYLGjdvOXOM8tE8cMa',
+      key: 'pk_test_18jB465AmfCTngdGeiBtSqqp',
       locale: 'auto',
-      token: function (token: any) {
-        // You can access the token ID with `token.id`.
-        // Get the token ID to your server-side code for use.
-      }
+      token: function(token){
+        console.log("Token sending: ", token);
+        var body =  JSON.stringify({
+              stripeToken: token,
+              amount: 20
+            });
+        this.http.post('http://localhost:5000/api/stripe', body)
+          .map(res => res.json())
+          .subscribe(
+            data => this.useData(data),
+            err => this.handleError(err),
+            () => console.log('TransactionComplete')
+          );
+      }.bind(this)
     });
 
     handler.open({
@@ -76,6 +94,16 @@ export class FundingComponent implements OnInit {
       amount: 2000
     });
 
+    console.log(handler);
+  }
+
+
+  useData(data){
+    console.log("Data token", data);
+  }
+
+  handleError(error){
+    console.log(error);
   }
 
 }

@@ -28,7 +28,7 @@
         </tr>
         <tr class="tran-amount">
           <td>Transaction Amount:</td>
-          <td>{{ parseFloat(cmte?.TRANSACTION_AMT) | currency:'USD':true}}</td>
+          <td>{{ parseFloat((cmte?.TRANSACTION_AMT) ? cmte?.TRANSACTION_AMT : 0.00) | currency:'USD':true}}</td>
         </tr>
       </table>
       <div class="instructions">
