@@ -8,7 +8,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-
+var stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 // *** routes *** //
 var votes = require('./api_congress/votes.js');
 var candidates = require('./api_funds/candidates.js');
