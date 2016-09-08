@@ -417,21 +417,6 @@ export class TreemapComponent implements OnInit, OnChanges {
               .attr("dx", "0.35em")
               .attr("dy", "4rem")
               .style("font-size", "3rem")
-
-            d3.select(this)
-              .append("tspan")
-                .attr("class", "child-tspan")
-                .attr("x", "1rem")
-                .attr("dx", "0.35em")
-                .attr("dy", "4rem")
-              .append("a")
-                .attr("xlink:href", function(d) {
-                  ctrl.lin_ima = d.fec;
-                  return "http://"+d.fec; })
-                .text("Link to FEC Record")
-                .style("font-size", "3rem")
-                .attr("fill", "white");
-
           }
         }
 
