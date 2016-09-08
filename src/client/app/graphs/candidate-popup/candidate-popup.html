@@ -2,17 +2,17 @@
 
 </div>
 <div class="cand-style">
-  <div class="two columns choices">
+  <div class="three columns choices">
     <div *ngIf="isCand" class="cand-pic text-center">
       <img [src]="imageVar?.image" alt="picture">
-      <h5>{{candidate?.CANDIDATE_NAME}}</h5>
+      <h3>{{candidate?.CANDIDATE_NAME}}</h3>
       <p>Party: {{candidate?.PARTY}}</p>
       <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
       <p>FEC ID: {{candidate?.CANDIDATE_ID}}</p>
       <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
     </div>
     <div *ngIf="!isCand" class="cand-pic text-center">
-      <h5>{{candidate?.com_nam}}</h5>
+      <h4>{{candidate?.com_nam}}</h4>
       <p>Designation: {{candidate?.com_des}}</p>
       <p>Type: {{candidate?.com_typ}}</p>
       <p>FEC ID: {{candidate?.com_id}}</p>
@@ -52,7 +52,7 @@
       </div>
     </div>
   </div>
-  <div class="ten columns main-content">
+  <div class="nine columns main-content">
     <individuals-section
       *ngIf="selection==='individuals'"
       [cmte]="committee"
@@ -82,13 +82,15 @@
       </div>
       <div class="eight columns candidate-content">
         <div *ngIf="!isRequesting" (click)="close()" class="close-button">×</div>
-        <div class="twelve columns top-row">
-            <div *ngIf="isCand" class="header">
-              <h2>{{primaryCmte?.CMTE_NM}} <img src="images/fec.png" class="fec" (click)="openFec()"/></h2>
-            </div>
-            <div *ngIf="!isCand"class="header">
-              <h5>{{candidate?.com_nam}} <img src="images/fec.png" class="fec" (click)="openFec()" /></h5>
-            </div>
+
+
+          <div *ngIf="isCand" class="header">
+            <h2>{{primaryCmte?.CMTE_NM}} <img src="images/fec.png" class="fec" (click)="openFec()"/></h2>
+          </div>
+          <div *ngIf="!isCand" class="header">
+            <h5>{{candidate?.com_nam}} <img src="images/fec.png" class="fec" (click)="openFec()" /></h5>
+          </div>
+          <div class="twelve columns top-row">
             <table>
               <tr>
                 <td class="heading">Receipts</td>
@@ -121,6 +123,36 @@
                 <td>{{parseFloat((candidate?.tot_dis) ? candidate?.tot_dis : 0.00) | currency:'USD':true}}</td>
               </tr>
               <tr>
+                <td>Party Committee Contributions</td>
+                <td>{{parseFloat((candidate?.par_com_con) ? candidate?.par_com_con : 0.00) | currency:'USD':true}}</td>
+                <td>Total Disbursements</td>
+                <td>{{parseFloat((candidate?.tot_dis) ? candidate?.tot_dis : 0.00) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Party Committee Contributions</td>
+                <td>{{parseFloat((candidate?.par_com_con) ? candidate?.par_com_con : 0.00) | currency:'USD':true}}</td>
+                <td>Total Disbursements</td>
+                <td>{{parseFloat((candidate?.tot_dis) ? candidate?.tot_dis : 0.00) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Party Committee Contributions</td>
+                <td>{{parseFloat((candidate?.par_com_con) ? candidate?.par_com_con : 0.00) | currency:'USD':true}}</td>
+                <td>Total Disbursements</td>
+                <td>{{parseFloat((candidate?.tot_dis) ? candidate?.tot_dis : 0.00) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Party Committee Contributions</td>
+                <td>{{parseFloat((candidate?.par_com_con) ? candidate?.par_com_con : 0.00) | currency:'USD':true}}</td>
+                <td>Total Disbursements</td>
+                <td>{{parseFloat((candidate?.tot_dis) ? candidate?.tot_dis : 0.00) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Party Committee Contributions</td>
+                <td>{{parseFloat((candidate?.par_com_con) ? candidate?.par_com_con : 0.00) | currency:'USD':true}}</td>
+                <td>Total Disbursements</td>
+                <td>{{parseFloat((candidate?.tot_dis) ? candidate?.tot_dis : 0.00) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
                 <td>Other Committee Contributions</td>
                 <td>{{parseFloat((candidate?.oth_com_con) ? candidate?.oth_com_con : 0.00) | currency:'USD':true}}</td>
                 <td colspan="2" class="heading">Cash Summary</td>
@@ -139,12 +171,12 @@
               </tr>
             </table>
         </div>
-        <div class="twelve columns bottom-row">
+<!--         <div class="twelve columns bottom-row">
           <bar-chart
             [cmte]="committee"
             class="twelve columns">
           </bar-chart>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

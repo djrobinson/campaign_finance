@@ -66,8 +66,14 @@ export class CandidatesComponent implements OnInit {
               } else if (item.PARTY_CODE === 'REP'){
                 item.tile_color = "solid "+repColors[0]+" 5px";
                 return item;
+              } else if (item.PARTY_CODE === 'LIB') {
+                item.tile_color = "solid #FFD700 5px";
+                return  item;
+              } else if (item.PARTY_CODE === 'GRE') {
+                item.tile_color = "solid #2E8B57 5px";
+                return  item;
               } else {
-                item.tile_color = '#4C4664';
+                item.tile_color = 'solid #708090 5px';
                 return item;
               }
             })

@@ -13,35 +13,23 @@
   </div>
   </div>
   <div class="row">
-    <ul class="list">
-      <li *ngFor="#candidate of candidatesView" class="list-item" [style.border]="candidate.tile_color">
-        <div class="candidate-profile">
-          <img src="images/fec.png" class="fec" (click)="openFec()" />
+    <ul class="list twelve-columns">
+      <li *ngFor="#candidate of candidatesView" class="list-item four columns" [style.border]="candidate.tile_color">
+        <div class="candidate-profile three columns">
+
           <div class="row profile-header ">
-            <div class="basic-info seven columns">
+            <!-- <div class="basic-info seven columns"> -->
               <h5>{{candidate.can_nam}}</h5>
               <p>{{candidate.PARTY}}</p>
-            </div>
-           <div class="image-container five columns">
-              <img [src]="candidate.profile_img" onerror="this.src='http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png'" class="profile-img">
-            </div>
+            <!-- </div> -->
+           <!-- <div class="image-container five columns"> -->
           </div>
-          <div class="row">
-
-            <table>
-              <tr>
-                <td>Cash on Hand</td>
-                <td style="text-align: right">{{parseFloat(candidate.cas_on_han_clo_of_per) | currency:'USD':true}}</td>
-              </tr>
-              <tr>
-                <td>Total Receipts</td>
-                <td style="text-align: right">{{parseFloat(candidate.tot_rec) | currency:'USD':true}}</td>
-              </tr>
-              <tr>
-                <td>Total Distributions</td>
-                <td style="text-align: right">{{parseFloat(candidate.tot_dis) | currency:'USD':true}}</td>
-              </tr>
-            </table>
+          <div class="six columns">
+              <img [src]="candidate.profile_img" onerror="this.src='http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png'" class="profile-img">
+            <!-- </div> -->
+          </div>
+          <div class="six columns">
+            <img src="images/fec.png" class="fec" (click)="openFec()" />
             <div class="button"
                   (click)="buildGraph(candidate.CANDIDATE_ID)"
                 >

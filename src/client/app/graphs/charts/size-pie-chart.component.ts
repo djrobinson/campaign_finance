@@ -133,7 +133,7 @@ export class SizePieComponent implements OnInit, OnChanges {
 
       var width = document.getElementById('chart2').offsetWidth;
       var height = document.getElementById('chart2').offsetHeight;
-      var radius = height /  2.5;
+      var radius = height /  2.6;
       var donutWidth = 50;
       var legendRectSize = 12;
       var legendSpacing = 2;

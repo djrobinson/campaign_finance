@@ -1,3 +1,9 @@
+.list * {
+  box-sizing: border-box !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
 button {
   width: 100%;
 }
@@ -81,7 +87,7 @@ td {
 
 .profile-header {
   align-items: center;
-  height: 20rem;
+  padding: 1rem;
 }
 
 
@@ -160,7 +166,6 @@ td {
 }
 
 .list-item {
-  width: 33%;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -171,8 +176,6 @@ td {
 
 .candidate-profile {
   position: relative;
-  display: block;
-  text-align: center;
   width: 100%;
 }
 

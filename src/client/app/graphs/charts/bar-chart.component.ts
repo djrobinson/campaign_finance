@@ -51,6 +51,7 @@ export class BarComponent {
         .subscribe(
             result => {
                       var indivData = result[0];
+                      console.log("Indiv data: ", indivData);
                       var cmteData = result[1];
                       var graphData = indivData.concat(cmteData);
                       this.stopRefreshing();

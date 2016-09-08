@@ -146,32 +146,32 @@ router.get('/committee/:cmte_id/pie', function(req, res, next){
 });
 
 
-// router.get('/committee/:cmte_id/date', function(req, res, next){
-//   barGraph.findOne({}, function(err, data){
-//     console.log(data);
-//     if (err) handleError(err);
-//     res.json(data.data.map((item)=>{
-//       return {
-//         sum: parseFloat(item.sum),
-//         date_trunc: item.date_trunc,
-//         type: "individuals"
-//       }
-//     }));
-//   });
-// });
-
-
 router.get('/committee/:cmte_id/date', function(req, res, next){
-  query.indivByDate(req.params.cmte_id).then(function(data){
-    res.json(data.rows.map((item)=>{
+  barGraph.findOne({id: req.params.cmte_id}, function(err, data){
+    console.log(data);
+    if (err) handleError(err);
+    res.json(data.data.map((item)=>{
       return {
-        count: item.count,
+        sum: parseFloat(item.sum),
         date_trunc: item.date_trunc,
         type: "individuals"
       }
     }));
   });
 });
+
+
+// router.get('/committee/:cmte_id/date', function(req, res, next){
+//   query.indivByDate(req.params.cmte_id).then(function(data){
+//     res.json(data.rows.map((item)=>{
+//       return {
+//         count: item.count,
+//         date_trunc: item.date_trunc,
+//         type: "individuals"
+//       }
+//     }));
+//   });
+// });
 
 
 router.get('/committee/:cmte_id/employers', function(req, res, next){
