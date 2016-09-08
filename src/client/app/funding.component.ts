@@ -1,5 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
-import {Http, Response} from 'angular2/http';
+import {Http, Response, Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 
 @Component({
@@ -78,7 +78,9 @@ export class FundingComponent implements OnInit {
               stripeToken: token,
               amount: 20
             });
-        this.http.post('http://localhost:5000/api/stripe', body)
+        var headers = new Headers();
+          headers.append('Content-Type', 'application/json');
+        this.http.post('/api/stripe', body, {headers: headers})
           .map(res => res.json())
           .subscribe(
             data => this.useData(data),

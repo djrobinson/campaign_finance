@@ -64,12 +64,14 @@ app.get('/', function(req, res, next) {
 app.post('/api/stripe', function(req, res, next) {
   console.log("Stripe being called, ", req.body);
   // Obtain StripeToken
+  console.log(req.body);
   var stripeToken = req.body.stripeToken;
         // Create Charge
+    console.log(stripeToken.card.id);
     var charge = {
       amount: parseInt(req.body.amount)*100,
       currency: 'USD',
-      card: stripeToken
+      source: stripeToken.id,
     };
     stripe.charges.create(charge, function(err, charge) {
       if(err) {
