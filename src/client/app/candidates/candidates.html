@@ -1,11 +1,11 @@
 <script src="dropdown.js"></script>
 <div class="candidates-container text-center">
   <h1>{{headerType}} Candidates</h1>
-  <div class="button button-top" (click)="sortCandidates('tot_dis')">
-    Sort by distributions
+  <div class="button button-top" (click)="sortCandidates()">
+    By Contributions
   </div>
   <div class="button button-top">
-    Sort by State
+    View by State
   <div class="list-container">
     <div class="dropdown-list">
       <div *ngFor="#state of states" class="dropdown-item" (click)="setState(state)">{{state}}</div>

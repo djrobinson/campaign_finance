@@ -1,7 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import { Router, RouteParams } from 'angular2/router';
 import {Http, Response} from 'angular2/http';
-import * as _ from 'lodash';
+// import * as _ from 'lodash';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 
 @Component({
@@ -122,9 +122,10 @@ export class CandidatesComponent implements OnInit {
   }
 
   public sortCandidates(column): void {
-    this.candidatesView = _.sortBy(this.candidates, function(o){
-      return parseFloat(o[column]);
-    }).reverse();
+    this.candidatesView = this.candidates;
+    // this.candidatesView = _.sortBy(this.candidates, function(o){
+    //   return parseFloat(o[column]);
+    // }).reverse();
   }
 
   public setState(state)
