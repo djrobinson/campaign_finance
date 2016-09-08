@@ -10,6 +10,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
 
         <div class="header">
           <p>Donations by Size</p>
+           <div class="asterisk">Does not include unitemized individual contributions</div>
         </div>
         <spinner [isRunning]="isRequestingPie">
         </spinner>
@@ -20,6 +21,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
         </div>
         <div id="chart2">
         </div>
+
   `,
   styles: [`
 
@@ -35,6 +37,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       align-items: center;
       justify-content: center;
       height: 100%;
+      flex-direction: row;
     }
 
     #chart2 {
@@ -44,6 +47,13 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       display: flex;
       width: 100%;
       height: 100%;
+    }
+
+    .asterisk {
+      postion: absolute;
+      bottom: 0;
+      right: 0
+      font-size: 1rem;
     }
 
     #tooltip {

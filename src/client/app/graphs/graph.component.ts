@@ -55,7 +55,7 @@ export class GraphComponent implements OnInit  {
     ) {
     this.graph = true;
     this.candidate_id = _params.get('id');
-    this.candImage = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/"+this.candidate_id+".jpg";
+    this.candImage = "https://s3-us-west-2.amazonaws.com/campaign-finance-app/"+this.candidate_id+".jpg";
   }
 
   ngOnInit() {
@@ -279,7 +279,7 @@ export class GraphComponent implements OnInit  {
         ctrl.isCand = true;
         ctrl.selectedNode = false;
         ctrl.selectedCandidate = d.CAND_ID;
-        ctrl.selectedCommittee = d.OTHER_ID;
+        ctrl.selectedCommittee = d.OTHER_ID || d.CMTE_ID;
       }
     }
 
@@ -320,13 +320,60 @@ export class GraphComponent implements OnInit  {
 
     var container = svg.append("g");
     //TODO: Make a conditional for congressman
+
+    function imageExists(url, callback) {
+      var img = new Image();
+      img.onload = function() { callback(true); };
+      img.onerror = function() { callback(false); };
+      img.src = url;
+    }
+
     svg.append('defs')
         .append('pattern')
             .attr('id', 'circles-1')
             .attr('width', 1)
             .attr('height', 1)
             .append("svg:image")
-                .attr("xlink:xlink:href", function(d) { return 'https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/'+candId+'.jpg';}) // "icon" is my image url. It comes from json too. The double xlink:xlink is a necessary hack (first "xlink:" is lost...).
+                .attr("xlink:xlink:href", function(d) {
+                // return "https://s3-us-west-2.amazonaws.com/campaign-finance-app/"+candId+".jpg"; // "icon" is my image url. It comes from json too. The double xlink:xlink is a necessary hack (first "xlink:" is lost...).
+                var candArr = ['P00003392'
+                ,'P20002671'
+                ,'P20002721'
+                ,'P40003576'
+                ,'P60003670'
+                ,'P60005915'
+                ,'P60006046'
+                ,'P60006111'
+                ,'P60006723'
+                ,'P60007168'
+                ,'P60007242'
+                ,'P60007671'
+                ,'P60007697'
+                ,'P60008059'
+                ,'P60008398'
+                ,'P60008521'
+                ,'P80001571'
+                ,'P80003478']
+                  if (candArr.indexOf(candId) !== -1){
+                    return 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + candId+'.jpg';
+                  } else {
+                    return 'http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png';
+                  }
+
+                  // var profile_img;
+                  // var imageUrl = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + candId+ '.jpg';
+                  // return imageExists(imageUrl, function(exists) {
+                  //   if (exists) {
+                  //     console.log(imageUrl);
+                  //     profile_img = imageUrl;
+                  //     return profile_img;
+                  //   } else {
+                  //     profile_img = 'http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png';
+                  //     return profile_img;
+                  //   }
+                  // });
+
+                })
                 .attr("x", 0)
                 .attr("y", 0)
                 .attr("height", 120)

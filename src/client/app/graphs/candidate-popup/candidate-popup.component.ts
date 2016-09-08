@@ -62,7 +62,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       this.selection = "main";
       if (!!this.candidate && this.isCand === true && this.candidate.charAt(0) === "P") {
         // this.route = '/api/pac/aggregate/' + this.candidate;
-        this.imageVar.image = "https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/" + this.candidate + ".jpg";
+        this.imageVar.image = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + this.candidate+'.jpg';
         this.typeString = "Superpac";
         this.isCand = true;
       } else {

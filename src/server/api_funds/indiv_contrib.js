@@ -138,7 +138,7 @@ router.get('/bubble/:cmte_id', function(req, res, next){
 //C00574624
 
 router.get('/committee/:cmte_id/pie', function(req, res, next){
-  pieGraph.findOne({}, function(err, data){
+  pieGraph.findOne({id: req.params.cmte_id}, function(err, data){
     if (err) handleError(err);
     console.log(data);
     res.json(data);
