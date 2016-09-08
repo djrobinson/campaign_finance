@@ -1,9 +1,12 @@
 import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
+import {SpinnerComponent} from '../../loading/spinner.component';
 
 @Component({
   selector: 'treemap',
   template: `
       <div id="containerChart">
+        <spinner [isRunning]="isRequesting">
+        </spinner>
         <div id="tooltip">
           <div class="tip-top">
             <div class="tree-tip" id="tip-name"></div>
@@ -46,6 +49,14 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       background: #EFF1F3;
       font-family: 'Oswald';
       font-weight: 300;
+    }
+
+    spinner {
+      position: absolute;
+      top: 30%;
+      height: 100%;
+      width: 80%;
+      right: 0;
     }
 
     .instructions {
@@ -168,12 +179,14 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
     .fec {
       height: 4rem;
     }
-  `]
+  `],
+  directives: [SpinnerComponent]
 })
 export class TreemapComponent implements OnInit, OnChanges {
   @Input() route: string;
   private level: string = "main";
   private lin_ima: string;
+  public isRequesting: boolean=true;
 
   constructor (){
     this.parseFloat = function(num) {
@@ -319,6 +332,7 @@ export class TreemapComponent implements OnInit, OnChanges {
       display(root);
 
       function display(d) {
+        ctrl.isRequesting = false;
         var backup = d3.select('#backup');
         backup
           .datum(d.parent)

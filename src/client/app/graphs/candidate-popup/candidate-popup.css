@@ -28,6 +28,7 @@ tr {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: .5rem;
 }
 
 
@@ -51,6 +52,9 @@ tr {
 .fec {
   height: 3rem;
   width: 3rem;
+  position: absolute;
+  left: 2%;
+  top: 0;
 }
 
 .close-button {
@@ -142,7 +146,7 @@ bar-chart {
 
 .top-row {
   position: relative;
-  height: 90%;
+  height: 100%;
   bottom: 0;
   text-align: center;
   display: flex;

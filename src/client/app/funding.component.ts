@@ -1,14 +1,13 @@
 import {Component, OnInit} from 'angular2/core';
 import {Http, Response, Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
-
+// <h5>Contribute to the development and hosting of Citizens Hub.</h5>
+//       <div class="button" (click)="openCheckout()">Contribute</div>
 @Component({
   selector: 'funding',
   template: `
     <div class="funding-container">
-      <h1>Give to Citizens Hub</h1>
-      <h5>Contribute to the development and hosting of Citizens Hub.</h5>
-      <div class="button" (click)="openCheckout()">Contribute</div>
+      <h1>Support Citizens Hub</h1>
     </div>
   `,
   styles: [`
@@ -68,7 +67,8 @@ export class FundingComponent implements OnInit {
     window.open('http://www.fec.gov/finance/disclosure/ftpdet.shtml#a2015_2016');
   }
 
-  openCheckout() {
+  openCheckout(amount) {
+    console.log("Checkout amount: ", amount);
     var handler = (<any>window).StripeCheckout.configure({
       key: 'pk_test_18jB465AmfCTngdGeiBtSqqp',
       locale: 'auto',
