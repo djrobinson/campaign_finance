@@ -4,3 +4,6 @@ npm-debug.log
 src/server/data
 2013
 .env
+server.pass.key
+server.csr
+server.key

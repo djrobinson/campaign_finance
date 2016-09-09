@@ -36,8 +36,6 @@ var earmark = require('./api_congress/earmark.js');
 //lProduction
 mongoose.connect('mongodb://'+process.env.MONGO_CONNECTION_STRING+'/'+ process.env.MONGO_TABLE);
 
-
-
 // //Test
 // mongoose.connect('mongodb://localhost/testPolis');
 // *** express instance *** //
