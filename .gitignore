@@ -7,3 +7,4 @@ src/server/data
 server.pass.key
 server.csr
 server.key
+www_citizenshub_org.crt
