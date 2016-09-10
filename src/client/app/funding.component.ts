@@ -8,6 +8,15 @@ import {Observable} from 'rxjs/Rx';
   template: `
     <div class="funding-container">
       <h1>Support Citizens Hub</h1>
+      <h1>Add user</h1>
+      <form #f="ngForm" (ngSubmit)="openCheckout(name)" novalidate>
+          <input type="text"
+            name="name"
+            [(ngModel)]="name"
+            required minlength="5">
+        <!--show error only when field is not valid & it's dirty or form submited-->
+          <button type="submit">Submit</button>
+      </form>
     </div>
   `,
   styles: [`
@@ -53,7 +62,7 @@ import {Observable} from 'rxjs/Rx';
 
 })
 export class FundingComponent implements OnInit {
-
+  private transaction;
   constructor(private http: Http) {
     this.parseFloat = function(num){
       return parseFloat(num);
@@ -61,13 +70,16 @@ export class FundingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.transaction = {
+      amount: 20
+    }
   }
 
   public openFec(){
     window.open('http://www.fec.gov/finance/disclosure/ftpdet.shtml#a2015_2016');
   }
 
-  openCheckout(amount) {
+  openCheckout(amount, valid) {
     console.log("Checkout amount: ", amount);
     var handler = (<any>window).StripeCheckout.configure({
       key: 'pk_test_18jB465AmfCTngdGeiBtSqqp',
