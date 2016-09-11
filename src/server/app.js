@@ -1,5 +1,5 @@
   //check// *** main dependencies *** //
-require('dotenv').config();
+// require('dotenv').config();
 
 var express = require('express');
 var path = require('path');
@@ -75,8 +75,10 @@ app.post('/api/stripe', function(req, res, next) {
       if(err) {
         return next(err);
       } else {
-        console.log("Success");
-        res.redirect('/');
+        return res.json({
+                          status: "Success",
+                          charge: charge
+                        })
       }
     });
 });

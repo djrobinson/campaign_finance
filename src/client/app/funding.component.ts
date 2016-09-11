@@ -2,23 +2,40 @@ import {Component, OnInit, CORE_DIRECTIVES} from 'angular2/core';
 import {Http, Response, Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgForm } from 'angular2/common';
-// <h5>Contribute to the development and hosting of Citizens Hub.</h5>
-//       <div class="button" (click)="openCheckout()">Contribute</div>
+
+          // <input
+          //   [(ngModel)]="amount"
+          //   type="number"
+          //   name="amount">
+          // <br>
+          // <div class="button" (click)="openCheckout(amount)">Submit</div>
+          // <div *ngIf="thankYou">
+          //   <p>Thank you for your contribution!</p>
+          // </div>
+          // <br>
 @Component({
   selector: 'funding',
   template: `
     <div class="funding-container">
       <h1>Support Citizens Hub</h1>
-      <h1>Add user</h1>
-      <form [ngFormModel]="formData" (ngSubmit)="doTransaction($event)" novalidate>
-          <input
-            [ngFormControl]="amount"
-            type="text"
-            name="name"
-            required minlength="5">
-        <!--show error only when field is not valid & it's dirty or form submited-->
-          <button type="submit">Submit</button>
-      </form>
+
+
+
+
+
+      <div class="button" (click)="bitcoinAddress()">
+        Bitcoin Address
+      </div>
+      <div *ngIf="bitcoin" >
+        1JWj61zs5a2mpg56oXPePeJ3YMvCZwjvoF
+      </div>
+      <br>
+      <div class="button" (click)="ethereumAddress()">
+        Ethereum Address
+      </div>
+      <div *ngIf="ethereum">
+        0xAdDd8248C1aa3EDa0246f1E57bF7c56Eb372bCE2
+      </div>
     </div>
   `,
   styles: [`
@@ -50,7 +67,7 @@ import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgFo
       border: 2px solid #9DBF9E;
       border-radius: 25px;
       box-sizing: border-box;;
-      width: 15%;
+      width: 20%;
 
     }
 
@@ -59,39 +76,37 @@ import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgFo
         color: white;
     }
   `],
-  providers: [FORM_PROVIDERS],
-  directives: [FORM_DIRECTIVES]
+  providers: [],
+  directives: []
 
 })
 export class FundingComponent implements OnInit {
   private transaction;
-  formData: ControlGroup;
+  amount: number;
+  thankYou: boolean;
+  bitcoin: boolean;
+  ethereum: boolean;
 
-  constructor(private http: Http, fb: FormBuilder) {
+  constructor(private http: Http) {
     this.parseFloat = function(num){
       return parseFloat(num);
     }
-    this.formData = fb.group({
-      amount: ["", Validators.required]
-    });
+
   }
 
   doTransaction(event) {
-    console.log(this.formData.value);
-    event.preventDefault();
+    console.log(event);
   }
 
   ngOnInit() {
-    this.transaction = {
-      amount: 20
-    }
+      this.amount = 20
   }
 
   public openFec(){
     window.open('http://www.fec.gov/finance/disclosure/ftpdet.shtml#a2015_2016');
   }
 
-  openCheckout(amount, valid) {
+  openCheckout(amount) {
     console.log("Checkout amount: ", amount);
     var handler = (<any>window).StripeCheckout.configure({
       key: 'pk_test_18jB465AmfCTngdGeiBtSqqp',
@@ -100,7 +115,7 @@ export class FundingComponent implements OnInit {
         console.log("Token sending: ", token);
         var body =  JSON.stringify({
               stripeToken: token,
-              amount: 20
+              amount: amount
             });
         var headers = new Headers();
           headers.append('Content-Type', 'application/json');
@@ -117,7 +132,7 @@ export class FundingComponent implements OnInit {
     handler.open({
       name: 'Citizens Hub',
       description: 'Hosting & Development',
-      amount: 2000
+      amount: amount * 100
     });
 
     console.log(handler);
@@ -125,11 +140,21 @@ export class FundingComponent implements OnInit {
 
 
   useData(data){
+    this.amount = 0;
+    this.thankYou = true;
     console.log("Data token", data);
   }
 
   handleError(error){
     console.log(error);
+  }
+
+  ethereumAddress(){
+    this.ethereum = true;
+  }
+
+  bitcoinAddress(){
+    this.bitcoin = true;
   }
 
 }

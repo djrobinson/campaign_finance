@@ -1,4 +1,4 @@
-<div class="landing-container">
+<div class="landing-container" *ngIf="!isMobile">
   <div class="main-banner seven columns">
     <div class="title">
       Citizens Hub
@@ -7,7 +7,9 @@
       <h2>A campaign finance data visualization project that makes FEC donation data accessible to all voters</h2>
       <p>Click on a category to the right to see candidates and committees. Thanks to the FEC for making this data public. Every <img src="images/fec.png" class="fec" (click)="openFec()" /> icon throughout the site is a link to the original FEC document containing the source data for the page your on.</p>
     </div>
+
   </div>
+
   <div class="main-menu five columns">
     <div class="main-menu-sel six columns" (click)="redirect('home')">
       <h3>Home</h3>
@@ -35,5 +37,40 @@
     </div>
   </div>
 </div>
-
+<div class="mobile-landing-container" *ngIf="isMobile">
+  <div class="mobile-main-banner">
+    <div class="mobile-title">
+     Citizens Hub
+    </div>
+    <div class="content">
+      <h2>A campaign finance data visualization project that makes FEC donation data accessible to all voters</h2>
+    </div>
+  </div>
+  <div class="mobile-main-menu">
+    <div class="mobile-main-menu-sel" (click)="redirect('home')">
+      <h3>Home</h3>
+    </div>
+    <div class="mobile-main-menu-sel" (click)="candPath('P')">
+      <h3>Presidential Candidates</h3>
+    </div>
+    <div class="mobile-main-menu-sel coming-soon" (click)="redirect('home')">
+      <h3 class="hide-soon">House Candidates</h3>
+    </div>
+    <div class="mobile-main-menu-sel coming-soon" (click)="redirect('home')">
+      <h3  class="hide-soon">Senate Candidates</h3>
+    </div>
+    <div class="mobile-main-menu-sel coming-soon" (click)="redirect('home')">
+      <h3  class="hide-soon">Super PACs</h3>
+    </div>
+    <div class="mobile-main-menu-sel" (click)="about('about')">
+      <h3>About</h3>
+    </div>
+    <div class="mobile-main-menu-sel" (click)="funding('funding')">
+      <h3>Donate</h3>
+    </div>
+    <div class="mobile-main-menu-sel" (click)="methods('methods')">
+      <h3>Resources</h3>
+    </div>
+  </div>
+</div>
 

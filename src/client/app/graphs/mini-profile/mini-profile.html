@@ -6,21 +6,6 @@
         <img src="images/fec.png" class="fec" (click)="openFec(cmte.IMAGE_NUM)" />
       </span>
       </div>
-
-      <table *ngIf="cmte?.graphtype !== 'individual'">
-        <tr>
-          <td>Cash:</td>
-          <td>{{parseFloat((cmte?.cas_on_han_clo_of_per) ? cmte?.cas_on_han_clo_of_per : 0.00) | currency:'USD':true}}</td>
-        </tr>
-        <tr>
-          <td>Distributions:</td>
-          <td>{{parseFloat((cmte?.tot_dis) ? cmte?.tot_dis : 0.00) | currency:'USD':true}}</td>
-        </tr>
-        <tr>
-          <td>Contributions:</td>
-          <td>{{parseFloat((cmte?.tot_rec) ? cmte?.tot_rec : 0.00)| currency:'USD':true}}</td>
-        </tr>
-      </table>
       <table>
         <tr *ngIf="cmte?.graphtype === 'individual'">
           <td>Employer</td>
