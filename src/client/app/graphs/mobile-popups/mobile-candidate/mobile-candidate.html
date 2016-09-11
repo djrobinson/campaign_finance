@@ -200,18 +200,24 @@
       <div *ngIf="selection==='opex'">
 
       </div>
+      <opex-list *ngIf="selection==='opex'" [cmte]="committee" class="twelve columns">
+      </opex-list>
       <div *ngIf="isCand" class="cand-option twelve columns"
         (click)="choice('superpacs')"
         [class.active]="selection==='superpacs'"
         >
        SuperPac Expenditures
       </div>
+      <superpacs-list *ngIf="selection==='superpacs'" [cand]="candidateObject" class="twelve columns">
+      </superpacs-list>
       <div class="cand-option twelve columns"
         (click)="choice('individuals')"
         [class.active]="selection==='individuals'"
         >
        Individual Donors
       </div>
+      <individuals-list *ngIf="selection==='individuals'" [cmte]="committee" class="twelve columns">
+      </individuals-list>
       <div class="cand-option twelve columns"
         (click)="choice('committees')"
         [class.active]="selection==='committees'"

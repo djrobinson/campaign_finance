@@ -2,9 +2,9 @@ import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from 'angular
 import {Http, Response} from 'angular2/http';
 import { Router, RouteParams } from 'angular2/router';
 import {Observable} from 'rxjs/Rx';
-import {OpexSectionComponent} from '../../candidate-popup/opex/opex.component';
-import {SuperpacsSectionComponent} from '../../candidate-popup/superpacs/superpacs.component';
-import {IndividualsSectionComponent} from '../../candidate-popup/individuals/individuals.component';
+import {OpexListComponent} from '../../candidate-popup/opex/opex-list.component';
+import {PacsListComponent} from '../../candidate-popup/superpacs/superpacs-list.component';
+import {IndividualsListComponent} from '../../candidate-popup/individuals/individuals-list.component';
 import {CommitteesSectionComponent} from '../../candidate-popup/committees/committees.component';
 import {SpinnerComponent} from '../../../loading/spinner.component';
 
@@ -12,7 +12,7 @@ import {SpinnerComponent} from '../../../loading/spinner.component';
   selector: 'mobile-candidate-popup',
   templateUrl: 'app/graphs/mobile-popups/mobile-candidate/mobile-candidate.html',
   styleUrls: ['app/graphs/mobile-popups/mobile-candidate/mobile-candidate.css'],
-  directives: [OpexSectionComponent, SuperpacsSectionComponent, CommitteesSectionComponent, IndividualsSectionComponent, SpinnerComponent]
+  directives: [OpexListComponent, PacsListComponent, CommitteesSectionComponent, IndividualsListComponent, SpinnerComponent]
 })
 export class MobileCandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
@@ -42,6 +42,7 @@ export class MobileCandidatePopupComponent implements OnInit, OnChanges {
   public type: string;
   public cand_id: string;
   public candidate: any;
+  public candidateObject: any;
 
 
   constructor(
@@ -71,6 +72,9 @@ export class MobileCandidatePopupComponent implements OnInit, OnChanges {
         this.isCand = false;
       }
       if (this.isCand === true){
+        this.candidateObject = {
+          CANDIDATE_ID: this.cand_id
+        }
         this.callPresApis(this.cand_id)
       } else {
         this.callCmteApis(this.committee);
