@@ -145,7 +145,7 @@ export class MobileCandidatesComponent implements OnInit {
   }
 
   public showCandidate(cand_id){
-    this.http.get('/api/candidates/'+cand_id+'/committees')
+    this.http.get('/api/candidates/'+cand_id+'/associated')
       .map(res => res.json())
       .subscribe(
         data => {

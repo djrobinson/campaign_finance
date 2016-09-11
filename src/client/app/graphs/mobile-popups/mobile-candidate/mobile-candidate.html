@@ -197,6 +197,9 @@
         >
        Operating Expenditures
       </div>
+      <div *ngIf="selection==='opex'">
+
+      </div>
       <div *ngIf="isCand" class="cand-option twelve columns"
         (click)="choice('superpacs')"
         [class.active]="selection==='superpacs'"
@@ -215,6 +218,9 @@
         >
        Committee Donors
       </div>
+      <committees-section *ngIf="selection==='committees'" [cmte]="committee" class="twelve columns">
+
+      </committees-section>
     </div>
   </div>
 <!-- <div class="twelve columns main-content">
