@@ -117,10 +117,6 @@ export class MobileCandidatesComponent implements OnInit {
       );
   }
 
-  public buildGraph(candidate_id): void {
-    console.log("inbound");
-    this.router.navigate(['Graphs', { id: candidate_id }]);
-  }
 
   public sortCandidates(column): void {
     this.candidatesView = this.candidates;
@@ -149,7 +145,15 @@ export class MobileCandidatesComponent implements OnInit {
   }
 
   public showCandidate(cand_id){
-    console.log("Candidate: ", cand_id);
-    this.router.navigate(['MobileCandidatePopupComponent', { cand: cand_id } ]);
-  }
+    this.http.get('/api/candidates/'+cand_id+'/committees')
+      .map(res => res.json())
+      .subscribe(
+        data => {
+          console.log("Show Data: ", data[0]);
+          console.log("Candidate: ", cand_id);
+          this.router.navigate(['MobileCandidatePopupComponent', { cand: cand_id, cmte: data[0].CMTE_ID, type: "P" } ]);
+        },
+        error => { console.log("Error", error)}
+        )
+    }
 }

@@ -17,7 +17,6 @@ import {SpinnerComponent} from '../../../loading/spinner.component';
 export class MobileCandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
 
-  @Input() candidate: string;
   @Input() committee: string;
   @Input() isCand: boolean;
   @Output() exitEmit = new EventEmitter();
@@ -40,32 +39,42 @@ export class MobileCandidatePopupComponent implements OnInit, OnChanges {
   public primaryCmte: any;
   public pacSupport: any;
   public pacOppose: any;
+  public type: string;
+  public cand_id: string;
+  public candidate: any;
+
 
   constructor(
-    private http: Http) {
+    private http: Http,
+    private _params: RouteParams,
+    public router: Router) {
+    this.cand_id = _params.get('cand');
+    this.committee = _params.get('cmte');
+    this.type = _params.get('type');
+    console.log("Cand ID to mobile: ", this.cand_id);
     this.parseFloat = function(num){
       return parseFloat(num);
     }
   }
 
   ngOnInit(){
-    console.log("Init:", this.candidate,"cmte:", this.committee);
+    console.log("Init:", this.cand_id,"cmte:", this.committee);
       this.isRequesting = true;
       this.imageVar = {};
       this.selection = "main";
-      // if (!!this.candidate && this.isCand === true && this.candidate.charAt(0) === "P") {
-      //   // this.route = '/api/pac/aggregate/' + this.candidate;
-      //   this.imageVar.image = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + this.candidate+'.jpg';
-      //   this.typeString = "Superpac";
-      //   this.isCand = true;
-      // } else {
-      //   this.isCand = false;
-      // }
-      // if (this.isCand === true){
-      //   this.callPresApis(this.candidate)
-      // } else {
-      //   this.callCmteApis(this.committee);
-      // }
+      if (!!this.cand_id && this.type === "P") {
+        // this.route = '/api/pac/aggregate/' + this.candidate;
+        this.imageVar.image = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + this.cand_id+'.jpg';
+        this.typeString = "Superpac";
+        this.isCand = true;
+      } else {
+        this.isCand = false;
+      }
+      if (this.isCand === true){
+        this.callPresApis(this.cand_id)
+      } else {
+        this.callCmteApis(this.committee);
+      }
   }
 
   private stopRefreshing() {
@@ -75,58 +84,29 @@ export class MobileCandidatePopupComponent implements OnInit, OnChanges {
   public callPresApis(fecId){
     Observable.forkJoin(
       this.http.get('/api/candidates/'+fecId)
-        .map((res: Response) => res.json()),
-      this.http.get('/api/candidates/'+fecId+'/associated')
-        .map((res: Response) => res.json()),
-      this.http.get('api/transfers/'+this.committee+'/designation')
-        .map((res: Response) => res.json()),
-      this.http.get('api/transfers/'+this.committee+'/cmtetype')
         .map((res: Response) => res.json())
     ).subscribe(
       data => {
 
         this.stopRefreshing();
         this.candidate = data[0][0];
-        this.primaryCmte = data[1].filter((cmte)=>{
-          if(cmte.CMTE_DSGN === "P"){
-            return cmte
-          };
-        })[0];
-        this.typePieComponent.callAsc(data[3]);
-        this.dsgnPieComponent.callAsc(data[2]);
-        this.committeeDonations = data[3].reduce((prev, item)=>{
-          return prev + +item.count;
-        }, 0);
+        console.log(data[0]);
       },
       err => console.error(err)
     );
   }
 
   public callCmteApis(cmte){
+    console.log(cmte);
     Observable.forkJoin(
       this.http.get('/api/committees/'+cmte)
-        .map((res: Response) => res.json()),
-      this.http.get('api/transfers/'+cmte+'/designation')
-        .map((res: Response) => res.json()),
-      this.http.get('api/transfers/'+cmte+'/cmtetype')
-        .map((res: Response) => res.json()),
-      this.http.get('/api/individuals/committee/'+cmte+'/pie')
-        .map((res: Response) => res.json()),
-      this.http.get('/api/individuals/committee/'+cmte+'/date')
-        .map((res: Response) => res.json()),
-      this.http.get('/api/transfers/'+cmte+'/date')
         .map((res: Response) => res.json())
     ).subscribe(
       data => {
         this.stopRefreshing();
-        this.candidate = data[0][0];
-        this.typePieComponent.callAsc(data[2]);
-        this.dsgnPieComponent.callAsc(data[1]);
-        this.committeeDonations = data[2].reduce((prev, item)=>{
-          return prev + +item.count;
-        }, 0)
+         console.log("mobile cand date: ", data);
       },
-      err => console.error(err)
+      err => console.log("Error", err)
     );
   }
 

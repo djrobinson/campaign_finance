@@ -147,7 +147,7 @@ import {MobileCandidatePopupComponent} from './graphs/mobile-popups/mobile-candi
     component: MobileCandidatesComponent
   },
   {
-    path: '/mobile/candidate/:cand',
+    path: '/mobile/candidate/:cand/:cmte/:type',
     as: 'MobileCandidatePopupComponent',
     component: MobileCandidatePopupComponent
   }

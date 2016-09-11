@@ -35,6 +35,7 @@ router.get('/', function(req, res, next){
 });
 
 router.get('/:cmte_id', function(req, res, next){
+  console.log("Calling the committee endpoint! ", req.params.cmte_id)
   if (req.query.offset){
     var offset = +req.query.offset * 100;
     query.getCmteSum(req.params.cmte_id, offset).then(function(data){

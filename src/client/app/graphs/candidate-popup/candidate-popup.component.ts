@@ -1,4 +1,4 @@
-import {Component, Input, Output, OnInit, OnChanges, EventEmitter, ViewChild} from 'angular2/core';
+  import {Component, Input, Output, OnInit, OnChanges, EventEmitter, ViewChild} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {TreemapComponent} from '../charts/treemap.component';
@@ -91,7 +91,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         .map((res: Response) => res.json())
     ).subscribe(
       data => {
-
+        console.log("Candidate popup data: ", data);
         this.stopRefreshing();
         this.candidate = data[0][0];
         this.primaryCmte = data[1].filter((cmte)=>{
@@ -125,6 +125,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         .map((res: Response) => res.json())
     ).subscribe(
       data => {
+
         this.stopRefreshing();
         this.candidate = data[0][0];
         this.typePieComponent.callAsc(data[2]);
