@@ -11,6 +11,7 @@ import {AboutComponent} from './about.component';
 import {MethodsComponent} from './methods.component';
 import {FundingComponent} from './funding.component';
 import {FundingTest} from './funding.test';
+import {MobileCandidatesComponent} from './mobile-candidates/mobile-candidates.component'
 
 
 @Component({
@@ -138,6 +139,11 @@ import {FundingTest} from './funding.test';
     path: '/funding',
     as: 'Funding',
     component: FundingComponent
+  },
+  {
+    path: '/mobile/candidates',
+    as: 'MobileCandidatesComponent',
+    component: MobileCandidatesComponent
   }
 ])
 export class AppComponent implements OnInit {

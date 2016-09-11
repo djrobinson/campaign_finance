@@ -59,4 +59,9 @@ export class Landing implements OnInit {
     window.open('http://www.fec.gov/finance/disclosure/ftpdet.shtml#a2015_2016');
   }
 
+  public mobilePres(){
+    console.log("mobile pres");
+    this.router.navigate(['MobileCandidatesComponent']);
+  }
+
 }

@@ -1,4 +1,3 @@
-<script src="dropdown.js"></script>
 <div class="candidates-container text-center">
   <h1>{{headerType}} Candidates</h1>
   <div class="button button-top" (click)="sortCandidates()">
@@ -13,7 +12,7 @@
   </div>
   </div>
   <div class="row">
-    <ul class="list twelve-columns">
+    <ul class="list twelve columns">
       <li *ngFor="#candidate of candidatesView" class="list-item four columns" [style.border]="candidate.tile_color">
         <div class="candidate-profile three columns">
 

@@ -4,6 +4,10 @@
   margin-right: 0 !important;
 }
 
+.header {
+  height: 200px;
+}
+
 button {
   width: 100%;
 }
@@ -43,18 +47,6 @@ td {
   margin-left: 10%;
 }
 
-.first {
-  background: #5A83BF;
-}
-
-.second {
-  background: #47a4b4;
-}
-
-.third {
-  background: #e49e95;
-}
-
 .candidates-container {
 
   bottom: 0;
@@ -62,14 +54,14 @@ td {
 }
 
 .fec {
-  height: 4rem;
+  height: 10rem;
   position: absolute;
   right: 1rem;
   bottom: 1rem;
 }
 
 .profile-img {
-  height: 10rem;
+  width: 100%;
   margin-bottom: 0;
   border-radius: 50%;
   padding-bottom: 0;
