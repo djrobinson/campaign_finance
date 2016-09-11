@@ -4,7 +4,7 @@ h1, h2, h3, h4, h5, p {
 }
 
 tr {
-  height: 3rem !important;
+  height: 5rem !important;
   vertical-align:middle;
 }
 
@@ -101,7 +101,7 @@ li {
   color: #4d4d4d;
 }
 .cand-options {
-  background-color: #73877B;
+
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -111,6 +111,7 @@ li {
   width: 100%;
 }
 .cand-option {
+  background-color: #73877B;
   font-family: 'Oswald';
   font-weight: 300;
   display: flex;
@@ -175,14 +176,13 @@ td {
   overflow: hidden;
   white-space: nowrap;
   vertical-align:middle;
-
-}
-
-.top-row td {
-  font-size: 1.5rem;
+  font-size: 4rem;
   font-family: 'Oswald';
   font-weight: 300;
+  color: #4d4d4d;
+  padding: 2rem;
 }
+
 
 
 td:nth-child(2n){
