@@ -1,7 +1,12 @@
 //check// *** main dependencies *** //
-// require('dotenv').config();
+
+
 
 var express = require('express');
+var app = express();
+if (app.get('env') === 'development'){
+  require('dotenv').config();
+}
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -39,12 +44,9 @@ mongoose.connect('mongodb://'+process.env.MONGO_CONNECTION_STRING+'/'+ process.e
 // //Test
 // mongoose.connect('mongodb://localhost/testPolis');
 // *** express instance *** //
-var app = express();
-
 
 // *** static directory *** //
 app.set('views', path.join(__dirname, 'views'));
-
 
 // *** config middleware *** //
 app.use(logger('dev'));

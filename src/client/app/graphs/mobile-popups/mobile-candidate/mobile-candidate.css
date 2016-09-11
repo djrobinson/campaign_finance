@@ -50,11 +50,11 @@ tr {
 }
 
 .fec {
-  height: 3rem;
-  width: 3rem;
+  height: 8rem;
+  width: 8rem;
   position: absolute;
-  left: 2%;
-  top: 0;
+  right: 2%;
+  top: 2%;
 }
 
 .close-button {
@@ -104,22 +104,28 @@ li {
   background-color: #73877B;
   display: flex;
   flex-direction: column;
+  align-content: center;
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
 }
 .cand-option {
+  font-family: 'Oswald';
+  font-weight: 300;
   display: flex;
   align-content: center;
   border: #839788;
-  font-size: 2rem;
+  font-size: 5rem;
   text-align: center;
   align-items: center;
+  justify-content: center;
   flex-grow: 1;
   color: white;
   box-sizing: border-box;
   margin: 0;
-  padding: 2rem;
+  padding: 4rem;
+  border-bottom: solid 2px #f2f2f2;
 }
 .cand-option:hover {
   background-color: #9DBF9E;

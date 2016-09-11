@@ -5,17 +5,17 @@
 <div class="cand-style">
 
   <div class="twelve columns choices">
-    <div style="color: black">
-      <h1>Mobile Profiles are Under Construction</h1>
+    <div style="color: black; margin-top: 100px;">
+      <h1>{{candidate?.CANDIDATE_NAME}}</h1>
     </div>
     <img src="images/fec.png" class="fec" (click)="openFec()" />
     <div *ngIf="isCand" class="cand-pic text-center">
       <img [src]="imageVar?.image" alt="picture">
       <h3>{{candidate?.CANDIDATE_NAME}}</h3>
-      <p>Party: {{candidate?.PARTY}}</p>
-      <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
-      <p>FEC ID: {{candidate?.CANDIDATE_ID}}</p>
-      <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
+      <h3>Party: {{candidate?.PARTY}}</h3>
+      <h3>Office: {{candidate?.CANDIDATE_OFFICE}}</h3>
+      <h3>FEC ID: {{candidate?.CANDIDATE_ID}}</h3>
+      <h3>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</h3>
     </div>
     <div *ngIf="!isCand" class="cand-pic text-center">
       <h4>{{candidate?.com_nam}} </h4>
@@ -27,35 +27,47 @@
 
     </div>
     <div class="cand-options twelve columns">
-      <div class="cand-option six-columns"
-        (click)="choice('main')"
-        [class.active]="selection==='main'"
+      <div class="cand-option twelve columns"
+        (click)="choice('cash')"
+        [class.active]="selection==='cash'"
         >
-        <p>Main Info</p>
+       Cash Overview
       </div>
-      <div class="cand-option"
+      <div class="cand-option twelve columns"
+        (click)="choice('receipts')"
+        [class.active]="selection==='receipts'"
+        >
+       Receipts Overview
+      </div>
+      <div class="cand-option twelve columns"
+        (click)="choice('disbursements')"
+        [class.active]="selection==='disbursements'"
+        >
+       Disbursements Overview
+      </div>
+      <div class="cand-option twelve columns"
         (click)="choice('opex')"
         [class.active]="selection==='opex'"
         >
-        <p>Operating Expenditures</p>
+       Operating Expenditures
       </div>
-      <div *ngIf="isCand" class="cand-option"
+      <div *ngIf="isCand" class="cand-option twelve columns"
         (click)="choice('superpacs')"
         [class.active]="selection==='superpacs'"
         >
-        <p>SuperPac Expenditures</p>
+       SuperPac Expenditures
       </div>
-      <div class="cand-option"
+      <div class="cand-option twelve columns"
         (click)="choice('individuals')"
         [class.active]="selection==='individuals'"
         >
-        <p>Individual Donors</p>
+       Individual Donors
       </div>
-      <div class="cand-option"
+      <div class="cand-option twelve columns"
         (click)="choice('committees')"
         [class.active]="selection==='committees'"
         >
-        <p>Committee Donors</p>
+       Committee Donors
       </div>
     </div>
   </div>

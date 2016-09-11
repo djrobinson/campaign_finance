@@ -33,6 +33,18 @@ import {MobileCandidatePopupComponent} from './graphs/mobile-popups/mobile-candi
       height: 5px;
       width:30px;
     }
+    #mobile-lines {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      z-index: 3;
+      border-bottom: 30px double #6C6F7D;
+      border-top: 10px solid #6C6F7D;
+      content:"";
+      height: 10px;
+      width:70px;
+    }
+
     #menu {
       display: flex;
       position: fixed;
@@ -42,9 +54,26 @@ import {MobileCandidatePopupComponent} from './graphs/mobile-popups/mobile-candi
       z-index: 4;
       flex-direction: column;
     }
+
+    #mobile-menu {
+      display: flex;
+      position: fixed;
+      width: 35%;
+      height: 100%;
+      background: #73877B;
+      z-index: 4;
+      flex-direction: column;
+    }
     .content-width {
       position: absolute;
       width: 83%;
+      height: 100%;
+      right: 0;
+    }
+
+    .mobile-content-width {
+      position: absolute;
+      width: 65%;
       height: 100%;
       right: 0;
     }
@@ -62,6 +91,7 @@ import {MobileCandidatePopupComponent} from './graphs/mobile-popups/mobile-candi
       padding: 0;
       margin: 0;
       padding-left: 1rem;
+      font-size: 3rem;
     }
     .menu-option:hover {
       background: #110B11;
@@ -87,7 +117,7 @@ import {MobileCandidatePopupComponent} from './graphs/mobile-popups/mobile-candi
       </div>
     </div>
     <div *ngIf="isMobile" class="app-mobile">
-      <div *ngIf="sideMenu" id="menu">
+      <div *ngIf="sideMenu" id="mobile-menu">
         <div class="menu-option" (click)="home()"><h5>Home</h5></div>
         <div class="menu-option"><h5>About</h5></div>
         <div class="menu-option" (click)="candPath('P')"><h5>Presidential Funding</h5></div>
@@ -98,8 +128,8 @@ import {MobileCandidatePopupComponent} from './graphs/mobile-popups/mobile-candi
         <div class="menu-option"><h5>Donate</h5></div>
         <div class="menu-option"><h5>About</h5></div>
       </div>
-      <div  [class.content-width]="sideMenu">
-        <div id="lines" (click)="showMenu()"></div>
+      <div  [class.mobile-content-width]="sideMenu">
+        <div id="mobile-lines" (click)="showMenu()"></div>
         <router-outlet></router-outlet>
       </div>
     </div>
