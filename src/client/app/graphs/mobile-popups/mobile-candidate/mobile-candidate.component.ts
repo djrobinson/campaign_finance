@@ -1,35 +1,28 @@
-import {Component, Input, Output, OnInit, OnChanges, EventEmitter, ViewChild} from 'angular2/core';
+import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
+import { Router, RouteParams } from 'angular2/router';
 import {Observable} from 'rxjs/Rx';
-import {TreemapComponent} from '../charts/treemap.component';
-import {TypePieComponent} from '../charts/type-pie-chart.component';
-import {SizePieComponent} from '../charts/size-pie-chart.component';
-import {DsgnPieComponent} from '../charts/dsgn-pie-chart.component';
-import {BarComponent} from '../charts/bar-chart.component';
-import {OpexSectionComponent} from './opex/opex.component';
-import {SuperpacsSectionComponent} from './superpacs/superpacs.component';
-import {IndividualsSectionComponent} from './individuals/individuals.component';
-import {CommitteesSectionComponent} from './committees/committees.component';
-import {SpinnerComponent} from '../../loading/spinner.component';
+import {OpexSectionComponent} from '../../candidate-popup/opex/opex.component';
+import {SuperpacsSectionComponent} from '../../candidate-popup/superpacs/superpacs.component';
+import {IndividualsSectionComponent} from '../../candidate-popup/individuals/individuals.component';
+import {CommitteesSectionComponent} from '../../candidate-popup/committees/committees.component';
+import {SpinnerComponent} from '../../../loading/spinner.component';
 
 @Component({
-  selector: 'candidate-popup',
-  templateUrl: 'app/graphs/candidate-popup/candidate-popup.html',
-  styleUrls: ['app/graphs/candidate-popup/candidate-popup.css'],
-  directives: [TypePieComponent, SizePieComponent, DsgnPieComponent, BarComponent, OpexSectionComponent, SuperpacsSectionComponent, CommitteesSectionComponent, IndividualsSectionComponent, SpinnerComponent]
+  selector: 'mobile-candidate-popup',
+  templateUrl: 'app/graphs/mobile-popups/mobile-candidate/mobile-candidate.html',
+  styleUrls: ['app/graphs/mobile-popups/mobile-candidate/mobile-candidate.css'],
+  directives: [OpexSectionComponent, SuperpacsSectionComponent, CommitteesSectionComponent, IndividualsSectionComponent, SpinnerComponent]
 })
-export class CandidatePopupComponent implements OnInit, OnChanges {
+export class MobileCandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
+
   @Input() candidate: string;
   @Input() committee: string;
   @Input() isCand: boolean;
   @Output() exitEmit = new EventEmitter();
   @Output() cmteEmit = new EventEmitter();
   @Output() changeIndiv = new EventEmitter();
-  @ViewChild(TypePieComponent) typePieComponent: TypePieComponent;
-  @ViewChild(SizePieComponent) sizePieComponent: SizePieComponent;
-  @ViewChild(DsgnPieComponent) dsgnPieComponent: DsgnPieComponent;
-  @ViewChild(BarComponent) barComponent: BarComponent;
 
   private disbursements: Object;
   private candidateInfo: Object;
@@ -56,23 +49,23 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(){
-      console.log(this.typePieComponent);
+    console.log("Init:", this.candidate,"cmte:", this.committee);
       this.isRequesting = true;
       this.imageVar = {};
       this.selection = "main";
-      if (!!this.candidate && this.isCand === true && this.candidate.charAt(0) === "P") {
-        // this.route = '/api/pac/aggregate/' + this.candidate;
-        this.imageVar.image = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + this.candidate+'.jpg';
-        this.typeString = "Superpac";
-        this.isCand = true;
-      } else {
-        this.isCand = false;
-      }
-      if (this.isCand === true){
-        this.callPresApis(this.candidate)
-      } else {
-        this.callCmteApis(this.committee);
-      }
+      // if (!!this.candidate && this.isCand === true && this.candidate.charAt(0) === "P") {
+      //   // this.route = '/api/pac/aggregate/' + this.candidate;
+      //   this.imageVar.image = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + this.candidate+'.jpg';
+      //   this.typeString = "Superpac";
+      //   this.isCand = true;
+      // } else {
+      //   this.isCand = false;
+      // }
+      // if (this.isCand === true){
+      //   this.callPresApis(this.candidate)
+      // } else {
+      //   this.callCmteApis(this.committee);
+      // }
   }
 
   private stopRefreshing() {

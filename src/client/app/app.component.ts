@@ -12,6 +12,7 @@ import {MethodsComponent} from './methods.component';
 import {FundingComponent} from './funding.component';
 import {FundingTest} from './funding.test';
 import {MobileCandidatesComponent} from './mobile-candidates/mobile-candidates.component'
+import {MobileCandidatePopupComponent} from './graphs/mobile-popups/mobile-candidate/mobile-candidate.component'
 
 
 @Component({
@@ -144,6 +145,11 @@ import {MobileCandidatesComponent} from './mobile-candidates/mobile-candidates.c
     path: '/mobile/candidates',
     as: 'MobileCandidatesComponent',
     component: MobileCandidatesComponent
+  },
+  {
+    path: '/mobile/candidate/:cand',
+    as: 'MobileCandidatePopupComponent',
+    component: MobileCandidatePopupComponent
   }
 ])
 export class AppComponent implements OnInit {

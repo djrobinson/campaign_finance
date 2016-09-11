@@ -147,4 +147,9 @@ export class MobileCandidatesComponent implements OnInit {
   public openFec(lin_ima){
     window.open(lin_ima);
   }
+
+  public showCandidate(cand_id){
+    console.log("Candidate: ", cand_id);
+    this.router.navigate(['MobileCandidatePopupComponent', { cand: cand_id } ]);
+  }
 }

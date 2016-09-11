@@ -1,0 +1,208 @@
+
+<div *ngIf="isRequesting" class="spinner-container">
+
+</div>
+<div class="cand-style">
+
+  <div class="twelve columns choices">
+    <div style="color: black">
+      <h1>Mobile Profiles are Under Construction</h1>
+    </div>
+    <img src="images/fec.png" class="fec" (click)="openFec()" />
+    <div *ngIf="isCand" class="cand-pic text-center">
+      <img [src]="imageVar?.image" alt="picture">
+      <h3>{{candidate?.CANDIDATE_NAME}}</h3>
+      <p>Party: {{candidate?.PARTY}}</p>
+      <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
+      <p>FEC ID: {{candidate?.CANDIDATE_ID}}</p>
+      <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
+    </div>
+    <div *ngIf="!isCand" class="cand-pic text-center">
+      <h4>{{candidate?.com_nam}} </h4>
+      <p>Designation: {{candidate?.com_des}}</p>
+      <p>Type: {{candidate?.com_typ}}</p>
+      <p>FEC ID: {{candidate?.com_id}}</p>
+      <p>Address: {{candidate?.add}}</p>
+      <p>Home City: {{candidate?.cit}}</p>
+
+    </div>
+    <div class="cand-options twelve columns">
+      <div class="cand-option six-columns"
+        (click)="choice('main')"
+        [class.active]="selection==='main'"
+        >
+        <p>Main Info</p>
+      </div>
+      <div class="cand-option"
+        (click)="choice('opex')"
+        [class.active]="selection==='opex'"
+        >
+        <p>Operating Expenditures</p>
+      </div>
+      <div *ngIf="isCand" class="cand-option"
+        (click)="choice('superpacs')"
+        [class.active]="selection==='superpacs'"
+        >
+        <p>SuperPac Expenditures</p>
+      </div>
+      <div class="cand-option"
+        (click)="choice('individuals')"
+        [class.active]="selection==='individuals'"
+        >
+        <p>Individual Donors</p>
+      </div>
+      <div class="cand-option"
+        (click)="choice('committees')"
+        [class.active]="selection==='committees'"
+        >
+        <p>Committee Donors</p>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="twelve columns main-content">
+    <individuals-section
+      *ngIf="selection==='individuals'"
+      [cmte]="committee"
+      (changeIndiv)="changeTran($event)">
+    </individuals-section>
+    <committees-section
+      *ngIf="selection==='committees'"
+      [cmte]="committee">
+    </committees-section>
+    <superpacs-section
+      *ngIf="selection==='superpacs'"
+      [cand]="candidate">
+    </superpacs-section>
+    <opex-section
+      *ngIf="selection==='opex'"
+      [cmte]="committee">
+    </opex-section>
+
+      <div class="twelve columns candidate-content">
+        <div (click)="close()" class="close-button">×</div>
+
+
+
+        <div class="twelve columns top-row">
+          <div *ngIf="isCand" class="header">
+            <h2>{{primaryCmte?.CMTE_NM}}</h2>
+          </div>
+          <div *ngIf="!isCand" class="header">
+            <h5>{{candidate?.com_nam}}</h5>
+          </div>
+            <table>
+              <tr>
+                <td class="heading">Receipts</td>
+                <td></td>
+                <td class="heading">Disbursements</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Federal Funds</td>
+                <td>{{parseFloat((candidate?.fed_fun) ? candidate?.fed_fun : 0.00) | currency:'USD':true}}</td>
+                <td>Operating Expenditures</td>
+                <td>{{parseFloat((candidate?.ope_exp) ? candidate?.ope_exp : 0.00)  | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Itemized Individual Contributions</td>
+                <td>{{parseFloat((candidate?.ind_ite_con) ? candidate?.ind_ite_con : 0.00) | currency:'USD':true}}</td>
+                <td>Transfers to Authorized Committees</td>
+                <td>{{parseFloat((candidate?.tra_to_oth_aut_com) ? candidate?.tra_to_oth_aut_com : 0.00) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Unitemized Individual Contributions</td>
+                <td>{{parseFloat((candidate?.ind_uni_con) ? candidate?.ind_uni_con : 0.00) | currency:'USD':true}}</td>
+                <td>Fundraising</td>
+                <td>{{parseFloat((candidate?.fun_dis) ? candidate?.fun_dis : 0.00) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Total Individual Contributions</td>
+                <td>{{parseFloat((candidate?.ind_con) ? candidate?.ind_con : 0.00) | currency:'USD':true}}</td>
+                <td>Exempt Legal and Accounting</td>
+                <td>{{parseFloat((candidate?.exe_leg_acc_dis_pre) ? candidate?.exe_leg_acc_dis_pre : 0.00) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Party Committee Contributions</td>
+                <td>{{parseFloat((candidate?.par_com_con) ? candidate?.par_com_con : 0.00) | currency:'USD':true}}</td>
+                <td>Candidate Loan Repayments</td>
+                <td>{{parseFloat((candidate?.can_loa_rep) ? candidate?.can_loa_rep : 0.00) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Other Committee Contributions</td>
+                <td>{{parseFloat((candidate?.oth_com_con) ? candidate?.oth_com_con : 0.00) | currency:'USD':true}}</td>
+                <td>Other Loan Repayments</td>
+                <td>{{parseFloat((candidate?.oth_loa_rep) ? candidate?.oth_loa_rep : 0.00) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Candidate Contributions</td>
+                <td>{{parseFloat((candidate?.can_com) ? candidate?.can_com : 0.00) | currency:'USD':true}}</td>
+                <td>Total Loan Repayments</td>
+                <td>{{parseFloat((candidate?.tot_loa_rep) ? candidate?.tot_loa_rep : 0.00) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Total Contributions</td>
+                <td>{{parseFloat((candidate?.tot_con) ? candidate?.tot_con : 0.00) | currency:'USD':true}}</td>
+                <td>Individual Refunds</td>
+                <td>{{parseFloat((candidate?.ind_ref) ? candidate?.ind_ref : 0.00) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Transfers from Authorized Committees</td>
+                <td>{{parseFloat((candidate?.tra_fro_oth_aut_com) ? candidate?.tra_fro_oth_aut_com : 0.00) | currency:'USD':true}}</td>
+                <td>Political Party Refunds</td>
+                <td>{{parseFloat((candidate?.pol_par_com_ref) ? candidate?.pol_par_com_ref : 0.00) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Candidate Loans</td>
+                <td>{{parseFloat((candidate?.can_loa) ? candidate?.can_loa : 0.00) | currency:'USD':true}}</td>
+                <td>Other Committee Refunds</td>
+                <td>{{parseFloat((candidate?.cas_on_han_clo_of_per) ? candidate?.cas_on_han_clo_of_per : 0.00 ) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Other Loans</td>
+                <td>{{parseFloat((candidate?.can_con) ? candidate?.can_con : 0.00 ) | currency:'USD':true}}</td>
+                <td>Total Contribution Refunds</td>
+                <td>{{parseFloat((candidate?.oth_com_ref) ? candidate?.oth_com_ref : 0.00 ) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Offsets to Operating Expenditures</td>
+                <td>{{parseFloat((candidate?.off_to_ope_exp) ? candidate?.off_to_ope_exp : 0.00 ) | currency:'USD':true}}</td>
+                <td>Other Disbursements</td>
+                <td>{{parseFloat((candidate?.oth_dis) ? candidate?.oth_dis : 0.00 ) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Fundraising Offsets</td>
+                <td>{{parseFloat((candidate?.off_to_fun_exp_pre) ? candidate?.off_to_fun_exp_pre : 0.00 ) | currency:'USD':true}}</td>
+                <td>Total Disbursements</td>
+                <td>{{parseFloat((candidate?.tot_dis) ? candidate?.tot_dis : 0.00 ) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Legal and Accounting Offsets</td>
+                <td>{{parseFloat((candidate?.off_to_leg_acc_exp_pre) ? candidate?.off_to_leg_acc_exp_pre : 0.00 ) | currency:'USD':true}}</td>
+                <td colspan="2" class="heading">Cash Summary</td>
+
+              </tr>
+              <tr>
+                <td>Total Offsets</td>
+                <td>{{parseFloat((candidate?.off_to_ope_exp) ? candidate?.off_to_ope_exp : 0.00 ) | currency:'USD':true}}</td>
+                <td>Ending Cash on Hand</td>
+                <td>{{parseFloat((candidate?.cas_on_han_clo_of_per) ? candidate?.cas_on_han_clo_of_per : 0.00 ) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Other Receipts</td>
+                <td>{{parseFloat((candidate?.oth_rec) ? candidate?.oth_rec : 0.00 ) | currency:'USD':true}}</td>
+                <td>Net Contributions</td>
+                <td>{{parseFloat((candidate?.net_con) ? candidate?.net_con : 0.00 ) | currency:'USD':true}}</td>
+              </tr>
+              <tr>
+                <td>Total Receipts</td>
+                <td>{{parseFloat((candidate?.tot_rec) ? candidate?.tot_rec : 0.00 ) | currency:'USD':true}}</td>
+                <td>Net Operating Expenditures</td>
+                <td>{{parseFloat((candidate?.net_ope_exp) ? candidate?.net_ope_exp : 0.00 ) | currency:'USD':true}}</td>
+              </tr>
+            </table>
+        </div> -->
+
+      <!-- </div> -->
+    <!-- </div> -->
+  <!-- </div> -->
+</div>
