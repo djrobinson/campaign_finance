@@ -1,6 +1,7 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit, CORE_DIRECTIVES} from 'angular2/core';
 import {Http, Response, Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
+import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgForm } from 'angular2/common';
 // <h5>Contribute to the development and hosting of Citizens Hub.</h5>
 //       <div class="button" (click)="openCheckout()">Contribute</div>
 @Component({
@@ -9,10 +10,11 @@ import {Observable} from 'rxjs/Rx';
     <div class="funding-container">
       <h1>Support Citizens Hub</h1>
       <h1>Add user</h1>
-      <form #f="ngForm" (ngSubmit)="openCheckout(name)" novalidate>
-          <input type="text"
+      <form [ngFormModel]="formData" (ngSubmit)="doTransaction($event)" novalidate>
+          <input
+            [ngFormControl]="amount"
+            type="text"
             name="name"
-            [(ngModel)]="name"
             required minlength="5">
         <!--show error only when field is not valid & it's dirty or form submited-->
           <button type="submit">Submit</button>
@@ -57,16 +59,26 @@ import {Observable} from 'rxjs/Rx';
         color: white;
     }
   `],
-
-  directives: []
+  providers: [FORM_PROVIDERS],
+  directives: [FORM_DIRECTIVES]
 
 })
 export class FundingComponent implements OnInit {
   private transaction;
-  constructor(private http: Http) {
+  formData: ControlGroup;
+
+  constructor(private http: Http, fb: FormBuilder) {
     this.parseFloat = function(num){
       return parseFloat(num);
     }
+    this.formData = fb.group({
+      amount: ["", Validators.required]
+    });
+  }
+
+  doTransaction(event) {
+    console.log(this.formData.value);
+    event.preventDefault();
   }
 
   ngOnInit() {

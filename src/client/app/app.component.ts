@@ -10,7 +10,7 @@ import {RouteParams} from 'angular2/router';
 import {AboutComponent} from './about.component';
 import {MethodsComponent} from './methods.component';
 import {FundingComponent} from './funding.component';
-
+import {FundingTest} from './funding.test';
 
 
 @Component({
@@ -115,7 +115,7 @@ import {FundingComponent} from './funding.component';
   {
     path: '/funding',
     as: 'Funding',
-    component: FundingComponent
+    component: FundingTest
   }
 ])
 export class AppComponent implements OnInit {
