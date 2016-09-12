@@ -1,5 +1,4 @@
 <div *ngIf="!isMobile" class="content">
-  <h1>Committees</h1>
   <table>
     <tr>
       <th>
@@ -45,7 +44,6 @@
 </div>
 
 <div *ngIf="isMobile" class="content">
-  <h1>Committees</h1>
   <table>
     <tr>
       <th class='mobile'>
@@ -59,7 +57,7 @@
       </th>
     </tr>
     <tr *ngFor="#committee of committees">
-      <td class="cmte-name" (click)="changeCmte(committee.CMTE_ID)" class='mobile'>
+      <td class="cmte-name" (click)="changeCmte(committee.OTHER_ID)" class='mobile'>
         {{committee.NAME}}
       </td>
       <td class='mobile'>

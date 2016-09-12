@@ -59,7 +59,7 @@ export class MobileCandidatePopupComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(){
-    console.log("Init:", this.cand_id,"cmte:", this.committee);
+    console.log("Init:", this.cand_id,"cmte:", this.committee, "type", this.type);
       this.isRequesting = true;
       this.imageVar = {};
       this.selection = "main";
@@ -108,6 +108,7 @@ export class MobileCandidatePopupComponent implements OnInit, OnChanges {
     ).subscribe(
       data => {
         this.stopRefreshing();
+        this.candidate = data[0][0];
          console.log("mobile cand date: ", data);
       },
       err => console.log("Error", err)

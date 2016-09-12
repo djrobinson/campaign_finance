@@ -53,28 +53,20 @@ import {Http, Response} from 'angular2/http';
           </td>
         </tr>
       </table>
-      <table *ngIf="isMobile">
+      <table *ngIf="isMobile" class="mobile">
         <tr>
-          <th>
+          <th class="mobile">
             Name
           </th>
-          <th>
-            Employer
-          </th>
-          <th>
+          <th class="mobile">
+            Employer,
             Title
           </th>
-          <th>
+          <th class="mobile">
             Transaction Amount
           </th>
-          <th>
-            Location
-          </th>
-          <th>
+          <th class="mobile">
             FEC File
-          </th>
-          <th>
-            Committe Link
           </th>
         </tr>
         <tr *ngFor="#individual of individuals">
@@ -82,22 +74,14 @@ import {Http, Response} from 'angular2/http';
             {{individual.NAME}}
           </td>
           <td>
-            {{individual.EMPLOYER}}
-          </td>
-          <td>
+            {{individual.EMPLOYER}},
             {{individual.OCCUPATION}}
           </td>
           <td class="green">
             {{parseFloat(individual.TRANSACTION_AMT) | currency:'USD':true}}
           </td>
           <td>
-            {{individual.CITY}}, {{individual.STATE}}
-          </td>
-          <td>
             <img src="images/fec.png" class="fec" (click)="openFec('http://docquery.fec.gov/cgi-bin/fecimg?'+individual?.IMAGE_NUM)" />
-          </td>
-          <td>
-            {{individual.TRAN_ID}}
           </td>
         </tr>
       </table>
@@ -106,6 +90,10 @@ import {Http, Response} from 'angular2/http';
     h1, h2, h3, h4, h5, p, td, th {
       font-family: 'Oswald';
       font-weight: 300;
+    }
+
+    .mobile {
+      font-size: 4rem;
     }
 
     .content {
@@ -127,8 +115,8 @@ import {Http, Response} from 'angular2/http';
       text-align: center;
     }
     .fec {
-      height: 3rem;
-      width: 3rem;
+      height: 7rem;
+      width: 7rem;
     }
   `],
   directives: []

@@ -64,9 +64,6 @@ import {Http, Response} from 'angular2/http';
             Superpac
           </th>
           <th class="mobile">
-            Targeting
-          </th>
-          <th class="mobile">
             Amount
           </th>
           <th class="mobile">
@@ -80,15 +77,12 @@ import {Http, Response} from 'angular2/http';
           <td class="cmte-name mobile">
             {{pac.spe_nam}}
           </td>
-          <td class="mobile">
-            {{pac.can_nam}}
-          </td>
           <td [style.color]="(pac.sup_opp === 'Support') ? 'green' : 'red'" class="mobile">
             {{parseFloat(pac.exp_amo) | currency:'USD':true}}
           </td>
           <td class="mobile">
             {{pac.pay}}
-          </td>s
+          </td>
           <td>
             <a [href]="'http://docquery.fec.gov/cgi-bin/fecimg?'+pac?.ima_num"><img src="images/fec.png" class="fec" /></a>
           </td>
@@ -124,8 +118,8 @@ import {Http, Response} from 'angular2/http';
       text-align: center;
     }
     .fec {
-      height: 3rem;
-      width: 3rem;
+      height: 7rem;
+      width: 7rem;
     }
   `],
   directives: []

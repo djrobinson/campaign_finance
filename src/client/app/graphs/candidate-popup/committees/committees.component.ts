@@ -1,5 +1,7 @@
 import {Component, Input, Output, OnInit} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
+import { Router, RouteParams } from 'angular2/router';
+
 
 @Component({
   selector: 'committees-section',
@@ -12,7 +14,7 @@ export class CommitteesSectionComponent implements OnInit {
   @Input() isMobile: boolean;
   private committees: any;
 
-  constructor(private http:Http) {
+  constructor(private http:Http, public router: Router) {
 
   }
 
@@ -26,5 +28,10 @@ export class CommitteesSectionComponent implements OnInit {
       console.log(data);
       this.committees = data;
     }, error => console.log('Could not load committees.'));
+  }
+
+  changeCmte(cmte_id){
+    console.log(cmte_id);
+    this.router.navigate(['MobileCandidatePopupComponent', { cand: "committee", cmte: cmte_id, type: "C" } ]);
   }
 }
