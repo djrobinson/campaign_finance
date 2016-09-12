@@ -2,6 +2,7 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {SpinnerComponent} from '../../loading/spinner.component';
+import {Router} from 'angular2/router';
 
 
 @Component({
@@ -24,7 +25,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
           </div>
           <div class="one-half column">
             <p>Donation: {{parseFloat(indiv?.TRANSACTION_AMT) | currency:'USD':true}}</p>
-            <div class="button" (click)="changeTran(indiv)">
+            <div class="button" (click)="changeTran(indiv?.TRAN_ID)">
               See Donation
             </div>
           </div>
@@ -39,9 +40,8 @@ import {SpinnerComponent} from '../../loading/spinner.component';
     }
 
     .indiv-list {
-      position: absolute;
-      bottom: 0;
-      width: 80%;
+      display: block
+      width: 100%;
       height: 90%;
       font-family: 'Prata', serif;
       text-align: center;
@@ -61,20 +61,44 @@ import {SpinnerComponent} from '../../loading/spinner.component';
     }
 
     .title {
-      position: absolute;
+      display: block;
       height: 10%;
-      top: 0;
+      width: 100%;
+      text-align: center;
+    }
+    .button {
+      font-family: 'Oswald';
+      background-color: #73877B; /* Green */
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+      cursor: pointer;
+      background-color: white;
+      color: black;
+      border: 2px solid #9DBF9E;
+      border-radius: 25px;
+      box-sizing: border-box;;
+      width: 100%;
+    }
+
+    .button:hover {
+        background-color: #9DBF9E;
+        color: white;
     }
   `],
   directives: [SpinnerComponent]
 })
 export class IndividualListPopupComponent implements OnInit {
   @Input() indivName: string;
+  @Input() isMobile: boolean;
   public otherIndividuals: any;
   public isRequesting: boolean=true;
-  @Output() changeIndiv = new EventEmitter();
 
-  constructor(private http:Http) {}
+  constructor(private http:Http, private router:Router) {}
 
 
   public parseFloat(num){
@@ -96,10 +120,15 @@ export class IndividualListPopupComponent implements OnInit {
   }
 
   changeTran(indiv) {
-    console.log("Calling the changeIndiv func");
-    this.changeIndiv.emit({
-      transaction: indiv.TRAN_ID,
-      name: indiv.NAME
-    })
+
+      console.log("Calling the changeIndiv func");
+      this.changeIndiv.emit({
+        transaction: indiv.TRAN_ID,
+        name: indiv.NAME
+      })
+  }
+
+  changeTranMobile(tran){
+    this.router.navigate(['MobileCandidatePopupComponent', { cand: cand_id, cmte: data[0].CMTE_ID, type: "P" } ]);
   }
 }
