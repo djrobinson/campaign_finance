@@ -17,7 +17,7 @@
   display: flex;
   align-content: center;
   justify-content: center;
-  padding-top: 20%;
+  padding-top: 15%;
   font-size: 6rem !important;
   color: #73877B;
 }
@@ -47,7 +47,7 @@
 }
 
 .content {
-  padding: 15%;
+  padding: 10%;
   text-align: justify;
   text-justify: auto;
 }
