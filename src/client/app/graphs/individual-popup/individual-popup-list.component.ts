@@ -25,7 +25,7 @@ import {Router} from 'angular2/router';
           </div>
           <div class="one-half column">
             <p>Donation: {{parseFloat(indiv?.TRANSACTION_AMT) | currency:'USD':true}}</p>
-            <div class="button" (click)="changeTran(indiv?.TRAN_ID)">
+            <div class="button" (click)="changeTran(indiv, isMobile)">
               See Donation
             </div>
           </div>
@@ -119,16 +119,20 @@ export class IndividualListPopupComponent implements OnInit {
       );
   }
 
-  changeTran(indiv) {
-
+  changeTran(indiv, isMobile) {
+      if (!isMobile){
+        this.changeIndiv.emit({
+          transaction: indiv.TRAN_ID,
+          name: indiv.NAME
+        })
+      } else {
+        this.router.navigate(['MobileIndividualPopupComponent', { transaction: indiv.TRAN_ID } ]);
+      }
       console.log("Calling the changeIndiv func");
-      this.changeIndiv.emit({
-        transaction: indiv.TRAN_ID,
-        name: indiv.NAME
-      })
+
   }
 
   changeTranMobile(tran){
-    this.router.navigate(['MobileCandidatePopupComponent', { cand: cand_id, cmte: data[0].CMTE_ID, type: "P" } ]);
+
   }
 }
