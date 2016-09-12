@@ -8,6 +8,10 @@ tr {
   vertical-align:middle;
 }
 
+.cand-options > * {
+  display: block;
+}
+
 .heading {
   font-family: 'Oswald' !important;
   font-weight: 700 !important;

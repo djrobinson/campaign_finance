@@ -1,5 +1,6 @@
 import {Component, Input, Output, OnInit} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
+import {Router} from 'angular2/router'
 
 @Component({
   selector: 'individuals-list',
@@ -69,7 +70,7 @@ import {Http, Response} from 'angular2/http';
             FEC File
           </th>
         </tr>
-        <tr *ngFor="#individual of individuals">
+        <tr *ngFor="#individual of individuals" (click)="chooseIndividual(individual.TRAN_ID)">
           <td class="cmte-name">
             {{individual.NAME}}
           </td>
@@ -90,6 +91,9 @@ import {Http, Response} from 'angular2/http';
     h1, h2, h3, h4, h5, p, td, th {
       font-family: 'Oswald';
       font-weight: 300;
+    }
+    th {
+      text-align: center;
     }
 
     .mobile {
@@ -113,6 +117,10 @@ import {Http, Response} from 'angular2/http';
 
     td {
       text-align: center;
+      padding: 2rem;
+    }
+    th {
+      text-align: center;
     }
     .fec {
       height: 7rem;
@@ -127,7 +135,7 @@ export class IndividualsListComponent implements OnInit {
   private individuals: any;
 
 
-  constructor(private http:Http) {}
+  constructor(private http:Http, public router:Router) {}
 
   public parseFloat = function(num){
     return parseFloat(num);
@@ -142,5 +150,11 @@ export class IndividualsListComponent implements OnInit {
 
   openFec(lin_ima){
     window.open(lin_ima);
+  }
+
+  chooseIndividual(tran_id){
+    console.log("Transaction: ", tran_id);
+    this.router.navigate(['MobileIndividualPopupComponent', {transaction: tran_id} ]);
+  }
   }
 }

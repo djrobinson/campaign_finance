@@ -77,6 +77,10 @@ import {Http, Response} from 'angular2/http';
       font-weight: 300;
     }
 
+    th {
+      text-align: center;
+    }
+
     .mobile {
       font-size: 4rem;
     }
@@ -99,6 +103,7 @@ import {Http, Response} from 'angular2/http';
 
     td {
       text-align: center;
+      padding: 2rem;
     }
     .fec {
       height: 7rem;

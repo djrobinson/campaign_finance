@@ -116,6 +116,10 @@ import {Http, Response} from 'angular2/http';
 
     td {
       text-align: center;
+      padding: 2rem;
+    }
+    th {
+      text-align: center;
     }
     .fec {
       height: 7rem;
