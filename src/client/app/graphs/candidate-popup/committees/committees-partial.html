@@ -1,4 +1,4 @@
-<div class="content">
+<div *ngIf="!isMobile" class="content">
   <h1>Committees</h1>
   <table>
     <tr>
@@ -13,9 +13,6 @@
       </th>
       <th>
         Location
-      </th>
-      <th>
-        Memo Text
       </th>
       <th>
         FEC File
@@ -38,13 +35,38 @@
         {{committee.CITY}}, {{committee.STATE}}
       </td>
       <td>
-        {{committee.MEMO_TEXT}}
-      </td>
-      <td>
       <a [href]="'http://docquery.fec.gov/cgi-bin/fecimg?'+committee?.IMAGE_NUM"><img src="images/fec.png" class="fec" /></a>
       </td>
       <td>
         {{committee.CMTE_ID}}
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf="isMobile" class="content">
+  <h1>Committees</h1>
+  <table>
+    <tr>
+      <th class='mobile'>
+        Committee Name
+      </th>
+      <th class='mobile'>
+        Transaction Amount
+      </th>
+      <th class='mobile'>
+        FEC File
+      </th>
+    </tr>
+    <tr *ngFor="#committee of committees">
+      <td class="cmte-name" (click)="changeCmte(committee.CMTE_ID)" class='mobile'>
+        {{committee.NAME}}
+      </td>
+      <td class='mobile'>
+        {{parseFloat(committee.TRANSACTION_AMT) | currency:'USD':true}}
+      </td>
+      <td class='mobile'>
+      <a [href]="'http://docquery.fec.gov/cgi-bin/fecimg?'+committee?.IMAGE_NUM"><img src="images/fec.png" class="fec" /></a>
       </td>
     </tr>
   </table>

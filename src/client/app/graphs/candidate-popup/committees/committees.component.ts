@@ -9,6 +9,7 @@ import {Http, Response} from 'angular2/http';
 })
 export class CommitteesSectionComponent implements OnInit {
   @Input() cmte: string;
+  @Input() isMobile: boolean;
   private committees: any;
 
   constructor(private http:Http) {

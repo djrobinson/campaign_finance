@@ -4,7 +4,43 @@ import {Http, Response} from 'angular2/http';
 @Component({
   selector: 'opex-list',
   template: `
-    <table>
+    <table *ngIf="!isMobile">
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Purpose
+          </th>
+          <th>
+            Transaction Amount
+          </th>
+          <th>
+            Date
+          </th>
+          <th>
+            FEC File
+          </th>
+        </tr>
+        <tr *ngFor="#opex of opexes">
+          <td class="cmte-name">
+            {{opex.NAME}}
+          </td>
+          <td>
+            {{opex.PURPOSE}}
+          </td>
+          <td class="green">
+            {{parseFloat(opex.TRANSACTION_AMT) | currency:'USD':true}}
+          </td>
+          <td>
+            {{opex.TRANSACTION_DT}}
+          </td>
+          <td>
+            <a [href]="'http://docquery.fec.gov/cgi-bin/fecimg?'+opex?.IMAGE_NUM"><img src="images/fec.png" class="fec" /></a>
+          </td>
+        </tr>
+      </table>
+      <table *ngIf="isMobile">
         <tr>
           <th>
             Name
@@ -75,6 +111,7 @@ import {Http, Response} from 'angular2/http';
 })
 export class OpexListComponent implements OnInit {
   @Input() cmte: string;
+  @Input() isMobile: boolean;
   private opexes: any;
 
   constructor(private http:Http) {}

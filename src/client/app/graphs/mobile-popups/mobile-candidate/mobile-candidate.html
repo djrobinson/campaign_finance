@@ -197,10 +197,11 @@
         >
        Operating Expenditures
       </div>
-      <div *ngIf="selection==='opex'">
-
-      </div>
-      <opex-list *ngIf="selection==='opex'" [cmte]="committee" class="twelve columns">
+      <opex-list
+        *ngIf="selection==='opex'"
+        [isMobile]="true"
+        [cmte]="committee"
+        class="twelve columns">
       </opex-list>
       <div *ngIf="isCand" class="cand-option twelve columns"
         (click)="choice('superpacs')"
@@ -208,7 +209,11 @@
         >
        SuperPac Expenditures
       </div>
-      <superpacs-list *ngIf="selection==='superpacs'" [cand]="candidateObject" class="twelve columns">
+      <superpacs-list
+        *ngIf="selection==='superpacs'"
+        [isMobile]="true"
+        [cand]="candidateObject"
+        class="twelve columns">
       </superpacs-list>
       <div class="cand-option twelve columns"
         (click)="choice('individuals')"
@@ -216,7 +221,11 @@
         >
        Individual Donors
       </div>
-      <individuals-list *ngIf="selection==='individuals'" [cmte]="committee" class="twelve columns">
+      <individuals-list
+        *ngIf="selection==='individuals'"
+        [cmte]="committee"
+        [isMobile]="true"
+        class="twelve columns">
       </individuals-list>
       <div class="cand-option twelve columns"
         (click)="choice('committees')"
@@ -224,7 +233,11 @@
         >
        Committee Donors
       </div>
-      <committees-section *ngIf="selection==='committees'" [cmte]="committee" class="twelve columns">
+      <committees-section
+      *ngIf="selection==='committees'"
+      [cmte]="committee"
+      [isMobile]="true"
+      class="twelve columns">
 
       </committees-section>
     </div>

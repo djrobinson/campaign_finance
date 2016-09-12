@@ -4,13 +4,10 @@ import {Http, Response} from 'angular2/http';
 @Component({
   selector: 'superpacs-list',
   template: `
-    <table>
+    <table *ngIf="!isMobile">
         <tr>
           <th>
             Superpac
-          </th>
-          <th>
-            Targeting
           </th>
           <th>
             Amount
@@ -38,9 +35,6 @@ import {Http, Response} from 'angular2/http';
           <td class="cmte-name">
             {{pac.spe_nam}}
           </td>
-          <td>
-            {{pac.can_nam}}
-          </td>
           <td class="green">
             {{parseFloat(pac.exp_amo) | currency:'USD':true}}
           </td>
@@ -64,6 +58,42 @@ import {Http, Response} from 'angular2/http';
           </td>
         </tr>
       </table>
+      <table *ngIf="isMobile">
+        <tr>
+          <th class="mobile">
+            Superpac
+          </th>
+          <th class="mobile">
+            Targeting
+          </th>
+          <th class="mobile">
+            Amount
+          </th>
+          <th class="mobile">
+            Recipient
+          </th>
+          <th class="mobile">
+            FEC File
+          </th>
+        </tr>
+        <tr *ngFor="#pac of pacs">
+          <td class="cmte-name mobile">
+            {{pac.spe_nam}}
+          </td>
+          <td class="mobile">
+            {{pac.can_nam}}
+          </td>
+          <td [style.color]="(pac.sup_opp === 'Support') ? 'green' : 'red'" class="mobile">
+            {{parseFloat(pac.exp_amo) | currency:'USD':true}}
+          </td>
+          <td class="mobile">
+            {{pac.pay}}
+          </td>s
+          <td>
+            <a [href]="'http://docquery.fec.gov/cgi-bin/fecimg?'+pac?.ima_num"><img src="images/fec.png" class="fec" /></a>
+          </td>
+        </tr>
+      </table>
   `,
   styles: [`
     h1, h2, h3, h4, h5, p, td, th {
@@ -71,6 +101,9 @@ import {Http, Response} from 'angular2/http';
       font-weight: 300;
     }
 
+    .mobile {
+      font-size: 3rem;
+    }
     .content {
       position: absolute;
       background-color: #2C3A46;
@@ -99,6 +132,7 @@ import {Http, Response} from 'angular2/http';
 })
 export class PacsListComponent implements OnInit {
   @Input() cand: any;
+  @Input() isMobile: boolean;
   private pacs: any;
 
   constructor(private http:Http) {}

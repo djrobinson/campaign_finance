@@ -1,6 +1,7 @@
 h1, h2, h3, h4, h5, p, td, th {
-  font-family: 'Prata', serif;
+  font-family: 'Oswald', serif;
   font-weight: 300;
+  font-size: 2rem;
 }
 
 .content {
@@ -8,6 +9,10 @@ h1, h2, h3, h4, h5, p, td, th {
   width: 100%;
   height: 100%;
   overflow: scroll;
+}
+
+.mobile {
+  font-size: 3rem;
 }
 
 .cmte-name {
@@ -23,6 +28,6 @@ td {
 }
 
 .fec {
-  height: 3rem;
-  width: 3rem;
+  height: 6rem;
+  width: 6rem;
 }

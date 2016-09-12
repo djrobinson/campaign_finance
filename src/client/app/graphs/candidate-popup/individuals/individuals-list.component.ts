@@ -5,7 +5,55 @@ import {Http, Response} from 'angular2/http';
   selector: 'individuals-list',
   template: `
 
-      <table>
+      <table *ngIf="!isMobile">
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Employer
+          </th>
+          <th>
+            Title
+          </th>
+          <th>
+            Transaction Amount
+          </th>
+          <th>
+            Location
+          </th>
+          <th>
+            FEC File
+          </th>
+          <th>
+            Committe Link
+          </th>
+        </tr>
+        <tr *ngFor="#individual of individuals">
+          <td class="cmte-name">
+            {{individual.NAME}}
+          </td>
+          <td>
+            {{individual.EMPLOYER}}
+          </td>
+          <td>
+            {{individual.OCCUPATION}}
+          </td>
+          <td class="green">
+            {{parseFloat(individual.TRANSACTION_AMT) | currency:'USD':true}}
+          </td>
+          <td>
+            {{individual.CITY}}, {{individual.STATE}}
+          </td>
+          <td>
+            <img src="images/fec.png" class="fec" (click)="openFec('http://docquery.fec.gov/cgi-bin/fecimg?'+individual?.IMAGE_NUM)" />
+          </td>
+          <td>
+            {{individual.TRAN_ID}}
+          </td>
+        </tr>
+      </table>
+      <table *ngIf="isMobile">
         <tr>
           <th>
             Name
@@ -87,6 +135,7 @@ import {Http, Response} from 'angular2/http';
 })
 export class IndividualsListComponent implements OnInit {
   @Input() cmte: string;
+  @Input() isMobile: boolean;
   private individuals: any;
 
 
