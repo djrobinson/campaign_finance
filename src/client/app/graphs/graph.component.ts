@@ -237,6 +237,7 @@ export class GraphComponent implements OnInit  {
   }
 
   buildGraph(ctrl, candId, absUrl) {
+    d3.selectAll("svg > *").remove();
     this.graph = false;
     //HELPER FUNCTIONS FOR GRAPH
     function dottype(d) {
