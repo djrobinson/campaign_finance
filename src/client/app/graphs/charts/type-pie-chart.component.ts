@@ -149,9 +149,10 @@ export class TypePieComponent implements OnInit, OnChanges {
   public buildPieChart(pieData) {
     (function(d3) {
       'use strict';
+      d3.selectAll("#chartType > *").remove();
 
-      var width = document.getElementById('chart2').offsetWidth;
-      var height = document.getElementById('chart2').offsetHeight;
+      var width = document.getElementById('chartType').offsetWidth;
+      var height = document.getElementById('chartType').offsetHeight;
       var radius = height / 2.5 ;
       var donutWidth = 50;
       var legendRectSize = 12;

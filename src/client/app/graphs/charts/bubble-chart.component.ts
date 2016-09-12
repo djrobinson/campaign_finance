@@ -56,6 +56,9 @@ export class BubbleComponent implements OnInit {
         }
         return color;
     }
+
+    d3.selectAll("#chart3 > *").remove();
+
     var diameter = document.getElementById('chart3').offsetHeight,
       format = d3.format(",d"),
       color = d3.scale.category20c();

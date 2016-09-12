@@ -116,6 +116,7 @@ export class DsgnPieComponent implements OnInit, OnChanges {
   public buildPieChart(pieData) {
     (function(d3) {
       'use strict';
+      d3.selectAll("#chartDsgn > *").remove();
 
       var width = document.getElementById('chart2').offsetWidth;
       var height = document.getElementById('chart2').offsetHeight;
