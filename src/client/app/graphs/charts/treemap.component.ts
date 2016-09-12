@@ -7,114 +7,97 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       <div id="containerChart">
         <spinner [isRunning]="isRequesting">
         </spinner>
-        <div id="tooltip">
           <div class="tip-top">
-            <div class="tree-tip" id="tip-name"></div>
-            <div class="tree-tip" id="tip-support"></div>
-            <div class="tree-tip" id="tip-amount"></div>
-            <div class="tree-tip" id="tip-purpose"></div>
-            <div *ngIf="level === 'parent'">
+            <div class="four columns tree-tip" id="tip-name"><span>Recipient</span></div>
+            <div class="two columns tree-tip">
+              <div class="twelve columns" id="tip-support"></div>
+              <div class="twelve columns" id="tip-amount"><span>Amount</span></div>
+            </div>
+
+            <div class="three columns tree-tip" id="tip-purpose"><span>Purpose</span></div>
+            <div class="three columns tree-tip">
+                <div *ngIf="level !=='main'" class="button" id="backup">
+                  Go Back
+                </div>
+            </div>
+
+          </div>
+        <div id="chart"></div>
+          <div *ngIf="level === 'main'" class="instruction-block">
+            <div class="four columns">
+              <h5>Expenditure by Recipient</h5>
+            </div>
+            <div class="eight columns">
+              <p>All blocks above represent the aggregate amount of money given to a specific recipient. Click on the block to analyze all transactions to the recipient.</p>
+            </div>
+          </div>
+          <div *ngIf="level === 'grandparent'" class="instruction-block">
+            <div class="four columns">
+              <h5>All Transactions to Recipient</h5>
+            </div>
+            <div class="eigth columns">
+              <p>All blocks above represent each transaction made to the selected recipient. Click the block to see further detail and link back to the FEC documentation</p>
+            </div>
+          </div>
+          <div *ngIf="level === 'parent'" class="instruction-block">
+            <div class="three columns">
+              <h5>Individual Transaction</h5>
+            </div>
+            <div class="six columns">
+              <h5>Click on the FEC icon to access the original filing.</h5>
+            </div>
+            <div class="three columns float-right">
               <img src="images/fec.png" class="fec" (click)="openFec(lin_ima)" />
             </div>
-            <div *ngIf="level !=='main'">
-              <div class="button" id="backup">
-                Go Back
-              </div>
           </div>
-        </div>
-          <div  class="instructions">
-            <div *ngIf="level === 'main'" class="instruction-block">
-              <h5>Expenditure by Recipient</h5>
-              <p>All blocks to the right represent the amount of money given to a specific recipient. Click on the block to analyze all transactions to the recipeint.</p>
-            </div>
-            <div *ngIf="level === 'grandparent'" class="instruction-block">
-              <h5>All Transactions to Recipient</h5>
-              <p>All blocks to the right represent each transaction made to the selected recipient. Click the block to see further detail and link back to the FEC documentation</p>
-            </div>
-            <div *ngIf="level === 'parent'" class="instruction-block">
-              <h5>Individual Transaction</h5>
-              <p>Click on the FEC Link to see the original filing.</p>
-            </div>
-          </div>
-        </div>
-        <div id="chart"></div>
       </div>
   `,
   styles: [`
 
+
+    .float-right {
+      text-align: right;
+    }
+
     #containerChart {
-      position: absolute;
+      position: relative;
       height: 100%;
       width: 100%;
       background: #EFF1F3;
       font-family: 'Oswald';
-      font-weight: 300;
     }
 
     spinner {
       position: absolute;
       top: 30%;
       height: 100%;
-      width: 80%;
+      width: 100%;
       right: 0;
     }
 
-    .instructions {
-      background: white;
-      height: 100%;
-      width: 100%;
-      text-align: center;
-
-    }
-
-    .instructions p {
-      font-size: 1.5rem;
-    }
-
     .instruction-block {
+      font-size: 1.5rem;
+      font-weight: 300;
       padding: 1rem;
       position: absolute;
       color: black;
-      height: 50%;
+      height: 10%;
       width: 100%;
-      border-bottom: solid 2px #BDBBB6;
       box-sizing: border-box;
       background:  #f2f2f2;;
       bottom: 0;
-      overflow: scroll;
-      border-top: solid 1px black;
-    }
-
-    .button-container {
-      position: absolute;
-      top: 20%;
-      display: block;
-      height: 15%;
-      width: 100%;
-      background: #EFF1F3;
     }
 
     .tip-top {
-      display: flex;
-      padding: 3%;
       top: 0;
       position: absolute;
-      height: 50%;
+      height: 10%;
       width: 100%;
-      background:  #f2f2f2;
-      font-family: 'Prata', serif;
-      font-size: 1.5rem;
-      display: flex;
-      align-items: space-between;
-      justify-content: center;
-      flex-direction: column;
-      overflow: scroll;
-    }
-
-    .tip-top p {
-      font-size: 1.5rem;
-      disply: flex;
-      align-self: left;
+      background:  #9DBF9E;
+      color: #4d4d4d;
+      font-family: 'Oswald';
+      font-weigth: 700;
+      font-size: 2rem;
     }
 
     rect {
@@ -122,34 +105,23 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       stroke-width: 1px;
     }
 
-    #tip-name {
-      width: 100%;
-    }
 
-
-    #tip-purpose {
-      width: 100%;
-    }
-    #tooltip {
-      position: relative;
-      text-align: center;
-      width: 30%;
-      height: 100%;
-      bottom: 0;
-      color: #5b4f49;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-    }
     #chart {
       position: absolute;
-      width: 70%;
-      height: 100%;
+      width: 100%;
+      height: 80%;
       right: 0;
-      bottom: 0;
+      bottom: 10%;
     }
-    .child-tspan {
-      font-size: 3rem;
+
+    .tree-tip {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex-direction: row;
+      border: solid 2px #9DBF9E;
     }
 
     .button {
@@ -168,7 +140,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       border: 2px solid #9DBF9E;
       border-radius: 25px;
       box-sizing: border-box;;
-      width: 80%;
+      width: 85%;
     }
 
     .button:hover {
@@ -177,7 +149,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
     }
 
     .fec {
-      height: 4rem;
+      height: 5rem;
     }
   `],
   directives: [SpinnerComponent]
@@ -379,7 +351,9 @@ export class TreemapComponent implements OnInit, OnChanges {
           var cutwidth = d.dx * ratio;
           var length = 0;
           if (d.category === "parent" || d.category === "grandparent") {
-            d3.select(this).append("tspan").style("font-size", size + "px").text(words.join(' '));
+            d3.select(this).append("tspan").style("font-size", size + "px").text(words.join(' '))
+              .attr("dx", "0.35em")
+              .attr("dy", "1rem");
             while (this.getBBox().width >= cutwidth) {
               var word = words.join(' ');
               var el = d3.select(this).text('');
@@ -453,6 +427,9 @@ export class TreemapComponent implements OnInit, OnChanges {
             //  join the array with slashes (as you have in your example)
             // now nameList should look like 'flare/animate/interpolate'
             //  use this to set the tooltip text
+
+            ctrl.lin_ima = d.fec;
+            console.log("Setting lin-ima : ", ctrl.lin_ima);
             d3.select('#tip-name').text(d.name);
             d3.select('#tip-amount').text("$" + d.value.formatMoney(2));
             d3.select('#tip-support').text(d.support);

@@ -1,24 +1,17 @@
-.individual-header {
-  position: absolute;
-  height: 20%;
-  width: 100%;
+.instructions {
+  height: 15%;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  justify-content: center;
-  align-content: space-around;
-}
-
-.options {
+  position: absolute;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  top: 0;
 }
 
 bubble-chart {
   position: absolute;
-  height: 80%;
+  height: 85%;
   width: 100%;
   bottom: 0;
 }
@@ -32,55 +25,17 @@ individuals-list {
 }
 
 h1, h2, h4, h5, p, td, th {
-  font-family: 'Prata', serif;
+  font-family: 'Oswald';
+  font-weight: 300;
 }
 
 .content {
-  margin-top: 3%;
   position: relative;
   width: 95%;
-  height: 90%;
+  height: 100%;
   overflow: hidden;
-  border: solid 2px gray;
 }
 
-.choose-bubble {
-  height: 9%;
-  text-align: center;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 50%;
-  display: inline;
-  border-bottom: solid 2px gray;
-  font-family: 'Oswald';
-  font-weight: 300;
-}
-
-.choose-list {
-  height: 9%;
-  text-align: center;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 50%;
-  background: transparent ;
-  display: inline;
-  border-bottom: solid 2px gray;
-  font-family: 'Oswald';
-  font-weight: 300;
-}
-
-
-.choose-bubble:hover {
-  background: #9DBF9E;
-  color: #4d4d4d;
-}
-
-.choose-list:hover {
-  background: #9DBF9E;
-  color: #4d4d4d;
-}
 
 .selected {
   background: #9DBF9E;

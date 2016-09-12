@@ -2,14 +2,14 @@
 
 treemap {
   position: absolute;
-  height: 90%;
+  height: 100%;
   width: 100%;
   bottom: 0;
 }
 
 opex-list {
   position: absolute;
-  height: 90%;
+  height: 100%;
   width: 100%;
   bottom: 0;
   overflow: scroll;
@@ -20,12 +20,11 @@ h1, h2, h4, h5, p, td, th {
 }
 
 .content {
-  margin-top: 3%;
   position: relative;
   width: 95%;
-  height: 90%;
+  height: 100%;
   overflow: hidden;
-  border: solid 2px gray;
+  box-sizing: border-box;
 }
 
 .choose-treemap {

@@ -9,34 +9,9 @@
 
 treemap {
   position: absolute;
-  height: 90%;
+  height: 100%;
   width: 100%;
   bottom: 0;
-}
-
-.choose-treemap {
-  height: 10%;
-  text-align: center;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 50%;
-  display: inline;
-  font-family: 'Oswald';
-  font-weight: 300;
-}
-
-.choose-list {
-  height: 10%;
-  text-align: center;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 50%;
-  background: transparent ;
-  display: inline;
-  font-family: 'Oswald';
-  font-weight: 300;
 }
 
 superpacs-list {
@@ -47,17 +22,11 @@ superpacs-list {
   overflow: scroll;
 }
 
-h1, h2, h4, h5, p, td, th {
-  font-family: 'Prata', serif;
-}
-
 .content {
-  margin-top: 3%;
   position: relative;
   width: 95%;
-  height: 90%;
+  height: 100%;
   overflow: hidden;
-  border: solid 2px gray;
 }
 
 .choose-treemap:hover {
