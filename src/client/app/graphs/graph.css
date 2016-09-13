@@ -35,7 +35,8 @@ inputs-view {
   background-color: blue;
 }
 mini-profile-view {
-  position: absolute;
+  height: 100%;
+  position: fixed;
   top: 0;
   right: 0;
 }

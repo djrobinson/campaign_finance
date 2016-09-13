@@ -131,33 +131,22 @@ li {
 }
 
 .innards{
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 100%;
   padding: 0;
   margin: 0;
 }
 
+.outer-container {
+  position: relative;
+  height: 100%;
+}
+
 bar-chart {
   position: relative;
   height: 100%;
   width: 100%;
-}
-
-.top-row {
-  position: relative;
-  height: 100%;
-  bottom: 0;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  overflow: scroll;
-}
-
-.top-row * {
-  margin: 0 !important;
-  padding: 0;
 }
 
 table {
@@ -169,10 +158,9 @@ td {
   overflow: hidden;
   white-space: nowrap;
   vertical-align:middle;
-  font-size: 1rem;
 }
 
-.top-row td {
+td {
   font-size: 1.5rem;
   font-family: 'Oswald';
   font-weight: 300;
@@ -209,32 +197,36 @@ td:nth-child(2n){
 }
 
 
+.highlight-column {
+  position: absolute;
+  left: 0;
+  background: green;
+  width: 30%;
+  height: 80%;
+}
 
-.bottom-row {
-  display: flex;
-  position: relative;
-  height: 50%;
+.full-financials {
+  position: absolute;
+  right: 0;
+  height: 80%;
+  width: 60%;
+  padding: 0 3rem;
+  overflow: scroll;
+}
+
+.highlight {
+  display: block;
+  background: red;
+  border: solid 8px blue;
+  box-sizing: border-box;
+  height: 25%;
   width: 100%;
-  flex-direction: row;
-  bottom: 0;
 }
 
-.highlight-tile {
+.main-container {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  margin: 0 10px 0 0;
-  padding: 0 !important;
-  background-color: #3B4E5E;
-  text-align: center;
-}
-
-.candidate-content {
+  width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  position: relative;
 }
 
 .pies {
@@ -324,35 +316,6 @@ committees-section {
 
 .bottom {
   bottom: 0;
-}
-
-.top-highlight {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  position: absolute;
-  height: 50%;
-  width: 100%;
-  top: 0;
-}
-
-.bottom-highlight {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  height: 50%;
-  width: 100%;
-  bottom: 0;
-}
-
-.support {
-  background-color: #04471C;
-}
-
-.oppose {
-  background-color: #3D0C11;
 }
 
 .button {
