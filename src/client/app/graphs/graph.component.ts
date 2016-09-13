@@ -141,11 +141,11 @@ export class GraphComponent implements OnInit  {
 
   public changeSize(){
     if (this.size === 'small') {
-      d3.select("svg").selectAll("*").remove();
+      d3.select("#force").selectAll("*").remove();
       this.size = 'big';
       this.getGraphData(this.candidate_id, 'big');
     } else {
-      d3.select("svg").selectAll("*").remove();
+      d3.select("#force").selectAll("*").remove();
       this.size = 'small';
       this.getGraphData(this.candidate_id, 'small');
     }
@@ -237,7 +237,7 @@ export class GraphComponent implements OnInit  {
   }
 
   buildGraph(ctrl, candId, absUrl) {
-    d3.selectAll("svg > *").remove();
+    d3.selectAll("#force > *").remove();
     this.graph = false;
     //HELPER FUNCTIONS FOR GRAPH
     function dottype(d) {

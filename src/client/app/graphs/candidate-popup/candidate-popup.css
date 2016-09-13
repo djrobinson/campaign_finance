@@ -169,7 +169,7 @@ td {
   overflow: hidden;
   white-space: nowrap;
   vertical-align:middle;
-
+  font-size: 1rem;
 }
 
 .top-row td {
