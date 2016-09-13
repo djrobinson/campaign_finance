@@ -3,26 +3,24 @@ import {Http, Response, Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgForm } from 'angular2/common';
 
-          // <input
-          //   [(ngModel)]="amount"
-          //   type="number"
-          //   name="amount">
-          // <br>
-          // <div class="button" (click)="openCheckout(amount)">Submit</div>
-          // <div *ngIf="thankYou">
-          //   <p>Thank you for your contribution!</p>
-          // </div>
-          // <br>
+
 @Component({
   selector: 'funding',
   template: `
     <div class="funding-container">
       <h1>Support Citizens Hub</h1>
-
-
-
-
-
+      <p>Help pay for hosting & development of Citizens Hub.</p>
+      <label for="amount">Amount</label>
+      <input
+        [(ngModel)]="amount"
+        type="number"
+        name="amount">
+      <br>
+      <div class="button" (click)="openCheckout(amount)">Pay with Stripe</div>
+      <div *ngIf="thankYou">
+        <p>Thank you for your contribution!</p>
+      </div>
+      <br>
       <div class="button" (click)="bitcoinAddress()">
         Bitcoin Address
       </div>
@@ -91,7 +89,6 @@ export class FundingComponent implements OnInit {
     this.parseFloat = function(num){
       return parseFloat(num);
     }
-
   }
 
   doTransaction(event) {
@@ -109,7 +106,7 @@ export class FundingComponent implements OnInit {
   openCheckout(amount) {
     console.log("Checkout amount: ", amount);
     var handler = (<any>window).StripeCheckout.configure({
-      key: 'pk_test_18jB465AmfCTngdGeiBtSqqp',
+      key: 'pk_live_5VDJMwo2IcGenMi0u5gN8eXx',
       locale: 'auto',
       token: function(token){
         console.log("Token sending: ", token);
