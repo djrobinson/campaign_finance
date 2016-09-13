@@ -1,9 +1,6 @@
-
 <div *ngIf="isRequesting" class="spinner-container">
-
 </div>
 <div class="cand-style">
-
   <div class="twelve columns choices">
     <div style="color: black; margin-top: 100px;">
       <h1>{{candidate?.CANDIDATE_NAME}}</h1>
@@ -40,12 +37,8 @@
             <td>{{parseFloat((candidate?.cas_on_han_clo_of_per) ? candidate?.cas_on_han_clo_of_per : 0.00 ) | currency:'USD':true}}</td>
           </tr>
           <tr>
-            <td>Net Contributions</td>
-            <td>{{parseFloat((candidate?.net_con) ? candidate?.net_con : 0.00 ) | currency:'USD':true}}</td>
-          </tr>
-          <tr>
-            <td>Net Operating Expenditures</td>
-            <td>{{parseFloat((candidate?.net_ope_exp) ? candidate?.net_ope_exp : 0.00 ) | currency:'USD':true}}</td>
+            <td>Cash on Hand Beginning of Period:</td>
+            <td>{{parseFloat((candidate?.cas_on_han_beg_of_per) ? candidate?.cas_on_han_beg_of_per : 0.00 ) | currency:'USD':true}}</td>
           </tr>
         </table>
       </div>

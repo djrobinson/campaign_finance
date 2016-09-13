@@ -173,13 +173,13 @@ export class TreemapComponent implements OnInit, OnChanges {
 
   rebuildMap(route){
     var ctrl = this;
-    d3.selectAll("svg").remove();
+
     this.buildTreeMap(route, ctrl);
   }
 
 
   buildTreeMap(route, ctrl) {
-
+    d3.selectAll("#chart > *").remove();
     Number.prototype.formatMoney = function(c, d, t) {
       var n = this,
         c = isNaN(c = Math.abs(c)) ? 2 : c,

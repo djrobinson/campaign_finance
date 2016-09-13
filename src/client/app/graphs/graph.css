@@ -68,7 +68,7 @@ committee-popup {
   background-color: #FEFFFE;
 }
 candidate-popup {
-  position: absolute;
+  position: fixed;
   width: 90%;
   height: 80%;
   top: 10%;
