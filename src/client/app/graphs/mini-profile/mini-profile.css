@@ -54,7 +54,6 @@ svg {
 img {
   height: 100px;
   border-radius: 50%;
-  margin-top: 2rem;
   border: solid 3px white;
 }
 
@@ -78,6 +77,10 @@ td {
   font-weight: 500;
   color: white;
   background: #839788;
+}
+.tran-link {
+  font-size: 2rem;
+  font-weight: 500;
 }
 
 .committee-rows {
@@ -143,5 +146,5 @@ svg {
 }
 
 .fec {
-  height: 2rem;
+  height: 6rem;
 }
