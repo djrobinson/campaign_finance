@@ -1,17 +1,36 @@
 <div class="candidates-container text-center">
-  <h1>{{headerType}} Candidates</h1>
-  <div class="button button-top" (click)="sortCandidates()">
+
+  <div class="toolbar">
+    <h1>{{headerType}} Candidates</h1>
+    <div class="row twelve columns toolbar-stuff">
+      <div class="option three columns" (click)="sortCandidates()">
+        Sort by Contributions
+      </div>
+
+      <div class="option three columns">
+        Sort by
+      </div>
+      <div class="option three columns">
+        Sort by
+      </div>
+      <div class="option three columns dropdown">
+        Sort by State
+        <div class="list-container">
+          <div class="dropdown-list">
+            <div *ngFor="#state of states" class="dropdown-item"  (click)="setState(state)">{{state}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="button button-top" >
     By Contributions
   </div>
   <div class="button button-top">
     View by State
-  <div class="list-container">
-    <div class="dropdown-list">
-      <div *ngFor="#state of states" class="dropdown-item" (click)="setState(state)">{{state}}</div>
-    </div>
+
   </div>
-  </div>
-  <div class="row">
+  <div class="row candidates-container">
     <ul class="list twelve columns">
       <li *ngFor="#candidate of candidatesView" class="list-item four columns" [style.border]="candidate.tile_color">
         <div class="candidate-profile three columns">

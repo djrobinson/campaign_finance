@@ -61,16 +61,16 @@ export class CandidatesComponent implements OnInit {
                 }
               });
               if (item.PARTY_CODE === 'DEM'){
-                item.tile_color = "solid "+demColors[0]+" 5px";
+                item.tile_color = "solid "+demColors[0]+" 15px";
                 return item;
               } else if (item.PARTY_CODE === 'REP'){
-                item.tile_color = "solid "+repColors[0]+" 5px";
+                item.tile_color = "solid "+repColors[0]+" 15px";
                 return item;
               } else if (item.PARTY_CODE === 'LIB') {
-                item.tile_color = "solid #FFD700 5px";
+                item.tile_color = "solid #FFD700 15px";
                 return  item;
               } else if (item.PARTY_CODE === 'GRE') {
-                item.tile_color = "solid #2E8B57 5px";
+                item.tile_color = "solid #2E8B57 15px";
                 return  item;
               } else {
                 item.tile_color = 'solid #708090 5px';

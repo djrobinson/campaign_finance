@@ -24,10 +24,10 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       position: relative;
     }
     #lines {
-      position: absolute;
+      position: fixed;
       top: 2rem;
       left: 2rem;
-      z-index: 3;
+      z-index: 6;
       border-bottom: 17px double #6C6F7D;
       border-top: 6px solid #6C6F7D;
       content:"";
@@ -35,10 +35,10 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       width:30px;
     }
     #mobile-lines {
-      position: absolute;
+      position: fixed;
       top: 2rem;
       left: 2rem;
-      z-index: 3;
+      z-index: 6;
       border-bottom: 30px double #6C6F7D;
       border-top: 10px solid #6C6F7D;
       content:"";
@@ -104,7 +104,7 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       <div *ngIf="sideMenu" id="menu">
         <div class="menu-option" (click)="home()"><h5>Home</h5></div>
         <div class="menu-option"><h5>About</h5></div>
-        <div class="menu-option"><h5>Presidential Funding</h5></div>
+        <div class="menu-option" (click)="candPath('P')"><h5>Presidential Funding</h5></div>
         <div class="menu-option"><h5>Super PACs</h5></div>
         <div class="menu-option"><h5>Senate Funding</h5></div>
         <div class="menu-option"><h5>House Funding</h5></div>
@@ -121,10 +121,10 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       <div *ngIf="sideMenu" id="mobile-menu">
         <div class="menu-option" (click)="home()"><h5>Home</h5></div>
         <div class="menu-option"><h5>About</h5></div>
-        <div class="menu-option" (click)="candPath('P')"><h5>Presidential Funding</h5></div>
+        <div class="menu-option"><h5>Presidential Funding</h5></div>
         <div class="menu-option"><h5>Super PACs</h5></div>
-        <div class="menu-option" (click)="candPath('S')"><h5>Senate Funding</h5></div>
-        <div class="menu-option" (click)="candPath('H')"><h5>House Funding</h5></div>
+        <div class="menu-option"><h5>Senate Funding</h5></div>
+        <div class="menu-option"><h5>House Funding</h5></div>
         <div class="menu-option"><h5>Resources</h5></div>
         <div class="menu-option"><h5>Donate</h5></div>
         <div class="menu-option"><h5>About</h5></div>
