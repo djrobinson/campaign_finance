@@ -24,13 +24,13 @@
 
     </div>
     <div class="cand-options twelve columns">
-      <div class="cand-option twelve columns"
+      <div class="cand-option twelve columns row "
         (click)="choice('cash')"
         [class.active]="selection==='cash'"
         >
        Cash Overview
       </div>
-      <div *ngIf="selection==='cash'" class="cand-option twelve columns">
+      <div *ngIf="selection==='cash'" class="cand-option twelve columns row">
         <table>
           <tr>
             <td>Cash on Hand Close of Period:</td>
@@ -42,13 +42,13 @@
           </tr>
         </table>
       </div>
-      <div class="cand-option twelve columns"
+      <div class="cand-option twelve columns row "
         (click)="choice('receipts')"
         [class.active]="selection==='receipts'"
         >
        Receipts Overview
       </div>
-      <div *ngIf="selection==='receipts'" class="cand-option twelve columns">
+      <div *ngIf="selection==='receipts'" class="cand-option twelve columns row">
         <table>
           <tr>
             <td>Federal Funds</td>
@@ -120,13 +120,13 @@
           </tr>
         </table>
       </div>
-      <div class="cand-option twelve columns"
+      <div class="cand-option twelve columns row "
         (click)="choice('disbursements')"
         [class.active]="selection==='disbursements'"
         >
        Disbursements Overview
       </div>
-      <div *ngIf="selection==='disbursements'" class="cand-option twelve columns">
+      <div *ngIf="selection==='disbursements'" class="cand-option twelve columns row ">
         <table>
           <tr>
                 <td>Operating Expenditures</td>
@@ -184,7 +184,7 @@
           </tr>
         </table>
       </div>
-      <div class="cand-option twelve columns"
+      <div class="cand-option twelve columns row "
         (click)="choice('opex')"
         [class.active]="selection==='opex'"
         >
@@ -194,9 +194,9 @@
         *ngIf="selection==='opex'"
         [isMobile]="true"
         [cmte]="committee"
-        class="twelve columns">
+        class="twelve columns row">
       </opex-list>
-      <div *ngIf="isCand" class="cand-option twelve columns"
+      <div *ngIf="isCand" class="cand-option twelve columns row"
         (click)="choice('superpacs')"
         [class.active]="selection==='superpacs'"
         >
@@ -206,9 +206,9 @@
         *ngIf="selection==='superpacs'"
         [isMobile]="true"
         [cand]="candidateObject"
-        class="twelve columns">
+        class="twelve columns row">
       </superpacs-list>
-      <div class="cand-option twelve columns"
+      <div class="cand-option twelve columns row "
         (click)="choice('individuals')"
         [class.active]="selection==='individuals'"
         >
@@ -218,9 +218,9 @@
         *ngIf="selection==='individuals'"
         [cmte]="committee"
         [isMobile]="true"
-        class="twelve columns">
+        class="twelve columns row">
       </individuals-list>
-      <div class="cand-option twelve columns"
+      <div class="cand-option twelve columns row "
         (click)="choice('committees')"
         [class.active]="selection==='committees'"
         >
@@ -230,7 +230,7 @@
       *ngIf="selection==='committees'"
       [cmte]="committee"
       [isMobile]="true"
-      class="twelve columns">
+      class="twelve columns row">
 
       </committees-section>
     </div>
