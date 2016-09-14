@@ -104,10 +104,10 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       <div *ngIf="sideMenu" id="menu">
         <div class="menu-option" (click)="home()"><h5>Home</h5></div>
         <div class="menu-option"><h5>About</h5></div>
-        <div class="menu-option" (click)="candPath('P')"><h5>Presidential Funding</h5></div>
+        <div class="menu-option"><h5>Presidential Funding</h5></div>
         <div class="menu-option"><h5>Super PACs</h5></div>
-        <div class="menu-option" (click)="candPath('S')"><h5>Senate Funding</h5></div>
-        <div class="menu-option" (click)="candPath('H')"><h5>House Funding</h5></div>
+        <div class="menu-option"><h5>Senate Funding</h5></div>
+        <div class="menu-option"><h5>House Funding</h5></div>
         <div class="menu-option"><h5>Resources</h5></div>
         <div class="menu-option"><h5>Donate</h5></div>
         <div class="menu-option"><h5>About</h5></div>
