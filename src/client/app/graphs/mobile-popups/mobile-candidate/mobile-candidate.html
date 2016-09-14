@@ -3,7 +3,7 @@
 <div class="cand-style">
   <div class="twelve columns choices">
     <div style="color: black; margin-top: 100px;">
-      <h1>{{candidate?.CANDIDATE_NAME}}</h1>
+      <h1>{{candidate?.CANDIDATE_NAME || candidate?.com_nam}}</h1>
     </div>
     <img src="images/fec.png" class="fec" (click)="openFec()" />
     <div *ngIf="isCand" class="cand-pic text-center">
