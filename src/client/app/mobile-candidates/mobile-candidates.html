@@ -2,29 +2,30 @@
   <h2>Candidates</h2>
 </div>
 
- <ul class="list twelve columns">
-      <li *ngFor="#candidate of candidatesView" class="list-item twelve columns" [style.border]="candidate.tile_color">
-        <div class="candidate-profile six columns">
-          <div class="four columns">
-              <img [src]="candidate.profile_img" onerror="this.src='http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png'" class="profile-img">
-            <!-- </div> -->
-          </div>
-          <div class="four columns">
-            <!-- <div class="basic-info seven columns"> -->
-              <h5>{{candidate.can_nam}}</h5>
-              <p>{{candidate.PARTY}}</p>
+<ul class="list twelve columns candidates-container">
+  <li *ngFor="#candidate of candidatesView" class="list-item twelve columns" [style.border]="candidate.tile_color">
+    <div class="candidate-profile twelve columns">
+          <img [src]="candidate.profile_img" onerror="this.src='http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png'" class="profile-img">
+        <!-- </div> -->
+    </div>
+    <div class="row twelve columns">
+      <!-- <div class="basic-info seven columns"> -->
+      <div class="button"
+            (click)="showCandidate(candidate.CANDIDATE_ID)"
+          >
+            Donor Profile
+      </div>
+      <br>
+      <br>
+      <img src="images/fec.png" class="fec" (click)="openFec(candidate.lin_ima)" />
+
+    </div>
             <!-- </div> -->
            <!-- <div class="image-container five columns"> -->
-          </div>
+    <div class="row twelve columns">
 
-          <div class="four columns">
-            <img src="images/fec.png" class="fec" (click)="openFec(candidate.lin_ima)" />
-            <div class="button"
-                  (click)="showCandidate(candidate.CANDIDATE_ID)"
-                >
-                  Donor Graph
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul>
+      <h5>{{candidate.can_nam}}</h5>
+        <p>{{candidate.PARTY}}</p>
+    </div>
+  </li>
+</ul>

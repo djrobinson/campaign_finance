@@ -4,28 +4,6 @@
   margin-right: 0 !important;
 }
 
-.header {
-  height: 200px;
-}
-
-button {
-  width: 100%;
-}
-table {
-  width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
-}
-
-h5 {
-  font-size: 2rem;
-}
-
-td {
-  font-family: 'Oswald';
-  font-weight: 300;
-}
-
 
 .text-center {
   text-align: center;
@@ -50,23 +28,21 @@ td {
 .candidates-container {
 
   bottom: 0;
-  font-family: 'Prata', serif;
+  font-family: 'Oswald';
+  font-weight: 500;
 }
 
 .fec {
-  height: 10rem;
-  position: absolute;
-  right: 1rem;
-  bottom: 1rem;
+  height: 15rem;
 }
 
 .profile-img {
-  width: 100%;
+  height: 100%;
   margin-bottom: 0;
   border-radius: 50%;
   padding-bottom: 0;
-  border: solid 3px black;
   box-sizing: border-box;
+  padding: 2rem;
 
 }
 
@@ -87,13 +63,19 @@ td {
   clear: both;
 }
 
-.select-option h5 {
-  padding: 0;
-  margin: 0;
+h5 {
+  font-size: 4rem;
+  font-family: 'Oswald';
+  font-weight: 300;
+}
+
+p {
+  font-size: 4rem;
 }
 
 .button {
-  font-family: 'Prata', serif;
+  font-family: 'Oswald';
+  font-weight: 300;
   background-color: #73877B; /* Green */
   border: none;
   color: white;
@@ -106,8 +88,12 @@ td {
   background-color: white;
   color: black;
   border: 2px solid #9DBF9E;
-  border-radius: 25px;
+  border-radius: 150px;
   box-sizing: border-box;
+  width: 70%;
+  height: 100%;
+  font-size: 4rem;
+  padding: 3rem;
 }
 
 .button-top {
@@ -156,17 +142,22 @@ td {
 }
 
 .list-item {
-  display: -webkit-flex;
-  display: -ms-flexbox;
+  height: 60vh;
+  text-align: center;
+  flex-direction: column;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
 }
 
 .candidate-profile {
   position: relative;
   width: 100%;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .image-container {
