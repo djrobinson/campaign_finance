@@ -14,23 +14,31 @@ th {
 }
 
 .mobile {
-  font-size: 3rem;
+  font-size: 4rem;
 }
 
 .cmte-name {
   width: 15%;
+  color: #73877B
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.cmte-name-mobile {
+  color: #73877B !important;
+  font-weight: 500 !important;
 }
 
 .green {
   color: #86ca6f;
 }
 
-    td {
-      text-align: center;
-      padding: 2rem;
-    }
+td {
+  text-align: center;
+  padding: 2rem;
+}
 
 .fec {
-  height: 6rem;
-  width: 6rem;
+  height: 10rem;
+  width: 10rem;
 }

@@ -58,7 +58,7 @@ export class MobileCandidatesComponent implements OnInit {
                   console.log(imageUrl);
                   item.profile_img = imageUrl;
                 } else {
-                  item.profile_img = 'http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png';
+                  item.profile_img = 'https://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png';
                 }
               });
               if (item.PARTY_CODE === 'DEM'){
