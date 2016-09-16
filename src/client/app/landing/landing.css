@@ -6,6 +6,11 @@
   bottom: 0;
 }
 
+.beta {
+  font-family: 'Oswald';
+  font-size: 1.5rem;
+}
+
 .mobile-landing-container {
   font-family: 'Prata', serif;
   position: absolute;
@@ -13,8 +18,9 @@
 }
 
 .title {
+  position: relative;
   display: flex;
-  align-content: center;
+  align-content: bottom;
   justify-content: center;
   padding-top: 15%;
   font-size: 8rem !important;
