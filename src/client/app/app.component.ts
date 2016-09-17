@@ -23,19 +23,9 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       width: 100%;
       position: relative;
     }
-    #lines {
-      position: fixed;
-      top: 2rem;
-      left: 2rem;
-      z-index: 6;
-      border-bottom: 17px double #6C6F7D;
-      border-top: 6px solid #6C6F7D;
-      content:"";
-      height: 5px;
-      width:30px;
-    }
+
     #mobile-lines {
-      position: fixed;
+      position: absolute;
       top: 2rem;
       left: 2rem;
       z-index: 6;
@@ -46,20 +36,31 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       width:70px;
     }
 
-    #menu {
-      display: flex;
-      position: fixed;
-      width: 17%;
-      height: 100%;
-      background: #73877B;
-      z-index: 4;
-      flex-direction: column;
-    }
-
     #mobile-menu {
       display: flex;
       position: fixed;
       width: 35%;
+      height: 100%;
+      background: #73877B;
+      z-index: 5;
+      flex-direction: column;
+    }
+
+    #lines {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      z-index: 5;
+      border-bottom: 17px double #6C6F7D;
+      border-top: 6px solid #6C6F7D;
+      content:"";
+      height: 5px;
+      width:30px;
+    }
+    #menu {
+      display: flex;
+      position: fixed;
+      width: 17%;
       height: 100%;
       background: #73877B;
       z-index: 4;
@@ -71,14 +72,6 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       height: 100%;
       right: 0;
     }
-
-    .mobile-content-width {
-      position: absolute;
-      width: 65%;
-      height: 100%;
-      right: 0;
-    }
-
     .menu-option {
       font-family: 'Oswald';
       font-weight: 300;
@@ -92,11 +85,9 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       padding: 0;
       margin: 0;
       padding-left: 1rem;
-      font-size: 3rem;
     }
     .menu-option:hover {
       background: #110B11;
-
     }
   `],
   template: `
