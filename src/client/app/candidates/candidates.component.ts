@@ -129,7 +129,7 @@ export class CandidatesComponent implements OnInit {
   }
 
   public sortCandidates(column): void {
-    this.candidatesView = this.candidates;
+    this.candidatesView = this.candidates.reverse();
     // this.candidatesView = _.sortBy(this.candidates, function(o){
     //   return parseFloat(o[column]);
     // }).reverse();

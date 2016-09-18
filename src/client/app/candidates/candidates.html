@@ -3,27 +3,30 @@
   <div class="toolbar">
     <h1>{{headerType}} Candidates</h1>
     <div class="row twelve columns toolbar-stuff">
-      <div class="option three columns" (click)="sortCandidates()">
+
+      <div class="three columns">
+
+      </div>
+      <div class="option two columns" (click)="sortCandidates()">
         Sort by Contributions
       </div>
-
-      <div class="option three columns">
-        Sort by Cash
-      </div>
-      <div class="option three columns">
+      <div class="option two columns">
         Search by Name
         <input
         [(ngModel)]="name"
         type="text"
         name="name">
       </div>
-      <div class="option three columns dropdown">
+      <div class="option two columns dropdown">
         Sort by State
         <div class="list-container">
           <div class="dropdown-list">
             <div *ngFor="#state of states" class="dropdown-item"  (click)="setState(state)">{{state}}</div>
           </div>
         </div>
+      </div>
+      <div class="three columns">
+
       </div>
     </div>
   </div>
