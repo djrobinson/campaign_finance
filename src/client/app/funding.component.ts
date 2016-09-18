@@ -24,14 +24,14 @@ import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgFo
       <div class="button" (click)="bitcoinAddress()">
         Bitcoin Address
       </div>
-      <div *ngIf="bitcoin" >
+      <div *ngIf="bitcoin" class="address">
         1JWj61zs5a2mpg56oXPePeJ3YMvCZwjvoF
       </div>
       <br>
       <div class="button" (click)="ethereumAddress()">
         Ethereum Address
       </div>
-      <div *ngIf="ethereum">
+      <div *ngIf="ethereum"  class="address">
         0xAdDd8248C1aa3EDa0246f1E57bF7c56Eb372bCE2
       </div>
     </div>
@@ -47,6 +47,20 @@ import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgFo
       align-items: center;
       justify-content: center;
       flex-direction: column;
+    }
+    input {
+      width: 10%;
+      text-align: center;
+    }
+    .address {
+      font-family: 'Courier New';
+      color: black;
+      margin-top: 1rem;
+      font-size: 2rem;
+      background: white;
+      padding: 1rem;
+      border-radius: 3rem;
+      border: 2px solid #9DBF9E;
     }
     .button {
       font-family: 'Oswald';

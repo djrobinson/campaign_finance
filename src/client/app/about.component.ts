@@ -4,10 +4,11 @@ import {Component, OnInit} from 'angular2/core';
   selector: 'about',
   template: `
     <div class="funding-container">
-      <h1>About this Project</h1>
-      <h5>Coming Soon</h5>
-      <div class="button" (click)="openCheckout()">Contribute</div>
 
+      <h1>About this Project</h1>
+      <div class="about-container">
+        <p>Citizens Hub is part of a personal project I began to visualize how funds exchange hands in our government. It is a compilation of public financial data from several different sources that creates donor maps for each candidate or committee. The aim is to make it easier to understand the big picture of how campaign finance works. I'm still in the process of completing the project, so feel free to send any usability suggestions to admin@citizenshub.org.</p>
+      </div>
     </div>
   `,
   styles: [`
@@ -21,6 +22,13 @@ import {Component, OnInit} from 'angular2/core';
       align-items: center;
       justify-content: center;
       flex-direction: column;
+    }
+    .about-container {
+      width: 30%;
+      text-align: justify;
+    }
+    .about-container p {
+      font-size: 2rem;
     }
     .button {
       font-family: 'Oswald';

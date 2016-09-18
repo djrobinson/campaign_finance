@@ -8,14 +8,26 @@ import {SpinnerComponent} from '../../loading/spinner.component';
         <spinner [isRunning]="isRequesting">
         </spinner>
           <div class="tip-top">
-            <div class="four columns tree-tip" id="tip-name"><span>Recipient</span></div>
+            <div class="four columns tree-tip">
+              <span>Recipient</span>
+              <div id="tip-name">
+              </div>
+            </div>
             <div class="two columns tree-tip">
+              <span>Amount/Type</span>
               <div class="twelve columns" id="tip-support"></div>
               <br>
               <div class="twelve columns" id="tip-amount"><span>Amount</span></div>
             </div>
 
-            <div class="three columns tree-tip" id="tip-purpose"><span>Purpose</span></div>
+            <div class="three columns tree-tip">
+              <span>Purpose</span>
+              <div id="tip-purpose">
+              </div>
+            </div>
+
+            <div id="tip-purpose">
+            </div>
             <div class="three columns tree-tip">
                 <div *ngIf="level !=='main'" class="button" id="backup">
                   Go Back
@@ -100,6 +112,13 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       font-size: 2rem;
     }
 
+    .tip-top span {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 1rem;
+    }
+
     rect {
       stroke: black;
       stroke-width: 1px;
@@ -121,6 +140,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       justify-content: center;
       text-align: center;
       flex-direction: row;
+      position: relative;
     }
 
     .button {
@@ -149,6 +169,10 @@ import {SpinnerComponent} from '../../loading/spinner.component';
 
     .fec {
       height: 5rem;
+    }
+
+    #tip-purpose {
+      font-size: 1.2rem;
     }
   `],
   directives: [SpinnerComponent]

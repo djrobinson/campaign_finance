@@ -329,6 +329,19 @@ export class GraphComponent implements OnInit  {
       img.src = url;
     }
 
+    svg.append("svg:defs").selectAll("marker")
+      .data(["end"])      // Different link/path types can be defined here
+    .enter().append("svg:marker")    // This section adds in the arrows
+      .attr("id", String)
+      .attr("viewBox", "0 -5 30 30")
+      .attr("refX", 15)
+      .attr("refY", -1.5)
+      .attr("markerWidth", 20)
+      .attr("markerHeight", 20)
+      .attr("orient", "auto")
+    .append("svg:path")
+      .attr("d", "M0,-5L10,0L0,5");
+
     svg.append('defs')
         .append('pattern')
             .attr('id', 'circles-1')
@@ -397,7 +410,9 @@ export class GraphComponent implements OnInit  {
       .enter().append("line")
       .attr("class", "link")
       .attr("stroke-width", 3)
-      .style("stroke", "#DCDCDC");
+      .style("stroke", "#DCDCDC")
+      .attr("marker-end", "url(#end)");
+
 
 
 
