@@ -3,9 +3,7 @@
   <div class="toolbar">
     <h1>{{headerType}} Candidates</h1>
     <div class="row twelve columns toolbar-stuff">
-
       <div class="three columns">
-
       </div>
       <div class="option two columns" (click)="sortCandidates()">
         Sort by Contributions
@@ -26,16 +24,8 @@
         </div>
       </div>
       <div class="three columns">
-
       </div>
     </div>
-  </div>
-  <div class="button button-top" >
-    By Contributions
-  </div>
-  <div class="button button-top">
-    View by State
-
   </div>
   <div class="row candidates-container">
     <ul class="list twelve columns">
@@ -45,12 +35,7 @@
           <div class="row">
             <div class="twelve columns">
                 <img [src]="candidate.profile_img" onerror="this.src='http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png'" class="profile-img">
-              <!-- </div> -->
             </div>
-<!--             <div class="six columns">
-              <img src="images/fec.png" class="fec" (click)="openFec(candidate.lin_ima)" />
-
-            </div> -->
           </div>
           <div class="row">
             <div class="button"
@@ -60,11 +45,9 @@
               </div>
           </div>
           <div class="row profile-header">
-            <!-- <div class="basic-info seven columns"> -->
+              <h4>Total Contributions: {{parseFloat(candidate.tot_con) | currency:'USD':true}}</h4>
               <h5>{{candidate.can_nam}}</h5>
               <p>{{candidate.PARTY}}<img src="images/fec.png" class="fec" (click)="openFec(candidate.lin_ima)" /></p>
-            <!-- </div> -->
-           <!-- <div class="image-container five columns"> -->
           </div>
         </div>
       </li>

@@ -128,8 +128,9 @@ export class CandidatesComponent implements OnInit {
     this.router.navigate(['Graphs', { id: candidate_id }]);
   }
 
-  public sortCandidates(column): void {
-    this.candidatesView = this.candidates.reverse();
+  public sortCandidates(): void {
+    console.log("reverse");
+    this.candidatesView = this.candidates;
     // this.candidatesView = _.sortBy(this.candidates, function(o){
     //   return parseFloat(o[column]);
     // }).reverse();

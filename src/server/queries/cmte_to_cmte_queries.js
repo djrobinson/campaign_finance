@@ -36,8 +36,8 @@ module.exports = {
             SELECT SUM(cmte_to_cmte."TRANSACTION_AMT"), committee_master."CMTE_DSGN"
               FROM cmte_to_cmte
               INNER JOIN committee_master
-              ON cmte_to_cmte."CMTE_ID"=committee_master."CMTE_ID"
-              WHERE "OTHER_ID" = '`+cmte_id+`'
+              ON cmte_to_cmte."OTHER_ID"=committee_master."CMTE_ID"
+              WHERE cmte_to_cmte."CMTE_ID" = '`+cmte_id+`'
               GROUP BY committee_master."CMTE_DSGN";
             `);
   },
@@ -47,8 +47,8 @@ module.exports = {
               count("TRANSACTION_AMT")
               FROM cmte_to_cmte
               INNER JOIN committee_master
-              ON cmte_to_cmte."CMTE_ID"=committee_master."CMTE_ID"
-              WHERE "OTHER_ID" = '`+cmte_id+`'
+              ON cmte_to_cmte."OTHER_ID"=committee_master."CMTE_ID"
+              WHERE cmte_to_cmte."CMTE_ID" = '`+cmte_id+`'
               GROUP BY committee_master."CMTE_TP";
             `);
   },

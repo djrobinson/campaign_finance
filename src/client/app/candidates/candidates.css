@@ -8,12 +8,19 @@
 .toolbar {
   position: fixed;
   width: 100%;
-  background: white;
   height: 16rem;
   top: 0px;
   z-index: 4;
   text-align: center;
   padding-top: 2rem;
+  /*background: #73877B;*/
+}
+
+h4 {
+  color:  #73877B;
+  font-family: 'Oswald';
+  font-weight: 500;
+
 }
 
 .toolbar-stuff {
