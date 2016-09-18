@@ -11,6 +11,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
             <div class="four columns tree-tip" id="tip-name"><span>Recipient</span></div>
             <div class="two columns tree-tip">
               <div class="twelve columns" id="tip-support"></div>
+              <br>
               <div class="twelve columns" id="tip-amount"><span>Amount</span></div>
             </div>
 
@@ -93,7 +94,6 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       position: absolute;
       height: 10%;
       width: 100%;
-      background:  #9DBF9E;
       color: #4d4d4d;
       font-family: 'Oswald';
       font-weigth: 700;
@@ -121,7 +121,6 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       justify-content: center;
       text-align: center;
       flex-direction: row;
-      border: solid 2px #9DBF9E;
     }
 
     .button {
