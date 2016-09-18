@@ -3,26 +3,33 @@ import { Router, RouteParams } from 'angular2/router';
 import {Http, Response} from 'angular2/http';
 // import * as _ from 'lodash';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
+import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgForm } from 'angular2/common';
+import {NameFilter} from './name.filter';
+
 
 @Component({
   selector: 'candidates-view',
   styleUrls: ['app/candidates/candidates.css'],
-  templateUrl: 'app/candidates/candidates.html'
+  templateUrl: 'app/candidates/candidates.html',
+  pipes: [NameFilter],
 })
 export class CandidatesComponent implements OnInit {
   private candidates: any[];
   private type: string;
   private sub: any;
+  public name: string;
   public headerType: string;
   private dropdown: boolean = false;
   public states: string[] = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
   public candidatesView: any[];
+
 
   constructor(
     private _params: RouteParams,
     public router: Router,
     public http: Http
     ){
+    this.candidatesView = [];
     this.type = _params.get('type');
     this.parseFloat = function(num) {
       return parseFloat(num);
@@ -30,7 +37,7 @@ export class CandidatesComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.name = "";
     var repColors = ['maroon'];
     var demColors = ['#001f3f'];
     this.http.get('/api/candidates/'+this.type+'/type')

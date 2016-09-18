@@ -22,10 +22,9 @@ require("csv-to-array")({
 //Structure and send a call to each candidate at the graph endpoint
 var i = 0;
 
-
 function getCandidateGraph(callback, cmte) {
-    console.log(cmte);
-    // return http.get('http://localhost:5000/api/graph/'+candId+'/candidate'
+  console.log(cmte);
+  // return http.get('http://localhost:5000/api/graph/'+candId+'/candidate'
   // return http.get('http://warm-cove-43638.herokuapp.com/api/individuals/committee/'+cmteIds[i].id+'/date'
   return http.get('http://www.citizenshub.org/api/individuals/bubble/' + cmte.id
     , function(response) {
@@ -58,7 +57,6 @@ function printData(data){
   if (i < cmteIds.length){
     getCandidateGraph(printData, cmteIds[i]);
   }
-
 }
 //mongo --eval 'db.test.update({"name":"foo"},{$set:{"this":"that"}});'
 
