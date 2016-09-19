@@ -22,26 +22,26 @@ import {LocationStrategy} from  'angular2/router'
   directives: [CandidateTableComponent, MiniProfileComponent, IndividualPopupComponent, CommitteePopupComponent, CandidatePopupComponent, TreemapComponent, BubbleComponent, BarComponent, SpinnerComponent]
 })
 export class GraphComponent implements OnInit  {
-  private selectedNode: Object;
-  private candidate: Object;
-  private candidate_id: string;
-  private indivPopup: boolean;
-  private cmtePopup: boolean;
-  private individualTran: string;
-  private indivName: string;
-  private selectedCommittee: string;
-  private result: Object;
-  private nodeData = Array;
-  private linkData = Array;
-  private graph: boolean;
-  private fullRoute: string = "";
-  private fullTreemap: boolean;
-  private fullBubble: boolean;
-  private isRequesting: boolean;
-  private bubbleCmte: string;
-  private bioguideId: string;
-  private selectedCandidate: string;
-  private isCand: boolean;
+  public selectedNode: Object;
+  public candidate: Object;
+  public candidate_id: string;
+  public indivPopup: boolean;
+  public cmtePopup: boolean;
+  public individualTran: string;
+  public indivName: string;
+  public selectedCommittee: string;
+  public result: Object;
+  public nodeData = Array;
+  public linkData = Array;
+  public graph: boolean;
+  public fullRoute: string = "";
+  public fullTreemap: boolean;
+  public fullBubble: boolean;
+  public isRequesting: boolean;
+  public bubbleCmte: string;
+  public bioguideId: string;
+  public selectedCandidate: string;
+  public isCand: boolean;
   public absUrl: string;
   public candImage: string;
   public size: string = 'small';
@@ -59,8 +59,11 @@ export class GraphComponent implements OnInit  {
   }
 
   ngOnInit() {
-    this.getGraphData(this.candidate_id, this.size);
-
+    if (this.candidate_id[0] === 'S'){
+      this.getSenateGraphData(this.candidate_id, this.size);
+    } else {
+      this.getGraphData(this.candidate_id, this.size);
+    }
     this.absUrl = this.location.path();
   }
 
@@ -161,6 +164,22 @@ export class GraphComponent implements OnInit  {
       this.http.get('/api/candidates/' + candId).map((res: Response) => res.json()),
       this.http.get('/api/legislators/' + candId).map((res: Response) => res.json()),
       this.http.get('api/graph/test/' + candId + '/' + size).map((res: Response) => res.json())
+    ).subscribe(
+      data => {
+        console.log(data);
+        this.candidate = data[0];
+        this.bioguideId = data[1];
+        this.graphInit(data[2]);
+      },
+      err => console.error(err)
+    )
+  }
+
+  public getSenateGraphData(candId, size): void {
+    Observable.forkJoin(
+      this.http.get('/api/candidates/' + candId).map((res: Response) => res.json()),
+      this.http.get('/api/legislators/' + candId).map((res: Response) => res.json()),
+      this.http.get('api/graph/senate/' + candId + '/' + size).map((res: Response) => res.json())
     ).subscribe(
       data => {
         console.log(data);

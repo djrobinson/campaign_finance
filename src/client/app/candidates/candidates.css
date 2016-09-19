@@ -13,7 +13,7 @@
   z-index: 4;
   text-align: center;
   padding-top: 2rem;
-  /*background: #73877B;*/
+  background: white;
 }
 
 h4 {
@@ -29,6 +29,9 @@ h4 {
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  padding-bottom: 2rem;
+  border-bottom: solid 1px black;
+  background: white;
 }
 
 .option {
@@ -46,6 +49,7 @@ h4 {
   font-weight: 500;
   font-size: 2rem;
   color:  #4d4d4d;
+  background: white;
   -webkit-transition: background 1s ease, color 1s ease; /* Safari 3.1 to 6.0 */
   transition: background color 1s ease, color 1s ease;
 }

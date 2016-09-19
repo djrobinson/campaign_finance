@@ -4,7 +4,7 @@ mongoose.connect('mongodb://heroku_2f1pj73r:tsu0gvp9jelb0lqkchsg86alh@ds023452.m
 // mongoose.connect('mongodb://localhost/testPolis');
 
 
-var Graph = mongoose.model('bubble', { id: String, size: String, data: [] });
+var Graph = mongoose.model('senate', { id: String, size: String, data: [] });
 
 //Get the list of candidates that you will seed the db with:
 var columns = ['id'];
@@ -12,7 +12,7 @@ var columns = ['id'];
 var cmteIds = [];
 
 require("csv-to-array")({
-   file: "/tmp/test.csv",
+   file: "/tmp/senate.csv",
    columns: columns
 }, function (err, array) {
   cmteIds = array;
@@ -26,7 +26,7 @@ function getCandidateGraph(callback, cmte) {
   console.log(cmte);
   // return http.get('http://localhost:5000/api/graph/'+candId+'/candidate'
   // return http.get('http://warm-cove-43638.herokuapp.com/api/individuals/committee/'+cmteIds[i].id+'/date'
-  return http.get('http://www.citizenshub.org/api/individuals/bubble/' + cmte.id
+  return http.get('http://localhost:5000/api/graph/' + cmte.id + '/candidate'
     , function(response) {
         var body = '';
         response.on('data', function(d) {
@@ -45,7 +45,7 @@ function getCandidateGraph(callback, cmte) {
 //Save the return value from the service call send to mongo
 function printData(data){
   console.log(data);
-  var graphData = new Graph({id: cmteIds[i].id, size: 'big', data: data});
+  var graphData = new Graph({id: cmteIds[i].id, size: 'small', data: data});
   graphData.save(function (err) {
     if (err) {
       console.log(err);
