@@ -20,7 +20,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
 })
 export class CandidatePopupComponent implements OnInit, OnChanges {
   //May want to start creating individual/committee types.
-  @Input() candidate: string;
+  @Input() candidate: any;
   @Input() committee: string;
   @Input() isCand: boolean;
   @Output() exitEmit = new EventEmitter();
@@ -31,15 +31,15 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   @ViewChild(DsgnPieComponent) dsgnPieComponent: DsgnPieComponent;
   @ViewChild(BarComponent) barComponent: BarComponent;
 
-  private disbursements: Object;
-  private candidateInfo: Object;
-  private contributions: Object;
-  private imageVar: Object;
-  private associatedCommittees: Object = {};
-  private pacSpends: Object;
-  private route: string;
-  private typeString: string;
-  private isRequesting: boolean;
+  public disbursements: Object;
+  public candidateInfo: Object;
+  public contributions: Object;
+  public imageVar: Object;
+  public associatedCommittees: Object = {};
+  public pacSpends: Object;
+  public route: string;
+  public typeString: string;
+  public isRequesting: boolean;
   public itemizedDonations: number;
   public committeeDonations: number;
   public barChartData: any;
@@ -47,6 +47,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   public primaryCmte: any;
   public pacSupport: any;
   public pacOppose: any;
+  public longName: boolean;
 
   constructor(
     private http: Http) {
@@ -99,6 +100,13 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
             return cmte
           };
         })[0];
+        console.log("Cand Data")
+        console.log("Primary length: ",this.primaryCmte.CMTE_NM.length);
+        if (this.primaryCmte.CMTE_NM.length > 20 ){
+          this.longName = true;
+        } else {
+          this.longName = false;
+        }
         this.typePieComponent.callAsc(data[3]);
         this.dsgnPieComponent.callAsc(data[2]);
         this.committeeDonations = data[3].reduce((prev, item)=>{
@@ -128,6 +136,12 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
         this.stopRefreshing();
         this.candidate = data[0][0];
+        console.log("Primary length: ",this.candidate.com_nam.length);
+        if (this.candidate.com_nam.length > 30 ){
+          this.longName = true;
+        } else {
+          this.longName = false;
+        }
         this.typePieComponent.callAsc(data[2]);
         this.dsgnPieComponent.callAsc(data[1]);
         this.committeeDonations = data[2].reduce((prev, item)=>{

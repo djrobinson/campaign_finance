@@ -6,14 +6,22 @@
   <div class="three columns choices">
     <div *ngIf="isCand" class="cand-pic text-center">
       <img [src]="imageVar?.image" alt="picture" onerror="this.src='http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png'">
-      <h3>{{candidate?.CANDIDATE_NAME}}</h3>
+      <h5>{{candidate?.CANDIDATE_NAME}}</h5>
       <p>Party: {{candidate?.PARTY}}</p>
       <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
       <p>FEC ID: {{candidate?.CANDIDATE_ID}}</p>
       <p>Hometown: {{candidate?.CITY}}, {{candidate?.STATE}}</p>
     </div>
-    <div *ngIf="!isCand" class="cand-pic text-center">
-      <h4>{{candidate?.com_nam}} </h4>
+    <div *ngIf="!isCand && !longName" class="cand-pic text-center">
+      <h5>{{candidate?.com_nam}} </h5>
+      <p>Designation: {{candidate?.com_des}}</p>
+      <p>Type: {{candidate?.com_typ}}</p>
+      <p>FEC ID: {{candidate?.com_id}}</p>
+      <p>Address: {{candidate?.add}}</p>
+      <p>Home City: {{candidate?.cit}}</p>
+    </div>
+    <div *ngIf="!isCand && longName" class="cand-pic text-center longNamePad">
+      <div class="longName">{{candidate?.com_nam}} </div>
       <p>Designation: {{candidate?.com_des}}</p>
       <p>Type: {{candidate?.com_typ}}</p>
       <p>FEC ID: {{candidate?.com_id}}</p>
@@ -109,8 +117,11 @@
           <div *ngIf="isCand" class="financials-header">
             <h5>{{primaryCmte?.CMTE_NM}}</h5>
           </div>
-          <div *ngIf="!isCand" class="financials-header">
+          <div *ngIf="!isCand && !longName" class="financials-header">
             <h5>{{candidate?.com_nam}}</h5>
+          </div>
+          <div *ngIf="!isCand && longName" class="financials-header">
+            <div class="longName">{{candidate?.com_nam}} </div>
           </div>
           <div class="full-financials">
             <table>

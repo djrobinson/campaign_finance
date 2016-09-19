@@ -91,12 +91,16 @@ li {
   flex-direction: column;
   justify-content: center;
   border-right: solid 3px #BDBBB6;
+  position: relative;
+  height: 100%;
 }
 .cand-pic {
   background-color: #FCFCFC;
   padding-bottom: 5rem;
   color: #4d4d4d;
   height: 50%;
+  position: absolute;
+  top: 0;
 }
 .cand-options {
   background-color: #73877B;
@@ -108,7 +112,10 @@ li {
   flex-direction: column;
   margin: 0;
   padding: 0;
-  height: 100%;
+  position:absolute;
+  height: 50%;
+  bottom: 0;
+  width: 100%;
 }
 .cand-option {
   display: -webkit-box;
@@ -247,7 +254,8 @@ td:nth-child(2n){
 }
 
 .financials-header h5 {
-  font-family: 'Prata', serif !important;
+  font-family: 'Oswald';
+  font-weight: 500;
 }
 
 .full-financials {
@@ -259,7 +267,17 @@ td:nth-child(2n){
   padding-right: 5rem;
   padding-left: 5rem;
   overflow: scroll;
-  border-top: solid 1px gray;
+}
+
+.longName {
+  font-size: 1.5rem;
+  width: 100%;
+  font-family: 'Oswald';
+  font-weight: 500;
+}
+
+.longNamePad {
+  padding: 2rem;
 }
 
 
