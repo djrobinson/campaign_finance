@@ -47,11 +47,10 @@ tr {
 }
 
 .fec {
-  height: 3rem;
-  width: 3rem;
-  position: absolute;
-  left: 2%;
-  top: 0;
+  margin: 0;
+  height:7rem;
+  width: 7rem;
+  padding-bottom: 2rem;
 }
 
 .close-button {
@@ -97,6 +96,7 @@ li {
   background-color: #FCFCFC;
   padding-bottom: 5rem;
   color: #4d4d4d;
+  height: 50%;
 }
 .cand-options {
   background-color: #73877B;
@@ -212,9 +212,16 @@ td:nth-child(2n){
 
 
 .highlight-column {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   left: 0;
-  background: green;
   width: 35%;
   height: 95%;
 }
@@ -226,7 +233,7 @@ td:nth-child(2n){
   width: 50%;
   right: 0;
   top: 0;
-    display: -webkit-box;
+  display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;

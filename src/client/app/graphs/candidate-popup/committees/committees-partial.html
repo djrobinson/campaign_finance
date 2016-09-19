@@ -34,7 +34,7 @@
         {{committee.CITY}}, {{committee.STATE}}
       </td>
       <td>
-      <a [href]="'http://docquery.fec.gov/cgi-bin/fecimg?'+committee?.IMAGE_NUM"><img src="images/fec.png" class="fec" /></a>
+      <a (click)="openFec('http://docquery.fec.gov/cgi-bin/fecimg?'+committee?.IMAGE_NUM)"><img src="images/fec.png" class="fec" /></a>
       </td>
       <td>
         {{committee.CMTE_ID}}
@@ -59,7 +59,7 @@
       </td>
       <td class='mobile'>
         {{parseFloat(committee.TRANSACTION_AMT) | currency:'USD':true}}
-        <a [href]="'http://docquery.fec.gov/cgi-bin/fecimg?'+committee?.IMAGE_NUM"><img src="images/fec.png" class="fec" /></a>
+        <a (click)="openFec('http://docquery.fec.gov/cgi-bin/fecimg?'+committee?.IMAGE_NUM)"><img src="images/fec.png" class="fec" /></a>
       </td>
     </tr>
   </table>

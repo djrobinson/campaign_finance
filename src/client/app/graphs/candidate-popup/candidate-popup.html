@@ -4,9 +4,8 @@
 <div class="cand-style">
 
   <div class="three columns choices">
-    <img src="images/fec.png" class="fec" (click)="openFec()" />
     <div *ngIf="isCand" class="cand-pic text-center">
-      <img [src]="imageVar?.image" alt="picture">
+      <img [src]="imageVar?.image" alt="picture" onerror="this.src='http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png'">
       <h3>{{candidate?.CANDIDATE_NAME}}</h3>
       <p>Party: {{candidate?.PARTY}}</p>
       <p>Office: {{candidate?.CANDIDATE_OFFICE}}</p>
@@ -89,6 +88,7 @@
         </div>
         <div class="row main-container twelve columns">
           <div class="highlight-column">
+            <img src="images/fec.png" class="fec" (click)="openFec()" />
             <div class="highlight">
               <p>Cash</p>
               <p>{{parseFloat((candidate?.cas_on_han_clo_of_per) ? candidate?.cas_on_han_clo_of_per : 0.00 ) | currency:'USD':true}}</p>
