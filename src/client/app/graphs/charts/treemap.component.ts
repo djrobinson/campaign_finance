@@ -342,16 +342,11 @@ export class TreemapComponent implements OnInit, OnChanges {
       layout(root);
       display(root);
 
+
+
       function display(d) {
         ctrl.isRequesting = false;
-        var backup = d3.select('#backup');
-        backup
-          .datum(d.parent)
-          .on("click", transition)
-          .select("text")
-          .text(name(d))
-        grandparent
-          .datum(d.parent)
+
 
         var g1 = svg.insert("g", ".grandparent")
           .datum(d)
@@ -484,12 +479,35 @@ export class TreemapComponent implements OnInit, OnChanges {
             d3.select('#tip-purpose').text(d.purpose);
           })
 
+        var parent = d3.selectAll('.parent');
+        var child = d3.selectAll('.child');
+
+        var backup = d3.select('#backup');
+        backup
+          .datum(d.parent)
+          .on("click", transition)
+          .select("text")
+        grandparent
+          .datum(d)
+
+
+        //   .text(name(d))
+
+
         function transition(d) {
-          if (d._children === undefined) {
-            console.log("No Transition?");
-            return;
-          };
-          ctrl.level = d.category;
+          console.log("Transition: D: ", ctrl.level);
+          if (d){
+            if (d._children === undefined) {
+              console.log("No Transition?");
+              return;
+            };
+          }
+          if (ctrl.level === 'main'){
+            ctrl.level = 'downward-grandparent';
+          } else {
+            ctrl.level = d.category;
+          }
+
           console.log(d.parent);
           if (typeof d.parent === 'undefined'){
             ctrl.level = 'main';
@@ -522,18 +540,18 @@ export class TreemapComponent implements OnInit, OnChanges {
             transitioning = false;
           });
 
-          setTimeout(function(){
+          // setTimeout(function(){
 
-            g2.append("text")
-              .filter(function(d) { return d.category === "parent" })
-              .attr("x", 0)
-              .attr("dx", "0.35em")
-              .attr("dy", "0.75em")
-              .call(text)
-              .each(addText)
-              .style("fill-opacity", 1);
+          //   g2.append("text")
+          //     .filter(function(d) { return d.category === "parent" })
+          //     .attr("x", 0)
+          //     .attr("dx", "0.35em")
+          //     .attr("dy", "0.75em")
+          //     .call(text)
+          //     .each(addText)
+          //     .style("fill-opacity", 1);
 
-            }, 800)
+          //   }, 800)
           }
         return g;
       }

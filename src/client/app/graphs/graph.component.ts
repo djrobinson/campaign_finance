@@ -412,7 +412,7 @@ export class GraphComponent implements OnInit  {
                   if (candArr.indexOf(candId) !== -1){
                     return 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + candId+'.jpg';
                   } else {
-                    return 'http://www.purplestrategies.com/wp-content/uploads/2014/04/placeholder_male@2x.png';
+                    return 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/placeholder.png';
                   }
 
                   // var profile_img;
