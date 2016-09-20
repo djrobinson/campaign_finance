@@ -64,7 +64,9 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
       </div>
   `,
   styles: [`
-
+    .child-tspan {
+      display: block;
+    }
 
     .float-right {
       text-align: right;
@@ -191,25 +193,6 @@ export class TreemapComponent implements OnInit, OnChanges {
   ngOnInit(){
     var ctrl = this;
     this.buildTreeMap(this.route, ctrl);
-
-    var isChromium = window.chrome,
-    winNav = window.navigator,
-    vendorName = winNav.vendor,
-    isOpera = winNav.userAgent.indexOf("OPR") > -1,
-    isIEedge = winNav.userAgent.indexOf("Edge") > -1,
-    isIOSChrome = winNav.userAgent.match("CriOS");
-
-    if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
-       // is Google Chrome
-       console.log("IS CHROME AL;SDJFALSDJFLAJSDF")
-       this.route = this.route + '/chrome';
-       this.isChrome = true;
-    } else {
-       // not Google Chrome
-       this.route = this.route;
-       this.isChrome = false;
-    }
-
   }
 
   rebuildMap(route){
@@ -220,6 +203,20 @@ export class TreemapComponent implements OnInit, OnChanges {
 
 
   buildTreeMap(route, ctrl) {
+    var isChromium = window.chrome,
+      winNav = window.navigator,
+      vendorName = winNav.vendor,
+      isOpera = winNav.userAgent.indexOf("OPR") > -1,
+      isIEedge = winNav.userAgent.indexOf("Edge") > -1,
+      isIOSChrome = winNav.userAgent.match("CriOS");
+    if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
+       // is Google Chrome
+       route = route + '/chrome';
+       ctrl.isChrome = true;
+    } else {
+       // not Google Chrome
+       ctrl.isChrome = false;
+    }
     d3.selectAll("#chart > *").remove();
     Number.prototype.formatMoney = function(c, d, t) {
       var n = this,
@@ -401,15 +398,15 @@ export class TreemapComponent implements OnInit, OnChanges {
               var tspan = el.append("tspan").text(word);
               words.pop();
             }
-          } else if (d.category === "child"){
+          } else if (d.category === "child" && ctrl.isChrome){
             d3.select(this)
               .append("tspan")
               .attr("class", "child-tspan")
               .text(d.name)
               .attr("x", 0)
               .attr("dx", "0.35em")
-              .attr("dy", "4rem")
-              .style("font-size", "4rem")
+              .attr("dy", "6rem")
+              .style("font-size", "6rem")
 
             d3.select(this)
               .append("tspan")
@@ -417,7 +414,7 @@ export class TreemapComponent implements OnInit, OnChanges {
               .text(d.to)
               .attr("x", 0)
               .attr("dx", "0.35em")
-              .attr("dy", "4rem")
+              .attr("dy", "6rem")
               .style("font-size", "3rem")
 
             d3.select(this)
@@ -426,7 +423,7 @@ export class TreemapComponent implements OnInit, OnChanges {
               .text(d.purpose)
               .attr("x", 0)
               .attr("dx", "0.35em")
-              .attr("dy", "4rem")
+              .attr("dy", "6rem")
               .style("font-size", "3rem")
 
 
@@ -436,7 +433,7 @@ export class TreemapComponent implements OnInit, OnChanges {
               .text(d.amount)
               .attr("x", 0)
               .attr("dx", "0.35em")
-              .attr("dy", "4rem")
+              .attr("dy", "6rem")
               .style("font-size", "3rem")
             d3.select(this)
               .append("tspan")
@@ -444,10 +441,20 @@ export class TreemapComponent implements OnInit, OnChanges {
               .text(d.date)
               .attr("x", 0)
               .attr("dx", "0.35em")
-              .attr("dy", "4rem")
+              .attr("dy", "6rem")
               .style("font-size", "3rem")
-          }
+          }  else {
+          d3.select(this)
+              .append("tspan")
+              .attr("class", "child-tspan")
+              .text("Purpose: " + d.purpose)
+              .attr("x", 0)
+              .attr("dx", "0.35em")
+              .attr("dy", "50px")
+              .style("font-size", "3rem")
+
         }
+       }
 
         g.attr("class", "cell")
           .on("click", transition)
