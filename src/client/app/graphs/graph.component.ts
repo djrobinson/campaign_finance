@@ -45,6 +45,7 @@ export class GraphComponent implements OnInit  {
   public absUrl: string;
   public candImage: string;
   public size: string = 'small';
+  public isPres: boolean;
   @ViewChild(MiniProfileComponent) miniProfileComponent: MiniProfileComponent;
 
   constructor(
@@ -61,8 +62,13 @@ export class GraphComponent implements OnInit  {
   ngOnInit() {
     if (this.candidate_id[0] === 'S'){
       this.getSenateGraphData(this.candidate_id, this.size);
+      this.isPres = false;
+    } else if (this.candidate_id[0] === 'H'){
+      this.getHouseGraphData(this.candidate_id, this.size);
+      this.isPres = false;
     } else {
       this.getGraphData(this.candidate_id, this.size);
+      this.isPres = true;
     }
     this.absUrl = this.location.path();
   }
