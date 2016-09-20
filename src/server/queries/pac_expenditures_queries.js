@@ -17,7 +17,13 @@ module.exports = {
   getAllIndExpendByCand: function(cand_id, offset){
     return knex('independent_expenditures')
            .where({'can_id': cand_id})
-           .orderBy('exp_amo', 'desc')
+           .andWhere('exp_amo', '>', 100000)
+           .offset(offset);
+  },
+  getAllIndExpendByCandChrome: function(cand_id, offset){
+    return knex('independent_expenditures')
+           .where({'can_id': cand_id})
+           .andWhere('exp_amo', '>', 1000)
            .offset(offset);
   },
   getIndExpendByComm: function(cmte_id, offset){
@@ -26,6 +32,8 @@ module.exports = {
            .orderBy('exp_amo', 'desc')
            .limit(100)
            .offset(offset);
+
+           //
   },
   getSuppByCand: function(cand_id, offset){
     return knex('independent_expenditures')

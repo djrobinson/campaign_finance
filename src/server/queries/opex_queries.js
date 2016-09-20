@@ -14,6 +14,18 @@ module.exports = {
            .limit(250)
            .offset(offset);
   },
+  getOpexByCmte: function(cmte_id, offset){
+    return knex('opex')
+           .where('TRANSACTION_AMT', '>', 300000)
+           .andWhere({'CMTE_ID': cmte_id})
+  },
+  getOpexByCmteChrome: function(cmte_id, offset){
+    return knex('opex')
+           .where({'CMTE_ID': cmte_id})
+           .orderBy('TRANSACTION_AMT', 'desc')
+           .limit(250)
+           .offset(offset);
+  },
   getOpexByRec: function(name, offset){
     return knex('opex')
            .where('NAME', 'like', '%'+ name +'%')

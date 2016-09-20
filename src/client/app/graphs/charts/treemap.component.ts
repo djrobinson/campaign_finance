@@ -1,12 +1,10 @@
 import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
-import {SpinnerComponent} from '../../loading/spinner.component';
 
 @Component({
   selector: 'treemap',
   template: `
       <div id="containerChart">
-        <spinner [isRunning]="isRequesting">
-        </spinner>
+
           <div class="tip-top">
             <div class="four columns tree-tip">
               <span>Recipient</span>
@@ -175,13 +173,14 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       font-size: 1.2rem;
     }
   `],
-  directives: [SpinnerComponent]
+  directives: []
 })
 export class TreemapComponent implements OnInit, OnChanges {
   @Input() route: string;
   private level: string = "main";
   private lin_ima: string;
   public isRequesting: boolean=true;
+  public isChrome: boolean;
 
   constructor (){
     this.parseFloat = function(num) {
@@ -192,6 +191,25 @@ export class TreemapComponent implements OnInit, OnChanges {
   ngOnInit(){
     var ctrl = this;
     this.buildTreeMap(this.route, ctrl);
+
+    var isChromium = window.chrome,
+    winNav = window.navigator,
+    vendorName = winNav.vendor,
+    isOpera = winNav.userAgent.indexOf("OPR") > -1,
+    isIEedge = winNav.userAgent.indexOf("Edge") > -1,
+    isIOSChrome = winNav.userAgent.match("CriOS");
+
+    if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
+       // is Google Chrome
+       console.log("IS CHROME AL;SDJFALSDJFLAJSDF")
+       this.route = this.route + '/chrome';
+       this.isChrome = true;
+    } else {
+       // not Google Chrome
+       this.route = this.route;
+       this.isChrome = false;
+    }
+
   }
 
   rebuildMap(route){
@@ -321,6 +339,7 @@ export class TreemapComponent implements OnInit, OnChanges {
     //starts w/ passed in data
     ///api/pac/aggregate/P00003392
     d3.json(route, function(root) {
+      console.log("Here's inside treemap route: ", root);
       initialize(root);
       accumulate(root);
       layout(root);
@@ -334,7 +353,6 @@ export class TreemapComponent implements OnInit, OnChanges {
           .on("click", transition)
           .select("text")
           .text(name(d))
-
         grandparent
           .datum(d.parent)
 
@@ -460,7 +478,6 @@ export class TreemapComponent implements OnInit, OnChanges {
           })
 
         function transition(d) {
-          console.log("Here's D! ", d);
           if (d._children === undefined) {
             console.log("No Transition?");
             return;

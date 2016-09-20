@@ -112,7 +112,63 @@ router.get('/aggregate/:cmte_id', function(req, res, next){
         });
     res.json(graphVals);
   });
-})
+});
+
+router.get('/aggregate/:cmte_id/chrome', function(req, res, next){
+  query.getOpexByCmteChrome(req.params.cmte_id).then(function(data){
+    var graphVals = data.reduce(function(prev, curr) {
+          var currIndex = _.findIndex(prev.children, {"name": curr.NAME});
+          var exp_amo = parseFloat(curr.TRANSACTION_AMT);
+          if (currIndex === -1){
+            prev.amount += exp_amo;
+            prev.children.push({
+              "children": [{
+                "name": curr.NAME,
+                "value": exp_amo,
+                "category": "parent",
+                "children": [{
+                  "name": curr.NAME,
+                  "purpose": curr.PURPOSE,
+                  "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.IMAGE_NUM,
+                  "amount": curr.exp_amo,
+                  "value": exp_amo,
+                  "category": "child"
+                }]
+              }],
+              "name": curr.NAME,
+              "id": curr.CMTE_ID,
+              "value": exp_amo,
+              "category": "grandparent"
+            })
+            return prev;
+          } else {
+            prev.amount += exp_amo;
+            prev.children[currIndex].amount += exp_amo;
+            prev.children[currIndex].children.push({
+              "name": curr.NAME,
+              "purpose": curr.PURPOSE,
+              "value": exp_amo,
+              "category": "parent",
+              "children": [{
+                  "name": curr.NAME,
+                  "purpose": curr.PURPOSE,
+                  "value": exp_amo,
+                  "date": curr.TRANSACTION_DT,
+                  "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.IMAGE_NUM,
+                  "category": "child"
+                }]
+            })
+            return prev;
+          }
+        }, {
+            "children": [],
+            "support": 1,
+            "amount": 0,
+            "name": "All Operating Expenditures by Committee"
+        });
+    res.json(graphVals);
+  });
+});
 
 
 module.exports = router;

@@ -157,7 +157,76 @@ router.get('/aggregate/:cand_id', function(req, res, next){
             prev.amount += exp_amo;
             prev.children[currIndex].value += exp_amo;
             prev.children[currIndex].amount += exp_amo;
-            if (exp_amo > 5000){
+            if (exp_amo > 10000){
+              prev.children[currIndex].children.push({
+                "support": curr.sup_opp,
+                "name": curr.pay,
+                "purpose": curr.pur,
+                "value": exp_amo,
+                "category": "parent",
+                "children": [{
+                    "name": curr.spe_nam,
+                    "to": curr.pay,
+                    "purpose": curr.pur,
+                    "amount": curr.exp_amo,
+                    "value": exp_amo,
+                    "date": curr.rec_dat,
+                    "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.ima_num,
+                    "category": "child"
+                  }]
+                })
+              }
+            return prev;
+          }
+        }, {
+            "children": [],
+            "support": 1,
+            "amount": 0,
+            "name": "All Superpac Expenditures Supporting or Opposing Candidate"
+        });
+    res.json(graphVals);
+  });
+});
+
+router.get('/aggregate/:cand_id/chrome', function(req, res, next){
+  query.getAllIndExpendByCandChrome(req.params.cand_id).then(function(data){
+
+    var graphVals = data.reduce(function(prev, curr) {
+          var currIndex = _.findIndex(prev.children, {"id": curr.spe_id});
+          var exp_amo = parseFloat(curr.exp_amo);
+          if (currIndex === -1){
+            prev.amount += exp_amo;
+              prev.children.push({
+                "children": [{
+                  "name": curr.pay,
+                  "value": exp_amo,
+                  "category": "parent",
+                  "children": [{
+                    "name": curr.spe_nam,
+                    "to": curr.pay,
+                    "purpose": curr.pur,
+                    "amount": curr.exp_amo,
+                    "value": exp_amo,
+                    "date": curr.rec_dat,
+                    "fec": "docquery.fec.gov/cgi-bin/fecimg/?"+curr.ima_num,
+                    "category": "child"
+                  }]
+                }],
+                "support": curr.sup_opp,
+                "name": curr.spe_nam,
+                "id": curr.spe_id,
+                "value": exp_amo,
+                "amount": exp_amo,
+                "category": "grandparent"
+              })
+
+            return prev;
+          } else {
+            prev.value += exp_amo;
+            prev.amount += exp_amo;
+            prev.children[currIndex].value += exp_amo;
+            prev.children[currIndex].amount += exp_amo;
+            if (exp_amo > 10000){
               prev.children[currIndex].children.push({
                 "support": curr.sup_opp,
                 "name": curr.pay,
