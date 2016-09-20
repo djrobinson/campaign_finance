@@ -25,7 +25,7 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
     }
 
     #mobile-lines {
-      position: absolute;
+      position: fixed;
       top: 2rem;
       left: 2rem;
       z-index: 6;
@@ -35,6 +35,8 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       height: 10px;
       width:70px;
     }
+
+
 
     #mobile-menu {
       display: flex;
@@ -47,9 +49,20 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
     }
 
     #lines {
-      position: absolute;
+      position: fixed;
       top: 2rem;
       left: 2rem;
+      z-index: 5;
+      border-bottom: 17px double #6C6F7D;
+      border-top: 6px solid #6C6F7D;
+      content:"";
+      height: 5px;
+      width:30px;
+    }
+    #open-lines {
+      position: fixed;
+      top: 2rem;
+      left: 19%;
       z-index: 5;
       border-bottom: 17px double #6C6F7D;
       border-top: 6px solid #6C6F7D;
@@ -104,7 +117,12 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
         <div class="menu-option"><h5>About</h5></div>
       </div>
       <div  [class.content-width]="sideMenu">
-        <div id="lines" (click)="showMenu()"></div>
+        <div *ngIf="!sideMenu">
+          <div id="lines" (click)="showMenu()"></div>
+        </div>
+        <div *ngIf="sideMenu">
+          <div id="open-lines" (click)="showMenu()"></div>
+        </div>
         <router-outlet></router-outlet>
       </div>
     </div>

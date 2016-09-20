@@ -8,7 +8,7 @@
 .toolbar {
   position: fixed;
   width: 100%;
-  height: 16rem;
+  height: 12%;
   top: 0px;
   z-index: 4;
   text-align: center;
@@ -20,11 +20,20 @@ h4 {
   color:  #73877B;
   font-family: 'Oswald';
   font-weight: 500;
+}
 
+.instructions {
+  padding-bottom: 2rem;
+  background: white;
+  font-size: 2rem;
 }
 
 .toolbar-stuff {
   width: 100%;
+    display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,13 +43,80 @@ h4 {
   background: white;
 }
 
+.search-box {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-box tr {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Oswald';
+  font-weight: 500;
+  border: none;
+}
+
+input {
+  margin-top: 1rem;
+}
+
+table {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+td {
+  border: none;
+    display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  margin: 0;
+}
+
+
+
+
+
+
+
 .option {
-  width: 25%;
   height: 8rem;
   border: solid 2px #73877B;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+    display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,16 +148,17 @@ h5 {
   font-size: 2rem;
 }
 
-td {
-  font-family: 'Oswald';
-  font-weight: 300;
-}
+
 
 
 .text-center {
   text-align: center;
 }
 .totals {
+    display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   margin: 0;
   padding: 0;
@@ -91,6 +168,10 @@ td {
 
 .totals-box {
   margin-top: 50px;
+    display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -212,7 +293,7 @@ td {
 
 .candidates-container {
   position: absolute;
-  height: 87%;
+  height: 80%;
   width: 100%;
   bottom: 0;
 }
@@ -246,6 +327,10 @@ td {
 
 .image-container {
   height: 100%;
+    display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   align-content: center;
   align-items: center;

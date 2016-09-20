@@ -2,20 +2,29 @@
 
   <div class="toolbar">
     <h1>{{headerType}} Candidates</h1>
+    <div class="instructions">
+      Select a candidate below to explore their donor map.
+    </div>
     <div class="row twelve columns toolbar-stuff">
-      <div class="three columns">
+      <div class="one columns">
       </div>
-      <div class="option two columns" (click)="sortCandidates()">
+      <div class="option three columns" (click)="sortCandidates()">
         Sort by Contributions
       </div>
-      <div class="option two columns">
-        Search by Name
-        <input
-        [(ngModel)]="name"
-        type="text"
-        name="name">
+      <div class="option four columns search-box">
+          <tr>
+            <td>
+              Search by Name
+            </td>
+            <td>
+              <input
+                [(ngModel)]="name"
+                type="text"
+                name="name">
+            </td>
+          </tr>
       </div>
-      <div class="option two columns dropdown">
+      <div class="option three columns dropdown">
         Sort by State
         <div class="list-container">
           <div class="dropdown-list">
@@ -23,7 +32,7 @@
           </div>
         </div>
       </div>
-      <div class="three columns">
+      <div class="one column">
       </div>
     </div>
   </div>

@@ -197,6 +197,22 @@ export class GraphComponent implements OnInit  {
     )
   }
 
+ public getHouseGraphData(candId, size): void {
+    Observable.forkJoin(
+      this.http.get('/api/candidates/' + candId).map((res: Response) => res.json()),
+      this.http.get('/api/legislators/' + candId).map((res: Response) => res.json()),
+      this.http.get('api/graph/house/' + candId + '/' + size).map((res: Response) => res.json())
+    ).subscribe(
+      data => {
+        console.log(data);
+        this.candidate = data[0];
+        this.bioguideId = data[1];
+        this.graphInit(data[2]);
+      },
+      err => console.error(err)
+    )
+  }
+
   public graphInit(result){
         //ONly for mongo
         result = result.data;
