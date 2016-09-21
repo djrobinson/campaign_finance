@@ -1,8 +1,12 @@
 <div class="content">
+  <div class="superpac-instructions">
+    Superpac instruction placeholder
+  </div>
   <superpacs-list
     *ngIf="showList"
     [cand]="cand"
   >
+
   </superpacs-list>
   <treemap *ngIf="!showList" route="{{route}}">
   </treemap>

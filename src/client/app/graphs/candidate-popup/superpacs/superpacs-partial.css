@@ -22,6 +22,17 @@ superpacs-list {
   overflow: scroll;
 }
 
+.superpac-instructions {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  background: blue;
+  height: 50%;
+  width: 50%;
+  z-index: 8;
+}
+
+
 .content {
   position: relative;
   width: 95%;

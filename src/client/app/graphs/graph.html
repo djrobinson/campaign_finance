@@ -13,7 +13,23 @@
   </div>
 <div>
   <div *ngIf="isFirst" class="graph-instructions">
-    CHING DILLY DING
+    <div class="instructions-close" (click)="closeInstructions()">
+      Got it
+    </div>
+    - What is it
+    - Each circle represents a political action committee or individual
+    - The center circle represents the selected candidate’s campaign committee
+    - The links branching off each circle represent donations to that committee
+
+    - How to navigate it
+    - Click each circle to look at a detailed donor profile for the individual/committee
+    - Hover over a node to see the donor name and transaction size in the preview box
+    - The diagram can be dragged and zoomed for better visibility of names
+    - For presidential candidates, select “More Nodes” to double the number of committees shown donating to the candidate’s campaign committee
+    - How to interpret it
+    - Green circles are individuals, while yellow/red circles represent committees
+    - The size of each circle represents the size of the transaction given to the connected circle
+    - The color of the committee circles indicates the size of that committee based on total money spent in the last 2 years
   </div>
   <mini-profile-view
     class="three columns"

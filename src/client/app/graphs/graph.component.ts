@@ -73,7 +73,7 @@ export class GraphComponent implements OnInit  {
       this.isPres = true;
     }
     this.absUrl = this.location.path();
-    setTimeout(this.closeInstructions.bind(this), 3000);
+    // setTimeout(this.closeInstructions.bind(this), 3000);
   }
 
   closeInstructions(){
