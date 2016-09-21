@@ -14,8 +14,10 @@ export class SuperpacsSectionComponent implements OnInit {
   private route: string;
   private showList: boolean=false;
   private isSelected: boolean=false;
+  public isFirst: boolean;
 
   ngOnInit() {
+    this.isFirst = true;
     console.log(this.cand);
     this.route = '/api/pac/aggregate/' + this.cand.CANDIDATE_ID;
   }
@@ -23,6 +25,11 @@ export class SuperpacsSectionComponent implements OnInit {
   public callSuperpacs(){
     this.isSelected = !this.isSelected;
     this.showList = !this.showList;
+  }
+
+  closeInstructions(){
+    console.log("Assurance");
+    this.isFirst = false;
   }
 
 }

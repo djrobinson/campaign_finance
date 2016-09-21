@@ -13,12 +13,19 @@ export class OpexSectionComponent implements OnInit {
   private route: string;
   private showList: boolean=false;
   private isSelected: boolean=false;
+  public isFirst: boolean;
   ngOnInit(){
+    this.isFirst = true;
     this.route = '/api/opex/aggregate/' + this.cmte;
   }
 
   public callList(){
     this.isSelected = !this.isSelected;
     this.showList = !this.showList;
+  }
+
+  closeInstructions(){
+    console.log("Assurance");
+    this.isFirst = false;
   }
 }

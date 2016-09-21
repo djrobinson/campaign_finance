@@ -1,12 +1,14 @@
 <div class="content">
-  <div class="superpac-instructions">
+  <div *ngIf="isFirst" class="superpac-instructions">
+    <div class="close-instructions" (click)="closeInstructions()">
+      Close for now
+    </div>
     Superpac instruction placeholder
   </div>
   <superpacs-list
     *ngIf="showList"
     [cand]="cand"
   >
-
   </superpacs-list>
   <treemap *ngIf="!showList" route="{{route}}">
   </treemap>

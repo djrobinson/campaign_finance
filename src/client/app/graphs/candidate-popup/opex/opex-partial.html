@@ -5,6 +5,12 @@
   <div class="choose-list" (click)="callList()" [class.selected]="isSelected">
     <h3>List</h3>
   </div> -->
+  <div *ngIf="isFirst" class="opex-instructions">
+    <div class="close-instructions" (click)="closeInstructions()">
+      Close for now
+    </div>
+    Superpac instruction placeholder
+  </div>
   <opex-list
     *ngIf="showList"
     [cmte]="cmte">
