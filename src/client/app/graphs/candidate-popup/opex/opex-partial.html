@@ -7,9 +7,22 @@
   </div> -->
   <div *ngIf="isFirst" class="opex-instructions">
     <div class="close-instructions" (click)="closeInstructions()">
-      Close for now
+      X
     </div>
-    Superpac instruction placeholder
+    Treemap
+
+    <ul>
+      <li>What is it</li>
+      - <li>The operating expenditures treemap represents all funds spent by a given committee</li>
+      <li>- The overall size of the rectangle represents all funds spent by the committee. Each smaller rectangle represents the portion of funds that were given to just one recipient.</li>
+      <li>- Clicking each rectangle will show a transaction by transaction breakout of each expense.</li>
+      <li>- How to navigate it</li>
+      <li>- Hover over any square to see the preview in the toolbar above the treemap.  This will show basic information like amount, recipient, and the purpose of the transaction.</li>
+      <li>- Click on a rectangle to see a detailed view of the transaction or recipient. The three levels of detail are:</li>
+          <li>- Committee Level – Shows a breakout of the recipients of the committee’s expenses.</li>
+          <li>- Recipient Level – Shows a breakout of each transaction to a given recipient</li>
+          <li>- Transaction level – Shows detailed info for a given transaction and provides a link to the FEC Doc in the lower right hand corner.</li>
+    </ul>
   </div>
   <opex-list
     *ngIf="showList"
