@@ -46,6 +46,7 @@ export class GraphComponent implements OnInit  {
   public candImage: string;
   public size: string = 'small';
   public isPres: boolean;
+  public isFirst: boolean;
   @ViewChild(MiniProfileComponent) miniProfileComponent: MiniProfileComponent;
 
   constructor(
@@ -60,6 +61,7 @@ export class GraphComponent implements OnInit  {
   }
 
   ngOnInit() {
+    this.isFirst = true;
     if (this.candidate_id[0] === 'S'){
       this.getSenateGraphData(this.candidate_id, this.size);
       this.isPres = false;
@@ -71,6 +73,12 @@ export class GraphComponent implements OnInit  {
       this.isPres = true;
     }
     this.absUrl = this.location.path();
+    setTimeout(this.closeInstructions.bind(this), 3000);
+  }
+
+  closeInstructions(){
+    console.log("Assurance");
+    this.isFirst = false;
   }
 
   showIndivPopup(event){

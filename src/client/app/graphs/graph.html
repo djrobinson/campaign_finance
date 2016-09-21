@@ -2,23 +2,19 @@
 </spinner>
 
 <svg id="force" height="100vh" width="100vw">
-  <!-- <defs>
-    <pattern id="circles-1" width="1" height="1">
-      <image [href]="https://raw.githubusercontent.com/djrobinson/campaign_finance/master/candidates/P00003392.jpg"
-      width="100" height="100">
-      </image>
-    </pattern>
-  </defs> -->
 </svg>
   <div *ngIf="isPres">
     <div *ngIf="size==='small'" class="button test-button" (click)="changeSize()">
       More Nodes
     </div>
-      <div *ngIf="size==='big'" class="button test-button" (click)="changeSize()">
+    <div *ngIf="size==='big'" class="button test-button" (click)="changeSize()">
       Less Nodes
     </div>
   </div>
 <div>
+  <div *ngIf="isFirst" class="graph-instructions">
+    CHING DILLY DING
+  </div>
   <mini-profile-view
     class="three columns"
   >
