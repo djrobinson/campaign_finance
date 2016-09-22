@@ -13,7 +13,7 @@
   </div>
 <div>
   <div *ngIf="isFirst" class="graph-instructions">
-    <div class="instructions-close" (click)="closeInstructions()">
+    <div class="instructions-close button" (click)="closeInstructions()">
       Got it!
     </div>
     <div class="row main-instructions-titles">
@@ -25,20 +25,20 @@
       </div>
     </div>
     <div class="row main-instructions">
-      <ul class="six columns">
+      <div class="six columns">
         <div class="graph-instruction-block">Green circles are individuals, while yellow/red circles represent committees</div>
         <div class="graph-instruction-block">The size of each circle represents the size of the transaction given to the connected circle</div>
         <div class="graph-instruction-block">The color of the committee circles indicates the size of that committee based on total money spent in the last 2 years</div>
         <div class="graph-instruction-block">
           Funds flow from outer nodes to inner nodes.
         </div>
-      </ul>
-      <ul class="six columns">
+      </div>
+      <div class="six columns">
         <div class="graph-instruction-block usage">Click each circle to look at a detailed donor profile for the individual/committee</div>
         <div class="graph-instruction-block usage">Hover over a node to see the donor name and transaction size in the preview box below</div>
         <div class="graph-instruction-block usage">The diagram can be dragged and zoomed for better visibility of names</div>
         <div class="graph-instruction-block usage">For presidential candidates, select “More Nodes” to double the number ofcommittees shown donating to the candidate’s campaign committee</div>
-      </ul>
+      </div>
     </div>
   </div>
   <mini-profile-view

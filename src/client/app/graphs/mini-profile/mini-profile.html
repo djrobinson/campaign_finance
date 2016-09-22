@@ -1,22 +1,19 @@
 <div class="title">
     <div class="profile-tooltip">
-      <div class="cmte-name">
+      <div class="four columns">
         {{cmte?.CMTE_NM  || cmte?.NAME}}
       </div>
-      <table>
+      <table class="four columns">
         <tr *ngIf="cmte?.graphtype === 'individual'">
           <td>Employer</td>
           <td>{{cmte?.EMPLOYER}}</td>
-        </tr>
-        <tr *ngIf="cmte?.graphtype === 'committee'" class="tran-link">
-          <td colspan="2" style="text-align: center;"><img src="images/fec.png" class="fec" (click)="openFec(cmte.IMAGE_NUM)" /></td>
-        </tr>
-        <tr class="tran-amount">
           <td>Transaction Amount:</td>
           <td>{{ parseFloat((cmte?.TRANSACTION_AMT) ? cmte?.TRANSACTION_AMT : 0.00) | currency:'USD':true}}</td>
         </tr>
-
       </table>
+      <div *ngIf="cmte?.graphtype === 'committee'" class="four columns">
+        <img src="images/fec.png" class="fec" (click)="openFec(cmte.IMAGE_NUM)" />
+      </div>
       <div class="instructions">
         <p>Click on a donor to see a more detailed profile</p>
       </div>
