@@ -478,10 +478,8 @@ export class TreemapComponent implements OnInit, OnChanges {
             d3.select('#tip-support').text(d.support);
             d3.select('#tip-purpose').text(d.purpose);
           })
-
         var parent = d3.selectAll('.parent');
         var child = d3.selectAll('.child');
-
         var backup = d3.select('#backup');
         backup
           .datum(d.parent)
@@ -490,12 +488,7 @@ export class TreemapComponent implements OnInit, OnChanges {
         grandparent
           .datum(d)
 
-
-        //   .text(name(d))
-
-
         function transition(d) {
-          console.log("Transition: D: ", ctrl.level);
           if (d){
             if (d._children === undefined) {
               console.log("No Transition?");

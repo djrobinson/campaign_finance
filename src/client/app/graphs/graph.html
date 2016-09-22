@@ -14,25 +14,34 @@
 <div>
   <div *ngIf="isFirst" class="graph-instructions">
     <div class="instructions-close" (click)="closeInstructions()">
-      Got it
+      Got it!
     </div>
-    - What is it
-    - Each circle represents a political action committee or individual
-    - The center circle represents the selected candidate’s campaign committee
-    - The links branching off each circle represent donations to that committee
-
-    - How to navigate it
-    - Click each circle to look at a detailed donor profile for the individual/committee
-    - Hover over a node to see the donor name and transaction size in the preview box
-    - The diagram can be dragged and zoomed for better visibility of names
-    - For presidential candidates, select “More Nodes” to double the number of committees shown donating to the candidate’s campaign committee
-    - How to interpret it
-    - Green circles are individuals, while yellow/red circles represent committees
-    - The size of each circle represents the size of the transaction given to the connected circle
-    - The color of the committee circles indicates the size of that committee based on total money spent in the last 2 years
+    <div class="row main-instructions-titles">
+      <div class="six columns title">
+        Explanation
+      </div>
+      <div class="six columns title">
+        Usage
+      </div>
+    </div>
+    <div class="row main-instructions">
+      <ul class="six columns">
+        <div class="graph-instruction-block">Green circles are individuals, while yellow/red circles represent committees</div>
+        <div class="graph-instruction-block">The size of each circle represents the size of the transaction given to the connected circle</div>
+        <div class="graph-instruction-block">The color of the committee circles indicates the size of that committee based on total money spent in the last 2 years</div>
+        <div class="graph-instruction-block">
+          Funds flow from outer nodes to inner nodes.
+        </div>
+      </ul>
+      <ul class="six columns">
+        <div class="graph-instruction-block usage">Click each circle to look at a detailed donor profile for the individual/committee</div>
+        <div class="graph-instruction-block usage">Hover over a node to see the donor name and transaction size in the preview box below</div>
+        <div class="graph-instruction-block usage">The diagram can be dragged and zoomed for better visibility of names</div>
+        <div class="graph-instruction-block usage">For presidential candidates, select “More Nodes” to double the number ofcommittees shown donating to the candidate’s campaign committee</div>
+      </ul>
+    </div>
   </div>
   <mini-profile-view
-    class="three columns"
   >
   </mini-profile-view>
 </div>
@@ -86,4 +95,79 @@
     (cmteEmit)="changeCmte($event)"
   >
   </congress-popup>
+
 </div>
+<svg height="40%" width="10%" class="instructions-1" *ngIf="!candPopup">
+  <g transform="translate(15, 20)">
+    <text dx="0" dy="1rem">Transaction Amount</text>
+  </g>
+
+  <g transform="translate(50, 90)">
+    <circle r="40" style="fill: #35978F">
+    </circle>
+    <text dx="0" dy="1rem">>$300K</text>
+  </g>
+  <g transform="translate(50, 160)">
+    <circle r="35" style="fill: #35978F">
+
+    </circle>
+    <text dx="0" dy="1rem">$300K</text>
+  </g>
+  <g transform="translate(50, 220)">
+    <circle r="30" style="fill: #35978F">
+
+    </circle>
+    <text dx="0" dy="1rem">$50K</text>
+  </g>
+  <g transform="translate(50, 270)">
+    <circle r="25" style="fill: #35978F">
+
+    </circle>
+    <text dx="0" dy="1rem">$10K</text>
+  </g>
+  <g transform="translate(50, 310)">
+    <circle r="20" style="fill: #35978F">
+    </circle>
+    <text dx="0" dy="1rem">$5K</text>
+  </g>
+  <g transform="translate(50, 340)">
+    <circle r="15" style="fill: #35978F">
+    </circle>
+    <text dx="0" dy="1rem"><$2,699</text>
+  </g>
+</svg>
+<svg height="40%" width="10%" class="instructions-2" *ngIf="!candPopup">
+  <g transform="translate(20, 20)">
+    <text dx="0" dy="1rem">Committee Size</text>
+  </g>
+  <g transform="translate(50, 75)">
+    <circle r="25" style="fill: #DB504A">
+    </circle>
+    <text dx="0" dy="1rem">$1M</text>
+  </g>
+  <g transform="translate(50, 125)">
+    <circle r="25" style="fill: #DB7F67">
+    </circle>
+    <text dx="0" dy="1rem">$500K</text>
+  </g>
+  <g transform="translate(50, 175)">
+    <circle r="25" style="fill: #EB9486">
+    </circle>
+    <text dx="0" dy="1rem">$100K</text>
+  </g>
+  <g transform="translate(50, 225)">
+    <circle r="25" style="fill: #F5C396">
+    </circle>
+    <text dx="0" dy="1rem">$50K</text>
+  </g>
+  <g transform="translate(50, 275)">
+    <circle r="25" style="fill: #F6F5AE">
+    </circle>
+    <text dx="0" dy="1rem"><$10K</text>
+  </g>
+  <g transform="translate(50, 325)">
+    <circle r="25" style="fill: #35978F">
+    </circle>
+    <text dx="0" dy="1rem">Individual</text>
+  </g>
+</svg>

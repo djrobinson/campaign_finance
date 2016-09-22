@@ -157,7 +157,7 @@ router.get('/aggregate/:cand_id', function(req, res, next){
             prev.amount += exp_amo;
             prev.children[currIndex].value += exp_amo;
             prev.children[currIndex].amount += exp_amo;
-            if (exp_amo > 10000){
+            if (exp_amo > 1000){
               prev.children[currIndex].children.push({
                 "support": curr.sup_opp,
                 "name": curr.pay,

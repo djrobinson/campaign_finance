@@ -32,8 +32,6 @@ module.exports = {
            .orderBy('exp_amo', 'desc')
            .limit(100)
            .offset(offset);
-
-           //
   },
   getSuppByCand: function(cand_id, offset){
     return knex('independent_expenditures')

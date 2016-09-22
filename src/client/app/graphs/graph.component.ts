@@ -11,7 +11,7 @@ import {BarComponent} from './charts/bar-chart.component';
 import {SpinnerComponent} from '../loading/spinner.component';
 import {Observable} from 'rxjs/Rx';
 import {Http, Response} from 'angular2/http';
-import { Router, RouteParams } from 'angular2/router';
+import {Router, RouteParams} from 'angular2/router';
 import {LocationStrategy} from  'angular2/router'
 
 @Component({

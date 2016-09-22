@@ -2,9 +2,6 @@
     <div class="profile-tooltip">
       <div class="cmte-name">
         {{cmte?.CMTE_NM  || cmte?.NAME}}
-      <span >
-
-      </span>
       </div>
       <table>
         <tr *ngIf="cmte?.graphtype === 'individual'">
@@ -23,83 +20,5 @@
       <div class="instructions">
         <p>Click on a donor to see a more detailed profile</p>
       </div>
-    </div>
-
-    <div class="legend">
-      <svg height="100%" width="40%">
-        <g transform="translate(15, 20)">
-          <text dx="0" dy="1rem">Transaction Amount</text>
-        </g>
-
-        <g transform="translate(50, 90)">
-          <circle r="40" style="fill: #35978F">
-          </circle>
-          <text dx="0" dy="1rem">>$300K</text>
-        </g>
-        <g transform="translate(50, 160)">
-          <circle r="35" style="fill: #35978F">
-
-          </circle>
-          <text dx="0" dy="1rem">$300K</text>
-        </g>
-        <g transform="translate(50, 220)">
-          <circle r="30" style="fill: #35978F">
-
-          </circle>
-          <text dx="0" dy="1rem">$50K</text>
-        </g>
-        <g transform="translate(50, 270)">
-          <circle r="25" style="fill: #35978F">
-
-          </circle>
-          <text dx="0" dy="1rem">$10K</text>
-        </g>
-        <g transform="translate(50, 310)">
-          <circle r="20" style="fill: #35978F">
-          </circle>
-          <text dx="0" dy="1rem">$5K</text>
-        </g>
-        <g transform="translate(50, 340)">
-          <circle r="15" style="fill: #35978F">
-          </circle>
-          <text dx="0" dy="1rem"><$2,699</text>
-        </g>
-      </svg>
-      <svg height="100%" width="40%">
-        <g transform="translate(20, 20)">
-          <text dx="0" dy="1rem">Committee Size</text>
-        </g>
-        <g transform="translate(50, 75)">
-          <circle r="25" style="fill: #DB504A">
-          </circle>
-          <text dx="0" dy="1rem">$1M</text>
-        </g>
-        <g transform="translate(50, 125)">
-          <circle r="25" style="fill: #DB7F67">
-          </circle>
-          <text dx="0" dy="1rem">$500K</text>
-        </g>
-        <g transform="translate(50, 175)">
-          <circle r="25" style="fill: #EB9486">
-          </circle>
-          <text dx="0" dy="1rem">$100K</text>
-        </g>
-        <g transform="translate(50, 225)">
-          <circle r="25" style="fill: #F5C396">
-          </circle>
-          <text dx="0" dy="1rem">$50K</text>
-        </g>
-        <g transform="translate(50, 275)">
-          <circle r="25" style="fill: #F6F5AE">
-          </circle>
-          <text dx="0" dy="1rem"><$10K</text>
-        </g>
-        <g transform="translate(50, 325)">
-          <circle r="25" style="fill: #35978F">
-          </circle>
-          <text dx="0" dy="1rem">Individual</text>
-        </g>
-      </svg>
-
     </div>
 </div>
