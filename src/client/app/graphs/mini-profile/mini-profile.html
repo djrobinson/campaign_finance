@@ -1,5 +1,4 @@
-<div *ngIf="cmte?.graphtype === 'candidate'" class="title">
-
+<div class="title">
       <div class="two columns">
         <div class="spacer">
         </div>
@@ -7,7 +6,7 @@
       <div *ngIf="cmte?.graphtype === 'individual'" class="three columns name">
         <h5>{{cmte?.NAME}}</h5>
       </div>
-      <div *ngIf="cmte?.graphtype === 'committee'" class="four columns name comm">
+      <div *ngIf="cmte?.graphtype === 'committee' || cmte?.graphtype === 'candidate'" class="four columns name comm">
         <p>{{cmte?.CMTE_NM}}</p>
       </div>
       <table *ngIf="cmte?.graphtype === 'individual'" class="two columns">
@@ -16,7 +15,7 @@
           <td>{{cmte?.EMPLOYER}}</td>
         </tr>
       </table>
-      <table class="two columns">
+      <table *ngIf="cmte?.graphtype !== 'candidate'" class="two columns">
         <tr>
           <td>Transaction Amount:</td>
           <td>{{ parseFloat((cmte?.TRANSACTION_AMT) ? cmte?.TRANSACTION_AMT : 0.00) | currency:'USD':true}}</td>
@@ -26,6 +25,6 @@
         <img src="images/fec.png" class="fec" (click)="openFec(cmte.IMAGE_NUM)" />
       </div>
       <div class="instructions two columns">
-        <p>Click on a donor to see a more detailed profile</p>
+        <p>Click on a node to see a more detailed donor profile</p>
       </div>
 </div>

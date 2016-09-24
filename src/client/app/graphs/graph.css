@@ -10,7 +10,7 @@ image {
 
 .test-button {
   position: fixed;
-  bottom: 20px;
+  bottom: 5vh;
   left: 20px;
   z-index: 3;
 }
@@ -63,7 +63,7 @@ inputs-view {
 }
 mini-profile-view {
   width: 100vw;
-  height: 10vh;
+  height: 15vh;
   position: fixed;
   bottom: 0;
 }
@@ -76,7 +76,7 @@ mini-profile-view {
 .instructions-1 {
   position: fixed;
   right: 0;
-  bottom: 10%;
+  bottom: 15%;
   background-color: rgba(255, 255, 255, .9);
   font-family: 'Oswald';
   font-weight: 300;
@@ -85,7 +85,7 @@ mini-profile-view {
 .instructions-2 {
   position: fixed;
   right: 0;
-  top: 10%;
+  top: 0%;
   background-color: rgba(255, 255, 255, .9);
   font-family: 'Oswald';
   font-weight: 300;
