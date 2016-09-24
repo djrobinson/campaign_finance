@@ -1,21 +1,31 @@
-<div class="title">
-    <div class="profile-tooltip">
-      <div class="four columns">
-        {{cmte?.CMTE_NM  || cmte?.NAME}}
+<div *ngIf="cmte?.graphtype === 'candidate'" class="title">
+
+      <div class="two columns">
+        <div class="spacer">
+        </div>
       </div>
-      <table class="four columns">
-        <tr *ngIf="cmte?.graphtype === 'individual'">
+      <div *ngIf="cmte?.graphtype === 'individual'" class="three columns name">
+        <h5>{{cmte?.NAME}}</h5>
+      </div>
+      <div *ngIf="cmte?.graphtype === 'committee'" class="four columns name comm">
+        <p>{{cmte?.CMTE_NM}}</p>
+      </div>
+      <table *ngIf="cmte?.graphtype === 'individual'" class="two columns">
+        <tr >
           <td>Employer</td>
           <td>{{cmte?.EMPLOYER}}</td>
+        </tr>
+      </table>
+      <table class="two columns">
+        <tr>
           <td>Transaction Amount:</td>
           <td>{{ parseFloat((cmte?.TRANSACTION_AMT) ? cmte?.TRANSACTION_AMT : 0.00) | currency:'USD':true}}</td>
         </tr>
       </table>
-      <div *ngIf="cmte?.graphtype === 'committee'" class="four columns">
+      <div *ngIf="cmte?.graphtype === 'committee'" class="two columns">
         <img src="images/fec.png" class="fec" (click)="openFec(cmte.IMAGE_NUM)" />
       </div>
-      <div class="instructions">
+      <div class="instructions two columns">
         <p>Click on a donor to see a more detailed profile</p>
       </div>
-    </div>
 </div>

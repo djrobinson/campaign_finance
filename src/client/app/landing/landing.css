@@ -105,8 +105,8 @@
   color:  #f2f2f2;
   -webkit-transition: background 1s ease, color 1s ease; /* Safari 3.1 to 6.0 */
   transition: background color 1s ease, color 1s ease;
-
 }
+
 
 .main-menu-sel:hover {
   background: #9DBF9E;
