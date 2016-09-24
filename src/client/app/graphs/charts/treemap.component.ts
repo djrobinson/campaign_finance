@@ -27,7 +27,7 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
             <div id="tip-purpose">
             </div>
             <div class="three columns tree-tip">
-                <div *ngIf="level !=='main'" class="button" id="backup">
+                <div *ngIf="level !== 'main'" class="button" id="backup">
                   Go Back
                 </div>
             </div>
@@ -481,14 +481,15 @@ export class TreemapComponent implements OnInit, OnChanges {
         var parent = d3.selectAll('.parent');
         var child = d3.selectAll('.child');
         var backup = d3.select('#backup');
+
+
         backup
           .datum(d.parent)
           .on("click", transition)
           .select("text")
-        grandparent
-          .datum(d)
 
         function transition(d) {
+          console.log("TRANSITION: ", d);
           if (d){
             if (d._children === undefined) {
               console.log("No Transition?");
@@ -502,7 +503,7 @@ export class TreemapComponent implements OnInit, OnChanges {
           }
 
           console.log(d.parent);
-          if (typeof d.parent === 'undefined'){
+          if (typeof d === 'grandparent'){
             ctrl.level = 'main';
           }
 
