@@ -21,7 +21,8 @@ import {Observable} from 'rxjs/Rx';
     .header p {
       size: 3rem;
       margin: 0 !important;
-      font-family: 'Prata', serif;
+      font-family: 'Oswald';
+      font-weight: 500;
       font-size: 1.5rem;
     }
 
@@ -153,7 +154,7 @@ export class TypePieComponent implements OnInit, OnChanges {
 
       var width = document.getElementById('chartType').offsetWidth;
       var height = document.getElementById('chartType').offsetHeight;
-      var radius = height / 2.5 ;
+      var radius = width / 3 ;
       var donutWidth = 50;
       var legendRectSize = 12;
       var legendSpacing = 2;

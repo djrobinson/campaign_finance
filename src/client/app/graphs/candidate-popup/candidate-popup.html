@@ -82,12 +82,16 @@
     <div class="innards">
 
       <div class="four columns pies">
-
+        <div class="welcome">
+          <h4>Committee Overview</h4>
+          <h3>{{primaryCmte?.CMTE_NM || candidate?.com_nam}}</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, sequi. Dolorum ea labore magnam voluptas laudantium nisi corrupti asperiores suscipit distinctio. Quae consectetur beatae, excepturi eligendi non ut at. Sed.</p>
+        </div>
         <size-pie [cmte]="committee"></size-pie>
 
         <type-pie></type-pie>
-
-        <dsgn-pie></dsgn-pie>
+<!--
+        <dsgn-pie></dsgn-pie> -->
       </div>
       <div class="eight columns outer-container">
         <div class="row twelve columns">
