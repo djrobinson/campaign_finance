@@ -64,8 +64,6 @@ export class CandidatesComponent implements OnInit {
                 if (exists) {
                   console.log(imageUrl);
                   item.profile_img = imageUrl;
-                } else {
-                  item.profile_img = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/placeholder.png';
                 }
               });
               if (item.PARTY_CODE === 'DEM'){
@@ -106,7 +104,9 @@ export class CandidatesComponent implements OnInit {
                  secondData => {
                    if (secondData[0].id){
                      item.profile_img = "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + secondData[0].id.bioguide + ".jpg";
-                   }
+                   } else {
+                      item.profile_img = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/placeholder.png';
+                }
                  },
                  err => console.log(err),
                  () => console.log("Image Call Complete")

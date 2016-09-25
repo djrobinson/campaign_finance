@@ -47,6 +47,8 @@ export class GraphComponent implements OnInit  {
   public size: string = 'small';
   public isPres: boolean;
   public isFirst: boolean;
+  public isDark: string;
+  public isShown: string;
   @ViewChild(MiniProfileComponent) miniProfileComponent: MiniProfileComponent;
 
   constructor(
@@ -61,6 +63,8 @@ export class GraphComponent implements OnInit  {
   }
 
   ngOnInit() {
+    this.isShown = "block";
+    this.isDark = 'rgba(0, 0, 0, .7)';
     this.isFirst = true;
     if (this.candidate_id[0] === 'S'){
       this.getSenateGraphData(this.candidate_id, this.size);
@@ -74,6 +78,13 @@ export class GraphComponent implements OnInit  {
     }
     this.absUrl = this.location.path();
     // setTimeout(this.closeInstructions.bind(this), 3000);
+  }
+
+
+  lightUpPage() {
+    console.log("Light up page!");
+    this.isDark = 'none';
+    setTimeout(function(){this.isShown = 'none';}.bind(this), 1000);
   }
 
   closeInstructions(){
@@ -153,7 +164,7 @@ export class GraphComponent implements OnInit  {
   }
 
   exitIndiv(){
-    this.indivPopup = false;
+    this.indivPopup = none;
   }
 
   public changeSize(){

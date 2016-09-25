@@ -59,7 +59,7 @@ export class BubbleComponent implements OnInit {
 
     d3.selectAll("#chart3 > *").remove();
 
-    var diameter = document.getElementById('chart3').offsetHeight,
+    var diameter = document.getElementById('chart3').offsetWidth,
       format = d3.format(",d"),
       color = d3.scale.category20c();
 

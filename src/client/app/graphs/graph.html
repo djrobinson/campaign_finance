@@ -1,9 +1,11 @@
 <spinner [isRunning]="isRequesting">
 </spinner>
 
+<div class="mega-bowl" [ngStyle]="{'background': isDark, 'display': isShown}">
+</div>
 <svg id="force" height="100vh" width="100vw">
 </svg>
-  <div *ngIf="isPres">
+  <div *ngIf="isPres && !candPopup">
     <div *ngIf="size==='small'" class="button test-button" (click)="changeSize()">
       More Nodes
     </div>
@@ -16,29 +18,21 @@
     <div class="instructions-close button" (click)="closeInstructions()">
       Got it!
     </div>
-    <div class="row main-instructions-titles">
-      <div class="six columns title">
-        Explanation
-      </div>
-      <div class="six columns title">
-        Usage
-      </div>
-    </div>
-    <div class="row main-instructions">
-      <div class="six columns">
-        <div class="graph-instruction-block">Green circles are individuals, while yellow/red circles represent committees</div>
-        <div class="graph-instruction-block">The size of each circle represents the size of the transaction given to the connected circle</div>
+    <div class="main-instructions" (mouseover)="lightUpPage()">
+<!--       <div class="heighter">
+ -->        <div class="graph-instruction-block"><div class="test">Green circles are individuals, while yellow/red circles represent committees</div></div>
+        <div class="graph-instruction-block"><p>The size of each circle represents the size of the transaction given to the connected circle</p></div>
         <div class="graph-instruction-block">The color of the committee circles indicates the size of that committee based on total money spent in the last 2 years</div>
         <div class="graph-instruction-block">
           Funds flow from outer nodes to inner nodes.
         </div>
-      </div>
-      <div class="six columns">
+     <!--  </div>
+      <div class="heighter"> -->
         <div class="graph-instruction-block usage">Click each circle to look at a detailed donor profile for the individual/committee</div>
         <div class="graph-instruction-block usage">Hover over a node to see the donor name and transaction size in the preview box below</div>
         <div class="graph-instruction-block usage">The diagram can be dragged and zoomed for better visibility of names</div>
         <div class="graph-instruction-block usage">For presidential candidates, select “More Nodes” to double the number ofcommittees shown donating to the candidate’s campaign committee</div>
-      </div>
+      <!-- </div> -->
     </div>
   </div>
   <mini-profile-view
@@ -98,7 +92,7 @@
   </congress-popup>
 
 </div>
-<svg height="40%" width="10%" class="instructions-1" *ngIf="!candPopup">
+<svg height="42.5%" width="10%" class="instructions-1" *ngIf="!candPopup">
   <g transform="translate(15, 20)">
     <text dx="0" dy="1rem">Transaction Amount</text>
   </g>
@@ -137,7 +131,7 @@
     <text dx="0" dy="1rem"><$2,699</text>
   </g>
 </svg>
-<svg height="40%" width="10%" class="instructions-2" *ngIf="!candPopup">
+<svg height="42.5%" width="10%" class="instructions-2" *ngIf="!candPopup">
   <g transform="translate(20, 20)">
     <text dx="0" dy="1rem">Committee Size</text>
   </g>
