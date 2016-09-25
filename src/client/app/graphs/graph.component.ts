@@ -164,7 +164,7 @@ export class GraphComponent implements OnInit  {
   }
 
   exitIndiv(){
-    this.indivPopup = none;
+    this.indivPopup = false;
   }
 
   public changeSize(){
