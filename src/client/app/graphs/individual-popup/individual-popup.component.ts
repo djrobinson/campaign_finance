@@ -17,7 +17,7 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   @Output() exitEmit = new EventEmitter();
   @ViewChild(IndividualListPopupComponent) individualListPopupComponent: IndividualListPopupComponent;
 
-  private individual: Observable<Object>;
+  private individual: any;
   private otherIndividuals: Observable<Object>;
   private dataStore: Observable<Object>;
   private showList: boolean=true;
@@ -36,6 +36,7 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    console.log("Indiv name: ", this.indivName);
     var internalList = this.individualListPopupComponent;
     console.log(this.individualTran);
     Observable.forkJoin(
@@ -44,8 +45,15 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
       data => {
         this.isRequesting = false;
         console.log("Here's the indiv data: ", data);
-        data[0][0].FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + data[0][0].IMAGE_NUM;
-        this.individual = data[0][0];
+        this.individual = data[0].filter(function(indiv){
+          console.log("filter: ", indiv, this.indivName);
+          if (indiv.NAME === this.indivName){
+            console.log("Worked");
+            indiv.FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + indiv.IMAGE_NUM;
+            return indiv;
+          };
+        }.bind(this))[0];
+        console.log("Indiv assign: ", this.individual);
       },
       err => console.error(err)
       );
