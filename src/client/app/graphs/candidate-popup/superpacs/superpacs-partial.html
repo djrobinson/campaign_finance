@@ -4,7 +4,7 @@
       Got It!
     </div>
         <div class="three columns instruction-block">The Super PAC expenditures treemap represents all funds spent by a given Super PAC</div>
-        <div class="three columns instruction-block">The overall size of the rectangle represents all funds spent by the committee. Each smaller rectangle represents the portion of funds that were given to just one recipient.</div>
+        <div class="three columns instruction-block">Each rectangle represents the portion of funds that were given to just one recipient.</div>
         <div class="three columns instruction-block">Clicking each rectangle will show a transaction by transaction breakout of each expense. Each level of granularity is explained in the instructions below.</div>
         <div class="three columns instruction-block">Hover over any square to see the preview in the toolbar above.  This will show a preview of the amount, recipient, and the purpose of the transaction.</div>
 <!--     <div class="column2">
@@ -16,11 +16,6 @@
       </ul>
     </div> -->
   </div>
-  <superpacs-list
-    *ngIf="showList"
-    [cand]="cand"
-  >
-  </superpacs-list>
-  <treemap *ngIf="!showList" route="{{route}}">
+  <treemap route="{{route}}">
   </treemap>
 </div>
