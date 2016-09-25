@@ -18,7 +18,7 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
   @ViewChild(IndividualListPopupComponent) individualListPopupComponent: IndividualListPopupComponent;
 
   private individual: any;
-  private otherIndividuals: Observable<Object>;
+  private otherIndividuals: any;
   private dataStore: Observable<Object>;
   private showList: boolean=true;
   private isSelected: boolean=false;
@@ -40,7 +40,8 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
     var internalList = this.individualListPopupComponent;
     console.log(this.individualTran);
     Observable.forkJoin(
-      this.http.get('/api/individuals/transaction/'+this.individualTran).map((res: Response) => res.json())
+      this.http.get('/api/individuals/transaction/'+this.individualTran).map((res: Response) => res.json()),
+      this.http.get('/api/individuals?donor=' + this.indivName).map((res: Response) => res.json())
     ).subscribe(
       data => {
         this.isRequesting = false;
@@ -53,7 +54,7 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
             return indiv;
           };
         }.bind(this))[0];
-        console.log("Indiv assign: ", this.individual);
+        this.otherIndividuals = data[1];
       },
       err => console.error(err)
       );
@@ -64,10 +65,12 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
     this.individualListPopupComponent.createList(data);
   }
 
-  changeIndiv(tranId){
-    console.log("Transaction ID from event ", tranId);
-    this.individualTran = tranId.transaction;
+  changeIndiv(event){
+    this.isRequesting = true;
+    console.log("Transaction ID from event ", event.transaction);
+    this.individualTran =  event.transaction;
     this.http.get('/api/individuals/transaction/' + this.individualTran).map(response => response.json()).subscribe(data => {
+      this.isRequesting = false;
       console.log("Transaction change indiv ", data);
       this.individual = data[0];
     }, error => console.log('Could not load transactions.'));

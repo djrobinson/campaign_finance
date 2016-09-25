@@ -8,19 +8,20 @@ import {Router} from 'angular2/router';
 @Component({
   selector: 'individual-popup-list',
   template: `
+
+    <spinner *ngIf="isRequesting" [isRunning]="isRequesting">
+    </spinner>
     <div class="title">
-      <p>Other Donations from Similar Names:</p>
+      <h5>Other Donations from Similar Names</h5>
     </div>
     <div class="indiv-list">
-      <div class="other-donations">
-        <spinner [isRunning]="isRequesting">
-        </spinner>
+
+
         <div *ngFor="#indiv of otherIndividuals?.data"
              class="row donor-tile">
           <div class="one-half column text-center">
-            <p>{{indiv?.NAME}}</p>
+            <h4>{{indiv?.NAME}}</h4>
             <p>{{indiv?.EMPLOYER}}</p>
-            <p>{{indiv?.OCCUPATION}}</p>
             <p>{{indiv?.CMTE_ID}}</p>
           </div>
           <div class="one-half column">
@@ -30,41 +31,63 @@ import {Router} from 'angular2/router';
             </div>
           </div>
         </div>
-      </div>
     </div>
   `,
   styles: [`
-    h1, h2, h3, h4, h5, p, td, th {
+    h1, h2, h3, h4, p, td, th {
       font-family: 'Oswald';
       font-weight: 300;
+    }
+
+    h4 {
+      font-family: 'Oswald';
+      font-weight: 500;
+      font-size: 1.5rem;
+      padding-top: 1rem;
+    }
+
+    .title h5 {
+      font-family: 'Oswald';
+      font-weight: 500;
     }
 
     .indiv-list {
       display: block
       width: 100%;
-      height: 90%;
-      font-family: 'Prata', serif;
+      height: 80%;
       text-align: center;
       overflow: scroll;
+      padding: 2rem;
+
+      border: solid 2px #75717B;
     }
 
-    .donor-tile:nth-child(2n+1) {
-      background-color: #9DBF9E;
+    spinner {
+      background-color: #FCFCFC;
+      padding-top: 47%;
+      position:absolute;
+      height: 72%;
+      width: 100%;
     }
 
     .fec {
       height: 2rem;
     }
 
-    .donor-tile:nth-child(2n) {
-      background-color: #f2f2f2;
+    .donor-tile {
+      border-bottom: solid 2px #f2f2f2;
     }
 
     .title {
+      padding-top: 2rem;
       display: block;
       height: 10%;
       width: 100%;
       text-align: center;
+    }
+    .title h5 {
+      font-weight: 500;
+
     }
     .button {
       font-family: 'Oswald';
@@ -82,7 +105,7 @@ import {Router} from 'angular2/router';
       border: 2px solid #9DBF9E;
       border-radius: 25px;
       box-sizing: border-box;;
-      width: 100%;
+      width: 80%;
     }
 
     .button:hover {
@@ -95,6 +118,8 @@ import {Router} from 'angular2/router';
 export class IndividualListPopupComponent implements OnInit {
   @Input() indivName: string;
   @Input() isMobile: boolean;
+  @Input() donationList: any;
+  @Output() tranEmit = new EventEmitter();
   public otherIndividuals: any;
   public isRequesting: boolean=true;
 
@@ -106,6 +131,10 @@ export class IndividualListPopupComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    // this.otherIndividuals.data = this.donationList;
+
+    console.log("Indiv Name at the start: ", this.indivName);
     Observable.forkJoin(
       this.http.get('/api/individuals?donor=' + this.indivName).map((res: Response) => res.json())
     ).subscribe(
@@ -121,7 +150,7 @@ export class IndividualListPopupComponent implements OnInit {
 
   changeTran(indiv, isMobile) {
       if (!isMobile){
-        this.changeIndiv.emit({
+        this.tranEmit.emit({
           transaction: indiv.TRAN_ID,
           name: indiv.NAME
         })

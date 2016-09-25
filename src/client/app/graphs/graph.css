@@ -180,12 +180,12 @@ outputs-view {
 }
 individual-popup {
   position: absolute;
-  width: 40%;
+  width: 60%;
   height: 70%;
-  top: 15%;
-  left: 30%;
-  border: solid 1px #75717B;
-  background-color: #FEFFFE;
+  top: 7.5%;
+  left: 15%;
+  border: solid 3px #75717B;
+  background-color: #FCFCFC;
   z-index: 5;
 }
 committee-popup {
