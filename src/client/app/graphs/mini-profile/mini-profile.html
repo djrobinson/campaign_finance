@@ -4,10 +4,10 @@
         </div>
       </div>
       <div *ngIf="cmte?.graphtype === 'individual'" class="three columns name">
-        <h5>{{cmte?.NAME}}</h5>
+        <h4>{{cmte?.NAME}}</h4>
       </div>
       <div *ngIf="cmte?.graphtype === 'committee' || cmte?.graphtype === 'candidate'" class="four columns name comm">
-        <p>{{cmte?.CMTE_NM}}</p>
+        <h4>{{cmte?.CMTE_NM}}</h4>
       </div>
       <table *ngIf="cmte?.graphtype === 'individual'" class="two columns">
         <tr >

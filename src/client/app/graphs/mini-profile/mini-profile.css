@@ -22,8 +22,7 @@
 }
 
 .name {
-  background: #73877B;
-  color: white;
+  color: #4d4d4d;
   height: 100%;
   font-weight: 500;
   display: -webkit-box;
@@ -35,6 +34,10 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
+}
+
+.name h4 {
+  font-weight: 500;
 }
 
 .fec {
