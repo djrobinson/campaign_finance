@@ -139,9 +139,6 @@ mini-profile-view {
   font-family: 'Oswald';
   font-weight: 300;
   display: inline-block;
-  text-align: center;
-  box-sizing: border-box;
-  min-height: 10em;
   display: table-cell;
   vertical-align: middle
   font-size: 1rem;

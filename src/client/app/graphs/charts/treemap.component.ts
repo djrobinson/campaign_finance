@@ -17,7 +17,6 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
               <br>
               <div class="twelve columns" id="tip-amount"><span>Amount</span></div>
             </div>
-
             <div class="three columns tree-tip">
               <span>Purpose</span>
               <div id="tip-purpose">

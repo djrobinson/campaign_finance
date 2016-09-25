@@ -18,6 +18,8 @@
   display: -webkit-flex;
   display: flex;
   box-sizing: border-box;
+  flex-direction: row;
+
 }
 
 .column2 {
@@ -56,12 +58,20 @@ superpacs-list {
 }
 
 .superpac-instructions {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  top: 15%;
-  left: 15%;
-  background: white;
-  height: 70%;
-  width: 70%;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  background: rgba(255, 255, 255, .5);
+  height: 40%;
+  width: 100%;
   z-index: 8;
   padding: 0;
   margin: 0;
@@ -109,15 +119,12 @@ superpacs-list {
   font-size: 2rem;
   font-family: 'Oswald';
   font-weight: 300;
-  height: 25%;
-  width: 100%;
+  height: 80%;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  border: solid 1px #75717B;
-  box-sizing: border-box;
+  flex-direction: row;
   margin: 0;
   font-weight: 300;
   color: white;
