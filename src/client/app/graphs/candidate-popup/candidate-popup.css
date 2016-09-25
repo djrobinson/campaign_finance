@@ -48,9 +48,8 @@ tr {
 
 .fec {
   margin: 0;
-  height:7rem;
-  width: 7rem;
-  padding-bottom: 2rem;
+  height:10rem;
+  width: 10rem;
 }
 
 .close-button {
@@ -236,9 +235,26 @@ td:nth-child(2n){
 
 .financials-header {
   position: absolute;
-  height: 10%;
   width: 50%;
   right: 0;
+  top: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  display: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-right: 5rem;
+  padding-left: 5rem;
+}
+
+.financials-header-left {
+  position: absolute;
+  width: 50%;
+  right: left;
   top: 0;
   display: -webkit-box;
   display: -moz-box;
@@ -258,11 +274,13 @@ td:nth-child(2n){
   font-weight: 500;
 }
 
+
+
 .full-financials {
   position: absolute;
   right: 0;
   bottom: 0;
-  height: 90%;
+  height: 95%;
   width: 50%;
   padding-right: 5rem;
   padding-left: 5rem;
@@ -297,6 +315,28 @@ td:nth-child(2n){
   box-sizing: border-box;
   height: 25%;
   width: 100%;
+}
+
+.highlight-title {
+  padding: 2rem;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  text-align: center;
+  box-sizing: border-box;
+  height: 10%;
+  width: 100%;
+
+}
+
+.highlight-title h5 {
+  font-family: 'Oswald';
+  font-weight: 500;
 }
 
 .highlight p {

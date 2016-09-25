@@ -64,7 +64,7 @@ export class GraphComponent implements OnInit  {
 
   ngOnInit() {
     this.isShown = "block";
-    this.isDark = 'rgba(0, 0, 0, .7)';
+    this.isDark = 'rgba(255, 255, 255, .5)';
     this.isFirst = true;
     if (this.candidate_id[0] === 'S'){
       this.getSenateGraphData(this.candidate_id, this.size);
@@ -292,6 +292,114 @@ export class GraphComponent implements OnInit  {
     this.miniProfileComponent.updateMiniProfile(d);
   }
 
+
+  showFlow() {
+    // for (var i = 0; i < 5; i++){
+      // setTimeout(function(){
+        d3.selectAll('.link')
+        .style("stroke-width", "4px")
+        .style("stroke", "aqua")
+        .style("stroke-dasharray", '100')
+        .style("animation", "dash 10s linear backwards")
+        .style("animation-direction", "reverse")
+        // }.bind(this), 1000)
+    // }
+
+
+  }
+
+  hideFlow(){
+      d3.selectAll('.link')
+        .style("stroke-width", "4px")
+        .style("stroke", "#DCDCDC")
+        .style("stroke-dasharray", 'none')
+        .style("animation", "none")
+        .style("animation-direction", "none")
+  }
+  showMoreButton(){
+    d3.selectAll('.test-button')
+      .style('background','aqua')
+  }
+  hideMoreButton(){
+    d3.selectAll('.test-button')
+      .style('background','white')
+  }
+  showPreview(){
+    d3.selectAll('mini-profile-view')
+      .style('box-sizing', 'border-box')
+      .style('border', 'solid 20px aqua')
+  }
+  hidePreview(){
+    d3.selectAll('mini-profile-view')
+      .style('box-sizing', 'border-box')
+      .style('border', 'none')
+  }
+  showExamplePopup(){
+    d3.selectAll('candidate-popup')
+      .style('border', 'solid 15px aqua')
+    d3.selectAll('.candidate')
+      .each(function(d){
+        this.candPopup = true;
+        this.isCand = true;
+        this.selectedNode = false;
+        this.selectedCandidate = d.CAND_ID;
+        this.selectedCommittee = d.OTHER_ID || d.CMTE_ID;
+      }.bind(this))
+  };
+
+  hideExamplePopup(){
+    this.candPopup = false;
+    this.isCand = false;
+  }
+
+  selectSizes() {
+    d3.selectAll('.instructions-1')
+      .style('background', 'aqua')
+  }
+
+  deselectSizes(){
+    d3.selectAll('.instructions-1')
+            .style('background', 'white')
+  }
+
+  showDrag(){
+     d3.selectAll('.candidate')
+       .each(function(d){
+
+       })
+  }
+
+  selectCategory() {
+    d3.selectAll('.instructions-2')
+      .style('box-sizing', 'border-box')
+      .style('background', 'aqua')
+    d3.selectAll('.committee')
+        .style('stroke', 'aqua')
+        .style('stroke-width', '6px')
+    d3.selectAll('text').style({ 'stroke-width': '1px'});
+  }
+
+  deselectCategory() {
+    d3.selectAll('.instructions-2')
+      .style('background', 'white')
+    d3.selectAll('.committee')
+    .style('stroke', '0')
+    .style('stroke-width', '0')
+  }
+
+  selectTypes() {
+    d3.selectAll('.individual')
+        .style('stroke', 'aqua')
+        .style('stroke-width', '6px')
+     d3.selectAll('text').style({ 'stroke-width': '1px'});
+  }
+
+  deselectTypes() {
+    d3.selectAll('.individual')
+          .style('stroke', '0')
+          .style('stroke-width', '0')
+  }
+
   setSelected(selected:string) {
     this.selectedNode = selected;
   }
@@ -389,18 +497,7 @@ export class GraphComponent implements OnInit  {
       img.src = url;
     }
 
-    svg.append("svg:defs").selectAll("marker")
-      .data(["end"])      // Different link/path types can be defined here
-    .enter().append("svg:marker")    // This section adds in the arrows
-      .attr("id", String)
-      .attr("viewBox", "0 -5 30 30")
-      .attr("refX", 15)
-      .attr("refY", -1.5)
-      .attr("markerWidth", 20)
-      .attr("markerHeight", 20)
-      .attr("orient", "auto")
-    .append("svg:path")
-      .attr("d", "M0,-5L10,0L0,5");
+
 
     svg.append('defs')
         .append('pattern')
@@ -464,6 +561,19 @@ export class GraphComponent implements OnInit  {
       .charge(-1000)
       .start();
 
+    svg.append("svg:defs").selectAll("marker")
+        .data(["end"])      // Different link/path types can be defined here
+      .enter().append("svg:marker")    // This section adds in the arrows
+        .attr("id", String)
+        .attr("viewBox", "0 -5 30 30")
+        .attr("refX", 15)
+        .attr("refY", -1.5)
+        .attr("markerWidth", 20)
+        .attr("markerHeight", 20)
+        .attr("orient", "auto")
+      .append("svg:path")
+        .attr("d", "M0,-5L10,0L0,5");
+
     var link = container.append("g")
       .selectAll(".link")
       .data(this.linkData)
@@ -473,14 +583,11 @@ export class GraphComponent implements OnInit  {
       .style("stroke", "#DCDCDC")
       .attr("marker-end", "url(#end)");
 
-
-
-
     var node = container.append("g")
       .selectAll(".node")
       .data(this.nodeData)
       .enter().append("g")
-      .attr("class", "node")
+      .attr("class", function(d){ return d.graphtype + " node" })
       .attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; })
       .call(drag)

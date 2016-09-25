@@ -29,27 +29,26 @@ image {
 
 .graph-instructions {
   position: fixed;
-  left: 5vw;
-  top: 15vh;
-  width: 80vw;
-  height: 50vh;
+  left: 2.5vw;
+  bottom: 15vh;
+  width: 85vw;
+  height: 40vh;
   z-index: 8;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 1000;
+  }
 }
 
 .instructions-close {
   position: absolute;
-  right: 25%;
+  right: 35%;
   bottom: 2rem;
   z-index: 9;
   font-size: 2rem;
-  width: 50% !important;
+  width: 30% !important;
 }
 
 .instructions-1 {
@@ -98,7 +97,6 @@ mini-profile-view {
 
 
 .usage {
-  font-weight: 500;
   color: white;
   background: #73877B;
 }
@@ -118,7 +116,7 @@ mini-profile-view {
   justify-content: center;
   position: relative;
   text-align: center;
-  height: 80%;
+  height: 100%;
   width: 100%;
   padding: 0 !important;
   margin: 0 !important;
@@ -136,7 +134,8 @@ mini-profile-view {
 .graph-instruction-block {
   padding: 2rem;
   margin: 0 !important;
-  height: 60%;
+  height: 55%;
+  width: 15%;
   font-family: 'Oswald';
   font-weight: 300;
   display: inline-block;
@@ -156,10 +155,10 @@ mini-profile-view {
   vertical-align: middle
   padding: 2rem;
   margin: 0 !important;
-  width: 50%;
+  width: 30%;
   height: 100%;
   font-family: 'Oswald';
-  font-weight: 500;
+  font-weight: 300;
   font-size: 2rem;
   background: #9DBF9E;
   color: #4d4d4d;

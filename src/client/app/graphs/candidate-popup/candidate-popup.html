@@ -95,7 +95,9 @@
         </div>
         <div class="row main-container twelve columns">
           <div class="highlight-column">
-            <img src="images/fec.png" class="fec" (click)="openFec()" />
+            <div class="highlight-title">
+                <h5>Financial Highlights</h5>
+            </div>
             <div class="highlight">
               <p>Cash</p>
               <p>{{parseFloat((candidate?.cas_on_han_clo_of_per) ? candidate?.cas_on_han_clo_of_per : 0.00 ) | currency:'USD':true}}</p>
@@ -112,15 +114,13 @@
               <p>Total Distributions</p>
               <p>{{parseFloat((candidate?.tot_dis) ? candidate?.tot_dis : 0.00)  | currency:'USD':true}}</p>
             </div>
+            <div class="highlight-title">
+                <h5>Reference Link</h5>
+            </div>
+            <img src="images/fec.png" class="fec" (click)="openFec()" />
           </div>
-          <div *ngIf="isCand" class="financials-header">
-            <h5>{{primaryCmte?.CMTE_NM}}</h5>
-          </div>
-          <div *ngIf="!isCand && !longName" class="financials-header">
-            <h5>{{candidate?.com_nam}}</h5>
-          </div>
-          <div *ngIf="!isCand && longName" class="financials-header">
-            <div class="longName">{{candidate?.com_nam}} </div>
+          <div class="financials-header">
+            <h5>Detailed Financial Statements</h5>
           </div>
           <div class="full-financials">
             <table>

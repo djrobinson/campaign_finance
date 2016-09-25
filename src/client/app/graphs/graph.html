@@ -15,24 +15,19 @@
   </div>
 <div>
   <div *ngIf="isFirst" class="graph-instructions">
-    <div class="instructions-close button" (click)="closeInstructions()">
-      Got it!
+    <div class="instructions-close button" (click)="closeInstructions()" (mouseover)="lightUpPage()">
+      Close Instructions
     </div>
-    <div class="main-instructions" (mouseover)="lightUpPage()">
-<!--       <div class="heighter">
- -->        <div class="graph-instruction-block"><div class="test">Green circles are individuals, while yellow/red circles represent committees</div></div>
-        <div class="graph-instruction-block"><p>The size of each circle represents the size of the transaction given to the connected circle</p></div>
-        <div class="graph-instruction-block">The color of the committee circles indicates the size of that committee based on total money spent in the last 2 years</div>
-        <div class="graph-instruction-block">
+    <div class="main-instructions">
+        <div class="graph-instruction-block usage" (mouseover)="showPreview()"  (mouseout)="hidePreview()">Hover over a node to see the donor name and transaction size in the preview box below</div>
+        <div class="graph-instruction-block usage" (mouseover)="showExamplePopup()"  (mouseout)="hideExamplePopup()">Click each circle to look at a detailed donor profile for the individual/committee</div>
+        <div class="graph-instruction-block usage" (mouseover)="showMoreButton()"  (mouseout)="hideMoreButton()">Select “More Nodes” to double the nodes branching off the presidential candidate</div>
+        <div class="graph-instruction-block" (mouseover)="showFlow()"  (mouseout)="hideFlow()">
           Funds flow from outer nodes to inner nodes.
         </div>
-     <!--  </div>
-      <div class="heighter"> -->
-        <div class="graph-instruction-block usage">Click each circle to look at a detailed donor profile for the individual/committee</div>
-        <div class="graph-instruction-block usage">Hover over a node to see the donor name and transaction size in the preview box below</div>
-        <div class="graph-instruction-block usage">The diagram can be dragged and zoomed for better visibility of names</div>
-        <div class="graph-instruction-block usage">Select “More Nodes” to double the nodes branching off the presidential candidate</div>
-      <!-- </div> -->
+        <div class="graph-instruction-block" (mouseover)="selectTypes()" (mouseout)="deselectTypes()">Green circlesrepresent individuals, while yellow/red circlesrepresent committees</div>
+        <div class="graph-instruction-block" (mouseover)="selectCategory()" (mouseout)="deselectCategory()">The yellow/red circles represent committees, with their shade based on overall contributions.</div>
+        <div class="graph-instruction-block" (mouseover)="selectSizes()" (mouseout)="deselectSizes()"><p>The size of each circle represents the size of the transaction given to the connected circle</p></div>
     </div>
   </div>
   <mini-profile-view
