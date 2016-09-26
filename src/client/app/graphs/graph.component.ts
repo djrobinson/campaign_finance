@@ -5,7 +5,7 @@ import {MiniProfileComponent} from './mini-profile/mini-profile.component.ts';
 import {IndividualPopupComponent} from './individual-popup/individual-popup.component.ts';
 import {CommitteePopupComponent} from './committee-popup/committee-popup.component.ts';
 import {CandidatePopupComponent} from './candidate-popup/candidate-popup.component.ts';
-import {TreemapComponent} from './charts/treemap.component.ts';
+import {TreemapComponent} from './charts/treemap/treemap.component.ts';
 import {BubbleComponent} from './charts/bubble-chart.component';
 import {BarComponent} from './charts/bar-chart.component';
 import {SpinnerComponent} from '../loading/spinner.component';

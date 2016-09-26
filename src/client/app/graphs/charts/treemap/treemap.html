@@ -1,0 +1,58 @@
+<div id="containerChart">
+
+          <div class="tip-top">
+            <div class="four columns tree-tip">
+              <span>Recipient</span>
+              <div id="tip-name">
+              </div>
+            </div>
+            <div class="two columns tree-tip">
+              <span>Amount/Type</span>
+              <div class="twelve columns" id="tip-support"></div>
+              <br>
+              <div class="twelve columns" id="tip-amount"><span>Amount</span></div>
+            </div>
+            <div class="three columns tree-tip">
+              <span>Purpose</span>
+              <div id="tip-purpose">
+              </div>
+            </div>
+
+            <div id="tip-purpose">
+            </div>
+            <div class="three columns tree-tip">
+                <div *ngIf="level !== 'main'" class="button" id="backup">
+                  Go Back
+                </div>
+            </div>
+
+          </div>
+        <div id="chart"></div>
+          <div *ngIf="level === 'main'" class="instruction-block">
+            <div class="four columns">
+              <h5>Expenditure by Recipient</h5>
+            </div>
+            <div class="eight columns">
+              <p>All blocks above represent the aggregate amount of money given to a specific recipient. Click on the block to analyze all transactions to the recipient.</p>
+            </div>
+          </div>
+          <div *ngIf="level === 'grandparent'" class="instruction-block">
+            <div class="four columns">
+              <h5>All Transactions to Recipient</h5>
+            </div>
+            <div class="eigth columns">
+              <p>All blocks above represent each transaction made to the selected recipient. Click the block to see further detail and link back to the FEC documentation</p>
+            </div>
+          </div>
+          <div *ngIf="level === 'parent'" class="instruction-block">
+            <div class="three columns">
+              <h5>Individual Transaction</h5>
+            </div>
+            <div class="six columns">
+              <h5>Click on the FEC icon to access the original filing.</h5>
+            </div>
+            <div class="three columns float-right">
+              <img src="images/fec.png" class="fec" (click)="openFec(lin_ima)" />
+            </div>
+          </div>
+      </div>

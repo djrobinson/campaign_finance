@@ -1,5 +1,5 @@
 import {Component, Input, Output, OnInit} from 'angular2/core';
-import {TreemapComponent} from '../../charts/treemap.component';
+import {TreemapComponent} from '../../charts/treemap/treemap.component';
 import {PacsListComponent} from './superpacs-list.component';
 import {NgClass} from '@angular/common';
 

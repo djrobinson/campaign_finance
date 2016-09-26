@@ -1,7 +1,7 @@
 import {Component, Input, Output, OnInit, OnChanges, EventEmitter} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
-import {TreemapComponent} from '../charts/treemap.component';
+import {TreemapComponent} from '../charts/treemap/treemap.component';
 import {BubbleComponent} from '../charts/bubble-chart.component';
 
 @Component({

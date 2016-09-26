@@ -1,7 +1,6 @@
   import {Component, Input, Output, OnInit, OnChanges, EventEmitter, ViewChild} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
-import {TreemapComponent} from '../charts/treemap.component';
 import {TypePieComponent} from '../charts/type-pie-chart.component';
 import {SizePieComponent} from '../charts/size-pie-chart.component';
 import {DsgnPieComponent} from '../charts/dsgn-pie-chart.component';
