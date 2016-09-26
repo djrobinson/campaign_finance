@@ -340,9 +340,12 @@ export class GraphComponent implements OnInit  {
       .style('background','white')
   }
   showPreview(){
+    d3.selectAll('mini-profile-view *')
+      .style('border', 'none')
     d3.selectAll('mini-profile-view')
       .style('box-sizing', 'border-box')
       .style('border', 'solid 20px aqua')
+
   }
   hidePreview(){
     d3.selectAll('mini-profile-view')
