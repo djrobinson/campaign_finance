@@ -259,6 +259,7 @@ export class GraphComponent implements OnInit  {
         var nodeData = this.nodeData;
         var onlyOne = 0;
         this.linkData = nodeData.reduce((prev, elem)=>{
+          console.log("Link Data: ", elem);
           if (elem.CAND_ID && onlyOne === 0){
             prev.push({ "source": elem.NODE, "target": 0, "value": 1 })
               return prev;
@@ -269,8 +270,8 @@ export class GraphComponent implements OnInit  {
                 return prev;
               } else if (elem.CMTE_ID === el.OTHER_ID){
                 return prev;
-              } else if (el.CMTE_ID === elem.OTHER_ID){
-                prev.push({ "source": elem.NODE, "target": i, "value": 2 })
+              } else if (el.CMTE_ID === elem.OTHER_ID && el.graphtype === 'committee'){
+                prev.push({ "source": elem.NODE, "target": i, "value": 3 })
                 return prev;
               }
             })
@@ -278,7 +279,7 @@ export class GraphComponent implements OnInit  {
           } else {
             nodeData.forEach((el, i) => {
               if (el.OTHER_ID === elem.CMTE_ID || el.CAND_ID && el.CMTE_ID === elem.CMTE_ID){
-                prev.push({ "source": elem.NODE, "target": i, "value": 3 })
+                prev.push({ "source": elem.NODE, "target": i, "value": 4 })
                 return prev;
               }
             })
@@ -297,6 +298,20 @@ export class GraphComponent implements OnInit  {
     // for (var i = 0; i < 5; i++){
       // setTimeout(function(){
         d3.selectAll('.link')
+        .filter(function(d){
+          console.log("Filtering Links: ", d);
+          return d.value === 3;
+        })
+        .style("stroke-width", "4px")
+        .style("stroke", "aqua")
+        .style("stroke-dasharray", '100')
+        .style("animation", "dash 10s linear backwards")
+
+        d3.selectAll('.link')
+        .filter(function(d){
+          console.log("Filtering Links: ", d);
+          return d.value !== 3;
+        })
         .style("stroke-width", "4px")
         .style("stroke", "aqua")
         .style("stroke-dasharray", '100')
