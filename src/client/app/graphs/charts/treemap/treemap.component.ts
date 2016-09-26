@@ -12,6 +12,7 @@ export class TreemapComponent implements OnInit, OnChanges {
   private lin_ima: string;
   public isRequesting: boolean=true;
   public isChrome: boolean;
+  public isFirst: boolean=true;
 
   constructor (){
     this.parseFloat = function(num) {

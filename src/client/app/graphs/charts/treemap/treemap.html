@@ -1,5 +1,14 @@
 <div id="containerChart">
 
+  <div *ngIf="isFirst" class="treemap-instructions">
+    <div class="close-instructions" (click)="closeInstructions()">
+      Got It!
+    </div>
+        <div class="three columns instruction-block-2">The Super PAC expenditures treemap represents all funds spent by a given Super PAC</div>
+        <div class="three columns instruction-block-2">Each rectangle represents the portion of funds that were given to just one recipient.</div>
+        <div class="three columns instruction-block-2">Clicking each rectangle will show a transaction by transaction breakout of each expense. Each level of granularity is explained in the instructions below.</div>
+        <div class="three columns instruction-block-2">Hover over any square to see the preview in the toolbar above.  This will show a preview of the amount, recipient, and the purpose of the transaction.</div>
+  </div>
           <div class="tip-top">
             <div class="four columns tree-tip">
               <span>Recipient</span>
