@@ -36,7 +36,38 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       width:70px;
     }
 
+    .logo {
+      position: fixed;
+      padding-top: 2rem;
+      padding-right: 1rem;
+      padding-left: 1rem;
+      margin: 0;
+      top: 2rem;
+      left: 2rem;
+      font-family: 'Prata', serif;
+      font-size: 1.5rem;
+      background: #73877B;
+      height: 10rem;
+      width: 10rem;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      text-align: center;
+      justify-content: center;
+      color: white;
+      border-radius: 50%;
+      z-index: 5;
+      letter-spacing: 1rem;
+    }
 
+    .logo:hover {
+      background: #9DBF9E;
+      color: #4d4d4d;
+    }
 
     #mobile-menu {
       display: flex;
@@ -50,26 +81,15 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
 
     #lines {
       position: fixed;
-      top: 2rem;
-      left: 2rem;
+      top: 5rem;
+      left: 5rem;
       z-index: 5;
-      border-bottom: 17px double #6C6F7D;
-      border-top: 6px solid #6C6F7D;
-      content:"";
+      font-family: 'Prata', serif;
+      font-size: 2rem;
       height: 5px;
       width:30px;
     }
-    #open-lines {
-      position: fixed;
-      top: 2rem;
-      left: 19%;
-      z-index: 5;
-      border-bottom: 17px double #6C6F7D;
-      border-top: 6px solid #6C6F7D;
-      content:"";
-      height: 5px;
-      width:30px;
-    }
+
     #menu {
       display: flex;
       position: fixed;
@@ -105,6 +125,10 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
   `],
   template: `
     <div *ngIf="!isMobile" class="app">
+      <div class="logo" (click)="home()">
+        <h3>CH</h3>
+      </div>
+
       <div *ngIf="sideMenu" id="menu">
         <div class="menu-option" (click)="home()"><h5>Home</h5></div>
         <div class="menu-option"><h5>About</h5></div>
