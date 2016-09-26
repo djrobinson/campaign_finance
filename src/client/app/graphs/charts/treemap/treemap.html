@@ -2,66 +2,66 @@
 
   <div *ngIf="isFirst" class="treemap-instructions">
     <div class="close-instructions" (click)="closeInstructions()">
-      Got It!
+      Got It
     </div>
-        <div class="three columns instruction-block-2">The Super PAC expenditures treemap represents all funds spent by a given Super PAC</div>
-        <div class="three columns instruction-block-2">Each rectangle represents the portion of funds that were given to just one recipient.</div>
-        <div class="three columns instruction-block-2">Clicking each rectangle will show a transaction by transaction breakout of each expense. Each level of granularity is explained in the instructions below.</div>
-        <div class="three columns instruction-block-2">Hover over any square to see the preview in the toolbar above.  This will show a preview of the amount, recipient, and the purpose of the transaction.</div>
+    <div class="three columns instruction-block-2" (mouseover)="overallSize()" (mouseout)="exitOverallsize()">The Super PAC expenditures treemap represents all funds spent by a given Super PAC</div>
+    <div class="three columns instruction-block-2" (mouseover)="showPortions()" (mouseout)="hidePortions()">Each rectangle represents the portion of funds that were given to just one recipient.</div>
+    <div class="three columns instruction-block-2" (mouseover)="selectExample()" (mouseout)="deselectExample()">Clicking each rectangle will show a transaction by transaction breakout of each expense. Each level of granularity is explained in the instructions below.</div>
+    <div class="three columns instruction-block-2" (mouseover)="selectTop()" (mouseout)="deselectTop()">Hover over any square to see the preview in the toolbar above.  This will show a preview of the amount, recipient, and the purpose of the transaction.</div>
   </div>
-          <div class="tip-top">
-            <div class="four columns tree-tip">
-              <span>Recipient</span>
-              <div id="tip-name">
-              </div>
-            </div>
-            <div class="two columns tree-tip">
-              <span>Amount/Type</span>
-              <div class="twelve columns" id="tip-support"></div>
-              <br>
-              <div class="twelve columns" id="tip-amount"><span>Amount</span></div>
-            </div>
-            <div class="three columns tree-tip">
-              <span>Purpose</span>
-              <div id="tip-purpose">
-              </div>
-            </div>
-
-            <div id="tip-purpose">
-            </div>
-            <div class="three columns tree-tip">
-                <div *ngIf="level !== 'main'" class="button" id="backup">
-                  Go Back
-                </div>
-            </div>
-
-          </div>
-        <div id="chart"></div>
-          <div *ngIf="level === 'main'" class="instruction-block">
-            <div class="four columns">
-              <h5>Expenditure by Recipient</h5>
-            </div>
-            <div class="eight columns">
-              <p>All blocks above represent the aggregate amount of money given to a specific recipient. Click on the block to analyze all transactions to the recipient.</p>
-            </div>
-          </div>
-          <div *ngIf="level === 'grandparent'" class="instruction-block">
-            <div class="four columns">
-              <h5>All Transactions to Recipient</h5>
-            </div>
-            <div class="eigth columns">
-              <p>All blocks above represent each transaction made to the selected recipient. Click the block to see further detail and link back to the FEC documentation</p>
-            </div>
-          </div>
-          <div *ngIf="level === 'parent'" class="instruction-block">
-            <div class="three columns">
-              <h5>Individual Transaction</h5>
-            </div>
-            <div class="six columns">
-              <h5>Click on the FEC icon to access the original filing.</h5>
-            </div>
-            <div class="three columns float-right">
-              <img src="images/fec.png" class="fec" (click)="openFec(lin_ima)" />
-            </div>
-          </div>
+  <div class="tip-top">
+    <div class="four columns tree-tip">
+      <span>Recipient</span>
+      <div id="tip-name">
       </div>
+    </div>
+    <div class="two columns tree-tip">
+      <span>Amount/Type</span>
+      <div class="twelve columns" id="tip-support"></div>
+      <br>
+      <div class="twelve columns" id="tip-amount"><span>Amount</span></div>
+    </div>
+    <div class="three columns tree-tip">
+      <span>Purpose</span>
+      <div id="tip-purpose">
+      </div>
+    </div>
+
+    <div id="tip-purpose">
+    </div>
+    <div class="three columns tree-tip">
+        <div *ngIf="level !== 'main'" class="button" id="backup">
+          Go Back
+        </div>
+    </div>
+
+  </div>
+  <div id="chart"></div>
+    <div *ngIf="level === 'main'" class="instruction-block">
+      <div class="four columns">
+        <h5>Expenditure by Recipient</h5>
+      </div>
+      <div class="eight columns">
+        <p>All blocks above represent the aggregate amount of money given to a specific recipient. Click on the block to analyze all transactions to the recipient.</p>
+      </div>
+    </div>
+    <div *ngIf="level === 'grandparent'" class="instruction-block">
+      <div class="four columns">
+        <h5>All Transactions to Recipient</h5>
+      </div>
+      <div class="eigth columns">
+        <p>All blocks above represent each transaction made to the selected recipient. Click the block to see further detail and link back to the FEC documentation</p>
+      </div>
+    </div>
+    <div *ngIf="level === 'parent'" class="instruction-block">
+      <div class="three columns">
+        <h5>Individual Transaction</h5>
+      </div>
+      <div class="six columns">
+        <h5>Click on the FEC icon to access the original filing.</h5>
+      </div>
+      <div class="three columns float-right">
+        <img src="images/fec.png" class="fec" (click)="openFec(lin_ima)" />
+      </div>
+    </div>
+</div>

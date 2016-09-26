@@ -31,6 +31,57 @@ export class TreemapComponent implements OnInit, OnChanges {
     this.buildTreeMap(route, ctrl);
   }
 
+  closeInstructions(){
+    this.isFirst = false;
+  }
+
+  overallSize(){
+    d3.select('#chart')
+      .style('margin', '0')
+      .style('border', 'solid 20px aqua')
+
+  }
+
+  exitOverallsize(){
+    d3.select('#chart')
+      .style('border', 'none')
+      .style('margin-left', '20px')
+      .style('margin-bottom', '20px')
+  }
+
+  showPortions(){
+    d3.selectAll('rect')
+      .style('stroke', 'aqua')
+      .style('stroke-width', '10px')
+  }
+
+  hidePortions(){
+    d3.selectAll('rect')
+      .style('stroke', 'none')
+      .style('stroke-width', 'none')
+  }
+
+  selectExample(){
+    d3.selectAll('.instruction-block')
+      .style('border', 'solid 15px aqua');
+  }
+
+  deselectExample(){
+    d3.selectAll('.instruction-block')
+      .style('border', 'none');
+  }
+
+  selectTop(){
+    d3.selectAll('.tip-top')
+      .style('border', 'solid 15px aqua')
+      .style('box-sizing', 'border-box')
+  }
+
+  deselectTop(){
+    d3.selectAll('.tip-top')
+      .style('border', 'none');
+  }
+
 
   buildTreeMap(route, ctrl) {
     var isChromium = window.chrome,

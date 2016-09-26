@@ -34,7 +34,6 @@
       text-align: center;
       position: relative;
       top: 40%;
-      background: rgba(255, 255, 255, .5);
       height: 40%;
       width: 100%;
       z-index: 8;
@@ -74,7 +73,7 @@
       bottom: 1rem;
       font-family: 'Oswald';
       font-weight: 500;
-      font-size: 2rem;
+      font-size: 1.6rem;
       color: #9DBF9E;
       z-index: 8;
       text-align: center;
@@ -139,9 +138,9 @@
 
     #chart {
       position: absolute;
-      width: 100%;
+      width: 95%;
       height: 80%;
-      right: 0;
+      left: 0;
       bottom: 10%;
     }
 
