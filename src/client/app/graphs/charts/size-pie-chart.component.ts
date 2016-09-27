@@ -10,7 +10,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
 
         <div class="header">
           <p>Donations by Size</p>
-           <div class="asterisk">Does not include unitemized individual contributions</div>
+           <div class="asterisk">Breaks out itemized donations by size of donation. Does not include unitemized individual contributions.</div>
         </div>
         <spinner [isRunning]="isRequestingPie">
         </spinner>
@@ -54,7 +54,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
       postion: absolute;
       bottom: 0;
       right: 0
-      font-size: 1rem;
+      font-size: 1.2rem;
     }
 
     #tooltip {
@@ -135,8 +135,8 @@ export class SizePieComponent implements OnInit, OnChanges {
 
       var width = document.getElementById('chart2').offsetWidth;
       var height = document.getElementById('chart2').offsetHeight;
-      var radius = width / 3;
-      var donutWidth = 50;
+      var radius = width / 3.5;
+      var donutWidth = 30;
       var legendRectSize = 12;
       var legendSpacing = 2;
 

@@ -6,7 +6,8 @@ import {Observable} from 'rxjs/Rx';
   selector: 'type-pie',
   template: `
         <div class="header">
-          <p>Donations by Committee Type</p>
+          <p>Donations Made by Committee Type</p>
+          <div class="asterisk">Displays donations to other committees categorized by type of committee</div>
         </div>
         <div id="tooltip" class="hidden">
             <p><span id="label"></span>
@@ -17,6 +18,12 @@ import {Observable} from 'rxjs/Rx';
         </div>
   `,
   styles: [`
+    .asterisk {
+      postion: absolute;
+      bottom: 0;
+      right: 0
+      font-size: 1.2rem;
+    }
 
     .header p {
       size: 3rem;
@@ -154,8 +161,8 @@ export class TypePieComponent implements OnInit, OnChanges {
 
       var width = document.getElementById('chartType').offsetWidth;
       var height = document.getElementById('chartType').offsetHeight;
-      var radius = width / 3 ;
-      var donutWidth = 50;
+      var radius = width / 3.5 ;
+      var donutWidth = 30;
       var legendRectSize = 12;
       var legendSpacing = 2;
 
