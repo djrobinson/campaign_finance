@@ -22,6 +22,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   @Input() candidate: any;
   @Input() committee: string;
   @Input() isCand: boolean;
+  @Input() popster: boolean;
   @Output() exitEmit = new EventEmitter();
   @Output() cmteEmit = new EventEmitter();
   @Output() changeIndiv = new EventEmitter();
@@ -56,6 +57,14 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(){
+
+      if (this.popster) {
+        d3.select(".cand-style")
+          .style('border', 'solid 10px aqua')
+      } else {
+        d3.select(".cand-style")
+          .style('border', 'none')
+      }
       console.log(this.typePieComponent);
       this.isRequesting = true;
       this.imageVar = {};

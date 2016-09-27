@@ -7,7 +7,6 @@ image {
   z-index: 20;
   margin-left: 200px;
 }
-
 .test-button {
   position: fixed;
   bottom: 5vh;
@@ -55,18 +54,22 @@ image {
   position: fixed;
   right: 0;
   bottom: 15%;
-  background-color: rgba(255, 255, 255, .9);
+  background-color: white;
   font-family: 'Oswald';
   font-weight: 300;
+  box-sizing: border-box;
+  border-left: solid 3px #4d4d4d;
 }
 
 .instructions-2 {
   position: fixed;
   right: 0;
   top: 0%;
-  background-color: rgba(255, 255, 255, .9);
+  background-color: white;
   font-family: 'Oswald';
   font-weight: 300;
+  box-sizing: border-box;
+  border-left: solid 3px #4d4d4d;
 }
 
 .tree-close {

@@ -49,6 +49,7 @@ export class GraphComponent implements OnInit  {
   public isFirst: boolean;
   public isDark: string;
   public isShown: string;
+  public popster: boolean = false;
   @ViewChild(MiniProfileComponent) miniProfileComponent: MiniProfileComponent;
 
   constructor(
@@ -351,14 +352,16 @@ export class GraphComponent implements OnInit  {
     d3.selectAll('mini-profile-view')
       .style('box-sizing', 'border-box')
       .style('border', 'none')
+    d3.selectAll('mini-profile-view')
+      .style('border', "solid 3px #4d4d4d")
   }
   showExamplePopup(){
-    d3.selectAll('candidate-popup')
-      .style('border', 'solid 15px aqua')
+
     d3.selectAll('.candidate')
       .each(function(d){
         this.candPopup = true;
         this.isCand = true;
+        this.popster = true;
         this.selectedNode = false;
         this.selectedCandidate = d.CAND_ID;
         this.selectedCommittee = d.OTHER_ID || d.CMTE_ID;
@@ -368,6 +371,7 @@ export class GraphComponent implements OnInit  {
   hideExamplePopup(){
     this.candPopup = false;
     this.isCand = false;
+    this.popster = false;
   }
 
   selectSizes() {
@@ -378,14 +382,9 @@ export class GraphComponent implements OnInit  {
   deselectSizes(){
     d3.selectAll('.instructions-1')
             .style('background', 'white')
+            .style('border-left', 'solid 3px #4d4d4d')
   }
 
-  showDrag(){
-     d3.selectAll('.candidate')
-       .each(function(d){
-
-       })
-  }
 
   selectCategory() {
     d3.selectAll('.instructions-2')
@@ -400,9 +399,11 @@ export class GraphComponent implements OnInit  {
   deselectCategory() {
     d3.selectAll('.instructions-2')
       .style('background', 'white')
+      .style('border-left', 'solid 3px #4d4d4d')
     d3.selectAll('.committee')
     .style('stroke', '0')
     .style('stroke-width', '0')
+
   }
 
   selectTypes() {

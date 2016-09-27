@@ -21,7 +21,7 @@
     <div class="main-instructions">
         <div class="graph-instruction-block usage" (mouseover)="showPreview()"  (mouseout)="hidePreview()">Hover over a node to see the donor name and transaction size in the preview box below</div>
         <div class="graph-instruction-block usage" (mouseover)="showExamplePopup()"  (mouseout)="hideExamplePopup()">Click each circle to look at a detailed donor profile for the individual/committee</div>
-        <div class="graph-instruction-block usage" (mouseover)="showMoreButton()"  (mouseout)="hideMoreButton()">Select “More Nodes” to double the nodes branching off the presidential candidate</div>
+        <div class="graph-instruction-block usage" (mouseover)="showMoreButton()"  (mouseout)="hideMoreButton()">Select “More Nodes” in the bottom-left to double the nodes branching off the presidential candidate</div>
         <div class="graph-instruction-block" (mouseover)="showFlow()"  (mouseout)="hideFlow()">
           Funds flow from outer nodes to inner nodes.
         </div>
@@ -66,8 +66,9 @@
     (bubbleEmit)="showBubble($event)">
   </committee-popup>
 </div>
-<div *ngIf="candPopup">
+<div *ngIf="candPopup" class="bordermeister">
   <candidate-popup
+    [popster]="popster"
     [isCand]="isCand"
     [candidate]="selectedCandidate"
     [committee]="selectedCommittee"
