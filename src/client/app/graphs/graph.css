@@ -181,7 +181,7 @@ outputs-view {
 individual-popup {
   position: absolute;
   width: 60%;
-  height: 85%;
+  height: 100%;
   top: 0%;
   left: 15%;
   border-left: solid 3px #75717B;
