@@ -1,5 +1,15 @@
 
 
+.movement-instructions {
+  font-family: 'Oswald';
+  font-size: 2rem;
+  font-weight: 500;
+  position: fixed;
+  bottom: 15.5%;
+  left: 2%;
+  color: black;
+}
+
 circle {
   z-index: 20;
 }
@@ -46,7 +56,7 @@ image {
   right: 35%;
   bottom: 2rem;
   z-index: 9;
-  font-size: 2rem;
+  font-size: 1.2rem;
   width: 30% !important;
 }
 
