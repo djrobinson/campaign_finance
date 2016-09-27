@@ -78,7 +78,7 @@ export class BubbleComponent implements OnInit {
       .style("position", "fixed")
       .style("z-index", "10")
       .style("visibility", "hidden")
-      .style("background-color", "white")
+      .style("background-color", "#FCFCFC")
       .style("padding", "8px")
       .style("border-radius", "10px")
       .style("font", "14px sans-serif")

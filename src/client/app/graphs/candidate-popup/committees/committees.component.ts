@@ -24,7 +24,7 @@ export class CommitteesSectionComponent implements OnInit {
 
   ngOnInit(){
     console.log(this.cmte);
-    this.http.get('/api/transfers/' + this.cmte + '/recipient').map(response => response.json()).subscribe(data => {
+    this.http.get('/api/transfers/' + this.cmte + '/contributor').map(response => response.json()).subscribe(data => {
       console.log(data);
       this.committees = data;
     }, error => console.log('Could not load committees.'));
