@@ -106,12 +106,8 @@
               <p>{{parseFloat((candidate?.cas_on_han_clo_of_per) ? candidate?.cas_on_han_clo_of_per : 0.00 ) | currency:'USD':true}}</p>
             </div>
             <div class="highlight">
-              <p>Donations from Individuals</p>
-              <p>{{parseFloat((candidate?.ind_con) ? candidate?.ind_con : 0.00) | currency:'USD':true}}</p>
-            </div>
-            <div class="highlight">
-              <p>Donations from PACs</p>
-              <p>{{parseFloat((candidate?.tra_fro_oth_aut_com) ? candidate?.tra_fro_oth_aut_com : 0.00) + parseFloat((candidate?.par_com_con) ? candidate?.par_com_con : 0.00) + parseFloat((candidate?.oth_com_con) ? candidate?.oth_com_con : 0.00)  | currency:'USD':true}}</p>
+              <p>Total Receipts</p>
+              <p>{{parseFloat((candidate?.tot_rec) ? candidate?.tot_rec : 0.00) | currency:'USD':true}}</p>
             </div>
             <div class="highlight">
               <p>Total Distributions</p>
