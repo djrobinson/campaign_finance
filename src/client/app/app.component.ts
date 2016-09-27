@@ -61,7 +61,6 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       color: white;
       border-radius: 50%;
       z-index: 5;
-      letter-spacing: 1rem;
     }
 
     .logo:hover {
@@ -126,7 +125,7 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
   template: `
     <div *ngIf="!isMobile" class="app">
       <div class="logo" (click)="home()">
-        <h3>CH</h3>
+        <p>Citizens Hub</p>
       </div>
 
       <div *ngIf="sideMenu" id="menu">

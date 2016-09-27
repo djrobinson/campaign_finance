@@ -64,9 +64,9 @@ import {Router} from 'angular2/router';
 
     spinner {
       background-color: #FCFCFC;
-      padding-top: 47%;
+      padding-top: 58%;
       position:absolute;
-      height: 72%;
+      height: 77%;
       width: 100%;
     }
 

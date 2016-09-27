@@ -1,13 +1,14 @@
 .indiv {
   position: absolute;
   text-align: center;
-  height: 90%;
-  width: 50%;
+  height: 85%;
+  width: 45%;
   font-family: 'Oswald';
   font-weight: 300;
-  bottom: 0;
-  left: 0;
+  top: 2.5%;
+  left: 2.5%;
   background-color: #FCFCFC;
+  font-size: 1.4rem;
 }
 
 .indiv h5, h3 {
@@ -20,6 +21,7 @@ individual-popup-list {
   width: 45%;
   bottom: 2.5%;
   right: 2.5%;
+  margin-left: 2rem;
 }
 
 table {

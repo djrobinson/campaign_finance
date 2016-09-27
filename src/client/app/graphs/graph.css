@@ -181,10 +181,11 @@ outputs-view {
 individual-popup {
   position: absolute;
   width: 60%;
-  height: 70%;
-  top: 7.5%;
+  height: 85%;
+  top: 0%;
   left: 15%;
-  border: solid 3px #75717B;
+  border-left: solid 3px #75717B;
+  border-right: solid 3px #75717B;
   background-color: #FCFCFC;
   z-index: 5;
 }

@@ -6,6 +6,7 @@
   </spinner>
   <div class="indiv" *ngIf="  !isRequesting">
     <h5>Individual Donation Summary</h5>
+    <p>The individual information listed below represents a single transaction from an individual to a committee. To see more detailed information about the individual and the transaction itself, click on the FEC Link below. To launch a Google search of the individual's name and employer in a new tab, click either of the search buttons below.  The table on the right includes a search of the Citizens Hub database for other donations made by individuals of a similar name.</p>
     <h3>{{individual?.NAME}}</h3>
     <h5>Donation
     Size: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}} </h5>

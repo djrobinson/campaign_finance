@@ -49,7 +49,6 @@ export class CandidatesComponent implements OnInit {
           if (this.type === 'P'){
             this.headerType = 'Presidential';
             var finalData = data.map((item) => {
-              // var currImg = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + item.CANDIDATE_ID + '.jpg';
 
               function imageExists(url, callback) {
                 var img = new Image();
@@ -58,7 +57,6 @@ export class CandidatesComponent implements OnInit {
                 img.src = url;
               }
 
-              // Sample usage
               var imageUrl = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + item.CANDIDATE_ID + '.jpg';
               imageExists(imageUrl, function(exists) {
                 if (exists) {
@@ -112,7 +110,6 @@ export class CandidatesComponent implements OnInit {
                  () => console.log("Image Call Complete")
                 )
               })
-              console.log("Final Data ", finalData);
           }
 
           this.candidates = data
@@ -128,7 +125,6 @@ export class CandidatesComponent implements OnInit {
   }
 
   public buildGraph(candidate_id): void {
-    console.log("inbound");
     this.router.navigate(['Graphs', { id: candidate_id }]);
   }
 
@@ -143,7 +139,6 @@ export class CandidatesComponent implements OnInit {
   public setState(state)
   {
     console.log(this.candidates);
-    console.log("Saver ", this.candidatesView);
     this.filterByState(state);
     this.filterByState(state);
   }
