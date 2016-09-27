@@ -7,7 +7,7 @@ import {Component, OnInit} from 'angular2/core';
 
       <h1>About this Project</h1>
       <div class="about-container">
-        <p>Citizens Hub is part of a personal project I began to visualize how funds exchange hands in our government. It is a compilation of public financial data from several different sources that creates donor maps for each candidate or committee. The aim is to make it easier to understand the big picture of how campaign finance works. I'm still in the process of completing the project, so feel free to send any usability suggestions to</p>
+        <p>Citizens Hub is part of a broader data project I began to visualize how funds exchange hands in our government. It is a compilation of public financial data from several different sources that creates donor maps for a candidate. The aim is to make it easier to understand the big picture of how campaign finance works. I'm still working on the project, so feel free to send any usability suggestions to danny@citizenshub.org.</p>
       </div>
     </div>
   `,
