@@ -63,7 +63,7 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
           .style('border', 'solid 10px aqua')
       } else {
         d3.select(".cand-style")
-          .style('border', 'none')
+          .style('border', 'solid 3px #4d4d4d')
       }
       console.log(this.typePieComponent);
       this.isRequesting = true;
