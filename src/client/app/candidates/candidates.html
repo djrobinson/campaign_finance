@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="eight columns instructions">
-        The candidates listed below are all candidates who have both registered with the FEC as candidates and have reported any funds being raised in the current 2-year election cycle. The candidates are sorted by total money raised (total contributions). You can filter by name or state using the text field and the drop down, and reset the list by clicking sort by contributions. Select a candidate to generate a donor map and begin exploring.
+        The candidates listed below are all candidates who have both registered with the FEC as candidates and have reported any funds being raised in the current 2-year election cycle. The candidates are sorted by total money raised (total receipts). You can filter by name or state using the text field and the drop down, and reset the list by clicking sort by receipts. Select a candidate to generate a donor map and begin exploring.
       </div>
       <div class="two columns">
         <div class="spacer">
@@ -20,7 +20,7 @@
       <div class="one columns">
       </div>
       <div class="option three columns" (click)="sortCandidates()">
-        Sort by Contributions
+        Sort by Receipts
       </div>
       <div class="option four columns search-box">
           <tr>
@@ -65,7 +65,7 @@
               </div>
           </div>
           <div class="row profile-header">
-              <h4>Total Contributions: {{parseFloat(candidate.tot_con) | currency:'USD':true}}</h4>
+              <h4>Total Receipts: {{parseFloat(candidate.tot_rec) | currency:'USD':true}}</h4>
               <h5>{{candidate.can_nam}}</h5>
               <p>{{candidate.PARTY}}<img src="images/fec.png" class="fec" (click)="openFec(candidate.lin_ima)" /></p>
           </div>
