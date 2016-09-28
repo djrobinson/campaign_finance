@@ -9,7 +9,7 @@ import {SpinnerComponent} from '../../loading/spinner.component';
 
 
         <div class="header">
-          <p>Donations by Size</p>
+          <p>Individual Contributions by Size</p>
            <div class="asterisk">Breaks out itemized donations by size of donation. Does not include unitemized individual contributions.</div>
         </div>
         <spinner [isRunning]="isRequestingPie">
