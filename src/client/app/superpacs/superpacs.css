@@ -1,0 +1,350 @@
+.list * {
+  box-sizing: border-box !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.spacer {
+  position: absolute;
+  height: 10%;
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+.white {
+  background: white;
+}
+
+
+
+.toolbar {
+  position: fixed;
+  width: 100%;
+  height: 12%;
+  top: 0px;
+  z-index: 4;
+  text-align: center;
+  padding-top: 2rem;
+  background: white;
+}
+
+h4 {
+  color:  #73877B;
+  font-family: 'Oswald';
+  font-weight: 500;
+}
+
+.instructions {
+  padding-bottom: 2rem;
+  background: white;
+  font-size: 1.5rem;
+}
+
+.toolbar-stuff {
+  width: 100%;
+    display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  padding-bottom: 2rem;
+  border-bottom: solid 1px black;
+  background: white;
+}
+
+.search-box {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-box tr {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Oswald';
+  font-weight: 500;
+  border: none;
+}
+
+input {
+  margin-top: 1rem;
+}
+
+table {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+td {
+  border: none;
+    display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  margin: 0;
+}
+
+
+
+
+
+
+
+.option {
+  height: 8rem;
+  border: solid 2px #73877B;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+    display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Oswald';
+  font-weight: 500;
+  font-size: 2rem;
+  color:  #4d4d4d;
+  background: white;
+  -webkit-transition: background 1s ease, color 1s ease; /* Safari 3.1 to 6.0 */
+  transition: background color 1s ease, color 1s ease;
+}
+
+.option:hover {
+  background: #9DBF9E;
+}
+
+
+button {
+  width: 100%;
+}
+table {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+h5 {
+  font-size: 2rem;
+}
+
+
+
+
+.text-center {
+  text-align: center;
+}
+.totals {
+    display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  justify-content: center;
+}
+
+.totals-box {
+  margin-top: 50px;
+    display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.first {
+  background: #5A83BF;
+}
+
+.second {
+  background: #47a4b4;
+}
+
+.third {
+  background: #e49e95;
+}
+
+.candidates-container {
+
+  bottom: 0;
+  font-family: 'Oswald';
+  font-weight: 300;
+}
+
+.fec {
+  height: 4rem;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.profile-img {
+  height: 15rem;
+  margin-bottom: 0;
+  border-radius: 50%;
+  padding-bottom: 0;
+  border: solid 3px black;
+  box-sizing: border-box;
+  margin-top: 2rem;
+
+}
+
+.basic-info {
+  text-align: center;
+  padding: 4rem;
+}
+
+.profile-header {
+  align-items: center;
+  padding: 1rem;
+}
+
+
+.select-options {
+  text-align: left;
+  margin: 2rem 0 2rem 10%;
+  clear: both;
+}
+
+.select-option h5 {
+  padding: 0;
+  margin: 0;
+}
+
+.button {
+  font-family: 'Prata', serif;
+  background-color: #73877B; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 2px solid #9DBF9E;
+  border-radius: 25px;
+  box-sizing: border-box;
+}
+
+.button-top {
+  width: 20%;
+}
+
+.button:hover {
+    background-color: #9DBF9E;
+}
+
+.button:hover > .list-container {
+  display: block;
+}
+
+.dropdown:hover > .list-container {
+  display: block;
+}
+
+.list-container {
+  top: 2rem;
+  position: relative;
+  width: 100%;
+  display: none;
+}
+
+
+.dropdown-list {
+  position: absolute;
+  height: 1000px;
+  overflow: scroll;
+  background: white;
+  border-left: solid #9DBF93 2px;
+  width: 100%;
+  z-index: 40;
+
+}
+
+.candidates-container {
+  position: absolute;
+  height: 80%;
+  width: 100%;
+  bottom: 0;
+}
+
+.list {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: 90%;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.list-item {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.candidate-profile {
+  position: relative;
+  width: 100%;
+}
+
+.image-container {
+  height: 100%;
+    display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}

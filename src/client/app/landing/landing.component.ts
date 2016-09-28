@@ -49,6 +49,11 @@ export class Landing implements OnInit {
     this.router.navigate(['Funding']);
   }
 
+  public superpacs(): void {
+    console.log("Home");
+    this.router.navigate(['Superpacs']);
+  }
+
   public candPath(typeVar): void {
     console.log("inbound");
     this.router.navigate(['Candidates', { type: typeVar } ]);

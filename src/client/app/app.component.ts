@@ -10,6 +10,7 @@ import {RouteParams} from 'angular2/router';
 import {AboutComponent} from './about.component';
 import {MethodsComponent} from './methods.component';
 import {FundingComponent} from './funding.component';
+import {SuperpacsComponent} from './superpacs/superpacs.component';
 import {FundingTest} from './funding.test';
 import {MobileCandidatesComponent} from './mobile-candidates/mobile-candidates.component'
 import {MobileCandidatePopupComponent} from './graphs/mobile-popups/mobile-candidate/mobile-candidate.component'
@@ -182,6 +183,11 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
     path: '/candidates/:type',
     as: 'Candidates',
     component: CandidatesComponent
+  },
+  {
+    path: '/superpacs',
+    as: 'Superpacs',
+    component: SuperpacsComponent
   },
   {
     path: '/',
