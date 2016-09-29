@@ -49,25 +49,19 @@
   </div>
   <div class="row candidates-container">
     <ul class="list twelve columns">
-      <li *ngFor="#candidate of candidatesView | nameFilter:name" class="list-item four columns" [style.border]="candidate.tile_color">
+      <li *ngFor="#candidate of candidatesView" class="list-item four columns" [style.border]="candidate.tile_color">
         <div class="candidate-profile three columns">
-
-          <div class="row">
-            <div class="twelve columns">
-                <img [src]="candidate.profile_img" onerror="this.src='https://s3-us-west-2.amazonaws.com/campaign-finance-app/placeholder.png'" class="profile-img">
-            </div>
-          </div>
           <div class="row">
             <div class="button"
-                    (click)="buildGraph(candidate.CANDIDATE_ID)"
+                    (click)="buildSuperGraph(candidate.CMTE_ID)"
                   >
                     Donor Graph
               </div>
           </div>
           <div class="row profile-header">
               <h4>Total Receipts: {{parseFloat(candidate.tot_rec) | currency:'USD':true}}</h4>
-              <h5>{{candidate.can_nam}}</h5>
-              <p>{{candidate.PARTY}}<img src="images/fec.png" class="fec" (click)="openFec(candidate.lin_ima)" /></p>
+              <h5>{{candidate.CMTE_NM}}</h5>
+              <img src="images/fec.png" class="fec" (click)="openFec(candidate.lin_ima)" />
           </div>
         </div>
       </li>

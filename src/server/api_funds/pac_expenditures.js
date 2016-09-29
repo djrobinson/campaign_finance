@@ -24,6 +24,12 @@ router.get('/', function(req, res, next){
   }
 });
 
+router.get('/superpacs/list', function(req, res, next){
+  query.getSuperpacs().then(function(data){
+    res.json(data);
+  })
+})
+
 router.get('/:cand_id/candidate', function(req, res, next){
   if (req.query.offset){
     var offset = +req.query.offset * 100;
