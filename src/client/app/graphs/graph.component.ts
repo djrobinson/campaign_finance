@@ -87,18 +87,15 @@ export class GraphComponent implements OnInit  {
 
 
   lightUpPage() {
-    console.log("Light up page!");
     this.isDark = 'none';
     setTimeout(function(){this.isShown = 'none';}.bind(this), 1000);
   }
 
   closeInstructions(){
-    console.log("Assurance");
     this.isFirst = false;
   }
 
   showIndivPopup(event){
-    console.log("Graph level event : ", event);
     this.indivName = event.name;
     this.indivPopup = true;
     this.individualTran = event.tranId;
@@ -161,7 +158,6 @@ export class GraphComponent implements OnInit  {
   }
 
   exit(){
-    console.log("Exit called ");
     this.indivPopup = false;
     this.selectedNode = false;
     this.cmtePopup = false;
@@ -212,7 +208,6 @@ export class GraphComponent implements OnInit  {
       this.http.get('api/graph/senate/' + candId + '/' + size).map((res: Response) => res.json())
     ).subscribe(
       data => {
-        console.log(data);
         this.candidate = data[0];
         this.bioguideId = data[1];
         this.graphInit(data[2]);
@@ -228,7 +223,6 @@ export class GraphComponent implements OnInit  {
       this.http.get('api/graph/house/' + candId + '/' + size).map((res: Response) => res.json())
     ).subscribe(
       data => {
-        console.log(data);
         this.candidate = data[0];
         this.bioguideId = data[1];
         this.graphInit(data[2]);
@@ -242,7 +236,6 @@ export class GraphComponent implements OnInit  {
       this.http.get('api/graph/'+cmte_id+'/superpac').map((res: Response) => res.json())
     ).subscribe(
       data => {
-        console.log("Superpac Data: ",data);
         this.candidate = {};
         this.candidate.data = data[0];
         this.graphInit(this.candidate);
@@ -262,7 +255,6 @@ export class GraphComponent implements OnInit  {
         var candArr = result.filter((elem)=>{
           return (elem.CMTE_DSGN === 'P' || elem.CMTE_ID === this.candidate_id);
         });
-        console.log("candArr", this.candidate);
         candArr[0].CANDIDATE = this.candidate_id;
         candArr[0].CAND_ID = this.candidate_id;
         candArr[0].data = {};
@@ -314,32 +306,25 @@ export class GraphComponent implements OnInit  {
 
 
   showFlow() {
-    // for (var i = 0; i < 5; i++){
-      // setTimeout(function(){
-        d3.selectAll('.link')
-        .filter(function(d){
-          console.log("Filtering Links: ", d);
-          return d.value === 3;
-        })
-        .style("stroke-width", "4px")
-        .style("stroke", "aqua")
-        .style("stroke-dasharray", '100')
-        .style("animation", "dash 10s linear backwards")
 
-        d3.selectAll('.link')
-        .filter(function(d){
-          console.log("Filtering Links: ", d);
-          return d.value !== 3;
-        })
-        .style("stroke-width", "4px")
-        .style("stroke", "aqua")
-        .style("stroke-dasharray", '100')
-        .style("animation", "dash 10s linear backwards")
-        .style("animation-direction", "reverse")
-        // }.bind(this), 1000)
-    // }
+    d3.selectAll('.link')
+    .filter(function(d){
+      return d.value === 3;
+    })
+    .style("stroke-width", "4px")
+    .style("stroke", "aqua")
+    .style("stroke-dasharray", '100')
+    .style("animation", "dash 10s linear backwards")
 
-
+    d3.selectAll('.link')
+    .filter(function(d){
+      return d.value !== 3;
+    })
+    .style("stroke-width", "4px")
+    .style("stroke", "aqua")
+    .style("stroke-dasharray", '100')
+    .style("animation", "dash 10s linear backwards")
+    .style("animation-direction", "reverse")
   }
 
   hideFlow(){
