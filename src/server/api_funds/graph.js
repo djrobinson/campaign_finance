@@ -18,7 +18,6 @@ router.get('/test/:cmte_id/:size', function(req, res, next){
   Graph.findOne({id: req.params.cmte_id, size: req.params.size}, function(err, data){
     console.log(err,data);
     if (err) handleError(err);
-    console.log(data);
     res.json(data);
   });
 });
@@ -27,7 +26,6 @@ router.get('/senate/:cmte_id/:size', function(req, res, next){
   Senate.findOne({id: req.params.cmte_id, size: req.params.size}, function(err, data){
     console.log(err,data);
     if (err) handleError(err);
-    console.log(data);
     res.json(data);
   });
 });
@@ -36,7 +34,6 @@ router.get('/house/:cmte_id/:size', function(req, res, next){
   House.findOne({id: req.params.cmte_id, size: req.params.size}, function(err, data){
     console.log(err,data);
     if (err) handleError(err);
-    console.log(data);
     res.json(data);
   });
 });
@@ -69,7 +66,7 @@ var appender = function(parArr, subArr){
   });
 };
 
-var typeMap = function(arr){
+var typeMap = function(arr, cmte_id){
   arr.forEach(function(item){
     if (item.CMTE_DSGN === 'P'){
       item.graphtype = "candidate";
@@ -81,6 +78,7 @@ var typeMap = function(arr){
       item.graphtype = "committee";
     }
   });
+  console.log("Is this the holdup? ", arr);
   return arr;
 };
 
@@ -138,7 +136,7 @@ router.get('/:cand_id/candidate', function(req, res, next){
       var uniqCmte  = _.uniqBy(cmtes, 'CMTE_NM');
       //Here I'm making sure every name is unique.
       var result = uniqIndiv.concat(uniqCmte);
-      console.log(result);
+      console.log("result");
       result = typeMap(result);
       res.json(result);
       // //Original
@@ -155,40 +153,40 @@ router.get('/:cand_id/candidate', function(req, res, next){
   });
 });
 
-router.get('/:cand_id/superpac', function(req, res, next){
+router.get('/:cmte_id/superpac', function(req, res, next){
   var indexer = 0;
   var final = [];
-  cmte.getGraphAsc(req.params.cand_id)
+  cmte.getGraphAsc(req.params.cmte_id)
     .then(function(first){
-      console.log("First", first);
+      console.log("First");
       //this function will need to then call the committee info page
     callAsc(first)
     .then(function(second){
-      console.log("second", second);
+      console.log("second");
       var notUniqIndivComm = second.reduce(function(prev, arr){
         return prev.concat(arr);
       }, []);
       var indivComm = _.uniqBy(notUniqIndivComm, 'OTHER_ID');
     appender(first, indivComm)
     .then(function(third){
-      console.log("third", third);
+      console.log("third");
     callInd(indivComm)
     .then(function(fourth){
-      console.log("fourth", fourth);
+      console.log("fourth");
       appender(third, fourth)
     .then(function(fifth){
       var notUniqSecondComm = fifth.reduce(function(prev, arr){
         return prev.concat(arr);
       }, []);
-      var secondComm = _.uniqBy(notUniqSecondComm, 'OTHER_ID');
-      console.log("secondComm ", secondComm);
-      callSecondaryAsc(secondComm)
+      var secondComm = _.uniqBy(notUniqSecondComm, 'CMTE_ID');
+      console.log("secondComm ");
+    callSecondaryAsc(secondComm)
     .then(function(sixth){
       var notUniqThirdComm = sixth.reduce(function(prev, arr){
         return prev.concat(arr);
       }, []);
       // var secondComm = _.uniqBy(notUniqSecondComm, 'OTHER_ID');
-      console.log("sixth ", sixth);
+      console.log("sixth");
       appender(notUniqSecondComm, sixth)
     .then(function(data){
       var indivs = data.filter(function(donor){
@@ -197,18 +195,16 @@ router.get('/:cand_id/superpac', function(req, res, next){
       var cmtes = data.filter(function(donor){
         if (!donor.NAME) return donor;
       });
-      // console.log("INDIVIDUALS ", indivs);
-      // console.log("COMMITTEES ", cmtes);
       var uniqIndiv = _.uniqBy(indivs, 'NAME');
       // var uniqCmte  = _.uniqBy(cmtes, 'CMTE_NM');
       //Here I'm making sure every name is unique.
       var result = uniqIndiv.concat(cmtes);
-      console.log(result);
-      result = typeMap(result);
+
+      result = typeMap(result, req.params.cmte_id);
+      console.log("result", result);
       res.json(result);
       // //Original
       // var uniquify = _.uniqBy(data, 'CMTE_NM');
-      //   console.log(uniquify);
       //   res.json(uniquify);
 
     });

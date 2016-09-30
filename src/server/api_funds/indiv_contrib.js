@@ -155,19 +155,19 @@ router.get('/committee/:cmte_id/pie', function(req, res, next){
 });
 
 
-router.get('/committee/:cmte_id/date', function(req, res, next){
-  barGraph.findOne({id: req.params.cmte_id}, function(err, data){
-    console.log(data);
-    if (err) handleError(err);
-    res.json(data.data.map((item)=>{
-      return {
-        sum: parseFloat(item.sum),
-        date_trunc: item.date_trunc,
-        type: "individuals"
-      }
-    }));
-  });
-});
+// router.get('/committee/:cmte_id/date', function(req, res, next){
+//   barGraph.findOne({id: req.params.cmte_id}, function(err, data){
+//     console.log(data);
+//     if (err) handleError(err);
+//     res.json(data.data.map((item)=>{
+//       return {
+//         sum: parseFloat(item.sum),
+//         date_trunc: item.date_trunc,
+//         type: "individuals"
+//       }
+//     }));
+//   });
+// });
 
 
 // router.get('/committee/:cmte_id/date', function(req, res, next){

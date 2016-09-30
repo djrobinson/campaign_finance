@@ -50,6 +50,7 @@ export class GraphComponent implements OnInit  {
   public isDark: string;
   public isShown: string;
   public popster: boolean = false;
+  public isSuperpac: boolean;
   @ViewChild(MiniProfileComponent) miniProfileComponent: MiniProfileComponent;
 
   constructor(
@@ -73,9 +74,12 @@ export class GraphComponent implements OnInit  {
     } else if (this.candidate_id[0] === 'H'){
       this.getHouseGraphData(this.candidate_id, this.size);
       this.isPres = false;
-    } else {
+    } else if (this.candidate_id[0] === 'P') {
       this.getGraphData(this.candidate_id, this.size);
       this.isPres = true;
+    } else if (this.candidate_id[0] === 'C') {
+      this.getSuperPacsGraphData(this.candidate_id, this.size);
+      this.isPres = false;
     }
     this.absUrl = this.location.path();
     // setTimeout(this.closeInstructions.bind(this), 3000);
@@ -233,6 +237,20 @@ export class GraphComponent implements OnInit  {
     )
   }
 
+  public getSuperPacsGraphData(cmte_id, size): void {
+    Observable.forkJoin(
+      this.http.get('api/graph/'+cmte_id+'/superpac').map((res: Response) => res.json())
+    ).subscribe(
+      data => {
+        console.log("Superpac Data: ",data);
+        this.candidate = {};
+        this.candidate.data = data[0];
+        this.graphInit(this.candidate);
+      },
+      err => console.error(err)
+    )
+  }
+
   public graphInit(result){
         //ONly for mongo
         result = result.data;
@@ -242,7 +260,7 @@ export class GraphComponent implements OnInit  {
         });
 
         var candArr = result.filter((elem)=>{
-          return elem.CMTE_DSGN === 'P';
+          return (elem.CMTE_DSGN === 'P' || elem.CMTE_ID === this.candidate_id);
         });
         console.log("candArr", this.candidate);
         candArr[0].CANDIDATE = this.candidate_id;
@@ -251,6 +269,7 @@ export class GraphComponent implements OnInit  {
         candArr[0].data = this.candidate[0];
         var resultOrdered = candArr.concat(nonCand);
         this.nodeData = resultOrdered.map((elem, i)=>{
+          //Wil likely need to set a similar property on api call to find superpacs
           if (elem.CAND_ID){
             elem.CORE = true;
           }
@@ -260,7 +279,6 @@ export class GraphComponent implements OnInit  {
         var nodeData = this.nodeData;
         var onlyOne = 0;
         this.linkData = nodeData.reduce((prev, elem)=>{
-          console.log("Link Data: ", elem);
           if (elem.CAND_ID && onlyOne === 0){
             prev.push({ "source": elem.NODE, "target": 0, "value": 1 })
               return prev;

@@ -65,7 +65,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         d3.select(".cand-style")
           .style('border', 'solid 3px #4d4d4d')
       }
-      console.log(this.typePieComponent);
       this.isRequesting = true;
       this.imageVar = {};
       this.selection = "main";

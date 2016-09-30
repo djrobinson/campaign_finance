@@ -9,8 +9,9 @@ module.exports = {
             .innerJoin('committee_summaries', 'committee_summaries.com_id', 'cmte_to_cmte.CMTE_ID')
             .innerJoin('committee_master', 'cmte_to_cmte.CMTE_ID', 'committee_master.CMTE_ID')
             .select('cmte_to_cmte.OTHER_ID', 'cmte_to_cmte.CMTE_ID', 'committee_master.CMTE_NM', 'committee_summaries.cas_on_han_clo_of_per', 'committee_summaries.net_con', 'committee_summaries.tot_dis', 'committee_summaries.tot_rec', 'committee_summaries.lin_ima', 'committee_master.CMTE_DSGN')
-            .where({'cmte_to_cmte.CMTE_ID': cmte_id})
-            .orderBy('committee_summaries.tot_rec', 'desc');
+            .where({'cmte_to_cmte.OTHER_ID': cmte_id})
+            .orderBy('committee_summaries.tot_rec', 'desc')
+            .limit(10);
   },
   getSuperpacs: function(){
     return knex('committee_master')
