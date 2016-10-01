@@ -70,6 +70,8 @@ var typeMap = function(arr, cmte_id){
   arr.forEach(function(item){
     if (item.CMTE_DSGN === 'P'){
       item.graphtype = "candidate";
+    } else if (item.CMTE_TP === 'O'){
+      item.graphtype = "superpac";
     } else if (item.tot_dis){
       item.graphtype = "committee";
     } else if (item.NAME){
@@ -196,9 +198,9 @@ router.get('/:cmte_id/superpac', function(req, res, next){
         if (!donor.NAME) return donor;
       });
       var uniqIndiv = _.uniqBy(indivs, 'NAME');
-      // var uniqCmte  = _.uniqBy(cmtes, 'CMTE_NM');
+      var uniqCmte  = _.uniqBy(cmtes, 'CMTE_NM');
       //Here I'm making sure every name is unique.
-      var result = uniqIndiv.concat(cmtes);
+      var result = uniqIndiv.concat(uniqCmte);
 
       result = typeMap(result, req.params.cmte_id);
       console.log("result", result);

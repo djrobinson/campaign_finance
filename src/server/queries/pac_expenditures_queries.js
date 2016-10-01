@@ -1,9 +1,6 @@
 var knex = require('./knex');
 
 module.exports = {
-  getSuperPacs: function(){
-    return knex();
-  },
   getGraphAsc: function(cmte_id){
     return knex('cmte_to_cmte')
             .innerJoin('committee_summaries', 'committee_summaries.com_id', 'cmte_to_cmte.CMTE_ID')
@@ -16,8 +13,9 @@ module.exports = {
   getSuperpacs: function(){
     return knex('committee_master')
             .innerJoin('committee_summaries', 'committee_summaries.com_id', 'committee_master.CMTE_ID')
-            .select('committee_master.CMTE_ID', 'committee_master.CMTE_NM', 'committee_summaries.cas_on_han_clo_of_per', 'committee_summaries.tot_rec', 'committee_summaries.tot_dis', 'committee_summaries.tot_con', 'committee_summaries.lin_ima', 'committee_master.CMTE_DSGN')
+            .select('committee_master.CMTE_ID', 'committee_master.CMTE_NM', 'committee_summaries.cas_on_han_clo_of_per', 'committee_summaries.tot_rec', 'committee_summaries.tot_dis', 'committee_summaries.tot_con', 'committee_summaries.lin_ima', 'committee_master.CMTE_DSGN', 'committee_master.CMTE_TP')
             .whereNotNull('committee_summaries.tot_rec', 'committee_summaries.tot_dis')
+            .where('committee_master.CMTE_TP', 'O')
             .orderBy('committee_summaries.tot_rec', 'desc')
             .limit(200)
 

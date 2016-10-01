@@ -132,10 +132,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
       this.http.get('api/transfers/'+cmte+'/cmtetype')
         .map((res: Response) => res.json()),
       this.http.get('/api/individuals/committee/'+cmte+'/pie')
-        .map((res: Response) => res.json()),
-      this.http.get('/api/individuals/committee/'+cmte+'/date')
-        .map((res: Response) => res.json()),
-      this.http.get('/api/transfers/'+cmte+'/date')
         .map((res: Response) => res.json())
     ).subscribe(
       data => {

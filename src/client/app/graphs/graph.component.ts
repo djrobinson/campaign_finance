@@ -233,27 +233,32 @@ export class GraphComponent implements OnInit  {
 
   public getSuperPacsGraphData(cmte_id, size): void {
     Observable.forkJoin(
-      this.http.get('api/graph/'+cmte_id+'/superpac').map((res: Response) => res.json())
+      this.http.get('api/graph/'+cmte_id+'/superpac').map((res: Response) => res.json()),
+      this.http.get('/api/committees/' + cmte_id).map((res: Response) => res.json())
     ).subscribe(
       data => {
-        this.candidate = {};
-        this.candidate.data = data[0];
-        this.graphInit(this.candidate);
+
+        this.candidate = data[1];
+        var getItDone = {
+          data: data[0]
+        }
+        this.graphInit(getItDone);
       },
       err => console.error(err)
     )
   }
 
   public graphInit(result){
+        console.log("Result!: ", result);
         //ONly for mongo
         result = result.data;
         this.result = result;
         var nonCand = result.filter((elem) => {
-          return elem.CMTE_DSGN !== 'P';
+          return (elem.CMTE_DSGN !== 'P' && elem.CMTE_DSGN !== 'O');
         });
 
         var candArr = result.filter((elem)=>{
-          return (elem.CMTE_DSGN === 'P' || elem.CMTE_ID === this.candidate_id);
+          return (elem.CMTE_DSGN === 'P' || elem.CMTE_TP === 'O');
         });
         candArr[0].CANDIDATE = this.candidate_id;
         candArr[0].CAND_ID = this.candidate_id;
@@ -264,8 +269,21 @@ export class GraphComponent implements OnInit  {
           //Wil likely need to set a similar property on api call to find superpacs
           if (elem.CAND_ID){
             elem.CORE = true;
+            elem.NODE = i;
           }
-          elem.NODE = i;
+
+          if (elem.CMTE_ID === this.candidate_id){
+            elem.CORE = true;
+            elem.NODE = 0;
+          }
+
+          if (elem.CMTE_TP === 'O'){
+            elem.CORE = true;
+            elem.NODE = 0;
+          } else {
+            elem.NODE = i;
+          }
+          console.log("elem after: ", elem);
           return elem;
         });
         var nodeData = this.nodeData;
@@ -276,10 +294,10 @@ export class GraphComponent implements OnInit  {
               return prev;
           } else if (elem.OTHER_ID) {
             nodeData.forEach((el, i) => {
-              if (el.CORE && el.CMTE_ID === elem.CMTE_ID ){
+              if (el.CORE && el.CMTE_ID === elem.CMTE_ID || elem.CMTE_ID === el.OTHER_ID && el.graphtype === 'superpac'){
                 prev.push({ "source": elem.NODE, "target": i, "value": 2 })
                 return prev;
-              } else if (elem.CMTE_ID === el.OTHER_ID){
+              } else if (elem.CMTE_ID === el.OTHER_ID && elem.graphtype !== 'individual'){
                 return prev;
               } else if (el.CMTE_ID === elem.OTHER_ID && el.graphtype === 'committee'){
                 prev.push({ "source": elem.NODE, "target": i, "value": 3 })
@@ -479,7 +497,7 @@ export class GraphComponent implements OnInit  {
 
     //BEHAVIOR SETUP FOR FORCE GRAPH. USES HELPER FUNCTIONS BELOW
     var zoom = d3.behavior.zoom()
-      .scaleExtent([1, 10])
+      .scaleExtent([1, 100])
       .on("zoom", zoomed);
 
     var drag = d3.behavior.drag()
@@ -641,12 +659,17 @@ export class GraphComponent implements OnInit  {
 
         } else if ( d.graphtype === "individual"){
           return "#35978F"
+        } else if ( d.graphtype === "superpac"){
+          return "maroon";
         }
       })
 
     node.append("circle")
       .attr("class", "circle")
       .attr("r",function(d) {
+        if (d.graphtype === "superpac"){
+          return 40;
+        }
         if (d.TRANSACTION_AMT < 2699)
           {
             return 15;
