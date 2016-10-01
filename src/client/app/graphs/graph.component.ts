@@ -248,6 +248,7 @@ export class GraphComponent implements OnInit  {
     )
   }
 
+  //This function is bananas. Should probably be broken into 70 files
   public graphInit(result){
         console.log("Result!: ", result);
         //ONly for mongo
@@ -274,7 +275,7 @@ export class GraphComponent implements OnInit  {
 
           if (elem.CMTE_ID === this.candidate_id){
             elem.CORE = true;
-            elem.NODE = 0;
+            elem.NODE = i;
           }
 
           if (elem.CMTE_TP === 'O'){
@@ -287,14 +288,13 @@ export class GraphComponent implements OnInit  {
           return elem;
         });
         var nodeData = this.nodeData;
-        var onlyOne = 0;
         this.linkData = nodeData.reduce((prev, elem)=>{
-          if (elem.CAND_ID && onlyOne === 0){
+          if (elem.CAND_ID || elem.CORE){
             prev.push({ "source": elem.NODE, "target": 0, "value": 1 })
               return prev;
           } else if (elem.OTHER_ID) {
             nodeData.forEach((el, i) => {
-              if (el.CORE && el.CMTE_ID === elem.CMTE_ID || elem.CMTE_ID === el.OTHER_ID && el.graphtype === 'superpac'){
+              if ((el.CORE && el.CMTE_ID === elem.CMTE_ID && el.graphtype !== 'individual') || (elem.CMTE_ID === el.OTHER_ID && el.graphtype === 'superpac')){
                 prev.push({ "source": elem.NODE, "target": i, "value": 2 })
                 return prev;
               } else if (elem.CMTE_ID === el.OTHER_ID && elem.graphtype !== 'individual'){
