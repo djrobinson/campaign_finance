@@ -104,12 +104,12 @@ router.get('/:cand_id/candidate', function(req, res, next){
         return prev.concat(arr);
       }, []);
       var indivComm = _.uniqBy(notUniqIndivComm, 'OTHER_ID');
+
     appender(first, indivComm)
     .then(function(third){
       // console.log("third", third);
     callInd(indivComm)
     .then(function(fourth){
-      // console.log("fourth", fourth);
       appender(third, fourth)
     .then(function(fifth){
       var notUniqSecondComm = fifth.reduce(function(prev, arr){
@@ -145,7 +145,6 @@ router.get('/:cand_id/candidate', function(req, res, next){
       // var uniquify = _.uniqBy(data, 'CMTE_NM');
       //   console.log(uniquify);
       //   res.json(uniquify);
-
     });
     });
     });
@@ -158,7 +157,11 @@ router.get('/:cand_id/candidate', function(req, res, next){
 router.get('/:cmte_id/superpac', function(req, res, next){
   var indexer = 0;
   var final = [];
-  cmte.getGraphAsc(req.params.cmte_id)
+    cmte.getFirst(req.params.cmte_id)
+    .then(function(zero){
+    cmte.getGraphAsc(req.params.cmte_id)
+    .then(function(starter){
+    appender(zero, starter)
     .then(function(first){
       console.log("First");
       //this function will need to then call the committee info page
@@ -208,7 +211,8 @@ router.get('/:cmte_id/superpac', function(req, res, next){
       // //Original
       // var uniquify = _.uniqBy(data, 'CMTE_NM');
       //   res.json(uniquify);
-
+    });
+    });
     });
     });
     });

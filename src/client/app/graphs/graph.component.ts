@@ -273,7 +273,7 @@ export class GraphComponent implements OnInit  {
             elem.NODE = i;
           }
 
-          if (elem.CMTE_ID === this.candidate_id){
+          if (elem.CMTE_ID === this.candidate_id || elem.OTHER_ID === this.candidate_id){
             elem.CORE = true;
             elem.NODE = i;
           }
@@ -287,6 +287,7 @@ export class GraphComponent implements OnInit  {
           console.log("elem after: ", elem);
           return elem;
         });
+        console.log("Node data: ", this.nodeData);
         var nodeData = this.nodeData;
         this.linkData = nodeData.reduce((prev, elem)=>{
           if (elem.CAND_ID || elem.CORE){
@@ -497,7 +498,7 @@ export class GraphComponent implements OnInit  {
 
     //BEHAVIOR SETUP FOR FORCE GRAPH. USES HELPER FUNCTIONS BELOW
     var zoom = d3.behavior.zoom()
-      .scaleExtent([1, 100])
+      .scaleExtent([-1, 100])
       .on("zoom", zoomed);
 
     var drag = d3.behavior.drag()
@@ -700,7 +701,7 @@ export class GraphComponent implements OnInit  {
       })
 
     var candNode = svg.selectAll(".node")
-      .filter(function(d) { return d.CMTE_DSGN === "P" })
+      .filter(function(d) { return d.CMTE_DSGN === "P" || d.CMTE_TP ==="O" })
       .attr("width", 100)
       .attr("height", 100)
         .append("circle")
@@ -746,7 +747,6 @@ export class GraphComponent implements OnInit  {
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; })
-
       node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
     });
 
