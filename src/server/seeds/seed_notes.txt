@@ -6,12 +6,12 @@ psql -h remotehost -d remote_mydb -U myuser -c
 
 psql -h ec2-54-227-245-222.compute-1.amazonaws.com -d <database_name> -U <Username> -c "\COPY indiv_contrib FROM '/Users/danny/seeds/campaign_cmte.csv' DELIMITER ',' CSV header encoding 'UTF-8'"
 
-\COPY committee_master FROM '/Users/danny/Downloads/cm.txt' (DELIMITER('|')); <16721, 17172
+\COPY committee_master FROM '/Users/danny/Downloads/cm.txt' (DELIMITER('|')); <16721, 17172, 17341
 \COPY cmte_to_cmte FROM '/Users/danny/Downloads/itoth.txt' (DELIMITER('|')); <398111, 540498
 \COPY indiv_contrib FROM '/Users/danny/Downloads/itcont 2.txt' (DELIMITER('|')); <7000075, 12018811
-\COPY cmte_to_cand FROM '/Users/danny/Downloads/itpas2 2.txt' (DELIMITER('|')); < 193635, 233244
-\COPY candidate_master FROM '/Users/danny/Downloads/cn 2.txt' (DELIMITER('|')); <16721, 7330
-\COPY opex FROM '/Users/danny/Downloads/oppexp 2.txt' (DELIMITER('|')); <982377,
+\COPY cmte_to_cand FROM '/Users/danny/Downloads/itpas2 2.txt' (DELIMITER('|')); < 193635, 233244, 240950
+\COPY candidate_master FROM '/Users/danny/Downloads/cn 2.txt' (DELIMITER('|')); <16721, 7330, 7509
+\COPY opex FROM '/Users/danny/Downloads/oppexp2.txt' (DELIMITER('|')); <982377, 1215323
 \COPY cmte_cand_linkage FROM '/Users/danny/Downloads/ccl 2.txt' (DELIMITER('|')); <6136
 
 \COPY campaign_cmte_rpts FROM '/Users/danny/Downloads/prodData/prod/campaign_cmte_rpts2.csv' DELIMITER ',' CSV header encoding 'UTF-8'; <9958, 12467
@@ -29,7 +29,7 @@ committee_registrations
 ccl.txt
 cn.txt
 cm.txt < Minor issue w/ '\'
-itoth.txt
+itoth.txt < Date format
 itcont.txt < '\' issue
 itpas2.txt
 oppexp.txt < SOLVED: Had to remove extra '|', removed final rows. \COPY vs COPY issue, '\' issue
@@ -46,7 +46,7 @@ Missing data for column "..." issue:
 independent_expenditures.csv  < Solved: Deleted blank rows at end of file
 candidate_registrations.csv <Solved: Same deal. Deleted blank rows.
 
-Other note: some bulk txt files have backslashes that need to be removed
+Other note: some bulk txt files have backslashes that need to be removed. Will be too large for buffer size.
 
 Note, it appears there is a difference between \COPY & COPY for postgres
 See the following article:

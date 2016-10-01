@@ -498,7 +498,7 @@ export class GraphComponent implements OnInit  {
 
     //BEHAVIOR SETUP FOR FORCE GRAPH. USES HELPER FUNCTIONS BELOW
     var zoom = d3.behavior.zoom()
-      .scaleExtent([-1, 100])
+      .scaleExtent([0, 100])
       .on("zoom", zoomed);
 
     var drag = d3.behavior.drag()
