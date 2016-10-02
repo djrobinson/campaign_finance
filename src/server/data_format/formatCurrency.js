@@ -9,7 +9,7 @@ fs.readdir(__dirname, function (err, files) {
         lines.forEach((line) => {
           var newLine = '';
           for (var i = 0; i < line.length; i++) {
-            if (line[i] == '"' && line[i + 1] == '$') {
+            if (line[i] == '"' && line[i + 1] == '$' || line[i] == '"' && line[i + 1] == '-') {
               var nextQuoteIndex = line.indexOf('"', i + 1);
               var subString = line.substring(i + 2, nextQuoteIndex);
               subString = subString.split(',').join('');
