@@ -12,7 +12,7 @@ module.exports = {
     return knex('cmte_cand_linkage')
             .innerJoin('committee_summaries', 'committee_summaries.com_id', 'cmte_cand_linkage.CMTE_ID')
             .innerJoin('committee_master', 'cmte_cand_linkage.CMTE_ID', 'committee_master.CMTE_ID')
-            .select('cmte_cand_linkage.CAND_ID', 'cmte_cand_linkage.CMTE_ID', 'committee_summaries.com_nam', 'committee_summaries.cas_on_han_clo_of_per', 'committee_summaries.net_con', 'committee_summaries.tot_dis', 'committee_summaries.tot_rec', 'committee_summaries.lin_ima', 'committee_master.CMTE_DSGN')
+            .select('cmte_cand_linkage.CAND_ID', 'cmte_cand_linkage.CMTE_ID', 'committee_master.CMTE_NM', 'committee_summaries.cas_on_han_clo_of_per', 'committee_summaries.net_con', 'committee_summaries.tot_dis', 'committee_summaries.tot_rec', 'committee_summaries.lin_ima', 'committee_master.CMTE_DSGN', 'committee_master.CMTE_TP')
             .where({'cmte_cand_linkage.CAND_ID': cand_id})
             .orderBy('committee_summaries.tot_rec', 'desc');
   },

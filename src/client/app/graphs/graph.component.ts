@@ -70,16 +70,20 @@ export class GraphComponent implements OnInit  {
     this.isFirst = true;
     if (this.candidate_id[0] === 'S'){
       this.getSenateGraphData(this.candidate_id, this.size);
+      this.isSuperpac = false;
       this.isPres = false;
     } else if (this.candidate_id[0] === 'H'){
       this.getHouseGraphData(this.candidate_id, this.size);
+      this.isSuperpac = false;
       this.isPres = false;
     } else if (this.candidate_id[0] === 'P') {
       this.getGraphData(this.candidate_id, this.size);
+      this.isSuperpac = false;
       this.isPres = true;
     } else if (this.candidate_id[0] === 'C') {
       this.getSuperPacsGraphData(this.candidate_id, this.size);
       this.isPres = false;
+      this.isSuperpac = true;
     }
     this.absUrl = this.location.path();
     // setTimeout(this.closeInstructions.bind(this), 3000);
@@ -257,8 +261,9 @@ export class GraphComponent implements OnInit  {
         });
 
         var candArr = result.filter((elem)=>{
-          return (elem.CMTE_DSGN === 'P' || elem.CMTE_TP === 'O');
+          return (elem.CMTE_DSGN === 'P' && !this.isSuperpac || elem.CMTE_TP === 'O' && this.isSuperpac);
         });
+        console.log("candArr", candArr);
         candArr[0].CANDIDATE = this.candidate_id;
         candArr[0].CAND_ID = this.candidate_id;
         candArr[0].data = {};
@@ -699,7 +704,7 @@ export class GraphComponent implements OnInit  {
       })
 
     var candNode = svg.selectAll(".node")
-      .filter(function(d) { return d.CMTE_DSGN === "P" || d.CMTE_TP ==="O" })
+      .filter(function(d) { return d.CMTE_DSGN === "P" })
       .attr("width", 100)
       .attr("height", 100)
         .append("circle")
@@ -716,7 +721,13 @@ export class GraphComponent implements OnInit  {
       if (!d.CANDIDATE){
         var size = "1rem";
         var name = d.CANDIDATE || d.NAME || d.CMTE_NM;
-        var words = name.split(' ');
+        console.log("anMalkasdlk", name);
+        if (!!name){
+           var words = name.split(' ');
+         } else {
+           words = [];
+         }
+
         var el = d3.select(this).style("font-size", size).text(words.join(' '))
                         .style('stroke', '#4d4d4d')
                         .style('fill', '#4d4d4d')
