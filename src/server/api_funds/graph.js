@@ -105,7 +105,7 @@ router.get('/:cand_id/candidate', function(req, res, next){
       }, []);
       var indivComm = _.uniqBy(notUniqIndivComm, 'OTHER_ID');
 
-    appender(first, indivComm)
+    appender(first, notUniqIndivComm)
     .then(function(third){
       // console.log("third", third);
     callInd(indivComm)
@@ -135,7 +135,7 @@ router.get('/:cand_id/candidate', function(req, res, next){
       // console.log("INDIVIDUALS ", indivs);
       // console.log("COMMITTEES ", cmtes);
       var uniqIndiv = _.uniqBy(indivs, 'NAME');
-      var uniqCmte  = _.uniqBy(cmtes, 'CMTE_NM');
+      var uniqCmte  = _.uniqBy(cmtes, 'OTHER_ID');
       //Here I'm making sure every name is unique.
       var result = uniqIndiv.concat(uniqCmte);
       console.log("result");

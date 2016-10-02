@@ -9,7 +9,7 @@ module.exports = {
             .where({'cmte_to_cmte.CMTE_ID': cmte.CMTE_ID})
             .where('TRANSACTION_TP', 'LIKE', '1%')
             .orderBy('cmte_to_cmte.TRANSACTION_AMT', 'desc')
-            .limit(10);
+            .limit(30);
   },
   getTopComSecondary: function(cmte){
     return knex('cmte_to_cmte')
@@ -19,13 +19,13 @@ module.exports = {
             .where({'cmte_to_cmte.CMTE_ID': cmte.OTHER_ID})
             .where('TRANSACTION_TP', 'LIKE', '1%')
             .orderBy('cmte_to_cmte.TRANSACTION_AMT', 'desc')
-            .limit(10);
+            .limit(5);
   },
   getTopInd: function(cmte){
     return knex('indiv_contrib')
             .select('CMTE_ID', 'NAME', 'TRANSACTION_AMT', 'TRAN_ID', 'EMPLOYER' )
             .where({'CMTE_ID': cmte.OTHER_ID})
             .orderBy('TRANSACTION_AMT', 'desc')
-            .limit(10);
+            .limit(5);
   }
 };

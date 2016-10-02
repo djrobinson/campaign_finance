@@ -189,10 +189,11 @@ export class GraphComponent implements OnInit  {
     Observable.forkJoin(
       this.http.get('/api/candidates/' + candId).map((res: Response) => res.json()),
       this.http.get('/api/legislators/' + candId).map((res: Response) => res.json()),
-      this.http.get('api/graph/test/' + candId + '/' + size).map((res: Response) => res.json())
+      // this.http.get('api/graph/test/' + candId + '/' + size).map((res: Response) => res.json())
+      this.http.get('/api/graph/' + candId +'/candidate').map((res: Response) => res.json())
     ).subscribe(
       data => {
-        console.log(data);
+        console.log("Graph Data: ", data);
         this.candidate = data[0];
         this.bioguideId = data[1];
         this.graphInit(data[2]);
@@ -239,10 +240,7 @@ export class GraphComponent implements OnInit  {
       data => {
 
         this.candidate = data[1];
-        var getItDone = {
-          data: data[0]
-        }
-        this.graphInit(getItDone);
+        this.graphInit(data[0]);
       },
       err => console.error(err)
     )
@@ -252,10 +250,10 @@ export class GraphComponent implements OnInit  {
   public graphInit(result){
         console.log("Result!: ", result);
         //ONly for mongo
-        result = result.data;
+        result = result;
         this.result = result;
         var nonCand = result.filter((elem) => {
-          return (elem.CMTE_DSGN !== 'P' && elem.CMTE_DSGN !== 'O');
+          return (elem.CMTE_DSGN !== 'P' && elem.CMTE_TP !== 'O');
         });
 
         var candArr = result.filter((elem)=>{

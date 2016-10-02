@@ -1,12 +1,12 @@
 var knex = require('./knex');
 
 module.exports = {
-  getFirst(cmte_id){
-    return knex('committee_summaries')
-            .innerJoin('committee_master', 'committee_summaries.com_id', 'committee_master.CMTE_ID')
-            .select('committee_summaries.cas_on_han_clo_of_per', 'committee_master.CMTE_NM', 'committee_summaries.net_con', 'committee_summaries.tot_dis', 'committee_summaries.tot_rec', 'committee_summaries.lin_ima', 'committee_master.CMTE_DSGN', 'committee_master.CMTE_TP')
-            .where({'committee_master.CMTE_ID': cmte_id})
-
+  getFirst: function(cmte_id){
+    return knex('indiv_contrib')
+            .select('CMTE_ID', 'NAME', 'TRANSACTION_AMT', 'TRAN_ID', 'EMPLOYER' )
+            .where({'CMTE_ID': cmte_id})
+            .orderBy('TRANSACTION_AMT', 'desc')
+            .limit(5);
   },
   getGraphAsc: function(cmte_id){
     return knex('cmte_to_cmte')
