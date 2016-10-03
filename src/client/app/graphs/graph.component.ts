@@ -520,15 +520,14 @@ export class GraphComponent implements OnInit  {
     //SETS UP AREA OF THE FORCE LAYOUT
     d3.select("candidate-table").remove();
     var svg = d3.select("#force")
-      .attr("width", width)
-      .attr("height", height)
       .append("g") //< added
       .call(zoom);
 
     var rect = svg.append("rect") //<= Added
-      .attr("width", width)
-      .attr("height", height)
+      .attr("width", "100vw")
+      .attr("height", "100vh")
       .style("fill", "none")
+      .style('border', 'solid 10px orange')
       .style("pointer-events", "all");
 
     var container = svg.append("g");
@@ -595,7 +594,18 @@ export class GraphComponent implements OnInit  {
                 .attr("width", 120)
 
     //STARTS FORCE LAYOUT. ADDS DATA, CREATES LINKS AND NODES
-    var force = d3.layout.force()
+    if (this.nodeData.length < 15){
+      var force = d3.layout.force()
+      .gravity(.3)
+      .friction(.7)
+      .size([1600, 900])
+      .nodes(this.nodeData)
+      .links(this.linkData)
+      .distance(220)
+      .charge(-1000)
+      .start();
+    } else {
+      var force = d3.layout.force()
       .gravity(.01)
       .friction(.7)
       .size([width, height])
@@ -604,6 +614,8 @@ export class GraphComponent implements OnInit  {
       .distance(220)
       .charge(-1000)
       .start();
+    }
+
 
     svg.append("svg:defs").selectAll("marker")
         .data(["end"])      // Different link/path types can be defined here
@@ -633,7 +645,7 @@ export class GraphComponent implements OnInit  {
       .enter().append("g")
       .attr("class", function(d){ return d.graphtype + " node" })
       .attr("cx", function(d) { return d.x; })
-      .attr("cy", function(d) { return d.y; })
+      .attr("cy", function(d) { return d.x; })
       .call(drag)
       .style("fill", function(d){
         if ( d.graphtype === "candidate" ){

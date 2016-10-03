@@ -6,7 +6,7 @@ module.exports = {
             .select('CMTE_ID', 'NAME', 'TRANSACTION_AMT', 'TRAN_ID', 'EMPLOYER' )
             .where({'CMTE_ID': cmte_id})
             .orderBy('TRANSACTION_AMT', 'desc')
-            .limit(10);
+            .limit(5);
   },
   getGraphAsc: function(cmte_id){
     return knex('cmte_to_cmte')
