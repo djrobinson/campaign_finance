@@ -9,7 +9,7 @@ import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgFo
   template: `
     <div class="funding-container">
       <h1>Support Citizens Hub</h1>
-      <p>Citizens Hub is currently a personal project. I will keep the site live for the next few months and pay for hosting out of pocket. If you would like to see the project around longer, please pitch in! I have plans to build this into a more all-encompassing view of the government (not just election spending), so if you like the idea and want to see it expanded and formalized, contribute to hosting and development below!</p>
+      <p>Citizens Hub is currently a personal project. I will keep the site live for the next few months and pay for hosting out of pocket. If you would like to see the project around longer, please pitch in! I have plans to build this into a more all-encompassing view of the government (not just election spending), so if you like the idea and want to see it expanded and formalized, contribute to hosting and development below.</p>
       <label for="amount">Amount</label>
       <input
         [(ngModel)]="amount"
