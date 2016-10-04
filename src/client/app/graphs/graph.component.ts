@@ -68,11 +68,7 @@ export class GraphComponent implements OnInit  {
     this.isShown = "block";
     this.isDark = 'rgba(255, 255, 255, .5)';
     this.isFirst = true;
-    if (this.candidate_id[0] === 'S'){
-      this.getSenateGraphData(this.candidate_id, this.size);
-      this.isSuperpac = false;
-      this.isPres = false;
-    } else if (this.candidate_id[0] === 'H'){
+    if (this.candidate_id[0] === 'H' || this.candidate_id[0] === 'S'){
       this.getHouseGraphData(this.candidate_id, this.size);
       this.isSuperpac = false;
       this.isPres = false;
@@ -194,7 +190,7 @@ export class GraphComponent implements OnInit  {
       this.http.get('/api/candidates/' + candId).map((res: Response) => res.json()),
       this.http.get('/api/legislators/' + candId).map((res: Response) => res.json()),
       // this.http.get('api/graph/test/' + candId + '/' + size).map((res: Response) => res.json())
-      this.http.get('/api/graph/' + candId +'/candidate').map((res: Response) => res.json())
+      this.http.get('/api/graph/test/' + candId +'/' + size).map((res: Response) => res.json())
     ).subscribe(
       data => {
         console.log("Graph Data: ", data);
@@ -206,30 +202,18 @@ export class GraphComponent implements OnInit  {
     )
   }
 
-  public getSenateGraphData(candId, size): void {
-    Observable.forkJoin(
-      this.http.get('/api/candidates/' + candId).map((res: Response) => res.json()),
-      this.http.get('/api/legislators/' + candId).map((res: Response) => res.json()),
-      this.http.get('api/graph/' + candId + '/candidate' + size).map((res: Response) => res.json())
-    ).subscribe(
-      data => {
-        this.candidate = data[0];
-        this.bioguideId = data[1];
-        this.graphInit(data[2]);
-      },
-      err => console.error(err)
-    )
-  }
 
  public getHouseGraphData(candId, size): void {
+   console.log("Mehe?", candId, size);
     Observable.forkJoin(
       this.http.get('/api/candidates/' + candId).map((res: Response) => res.json()),
       this.http.get('/api/legislators/' + candId).map((res: Response) => res.json()),
-      this.http.get('api/graph/' + candId + '/candidate').map((res: Response) => res.json())
+      this.http.get('/api/graph/congress/' + candId + '/small').map((res: Response) => res.json())
     ).subscribe(
       data => {
+        console.log("House data.");
+        console.log("House data: ", data);
         this.candidate = data[0];
-        this.bioguideId = data[1];
         this.graphInit(data[2]);
       },
       err => console.error(err)
@@ -238,7 +222,7 @@ export class GraphComponent implements OnInit  {
 
   public getSuperPacsGraphData(cmte_id, size): void {
     Observable.forkJoin(
-      this.http.get('api/graph/'+cmte_id+'/superpac').map((res: Response) => res.json()),
+      this.http.get('api/graph/superpac/'+cmte_id+'/small').map((res: Response) => res.json()),
       this.http.get('/api/committees/' + cmte_id).map((res: Response) => res.json())
     ).subscribe(
       data => {
@@ -254,7 +238,7 @@ export class GraphComponent implements OnInit  {
   public graphInit(result){
         console.log("Result!: ", result);
         //ONly for mongo
-        result = result;
+        result = result.data;
         this.result = result;
         var nonCand = result.filter((elem) => {
           return (elem.CMTE_DSGN !== 'P' && elem.CMTE_TP !== 'O');

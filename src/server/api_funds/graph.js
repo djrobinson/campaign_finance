@@ -10,9 +10,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Graph = mongoose.model('Graph', { id: String, size: String, data: [] });
-var Senate = mongoose.model('Senate', { id: String, size: String, data: [] });
-var House = mongoose.model('House', { id: String, size: String, data: [] });
 var Congress = mongoose.model('Congress', { id: String, size: String, data: [] });
+var Superpac = mongoose.model('Superpac', { id: String, size: String, data: [] });
 
 
 router.get('/test/:cmte_id/:size', function(req, res, next){
@@ -23,16 +22,16 @@ router.get('/test/:cmte_id/:size', function(req, res, next){
   });
 });
 
-router.get('/senate/:cmte_id/:size', function(req, res, next){
-  Senate.findOne({id: req.params.cmte_id, size: req.params.size}, function(err, data){
+router.get('/congress/:cmte_id/:size', function(req, res, next){
+  Congress.findOne({id: req.params.cmte_id, size: req.params.size}, function(err, data){
     console.log(err,data);
     if (err) handleError(err);
     res.json(data);
   });
 });
 
-router.get('/house/:cmte_id/:size', function(req, res, next){
-  House.findOne({id: req.params.cmte_id, size: req.params.size}, function(err, data){
+router.get('/superpac/:cmte_id/:size', function(req, res, next){
+  Superpac.findOne({id: req.params.cmte_id, size: req.params.size}, function(err, data){
     console.log(err,data);
     if (err) handleError(err);
     res.json(data);
