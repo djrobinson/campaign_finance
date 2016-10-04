@@ -77,7 +77,7 @@ export class CandidatesComponent implements OnInit {
                 item.tile_color = "solid #2E8B57 15px";
                 return  item;
               } else {
-                item.tile_color = 'solid #708090 5px';
+                item.tile_color = 'solid gray 15px';
                 return item;
               }
             })
@@ -89,13 +89,14 @@ export class CandidatesComponent implements OnInit {
               this.headerType = 'House';
             }
             var finalData = data.map((item) => {
-              if (item.PARTY_CODE === 'DEM') {
-                item.tile_color = demColors[Math.floor(Math.random() * 3)];
-              } else if (item.PARTY_CODE === 'REP') {
-                item.tile_color = repColors[Math.floor(Math.random() * 3)];
-              } else {
-                item.tile_color = '#4C4664';
-              }
+              // if (item.PARTY_CODE === 'DEM') {
+              //   item.tile_color = demColors[Math.floor(Math.random() * 3)];
+              // } else if (item.PARTY_CODE === 'REP') {
+              //   item.tile_color = repColors[Math.floor(Math.random() * 3)];
+              // } else {
+              //   item.tile_color = '#4C4664';
+              // }
+              item.tile_color = 'solid gray 15px';
                this.http.get('/api/legislators/' + item.CANDIDATE_ID)
                  .map(res => res.json())
                  .subscribe(
