@@ -12,6 +12,7 @@ var Schema = mongoose.Schema;
 var Graph = mongoose.model('Graph', { id: String, size: String, data: [] });
 var Senate = mongoose.model('Senate', { id: String, size: String, data: [] });
 var House = mongoose.model('House', { id: String, size: String, data: [] });
+var Congress = mongoose.model('Congress', { id: String, size: String, data: [] });
 
 
 router.get('/test/:cmte_id/:size', function(req, res, next){
@@ -101,82 +102,86 @@ router.get('/:cand_id/candidate', function(req, res, next){
   cand.getGraphAsc(req.params.cand_id)
     .then(function(first){
       var nextCmte = first.filter(function(cmte){
-        return (cmte.CMTE_TP === 'P');
+        return (cmte.CMTE_DSGN === 'P');
       })
-      console.log("First First: ", nextCmte);
-    cmte.getFirst(nextCmte[0].CMTE_ID)
-    .then(function(zero){
-      console.log("Zero: ", zero);
-    appender(first, zero)
-    .then(function(next){
-      console.log("First", next);
-      //this function will need to then call the committee info page
-    callAsc(next)
-    .then(function(second){
-      console.log("second", second);
-      var notUniqIndivComm = second.reduce(function(prev, arr){
-        return prev.concat(arr);
-      }, []);
-      var indivComm = _.uniqBy(notUniqIndivComm, 'OTHER_ID');
+      if (!nextCmte.length) { res.json([]); }
+      else {
+        console.log("First First: ", nextCmte);
+        cmte.getFirst(nextCmte[0].CMTE_ID)
+        .then(function(zero){
+          console.log("Zero: ", zero);
+        appender(first, zero)
+        .then(function(next){
+          console.log("First", next);
+          //this function will need to then call the committee info page
+        callAsc(next)
+        .then(function(second){
+          console.log("second", second);
+          var notUniqIndivComm = second.reduce(function(prev, arr){
+            return prev.concat(arr);
+          }, []);
+          var indivComm = _.uniqBy(notUniqIndivComm, 'OTHER_ID');
 
-    appender(next, second)
-    .then(function(third){
-      // console.log("third", third);
-    callInd(indivComm)
-    .then(function(fourth){
-      appender(third, fourth)
-    .then(function(fifth){
-      // console.log("Fifth: ", fifth);
-      var notUniqSecondComm = fifth.reduce(function(prev, arr){
-        return prev.concat(arr);
-      }, []);
-      var secondComm = _.uniqBy(notUniqSecondComm, 'CMTE_NM');
-      var secondNames = _.uniqBy(notUniqSecondComm, 'NAME')
-      // console.log("Second Comm:", secondNames);
-      //I THINK THIS IS DELETING ALL INDIVIDUALS FROM THIS ARRAY.
-      // console.log("secondComm ", secondComm);
-    appender(secondComm, secondNames)
-      .then(function(inbetween){
+        appender(next, second)
+        .then(function(third){
+          // console.log("third", third);
+        callInd(indivComm)
+        .then(function(fourth){
+          appender(third, fourth)
+        .then(function(fifth){
+          // console.log("Fifth: ", fifth);
+          var notUniqSecondComm = fifth.reduce(function(prev, arr){
+            return prev.concat(arr);
+          }, []);
+          var secondComm = _.uniqBy(notUniqSecondComm, 'CMTE_NM');
+          var secondNames = _.uniqBy(notUniqSecondComm, 'NAME')
+          // console.log("Second Comm:", secondNames);
+          //I THINK THIS IS DELETING ALL INDIVIDUALS FROM THIS ARRAY.
+          // console.log("secondComm ", secondComm);
+        appender(secondComm, secondNames)
+          .then(function(inbetween){
 
 
-      callSecondaryAsc(secondComm)
-    .then(function(sixth){
-      var notUniqThirdComm = sixth.reduce(function(prev, arr){
-        return prev.concat(arr);
-      }, []);
-      // console.log("not secondComm", notUniqSecondComm);
-      // console.log("notUniqThirdComm", notSUniqThirdComm);
-      appender(inbetween, notUniqThirdComm)
-    .then(function(data){
-      // console.log("Final Data: ", data);
-      var indivs = data.filter(function(donor){
-        if (!!donor.NAME) return donor;
+          callSecondaryAsc(secondComm)
+        .then(function(sixth){
+          var notUniqThirdComm = sixth.reduce(function(prev, arr){
+            return prev.concat(arr);
+          }, []);
+          // console.log("not secondComm", notUniqSecondComm);
+          // console.log("notUniqThirdComm", notSUniqThirdComm);
+          appender(inbetween, notUniqThirdComm)
+        .then(function(data){
+          // console.log("Final Data: ", data);
+          var indivs = data.filter(function(donor){
+            if (!!donor.NAME) return donor;
+          });
+          var cmtes = data.filter(function(donor){
+            if (!!donor.CMTE_TP) return donor;
+          });
+          // console.log("INDIVIDUALS ", indivs);
+          // console.log("Indiv: ", indivs);
+          var uniqIndiv = _.uniqBy(indivs, 'NAME');
+          var uniqCmte  = _.uniqBy(cmtes, 'CMTE_NM');
+          //Here I'm making sure every name is unique.
+          var result = uniqIndiv.concat(uniqCmte);
+          console.log("result");
+          result = typeMap(result);
+          res.json(result);
+          // //Original
+          // var uniquify = _.uniqBy(data, 'CMTE_NM');
+          //   console.log(uniquify);
+          //   res.json(uniquify);
+        });
+        });
+        });
+        });
+        });
+        });
       });
-      var cmtes = data.filter(function(donor){
-        if (!!donor.CMTE_TP) return donor;
       });
-      // console.log("INDIVIDUALS ", indivs);
-      // console.log("Indiv: ", indivs);
-      var uniqIndiv = _.uniqBy(indivs, 'NAME');
-      var uniqCmte  = _.uniqBy(cmtes, 'CMTE_NM');
-      //Here I'm making sure every name is unique.
-      var result = indivs.concat(uniqCmte);
-      console.log("result");
-      result = typeMap(result);
-      res.json(result);
-      // //Original
-      // var uniquify = _.uniqBy(data, 'CMTE_NM');
-      //   console.log(uniquify);
-      //   res.json(uniquify);
-    });
-    });
-    });
-    });
-    });
-    });
-  });
-  })
-  })
+      });
+    }
+
   });
 });
 

@@ -210,7 +210,7 @@ export class GraphComponent implements OnInit  {
     Observable.forkJoin(
       this.http.get('/api/candidates/' + candId).map((res: Response) => res.json()),
       this.http.get('/api/legislators/' + candId).map((res: Response) => res.json()),
-      this.http.get('api/graph/senate/' + candId + '/' + size).map((res: Response) => res.json())
+      this.http.get('api/graph/' + candId + '/candidate' + size).map((res: Response) => res.json())
     ).subscribe(
       data => {
         this.candidate = data[0];
@@ -225,7 +225,7 @@ export class GraphComponent implements OnInit  {
     Observable.forkJoin(
       this.http.get('/api/candidates/' + candId).map((res: Response) => res.json()),
       this.http.get('/api/legislators/' + candId).map((res: Response) => res.json()),
-      this.http.get('api/graph/house/' + candId + '/' + size).map((res: Response) => res.json())
+      this.http.get('api/graph/' + candId + '/candidate').map((res: Response) => res.json())
     ).subscribe(
       data => {
         this.candidate = data[0];
