@@ -7,7 +7,16 @@ import {Component, OnInit} from 'angular2/core';
 
       <h1>About this Project</h1>
       <div class="about-container">
-        <p>Citizens Hub is part of a data project to visualize how funds exchange hands in our government. It is a compilation of public financial data from several different sources that creates donor maps for a candidate. The aim is to make it easier to understand the big picture of how campaign finance works. I'm still working on the project, so feel free to send any usability suggestions to danny@citizenshub.org.</p>
+
+        <p>Citizens Hub began out of my personal frustration with the current presidential election. I found that it was incredibly hard to be a truly informed voter, since there wasn't an unbiased news outlet I could use to do research. I thought that it would be interesting to create a sort of high-level political data dashboard, similar to stock market analysis tools, where users can come to their own opinions based off of verifiable data.</p>
+
+        <p>Citizens Hub is a collection of publicly available government data from a variety of different sources that has been combined and transformed into interactive graphical representations. The beta version currently contains the past 2 years of campaign donations and spending, which paints a high level picture of who the top donors are for each candidate and political action committee. I would like to expand and formalize the project to include lobbyist spending, congressional voting history, government contract data, and historical data for all congressional actions. If you like the idea, please give to the crowdfunding campaign or email me if you would like to contribute in some other way.</p>
+
+        <p>I would love to hear your feedback on how I can make the app more usable and what new features people are most interested in seeing. This is a personal project, so I haven't vetted every page. Any bug reports and typo fixes would be appreciated. For bugs, inaccuracies, and usability concerns please send an email to admin@citizenshub.org, and I will add them to the known issues and address them in order of urgency. For any feature suggestions, feedback, or general inquiries please email me at danny@citizenshub.org.</p>
+
+        <p>-Danny Robinson</p>
+
+        <p>*Note - I highly suggest viewing this site in Chrome. Data visualizations are very slow/buggy in other browsers for large datasets.</p>
       </div>
     </div>
   `,
@@ -24,7 +33,7 @@ import {Component, OnInit} from 'angular2/core';
       flex-direction: column;
     }
     .about-container {
-      width: 30%;
+      width: 70%;
       text-align: justify;
     }
     .about-container p {

@@ -112,11 +112,12 @@ export class SizePieComponent implements OnInit, OnChanges {
     var http = this.http;
     var pieData = [];
       console.log("Size pie data ", data);
-      Object.keys(data[0]).forEach((key)=>{
+      data.data = JSON.parse(data.data);
+      Object.keys(data.data[0]).forEach((key)=>{
         if (key !== "count"){
           pieData.push({
             label: key,
-            amount: +data[0][key]
+            amount: +data.data[0][key]
           });
         }
       });

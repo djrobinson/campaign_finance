@@ -9,7 +9,7 @@ import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgFo
   template: `
     <div class="funding-container">
       <h1>Support Citizens Hub</h1>
-      <p>Help pay for hosting & development of Citizens Hub.</p>
+      <p>Citizens Hub is currently a personal project. I will keep the site live for the next few months and pay for hosting out of pocket. If you would like to see the project around longer, please pitch in! I have plans to build this into a more all-encompassing view of the government (not just election spending), so if you like the idea and want to see it expanded and formalized, contribute to hosting and development below!</p>
       <label for="amount">Amount</label>
       <input
         [(ngModel)]="amount"
@@ -41,8 +41,9 @@ import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgFo
       font-family: 'Oswald';
       font-weight: 300;
       position: absolute;
-      width: 100%;
+      width: 60%;
       height: 100%;
+      left: 20%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -54,13 +55,12 @@ import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgFo
     }
     .address {
       font-family: 'Courier New';
-      color: black;
+      color: maroon;
       margin-top: 1rem;
       font-size: 2rem;
-      background: white;
+      background: gray;
       padding: 1rem;
-      border-radius: 3rem;
-      border: 2px solid #9DBF9E;
+      border-radius: 1rem;
     }
     .button {
       font-family: 'Oswald';
@@ -79,7 +79,7 @@ import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgFo
       border: 2px solid #9DBF9E;
       border-radius: 25px;
       box-sizing: border-box;;
-      width: 20%;
+      width: 40%;
 
     }
 

@@ -87,9 +87,9 @@ export class BubbleComponent implements OnInit {
 
     d3.json("/api/individuals/bubble/"+cmte, function(error, root) {
       ctrl.isRequesting = false;
-      console.log("Bubble Root: ", root.children);
+      console.log("Bubble Root: ", root.data[0]);
       var node = svg.selectAll(".node")
-        .data(bubble.nodes(classes(root))
+        .data(bubble.nodes(classes(JSON.parse(root.data[0])))
           .filter(function(d) { return !d.children; }))
         .enter().append("g")
         .attr("class", "node")

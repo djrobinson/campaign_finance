@@ -1,9 +1,9 @@
 var http = require('http');
 var mongoose = require('mongoose');
-mongoose.connect();
+mongoose.connect('mongodb://admin:dingo_crayons@ds049306-a0.mlab.com:49306,ds049306-a1.mlab.com:49306/heroku_b3tct5bh?replicaSet=rs-ds049306');
 // mongoose.connect('mongodb://localhost/testPolis');
 
-var Graph = mongoose.model('pies', { id: String, size: String, data: [] });
+var Graph = mongoose.model('bubble', { id: String, size: String, data: [] });
 
 //Get the list of candidates that you will seed the db with:
 var columns = ['id'];
@@ -27,7 +27,7 @@ function getCandidateGraph(callback, cmte) {
   // return http.get('http://warm-cove-43638.herokuapp.com/api/individuals/committee/'+cmteIds[i].id+'/date'
   //individuals/bubble/ + cmte_id
   //individuals/committee/+ cmte_id + /pie
-  return http.get('http://www.citizenshub.org/api/individuals/committee/'+cmte.id+'/pie'
+  return http.get('http://www.citizenshub.org/api/individuals/bubble/'+cmte.id
     ,function(response) {
         var body = '';
         response.on('data', function(d) {
@@ -58,5 +58,3 @@ function printData(data){
     getCandidateGraph(printData, cmteIds[i]);
   }
 }
-
-
