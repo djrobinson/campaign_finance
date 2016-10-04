@@ -116,43 +116,43 @@ router.get('/transaction/:tran_id', function(req, res, next){
   });
 });
 
-// router.get('/bubble/:cmte_id', function(req, res, next){
-//   query.bubbleContrib(req.params.cmte_id).then(function(data){
-//     res.json({'name': 'Donors',
-//               'children': data.map(function(d){
-//                 return {
-//                   'name': d.NAME,
-//                   'size': d.TRANSACTION_AMT,
-//                   'TRAN_ID': d.TRAN_ID
-//                 }
-//               })});
-//   });
-// });
-
-// router.get('/committee/:cmte_id/pie', function(req, res, next){
-//   query.indivByCmtePie(req.params.cmte_id).then(function(data){
-//     console.log(data);
-//     res.json(data.rows);
-//   });
-// });
-
-//C00574624
-
 router.get('/bubble/:cmte_id', function(req, res, next){
-  bubbleGraph.findOne({id: req.params.cmte_id}, function(err, data){
-    if (err) handleError(err);
-    console.log(data);
-    res.json(data);
+  query.bubbleContrib(req.params.cmte_id).then(function(data){
+    res.json({'name': 'Donors',
+              'children': data.map(function(d){
+                return {
+                  'name': d.NAME,
+                  'size': d.TRANSACTION_AMT,
+                  'TRAN_ID': d.TRAN_ID
+                }
+              })});
   });
 });
 
 router.get('/committee/:cmte_id/pie', function(req, res, next){
-  pieGraph.findOne({id: req.params.cmte_id}, function(err, data){
-    if (err) handleError(err);
+  query.indivByCmtePie(req.params.cmte_id).then(function(data){
     console.log(data);
-    res.json(data);
+    res.json(data.rows);
   });
 });
+
+//C00574624
+
+// router.get('/bubble/:cmte_id', function(req, res, next){
+//   bubbleGraph.findOne({id: req.params.cmte_id}, function(err, data){
+//     if (err) handleError(err);
+//     console.log(data);
+//     res.json(data);
+//   });
+// });
+
+// router.get('/committee/:cmte_id/pie', function(req, res, next){
+//   pieGraph.findOne({id: req.params.cmte_id}, function(err, data){
+//     if (err) handleError(err);
+//     console.log(data);
+//     res.json(data);
+//   });
+// });
 
 
 // router.get('/committee/:cmte_id/date', function(req, res, next){

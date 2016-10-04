@@ -87,9 +87,9 @@ export class BubbleComponent implements OnInit {
 
     d3.json("/api/individuals/bubble/"+cmte, function(error, root) {
       ctrl.isRequesting = false;
-      console.log("Bubble Root: ", root.data[0]);
+      console.log("Bubble Root: ", root.children);
       var node = svg.selectAll(".node")
-        .data(bubble.nodes(classes(root.data[0]))
+        .data(bubble.nodes(classes(root))
           .filter(function(d) { return !d.children; }))
         .enter().append("g")
         .attr("class", "node")
@@ -125,7 +125,13 @@ export class BubbleComponent implements OnInit {
         .attr("dy", ".3em")
         .style("text-anchor", "middle")
         .style("pointer-events", "none")
-        .text(function(d) { return d.className.substring(0, d.r / 3); });
+        .text(function(d) {
+          if (!!d.className){
+            return d.className.substring(0, d.r / 3);
+          } else {
+            return "";
+          }
+        });
     });
 
     function classes(root) {
