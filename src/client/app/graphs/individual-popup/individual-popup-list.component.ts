@@ -22,7 +22,7 @@ import {Router} from 'angular2/router';
           <div class="one-half column text-center">
             <h4>{{indiv?.NAME}}</h4>
             <p>{{indiv?.EMPLOYER}}</p>
-            <p>{{indiv?.CMTE_ID}}</p>
+            <p>{{indiv?.CMTE_NM}}</p>
           </div>
           <div class="one-half column">
             <p>Donation: {{parseFloat(indiv?.TRANSACTION_AMT) | currency:'USD':true}}</p>

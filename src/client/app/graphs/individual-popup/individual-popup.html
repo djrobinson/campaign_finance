@@ -12,6 +12,10 @@
     Size: {{parseFloat(individual?.TRANSACTION_AMT) | currency:'USD':true}} </h5>
     <table>
       <tr>
+        <td>Donation To:</td>
+        <td>{{individual?.CMTE_NM}}</td>
+      </tr>
+      <tr>
         <td>Hometown:</td>
         <td>{{individual?.CITY}}, {{individual?.STATE}}</td>
       </tr>

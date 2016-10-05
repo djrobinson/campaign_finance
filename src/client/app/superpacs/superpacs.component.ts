@@ -47,7 +47,10 @@ export class SuperpacsComponent implements OnInit {
         data => {
 
           /* if congressman */
-
+          data = data.map(function(item){
+            item.tile_color = 'solid gray 15px';
+            return item;
+          })
           this.candidates = data
           this.candidatesView = data;
           console.log(this.candidates);

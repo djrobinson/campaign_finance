@@ -16,11 +16,13 @@ module.exports = {
   },
   getContribByDon: function(donor, offset){
     return knex('indiv_contrib')
-           .where('NAME', 'like', '%'+donor+'%')
+           .join('committee_master', 'indiv_contrib.CMTE_ID', 'committee_master.CMTE_ID')
+           .where('NAME', 'like', donor+'%')
            .offset(offset);
   },
   getContribById: function(tran_id){
     return knex('indiv_contrib')
+            .join('committee_master', 'indiv_contrib.CMTE_ID', 'committee_master.CMTE_ID')
             .where('TRAN_ID', tran_id);
   },
   bubbleContrib: function(cmte_id){
@@ -30,6 +32,10 @@ module.exports = {
             .orderBy('TRANSACTION_AMT', 'desc')
             .limit(100)
   },
+
+// GET /api/individuals?donor=STATWARE%20INC.%20AND%20OTHER%20FIRMS 304 7114.601 ms - -
+// GET /api/individuals/transaction/SA11AI.4375 304 7123.890 ms - -
+// GET /api/individuals?donor=STATWARE%20INC.%20AND%20OTHER%20FIRMS 304 4222.550
   aggregateEmpl: function(donor, offset){
     return knex('indiv_contrib')
            .select('EMPLOYER')

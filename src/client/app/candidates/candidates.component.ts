@@ -89,18 +89,19 @@ export class CandidatesComponent implements OnInit {
               this.headerType = 'House';
             }
             var finalData = data.map((item) => {
-              // if (item.PARTY_CODE === 'DEM') {
-              //   item.tile_color = demColors[Math.floor(Math.random() * 3)];
-              // } else if (item.PARTY_CODE === 'REP') {
-              //   item.tile_color = repColors[Math.floor(Math.random() * 3)];
-              // } else {
-              //   item.tile_color = '#4C4664';
-              // }
+              if (item.PARTY_CODE === 'DEM') {
+                item.tile_color = demColors[Math.floor(Math.random() * 3)];
+              } else if (item.PARTY_CODE === 'REP') {
+                item.tile_color = repColors[Math.floor(Math.random() * 3)];
+              } else {
+                item.tile_color = 'solid gray 15px';
+              }
               item.tile_color = 'solid gray 15px';
                this.http.get('/api/legislators/' + item.CANDIDATE_ID)
                  .map(res => res.json())
                  .subscribe(
                  secondData => {
+                   console.log("SecondData: ", secondData);
                    if (secondData[0].id){
                      item.profile_img = "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + secondData[0].id.bioguide + ".jpg";
                    } else {

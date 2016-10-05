@@ -40,8 +40,7 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
     var internalList = this.individualListPopupComponent;
     console.log(this.individualTran);
     Observable.forkJoin(
-      this.http.get('/api/individuals/transaction/'+this.individualTran).map((res: Response) => res.json()),
-      this.http.get('/api/individuals?donor=' + this.indivName).map((res: Response) => res.json())
+      this.http.get('/api/individuals/transaction/'+this.individualTran).map((res: Response) => res.json())
     ).subscribe(
       data => {
         this.isRequesting = false;
@@ -54,7 +53,6 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
             return indiv;
           };
         }.bind(this))[0];
-        this.otherIndividuals = data[1];
       },
       err => console.error(err)
       );
