@@ -44,11 +44,9 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
     ).subscribe(
       data => {
         this.isRequesting = false;
-        console.log("Here's the indiv data: ", data);
         this.individual = data[0].filter(function(indiv){
           console.log("filter: ", indiv, this.indivName);
           if (indiv.NAME === this.indivName){
-            console.log("Worked");
             indiv.FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + indiv.IMAGE_NUM;
             return indiv;
           };
@@ -65,12 +63,20 @@ export class IndividualPopupComponent implements OnInit, OnChanges {
 
   changeIndiv(event){
     this.isRequesting = true;
-    console.log("Transaction ID from event ", event.transaction);
-    this.individualTran =  event.transaction;
+    console.log("Transaction ID from event ", event);
+    this.individualTran = event.transaction;
+    var tranDate = event.date;
     this.http.get('/api/individuals/transaction/' + this.individualTran).map(response => response.json()).subscribe(data => {
-      this.isRequesting = false;
-      console.log("Transaction change indiv ", data);
-      this.individual = data[0];
+        this.isRequesting = false;
+        console.log("Here's the indiv data: ", data);
+        this.individual = data.filter(function(indiv){
+          console.log("filter: ", indiv, this.indivName);
+          if (indiv.NAME === this.indivName && indiv.TRANSACTION_DT === tranDate){
+            console.log("Worked");
+            indiv.FEC_LINK = 'http://docquery.fec.gov/cgi-bin/fecimg/?' + indiv.IMAGE_NUM;
+            return indiv;
+          };
+        }.bind(this))[0];
     }, error => console.log('Could not load transactions.'));
     this.isSelected = !this.isSelected;
     this.showList = !this.showList;

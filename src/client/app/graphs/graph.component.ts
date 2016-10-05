@@ -245,7 +245,7 @@ export class GraphComponent implements OnInit  {
         });
 
         var candArr = result.filter((elem)=>{
-          return (elem.CMTE_DSGN === 'P' && !this.isSuperpac || elem.CMTE_TP === 'O' && this.isSuperpac);
+          return (elem.CMTE_DSGN === 'P' || elem.CMTE_TP === 'P' && !this.isSuperpac || elem.CMTE_TP === 'O' && this.isSuperpac);
         });
         console.log("candArr", candArr);
         candArr[0].CANDIDATE = this.candidate_id;
@@ -700,7 +700,7 @@ export class GraphComponent implements OnInit  {
       })
 
     var candNode = svg.selectAll(".node")
-      .filter(function(d) { return d.CMTE_DSGN === "P" })
+      .filter(function(d) { return (d.CMTE_TP === "P" || d.CMTE_DSGN === "P") })
       .attr("width", 100)
       .attr("height", 100)
         .append("circle")

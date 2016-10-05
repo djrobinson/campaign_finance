@@ -152,7 +152,8 @@ export class IndividualListPopupComponent implements OnInit {
       if (!isMobile){
         this.tranEmit.emit({
           transaction: indiv.TRAN_ID,
-          name: indiv.NAME
+          name: indiv.NAME,
+          date: indiv.TRANSACTION_DT
         })
       } else {
         this.router.navigate(['MobileIndividualPopupComponent', { transaction: indiv.TRAN_ID } ]);
