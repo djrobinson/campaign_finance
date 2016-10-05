@@ -8,11 +8,13 @@ import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
 })
 export class TreemapComponent implements OnInit, OnChanges {
   @Input() route: string;
+  @Input() graphtype: string;
   private level: string = "main";
   private lin_ima: string;
   public isRequesting: boolean=true;
   public isChrome: boolean;
   public isFirst: boolean=true;
+  public graphtypeWord: string;
 
   constructor (){
     this.parseFloat = function(num) {
@@ -21,7 +23,14 @@ export class TreemapComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(){
+    console.log("Thislkasjdfl", this.graphtype);
     var ctrl = this;
+    this.graphtypeWord = this.graphtype;
+    if (this.graphtype === 'superpac'){
+      this.graphtypeWord = "The Super PAC treemap represents all funds spent by a given Super PAC in support (green) or against (red) a candidate. "
+    } else {
+      this.graphtypeWord = "The operating expenditure treemap represents all transactions to different companies by a given committee. "
+    }
     this.buildTreeMap(this.route, ctrl);
   }
 
