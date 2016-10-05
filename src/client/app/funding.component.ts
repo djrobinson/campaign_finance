@@ -9,7 +9,7 @@ import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgFo
   template: `
     <div class="funding-container">
       <h1>Support Citizens Hub</h1>
-      <p>Citizens Hub is currently a personal project. I plan to keep the site live during the election, but if you would like to see the project around please contribute! I have plans to integrate a lot of other interesting data into this site, so if you like the idea and want to see it expanded, contribute to hosting and development below.</p>
+      <h5>Citizens Hub is currently a personal project. I plan to keep the site live during the election, but if you would like to see the project around please contribute! I have plans to integrate a lot of other interesting data into this site, so if you like the idea and want to see it expanded, contribute to hosting and development below.</h5>
       <label for="amount">Amount</label>
       <input
         [(ngModel)]="amount"
@@ -50,7 +50,7 @@ import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgFo
       flex-direction: column;
     }
     input {
-      width: 40%;
+      width: 30%;
       text-align: center;
     }
     .address {

@@ -37,6 +37,18 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       width:70px;
     }
 
+    #open-mobile-lines {
+      position: fixed;
+      top: 2rem;
+      left: 36%;;
+      z-index: 6;
+      border-bottom: 30px double #6C6F7D;
+      border-top: 10px solid #6C6F7D;
+      content:"";
+      height: 10px;
+      width:70px;
+    }
+
     .logo {
       position: fixed;
       padding-top: 2rem;
@@ -50,6 +62,33 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       background: #73877B;
       height: 10rem;
       width: 10rem;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      text-align: center;
+      justify-content: center;
+      color: white;
+      border-radius: 50%;
+      z-index: 5;
+    }
+
+    .mobile-logo {
+      position: fixed;
+      padding-top: 2rem;
+      padding-right: 1rem;
+      padding-left: 1rem;
+      margin: 0;
+      top: 2rem;
+      left: 2rem;
+      font-family: 'Prata', serif;
+      font-size: 2rem;
+      background: #73877B;
+      height: 16rem;
+      width: 16rem;
       display: -webkit-box;
       display: -moz-box;
       display: -ms-flexbox;
@@ -133,21 +172,10 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       </div>
     </div>
     <div *ngIf="isMobile" class="app-mobile">
-      <div *ngIf="sideMenu" id="mobile-menu">
-        <div class="menu-option" (click)="home()"><h5>Home</h5></div>
-        <div class="menu-option"><h5>About</h5></div>
-        <div class="menu-option"><h5>Presidential Funding</h5></div>
-        <div class="menu-option"><h5>Super PACs</h5></div>
-        <div class="menu-option"><h5>Senate Funding</h5></div>
-        <div class="menu-option"><h5>House Funding</h5></div>
-        <div class="menu-option"><h5>Resources</h5></div>
-        <div class="menu-option"><h5>Donate</h5></div>
-        <div class="menu-option"><h5>About</h5></div>
+      <div class="mobile-logo" (click)="home()">
+        <p>Citizens Hub</p>
       </div>
-      <div  [class.mobile-content-width]="sideMenu">
-        <div id="mobile-lines" (click)="showMenu()"></div>
-        <router-outlet></router-outlet>
-      </div>
+         <router-outlet></router-outlet>
     </div>
 
 

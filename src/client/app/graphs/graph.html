@@ -25,9 +25,9 @@
     <div class="main-instructions">
         <div class="graph-instruction-block usage" (mouseover)="showPreview()"  (mouseout)="hidePreview()">Hover over a node to see the donor name and transaction size in the preview box below</div>
         <div class="graph-instruction-block usage" (mouseover)="showExamplePopup()"  (mouseout)="hideExamplePopup()">Click each circle to look at a detailed donor profile for the individual/committee</div>
-        <div class="graph-instruction-block usage" (mouseover)="showMoreButton()"  (mouseout)="hideMoreButton()">Select “More Nodes” in the bottom-left to double the nodes branching off the presidential candidate</div>
+        <div *ngIf="isPres" class="graph-instruction-block usage" (mouseover)="showMoreButton()"  (mouseout)="hideMoreButton()">Select “More Nodes” in the bottom-left to double the nodes branching off the presidential candidate</div>
         <div class="graph-instruction-block" (mouseover)="showFlow()"  (mouseout)="hideFlow()">
-          Funds flow from outer nodes to inner nodes.
+          Funds flow from outer nodes to inner nodes (Except for occasional contribution refunds. Click the transaction to see the purpose.)
         </div>
         <div class="graph-instruction-block" (mouseover)="selectTypes()" (mouseout)="deselectTypes()">Green circles represent single donations from individuals</div>
         <div class="graph-instruction-block" (mouseover)="selectCategory()" (mouseout)="deselectCategory()">The yellow/red circles represent committees, with their shade based on overall contributions.</div>

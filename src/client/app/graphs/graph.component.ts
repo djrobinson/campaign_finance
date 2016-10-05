@@ -714,9 +714,8 @@ export class GraphComponent implements OnInit  {
 
 
     function addText(d) {
-      if (!d.CANDIDATE){
         var size = "1rem";
-        var name = d.CANDIDATE || d.NAME || d.CMTE_NM;
+        var name = d.NAME || d.CMTE_NM;
         console.log("anMalkasdlk", name);
         if (!!name){
            var words = name.split(' ');
@@ -745,7 +744,6 @@ export class GraphComponent implements OnInit  {
           words.pop();
         }
       }
-    }
 
     force.on("tick", function() {
       link.attr("x1", function(d) { return d.source.x; })

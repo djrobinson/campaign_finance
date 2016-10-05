@@ -6,6 +6,7 @@ import {Component, OnInit} from 'angular2/core';
     <div class="funding-container">
       <h1>Methods & Resources</h1>
       <h5>Coming Soon</h5>
+      <p>This section will include an explanation for how each graph gets generated, any known bugs, and FAQs.</p>
     </div>
   `,
   styles: [`
