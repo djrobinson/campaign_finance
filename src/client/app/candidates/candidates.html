@@ -11,18 +11,15 @@
       <div class="eight columns instructions">
         The candidates listed below are all candidates who have both registered with the FEC as candidates and have reported any funds being raised in the current 2-year election cycle. The candidates are sorted by total money raised (total receipts). You can filter by name or state using the text field and the drop down, and reset the list by clicking sort by receipts. Select a candidate to generate a donor map and begin exploring.
       </div>
-      <div class="two columns">
+      <div class="three columns">
         <div class="spacer">
         </div>
       </div>
     </div>
     <div class="row twelve columns toolbar-stuff">
-      <div class="one columns">
+      <div class="three columns">
       </div>
-      <div class="option three columns" (click)="sortCandidates()">
-        Sort by Receipts
-      </div>
-      <div class="option four columns search-box">
+      <div class="option six columns search-box">
           <tr>
             <td>
               Search by Name
@@ -35,15 +32,7 @@
             </td>
           </tr>
       </div>
-      <div class="option three columns dropdown">
-        Sort by State
-        <div class="list-container">
-          <div class="dropdown-list">
-            <div *ngFor="#state of states" class="dropdown-item"  (click)="setState(state)">{{state}}</div>
-          </div>
-        </div>
-      </div>
-      <div class="one column">
+      <div class="three columns">
       </div>
     </div>
   </div>

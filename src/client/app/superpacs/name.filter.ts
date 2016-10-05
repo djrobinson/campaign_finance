@@ -7,6 +7,6 @@ import {Injectable, Pipe, PipeTransform} from 'angular2/core';
 export class NameFilter implements PipeTransform {
   transform(candidates: any[], args: any[]): any {
     console.log("Here's the transform: ", candidates);
-    return candidates.filter(candidate => candidate.CANDIDATE_NAME.toLowerCase().indexOf(args[0].toLowerCase()) !== -1);
+    return candidates.filter(candidate => candidate.CMTE_NM.toLowerCase().indexOf(args[0].toLowerCase()) !== -1);
   }
 }

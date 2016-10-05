@@ -10,11 +10,12 @@ import {Component, OnInit} from 'angular2/core';
 
         <p>Citizens Hub began out of my personal frustration with the current presidential election. I started the year trying to thoroughly research each candidate, but I found that becoming an informed voter was actually pretty difficult to accomplish. Typical news sources were too biased, candidate statements were always empty, and the information provided by the government was nightmarishly boring and incomprehensible to most voters.</p>
 
-        <p>After sifting through a bunch of government data I had an idea for a high-level political data dashboard, similar to stock market analysis tools.  using only data pulled directly from government sites. Citizens Hub is a collection of publicly available government data from a variety of different sources that has been combined and transformed into interactive graphical representations. The beta version currently contains the past 2 years of campaign donations and spending, which paints a high level picture of who the top donors are for each candidate and political action committee. I have plans to expand and formalize the project to include lobbyist spending, congressional voting history, government contract data, and historical data for all congressional actions.</p>
+        <p>After sifting through campaign spending data I had an idea for a high-level political data dashboard similar to stock market analysis tools using only data pulled directly from government sites. Citizens Hub is a collection of publicly available government data that has been transformed into interactive graphical representations. The beta version currently contains the past 2 years of campaign donations and spending, which paints a high level picture of who the top donors are for each candidate and political action committee. I plan to expand the project to include lobbyist spending, congressional voting history, government contract data, and historical data for all congressional actions.</p>
 
         <p>If you like the idea, please give to the crowdfunding campaign or email me if you would like to contribute in some other way. I would love to hear your feedback on how I can make the app more usable and what new features people are most interested in seeing. This is a personal project, so I haven't vetted every page. Any bug reports and typo fixes would be appreciated. For bugs, inaccuracies, and usability concerns please send an email to admin@citizenshub.org, and I will add them to the known issues and address them in order of urgency. For any feature suggestions, feedback, or general inquiries please email me at danny@citizenshub.org.</p>
-
-        <p>-Danny Robinson</p>
+        <div class="text-left">
+          <p>-Danny Robinson</p>
+        </div>
 
         <p>*Note - I highly suggest viewing this site in Chrome. Data visualizations are very slow/buggy in other browsers for large datasets.</p>
       </div>

@@ -17,12 +17,9 @@
       </div>
     </div>
     <div class="row twelve columns toolbar-stuff">
-      <div class="one columns">
+      <div class="three columns">
       </div>
-      <div class="option three columns" (click)="sortCandidates()">
-        Sort by Receipts
-      </div>
-      <div class="option four columns search-box">
+      <div class="option six columns search-box">
           <tr>
             <td>
               Search by Name
@@ -35,21 +32,13 @@
             </td>
           </tr>
       </div>
-      <div class="option three columns dropdown">
-        Sort by State
-        <div class="list-container">
-          <div class="dropdown-list">
-            <div *ngFor="#state of states" class="dropdown-item"  (click)="setState(state)">{{state}}</div>
-          </div>
-        </div>
-      </div>
-      <div class="one column">
+      <div class="three columns">
       </div>
     </div>
   </div>
   <div class="row candidates-container">
     <ul class="list twelve columns">
-      <li *ngFor="#candidate of candidatesView" class="list-item four columns" [style.border]="candidate.tile_color">
+      <li *ngFor="#candidate of candidatesView  | nameFilter:name" class="list-item four columns" [style.border]="candidate.tile_color">
         <div class="candidate-profile three columns">
           <div class="row">
             <div class="button"

@@ -4,14 +4,14 @@ import {Http, Response} from 'angular2/http';
 // import * as _ from 'lodash';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgForm } from 'angular2/common';
-// import {NameFilter} from './name.filter';
+import {NameFilter} from './name.filter';
 
 
 @Component({
   selector: 'superpacs-view',
   styleUrls: ['app/superpacs/superpacs.css'],
   templateUrl: 'app/superpacs/superpacs.html',
-  // pipes: [NameFilter],
+  pipes: [NameFilter],
 })
 export class SuperpacsComponent implements OnInit {
   private candidates: any[];
@@ -73,13 +73,6 @@ export class SuperpacsComponent implements OnInit {
     // this.candidatesView = _.sortBy(this.candidates, function(o){
     //   return parseFloat(o[column]);
     // }).reverse();
-  }
-
-  public setState(state)
-  {
-    console.log(this.candidates);
-    this.filterByState(state);
-    this.filterByState(state);
   }
 
   public filterByState(state) {
