@@ -74,9 +74,13 @@ import {MobileIndividualPopupComponent} from './graphs/mobile-popups/mobile-indi
       color: white;
       border-radius: 50%;
       z-index: 5;
+      cursor: pointer;
+      cursor: hand;
     }
 
     .mobile-logo {
+      cursor: pointer;
+  cursor: hand;
       position: fixed;
       padding-top: 2rem;
       padding-right: 1rem;

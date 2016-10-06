@@ -5,8 +5,13 @@ import {Component, OnInit} from 'angular2/core';
   template: `
     <div class="funding-container">
       <h1>Methods & Resources</h1>
-      <h5>Coming Soon</h5>
-      <p>This section will include an explanation for how each graph gets generated, any known bugs, and FAQs.</p>
+      <p>Data was last pulled on September 30th, 2016. This will include all individual transaction data through September 30th. Aggregate data will be from around August 31st, depending on the most recent financial report.</p>
+      <h5>Known Issues:</h5>
+      <ul>
+        <li>Text overflowing throughout the app</li>
+        <li>Slow load time for individual name search</li>
+      </ul>
+
     </div>
   `,
   styles: [`

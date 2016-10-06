@@ -2,7 +2,7 @@
 
 .movement-instructions {
   font-family: 'Oswald';
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: 500;
   position: fixed;
   bottom: 15.5%;
@@ -12,6 +12,8 @@
 
 circle {
   z-index: 20;
+  cursor: pointer;
+  cursor: hand;
 }
 image {
   z-index: 20;
@@ -80,6 +82,18 @@ image {
   font-weight: 300;
   box-sizing: border-box;
   border-left: solid 3px #4d4d4d;
+}
+
+.instructions-3 {
+  position: fixed;
+  right: 0;
+  bottom: 0%;
+  background-color: white;
+  font-family: 'Oswald';
+  font-weight: 300;
+  box-sizing: border-box;
+  border-left: solid 3px #4d4d4d;
+  z-index: 2;
 }
 
 .tree-close {

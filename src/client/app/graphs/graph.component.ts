@@ -666,6 +666,8 @@ export class GraphComponent implements OnInit  {
 
     node.append("circle")
       .attr("class", "circle")
+      .style("cursor", "pointer")
+      .style("cursor", "hand")
       .attr("r",function(d) {
         if (d.graphtype === "superpac"){
           return 40;
@@ -706,6 +708,8 @@ export class GraphComponent implements OnInit  {
         .append("circle")
         .attr("id", "cand-node")
         .style("fill", "url('"+absUrl+"#circles-1')")
+        .style("cursor", "pointer")
+        .style("cursor", "hand")
         .attr("r", 60);
 
     node.append("text")
