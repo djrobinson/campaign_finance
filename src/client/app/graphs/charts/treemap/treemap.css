@@ -183,6 +183,8 @@
 
     .fec {
       height: 5rem;
+      cursor: pointer;
+  cursor: hand;
     }
 
     #tip-purpose {

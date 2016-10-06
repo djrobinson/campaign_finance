@@ -127,9 +127,14 @@
 
 .fec {
   height: 3rem;
+  cursor: pointer;
+  cursor: hand;
 }
 
+
 .main-menu-sel {
+  cursor: pointer;
+  cursor: hand;
   font-weight: 700;
   display: flex;
   padding: 0;

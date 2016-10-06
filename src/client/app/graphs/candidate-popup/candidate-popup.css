@@ -54,6 +54,8 @@ tr {
   margin: 0;
   height:10rem;
   width: 10rem;
+  cursor: pointer;
+  cursor: hand;
 }
 
 .close-button {

@@ -67,6 +67,8 @@ td:nth-child(2n) {
 
 .fec {
   height: 8rem;
+  cursor: pointer;
+  cursor: hand;
 }
 
 .donor-tile:nth-child(2n) {

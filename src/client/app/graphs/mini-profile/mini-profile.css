@@ -42,6 +42,8 @@
 
 .fec {
   height: 6rem;
+  cursor: pointer;
+  cursor: hand;
 }
 
 td {
