@@ -95,6 +95,9 @@ export class GraphComponent implements OnInit  {
     this.isFirst = false;
   }
 
+  showInstructions(){
+    this.isFirst = true;
+  }
   showIndivPopup(event){
     this.indivName = event.name;
     this.indivPopup = true;

@@ -99,7 +99,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
         .map((res: Response) => res.json())
     ).subscribe(
       data => {
-        console.log("Candidate popup data: ", data);
         this.stopRefreshing();
         this.candidate = data[0][0];
         this.primaryCmte = data[1].filter((cmte)=>{
@@ -107,8 +106,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
             return cmte
           };
         })[0];
-        console.log("Cand Data")
-        console.log("Primary length: ",this.primaryCmte.CMTE_NM.length);
         if (this.primaryCmte.CMTE_NM.length > 20 ){
           this.longName = true;
         } else {
@@ -138,7 +135,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
 
         this.stopRefreshing();
         this.candidate = data[0][0];
-        console.log("Primary length: ",this.candidate.com_nam.length);
         if (this.candidate.com_nam.length > 30 ){
           this.longName = true;
         } else {
@@ -161,7 +157,6 @@ export class CandidatePopupComponent implements OnInit, OnChanges {
   }
 
   public changeTran(event){
-    console.log("Change indiv Candidate Level", event);
     this.changeIndiv.emit({
       tranId: event.transaction,
       name: event.name

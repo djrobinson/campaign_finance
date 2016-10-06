@@ -24,7 +24,6 @@ export class TreemapComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(){
-    console.log("Thislkasjdfl", this.graphtype);
     var ctrl = this;
     this.graphtypeWord = this.graphtype;
     if (this.graphtype === 'superpac'){
@@ -227,7 +226,6 @@ export class TreemapComponent implements OnInit, OnChanges {
     //starts w/ passed in data
     ///api/pac/aggregate/P00003392
     d3.json(route, function(root) {
-      console.log("Here's inside treemap route: ", root);
       initialize(root);
       accumulate(root);
       layout(root);
@@ -345,7 +343,6 @@ export class TreemapComponent implements OnInit, OnChanges {
         g.attr("class", "cell")
           .on("click", transition)
           .on('mouseover', function(d) {
-            console.log(d);
             // this variable will be used in a loop to store the current node being inspected
             var currentNode = d;
             // this array will hold the names of each subsequent parent node
@@ -363,7 +360,6 @@ export class TreemapComponent implements OnInit, OnChanges {
             //  use this to set the tooltip text
 
             ctrl.lin_ima = d.fec;
-            console.log("Setting lin-ima : ", ctrl.lin_ima);
             d3.select('#tip-name').text(d.name);
             d3.select('#tip-amount').text("$" + d.value.formatMoney(2));
             d3.select('#tip-support').text(d.support);
@@ -380,10 +376,8 @@ export class TreemapComponent implements OnInit, OnChanges {
           .select("text")
 
         function transition(d) {
-          console.log("TRANSITION: ", d);
           if (d){
             if (d._children === undefined) {
-              console.log("No Transition?");
               return;
             };
           }
@@ -393,7 +387,6 @@ export class TreemapComponent implements OnInit, OnChanges {
             ctrl.level = d.category;
           }
 
-          console.log(d.parent);
           if (typeof d === 'grandparent'){
             ctrl.level = 'main';
           }
@@ -482,7 +475,6 @@ export class TreemapComponent implements OnInit, OnChanges {
   }
 
   public openFec(lin_ima){
-    console.log("Open FEC: ", lin_ima);
     window.open("http://"+lin_ima);
   }
 

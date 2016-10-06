@@ -16,7 +16,6 @@ export class Landing implements OnInit {
   ngOnInit() {
     this.landing = true;
     this.isMobile = this.mobileAndTabletcheck();
-    console.log("Device Type: ", this.isMobile);
   }
 
   mobileAndTabletcheck() {
@@ -30,32 +29,26 @@ export class Landing implements OnInit {
   }
 
   public home(): void {
-    console.log("Home");
     this.router.navigate(['Landing']);
   }
 
   public about(): void {
-    console.log("Home");
     this.router.navigate(['About']);
   }
 
   public methods(): void {
-    console.log("Home");
     this.router.navigate(['Methods']);
   }
 
   public funding(): void {
-    console.log("Home");
     this.router.navigate(['Funding']);
   }
 
   public superpacs(): void {
-    console.log("Home");
     this.router.navigate(['Superpacs']);
   }
 
   public candPath(typeVar): void {
-    console.log("inbound");
     this.router.navigate(['Candidates', { type: typeVar } ]);
     this.sideMenu = false;
   }

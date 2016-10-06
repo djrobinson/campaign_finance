@@ -142,7 +142,6 @@ export class PacsListComponent implements OnInit {
 
   ngOnInit(){
     this.http.get('/api/pac/' + this.cand.CANDIDATE_ID + '/candidate').map(response => response.json()).subscribe(data => {
-      console.log(data);
       this.pacs = data;
     }, error => console.log('Could not load individuals.'));
   }

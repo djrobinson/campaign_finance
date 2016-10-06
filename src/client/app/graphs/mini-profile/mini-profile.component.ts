@@ -33,7 +33,7 @@ export class MiniProfileComponent implements OnChanges, OnInit {
   }
 
   public updateMiniProfile(d){
-    console.log("View Child Blah ", d);
+
     this.cmte = d;
   }
 

@@ -103,7 +103,6 @@ export class SizePieComponent implements OnInit, OnChanges {
       this.http.get('/api/individuals/committee/'+this.cmte+'/pie')
         .subscribe(
             result => {
-                      console.log(result._body);
                       this.callAsc(JSON.parse(result._body));
                       this.stopRefreshing();
                     },
@@ -115,7 +114,6 @@ export class SizePieComponent implements OnInit, OnChanges {
     var buildPieChart = this.buildPieChart;
     var http = this.http;
     var pieData = [];
-      console.log("Size pie data ", data);
       data.data = JSON.parse(data.data);
       Object.keys(data.data[0]).forEach((key)=>{
         if (key !== "count"){
@@ -140,7 +138,7 @@ export class SizePieComponent implements OnInit, OnChanges {
 
       var width = document.getElementById('chart2').offsetWidth;
       var height = document.getElementById('chart2').offsetHeight;
-      var radius = height / 2.7;
+      var radius = height / 3;
       var donutWidth = 30;
       var legendRectSize = 12;
       var legendSpacing = 2;
@@ -173,7 +171,7 @@ export class SizePieComponent implements OnInit, OnChanges {
         .attr('height', height)
         .append('g')
         .attr('transform', 'translate(' + (radius + 10) +
-        ',' + (height / 2.7) + ')');
+        ',' + (height / 3) + ')');
 
       var arc = d3.svg.arc()
         .innerRadius(radius - donutWidth)
@@ -202,7 +200,6 @@ export class SizePieComponent implements OnInit, OnChanges {
           .append('path')
           .attr('d', arc)
           .attr('fill', function(d, i) {
-            console.log("D ", d);
             return color(d.data.label);
           });
 
@@ -219,7 +216,6 @@ export class SizePieComponent implements OnInit, OnChanges {
           // tooltip.select('.pie-label').html(d.data.label);
           // tooltip.select('.pie-amount').html(d.data.amount);
           // tooltip.select('.pie-percent').html(percent + '%');
-          console.log("event: ", d3.event.pageX);
           d3.select("#tooltip")
               .style("left", d3.event.pageX + "px")
               .style("top", d3.event.pageY + "px")

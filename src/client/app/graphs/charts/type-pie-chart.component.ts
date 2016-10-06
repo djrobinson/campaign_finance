@@ -161,7 +161,7 @@ export class TypePieComponent implements OnInit, OnChanges {
 
       var width = document.getElementById('chartType').offsetWidth;
       var height = document.getElementById('chartType').offsetHeight;
-      var radius = height / 2.7 ;
+      var radius = height / 3 ;
       var donutWidth = 30;
       var legendRectSize = 12;
       var legendSpacing = 2;
@@ -193,7 +193,7 @@ export class TypePieComponent implements OnInit, OnChanges {
         .attr('height', height)
         .append('g')
         .attr('transform', 'translate(' + (radius + 10) +
-        ',' + (height / 2.7) + ')');
+        ',' + (height / 3) + ')');
 
       var arc = d3.svg.arc()
         .innerRadius(radius - donutWidth)
@@ -234,7 +234,6 @@ export class TypePieComponent implements OnInit, OnChanges {
             return d.amount;
           }));
           var percent = Math.round(1000 * d.data.amount / total) / 10;
-          console.log("event: ", d3.event.pageX);
           d3.select("#tooltip")
               .style("left", d3.event.pageX + "px")
               .style("top", d3.event.pageY + "px")
@@ -277,7 +276,6 @@ export class TypePieComponent implements OnInit, OnChanges {
           .attr('width', legendRectSize)
           .attr('height', legendRectSize)
           .style('fill', function(d, i){
-            console.log("Count Colors arr: ", countColors[i]);
             return remColors[i];
           })
 

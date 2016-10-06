@@ -125,7 +125,6 @@ export class OpexListComponent implements OnInit {
 
   ngOnInit(){
     this.http.get('/api/opex/committee/' + this.cmte ).map(response => response.json()).subscribe(data => {
-      console.log(data);
       this.opexes = data;
     }, error => console.log('Could not load individuals.'));
   }

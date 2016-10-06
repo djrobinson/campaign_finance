@@ -34,7 +34,14 @@ image {
 }
 .test-button {
   position: fixed;
-  bottom: 5vh;
+  bottom: 7vh;
+  left: 20px;
+  z-index: 3;
+}
+
+.instructions-button {
+  position: fixed;
+  bottom: 1vh;
   left: 20px;
   z-index: 3;
 }

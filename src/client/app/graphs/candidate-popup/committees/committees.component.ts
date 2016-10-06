@@ -23,20 +23,16 @@ export class CommitteesSectionComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log(this.cmte);
     this.http.get('/api/transfers/' + this.cmte + '/contributor').map(response => response.json()).subscribe(data => {
-      console.log(data);
       this.committees = data;
     }, error => console.log('Could not load committees.'));
   }
 
   changeCmte(cmte_id){
-    console.log(cmte_id);
     this.router.navigate(['MobileCandidatePopupComponent', { cand: "committee", cmte: cmte_id, type: "C" } ]);
   }
 
   public openFec(lin_ima){
-    console.log("Open FEC: ", lin_ima);
     window.open(lin_ima);
   }
 }

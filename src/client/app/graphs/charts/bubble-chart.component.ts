@@ -42,7 +42,6 @@ export class BubbleComponent implements OnInit {
   public isRequesting: boolean=true;
 
   ngOnInit(){
-    console.log(this.cmte);
     this.buildBubbles(this.cmte, this);
   }
 
@@ -87,20 +86,18 @@ export class BubbleComponent implements OnInit {
 
     d3.json("/api/individuals/bubble/"+cmte, function(error, root) {
       ctrl.isRequesting = false;
-      console.log("Bubble Root: ", root.data[0]);
       var node = svg.selectAll(".node")
         .data(bubble.nodes(classes(JSON.parse(root.data[0])))
           .filter(function(d) { return !d.children; }))
         .enter().append("g")
         .attr("class", "node")
         .attr("transform", function(d) {
-          console.log(d);
           return "translate(" +
             d.x + "," +
             d.y + ")"; });
 
       node.append("circle")
-        .attr("r", function(d) { console.log(d); return d.r; })
+        .attr("r", function(d) { return d.r; })
         .style("fill", function(d) { return getRandomColor(); })
         .on("mouseover", function(d) {
           tooltip.text(d.className + ": " + format(d.value));
@@ -151,7 +148,6 @@ export class BubbleComponent implements OnInit {
   }
 
   changeIndiv(indiv) {
-    console.log("Change Indiv bubble chart ", indiv);
     this.indivEmit.emit({
       transaction: indiv.TRAN_ID,
       name: indiv.NAME

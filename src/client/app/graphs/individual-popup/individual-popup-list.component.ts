@@ -134,12 +134,10 @@ export class IndividualListPopupComponent implements OnInit {
 
     // this.otherIndividuals.data = this.donationList;
 
-    console.log("Indiv Name at the start: ", this.indivName);
     Observable.forkJoin(
       this.http.get('/api/individuals?donor=' + this.indivName).map((res: Response) => res.json())
     ).subscribe(
       data => {
-        console.log("For Individuals list: ", data);
         this.isRequesting = false;
         this.otherIndividuals = {};
         this.otherIndividuals.data = data[0];
@@ -158,8 +156,6 @@ export class IndividualListPopupComponent implements OnInit {
       } else {
         this.router.navigate(['MobileIndividualPopupComponent', { transaction: indiv.TRAN_ID } ]);
       }
-      console.log("Calling the changeIndiv func");
-
   }
 
   changeTranMobile(tran){

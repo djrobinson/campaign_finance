@@ -143,7 +143,6 @@ export class IndividualsListComponent implements OnInit {
 
   ngOnInit(){
     this.http.get('/api/individuals/' + this.cmte + '/recipient').map(response => response.json()).subscribe(data => {
-      console.log(data);
       this.individuals = data;
     }, error => console.log('Could not load individuals.'));
   }
@@ -153,7 +152,6 @@ export class IndividualsListComponent implements OnInit {
   }
 
   chooseIndividual(tran_id){
-    console.log("Transaction: ", tran_id);
     this.router.navigate(['MobileIndividualPopupComponent', {transaction: tran_id} ]);
   }
   }

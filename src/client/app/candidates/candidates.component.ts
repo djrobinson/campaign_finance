@@ -60,7 +60,6 @@ export class CandidatesComponent implements OnInit {
               var imageUrl = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/' + item.CANDIDATE_ID + '.jpg';
               imageExists(imageUrl, function(exists) {
                 if (exists) {
-                  console.log(imageUrl);
                   item.profile_img = imageUrl;
                 }
               });
@@ -88,7 +87,7 @@ export class CandidatesComponent implements OnInit {
             } else if (this.type === 'H'){
               this.headerType = 'House';
             }
-            var finalData = data.map((item) => {
+            var finalData = data.map((item, i) => {
               if (item.PARTY_CODE === 'DEM') {
                 item.tile_color = demColors[Math.floor(Math.random() * 3)];
               } else if (item.PARTY_CODE === 'REP') {
@@ -97,11 +96,11 @@ export class CandidatesComponent implements OnInit {
                 item.tile_color = 'solid gray 15px';
               }
               item.tile_color = 'solid gray 15px';
-               this.http.get('/api/legislators/' + item.CANDIDATE_ID)
+              if (i < 30){
+                this.http.get('/api/legislators/' + item.CANDIDATE_ID)
                  .map(res => res.json())
                  .subscribe(
                  secondData => {
-                   console.log("SecondData: ", secondData);
                    if (secondData[0].id){
                      item.profile_img = "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + secondData[0].id.bioguide + ".jpg";
                    } else {
@@ -111,6 +110,8 @@ export class CandidatesComponent implements OnInit {
                  err => console.log(err),
                  () => console.log("Image Call Complete")
                 )
+              }
+
               })
           }
 
@@ -131,7 +132,6 @@ export class CandidatesComponent implements OnInit {
   }
 
   public sortCandidates(): void {
-    console.log("reverse");
     this.candidatesView = this.candidates;
     // this.candidatesView = _.sortBy(this.candidates, function(o){
     //   return parseFloat(o[column]);
@@ -140,7 +140,6 @@ export class CandidatesComponent implements OnInit {
 
   public setState(state)
   {
-    console.log(this.candidates);
     this.filterByState(state);
     this.filterByState(state);
   }
@@ -149,7 +148,6 @@ export class CandidatesComponent implements OnInit {
     this.candidatesView = this.candidates.filter(function(o){
       return (o.can_sta === state);
     });
-    console.log(this.candidates);
   }
 
   public openFec(lin_ima){
