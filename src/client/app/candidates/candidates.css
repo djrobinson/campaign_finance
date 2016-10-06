@@ -181,7 +181,7 @@ h5 {
 
 .totals-box {
   margin-top: 50px;
-    display: -webkit-box;
+  display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -204,13 +204,6 @@ h5 {
   background: #e49e95;
 }
 
-.candidates-container {
-  height: 80%;
-
-  bottom: 0;
-  font-family: 'Oswald';
-  font-weight: 300;
-}
 
 .fec {
   height: 4rem;
@@ -306,6 +299,8 @@ h5 {
 }
 
 .candidates-container {
+  font-family: 'Oswald';
+  font-weight: 300;
   position: absolute;
   height: 80%;
   width: 100%;
