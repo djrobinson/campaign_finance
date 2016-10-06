@@ -17,6 +17,7 @@ import { Control, FORM_DIRECTIVES, FORM_PROVIDERS, FormBuilder, Validators, NgFo
         name="amount">
       <br>
       <div class="button" (click)="openCheckout(amount)">Pay with Stripe</div>
+      <p>{{warning}}</p>
       <div *ngIf="thankYou">
         <p>Thank you for your contribution!</p>
       </div>
@@ -98,6 +99,7 @@ export class FundingComponent implements OnInit {
   thankYou: boolean;
   bitcoin: boolean;
   ethereum: boolean;
+  warning: string;
 
   constructor(private http: Http) {
     this.parseFloat = function(num){
@@ -118,35 +120,39 @@ export class FundingComponent implements OnInit {
   }
 
   openCheckout(amount) {
-    console.log("Checkout amount: ", amount);
-    var handler = (<any>window).StripeCheckout.configure({
-      key: 'pk_live_5VDJMwo2IcGenMi0u5gN8eXx',
-      locale: 'auto',
-      token: function(token){
-        console.log("Token sending: ", token);
-        var body =  JSON.stringify({
-              stripeToken: token,
-              amount: amount
-            });
-        var headers = new Headers();
-          headers.append('Content-Type', 'application/json');
-        this.http.post('/api/stripe', body, {headers: headers})
-          .map(res => res.json())
-          .subscribe(
-            data => this.useData(data),
-            err => this.handleError(err),
-            () => console.log('TransactionComplete')
-          );
-      }.bind(this)
-    });
+    if (amount > 0){
+      this.warning = '';
+      console.log("Checkout amount: ", amount);
+      var handler = (<any>window).StripeCheckout.configure({
+        key: 'pk_live_5VDJMwo2IcGenMi0u5gN8eXx',
+        locale: 'auto',
+        token: function(token){
+          console.log("Token sending: ", token);
+          var body =  JSON.stringify({
+                stripeToken: token,
+                amount: amount
+              });
+          var headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+          this.http.post('/api/stripe', body, {headers: headers})
+            .map(res => res.json())
+            .subscribe(
+              data => this.useData(data),
+              err => this.handleError(err),
+              () => console.log('TransactionComplete')
+            );
+        }.bind(this)
+      });
 
-    handler.open({
-      name: 'Citizens Hub',
-      description: 'Hosting & Development',
-      amount: amount * 100
-    });
+      handler.open({
+        name: 'Citizens Hub',
+        description: 'Hosting & Development',
+        amount: amount * 100
+      });
+    } else {
+      this.warning = "Please enter a valid amount."
+    }
 
-    console.log(handler);
   }
 
 

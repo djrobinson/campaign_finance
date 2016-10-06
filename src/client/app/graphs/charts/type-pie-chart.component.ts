@@ -161,7 +161,7 @@ export class TypePieComponent implements OnInit, OnChanges {
 
       var width = document.getElementById('chartType').offsetWidth;
       var height = document.getElementById('chartType').offsetHeight;
-      var radius = width / 3.5 ;
+      var radius = height / 2.7 ;
       var donutWidth = 30;
       var legendRectSize = 12;
       var legendSpacing = 2;
@@ -193,7 +193,7 @@ export class TypePieComponent implements OnInit, OnChanges {
         .attr('height', height)
         .append('g')
         .attr('transform', 'translate(' + (radius + 10) +
-        ',' + (height / 2.5) + ')');
+        ',' + (height / 2.7) + ')');
 
       var arc = d3.svg.arc()
         .innerRadius(radius - donutWidth)

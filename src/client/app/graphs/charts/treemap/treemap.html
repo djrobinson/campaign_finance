@@ -1,5 +1,6 @@
 <div id="containerChart">
-
+  <spinner [isRunning]="isRequesting">
+        </spinner>
   <div *ngIf="isFirst" class="treemap-instructions">
     <div class="close-instructions" (click)="closeInstructions()">
       Got It

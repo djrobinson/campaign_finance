@@ -1,10 +1,11 @@
 import {Component, Input, Output, OnInit, EventEmitter} from 'angular2/core';
+import {SpinnerComponent} from '../../../loading/spinner.component';
 
 @Component({
   selector: 'treemap',
   templateUrl: 'app/graphs/charts/treemap/treemap.html',
   styleUrls: ['app/graphs/charts/treemap/treemap.css'],
-  directives: []
+  directives: [SpinnerComponent]
 })
 export class TreemapComponent implements OnInit, OnChanges {
   @Input() route: string;

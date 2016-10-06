@@ -1,11 +1,24 @@
 
+.instructions-header {
+  width: 40vw;
+  text-align: center;
+  color: black;
+  font-family: 'Oswald';
+  font-weight: 500;
+  background: rgba(255, 255, 255, .8);
+  position: fixed;
+  bottom: 60vh;
+  left: 25vw;
+
+
+}
 
 .movement-instructions {
   font-family: 'Oswald';
   font-size: 1.4rem;
   font-weight: 500;
   position: fixed;
-  bottom: 15.5%;
+  bottom: 16%;
   left: 2%;
   color: black;
 }
@@ -54,9 +67,9 @@ image {
 }
 
 .instructions-close {
-  position: absolute;
-  right: 35%;
-  bottom: 2rem;
+  position: fixed;
+  right: 40%;
+  bottom: 55vh;
   z-index: 9;
   font-size: 1.2rem;
   width: 30% !important;
@@ -65,7 +78,7 @@ image {
 .instructions-1 {
   position: fixed;
   right: 0;
-  bottom: 15%;
+  bottom: 0;
   background-color: white;
   font-family: 'Oswald';
   font-weight: 300;

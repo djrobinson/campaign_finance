@@ -19,6 +19,9 @@
   </div>
 <div>
   <div *ngIf="isFirst" class="graph-instructions">
+    <div class="instructions-header">
+      <h1>Instructions</h1>
+    </div>
     <div class="instructions-close button" (click)="closeInstructions()" (mouseover)="lightUpPage()">
       Close Instructions
     </div>
@@ -92,7 +95,7 @@
   </congress-popup>
 
 </div>
-<svg height="42.5%" width="10%" class="instructions-1" *ngIf="!candPopup">
+<svg height="50%" width="10%" class="instructions-1" *ngIf="!candPopup">
   <g transform="translate(15, 20)">
     <text dx="0" dy="1rem">Transaction Amount</text>
   </g>
@@ -131,7 +134,7 @@
     <text dx="0" dy="1rem"><$2,699</text>
   </g>
 </svg>
-<svg height="42.5%" width="10%" class="instructions-2" *ngIf="!candPopup">
+<svg height="50%" width="10%" class="instructions-2" *ngIf="!candPopup">
   <g transform="translate(20, 20)">
     <text dx="0" dy="1rem">Committee Contributions</text>
   </g>
@@ -165,7 +168,4 @@
     </circle>
     <text dx="0" dy="1rem">Individual</text>
   </g>
-</svg>
-<svg height="15%" width="10%" class="instructions-3" *ngIf="!candPopup">
-
 </svg>
