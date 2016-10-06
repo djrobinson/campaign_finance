@@ -49,6 +49,7 @@ module.exports = {
            .where({'CANDIDATE_OFFICE_CODE': office})
            .whereRaw('tot_rec IS NOT NULL')
            .orderBy('tot_rec', 'desc')
+           .limit(300)
            .offset(offset);
   },
 
