@@ -14,7 +14,7 @@ import {Component, OnInit} from 'angular2/core';
 
         <p>If you like the idea, please give to the crowdfunding campaign or email me if you would like to contribute in some other way. I would love to hear your feedback on how I can make the app more usable and what new features people are most interested in seeing. This is a personal project, so I haven't vetted every page. There are still defects that I am working to fix now. Any bug reports and typo fixes would be appreciated. For bugs, inaccuracies, and usability concerns please send an email to admin@citizenshub.org, and I will add them to the known issues and address them in order of urgency. For any feature suggestions, feedback, or general inquiries please email me at danny@citizenshub.org.</p>
         <div class="text-right">
-          <h5>-Danny</h5>
+          <h5>-Danny Robinson</h5>
         </div>
 
         <p>*Note - I highly suggest viewing this site in Chrome. Data visualizations are very slow/buggy in other browsers for large datasets.</p>
