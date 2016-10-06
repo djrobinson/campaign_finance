@@ -196,7 +196,6 @@ export class GraphComponent implements OnInit  {
       this.http.get('/api/graph/test/' + candId +'/' + size).map((res: Response) => res.json())
     ).subscribe(
       data => {
-        console.log("Graph Data: ", data);
         this.candidate = data[0];
         this.bioguideId = data[1];
         this.graphInit(data[2]);
@@ -207,15 +206,12 @@ export class GraphComponent implements OnInit  {
 
 
  public getHouseGraphData(candId, size): void {
-   console.log("Mehe?", candId, size);
     Observable.forkJoin(
       this.http.get('/api/candidates/' + candId).map((res: Response) => res.json()),
       this.http.get('/api/legislators/' + candId).map((res: Response) => res.json()),
       this.http.get('/api/graph/congress/' + candId + '/small').map((res: Response) => res.json())
     ).subscribe(
       data => {
-        console.log("House data.");
-        console.log("House data: ", data);
         this.candidate = data[0];
         this.graphInit(data[2]);
       },
@@ -239,7 +235,6 @@ export class GraphComponent implements OnInit  {
 
   //This function is bananas. Should probably be broken into 70 files
   public graphInit(result){
-        console.log("Result!: ", result);
         //ONly for mongo
         result = result.data;
         this.result = result;
@@ -250,7 +245,6 @@ export class GraphComponent implements OnInit  {
         var candArr = result.filter((elem)=>{
           return (elem.CMTE_DSGN === 'P' || elem.CMTE_TP === 'P' && !this.isSuperpac || elem.CMTE_TP === 'O' && this.isSuperpac);
         });
-        console.log("candArr", candArr);
         candArr[0].CANDIDATE = this.candidate_id;
         candArr[0].CAND_ID = this.candidate_id;
         candArr[0].data = {};
@@ -274,10 +268,8 @@ export class GraphComponent implements OnInit  {
           } else {
             elem.NODE = i;
           }
-          console.log("elem after: ", elem);
           return elem;
         });
-        console.log("Node data: ", this.nodeData);
         var nodeData = this.nodeData;
         this.linkData = nodeData.reduce((prev, elem)=>{
           if (elem.CAND_ID || elem.CORE){
@@ -723,7 +715,6 @@ export class GraphComponent implements OnInit  {
     function addText(d) {
         var size = "1rem";
         var name = d.NAME || d.CMTE_NM;
-        console.log("anMalkasdlk", name);
         if (!!name){
            var words = name.split(' ');
          } else {
@@ -774,7 +765,6 @@ export class GraphComponent implements OnInit  {
 
     node.on("mouseover", function(d) {
 
-      console.log(d);
       ctrl.onHover(d);
       node.classed("node-active", function(o) {
       });

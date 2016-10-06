@@ -96,21 +96,21 @@ export class CandidatesComponent implements OnInit {
                 item.tile_color = 'solid gray 15px';
               }
               item.tile_color = 'solid gray 15px';
-              if (i < 30){
-                this.http.get('/api/legislators/' + item.CANDIDATE_ID)
-                 .map(res => res.json())
-                 .subscribe(
-                 secondData => {
-                   if (secondData[0].id){
-                     item.profile_img = "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + secondData[0].id.bioguide + ".jpg";
-                   } else {
-                      item.profile_img = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/placeholder.png';
-                }
-                 },
-                 err => console.log(err),
-                 () => console.log("Image Call Complete")
-                )
-              }
+              // if (i < 30){
+              //   this.http.get('/api/legislators/' + item.CANDIDATE_ID)
+              //    .map(res => res.json())
+              //    .subscribe(
+              //    secondData => {
+              //      if (secondData[0].id){
+              //        item.profile_img = "https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/" + secondData[0].id.bioguide + ".jpg";
+              //      } else {
+              //         item.profile_img = 'https://s3-us-west-2.amazonaws.com/campaign-finance-app/placeholder.png';
+              //   }
+              //    },
+              //    err => console.log(err),
+              //    () => console.log("Image Call Complete")
+              //   )
+              // }
 
               })
           }
