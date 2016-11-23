@@ -5,11 +5,12 @@
 
 .load-main {
   position: absolute;
-  top: 45%;
-  width: 100%;
+  left: 25%;
+  top: 35%;
+  width: 50%;
   text-align: center;
 }
-.load-main h5 {
+.load-main h5, p {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
